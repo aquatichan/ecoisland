@@ -1,0 +1,38 @@
+[
+  {
+    "question": "Which of the following is an example of sustainable forestry?",
+    "difficulty": "Easy",
+    "A": "Clear-cutting large tracts of land",
+    "B": "Selective cutting of mature trees",
+    "C": "Slash-and-burn logging",
+    "D": "Planting only one tree species after harvest",
+    "answer": "B"
+  },
+  {
+    "question": "Which agricultural practice is most effective at reducing soil erosion on steep slopes?",
+    "difficulty": "Medium",
+    "A": "Monocropping",
+    "B": "Contour plowing",
+    "C": "Slash-and-burn agriculture",
+    "D": "Intensive tillage",
+    "answer": "B"
+  },
+  {
+    "question": "Overfishing of top predators in a marine ecosystem is most likely to result in:",
+    "difficulty": "Hard",
+    "A": "An increase in primary productivity",
+    "B": "A trophic cascade affecting lower trophic levels",
+    "C": "A reduction in algal blooms",
+    "D": "Stabilization of prey populations",
+    "answer": "B"
+  },
+  {
+    "question": "A region uses large-scale irrigation for agriculture. Over decades, the soil becomes white and crusty. What process is occurring?",
+    "difficulty": "Challenge",
+    "A": "Eutrophication",
+    "B": "Salinization",
+    "C": "Leaching",
+    "D": "Deforestation",
+    "answer": "B"
+  }
+]
