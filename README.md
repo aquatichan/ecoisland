@@ -8,7 +8,7 @@ Ecoisland is an environmental outreach platform with a gamification approach. Us
 
 - Main coding framework: **Vite + React + Tailwind + TypeScript**
 - Database: Firebase
-- Deployment: Vercel (https://ecoisland-n32fcl4fk-aquatic90210s-projects.vercel.app)
+- Deployment: Vercel (https://ecoisland-kappa.vercel.app)
 
 - Intended audience: **Competitive volunteers in high school and college**
 - Purpose and Rationale: *Today, many students are indifferent to environmental sustainability because the impact of small actions often feels invisible. However, with the global population estimated to keep growing until 2080 (Source: UN), it's now more important than ever to teach the younger generations how to properly care for our planet. As a current high school student myself, I understand how my generation connects best: through games, social media, and instant messaging. Ecoisland leverages these means to make environmental sustainability fun, competitive, and social.*
