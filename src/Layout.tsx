@@ -213,7 +213,7 @@ export default function Layout({ children, currentPageName }) {
               <div className="hidden md:flex items-center gap-4">
                 <div className="text-right">
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold text-teal-600">{user.treecoins || 250}</span>
+                    <span className="text-lg font-bold text-teal-600">{user.treecoins || 0}</span>
                     <Leaf className="w-4 h-4 text-green-500" />
                   </div>
                   <p className={`text-xs ${'text-gray-500'}`}>Treecoins</p>
