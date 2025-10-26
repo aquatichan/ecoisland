@@ -18,8 +18,8 @@ export const User = {
           const defaultData = {
             id: user.uid,
             email: user.email,
-            full_name: user.displayName || 'John Doe',
-            username: user.displayName || 'John Doe',
+            full_name: user.displayName || 'Anonymous User',
+            username: user.displayName || 'Anonymous User',
             treecoins: 0,
             xp: 0,
             xp_to_next_level: 100,
@@ -61,6 +61,7 @@ export const User = {
 
   async login() {
     await signInWithPopup(auth, googleProvider);
+    return this.me;
   },
 
   async logout() {
