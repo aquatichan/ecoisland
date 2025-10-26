@@ -88,8 +88,7 @@ export default function Onboarding() {
           }));
           navigate(createPageUrl("Dashboard"), { replace: true });
         } else if (user && user.username) {
-          // User is logged in but hasn't finished onboarding, show profile setup
-          alert('You must finish onboarding before you can proceed to your dashboard.')
+          // User is logged in but hasn't finished onboarding
           setAuthMode('signup');
           setCurrentSlide(0);
           setFormData(prev => ({
@@ -101,12 +100,13 @@ export default function Onboarding() {
           setCurrentSlide(0);
         }
       } catch (e) {
+        // Not authenticated -> stay on onboarding
         setAuthMode(null);
         setCurrentSlide(0);
       }
     };
     checkUser();
-  }, []);
+  }, [navigate]);
 
   const nextSlide = () => {
     setDirection(1);
@@ -118,20 +118,26 @@ export default function Onboarding() {
     setCurrentSlide(prev => Math.max(prev - 1, 0));
   };
 
+  // call User.login() then re-fetch Firestore user with User.me()
   const handleAuthChoice = async (mode) => {
     setAuthMode(mode);
-    if (mode === 'login') {
-      setIsLoading(true);
-      try {
-        // Login with Google and redirect to Dashboard
-        await User.login();
+    setIsLoading(true);
+
+    try {
+      await User.login();
+      const userData = await User.me();
+      setCurrentUser(userData);
+
+      if (userData.onboarding_complete) {
         navigate(createPageUrl("Dashboard"), { replace: true });
-      } catch (error) {
-        alert('Login failed. Please try again.');
-        setIsLoading(false);
+      } else {
+        nextSlide();
       }
-    } else {
-      nextSlide();
+    } catch (error) {
+      console.error("Auth error:", error);
+      alert("Login/signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -140,7 +146,7 @@ export default function Onboarding() {
     if (file) {
       setIdFile(file);
       const reader = new FileReader();
-      reader.onload = (e) => setIdPreview(e.target.result);
+      reader.onload = (ev) => setIdPreview(ev.target.result);
       reader.readAsDataURL(file);
       setErrors(prev => ({ ...prev, id: '' }));
     }
@@ -156,8 +162,8 @@ export default function Onboarding() {
 
   const validateSlide3 = () => {
     const newErrors = {};
-    if (!formData.zip_code.trim()) newErrors.zip_code = "ZIP code required";
-    if (!formData.city.trim()) newErrors.city = "City required";
+    if (!formData.zip_code || !formData.zip_code.trim()) newErrors.zip_code = "ZIP code required";
+    if (!formData.city || !formData.city.trim()) newErrors.city = "City required";
     if (!formData.country) newErrors.country = "Country required";
     if (!idFile) newErrors.id = "Valid ID required for verification";
     setErrors(newErrors);
@@ -170,13 +176,42 @@ export default function Onboarding() {
   };
 
   const handleFinalSubmit = async () => {
+    if (!validateSlide3()) return;
+
     setIsLoading(true);
-      try {
-        await User.login();
-      } catch (error) {
-        alert('Signup failed. Please try again.');
-        setIsLoading(false);
+    try {
+      const updates = {
+        full_name: formData.username || "Anonymous User",
+        username: formData.username || "Anonymous User",
+        bio: formData.bio || "",
+        zip_code: formData.zip_code || "",
+        city: formData.city || "",
+        country: formData.country || "",
+        onboarding_complete: true,
+        verification_status: "pending",
+      };
+
+      const updatedUser = await User.updateMyUserData(updates);
+
+      setCurrentUser(updatedUser);
+      if (updatedUser && updatedUser.onboarding_complete) {
+        navigate(createPageUrl("Dashboard"), { replace: true });
+      } else {
+        const fresh = await User.me();
+        setCurrentUser(fresh);
+        if (fresh.onboarding_complete) {
+          navigate(createPageUrl("Dashboard"), { replace: true });
+        } else {
+          console.warn("Onboarding flag not set after update.");
+          alert("We couldn't confirm your onboarding — try again in a moment.");
+        }
       }
+    } catch (error) {
+      console.error("Final submit failed:", error);
+      alert("Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const slides = [
@@ -247,7 +282,7 @@ export default function Onboarding() {
           <CardContent className="p-6 text-center">
             <Users className="w-12 h-12 mx-auto mb-3 text-purple-500" />
             <h3 className="font-semibold text-gray-900">3. Join a Community</h3>
-            <p className="text-sm text-gray-600 mt-2">Connect with over 0.67 environmental activists worldwide</p>
+            <p className="text-sm text-gray-600 mt-2">Connect with numerous environmental activists worldwide</p>
           </CardContent>
         </Card>
       </motion.div>
@@ -397,7 +432,7 @@ export default function Onboarding() {
                   <SelectTrigger className={errors.country ? "border-red-300" : ""}>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white text-black border border-gray-200 shadow-md rounded-md">
                     {countries.map(country => (
                       <SelectItem key={country} value={country}>{country}</SelectItem>
                     ))}
