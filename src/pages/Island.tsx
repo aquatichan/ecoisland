@@ -224,7 +224,7 @@ export default function Island() {
               <div className="flex items-center gap-3">
                 <Coins className="w-6 h-6 text-teal-600" />
                 <div>
-                  <p className="text-2xl font-bold text-teal-700">{user?.treecoins || 250}</p>
+                  <p className="text-2xl font-bold text-teal-700">{user?.treecoins || 0}</p>
                   <p className="text-sm text-gray-600">Treecoins</p>
                 </div>
               </div>
