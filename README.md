@@ -32,4 +32,4 @@ Ecoisland is an environmental outreach platform with a gamification approach. Us
 
 # Demo Video
 
-This will be updated once I create and upload the demo video.
+https://www.youtube.com/watch?v=m4QyoFBDeEc
