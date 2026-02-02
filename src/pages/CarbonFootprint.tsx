@@ -27,6 +27,9 @@ import {
 import { format, subDays } from "date-fns";
 import { Plus, Leaf, Car, Zap, Utensils, CheckCircle, X, Calendar } from "lucide-react";
 
+import { collection, query, orderBy, getDocs, doc, addDoc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebase";
+
 // Units: transport = kg CO2 per passenger-km
 //        energy    = kg CO2 per kWh
 //        diet      = kg CO2 per kg of food (assumes 2000 kcal per 1 kg food)
@@ -70,18 +73,32 @@ const COINS_PER_LOG = 10;
 const MAX_DAILY_COINS = 50;
 
 export default function CarbonFootprint() {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('ecoisland_user');
-    return saved ? JSON.parse(saved) : { 
-      preferences: { weight_unit: 'kg', distance_unit: 'km', theme: 'light' },
-      treecoins: 250
-    };
-  });
+  const [user, setUser] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  useEffect(() => {
+    User.me()
+      .then(setUser)
+      .finally(() => setLoadingUser(false));
+  }, []);
   
-  const [entries, setEntries] = useState(() => {
-    const saved = localStorage.getItem('carbon_entries');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [entries, setEntries] = useState([]);
+  
+  useEffect(() => {
+    if (!user) return;
+
+    const loadEntries = async () => {
+      const q = query(
+        collection(db, "users", user.id, "carbon_entries"),
+        orderBy("date", "desc")
+      );
+
+      const snap = await getDocs(q);
+      setEntries(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    };
+
+    loadEntries();
+  }, [user]);
   
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [todaysLogs, setTodaysLogs] = useState(0);
@@ -91,13 +108,9 @@ export default function CarbonFootprint() {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('carbon_entries', JSON.stringify(entries));
-    localStorage.setItem('ecoisland_user', JSON.stringify(user));
-    
     const today = new Date().toISOString().split("T")[0];
-    const todayEntries = entries.filter((e) => e.date === today);
-    setTodaysLogs(todayEntries.length);
-  }, [entries, user]);
+    setTodaysLogs(entries.filter(e => e.date === today).length);
+  }, [entries]);
 
   const addTransportItem = () => {
     setTransportItems([...transportItems, { type: "walking", distance: 0 }]);
@@ -132,65 +145,49 @@ export default function CarbonFootprint() {
     };
   };
 
-  const handleLogEmissions = () => {
-    const existingEntryIndex = entries.findIndex(e => e.date === selectedDate);
-    
-    if (existingEntryIndex !== -1) {
-      // Override existing entry
-      const emissions = calculateEmissions();
-      const updatedEntries = [...entries];
-      updatedEntries[existingEntryIndex] = {
-        ...updatedEntries[existingEntryIndex],
-        ...emissions,
-        notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
-        updated_date: new Date().toISOString()
-      };
-      setEntries(updatedEntries);
-      setMessage({ type: "success", text: `Entry updated! You earned ${COINS_PER_LOG} Treecoins.` });
+  const handleLogEmissions = async () => {
+    if (!user) return;
+
+    const emissions = calculateEmissions();
+    const now = new Date().toISOString();
+    const existing = entries.find(e => e.date === selectedDate);
+
+    if (existing) {
+      // Update entry
+      await updateDoc(
+        doc(db, "users", user.id, "carbon_entries", existing.id),
+        {
+          ...emissions,
+          notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
+          updated_date: now
+        }
+      );
     } else {
-      const today = new Date().toISOString().split("T")[0];
-      if (selectedDate === today && todaysLogs >= DAILY_LIMIT) {
-        setMessage({
-          type: "error",
-          text: `You've reached the daily limit of ${DAILY_LIMIT} logs. Try again tomorrow!`,
-        });
-        setTimeout(() => setMessage(null), 3000);
-        return;
-      }
+      // Create entry
+      await addDoc(
+        collection(db, "users", user.id, "carbon_entries"),
+        {
+          date: selectedDate,
+          ...emissions,
+          notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
+          created_date: now
+        }
+      );
 
-      // Create new entry
-      const emissions = calculateEmissions();
-      const newEntry = {
-        id: `entry-${Date.now()}`,
-        user_id: 'local-user',
-        date: selectedDate,
-        ...emissions,
-        notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
-        created_date: new Date().toISOString()
-      };
-
-      setEntries(prev => [newEntry, ...prev]);
-
-      // Award coins
-      const coinsToAward = Math.min(COINS_PER_LOG, MAX_DAILY_COINS - todaysLogs * COINS_PER_LOG);
-      if (coinsToAward > 0) {
-        setUser(prev => ({
-          ...prev,
-          treecoins: (prev.treecoins || 0) + coinsToAward
-        }));
-      }
-
-      setMessage({
-        type: "success",
-        text: `Emissions logged! ${
-          coinsToAward > 0 ? `You earned ${coinsToAward} Treecoins!` : "Daily coin limit reached."
-        }`,
+      // Award coins using your User entity
+      await User.updateMyUserData({
+        treecoins: (user.treecoins || 0) + COINS_PER_LOG
       });
     }
 
-    setTimeout(() => setMessage(null), 3000);
+    // Reload entries
+    const q = query(
+      collection(db, "users", user.id, "carbon_entries"),
+      orderBy("date", "desc")
+    );
+    const snap = await getDocs(q);
+    setEntries(snap.docs.map(d => ({ id: d.id, ...d.data() })));
 
-    // Reset form
     setTransportItems([]);
     setEnergyUsage([20]);
     setDietType("omnivore");
@@ -251,6 +248,9 @@ export default function CarbonFootprint() {
 
   const evaluation = getEmissionEvaluation();
 
+  if (loadingUser) return <div>Loading...</div>;
+  if (!user) return <div>Please sign in</div>;
+  
   return (
     <div className="p-4 md:p-8 bg-gray-50">
       <div className="max-w-6xl mx-auto">
