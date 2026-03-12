@@ -1,0 +1,94 @@
+{
+  "title": "6.11 Hydrogen Fuel Cell",
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is a Hydrogen Fuel Cell?"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Hydrogen Fuel Cells</strong> are powered by sunlight, hydrogen and oxygen. To rejoin the broken hydrogen and oxygen, a fuel cell pushes electrons through the circuit to carry energy through the circuit to the motor. Hydrogen reacts with the oxygen to produce water and also energy in the hydrogen fuel cell. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Hydrogen fuel cells come from water and are stored and used to generate electricity. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Fuel cell cars would work by using the hydrogen to power the motor and start. This is a greener alternative to gas fueled cars because hydrogen fuel celled cars only emit water vapor and heat instead of carbon monoxide and nitrogen oxides. "
+    },
+    {
+      "type": "paragraph",
+      "html": "The basic operation of a hydrogen fuel cell can be described in four steps:"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "html": "<ol class=\"MuiBox-root mui-19idom\">\n<li>Hydrogen is supplied to the anode (negative electrode) of the fuel cell.</li>\n<li>Oxygen is supplied to the cathode (positive electrode) of the fuel cell.</li>\n<li>An electrolyte, which is a substance that conducts ions, is placed between the anode and cathode.</li>\n<li>As the hydrogen flows through the anode, it is ionized by the electrolyte, creating a flow of protons and electrons. The protons pass through the electrolyte to the cathode, while the electrons are forced to flow through an external circuit, generating an electric current.\nAt the cathode, the protons and electrons are reunited, combining with oxygen from the air to form water. This is the only byproduct of the reaction, making hydrogen fuel cells a clean and efficient source of electricity.</li>\n</ol>"
+    },
+    {
+      "type": "heading",
+      "text": "Types of Hydrogen Fuel Cells"
+    },
+    {
+      "type": "paragraph",
+      "html": "There are several types of hydrogen fuel cells, including proton exchange membrane (PEM) fuel cells, phosphoric acid fuel cells, and molten carbonate fuel cells. Each type has its own unique characteristics and is suited for different applications."
+    },
+    {
+      "type": "paragraph",
+      "html": "PEM fuel cells are the most common type of hydrogen fuel cell, and they are often used in vehicles and portable electronic devices. They operate at a low temperature (around 80 degrees Celsius) and have a high power density, making them suitable for use in mobile applications."
+    },
+    {
+      "type": "paragraph",
+      "html": "Phosphoric acid fuel cells are typically used in stationary applications, such as power plants and cogeneration systems. They operate at a higher temperature (around 200 degrees Celsius) and have a lower power density compared to PEM fuel cells."
+    },
+    {
+      "type": "paragraph",
+      "html": "Molten carbonate fuel cells are primarily used in large-scale stationary applications, such as power plants. They operate at a very high temperature (around 650 degrees Celsius) and have a high efficiency, but they are also the most expensive and complex type of hydrogen fuel cell."
+    },
+    {
+      "type": "paragraph",
+      "html": "Hydrogen fuel cells have several advantages over traditional fossil fuel-based power generation technologies. They are highly efficient, with some types having an efficiency of up to 80%. They produce electricity with only water as a byproduct, making them a clean and environmentally friendly source of energy. They are also quiet and have a quick start-up time, making them suitable for use in a variety of applications. However, hydrogen fuel cells also have some limitations. They require a constant supply of hydrogen fuel, which can be expensive and logistically challenging to deliver. They also require expensive materials and skilled labor to manufacture, which can make them expensive to produce. In addition, hydrogen fuel cells are not yet widely available, and the infrastructure for distributing hydrogen fuel is still being developed."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Fcells.jpg?alt=media&token=ca1ceb3c-2b38-4005-8ce6-83b28f0dfe40",
+      "width": "525",
+      "height": "394"
+    },
+    {
+      "type": "heading",
+      "text": "Benefits and Drawbacks"
+    },
+    {
+      "type": "paragraph",
+      "html": "Hydrogen fuel cells are a clean and efficient source of electricity that have the potential to revolutionize the way we generate and use energy. However, like any technology, they have both advantages and disadvantages."
+    },
+    {
+      "type": "paragraph",
+      "html": "Pros of hydrogen fuel cells:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>High efficiency: Hydrogen fuel cells are highly efficient, with some types having an efficiency of up to 80%. This means that they can convert a large portion of the energy stored in the hydrogen fuel into electricity.</li>\n<li>Clean energy: Hydrogen fuel cells produce electricity with only water as a byproduct, making them a clean and environmentally friendly source of energy. They do not produce any harmful emissions, such as carbon dioxide, which contributes to climate change.</li>\n<li>Quiet operation: Hydrogen fuel cells are quiet and do not produce any noise during operation. This makes them suitable for use in a variety of settings, including residential areas, hospitals, and schools.</li>\n<li>Quick start-up time: Hydrogen fuel cells have a quick start-up time, which makes them suitable for use in applications that require a rapid response, such as backup power systems.</li>\n<li>Versatility: Hydrogen fuel cells can be used in a wide range of applications, including vehicles, portable electronic devices, and stationary power generation systems.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Cons of hydrogen fuel cells:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Hydrogen fuel availability: Hydrogen fuel cells require a constant supply of hydrogen fuel, which can be expensive and logistically challenging to deliver. Hydrogen fuel is not as widely available as other fuels, such as gasoline, and the infrastructure for distributing hydrogen fuel is still being developed.</li>\n<li>Manufacturing cost: Hydrogen fuel cells require expensive materials and skilled labor to manufacture, which can make them expensive to produce. The cost of producing hydrogen fuel cells has been decreasing over time, but they are still more expensive than some traditional power generation technologies.</li>\n<li>Safety concerns: Hydrogen is a highly flammable gas, and there have been concerns about the safety of storing and transporting hydrogen fuel. However, hydrogen fuel cells have a good safety record, and the technology has been designed to minimize the risk of accidents.</li>\n<li>Limited availability: Hydrogen fuel cells are not yet widely available, and the infrastructure for distributing hydrogen fuel is still being developed. This limits the widespread adoption of hydrogen fuel cells and makes them less accessible to the general public.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Overall, hydrogen fuel cells have the potential to be a clean and efficient source of electricity. While they have some limitations, such as the availability of hydrogen fuel and the cost of manufacturing, these issues are being addressed through research and development, and it is likely that hydrogen fuel cells will become more widely adopted in the future."
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Benefits 👍🏻</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Drawbacks 👎🏻</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">- Clean emissions: water vapor<br/>- Renewable: hydrogen is abundant<br/>- Higher efficiency</td><td class=\"mui-enerfg-tableCell\">- Expensive<br/>- Construction of fuel cell releases pollutants<br/>- Difficult to store</td></tr></tbody></table>"
+    }
+  ]
+}

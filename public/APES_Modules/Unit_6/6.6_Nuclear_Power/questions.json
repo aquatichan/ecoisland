@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A uranium-rich region will expand nuclear power to reduce coal use and air pollution. Which option describes a long-term environmental disadvantage specific to nuclear energy?",
+    "answers": [
+      "Require substantial cooling water that reduces water available for agriculture.",
+      "Eliminate regional air pollution immediately from vehicles and industry.",
+      "Radioactive waste stays hazardous for millennia and can contaminate groundwater.",
+      "Claim uranium mining produces coal as an accidental byproduct."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Year Uranium-235 Inventory (kg) Electrical Output (MW)\n2010 15,000 450\n2015 13,200 480\n2020 11,100 510\nUsing the table above, which calculation determines whether energy output per kilogram of fuel is improving?",
+    "answers": [
+      "Subtract 2010 inventory from 2020 then divide by 2020 output.",
+      "Compute output divided by fuel inventory each year and compare the ratios.",
+      "Divide total fuel decrease by total electrical increase across the decade.",
+      "Compare percent change in fuel and percent change in output over time."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A nuclear power plant's steam turbine converts thermal energy from the reactor into mechanical energy, which a generator then converts into electrical energy. If the turbine operates at 40% efficiency, converting 40% of input thermal energy into mechanical energy, which of the following best explains what happens to the remaining 60% of thermal energy?",
+    "answers": [
+      "The remaining 60% is absorbed by the steam, which condenses back into water and releases the energy as the latent heat of vaporization.",
+      "The remaining 60% is converted to electrical energy by the generator, which then loses it as heat in electrical transmission lines before reaching consumers.",
+      "The remaining 60% is stored in the turbine's rotating blades as kinetic energy, which is gradually dissipated through friction over the turbine's operational lifetime.",
+      "The remaining 60% is released as waste heat into the cooling water and environment, representing energy lost to entropy increase during the conversion process."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A region experiencing severe air quality degradation from coal-fired power plants proposes nuclear expansion to improve public health outcomes. Current air pollution from coal plants contributes to an estimated 3,200 premature deaths annually from respiratory and cardiovascular disease. Nuclear plants produce no combustion pollutants but generate radioactive waste. Which of the following best justifies nuclear expansion from a public health perspective?",
+    "answers": [
+      "Nuclear generation eliminates combustion pollutants including particulate matter, nitrogen oxides, and sulfur dioxide, but prevents only a portion of the estimated 3,200 annual premature deaths due to other regional pollution sources.",
+      "Nuclear generation eliminates combustion pollutants including particulate matter, nitrogen oxides, and sulfur dioxide, but the radioactive waste produced creates comparable health risks to the estimated 3,200 annual premature deaths from coal.",
+      "Nuclear generation reduces combustion pollutant concentrations in the regional airshed, decreasing the estimated 3,200 annual premature deaths caused by coal-related air pollution.",
+      "Nuclear generation eliminates combustion pollutants including particulate matter, nitrogen oxides, and sulfur dioxide, preventing the estimated 3,200 annual premature deaths caused by coal-related air pollution."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A nuclear engineer testifies before a regulatory committee: 'Opponents cite Chernobyl and Fukushima as proof that nuclear power is inherently dangerous. These accidents stemmed from specific design and operational failures rather than the physics of fission. Modern reactors include passive safety systems and stronger containment to prevent meltdowns and major releases. Therefore environmental risks are manageable through improved design and regulation, making nuclear energy a viable low carbon source.'",
+    "answers": [
+      "Chernobyl and Fukushima resulted from design flaws and operational errors.",
+      "Past nuclear contamination stemmed from preventable design and operational failures.",
+      "Opponents claim nuclear power is inherently dangerous citing those accidents.",
+      "Modern reactors use passive safety systems to prevent meltdown during cooling loss."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A nuclear power plant generates 750 megawatts of electrical power and operates continuously throughout the year. The plant's thermal efficiency is 33%. To determine the total thermal energy released (including waste heat) from the reactor annually, which calculation sequence is necessary?",
+    "answers": [
+      "Multiply the electrical power output by the thermal efficiency (as a decimal), then multiply by the number of hours in a year to convert power to annual energy",
+      "Divide the electrical power output by the thermal efficiency percentage value (33), then multiply by the number of hours in a year to convert power to annual energy",
+      "Divide the electrical power output by the thermal efficiency (as a decimal), then multiply by the number of hours in a year to convert power to annual energy",
+      "Divide the electrical power output by the thermal efficiency (as a decimal), subtract the electrical power output, then multiply by the number of hours in a year to obtain waste heat only"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A developing country plans its first nuclear plant to cut coal imports and meet rising electricity demand. Which disadvantage is especially significant in this context?",
+    "answers": [
+      "One plant immediately eliminates electricity imports and guarantees energy independence.",
+      "Monthly fuel rod replacements would dramatically increase operating and maintenance costs.",
+      "Routine air pollution worsening respiratory health from nuclear power plants.",
+      "Insufficient geological, regulatory, and technical capacity for long-term radioactive waste."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An environmental scientist studying Three Mile Island writes: 'The 1979 cooling system malfunction released radioactive gases into the atmosphere, but the containment structure prevented the catastrophic core exposure that occurred at Chernobyl. However, tritium contamination persisted in groundwater downgradient from the site for decades, requiring ongoing monitoring and restricting well-water use in surrounding communities. This case demonstrates that even when reactor containment functions as designed, nuclear accidents generate environmental contamination in water resources that extends far beyond the immediate vicinity of the plant. The long-term groundwater impacts reveal that thermal pollution and radioactive waste disposal remain significant environmental consequences of nuclear energy, independent of containment system performance.'",
+    "answers": [
+      "When containment structures fail, nuclear accidents can contaminate groundwater with radioactive isotopes for extended periods.",
+      "Even with functioning containment structures, nuclear accidents can release radioactive gases into the atmosphere for extended periods.",
+      "Even with functioning containment structures, nuclear accidents can contaminate groundwater with radioactive isotopes for extended periods.",
+      "Even with functioning containment structures, nuclear accidents can contaminate groundwater with radioactive isotopes in the immediate vicinity of the plant."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Following the 1979 Three Mile Island release, iodine-131 (half-life 8 days) measured 450 microcuries per cubic meter. Which calculation method finds when concentration decays to background 0.7 microcuries per cubic meter?",
+    "answers": [
+      "Subtract background from initial and treat decay as linear over time.",
+      "Determine how many half-lives reduce 450 to 0.7, then multiply by 8 days.",
+      "Divide initial by background then convert that factor to half-lives using logs.",
+      "Compute percent decrease then try to divide by 50 percent to count half-lives."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A coastal nation plans to expand nuclear power capacity to reduce dependence on coal and meet growing electricity demand. The proposed plants will use cooling water from the ocean to condense steam from the turbines before returning it to the sea. Which of the following represents an unintended environmental consequence of this cooling system design?",
+    "answers": [
+      "Heated water discharged into the ocean causes thermal pollution, disrupting marine ecosystems and increasing dissolved oxygen through enhanced photosynthetic activity",
+      "Heated water discharged into rivers causes thermal pollution, disrupting freshwater ecosystems and reducing dissolved oxygen in inland waterways",
+      "Chemical additives in discharged water cause pollution, disrupting marine ecosystems and reducing dissolved oxygen in coastal waters",
+      "Heated water discharged into the ocean causes thermal pollution, disrupting marine ecosystems and reducing dissolved oxygen in coastal waters"
+    ],
+    "correct": "D"
+  }
+]

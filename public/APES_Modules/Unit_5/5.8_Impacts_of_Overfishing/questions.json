@@ -1,0 +1,102 @@
+[
+  {
+    "question": "In many ocean regions, fishing regulations establish catch quotas that limit the total amount of fish that can be harvested annually. However, individual fishing vessels often compete to catch their share of the quota before other vessels deplete it, leading to rapid, intensive fishing. Which of the following best explains how this competitive dynamic contributes to overfishing despite the existence of catch limits?",
+    "answers": [
+      "Vessels racing to catch their quota share before others deplete the total allowance leads to unsustainable harvest rates that exceed fish population reproduction, even though the total quota may theoretically be sustainable.",
+      "Vessels racing to catch their quota share before others deplete the total allowance leads to concentrated fishing during spawning periods that disrupts reproductive behavior, even though the total quota may theoretically be sustainable.",
+      "Vessels racing to catch their quota share before others deplete the total allowance leads to geographically concentrated fishing that depletes localized populations faster than they can reproduce, even though the total quota may theoretically be sustainable.",
+      "Vessels racing to catch their quota share before others deplete the total allowance leads to unsustainable harvest rates that exceed fish population reproduction because the quota itself is set above sustainable levels."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A Mediterranean region reports a 40 percent decline in European eel populations over 20 years. Eels migrate to the ocean to spawn and glass eels must return to freshwater rivers to mature. Dams built for hydroelectric power and irrigation block juvenile migration, and commercial fishing removes adults during spawning. Which intervention would most effectively address this overfishing-related decline?",
+    "answers": [
+      "Ban commercial eel fishing but leave migration barriers intact.",
+      "Develop hatcheries to release juveniles without removing migration barriers.",
+      "Build eel-friendly fish passages at dams and enforce seasonal fishing closures.",
+      "Reduce fishing effort 30 percent across all species without fixing dams."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Fisheries managers want to determine whether a new minimum size limit for commercial tuna harvest will prevent population collapse. They plan to measure tuna population size annually for five years after implementing the regulation. Which of the following represents a significant limitation of this measurement approach for assessing whether the regulation is effective?",
+    "answers": [
+      "Five years may be insufficient to detect changes in population size structure because tuna have long generation times and slow reproductive rates",
+      "Five years may be excessive for detecting population recovery because tuna reach reproductive maturity quickly and have high reproductive rates",
+      "Five years may be insufficient to detect population recovery because tuna have long generation times and slow reproductive rates",
+      "Five years may be insufficient to detect population recovery because tuna migrate across vast ocean regions and may not be consistently sampled"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A marine scientist argues overfishing in the Mediterranean removed large predators and disrupted the food web. Landings of large predators declined 80% from 1970 to 2020 while landings of smaller fish rose 45%. Which observation would most weaken the claim that predator removal caused food web disruption?",
+    "answers": [
+      "Increases in jellyfish and sea urchins indicate broader ecosystem shifts.",
+      "Stricter regulations since 1995 could explain predator landings stabilizing after 2000.",
+      "Smaller species' fast reproduction lets them rebound rapidly from fishing.",
+      "Smaller catches reflect fishery effort shifting to small species, not abundance."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A Pacific island fishery's data show average harvested tuna age rose from 3.2 years (1985) to 5.1 years (2005) then fell to 2.8 years (2020). Annual catch remained about 45,000–52,000 metric tons. Breeding-age tuna (≥4 years) fell from 62% to 18% between 1985 and 2020. Which conclusion about overfishing's impact on population structure is best supported?",
+    "answers": [
+      "Stable catches do not prove healthy populations when age structure declines.",
+      "Stable catches mask overfishing as fishers shift to younger, nonbreeding tuna.",
+      "Stable catches can mask depleted breeding populations despite apparent management success.",
+      "Rise in average harvest age does not indicate recovery and later decline signals worsening."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Coastal fishing communities in West Africa have experienced declining fish catches over the past two decades despite increased fishing effort and more advanced technology. Which of the following best describes the relationship between overfishing and this declining catch pattern?",
+    "answers": [
+      "Increased fishing effort has caused fish to evolve smaller body sizes, reducing the total biomass caught even though individual fish numbers remain stable.",
+      "Advanced fishing technology has made fish populations migrate to deeper waters where they cannot be caught by coastal communities.",
+      "Overfishing has reduced fish population sizes below levels that can sustain current harvest rates, so catches decline even as fishing effort increases.",
+      "Climate change has altered ocean currents, reducing the availability of nutrients that fish depend on for growth and reproduction."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Juvenile share of commercial catches rose from 8% (1995) to 34% (2010) to 61% (2020) while fish at reproductive maturity (≥3 years) fell from 78% to 41% to 12%. Total annual catches stayed near 125,000–135,000 metric tons and species richness declined 43% over 25 years. Which conclusion about overfishing and ecosystem function is best supported by these data?",
+    "answers": [
+      "Higher juvenile share indicates healthy reproduction and future population growth.",
+      "Stable catches indicate no overfishing because productivity remained constant.",
+      "Species richness decline is unrelated to fishing and stems from environmental factors.",
+      "Overfishing depleted breeding adults, forcing juvenile harvest and reducing recruitment."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A seafood industry representative testifies: 'Consumer demand for seafood has increased 50% globally in the past 20 years as populations grow and incomes rise in developing nations. Meeting this demand through wild capture fisheries alone is impossible given current stock levels. Aquaculture—fish farming—now produces 50% of global seafood supply and is the fastest-growing food production sector. Aquaculture reduces pressure on wild fish stocks by providing an alternative protein source. However, some aquaculture operations use wild-caught fish as feed, and escaped farmed fish can interbreed with wild populations. Despite these challenges, expanding aquaculture is necessary to meet growing seafood demand without further depleting wild stocks. Restricting aquaculture growth would force increased pressure on already-stressed wild fisheries.'",
+    "answers": [
+      "Global seafood demand has increased 50% in the past 20 years due to population growth and rising incomes.",
+      "Expanding aquaculture is necessary to meet seafood demand while reducing pressure on wild fish stocks.",
+      "Aquaculture currently produces 50% of global seafood supply and is the fastest-growing food production sector.",
+      "Some aquaculture operations use wild-caught fish as feed and escaped farmed fish can interbreed with wild populations."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Fisheries data from the South China Sea show that total fish catch increased from 4.2 million metric tons in 1990 to 6.8 million metric tons in 2010, then declined to 4.1 million metric tons by 2020. During the same period, the number of large predatory fish species (sharks, groupers, snappers) declined from 18 to 8 species, while small forage fish species (anchovies, sardines) increased from 12 to 19 species. What do these data illustrate about overfishing's impact on marine ecosystem structure?",
+    "answers": [
+      "Overfishing depleted large predatory species while allowing forage fish to outcompete remaining predators for resources, causing ecosystem restructuring toward smaller species composition and reduced biodiversity of apex predators.",
+      "Overfishing depleted large predatory species while releasing forage fish from predation pressure, causing ecosystem restructuring toward smaller species composition and reduced biodiversity of apex predators.",
+      "Overfishing initially depleted large predatory species while releasing forage fish from predation pressure, but the catch decline from 6.8 to 4.1 million metric tons indicates ecosystem recovery toward pre-1990 species composition.",
+      "Overfishing depleted large predatory species while releasing forage fish from predation pressure, causing ecosystem restructuring toward increased total biodiversity as forage fish species increased from 12 to 19."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Fisheries biologists investigating the impact of bottom trawling on fish populations in the North Atlantic established 12 study sites at depths between 200-400 meters. At six randomly selected sites, they prohibited bottom trawling for three years while allowing it to continue at the other six sites. They measured fish species richness, total fish biomass, and the abundance of benthic organisms at each site every six months. Which of the following best describes the independent variable in this study?",
+    "answers": [
+      "The depth of the ocean at each study site",
+      "The total fish biomass recorded at each site",
+      "The frequency of fish population measurements every six months",
+      "The presence or absence of bottom trawling at each study site"
+    ],
+    "correct": "D"
+  }
+]

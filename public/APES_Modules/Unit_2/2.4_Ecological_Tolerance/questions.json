@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Monitoring shows coral bleaching when water temperature anomalies exceed +1.5°C. Bleaching frequency rose from 2 events per decade (1980–1990) to 8 events per decade (2010–2020). Which conclusion about coral ecological tolerance is best supported by these data?",
+    "answers": [
+      "Bleaching from ocean acidification is unlikely given the temperature-focused data",
+      "Bleaching results from warming past upper limits rather than cooling stress",
+      "Corals have a narrow upper thermal tolerance now exceeded more frequently",
+      "Bleaching frequency is not decreasing and rapid adaptation is not supported"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Researchers placed macroinvertebrates from a reference stream into laboratory flumes with velocities from 0.1 to 2.0 m/s and measured attachment time. What is the primary advantage of using controlled flumes instead of comparing organisms across natural streams with different flow rates?",
+    "answers": [
+      "They isolate flow rate by holding other environmental factors constant.",
+      "They eliminate the need for replication because conditions are standardized.",
+      "They can process more specimens in less time than field surveys.",
+      "Laboratory flumes provide more realistic conditions than field streams."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A diagram shows an estuarine salinity gradient (0 to 35 ppt) with stenohaline and euryhaline fish marked. Which statement best explains the relationship between salinity tolerance and species distribution?",
+    "answers": [
+      "Stenohaline restriction results from physiology not voluntary migration behavior.",
+      "Stenohaline species do not occupy broader zones and are salinity specialists.",
+      "Stenohaline species occupy narrow salinity zones due to narrow physiological tolerance.",
+      "Euryhaline species occupy broader salinity zones because they tolerate wide fluctuations."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Ecologists studying light tolerance in forest understory plants collect seedlings of five plant species from a mixed deciduous forest. They grow identical seedlings in a greenhouse under five different light conditions: 5%, 15%, 30%, 50%, and 100% of full sunlight. All seedlings receive identical water, nutrients, temperature, and photoperiod. After 12 weeks, researchers measure plant height, leaf area, and chlorophyll concentration. Which of the following best describes a potential limitation of this study design for understanding ecological tolerance in natural forests?",
+    "answers": [
+      "Laboratory conditions lack the seasonal and temporal variation in light and temperature present in natural forests",
+      "Laboratory conditions lack the complex environmental variation and competitive interactions present in all natural ecosystems",
+      "Laboratory conditions lack the natural variation in temperature, moisture, and soil nutrients present in natural forests",
+      "Laboratory conditions lack the complex environmental variation and competitive interactions present in natural forests"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An ecologist sampled macroinvertebrates in six streams (pH 5.2–7.8) at three sites per stream, identifying species and acid tolerance. Which best describes the research method used?",
+    "answers": [
+      "Longitudinal study following the same streams over multiple years",
+      "Controlled experiment manipulating pH to test macroinvertebrate survival",
+      "Observational field study comparing communities across a natural pH gradient",
+      "Laboratory experiment measuring individual species acid tolerance under controlled pH"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A soil scientist claims that a particular crop variety has higher ecological tolerance than traditional varieties because it maintains yields between 3,500 and 5,200 kg/hectare across soil pH levels ranging from 5.8 to 8.2, while traditional varieties produce yields only between 4,100 and 4,900 kg/hectare across the same pH range. Which of the following best describes a flaw in how the evidence supports this tolerance claim?",
+    "answers": [
+      "The evidence compares yield ranges across pH 5.8-8.2 and treats this test range as the tolerance limits, conflating the experimental conditions with physiological tolerance boundaries",
+      "The evidence compares yield ranges rather than the actual tolerance range of environmental conditions the crop can endure, conflating productivity variation with physiological tolerance limits",
+      "The evidence compares average yields rather than the actual tolerance range of environmental conditions the crop can endure, conflating mean productivity with physiological tolerance limits",
+      "The evidence compares yield ranges rather than the actual tolerance range of environmental conditions the crop can endure, conflating yield stability with stress resistance capacity"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A researcher measured photosynthetic rates of a shade-tolerant plant at light intensities 5% (15 μmol·m−2·s−1), 15% (28), 30% (35), 60% (38), and 100% (32). Which statement best describes the relationship between light intensity and photosynthetic rate for this species?",
+    "answers": [
+      "Photosynthetic rate increases linearly across all tested light intensities",
+      "Photosynthetic rate declines steadily with increasing light intensity across levels",
+      "Photosynthetic rate remains constant across the tested light levels",
+      "Photosynthetic rate rises to a peak near 60% light then declines"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Scientists studying light tolerance in shade-adapted forest plants collected seedlings from the understory of a dense forest and exposed half of them to 100% full sunlight and half to 40% of full sunlight (filtered through shade cloth) for 60 days. They measured photosynthetic rate, leaf damage, and survival in both groups. Which of the following best describes why the researchers maintained a group at 40% sunlight rather than comparing only full sunlight to the plants' original understory conditions?",
+    "answers": [
+      "The 40% light level serves as an intermediate condition to compare stress responses between two light intensities that both exceed the plants' tolerance range",
+      "The 40% light level represents the maximum light intensity these shade-adapted plants can tolerate before experiencing lethal stress responses",
+      "The 40% light level serves as an intermediate condition to test whether shade-adapted plants can acclimate to higher light intensities over time",
+      "The 40% light level serves as an intermediate condition to help identify the gradient of stress responses between optimal and lethal light intensities"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Forest ecologists measured light availability only in the forest canopy to assess light tolerance of forest plants. How would this spatial modification most likely affect their conclusions about light tolerance in the forest ecosystem?",
+    "answers": [
+      "It would fail to capture the light tolerance of canopy plants because it would not include measurements from multiple canopy locations where canopy species experience variable light conditions.",
+      "It would overestimate the light tolerance of understory plants because it would only measure high-light conditions that exceed the range where understory species actually survive.",
+      "It would fail to capture the light tolerance of understory plants because it would not include measurements of the low-light conditions where understory species actually survive.",
+      "It would fail to capture the light tolerance of understory plants because it would not include measurements across different times of day when light conditions vary in the understory."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A botanist recorded average plant heights at pH 4.2 (18 cm), 5.8 (31 cm), 6.5 (42 cm), 7.2 (39 cm), and 8.1 (22 cm). Which statement best describes the relationship between soil pH and plant growth?",
+    "answers": [
+      "Plant height peaks near pH 6.5 then declines at lower and higher pH.",
+      "No consistent relationship exists because plant height varies randomly across pH levels.",
+      "Plant height increases steadily as soil pH rises from acidic to alkaline.",
+      "Plant height decreases as pH increases, indicating inability to tolerate alkaline soils."
+    ],
+    "correct": "!"
+  }
+]

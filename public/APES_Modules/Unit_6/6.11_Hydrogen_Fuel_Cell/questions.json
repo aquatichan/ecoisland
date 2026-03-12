@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A company considers switching from gasoline cars to hydrogen fuel cell vehicles. Fuel cells emit only water at the tailpipe, but environmental benefits depend on how hydrogen is produced. Which statement best explains why production method matters for environmental assessment?",
+    "answers": [
+      "Renewable hydrogen avoids combustion emissions and is not more polluting.",
+      "Color labels describe production source, not hydrogen properties or storage ease.",
+      "Hydrogen is chemically identical regardless of source, so efficiency is unaffected.",
+      "Hydrogen from fossil fuels emits CO2 during production, cutting lifecycle benefits."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A manufacturer produces hydrogen by steam reforming natural gas. Compared with electrolysis powered by renewables, what environmental disadvantage applies?",
+    "answers": [
+      "Hydrogen from steam reforming reduces fuel cell efficiency compared with electrolysis",
+      "Steam reforming consumes finite natural gas resources faster than electrolysis consumes water",
+      "Steam reforming causes chemical contamination that shortens fuel cell component life",
+      "Steam reforming emits carbon dioxide during production, negating fuel cell's zero emissions"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A study compared lifecycle CO2-equivalent emissions per vehicle lifetime: gasoline cars 62,000 kg, battery electric vehicles 35,000 kg, and hydrogen fuel cell vehicles using natural-gas-derived hydrogen 48,000 kg. What does this data illustrate about hydrogen fuel cells as a climate solution?",
+    "answers": [
+      "Battery electric vehicles have higher lifecycle emissions than hydrogen fuel cell vehicles.",
+      "Hydrogen fuel cells have zero lifecycle emissions and are superior to all.",
+      "Hydrogen offers no lifecycle advantage over gasoline because production emits CO2.",
+      "Hydrogen lowers lifecycle emissions versus gasoline but depends on hydrogen production."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Hydrogen fuel cells generate electricity by combining hydrogen and oxygen and emit only water. Why does this make them potentially advantageous for reducing atmospheric pollution compared to fossil fuel combustion?",
+    "answers": [
+      "Water vapor does not actively clean the atmosphere of pollutants.",
+      "Fuel cells do not eliminate all pollution and do not internally recycle water.",
+      "Water emission produces no persistent CO2 or NOx unlike fossil fuel combustion.",
+      "Water vapor remains in the atmosphere and does not settle to the ground."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "The diagram below shows the hydrogen fuel cell process, with hydrogen gas entering the anode, oxygen entering the cathode, and water as the output. Which of the following best describes the environmental advantage represented by this fuel cell schematic?",
+    "answers": [
+      "The fuel cell converts oxygen into hydrogen, reversing atmospheric composition changes caused by combustion",
+      "The fuel cell eliminates the need for energy input, making it a perpetual energy source with no environmental cost",
+      "The fuel cell produces electricity while simultaneously removing carbon dioxide from the atmosphere through the water output",
+      "The fuel cell produces only water as a byproduct, eliminating greenhouse gas emissions during electricity generation"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A coastal city compared 30-year CO2 emissions from three bus scenarios: Scenario A gasoline 450,000 metric tons CO2; Scenario B hydrogen from natural gas 320,000 metric tons CO2; Scenario C hydrogen from renewables 85,000 metric tons CO2. What does the data reveal about when hydrogen fuel cells provide climate benefits?",
+    "answers": [
+      "Natural gas hydrogen is preferable because it achieves faster emissions reductions.",
+      "Hydrogen fuel cells eliminate all emissions because tailpipe only emits water.",
+      "Hydrogen's climate benefit depends on production and renewable hydrogen cuts emissions most.",
+      "Hydrogen fuel cells offer no environmental advantage since all scenarios still emit CO2."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A municipal wastewater treatment plant currently uses diesel generators for backup power during grid outages, operating approximately 40 hours annually. The facility proposes installing a hydrogen fuel cell system for backup power, with hydrogen produced on-site via electrolysis using renewable energy credits purchased from wind farms. Which advantage best justifies this fuel cell installation from an environmental perspective?",
+    "answers": [
+      "The fuel cell system eliminates diesel combustion emissions during outages by reducing the facility's dependence on grid electricity, preventing 40 hours annually of diesel generator operation and associated transmission losses.",
+      "The fuel cell system eliminates diesel combustion emissions by providing continuous backup power through hydrogen produced from renewable energy, preventing diesel generator operation during the 40 hours annually when renewable energy generation exceeds facility demand.",
+      "The fuel cell system eliminates diesel combustion emissions during outages by providing backup power through hydrogen produced from renewable energy, reducing the facility's overall carbon footprint and environmental impact.",
+      "The fuel cell system eliminates diesel combustion emissions during outages by providing backup power through hydrogen produced from renewable energy, preventing 40 hours annually of diesel generator operation and associated air pollutant emissions."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A natural-gas powered factory would run a hydrogen fuel cell using 500 kg/day H2 made by electrolysis on a grid that is 60% natural gas and 40% wind. Which advantage best justifies the fuel cell on a lifecycle emissions basis?",
+    "answers": [
+      "Net greenhouse gas reduction because electrolysis uses 40% wind on the grid.",
+      "Produces water vapor but recovery volume is small and impractical for cooling.",
+      "Zero emissions claim is false because electrolysis uses fossil-heavy grid power.",
+      "Lower operating costs may occur but do not address lifecycle emissions."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A city planning department is evaluating energy sources to power a new municipal water treatment facility that operates continuously. Engineers propose using hydrogen fuel cells powered by hydrogen produced from electrolysis of water using renewable solar energy. Which of the following best explains why this system would reduce the facility's overall carbon dioxide emissions compared to a natural gas-powered plant?",
+    "answers": [
+      "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct, and when hydrogen is produced from renewable energy sources, no carbon dioxide is released during either the fuel production or electricity generation stages.",
+      "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct during operation, which eliminates direct emissions at the facility, though this does not account for emissions from hydrogen production methods.",
+      "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct, which reduces carbon dioxide emissions compared to natural gas combustion, though some emissions occur during the renewable energy infrastructure manufacturing process.",
+      "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct, but when hydrogen is produced from electrolysis using grid electricity, carbon dioxide emissions are reduced but not eliminated compared to natural gas plants."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A researcher notes electrolysis loses about 20 to 30 percent of input energy and that batteries are more efficient for passenger vehicles, while hydrogen's higher energy density and faster refueling suit long-haul trucking, aviation, and industrial heat. Which claim best expresses the researcher's recommendation?",
+    "answers": [
+      "Electrolysis typically loses 20 to 30 percent of input energy",
+      "Hydrogen has higher energy density enabling longer range and faster refueling",
+      "Batteries are preferable for passenger vehicles but not all transport uses",
+      "Prioritize hydrogen fuel cells for long-range transport and industrial heat"
+    ],
+    "correct": "D"
+  }
+]

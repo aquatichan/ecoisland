@@ -1,0 +1,120 @@
+{
+  "title": "8.1 Sources of Pollution",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "Every human activity impacts the environment, and one 1️⃣ of the most major of those impacts is pollution. In APES, we can define pollution as anything that is present or introduced to the environment with harmful effects."
+    },
+    {
+      "type": "paragraph",
+      "html": "In this section, we will begin by classifying pollutants into two main categories, <strong>Point Source</strong> and <strong>Nonpoint Source</strong>.  When you look at the images below, your first thought might be that they are the same when in fact they are very different. Can you identify which one is a <strong>Point Source</strong> and which is a <strong>Nonpoint Source?</strong>"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-eApxVNhybvpt.png?alt=media&token=2d6fe23d-492d-4eb7-8a57-835c90ad3f94",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://pixabay.com/photos/smoke-pollution-environment-steam-637620/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/smoke-pollution-environment-steam-637620/\">Smoke Stack</span></a> and <a href=\"https://pixabay.com/photos/outfall-pipe-waste-water-effluent-3491306/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/outfall-pipe-waste-water-effluent-3491306/\">Water Runoff</span></a>"
+    },
+    {
+      "type": "heading",
+      "text": "Point Source Pollution"
+    },
+    {
+      "type": "paragraph",
+      "html": "Pollutants that are emitted from a single, identifiable source are known as point source pollutants. Examples of point source pollution include smoke from a smokestack of a factory, untreated sewage coming out of a pipe into a river 💩, and vehicle exhaust coming out of a car tailpipe. Point sources of pollution are easy to identify and much easier to regulate pollution coming from these sources."
+    },
+    {
+      "type": "paragraph",
+      "html": "A major characteristic of point source pollution is a plume which is where the pollutant is most concentrated. Here’s an example:"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-7w2kckItjQZ0.png?alt=media&token=92a2fa99-6570-493a-9836-fb73e494298d",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "heading",
+      "text": "Legislation Connection - Clean Water Act"
+    },
+    {
+      "type": "paragraph",
+      "html": "This act makes it unlawful for anyone to discharge any point source pollution without permits."
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "html": "<ol class=\"MuiBox-root mui-19idom\">\n<li>The act requires that we use “Best Practicable Technology” (BPT) to clean point sources and “Best Available Technology” (BAT) be used to clean up toxins</li>\n<li>This act funds construction of several important facilities such as sewage treatment plants and includes provisions for protecting wetlands</li>\n<li>The main goal of this act is to get to the point where all water is “fishable and swimmable”</li>\n</ol>"
+    },
+    {
+      "type": "heading",
+      "text": "Nonpoint Source Pollution"
+    },
+    {
+      "type": "paragraph",
+      "html": "Nonpoint source pollutants come from a non-identifiable location, and are often spread out over a large area. Nonpoint source pollution transported by moving water, or going into water, is commonly referred to as \"runoff\""
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-tbI2JUICoc1V.png?alt=media&token=ef80c2c8-a8a4-4397-ac8e-43e873960bf5",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "paragraph",
+      "html": "Graphic displaying the non-point sources of pollution in a watershed"
+    },
+    {
+      "type": "paragraph",
+      "html": "Be careful using this graphic to define nonpoint sources of pollution! While everything on the image is true, be aware that sometimes you can identify sources of pollution from Industry, like in the pipe shown in the image above."
+    },
+    {
+      "type": "paragraph",
+      "html": "Examples of nonpoint source pollution can include excess fertilizer washing off all the lawns in a neighborhood during a rain storm and into a local creek, as well as smoke from a wildfire. Since nonpoint source pollution is diffuse in its location, it is very difficult to regulate and thus is usually the largest source of surface water pollution."
+    },
+    {
+      "type": "heading",
+      "text": "Check Your Understanding"
+    },
+    {
+      "type": "paragraph",
+      "html": "Go back to the image of the smokestack and water runoff.  Although they both look similar in that they are a pipe emitting pollution, the smokestack is a point source because it is coming from one identifiable factory, and, if needed, it would be ‘simple’ to create regulations to prevent that factory from polluting.  The water runoff, however, is a collection of alllll the potential pollutants found on the street.  If something toxic was found in that water it would be very difficult to track down and regulate the original source. "
+    },
+    {
+      "type": "heading",
+      "text": "Environmental Hazards"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Hazard Type</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Definition</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Examples</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Physical Hazards</td><td class=\"mui-enerfg-tableCell\">Arise from processes that occur naturally in our environment and pose risks to human health</td><td class=\"mui-enerfg-tableCell\">Fires, Floods, Blizzards</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Chemical Hazards</td><td class=\"mui-enerfg-tableCell\">Synthetic Chemicals that our society manufactures</td><td class=\"mui-enerfg-tableCell\">Hydrocarbons, Lead, Asbestos</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Biological Hazards</td><td class=\"mui-enerfg-tableCell\">Ecological interactions when hosts become sick after a virus or bacteria invades.</td><td class=\"mui-enerfg-tableCell\">Viral infection, bacterial infection, parasite</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Cultural Hazards</td><td class=\"mui-enerfg-tableCell\">Hazards that result from our place of residence, our socioeconomic status, and our behavior.</td><td class=\"mui-enerfg-tableCell\">Smoking cigarettes, Noise Pollution</td></tr></tbody></table>"
+    },
+    {
+      "type": "heading",
+      "text": "Practice MCQ (Multiple Choice Question) Time"
+    },
+    {
+      "type": "paragraph",
+      "html": "Which of the following in the chart correctly gives examples of Point and Non-Point Source Pollution?"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Answer</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Point Source</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Nonpoint Source</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>A</strong></td><td class=\"mui-enerfg-tableCell\">Someone throws a cigarette butt out of their car window.</td><td class=\"mui-enerfg-tableCell\">Smoke is emitted from a factory and can be seen from miles away.</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>B</strong></td><td class=\"mui-enerfg-tableCell\">Sewage draining from a pipe into a nearby river.</td><td class=\"mui-enerfg-tableCell\">After a large rainstorm, multiple different pollutants are found in a nearby river.</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>C</strong></td><td class=\"mui-enerfg-tableCell\">A large rainstorm comes and carries away fertilizer from many farms.</td><td class=\"mui-enerfg-tableCell\">Sewage draining from a pipe into a nearby river.</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>D</strong></td><td class=\"mui-enerfg-tableCell\">After a large rainstorm, multiple different pollutants are found in a nearby river.</td><td class=\"mui-enerfg-tableCell\">Someone throws a cigarette butt out of their car window.</td></tr></tbody></table>"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>✅ Correct Answer Choice</strong>"
+    },
+    {
+      "type": "paragraph",
+      "html": "B! Remember that with point source pollution, you can point to a direct source. With nonpoint source, you will have a combination of pollutants from different sources."
+    },
+    {
+      "type": "paragraph",
+      "html": "Need more practice with Source of Pollution? Check out a trivia game"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "3.9 Demographic Transition",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Demographic Transition Model"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Fdemo.JPG?alt=media&token=1031c171-20de-499c-9ed9-41e8bdb703b3",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong><strong>Stage 1</strong></strong> ➪ High CBR, High CDR, low growth rate "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong><strong>Stage 2</strong></strong> ➪ High CBR, lowering CDR, high growth rate "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong><strong>Stage 3</strong></strong> ➪ Lowering CBR, lowering CDR, lowering growth rate "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong><strong>Stage 4</strong></strong> ➪ Low CBR, low CDR, low/negative growth rate"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong><strong>Stage 5</strong></strong>  ➪ Rising CBR, low CDR, stable or slowly increasing growth rate"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Pre-industrial Stage</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Transitional Stage</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Industrial Stage</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Post-industrial Stage</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Birth rate is high to compensate for high infant mortality rate. Less developed countries are in this stage. Women have many children and unfortunately many do not survive into adulthood.</td><td class=\"mui-enerfg-tableCell\">Industrialization begins. Access to food and improved healthcare lowers death rate. </td><td class=\"mui-enerfg-tableCell\">Death rate drops due to improved medicine and modernization. Mostly developed countries are in this stage.</td><td class=\"mui-enerfg-tableCell\">Birth rate drops to equal zero population growth. If the birth rate falls below death rate, than population will decrease </td></tr></tbody></table>"
+    }
+  ]
+}

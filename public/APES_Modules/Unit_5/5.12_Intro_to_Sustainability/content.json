@@ -1,0 +1,35 @@
+{
+  "title": "5.12 Intro to Sustainability",
+  "content": [
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2020%2F03%2F27%2F08%2F45%2Fcurrent-4972878_960_720.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Environmental Sustainability"
+    },
+    {
+      "type": "paragraph",
+      "html": "Specifically, <strong>environmental sustainability</strong> refers to ways in which we simultaneously use our environment while conserving its resources for future generations. The factors that are important to sustainability are biological diversity, human population levels, resource consumption, CO2, CH4 and other greenhouse gas concentrations, and food production."
+    },
+    {
+      "type": "heading",
+      "text": "Sustainable Yield"
+    },
+    {
+      "type": "paragraph",
+      "html": "An important concept related to food production is a <strong>sustainable yield</strong>. Sustainable yield is the amount of resource that can be harvested without decreasing the food supply.  This concept applies to timber harvesting, freshwater, fish populations as well as all crops.  "
+    },
+    {
+      "type": "paragraph",
+      "html": "Determining the sustainable yield of a resource can be complex and requires taking into account a variety of factors, including the resource's rate of replenishment or regeneration, the impact of extraction on the environment, and the demand for the resource. Maintaining a resource at its sustainable yield can help to ensure that the resource is available for future generations and that the ecosystem in which the resource is found is not damaged."
+    },
+    {
+      "type": "paragraph",
+      "html": "Areas that have historically not been able to manage a sustainable yield are resources that are considered a commons. Fishers worldwide are being fished at a rate faster than they can reproduce causing their populations to crash. This crash often results in one of two outcomes, extinction of the species or a regulation that stops harvesting. Either option results in humans losing access to that resource. If the fishers are managed at a sustainable yield then they should be able to have a consistent population and be able to provide that resource to humans. "
+    }
+  ]
+}

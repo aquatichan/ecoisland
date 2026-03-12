@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A lake receives nutrient-rich agricultural runoff for several years, causing algal populations to increase dramatically. Eventually, the algae die and decompose, consuming dissolved oxygen and creating a dead zone where fish cannot survive. Which of the following best explains how this sequence of events demonstrates the concept of carrying capacity?",
+    "answers": [
+      "Excess nutrients initially increased the carrying capacity for algae, but decomposition of dead algae depleted oxygen, reducing the carrying capacity for fish to near zero",
+      "The dead zone formation is caused by algae intentionally consuming oxygen to prevent fish from competing for nutrients",
+      "Fish populations in the lake have a fixed carrying capacity that cannot be altered by changes in water chemistry or nutrient availability",
+      "The algal bloom represents a population that exceeded its carrying capacity and crashed due to resource depletion, similar to how fish populations crash when oxygen becomes scarce"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An environmental economist analyzing Easter Island's historical collapse writes: 'Archaeological evidence indicates that Easter Island's population grew to approximately 15,000 people by 1200 CE, supported by agriculture and marine resources. The population subsequently exceeded the island's carrying capacity through a combination of factors: deforestation for agriculture and monument construction, soil erosion reducing crop productivity, and overharvesting of marine resources. Population growth continued even as resource availability declined, creating severe overshoot. By 1500 CE, the population had crashed to approximately 3,000 people through famine, disease, and conflict—the inevitable consequences of exceeding carrying capacity. This historical example demonstrates that when populations overshoot environmental limits, die-off occurs regardless of cultural sophistication or prior success. Some scholars argue that the collapse resulted from poor resource management decisions, but the fundamental cause was that the island's finite resources could not support the population that had developed.'",
+    "answers": [
+      "Deforestation, soil erosion, and overharvesting of marine resources reduced resource availability on Easter Island.",
+      "Easter Island's population exceeded its carrying capacity, resulting in resource depletion and catastrophic die-off.",
+      "Poor resource management decisions by Easter Island's population contributed to the historical collapse.",
+      "Easter Island's population grew to approximately 15,000 people by 1200 CE and declined to 3,000 by 1500 CE."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A diagram illustrates the water cycle in a semi-arid region, showing: precipitation → surface runoff and infiltration → groundwater storage → plant uptake and evapotranspiration → atmospheric water vapor → precipitation. If human water extraction increases from 20% to 80% of annual precipitation, which statement best explains the relationship between water extraction and the cycle's capacity to sustain vegetation?",
+    "answers": [
+      "Extracting 80% of precipitation reduces surface runoff and increases water retention in the soil, enhancing the cycle's ability to sustain vegetation despite exceeding historical water availability.",
+      "Extracting 80% of precipitation reduces water available for plant uptake and groundwater recharge, decreasing the cycle's ability to sustain vegetation and exceeding the ecosystem's water-based carrying capacity.",
+      "Extracting 80% of precipitation reduces water available for plant uptake and groundwater recharge, but groundwater reserves will buffer the impact for decades, so carrying capacity remains stable in the short term.",
+      "Extracting 80% of precipitation reduces water available for plant uptake and groundwater recharge, but vegetation adapts through succession to drought-tolerant species, maintaining the ecosystem's carrying capacity."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "After large-scale timber harvest, remaining vegetation cannot support the deer population, causing starvation and disease. Which ecological process best describes this scenario?",
+    "answers": [
+      "Reduced carrying capacity causing population overshoot and subsequent die-off",
+      "Predator overpopulation driving die-off instead of habitat loss reducing carrying capacity",
+      "Natural population cycles producing a routine low independent of habitat change",
+      "Tree removal frees nutrients and should increase deer food supply"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A developing nation with rapid population growth promotes high-yield crop varieties and intensive fertilizer use to boost food production. Which of the following is a long-term disadvantage of this approach?",
+    "answers": [
+      "High-yield varieties require less water than traditional crops, conserving freshwater.",
+      "High-yield varieties eliminate the need for crop rotation and management.",
+      "Intensive fertilizer use degrades soil and lowers long-term agricultural capacity.",
+      "Intensive agriculture prevents all pest outbreaks and removes need for pest control."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "In a small pond, an invasive aquatic plant species spreads rapidly, covering 80% of the water surface within two years. Native fish populations that depend on open water for feeding and reproduction decline sharply. Which of the following best describes how the invasive plant affects the carrying capacity for native fish?",
+    "answers": [
+      "The invasive plant lowers carrying capacity for native fish in the short term, but native fish will evolve to utilize the plant as food, restoring carrying capacity to previous levels",
+      "The invasive plant increases the carrying capacity for native fish by providing additional food sources and shelter from predators",
+      "The invasive plant does not affect carrying capacity because carrying capacity is determined only by water temperature and dissolved oxygen levels",
+      "The invasive plant reduces available habitat and feeding space, lowering the carrying capacity for native fish by decreasing the resources they depend on"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A national park implements a policy to protect a wolf population by restricting hunting and providing legal protection. Within 15 years, the wolf population grows from 50 to 500 individuals. However, the growing wolf population increasingly hunts elk, causing elk populations to decline significantly. As elk become scarcer, wolves begin to starve, and the wolf population crashes to 150 individuals. Which of the following best describes the ecological process occurring in this scenario?",
+    "answers": [
+      "Wolves and elk naturally cycle between high and low populations regardless of predator-prey relationships, and the crash represents the predictable low point in the cycle",
+      "Wolf population growth initially exceeded the carrying capacity supported by available elk prey, causing overshoot followed by die-off as prey became depleted",
+      "The wolf population crash resulted from increased hunting pressure by humans, not from overshoot of the carrying capacity supported by prey availability",
+      "The wolf population reached a stable carrying capacity at 500 individuals, but external factors like disease caused the subsequent population crash"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers measured monthly growth rates of a snail population in a closed pond for 18 months: 45% in months 1–4, 18% in months 5–10, and 2% in months 11–18. Pond volume and chemistry were constant. What does this pattern indicate about the population's relation to carrying capacity?",
+    "answers": [
+      "Growth slowed with increasing density, indicating approach to carrying capacity.",
+      "Growth stayed near 20% per month throughout the study despite rising density.",
+      "Decline caused by increased predation from fish in the pond system.",
+      "Decline reflects higher carrying capacity in an open lake rather than the pond."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A consultant argues a 15% loss of agricultural land is acceptable because technology and imports will compensate. What assumption about resource limits underlies this claim?",
+    "answers": [
+      "Technology improves crop yields but does not create new agricultural land",
+      "Local food carrying capacity can be offset by trade and technology",
+      "Population growth will force food demand beyond current local production",
+      "Economic growth necessarily conflicts with maintaining current agricultural production"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "An aquifer currently contains 45 million cubic meters of water. The region's population withdraws 2.8 million cubic meters annually, while natural recharge adds 1.2 million cubic meters annually. At this net depletion rate, approximately how many years will the aquifer remain viable before becoming depleted?",
+    "answers": [
+      "Approximately 28 years",
+      "Approximately 16 years",
+      "Approximately 11 years",
+      "Approximately 45 years"
+    ],
+    "correct": "D"
+  }
+]

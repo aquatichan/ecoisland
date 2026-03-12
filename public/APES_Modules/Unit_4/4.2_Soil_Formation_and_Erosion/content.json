@@ -1,0 +1,41 @@
+{
+  "title": "4.2 Soil Formation and Erosion",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "<strong>Soil formation</strong> is an important process in the environment that creates the ability of plants to grow. Through the formation of soil, different soil horizons are created that have different properties and nutrients. The soil itself is one of the most critical pieces of an environment so protecting it is crucial. "
+    },
+    {
+      "type": "heading",
+      "text": "Soil Formation"
+    },
+    {
+      "type": "paragraph",
+      "html": "Soil formation starts with <strong>parent material</strong>. Over time, <strong>weathering</strong> occurs and the parent material is broken down into smaller and smaller particles. Also, particles from other places might be introduced through the <strong>deposition</strong>. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Once a small layer of soil has been formed, moss and other small vegetation begin to grow. With the presence of small vegetation and organisms, more <strong>soil horizons</strong> form and nutrients are added to the soil. From here, the soil continues to develop as more plants and organisms interact with it."
+    },
+    {
+      "type": "heading",
+      "text": "Soil Horizons"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\">O Horizon (<strong>Humus</strong>)</th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Surface litter</strong>, like leaves and other decaying matter</th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">A Horizon (<strong>Topsoil</strong>)</td><td class=\"mui-enerfg-tableCell\">Mixture of organic materials with minerals</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">E Horizon (<strong>Eluviated</strong>)</td><td class=\"mui-enerfg-tableCell\"><strong>Zone of Leaching</strong>, nutrients from upper horizons moves to lower horizons</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">B Horizon (<strong>Subsoil</strong>)</td><td class=\"mui-enerfg-tableCell\"><strong>Zone of Accumulation</strong> where minerals such as iron and other nutrients accumulate</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">C Horizon (<strong>Parent Material</strong>)</td><td class=\"mui-enerfg-tableCell\">The material that is broken down to create the soil</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Bedrock</strong></td><td class=\"mui-enerfg-tableCell\">Solid rock that lies beneath the parent material and soil</td></tr></tbody></table>"
+    },
+    {
+      "type": "heading",
+      "text": "Soil Erosion and Water Quality"
+    },
+    {
+      "type": "paragraph",
+      "html": "Due to soil’s importance to the environment, it is critical that it is protected. Often, soil can be washed away or eroded away by wind and water. This happens when no plants or vegetation are available to hold the soil in place. An example of this is the Dust Bowl that took place in the US."
+    },
+    {
+      "type": "paragraph",
+      "html": "Erosion can negatively impact water quality. One thing that soil does is filter water with the help of vegetation. No soil or vegetation means that water won’t be filtered which might result in unclean water with higher amounts of pollutants."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title": "2.6 Adaptations",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Adapt to the Surroundings"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Survival of the Fittest</strong>: those that have the right genes for the ecosystem tend to live longer. So, if one wants to survive in a certain environment, he needs the traits for it!"
+    },
+    {
+      "type": "paragraph",
+      "html": "Adaptations must be made by all species to survive adequately in any given environment. Species adaptation refers to the changes that a species undergoes over time in response to environmental pressures or selective pressures. These changes can be genetic, behavioral, or physiological and may occur over multiple generations or within a single generation. Adaptations can occur in response to a variety of factors, including changes in climate, competition with other species, or the presence of predators. Examples of species adaptation include the development of thicker fur in arctic animals to insulate against the cold, the evolution of longer beaks in certain birds to reach nectar in deep flowers, and the development of camouflage in certain animals to blend in with their surroundings and avoid predators."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Evolution</strong> is inevitable. Ecosystems change, and so must the populations in order to keep up with their environment. Otherwise, they face faster death rates and eventual extinction. Diverse genetic populations are more withstanding to disaster and, with proper evolution, more and more members of individual species/societies can acquire optimal genes through reproduction. "
+    },
+    {
+      "type": "heading",
+      "text": "Reproductive Isolation"
+    },
+    {
+      "type": "paragraph",
+      "html": "Populations may diverge from the original due to changes in the environment. If changes are made to the ecosystem in a way that requires evolution to combat it, one population may form with one gene, while one changes its environment and retains its genetic pattern. <strong>Reproductive isolation</strong> is when two populations are no longer able to reproduce with each other. If there is a physical barrier between them (a road cutting through a forest), this is called <strong>allopatric speciation</strong>.  However, if the populations are in the same area but do not reproduce, this is <strong>sympatric speciation</strong>. The latter may be because reproduction times are different (early bird vs night owl) or seasons are different for the two populations. Essentially, allopatric speciation means two populations are forced to avoid reproduction, while sympatric speciation means they coexist without reproducing together. "
+    }
+  ]
+}

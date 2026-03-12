@@ -1,0 +1,67 @@
+{
+  "title": "5.5 Irrigation Methods",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "Irrigation uses water in several organized ways to promote healthy and efficient crop growth. It accounts for roughly 70% of our planet's freshwater use. "
+    },
+    {
+      "type": "heading",
+      "text": "Spray Irrigation"
+    },
+    {
+      "type": "paragraph",
+      "html": "Water is distributed and sprayed over the field from a central location. This method is more efficient than flood irrigation because it requires less water and a lot less water is lost to evaporation or runoff. Often times, like in the photo shown below, mist and water is dispensed from sprinklers which water the plants without as much water waste."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F1%2F17%2FPivotIrrigationOnCotton.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Flood Irrigation"
+    },
+    {
+      "type": "paragraph",
+      "html": "Flood irrigation uses the surface of the field by simply dumping water and allowing it to disperse accordingly. This method of irrigation is quite wasteful, not environmentally friendly, and does not accurately account for plant needs."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fa%2Fae%2FLevelBasinFloodIrrigation.JPG%2F800px-LevelBasinFloodIrrigation.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Furrow Irrigation"
+    },
+    {
+      "type": "paragraph",
+      "html": "This Is a type of surface irrigation that uses trenches that are dug underground between rows of crops. Furrow irrigation is inexpensive, but some water is lost due to the soil."
+    },
+    {
+      "type": "heading",
+      "text": "Drip Irrigation"
+    },
+    {
+      "type": "paragraph",
+      "html": "This system is localized and uses an underground hose full of holes which dispenses water closest to the plant root. While being productive, efficient, and not wasteful, it is also quite costly."
+    },
+    {
+      "type": "image",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Dripirrigation.png/960px-Dripirrigation.png?_=20150105143454",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Salinization"
+    },
+    {
+      "type": "paragraph",
+      "html": "As water evaporates after irrigation, salt can accumulate. This is called <strong>salinization</strong>, which is very harmful for plants. Preventing salinization just requires proper irrigation and maintaining of that soil.\n<strong>Aquifers</strong> are underground water storage for groundwater. It gathers water that makes it through less permeable soils into very compact ones, like clay, and stores it underground. One of the largest aquifers is the <strong>Ogallala</strong>, found in the Great Plains (USA). Water from an aquifer is retrieved using a pump<a href=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Aquifer_en.svg/606px-Aquifer_en.svg.png\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Aquifer_en.svg/606px-Aquifer_en.svg.png\"></span></a>, and can be \"replenished\" with enough time.<a href=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Aquifer_en.svg/606px-Aquifer_en.svg.png\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Aquifer_en.svg/606px-Aquifer_en.svg.png\"></span></a>"
+    }
+  ]
+}

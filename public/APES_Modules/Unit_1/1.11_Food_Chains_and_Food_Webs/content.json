@@ -1,0 +1,107 @@
+{
+  "title": "1.11 Food Chains and Food Webs",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Energy Transfers in Ecosystems 🌱"
+    },
+    {
+      "type": "paragraph",
+      "html": "A <strong>food chain</strong> is a way of showing how different organisms in an ecosystem depend on each other for food and how energy is transferred linearly. For example, in a grassland ecosystem, the grass is a <strong>producer</strong>, using sunlight to create energy via photosynthesis. The grass is then eaten by a rabbit, which is a <strong>primary consumer</strong>. Later on, the rabbit is eaten by a hawk, which makes the hawk a <strong>secondary consumer</strong>. "
+    },
+    {
+      "type": "paragraph",
+      "html": "However, a food chain is an oversimplified model to describe energy and nutrient transfers in ecological communities. Often, an organism can consume multiple types of prey or be eaten by a variety of predators, including predators at different trophic levels. What if owls and hawks eat the rabbit in our grassland ecosystem example? The simple chain model cannot represent two predators on the same organism. "
+    },
+    {
+      "type": "paragraph",
+      "html": "For this reason, we can more accurately represent energy transfers in ecosystems by using <strong>food webs</strong>, a relationship graph that shows all the trophic interactions—or overlapping food chains—between various species in an ecosystem! Food webs offer the opportunity to observe trophic cascades, as organism populations at any level of a food web can affect other species in ecological communities. "
+    },
+    {
+      "type": "paragraph",
+      "html": "A <strong>trophic cascade</strong> is a series of events in an ecosystem that occurs when a predator at the top of the food chain has an impact on the populations of organisms lower down in the food chain. For example, in a marine ecosystem, if the population of sea otters, which are a predator, increases, it can lead to a decrease in the population of sea urchins, which are a species of prey for sea otters. This decrease in sea urchins can then result in an increase in kelp, which is a type of seaweed that sea urchins eat. The increase in kelp can then provide more habitat for other species, leading to a ripple effect throughout the ecosystem."
+    },
+    {
+      "type": "paragraph",
+      "html": "Trophic cascades can have both positive and negative effects on an ecosystem, and they can be caused by both natural and human-induced changes. Understanding the interactions between different species and their impacts on each other is an important part of conserving and managing ecosystems!"
+    },
+    {
+      "type": "paragraph",
+      "html": "The diagram below shows an example of a food web from Lake Ontario. Primary producers are marked in green, primary consumers are represented in orange, secondary consumers are marked blue, and tertiary consumers are marked purple:"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2FPhosph.png?alt=media&token=519c5f7d-4388-46a1-a63c-0a52b5a279b0",
+      "width": "640",
+      "height": "289"
+    },
+    {
+      "type": "heading",
+      "text": "Response to Disturbance"
+    },
+    {
+      "type": "heading",
+      "text": "Feedback Loops"
+    },
+    {
+      "type": "paragraph",
+      "html": "Natural systems try to remain in a steady state by responding to changes in inputs and outputs. These changes in inputs and outputs are known as feedback. There are two different types of feedback: negative feedback loops and positive feedback loops."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Negative feedback loops</strong> are more common. They occur when a system responds to change by trying to return to its original state or by attempting to decrease the rate at which the change is occurring. For example, if drought causes a lake to evaporate, then the lake will decrease in surface area, leading to less and less evaporation. On the other hand, when there is more precipitation, the lake will increase in surface area, which will increase evaporation. The lake, therefore, always tends to stay the same size. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Negative feedback applies to food web interactions as well. It helps to maintain balance and stability in ecosystems. "
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-CSKkgdipnZOh.jpg?alt=media&token=79e032e0-f607-47de-8840-ec3b81bab69a",
+      "width": "225",
+      "height": "225"
+    },
+    {
+      "type": "paragraph",
+      "html": "Take, for instance, a population of herbivorous primary consumers, like deer. If the population of herbivores increases, they will eat more plants, leading to a decrease in the plant population. This decrease in plants can then lead to a decrease in the herbivore population, as there is less food available for them to eat. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Negative feedback loops prevent a singular species from becoming too dominant and disrupting the ecosystem."
+    },
+    {
+      "type": "paragraph",
+      "html": "However, scientists are more concerned with <strong>positive feedback loops</strong>, in which change always continues to increase. For example, increased global temperatures and pollution lead to ice caps melting. As the ground is exposed and smog settles on the ice, the ground becomes darker in color, which absorbs more sunlight and contributes to even more melting. It is very difficult to mitigate the effects of positive feedback loops. "
+    },
+    {
+      "type": "paragraph",
+      "html": "A positive feedback loop in a food web occurs when a change in one part of the ecosystem leads to a response that amplifies the original change, which may result in an unstable system that is more prone to major shifts or changes. "
+    },
+    {
+      "type": "paragraph",
+      "html": "One example of a positive feedback loop in a food web is the relationship caused by the introduction of an invasive species."
+    },
+    {
+      "type": "paragraph",
+      "html": "Brown tree snakes arrived on the island of Guam from the South Pacific, likely as stowaways in ship cargo. With no natural predators, the brown tree snake population expanded on the island exponentially and wiped out populations of Guam's native bird species. "
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-PecocjS95zoy.jpg?alt=media&token=a09412d4-d57a-4603-a489-5a85004b4b61",
+      "width": "276",
+      "height": "183"
+    },
+    {
+      "type": "paragraph",
+      "html": "Overall, the introduction and proliferation of the brown tree snake on Guam have had a cascading effect on the ecosystem, leading to a series of changes that have had a self-reinforcing, amplifying effect on an ecological community. This is an example of positive feedback in food webs, as the initial change (the introduction of the brown tree snake) has led to a series of further changes (reduction of birds) that have contributed to the overall impact on the Guam ecosystem."
+    },
+    {
+      "type": "paragraph",
+      "html": "The words positive and negative can be confusing, but they do not mean that one type of feedback loop is bad or that the other is good. In fact, negative feedback loops usually indicate healthy environments. Instead, remember that positive feedback loops cause <strong>more change</strong>, whereas negative feedback loops cause <strong>less change</strong>. "
+    },
+    {
+      "type": "paragraph",
+      "html": "For food webs, when one species is removed from or added to a specific food web, the rest of the food web can be affected!"
+    }
+  ]
+}

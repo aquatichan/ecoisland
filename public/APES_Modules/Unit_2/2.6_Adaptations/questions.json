@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Arctic foxes in northern Canada have thick white fur that provides insulation and camouflage in snowy environments. As climate change causes earlier spring snowmelt and reduced snow cover duration, some fox populations are experiencing higher predation rates during spring months. Which of the following best explains how this environmental change threatens the survival of individual foxes in these populations?",
+    "answers": [
+      "Earlier snowmelt exposes dark ground before foxes molt their white winter fur, making them visible to predators despite possessing an adaptation that was previously effective",
+      "Earlier snowmelt causes foxes to lose their white fur prematurely, forcing them to develop darker fur that reduces their insulation in remaining snow",
+      "Reduced snow cover allows predators to hunt more effectively year-round, but foxes can adapt by developing darker fur within a single generation to match the exposed ground",
+      "Earlier snowmelt increases the availability of plant food sources, which reduces predator populations and therefore decreases predation pressure on foxes"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A nocturnal predator suddenly appears. Some insects carry a heritable allele for daytime activity while others remain nocturnal. How will the population most likely respond to this predation pressure?",
+    "answers": [
+      "Day-active allele will increase as diurnal insects survive nocturnal predation",
+      "Population cannot become fully diurnal in one generation because genetic change takes generations",
+      "Individuals may shift activity by learning but learned behavior is not inherited",
+      "Predator will not starve because some nocturnal prey remain and predators can adapt"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Prey species such as ground squirrels that exhibit vigilance behaviors—frequently scanning for predators—have higher survival rates than less vigilant individuals in the same population. Over multiple generations, vigilance behaviors become more common in the population. Which of the following best explains this pattern?",
+    "answers": [
+      "Vigilant individuals detect predators earlier and survive at higher rates, but vigilance frequency remains constant in the population because vigilant individuals spend less time foraging and produce fewer offspring.",
+      "Vigilant individuals detect predators earlier and survive at higher rates, passing genes for vigilance to offspring and increasing the frequency of vigilant behavior in the population through natural selection.",
+      "Vigilant individuals have higher survival rates because they spend less energy on vigilance and more energy on reproduction, allowing them to produce more offspring.",
+      "Vigilance behaviors increase survival in environments with high predator density, but this behavioral adaptation only occurs within individual organisms during their lifetime and is not heritable across generations."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers studying beak size evolution in Darwin's finches on the Galápagos Islands collected data on beak depth and body size for 200 individual finches across five species over a 20-year period. They measured beak depth using calipers and recorded measurements annually during the breeding season. Which of the following best describes the research method used in this study?",
+    "answers": [
+      "Longitudinal observational study tracking individual beak development within the same finches over their lifespans",
+      "Longitudinal observational study tracking morphological traits across populations over time",
+      "Retrospective observational study tracking morphological traits by analyzing museum specimens collected over a 20-year period",
+      "Longitudinal experimental study manipulating environmental conditions to track morphological trait changes across populations over time"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A study investigates how root depth affects survival in drought-adapted grasses. Researchers plant three grass species with different average root depths (10 cm, 30 cm, 50 cm) in identical soil plots and withhold water for 30 days. What is the dependent variable?",
+    "answers": [
+      "The average root depth of the three grass species",
+      "The duration of water withholding during the study",
+      "The survival rate of the grass species after 30 days",
+      "The soil composition used in the identical plots"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An ornithologist shows migratory birds have genetically programmed navigation and seasonal timing consistent across populations and generations. Which choice best describes the reasoning that migration is an adaptation to seasonal change?",
+    "answers": [
+      "It wrongly attributes migration evolution to recent human caused climate change.",
+      "It mistakes innate genetic programming for learned behavior becoming inherited.",
+      "Inherited navigation and timing show migration evolved by natural selection.",
+      "It wrongly assumes genetic basis makes migration completely inflexible to environment."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "To test if a mosquito population has evolved resistance to DDT, researchers expose 50 mosquitoes to a standard dose and record mortality. They repeat this procedure with 10 different groups of 50 mosquitoes from the same population. What is the primary purpose of using multiple groups?",
+    "answers": [
+      "To increase the sample size and improve the statistical power of the experiment",
+      "To account for natural variability in mosquito survival rates",
+      "To determine whether resistance levels vary among different subpopulations within the same location",
+      "To control for environmental factors that might affect DDT effectiveness across trials"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A disease ecologist reports plague outcomes in two prairie dog colonies with different genetic diversity. Colony A had 200 individuals and genetic diversity index 0.45; Colony B had 180 individuals and index 0.72. After plague spread, Colony A suffered 95% mortality with 10 survivors, all carrying a rare resistance allele originally at 2% frequency. Colony B suffered 60% mortality with survivors showing multiple resistance mechanisms. The author concludes that without sufficient genetic variation for disease resistance, populations cannot persist through sudden outbreaks regardless of initial size. Which claim best matches the author's argument?",
+    "answers": [
+      "Populations lacking genetic variation for resistance can collapse after plague outbreaks.",
+      "Small population size alone does not explain collapse without low genetic diversity.",
+      "Individual survival does not imply population persistence under sudden outbreaks.",
+      "Lack of genetic variation can cause rapid collapse rather than only reduced reproduction."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A researcher studying behavioral adaptation to predation in beetles placed beetles from a high-predation forest population and a low-predation forest population into identical experimental chambers. The researcher then introduced a predatory spider into each chamber and recorded whether beetles fled, froze, or attacked the spider within 30 seconds. What is the independent variable in this experiment?",
+    "answers": [
+      "The population origin of the beetles (high-predation versus low-predation)",
+      "The body size of the beetles from the two forest populations",
+      "The population origin of the beetles (high-predation versus low-predation) as it affects survival rate",
+      "The species of predatory spider introduced into each chamber"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Estuarine fish face fluctuating salinity and evolve genetic variants for flexible osmoregulation. Which best explains how this trait is an adaptation to the estuary environment?",
+    "answers": [
+      "Fish in stable marine habitats evolve flexible osmoregulation despite constant salinity.",
+      "Alleles for flexible osmoregulation increase survival and reproduction in variable salinity.",
+      "Thicker skin blocking water and salt exchange is not a known fish mechanism.",
+      "Flexible osmoregulation provides no advantage because fish cannot reproduce in fluctuating salinity"
+    ],
+    "correct": "B"
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A facility has 200 gasoline delivery vehicles averaging 6.5 km per liter. It will replace 80 vehicles with hybrids rated 12 km per liter. Each vehicle averages 45,000 km per year. Which advantage best justifies the conversion from an energy conservation perspective?",
+    "answers": [
+      "Lower maintenance costs by reducing brake wear through regenerative braking.",
+      "Provide smoother acceleration and quieter operation to improve driver comfort.",
+      "Cut total gasoline consumption by substantially improving fleet fuel economy.",
+      "Claim zero exhaust emissions during deliveries due to electric drive."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A household uses 24,000 kWh per year. Water heating is 18% of that. A solar water heater supplies 70% of water-heating energy. Which calculation gives the annual kWh reduction?",
+    "answers": [
+      "Multiply 24,000 by 0.18 then multiply the result by 0.70",
+      "Divide 24,000 by 0.18 then multiply by 0.70 which inverts the relationship",
+      "Multiply 24,000 by 0.70 assuming solar covers all household consumption",
+      "Take 0.30 of 24,000 then apply 0.18 which misorders percentages"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A household switches from a conventional water heater to a high-efficiency model that reduces hot water energy consumption by 40%. The household's total energy consumption decreases by only 6%. Which of the following best explains why the water heater efficiency improvement produces a smaller total energy reduction?",
+    "answers": [
+      "The high-efficiency water heater requires additional electrical power to operate its control systems, which consumes 34% of the energy savings achieved through improved heating efficiency.",
+      "Residents responded to lower hot water costs by taking longer showers and using more hot water for laundry, offsetting 34% of the efficiency improvement.",
+      "The conventional water heater was already operating at 85% efficiency, so the high-efficiency model's improvement from 85% to 94% efficiency represents only a 9% relative improvement, not the 40% absolute improvement claimed.",
+      "Water heating represents approximately 15% of typical household energy consumption; therefore, a 40% reduction in water heating energy produces roughly a 6% reduction in total household energy (0.40 × 0.15 ≈ 0.06)."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A city measured fuel use: frequent-stop buses 5.2 mpg, express buses 8.1 mpg, private vehicles 24 mpg. Per-passenger fuel was 0.18 gallons per passenger-mile for buses and 0.95 for private vehicles. Which conclusion about transportation energy conservation is best supported by these data?",
+    "answers": [
+      "Express buses have higher vehicle mpg but per-passenger impact needs occupancy data.",
+      "Private cars have higher vehicle mpg but worse per-passenger fuel use.",
+      "Public transit uses less fuel per passenger-mile thanks to higher occupancy.",
+      "Improving car mpg alone will not match transit's per-passenger efficiency."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A homeowner installs a programmable thermostat that automatically lowers heating by 5°C during nighttime hours and when residents are away. Which of the following best describes how this modification reduces residential energy consumption?",
+    "answers": [
+      "Programmable thermostats eliminate the need for heating systems to operate during nighttime hours by storing thermal energy in building materials during the day.",
+      "Lowering the thermostat setting increases the efficiency of the heating system by allowing it to operate at higher capacity for shorter periods rather than at lower capacity continuously.",
+      "Lower temperatures increase the density of air inside the home, which reduces the volume of space requiring heating and therefore reduces total energy consumption.",
+      "Reducing the temperature differential between indoor and outdoor environments decreases the rate of heat transfer through walls and windows, lowering the energy required to maintain comfort."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An urban planning study examined the relationship between public transportation investment and vehicle fuel consumption across 12 cities over a 10-year period. The data table shows annual public transit funding (millions of dollars), percentage of commuters using public transit, and average annual fuel consumption per capita (liters).\nCity Transit Funding ($M) Public Transit Use (%) Fuel per Capita (liters)\n1 5 8 1,240\n2 12 14 1,080\n3 18 22 920\n4 25 31 780\n5 32 38 650\n6 8 11 1,160\n7 15 18 980\n8 22 28 820\n9 28 35 720\n10 35 42 580\n11 10 12 1,120\n12 20 26 880\nWhich statement best describes the relationship among transit funding, transit use, and fuel consumption?",
+    "answers": [
+      "Transit funding increases fuel consumption because transit systems require diesel fuel for buses and trains.",
+      "Public transit funding has no effect on fuel consumption because people choose transportation modes based on personal preference, not availability.",
+      "Increased public transit funding leads to higher transit ridership, which reduces per capita fuel consumption through modal shift from private vehicles.",
+      "As public transit funding increases, both transit use and per capita fuel consumption increase proportionally, demonstrating the effectiveness of transit investment."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A city transit authority is evaluating energy conservation by comparing transportation modes. A commuter driving alone in a gasoline vehicle travels 45 miles daily and achieves 28 miles per gallon. If the same commuter switches to public transportation, which uses 0.32 kWh per passenger-mile, how much less energy (in kWh) does the commuter use daily? (1 gallon of gasoline = 33.7 kWh)",
+    "answers": [
+      "42,336 kWh per day",
+      "25.4 kWh per day",
+      "38.2 kWh per day",
+      "39.8 kWh per day"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A building code official recommends updating codes to require high-performance insulation and variable-capacity heat pumps. The official notes current codes are 12 years old, typical buildings use 18–22 kWh/m² annually for climate control, while upgraded buildings use 12–15 kWh/m² (30–35% less). Upgrades raise construction costs 5–8% and pay back in 6–9 years through energy savings. Which choice best states the official's primary claim?",
+    "answers": [
+      "Buildings with high-performance insulation and heat pumps use 30-35% less energy.",
+      "Building codes should require advanced insulation and variable-capacity heat pumps.",
+      "Advanced efficiency raises construction costs 5-8% and pays back in 6-9 years.",
+      "Current building codes have not been updated for 12 years despite advances."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A household uses 24,000 kWh per year. Lighting is 18% and the refrigerator is 12% of that total. If switching all incandescent bulbs to LEDs reduces lighting use by 75% and replacing the refrigerator with an Energy Star model reduces refrigerator use by 40%, what is the total annual energy savings?",
+    "answers": [
+      "1,152 kWh per year representing only the refrigerator savings, omitting lighting",
+      "4,320 kWh per year from lighting baseline consumption mistakenly used as savings",
+      "7,200 kWh per year representing the combined baseline of both appliances",
+      "4,392 kWh per year saved from both lighting and refrigerator upgrades"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A manufacturing facility currently operates 45 electric motors with a combined power rating of 2,250 kW. The facility manager replaces these motors with high-efficiency models that reduce energy consumption by 12%. If the motors operate continuously for 8,000 hours per year, how many megawatt-hours (MWh) of electrical energy does the facility save annually? (1 MWh = 1,000 kWh)",
+    "answers": [
+      "2.16 MWh per year",
+      "0.216 MWh per year",
+      "0.18 MWh per year",
+      "2,160 MWh per year"
+    ],
+    "correct": "!"
+  }
+]

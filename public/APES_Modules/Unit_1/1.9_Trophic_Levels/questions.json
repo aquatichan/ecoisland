@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A scientist compares two ecosystems: a tropical rainforest with net primary productivity of 2,000 g C/m²/year and a temperate grassland with net primary productivity of 400 g C/m²/year. Both ecosystems support similar numbers of top predators per unit area. Which of the following best explains how this is possible despite the large difference in primary productivity?",
+    "answers": [
+      "The rainforest's higher primary productivity supports a longer food chain with more trophic levels, and the grassland's shorter food chain also distributes energy across fewer consumers, so both ecosystems deliver similar amounts of energy to top predators despite different productivity levels",
+      "The rainforest's higher primary productivity supports a longer food chain with more trophic levels, so energy is distributed across more consumers before reaching top predators, while the grassland's shorter food chain concentrates more energy at the top predator level",
+      "The rainforest's higher primary productivity results in lower energy transfer efficiency between trophic levels, so less energy reaches top predators, while the grassland's lower productivity has higher transfer efficiency that concentrates more energy at the top predator level",
+      "The rainforest's higher primary productivity supports an inverted biomass pyramid where consumer biomass exceeds producer biomass, distributing energy differently than the grassland's upright pyramid, allowing both to support similar numbers of top predators"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Conservation managers in a region with isolated forest reserves observe that apex predator populations have declined 80% over 20 years, while mid-level carnivore populations have increased dramatically. Ecological models predict complete food web collapse within 10 years. Managers propose establishing wildlife corridors connecting fragmented reserves. Which advantage best justifies this connectivity solution?",
+    "answers": [
+      "Habitat corridors restore gene flow and allow apex predator recolonization, enabling populations to adapt to climate-driven habitat changes predicted over the next 10 years that threaten ecosystem stability.",
+      "Habitat corridors expand available territory for remaining apex predators, providing additional hunting grounds that prevent the 80% population decline from worsening and maintain food web structure.",
+      "Habitat corridors restore gene flow and allow mid-level carnivore dispersal, regulating their dramatically increased populations to prevent overgrazing and ecosystem collapse.",
+      "Habitat corridors restore gene flow and allow apex predator recolonization, maintaining the complete food web structure required to prevent trophic cascade and ecosystem collapse."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A marine food web includes phytoplankton → zooplankton → small fish → large predatory fish. If phytoplankton biomass is 100 kg/km², what is the maximum expected biomass of large predatory fish, and which principle best explains this limit?",
+    "answers": [
+      "Approximately 0.1 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so four trophic transfers result in roughly 0.1% of original energy",
+      "Approximately 1 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so three trophic transfers result in roughly 1% of original energy",
+      "Approximately 10 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so two trophic transfers from zooplankton result in roughly 10% of zooplankton energy",
+      "Approximately 0.1 kg/km²; the 10% energy transfer rule means large predatory fish retain 10% of the energy from small fish at the third trophic level"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The diagram below shows energy flow through four trophic levels in a temperate forest ecosystem, with energy values in kilocalories (kcal) labeled at each level.\n[Diagram: Pyramid with base labeled \"Plants (Producers): 10,000 kcal\" → \"Herbivores (Primary Consumers): 1,000 kcal\" → \"Small Carnivores (Secondary Consumers): 100 kcal\" → \"Large Carnivores (Tertiary Consumers): 10 kcal\"]\nWhich of the following best describes why energy available to tertiary consumers is only 1% of the energy available to producers?",
+    "answers": [
+      "Energy is recycled back to producers through decomposition, so tertiary consumers have access to less total energy than lower trophic levels.",
+      "Tertiary consumers are larger organisms that require more energy per individual, reducing the total number that can be supported at that trophic level.",
+      "Tertiary consumers consume only 10% of the secondary consumers available in the forest due to predator-prey population ratios.",
+      "Tertiary consumers lose approximately 90% of the energy from secondary consumers through cellular respiration, with the remaining energy stored in biomass."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "In a marine ecosystem, phytoplankton capture solar energy through photosynthesis and are consumed by small fish, which are then eaten by larger predatory fish. Which of the following best describes why the total biomass of phytoplankton is typically greater than the total biomass of the predatory fish in the same ecosystem?",
+    "answers": [
+      "Energy is lost as heat and through cellular respiration at each trophic level, so less energy is available to support biomass at higher levels",
+      "Phytoplankton reproduce more rapidly than fish, allowing their populations to remain larger despite consuming the same amount of energy",
+      "Phytoplankton are autotrophs that create energy from sunlight, while fish must obtain energy from consuming other organisms, making phytoplankton inherently more energy-rich",
+      "Predatory fish actively avoid consuming large quantities of smaller fish to prevent ecosystem collapse"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A diagram shows a terrestrial food chain: grass → grasshopper → songbird → hawk, with biomass values indicated at each level in kilograms per hectare: grass (5,000 kg/ha), grasshopper (500 kg/ha), songbird (50 kg/ha), and hawk (5 kg/ha). The diagram illustrates the 10% energy transfer rule between successive trophic levels. Which environmental consequence is most directly explained by the biomass pyramid shown?",
+    "answers": [
+      "Populations of top predators like hawks are naturally limited to small numbers because the energy available from lower trophic levels can only support a small biomass of apex consumers",
+      "Populations of top predators like hawks maintain stable numbers because the energy available from lower trophic levels provides consistent support for apex consumer biomass over time",
+      "Populations of intermediate consumers like songbirds are naturally limited to small numbers because the energy available from grasshoppers can only support a small biomass at the third trophic level",
+      "Populations of top predators like hawks are naturally limited to small numbers because large territorial requirements restrict the number of individuals that can occupy a given habitat area"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Agricultural nitrogen causes an algal bloom. Dead algae sink and decompose. Why do bottom waters become oxygen-depleted?",
+    "answers": [
+      "Dead algae stop photosynthesizing so they no longer produce oxygen.",
+      "Nitrogen fuels algal growth but does not directly consume dissolved oxygen.",
+      "Reduced light limits deep photosynthesis but decomposition uses most bottom oxygen.",
+      "Decomposer respiration consumes oxygen and stratification prevents surface mixing."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Forest managers in a region with a history of clear-cutting propose retaining dead wood on the forest floor instead of removing it for fuel or timber. Soil nutrient monitoring shows that retained dead wood areas have 40% higher available nitrogen compared to areas where dead wood was removed. Which advantage best justifies this dead wood retention policy?",
+    "answers": [
+      "Dead wood retention is most effective at restoring nutrients in young plantation forests, not in previously clear-cut areas where soil depletion is already severe.",
+      "Dead wood prevents soil erosion and stabilizes forest structure, improving habitat quality for wildlife without directly affecting nutrient cycling processes.",
+      "Dead wood increases light availability by creating canopy gaps, allowing understory vegetation to photosynthesize more efficiently and produce more energy for the forest ecosystem.",
+      "Dead wood provides habitat for decomposers that break down organic matter and restore soil nitrogen availability, reestablishing the nutrient cycling process disrupted by clear-cutting."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A field guide explains that food webs contain more species at lower trophic levels than at higher trophic levels. The author supports this by noting that less than 10% of energy remains available at each trophic level. Which statement best describes a limitation of this reasoning?",
+    "answers": [
+      "The energy transfer efficiency explains why fewer organisms can be supported at higher levels, but does not account for how species diversity (number of species) differs from biomass distribution (total mass of organisms).",
+      "The energy transfer efficiency explains why fewer organisms can be supported at higher levels, but only partially accounts for species diversity patterns without considering other ecological factors like niche availability.",
+      "The energy transfer efficiency explains why fewer organisms can be supported at higher levels, but does not account for how species diversity (number of species) differs from organism abundance (number of individuals).",
+      "The energy transfer efficiency explains the total energy available at each trophic level, but does not account for how species diversity (number of species) differs from organism abundance (number of individuals)."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An ecologist argues that reintroducing managed bison would restore historical energy flow and trophic interactions in prairies, while modern cattle grazing degrades them. Which land management perspective does this reflect?",
+    "answers": [
+      "Eliminating livestock grazing entirely to allow grassland recovery without herbivores",
+      "Maximizing livestock production through technical grazing and efficiency measures",
+      "Replacing native species with more productive domesticated animals for economic gain",
+      "Ecological restoration by restoring historical disturbance regimes and native species"
+    ],
+    "correct": "D"
+  }
+]

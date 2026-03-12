@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A country's per capita ecological footprint is 2.8 global hectares and biocapacity is 1.5, leaving a 1.3 gha deficit. Per capita footprint breakdown is cropland 0.9, grazing 0.6, forest 0.5, fishing grounds 0.2, built up land 0.1. The nation imports 40% of its food and exports forest products. Which strategy best closes the 1.3 gha deficit by targeting the largest contributors?",
+    "answers": [
+      "Densify cities and convert green space to reduce built up land use.",
+      "Eliminate the fishing industry to remove the fishing grounds footprint.",
+      "Reduce meat consumption and boost crop yields to cut cropland and grazing.",
+      "Halt forest product exports and conserve forests to lower forest footprint."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A city conducted an ecological footprint analysis comparing neighborhoods with different population densities and transportation patterns. The graph shows the relationship between population density (people per square kilometer) and per capita ecological footprint (global hectares per person) across twelve urban neighborhoods.\n[Graph shows scatter plot with negative correlation: low-density neighborhoods (200-400 people/km²) have footprints of 3.8-4.5 gha/person; medium-density neighborhoods (800-1200 people/km²) have footprints of 2.2-2.8 gha/person; high-density neighborhoods (2000-3500 people/km²) have footprints of 1.1-1.6 gha/person; moderate scatter around trend]\nWhich statement best describes the relationship between population density and per capita ecological footprint shown in this data?",
+    "answers": [
+      "Per capita ecological footprint increases proportionally with population density because more people require more total resources.",
+      "Population density and per capita ecological footprint show no consistent relationship because individual consumption choices vary too much within neighborhoods.",
+      "Per capita ecological footprint decreases as population density increases, reflecting reduced individual resource consumption in compact urban areas.",
+      "Per capita ecological footprint remains constant across all population densities because each person requires the same amount of resources regardless of where they live."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An environmental justice advocate writes: 'Ecological footprint calculations often focus on individual consumption choices like diet and transportation, but this approach obscures how low-income communities and communities of color bear disproportionate environmental burdens from industrial facilities, waste disposal sites, and pollution sources they did not choose. True sustainability requires measuring and addressing these structural inequities, not just individual lifestyle modifications.' What does this passage assume about ecological footprint methodology?",
+    "answers": [
+      "Current footprint frameworks inadequately capture environmental injustices and structural inequities that individuals cannot control through personal choices.",
+      "Low-income communities and communities of color have smaller ecological footprints than wealthy populations because they consume fewer resources.",
+      "Individual lifestyle modifications are sufficient to address both personal footprints and community-level environmental inequities.",
+      "Ecological footprint calculations should exclude industrial facilities and waste sites because these represent corporate impacts, not individual responsibility."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A country with a population of 50 million people has an average ecological footprint of 2.5 global hectares per person, while the global average is 1.7 global hectares per person. Which of the following best explains what this difference in footprint measurements indicates about the country's resource use?",
+    "answers": [
+      "The country's population consumes resources and produces waste at rates exceeding what the global average suggests is sustainable per capita.",
+      "The country has more total resources available than other countries, allowing each person to consume more without environmental consequences.",
+      "The country's population is larger than the global average, so each person must consume more resources to maintain economic stability.",
+      "The country produces more waste than other countries, but this waste is recycled more efficiently than the global average."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A dietary study measured the ecological footprint associated with different food consumption patterns. A meat-based diet (consuming 85 kg meat annually) produced a food footprint of 1.2 global hectares per person. A vegetarian diet (consuming 0 kg meat, 120 kg vegetables/grains annually) produced a footprint of 0.35 global hectares per person. A pescatarian diet (consuming 25 kg fish, 95 kg vegetables/grains annually) produced a footprint of 0.58 global hectares per person. What do these data illustrate about the variables measured in food-related ecological footprints?",
+    "answers": [
+      "Food footprints primarily reflect the production methods used to generate different food types; the 3.4× difference between meat and vegetarian diets indicates that industrial meat production requires more land and resources than industrial crop production.",
+      "Food footprints reflect both the quantity and type of food consumed; animal-based proteins require substantially more land and resources per kilogram than plant-based foods, explaining why the pescatarian diet (0.58 global hectares) represents the optimal balance between nutrition and environmental impact.",
+      "Food footprints reflect both the quantity and type of food consumed; the 3.4× difference between meat and vegetarian diets is primarily explained by the larger total quantity of food consumed in the meat-based diet (85 kg meat vs. 120 kg vegetables/grains).",
+      "Food footprints reflect both the quantity and type of food consumed; animal-based proteins require substantially more land and resources per kilogram than plant-based foods, explaining the 3.4× difference between meat and vegetarian diets."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Ecological footprint measures the land needed to supply a person's resources and absorb their waste. Developed countries often show footprints of 4–5 hectares per person, while low-income developing countries show 1–2 hectares. Which best explains this difference?",
+    "answers": [
+      "Attributing smaller footprints to superior waste management in developing nations",
+      "Higher per-capita consumption of energy, goods, and meat increases land demand",
+      "Confusing total national land area with individual per-capita impact",
+      "Blaming stricter regulations for larger footprints instead of higher consumption"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A nation's total ecological footprint is 450 million gha, while its biocapacity (available resources and waste-absorption capacity) is 300 million gha. The population is 50 million people. Which statement best explains the relationship between per-capita footprint, biocapacity, and sustainability shown by these values?",
+    "answers": [
+      "The nation's per-capita footprint is 9.0 gha, exceeding its per-capita biocapacity of 6.0 gha, indicating the population is living unsustainably because the 150 million gha deficit must be met through resource imports from other nations.",
+      "The nation's per-capita footprint is 9.0 gha, exceeding its per-capita biocapacity of 6.0 gha, but this indicates temporary resource use that will stabilize once the population adjusts consumption patterns.",
+      "The nation's per-capita footprint is 9.0 gha, and while total footprint exceeds total biocapacity by 150 million gha, the population is living unsustainably because per-capita footprint exceeds the global sustainable threshold of 1.7 gha.",
+      "The nation's per-capita footprint is 9.0 gha, exceeding its per-capita biocapacity of 6.0 gha, indicating the population is living unsustainably and depleting resources faster than they regenerate."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An organization estimated an ecological footprint for a rural agricultural community using averages from surveys of food consumption, home energy use, and vehicle travel. If researchers instead collected data from each household rather than using community averages, which outcome is most likely?",
+    "answers": [
+      "Variation would show household incomes vary more than assumed by community averages.",
+      "Variation would reveal true outliers but not justify excluding households from analysis.",
+      "Household footprints would show substantial variation around the community average.",
+      "Total community footprint would remain similar while household values vary."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A city of 280,000 residents generates 450 metric tons of solid waste daily. If waste disposal and processing requires 0.0008 hectares per kilogram of waste, what is the annual waste-related ecological footprint for the entire city in hectares? (1 metric ton = 1,000 kg)",
+    "answers": [
+      "360 hectares",
+      "131.4 hectares",
+      "131,400 hectares",
+      "164,250 hectares"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A company offers employees the option to work from home three days per week instead of commuting to an office daily. Which of the following best explains how this policy change would affect the transportation variable in employees' ecological footprints?",
+    "answers": [
+      "The transportation variable would decrease because fewer commuting days lead employees to shift from personal vehicles to public transportation for remaining commute days, lowering the biocapacity required for fuel production and carbon sequestration",
+      "The transportation variable would increase because fewer commuting days reduce fuel consumption but employees compensate by taking additional discretionary trips, resulting in higher overall biocapacity required for fuel production and carbon sequestration",
+      "The transportation variable would decrease because fewer commuting days reduce fuel consumption and associated energy demands, lowering the biocapacity required for fuel production and carbon sequestration",
+      "The transportation variable would remain approximately the same because fewer commuting days reduce fuel consumption, but employees use the saved commuting time for other activities requiring similar travel distances, maintaining the biocapacity required for fuel production and carbon sequestration"
+    ],
+    "correct": "C"
+  }
+]

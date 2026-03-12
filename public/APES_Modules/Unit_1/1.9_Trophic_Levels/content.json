@@ -1,0 +1,47 @@
+{
+  "title": "1.9 Trophic Levels",
+  "content": [
+    {
+      "type": "heading",
+      "text": "The Trophic Levels"
+    },
+    {
+      "type": "paragraph",
+      "html": "Ecosystems manage and regulate energy usage and allowance through their <strong>trophic levels</strong>. Similar to a tier list or a pyramid, lower trophic levels have much higher populations than higher trophic levels, allowing predators to have access to prey in adequate amounts whilst also managing their population control. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Plants capture glucose and convert it into energy, as we've discussed before. This makes plants <strong>autotrophs/producers</strong>, since they are able to create their own sustenance entirely by themselves. They do not rely on other processes to create food for them. On the other hand, <strong>consumers/heterotrophs</strong> consume food created by autotrophs or organisms on lower trophic levels. <strong>Primary consumers</strong> are the tier above plants, consuming only autotrophs. <strong>Secondary consumers</strong> are above primary consumers and consume them, while <strong>tertiary consumers</strong> are able to consume secondary consumers. These energy levels, or consumption guidelines, define trophic levels. Since most ecosystems have more than one type of each (autotrophs, primary, secondary, tertiary consumers), food chains are an inadequate way to represent feeding habits in an ecosystem. Instead, one can use a <strong>food web</strong> (see below)."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F800px-TrophicWeb.jpg?alt=media&token=3ec0ca65-ed54-4765-b2ff-f59179592628",
+      "width": "640",
+      "height": "265"
+    },
+    {
+      "type": "paragraph",
+      "html": "Due to the <strong>Law of Thermodynamics</strong>, energy is lost as we move up through trophic levels. Less than 10% of energy remains every time you move up one trophic level."
+    },
+    {
+      "type": "paragraph",
+      "html": "There are also some animals who eat dead organic matter: <strong>scavengers</strong>, <strong>detritivores</strong>, and <strong>decomposers</strong>. You may have noticed that trophic levels do not skip a tier (for example, tertiary consumers do not directly eat autotrophs, but instead end up consuming them after they have been consumed by a lower trophic level). These organisms, along with producers, are especially important to ecosystems because they help to regulate and ‘clean up’. Dead organic matter is consumed which prevents buildup of nutrients or excess decay. <strong>Scavengers</strong>, such as racoons and vultures, consume dead animals prior to decomposition. <strong>Detritivores</strong>, such as dung beetles, obtain nutrients by actively breaking down dead tissues and waste. <strong>Decomposers</strong>, such as worms, are fungi and bacteria that convert organic bacteria into small elements and molecules that can be recycled back into the ecosystem. "
+    },
+    {
+      "type": "heading",
+      "text": "Community Ecology"
+    },
+    {
+      "type": "paragraph",
+      "html": "Mutualism: 😀-😀&#9;&#9;Commensalism: 😀-😐&#9;&#9;Parasitism: 😀-😟&#9;&#9;Predator and Prey: 😀-😟"
+    },
+    {
+      "type": "paragraph",
+      "html": "In an ecosystem, especially given the varying trophic levels and interactions species must have to survive, patterns of relationship types emerge. In a <strong>mutualistic</strong> relationship, such as bees and pollination to flowers, both organisms benefit from their interaction. In <strong>commensalism</strong> relationships, <strong>symbiosis</strong> (or coexistence) occurs where one organism is benefitted and the other is left unaffected. For example, a barnacle using a whale for transport allows the barnacle to move throughout the ocean and collect nutrients without harming the whale. Commensalism is a lot more common due to most organisms' need to live in a community. In a <strong>parasitic</strong> relationship, the parasite will inhabit the host; the host gets harmed from this interaction while the parasites benefit. An example of this can be a tapeworm, which eats the food of its host and can cause nutrient absorption problems. In these parasitic interactions, one will often find <strong>pathogens</strong>, which are parasites that carry and trasmit disease. Lastly, in a <strong>predator-prey relationship</strong>, one animal will kill and consume another animal. These interactions help limit population growth of lower trophic levels. In response to attacks from predators, prey have defenses, whether they are <strong>behavioral</strong> (hiding), <strong>morphological</strong> (attacking), or <strong>chemical</strong> (poisoning). Often times, new defense mechanisms will come about for certain species simply by mimicking other organisms. "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Competition</strong>\nCompetition occurs when organisms must share a limited resource. Whether it be water, shelter, food, nutrients, or light, coexistence is dependent on access to resources. For example, if two competitors prey on one species, food will be limited and certain populations will decline. Species who share common resources, though, are able to resource partition, or divide equally needed resources according to survival needs. If two species eat different parts of the same plant, they can share that niche without overlapping and depleting populations. Though, if two species eat the stem of the plant while one eats the leaves, evolution will favor the species with access to more resources, while species forced to over-artition will begin to die off. This is the process of natural selection that occurs both within a species and between several species that live in the same environment."
+    }
+  ]
+}

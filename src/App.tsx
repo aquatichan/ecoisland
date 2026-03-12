@@ -19,6 +19,7 @@ import Impact from "@/pages/Impact";
 import Settings from "@/pages/Settings";
 import Leaderboard from "@/pages/Leaderboard";
 import APES from "@/pages/APES";
+import LessonPage from "./pages/LessonPage"
 
 import "leaflet/dist/leaflet.css";
 import "@/App.css";
@@ -118,6 +119,15 @@ function App() {
             element={
               <Layout currentPageName="APES">
                 <APES />
+              </Layout>
+            }
+          />
+
+          <Route
+            path="/apes/unit/:unit/:lesson"
+            element={
+              <Layout currentPageName="Lesson">
+                <LessonPage />
               </Layout>
             }
           />

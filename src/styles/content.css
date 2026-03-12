@@ -1,0 +1,118 @@
+.article {
+  line-height: 1.7;
+}
+
+
+/* Headings */
+
+.article h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+.article h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  color: hsl(var(--foreground));
+}
+
+
+/* Paragraphs */
+
+.article p {
+  margin-top: 1rem;
+  color: hsl(var(--foreground));
+}
+
+
+/* Lists */
+
+.article ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.article ol {
+  list-style: decimal;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.article li {
+  margin-bottom: 0.4rem;
+  color: hsl(var(--foreground));
+}
+
+
+/* Images */
+
+.article img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  max-width: 100%;
+}
+
+
+/* Tables */
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid hsl(var(--border));
+}
+
+
+/* Table headers */
+
+.article th {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 3px solid hsl(var(--border));
+}
+
+
+/* Table cells */
+
+.article td {
+  padding: 10px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+
+/* Alternating rows */
+
+.article tr:nth-child(even) {
+  background: hsl(var(--muted));
+}
+
+
+/* Hover */
+
+.article tr:hover {
+  background: hsl(var(--accent));
+}
+
+
+/* Links */
+
+.article a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+}
+
+.article a:hover {
+  color: hsl(var(--accent-foreground));
+}

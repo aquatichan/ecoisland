@@ -1,0 +1,102 @@
+[
+  {
+    "question": "The researcher says endocrine disruptors are ubiquitous and that meaningful reduction requires systematic industry replacement rather than relying on consumer choice. Which value does the researcher prioritize?",
+    "answers": [
+      "Food packaging poses higher endocrine disruptor risks than cosmetics or toiletries",
+      "Systemic regulation of chemicals across industries rather than consumer responsibility",
+      "Individual consumers should shoulder primary responsibility through product selection",
+      "Voluntary consumer choices and awareness campaigns can sufficiently reduce exposure"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Endocrine disruptors interfere with normal physiological processes in organisms. Which of the following best describes the mechanism by which endocrine disruptors cause this interference?",
+    "answers": [
+      "They mimic or block natural hormones, altering hormone production rates in endocrine glands through negative feedback mechanisms that normally regulate physiological processes.",
+      "They chemically degrade natural hormones in the bloodstream, disrupting signaling between endocrine glands and target cells that normally regulate physiological processes.",
+      "They mimic or block natural hormones, disrupting signaling between endocrine glands and target cells that normally regulate physiological processes.",
+      "They mimic or block natural hormones, disrupting signaling between endocrine glands and target cells specifically during critical developmental windows when physiological processes are being established."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A study measured pesticide application rates in agricultural watersheds and tracked the proportion of feminized male fish in downstream populations. The data show that watersheds with 2 kg/hectare pesticide application had 8% feminized males, 5 kg/hectare had 18% feminized males, 8 kg/hectare had 31% feminized males, and 12 kg/hectare had 47% feminized males. Which statement best characterizes the relationship between pesticide application rate and fish feminization?",
+    "answers": [
+      "Feminization in male fish decreases with pesticide application rate because higher pesticide concentrations inhibit all reproductive development",
+      "Feminization in male fish increases with pesticide application rate due to temperature-driven changes in sex determination in warmer downstream waters",
+      "Feminization in male fish increases with pesticide application rate, demonstrating a dose-response relationship between endocrine disruptor exposure and reproductive disruption",
+      "Feminization in male fish shows an inverse relationship with agricultural pesticide runoff, with female-biased populations occurring in upstream areas away from pesticide sources"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Perchlorate from aerospace and weapons manufacturing contaminates drinking groundwater. Pregnant women and young children consuming this water have reduced thyroid hormone levels and delayed neurological development. Which best explains this health effect?",
+    "answers": [
+      "Perchlorate disrupts pancreatic hormone synthesis, impairing glucose metabolism and energy supply.",
+      "Perchlorate blocks thyroid iodine uptake, lowering hormone production and harming neurodevelopment.",
+      "Perchlorate destroys thyroid tissue and cells, causing loss of hormone production.",
+      "Perchlorate reduces thyroid hormones, but alternative pathways compensate to preserve development."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers sampled water and fish at five river sites upstream and downstream of a wastewater plant, measured perchlorate, and assessed fish sex ratio and gonadal development monthly for 18 months. Which major limitation applies to this observational study design?",
+    "answers": [
+      "Sex ratio and gonadal abnormalities are known effects of endocrine disruptors in fish",
+      "Observational design cannot prove perchlorate caused reproductive changes due to confounders",
+      "Monthly sampling provides seasonal replication and temporal resolution rather than wasting resources",
+      "Including only one location would remove exposure gradient and prevent comparisons"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "An environmental health advocate argues that dioxin exposure poses significant risk to wildlife ecosystems because dioxins are released from multiple sources—herbicide production, paper bleaching, waste incineration, and wildfires—and persist in the environment, creating unavoidable chronic exposure. Which of the following best describes a weakness in this reasoning?",
+    "answers": [
+      "The argument establishes that dioxins come from multiple sources and persist, but does not provide evidence that dioxins bioaccumulate through food chains to reach concentrations that cause endocrine disruption in wildlife populations.",
+      "The argument establishes that dioxins come from multiple sources and persist, but does not provide evidence that endocrine disruption in individual wildlife translates to population-level declines in natural ecosystems.",
+      "The argument establishes that dioxins come from multiple sources and persist, but does not provide evidence that environmental concentrations exceed the threshold levels necessary to cause endocrine disruption in wildlife populations.",
+      "The argument establishes that dioxins come from multiple sources and persist, but does not provide evidence that wildlife populations actually experience harmful endocrine disruption from these exposure levels in natural ecosystems."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A wastewater treatment removes estrogen-mimicking compounds but forms endocrine-active byproducts. Which describes a disadvantage?",
+    "answers": [
+      "It replaces one endocrine hazard with new endocrine-active byproducts.",
+      "It may be too expensive for many municipalities to adopt widely.",
+      "It would not quickly reverse fish feminization across complex exposures.",
+      "It increases energy use and the treatment plant's carbon footprint."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A study of alligator populations in a Florida wetland reveals gender imbalances with significantly more females than males, linked to elevated estrogen-mimicking chemicals from treated sewage discharge. Population modeling suggests the current sex ratio will cause population collapse within 20 years. Which intervention would most effectively prevent population decline?",
+    "answers": [
+      "Translocate female alligators to other wetlands to reduce population density and slow population decline",
+      "Establish a captive breeding program for alligators with balanced sex ratios to maintain the species while the wetland recovers naturally",
+      "Upgrade wastewater treatment facilities to remove estrogen-mimicking endocrine disruptors before discharge into the wetland",
+      "Artificially incubate alligator eggs at higher temperatures to produce more male offspring and rebalance the population"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A researcher describes phytoestrogens in soy, their estrogen-receptor activity, developmental risks, and advises caution for pregnancy and early childhood. Which choice best expresses the author's main claim?",
+    "answers": [
+      "Natural phytoestrogens can be endocrine disruptors and pose developmental risks during early development.",
+      "Phytoestrogens are plant compounds in soy products such as tofu and soy milk with hormone-like activity.",
+      "Some health advocates promote soy consumption for hormone balance, especially menopausal women.",
+      "Phytoestrogens bind estrogen receptors and can mimic or block endogenous estrogen signaling."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A study measured perchlorate concentrations in pond water and thyroid hormone (T3 and T4) levels in developing tadpoles from five ponds. Data show thyroid hormone levels of 45 ng/mL at 0 ppb perchlorate, 38 ng/mL at 5 ppb, 28 ng/mL at 15 ppb, 18 ng/mL at 30 ppb, and 12 ng/mL at 50 ppb perchlorate. Which statement best characterizes the relationship between perchlorate exposure and thyroid hormone levels?",
+    "answers": [
+      "Thyroid hormone levels show no consistent relationship with perchlorate concentration, as individual variation masks any dose-dependent endocrine disruption pattern in developing tadpoles",
+      "Thyroid hormone levels show a negative correlation with perchlorate concentration, demonstrating dose-dependent endocrine disruption of thyroid function in developing tadpoles",
+      "Thyroid hormone levels show a negative correlation with perchlorate concentration, demonstrating proportional linear decrease in thyroid function across all exposure levels in developing tadpoles",
+      "Thyroid hormone levels show a negative correlation with perchlorate concentration, demonstrating dose-dependent competitive inhibition of iodine uptake in developing tadpoles"
+    ],
+    "correct": "B"
+  }
+]

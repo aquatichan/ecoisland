@@ -1,0 +1,50 @@
+{
+  "title": "3.1 Generalist and Specialist Species",
+  "content": [
+    {
+      "type": "heading",
+      "text": "What does generalist and specialist mean?"
+    },
+    {
+      "type": "paragraph",
+      "html": "As discussed in other units, the Earth contains vastly different specific biomes that are home to many different species of animals. These biomes are determined by a map that takes into account the Sun's energy and earth tilt which disperses heat into different biomes. This range of conditions create specific environments that, depending on the species, are either livable or unlivable. The level of adaptability that a species can utilize to survive in an environment differentiates them to be either a <strong>generalist</strong> or a <strong>specialist</strong>. These two categories use a number of factors to divide organisms on their adaptability to different conditions.  Some of the factors used to determine this ability are:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Niche/ Adaptability</strong> ➢ What niche does the species occupy? How easy would it be for them to adapt to a sudden change?</li>\n<li><strong>Diet</strong>  ➢ What do they eat, how readily is it available, and how much would it impact them to forcibly change their intake?</li>\n<li><strong>Location</strong> ➢ Where do they inhabit now, and does a change in location or climate directly affect their survival?</li>\n<li><strong>Tolerance</strong> ➢ How any small or large change would affect their well-being and, if affected, how quickly they would recover?<a href=\"https://cdn.pixabay.com/photo/2017/01/11/16/19/black-bear-1972219_960_720.jpg\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://cdn.pixabay.com/photo/2017/01/11/16/19/black-bear-1972219_960_720.jpg\"></span></a></li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Characteristics of a Generalist Species"
+    },
+    {
+      "type": "paragraph",
+      "html": " A <strong>generalist</strong> is a species with a <strong>broad niche</strong> that is easily adaptable to many environmental conditions. These species are more likely to survive (and in larger numbers) due to the fact that they are able to easily relocate, change food sources, and adapt in other ways to new biomes. Generalists are quickly adaptable to change and are rarely faced with the need to \"recover\" from any environmental problems. Generalists' diets change in accordance with surroundings and they can even evolve in certain ways to maintain genetic traits specific to their new/recently inhabited biome."
+    },
+    {
+      "type": "paragraph",
+      "html": "An example of a generalist species would be a raccoon. Found all over the world, whether in trash bins or parks, raccoons can adapt easily to changes in weather or habitat. Their diets are simply consistent with what surrounds them (they are able to forage in trash cans for food if needed) and they don't require any specific or incredibly stable conditions to keep reproducing or maintaining their health.<a href=\"https://cdn.pixabay.com/photo/2015/09/09/08/41/snow-leopard-931224_960_720.jpg\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://cdn.pixabay.com/photo/2015/09/09/08/41/snow-leopard-931224_960_720.jpg\"></span></a>"
+    },
+    {
+      "type": "heading",
+      "text": "Characteristics of a Specialist Species"
+    },
+    {
+      "type": "paragraph",
+      "html": "A <strong>specialist species</strong>, on the other hand, has a <strong>narrow niche</strong> with incredibly specific needs in order to survive. Specialists require a detailed and consistent climate, diet, and regimen to keep them alive. Specialists are not able to readily move biomes and are more likely to seriously suffer from a natural disaster since their ability to leave or readily adapt to a new environment is massively hindered. Their forms of shelter must remain consistent with equal levels of sunlight and access to water (depending on the species). Specialists reproduce in a way meant to keep all genetic traits needed for survival in their biome present in their offspring."
+    },
+    {
+      "type": "paragraph",
+      "html": "An example of a specialist species is a panda. Pandas need a certain diet and habitat in order to survive. Pandas are mostly found in Temperate Broadleaf Deciduous Forests, Tropical Broadleaf Evergreen, and Bamboo Forests because of the specific diet they have. Pandas can only survive off eating bamboo and other grasses. "
+    },
+    {
+      "type": "heading",
+      "text": "⚡ Checkpoint question"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Characteristic</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Generalist</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Specialist</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Niche/Adaptability</strong></td><td class=\"mui-enerfg-tableCell\"><strong>Broad niche</strong> and adaptable to many environments</td><td class=\"mui-enerfg-tableCell\"><strong>Narrow niche</strong> and are not adaptable to change in environment</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Diet</strong></td><td class=\"mui-enerfg-tableCell\"><strong>Not a picky eater</strong>, use a variety of resources</td><td class=\"mui-enerfg-tableCell\"><strong>Limited diet</strong></td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Location</strong></td><td class=\"mui-enerfg-tableCell\">Can be found around the <strong>world,</strong> not one specific location</td><td class=\"mui-enerfg-tableCell\">Found in <strong>specific habitats</strong></td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Range of Tolerance</strong></td><td class=\"mui-enerfg-tableCell\"><strong>High tolerance</strong> \"Go with the flow\" quite tolerant to changes in ecosystem, resist changes</td><td class=\"mui-enerfg-tableCell\"><strong>Low tolerance</strong> \"That is not how we do it\" Highly sensitive to change, pop. declines to change</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><strong>Examples</strong></td><td class=\"mui-enerfg-tableCell\">Raccoons, rats, mice, cockroaches, coyotes, whitetail deer, brown rats, horseshoe crab</td><td class=\"mui-enerfg-tableCell\">Panda, river otter, owls, koala, sword-billed hummingbird, Venus flytrap</td></tr></tbody></table>"
+    }
+  ]
+}

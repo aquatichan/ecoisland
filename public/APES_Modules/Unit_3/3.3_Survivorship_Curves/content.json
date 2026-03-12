@@ -1,0 +1,39 @@
+{
+  "title": "3.3 Survivorship Curves",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Survivorship Curves"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Survivorship curves</strong> are used to compare the pattern of mortality between species. These curves show which member of which age groups die at which point. Essentially, it maps the pattern of mortality in a given species based on the way individuals were born and raised. Remember in the last section when we discussed K-selected versus R-selected species? These graphs help put into perspective how a population with a certain parental care rate/reproductive rate may look as individuals continue to age."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Type 1</strong> shows a curve in which most of the population dies off toward their old age. This is representative of a K-selected species; it shows few offspring with high levels of parental care that lived to old age due to this attention to their specific well-being."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Type 2</strong> curve shows a constant loss population that is not affected by age. Age doesn't determine survival or mortality. This curve shows that death is a constant regardless of age."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Type 3</strong> curve shows a species that has an early loss population and few live to old age. This is what the R-selected graph looks like, since many offspring are born yet few survive due to neglect or unindividualized parental attention."
+    },
+    {
+      "type": "paragraph",
+      "html": "These three graphs are used to determine patterns of certain species and how birth rate or death rate correspond with levels of parental care to predict mortality at a certain age."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2FCapture.JPG?alt=media&token=14ef3095-0cf0-4c75-abc5-1f37fe233848",
+      "width": "640",
+      "height": "297"
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Survivability</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Type 1</strong> </th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Type 2</strong> </th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Type 3</strong> </th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Early Age </td><td class=\"mui-enerfg-tableCell\">High </td><td class=\"mui-enerfg-tableCell\">High </td><td class=\"mui-enerfg-tableCell\">High </td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Middle Age </td><td class=\"mui-enerfg-tableCell\">High </td><td class=\"mui-enerfg-tableCell\">Medium</td><td class=\"mui-enerfg-tableCell\">Low</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Old Age </td><td class=\"mui-enerfg-tableCell\">Low</td><td class=\"mui-enerfg-tableCell\">Low</td><td class=\"mui-enerfg-tableCell\">Low</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">Example</td><td class=\"mui-enerfg-tableCell\">Humans</td><td class=\"mui-enerfg-tableCell\">Song Birds, Bees </td><td class=\"mui-enerfg-tableCell\">Frogs</td></tr><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\">K/r </td><td class=\"mui-enerfg-tableCell\">K</td><td class=\"mui-enerfg-tableCell\">K </td><td class=\"mui-enerfg-tableCell\">R</td></tr></tbody></table>"
+    }
+  ]
+}

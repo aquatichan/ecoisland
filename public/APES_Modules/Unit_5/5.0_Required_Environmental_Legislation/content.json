@@ -1,0 +1,141 @@
+{
+  "title": "5.0 Required Environmental Legislation",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Why Do I Need to Know These?"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>On your AP exam in May, various multiple choice questions will often either directly or indirectly test your understanding of these pieces of legislation.</li>\n<li>In the past, the College Board has not put out a specific list of laws to know for the AP exam. The fact that there is now a list on the <a href=\"https://apcentral.collegeboard.org/pdf/ap-environmental-science-course-and-exam-description.pdf?course=ap-environmental-science\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://apcentral.collegeboard.org/pdf/ap-environmental-science-course-and-exam-description.pdf?course=ap-environmental-science\">Course &amp; Exam Description</span></a> likely means these will be tested!</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "What Are The Required Pieces of Legislation?"
+    },
+    {
+      "type": "paragraph",
+      "html": "This is the list that the College Board has put out! While it would be helpful to have an understanding of other laws, these are the ones you should focus on:"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "html": "<ol class=\"MuiBox-root mui-19idom\">\n<li>Clean Air Act</li>\n<li>Clean Water Act</li>\n<li>Convention On International Trade in Endangered Species of Wild Fauna and Flora (CITES)</li>\n<li>Comprehensive Environmental Response, Compensation, and Liability Act (CERCLA)</li>\n<li>Montreal Protocol</li>\n<li>Kyoto Protocol</li>\n<li>Endangered Species Act</li>\n<li>Safe Drinking Water Act (SDWA)</li>\n<li>Delaney Clause Of Food, Drug, and Cosmetic Act</li>\n<li>Resource Conservation and Recovery Act (RCRA)</li>\n</ol>"
+    },
+    {
+      "type": "heading",
+      "text": "Laws Involving the Disposal of Hazardous Wastes"
+    },
+    {
+      "type": "heading",
+      "text": "RCRA: Resource Conservation and Recovery Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This act is also called the “<strong>cradle to grave</strong>” act as it gives the Environmental Protection Agency the authority to control any hazardous waste at all stages.</li>\n<li>It requires shippers, generators, and disposers to keep detailed accounts of the type and amount of hazardous waste that is handled from the time of generation to final disposal.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "<em>“Cradle-to-grave” is a keyword for your APES exam! This could be a part of the MC question and you would have to identify the RCRA as the correct choice.</em>"
+    },
+    {
+      "type": "heading",
+      "text": "CERCLA: Comprehensive Environmental Response, Compensation, and Liability Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This is also known as the “Superfund,” a U.S. law passed in 1980.</li>\n<li>Its main purpose is to clean up and/or contain abandoned toxic waste sites using the concept of a <em>superfund.</em>\n<ul class=\"MuiBox-root mui-19idom\">\n<li>The superfund money comes from taxes on those that produce hazardous waste.</li>\n<li>The EPA was given the power to hold the parties responsible for any toxic waste release.</li>\n</ul>\n</li>\n<li>It authorizes actions for short term and long term responses based on the nature of the threat to human health.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Air & Water Protection"
+    },
+    {
+      "type": "heading",
+      "text": "Clean Air Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This act was a major milestone in terms of air quality legislation and is considered one of the most comprehensive laws regarding pollution in the world.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Set limits for <strong>criteria pollutants</strong>: also called conventional pollutants - the seven major air pollutants that are considered to have the most serious threat to humans.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Sulfur Oxides (SOx)</li>\n<li>Carbon Monoxide (CO)</li>\n<li>Particulate Material (PM)</li>\n<li>Volatile Organic Compounds (VOCs)</li>\n<li>Nitrogen oxides (NOx)</li>\n<li>Ozone (tropospheric)</li>\n<li>Lead\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Lead was regulated particularly in fuels, leading to a dramatic decrease in the amount of lead in the atmosphere (this is specifically mention in the College Board CED)</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Set primary standards (to protect human health) and secondary standards (to protect property, visibility, and crops.)</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Clean Water Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This act makes it unlawful for anyone to discharge any point source pollution without permits.</li>\n<li>The act requires that “Best Practicable Technology” (BPT) be used to clean point sources and “Best Available Technology” (BAT) be used to clean up toxins.</li>\n<li>This act funds construction of several important facilities such as sewage treatment plants and includes provisions for protecting wetlands.</li>\n<li>The main goal of this act is to get to the point where all water is “fishable and swimmable.”</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Safe Drinking Water Act (SDWA)"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>The intention behind this act is to “protect public health” through regulation of public drinking water supply.</li>\n<li>The act protects the sources of drinking water - including reservoirs, lakes, and rivers.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Above ground or underground sources are included</li>\n</ul>\n</li>\n<li>The act allows for the EPA to set health standards in order to protect Americans from possible water contaminants.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Biodiversity Protection"
+    },
+    {
+      "type": "heading",
+      "text": "CITES: Convention on Int’l Trade in Endangered Species of Wild Fauna & Flora"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>An <em>international agreement</em> regulating trade in living specimen &amp; products derived from listed endangered species\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Prevents species from reaching point of endangerment or extinction due to international trade</li>\n</ul>\n</li>\n<li>Countries collaborate to make sure any type of trade of the specimen is biologically sustainable and does not impede their survival</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Endangered Species Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This United States law identifies endangered, threatened, and vulnerable species. In addition, it places restrictions and regulations on any recreational or commercial activities involving these.\n<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Endangered</strong>: a species is in danger of extinction</li>\n<li><strong>Threatened</strong>: a species is likely to become endangered in the near future without further action or intervention</li>\n</ul>\n</li>\n<li>Under this law, the US Fish &amp; Wildlife Service is required to create recovery plans for each listed species, detailing how they will be supported in order to prevent possible extinction.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Commonly Confused International Protocols"
+    },
+    {
+      "type": "heading",
+      "text": "Montreal Protocol"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>An international treaty to eliminate production and consumption of ozone depleting substances (ODS).\n<ul class=\"MuiBox-root mui-19idom\">\n<li>The main goal is to protect the stratospheric ozone layer by phasing out substances including chlorofluorocarbons (CFCs), halons, and carbon tetrafluorides.</li>\n</ul>\n</li>\n<li>It was signed by all members of the United Nations. According to the EPA, it was the “first treaty in the history of the UN to achieve universal ratification” and therefore is considered one of the most successful global-environmental actions.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Kyoto Protocol"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>This was an <em>international agreement</em> that was a part of the United Nations’ Framework Convention on Climate Change.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>The aim of the protocol is to bind the countries that sign the act to regulations that reduce greenhouse gas emissions.</li>\n</ul>\n</li>\n<li>The act set tighter regulations on more developed/industrialized countries. Therefore, the United States was one of the only countries to object to the protocol, with representatives refusing to sign it.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Carcinogens"
+    },
+    {
+      "type": "heading",
+      "text": "Delaney Clause Of Food, Drug, and Cosmetic Act"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>The Delaney Clause is a provision of a larger amendment to the Food, Drugs, and Cosmetic Act of 1938.</li>\n<li>It states that chemical additives “found to induce cancer in man” or in animals could NOT be approved for use in foods by the FDA.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Any <strong>carcinogens</strong> causing “reasonable harm” could not be added to food or drugs.</li>\n</ul>\n</li>\n</ul>"
+    }
+  ]
+}

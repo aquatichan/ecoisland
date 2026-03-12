@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Groundwater from 12 wells was sampled before and after hydraulic fracturing. Methane rose from 0.8 to 8.2 mg/L and VOCs increased from undetectable to 2.4 μg/L. What do these data indicate about fracturing's environmental effects?",
+    "answers": [
+      "Hydraulic fracturing contaminated groundwater by raising methane and VOCs.",
+      "Fracturing reduces methane leaching and eliminates VOCs from groundwater.",
+      "Contamination was limited to methane and did not affect VOCs.",
+      "Observed increases reflect natural variability unrelated to fracturing."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Oil extraction in the Niger Delta region of Nigeria involves transporting crude oil through pipelines that frequently rupture due to corrosion and sabotage, spilling thousands of barrels into wetland ecosystems annually. The spilled oil forms a surface layer that prevents gas exchange between water and atmosphere. Aquatic plant photosynthesis rates decline, and anaerobic bacteria populations increase dramatically. Which of the following best explains why anaerobic bacteria populations increase following oil spills?",
+    "answers": [
+      "Oil reduces oxygen diffusion into water by forming a surface barrier, but anaerobic bacteria increase because aerobic bacteria rapidly consume the remaining dissolved oxygen through respiration, depleting oxygen faster than the barrier effect alone.",
+      "Oil reduces oxygen diffusion into water by forming a surface barrier, creating anaerobic conditions that favor anaerobic bacteria over aerobic species that require dissolved oxygen.",
+      "Oil reduces oxygen diffusion into water by forming a surface barrier, creating conditions where anaerobic bacteria increase because they possess greater tolerance to oil toxicity compared to aerobic species.",
+      "Oil reduces oxygen availability in deep wetland sediments where anaerobic bacteria naturally dominate, and the oil spill enhances these existing anaerobic zones rather than creating new surface barrier effects."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Hydraulic fracturing operations inject pressurized fluid deep underground to extract natural gas. Which of the following best explains why this process can contaminate groundwater aquifers with volatile organic compounds and methane?",
+    "answers": [
+      "The pressurized fluid absorbs volatile organic compounds from deep rock layers and carries them upward through natural groundwater flow patterns",
+      "The pressurized fluid creates fractures that allow volatile organic compounds and methane to migrate into surface water bodies through lateral flow rather than into groundwater aquifers",
+      "The pressurized fluid creates fractures that breach aquifer seals, but volatile organic compounds and methane remain trapped in the fractured rock and do not reach groundwater supplies",
+      "The pressurized fluid creates fractures in rock layers that can breach the seals separating aquifers from gas-bearing formations, allowing contaminants to migrate upward into groundwater"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Mountaintop removal buries streams and wetlands with overburden. Why does this lead to long-term downstream aquatic degradation?",
+    "answers": [
+      "Loss of riparian filtration increases sediment and nutrients and causes acid mine drainage.",
+      "Compacted overburden reduces infiltration and lowers groundwater recharge and seasonal baseflow.",
+      "Buried wetlands can produce methane emissions, but these do not directly harm streams.",
+      "Valley fills bury channels but do not increase stream gradient or flow acceleration."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An environmental health researcher publishes findings on oil refinery emissions: 'Residents living within 5 kilometers of oil refineries in the Houston Ship Channel area experience asthma hospitalization rates 2.5 times higher than residents in comparable neighborhoods distant from refineries. Refinery operations release volatile organic compounds, hydrogen sulfide, and particulate matter that accumulate in nearby residential areas due to prevailing wind patterns. Longitudinal health data spanning 15 years show that children born to mothers living near refineries have lower birth weights and higher rates of respiratory infections compared to children born to mothers in non-refinery areas, even after controlling for socioeconomic factors. These health disparities are not randomly distributed but concentrated in lower-income communities with limited political influence over industrial zoning decisions. The documented health impacts of oil refining operations demonstrate that fossil fuel processing creates disproportionate environmental health burdens on vulnerable populations.'",
+    "answers": [
+      "Residents within 5 kilometers of oil refineries experience asthma hospitalization rates 2.5 times higher than distant residents.",
+      "Oil refining operations create disproportionate environmental health burdens on vulnerable populations.",
+      "Oil refineries release volatile organic compounds, hydrogen sulfide, and particulate matter that accumulate in nearby residential areas.",
+      "Children born to mothers living near refineries have lower birth weights and higher respiratory infection rates than children in non-refinery areas."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The graph shows SO2 emissions (million metric tons/year) from coal-fired plants versus coal sulfur content (%). Low-sulfur coal (0.5% S) yields about 2 Mt/year and high-sulfur coal (3% S) about 12 Mt/year. The relationship is approximately linear. Which statement best explains this pattern?",
+    "answers": [
+      "Attribute higher SO2 emissions to combustion rates rather than coal sulfur content.",
+      "SO2 emissions rise only above a 2% sulfur threshold rather than proportionally.",
+      "Claim that sulfur raises combustion temperature and therefore increases SO2 formation.",
+      "SO2 emissions increase proportionally because sulfur in coal oxidizes to SO2."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A Midwest coal plant emits NOx and SO2 that form nitric and sulfuric acids. Acid rain lowers pH in Adirondack lakes and streams. Which best explains why aquatic organisms decline after these events?",
+    "answers": [
+      "Acid rain raises water density disrupting thermal layers and stressing fish",
+      "Acid rain dissolves calcium carbonate shells harming mollusks and altering food webs",
+      "Lower pH disrupts enzymes and osmoregulation and mobilizes toxic metals like aluminum",
+      "Acid rain increases photosynthesis causing oxygen oversaturation and gill damage"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "When coal containing sulfur impurities is burned in a power plant, sulfur dioxide is released into the atmosphere. Which of the following best explains how this sulfur dioxide contributes to acid rain in ecosystems hundreds of kilometers away?",
+    "answers": [
+      "Sulfur dioxide remains in the atmosphere as a gas and prevents water vapor from condensing, which indirectly causes acidification when precipitation finally occurs",
+      "Sulfur dioxide is converted to sulfuric acid in the atmosphere, but this acid remains suspended in air and does not precipitate to Earth's surface",
+      "Sulfur dioxide reacts with atmospheric water vapor and oxygen to form sulfuric acid, which dissolves in precipitation and falls as acid rain",
+      "Sulfur dioxide dissolves directly in rain droplets without undergoing chemical reactions, immediately lowering pH"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "The diagram below shows energy transformations in a coal-fired power plant. Coal (100 units) is burned to produce heat, which converts water to steam. The steam drives a turbine that generates 35 units of electricity, while 65 units are released as waste heat to the environment. Which statement best explains the relationship between the chemical energy in coal and the electrical energy produced?",
+    "answers": [
+      "Chemical energy in coal is converted to electrical energy at a 1:1 ratio, so the 35 units of electricity represent only the portion of coal that undergoes complete combustion, while 65 units come from incomplete combustion.",
+      "Chemical energy in coal is completely converted to electrical energy, but 65 units are lost because the turbine is inefficiently designed and could be improved to capture all energy.",
+      "Chemical energy in coal is converted to thermal energy through combustion, but only a portion becomes electrical energy because energy is lost as waste heat during steam generation and turbine operation.",
+      "Chemical energy in coal produces 100 units of electricity, but the diagram shows only 35 units because 65 units are consumed by the power plant's internal operations before reaching consumers."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A coal-fired power plant measured steam turbine efficiency at different loads: 40% load 28% efficiency, 60% 32%, 80% 35%, and 100% 36%. Which conclusion about fossil fuel power generation is best supported by these data?",
+    "answers": [
+      "Efficiency stays constant across capacities, so electrical output is unchanged.",
+      "Efficiency decreases as capacity increases, so plants should run at minimal load.",
+      "Gains diminish above 80 percent, but the data do not prove a fixed maximum.",
+      "Efficiency rises with capacity, so plants operate more efficiently near full load."
+    ],
+    "correct": "D"
+  }
+]

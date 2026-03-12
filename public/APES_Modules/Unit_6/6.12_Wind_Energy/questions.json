@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A developing nation with limited capital seeks to expand wind energy while protecting migratory bird populations that pass through its territory twice annually. Coastal offshore locations have strong, consistent winds but are adjacent to major migration routes. Inland desert regions have moderate winds but minimal bird activity. Which approach would best balance energy production with wildlife protection?",
+    "answers": [
+      "Locate wind farms in offshore waters where migration routes are less concentrated and collision risk is lower than onshore locations.",
+      "Install ultrasonic deterrent devices around turbine bases to repel birds and bats from the area.",
+      "Locate wind farms in offshore waters to reduce visual and noise pollution for human communities while accepting wildlife collision risks.",
+      "Locate wind farms in high-wind desert regions where bird and bat populations are naturally sparse."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers studied avian collision risk at a wind farm by recording turbine blade rotation speed and bird flight altitude using radar at one central monitoring location for six months. If they modified the study to include radar stations at multiple locations surrounding the wind farm perimeter, which improvement in data interpretation would most likely result?",
+    "answers": [
+      "Spatial variation in bird flight paths and collision risk zones around the wind farm could be identified and mapped",
+      "Bird flight altitude measurements would become more accurate due to redundant data collection at each location",
+      "Seasonal migration patterns would be more clearly detected because monitoring occurs at different elevations around the farm",
+      "Turbine blade rotation speed would need to be adjusted at different locations to account for varying wind conditions"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A wind farm operator collected data on turbine downtime and bat mortality over four seasons: Spring (migration): 12% downtime, 34 bat deaths; Summer (breeding): 3% downtime, 8 bat deaths; Fall (migration): 14% downtime, 41 bat deaths; Winter (low activity): 2% downtime, 3 bat deaths. The operator attributes downtime to maintenance and weather. Which conclusion about the relationship between turbine operation and bat mortality is best supported?",
+    "answers": [
+      "Bat mortality shows a strong inverse relationship with turbine downtime, with highest mortality occurring during breeding season (Summer) when bat activity levels peak.",
+      "Bat mortality shows a strong positive relationship with turbine downtime, with highest mortality occurring during seasons with greatest maintenance activity (Spring: 12% downtime, Fall: 14% downtime).",
+      "Bat mortality is primarily driven by seasonal migration patterns, with highest mortality occurring during migration seasons (Spring: 34 deaths, Fall: 41 deaths) regardless of turbine operational patterns.",
+      "Bat mortality shows a strong inverse relationship with turbine downtime, with highest mortality occurring during migration seasons when turbines operate most consistently."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Wind turbines in coastal regions kill migratory seabirds that navigate using celestial cues during nighttime flights. Which of the following best explains the mechanism by which wind farms cause these bird fatalities?",
+    "answers": [
+      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in collision deaths during migration periods when birds travel through turbine-occupied airspace.",
+      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in wing injuries and disorientation during migration periods when birds travel through turbine-occupied airspace.",
+      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in collision deaths during daytime feeding periods when birds forage near turbine bases.",
+      "Spinning turbine blades create motion blur that visually confuses birds during nighttime migration, resulting in collision deaths when birds travel through turbine-occupied airspace."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A wildlife biologist claims that offshore wind farms pose a lower threat to bird populations than onshore wind farms. The biologist cites evidence that migratory bird species follow established flight corridors over land during spring and fall migrations, while offshore wind installations are located beyond typical migration routes. Which of the following best describes a limitation in how this evidence supports the biologist's claim?",
+    "answers": [
+      "The evidence does not explain the mechanical process by which turbine blades kill birds, so the claim about threat reduction cannot be evaluated.",
+      "Offshore wind farms are more expensive to construct and maintain than onshore farms, so the economic costs outweigh any environmental benefits to birds.",
+      "The evidence addresses only migratory birds during specific seasons but does not account for year-round resident bird populations or non-migratory species that may inhabit offshore areas.",
+      "The evidence relies on the assumption that all migratory bird species follow identical flight paths, which is not true because different species migrate at different altitudes and times."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A utility evaluated three wind sites. Data: Site A coastal plain (50 m) 8.2 m/s 32% capacity factor; Site B inland valley (120 m) 6.1 m/s 18% capacity factor; Site C ridge top (340 m) 10.4 m/s 41% capacity factor. Capacity factor equals actual output divided by maximum possible output. Which conclusion about wind resource assessment is best supported by these data?",
+    "answers": [
+      "Coastal location does not guarantee the strongest wind resource or output.",
+      "Elevation alone does not determine wind speed or capacity factor.",
+      "Capacity factor varies with wind so sites do not produce identical electricity.",
+      "Site C's higher elevation and stronger winds yield higher capacity factors."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A developer compares annual bird mortality at three sites. Location A has 45 turbines and 2.3 deaths per turbine per year. Location B has 38 turbines and 1.8 deaths per turbine per year. Location C has 52 turbines and 2.1 deaths per turbine per year. Which calculation determines which site has the lowest total annual bird mortality?",
+    "answers": [
+      "Divide per-turbine death rate by turbine count which yields misleading values",
+      "Compare only per-turbine rates and choose the lowest regardless of turbine count",
+      "Multiply turbines by deaths per turbine for each location then compare totals",
+      "Average the three per-turbine rates and ignore differing turbine counts"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A wind farm is proposed for a location with average wind speeds of 6 m/s. Engineers calculate that the turbines would generate electricity at only 25% capacity factor, meaning they produce power at only one-quarter of their maximum potential output. Which of the following best explains why the capacity factor is low at this location?",
+    "answers": [
+      "Wind speed at this location is reduced by surrounding terrain obstacles and vegetation that create turbulence, preventing the turbine blades from spinning at the rotational speed required for optimal electricity generation despite average measured wind speeds of 6 m/s.",
+      "Wind speed at this location is highly variable and intermittent, causing the turbine blades to frequently start and stop rather than maintaining consistent rotational speed, resulting in lower power output relative to the turbine's design capacity.",
+      "Wind speed at this location requires turbine blades to operate at suboptimal rotational speeds, and the turbines must be shut down 75% of the time for routine maintenance and repairs, resulting in a 25% capacity factor relative to the turbine's design capacity.",
+      "Wind speed at this location is insufficient to consistently spin the turbine blades at the rotational speed required for optimal electricity generation, resulting in lower power output relative to the turbine's design capacity."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A coastal site has steady 12 m/s winds. An inland prairie averages 10 m/s but varies 4–18 m/s. Both plan wind farms. Why will the coastal site likely produce more reliable electricity despite its lower average speed?",
+    "answers": [
+      "Steady 12 m/s yields consistent power because energy scales with speed squared",
+      "Consistent winds reduce reliance on storage and improve operational reliability",
+      "Coastal salt aerosols do not significantly change air density or turbine power",
+      "Ocean thermal effects do not raise turbine efficiency enough to offset variability"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A wind farm produces 150 megawatt-hours (MWh) of electricity in a month but can only deliver 108 MWh to the grid due to transmission losses and storage inefficiencies. Which calculation approach would determine the overall system efficiency?",
+    "answers": [
+      "Divide energy delivered to grid by energy produced, then multiply by 100%",
+      "Divide energy produced by energy delivered to grid",
+      "Multiply energy delivered by energy produced, then divide by 100",
+      "Subtract energy delivered from energy produced, then divide by energy produced"
+    ],
+    "correct": "!"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "title": "6.8 Solar Energy",
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is Solar Energy? 🌞"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Solar energy</strong> is energy that is produced from the sun. It is a renewable energy source, which means that it can be replenished naturally over time. Solar energy is harnessed through the use of solar panels, which are made up of <strong>photovoltaic cells</strong>. In much older civilizations, this was imitated using glass and heat from the sun to spark fires. Now, these cells convert sunlight into electricity, which can be used to power homes, businesses, and other buildings."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Fsolar.jpg?alt=media&token=f8a544b9-12d4-4802-874f-46819ce8efe8",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Photovoltaic cells</strong> (PV cells) are electrical cells that allow the light energy of the sun to be converted into electricity. PV cells are usually made with purified silicon and traces of metals that allow them to act as semiconductors."
+    },
+    {
+      "type": "paragraph",
+      "html": "Sunlight photons hit the solar cell, which then knocks electrons loose from their atoms. If conductors are attached to the positive and negative sides of a cell, an electrical circuit forms. The movement of electrons in the circuit equals electricity! Because each cell only produces a small quantity of electricity, many cells are then wired together to an electrical grid on a panel. "
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Benefits 👍🏻</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Drawbacks 👎🏻</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><ul class=\"MuiBox-root mui-19idom\"><li>Solar energy is a renewable source of energy because the sun will not deplete in at least a couple billion more years.</li><li>Does not produce CO2 emissions or generate any waste</li><li>No cost in production only in set up for panels</li><li>Electricity produced from solar panels will decrease electricity bill</li><li>No long distance energy lost</li><li>Sun is a constant presence in our lives and this expands solar energy into any urbanity level</li></ul></td><td class=\"mui-enerfg-tableCell\"><ul class=\"MuiBox-root mui-19idom\"><li>Limited efficiency by sunlight so energy can not be collected under specific weather conditions such as night</li><li>High upfront costs for installation</li><li>There is a need for a storage system for electricity</li><li>Production of PV cells require fossil fuels</li></ul></td></tr></tbody></table>"
+    }
+  ]
+}

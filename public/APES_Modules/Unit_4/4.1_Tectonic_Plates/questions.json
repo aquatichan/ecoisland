@@ -1,0 +1,102 @@
+[
+  {
+    "question": "An oceanic plate subducts beneath a continental plate. Which geological features form?",
+    "answers": [
+      "A rift valley and seafloor spreading produce new oceanic crust.",
+      "A deep ocean trench and volcanic mountain chain form on the continent.",
+      "Plates slide past each other along a transform fault causing earthquakes.",
+      "The continental plate sinks beneath the ocean forming a sediment-filled coastal plain."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The diagram shows the San Andreas Fault in California, where the Pacific plate and North American plate are moving horizontally past each other. Which characteristic of this transform boundary is most directly indicated by the visual representation of the fault geometry and plate motion?",
+    "answers": [
+      "The two plates move in opposite horizontal directions along the fault, causing friction to lock the plates intermittently, which allows stress to accumulate until it suddenly overcomes the friction and releases energy as an earthquake with minor vertical displacement of the land surface.",
+      "The two plates move in opposite horizontal directions along the fault, causing friction to lock the plates intermittently, which allows stress to accumulate until it suddenly overcomes the friction and releases energy as an earthquake.",
+      "The two plates move in opposite horizontal directions along the fault, causing friction to lock the plates intermittently, which allows stress to accumulate and be released gradually through slow fault creep rather than sudden earthquakes.",
+      "The two plates move in opposite horizontal directions along the fault, causing continuous sliding motion without locking, which allows stress to be released gradually through frequent small earthquakes rather than sudden large events."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Volcanoes along the Pacific Ring of Fire concentrate where oceanic plates subduct beneath continental or island arc plates. Why do subduction zones produce abundant volcanism?",
+    "answers": [
+      "Frictional heating melts overriding crust, but it is not the main magma source.",
+      "Divergent boundaries produce rift volcanism, not subduction volcanism of the Ring of Fire.",
+      "Hotspot plumes create isolated volcanic chains, not the boundary-aligned Ring of Fire.",
+      "Subducting plates carry water into the mantle, lowering melting point and producing magma."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "The Mariana Trench is Earth's deepest ocean depression where the Pacific Plate meets the Philippine Plate. Which best explains its formation and continued deepening?",
+    "answers": [
+      "Plates slide past each other along a transform fault, causing earthquakes.",
+      "Denser Pacific Plate subducts beneath the Philippine Plate, pulling seafloor down.",
+      "Plates diverge and new oceanic crust forms at a mid-ocean ridge.",
+      "Erosion and plate separation create ridges or shallow features, not trenches."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The Ring of Fire, a region of intense seismic and volcanic activity encircling the Pacific Ocean, corresponds closely with the global distribution of plate boundaries. Which of the following best explains why this geographic correlation exists?",
+    "answers": [
+      "The Pacific plate is uniformly moving in one direction, causing it to collide with all surrounding continental plates simultaneously, which generates earthquakes but not volcanoes",
+      "Most plate boundaries around the Pacific rim are convergent or transform boundaries where subduction, crustal compression, and lateral plate motion generate earthquakes and magma that produces volcanoes",
+      "The Pacific Ocean basin is surrounded by divergent boundaries where seafloor spreading creates new oceanic crust and releases magma that erupts as volcanoes along the coastlines",
+      "Erosion patterns around the Pacific Ocean have created deep trenches and valleys that concentrate seismic energy, while volcanic activity results from geothermal heating of groundwater in these low-lying regions"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The diagram shows the Nazca oceanic plate descending beneath South America's continental plate. Which sequence of geologic outcomes does this convergent boundary indicate?",
+    "answers": [
+      "Nazca plate subducts, melts, forms a continental volcanic arc and generates earthquakes.",
+      "Plates separate, forming a rift valley and new oceanic crust by seafloor spreading.",
+      "Plates slide past one another on a transform fault, causing earthquakes but no volcanism.",
+      "Continental plate subducts beneath oceanic plate, producing a trench and island arc."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The East African Rift Valley is widening at a rate of approximately 6 millimeters per year, and geologists observe that the valley floor is dropping relative to the surrounding highlands. Which of the following best describes the tectonic process causing this subsidence and widening?",
+    "answers": [
+      "Erosion by rivers and rainfall has carved out the rift valley, and the removal of rock material has allowed the valley floor to subside due to isostatic adjustment",
+      "The African plate is sliding horizontally past adjacent plates at a transform boundary, and the lateral motion creates a depression that fills with sediment and water, forming the rift valley",
+      "The African plate is being pulled apart at a divergent boundary, causing the crust to thin and subside as magma rises through the widening gap, creating the rift valley structure",
+      "The African plate is being compressed by surrounding plates at a convergent boundary, causing the crust to thicken and fold upward into mountains while the valley floor subsides between the mountain ranges"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "At the East Africa Rift Valley, the African plate is splitting apart as two sections move away from each other. Which of the following best describes the geological processes occurring at this divergent boundary?",
+    "answers": [
+      "The plates slide horizontally past each other, causing stress accumulation that eventually triggers earthquakes but does not produce new crustal material",
+      "One plate slides beneath the other, compressing the continental crust and forcing magma downward into the mantle where it cools and solidifies",
+      "Friction between the two moving plates generates heat that melts surrounding rock, but the magma remains trapped beneath the surface and does not reach the crust",
+      "Magma rises through the widening gap between plates, cools upon contact with surface water or air, and forms new oceanic or continental crust as the plates separate"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Scientists are monitoring a divergent boundary in Iceland to measure the widening of a rift valley using laser ranging. To ensure that measured changes in distance are due to tectonic plate movement and not seasonal thermal expansion of the ground, which of the following modifications to the research design is most appropriate?",
+    "answers": [
+      "Comparing measurements taken at different times of day over a single week",
+      "Comparing measurements taken at the same time of year over multiple decades",
+      "Comparing measurements taken at sites with different soil moisture levels",
+      "Comparing measurements taken using different laser instruments each year"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Which sequence best describes geologic events at an oceanic divergent plate boundary?",
+    "answers": [
+      "Plates converge and one subducts, forming a trench and volcanic activity.",
+      "Plates slide past each other, causing earthquakes and little new crust.",
+      "Crust between plates thickens and sinks to form a sediment-filled rift valley.",
+      "Magma wells up, cools, and forms new oceanic crust as seafloor spreads."
+    ],
+    "correct": "D"
+  }
+]

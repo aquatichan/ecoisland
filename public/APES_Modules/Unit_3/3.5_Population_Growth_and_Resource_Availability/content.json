@@ -1,0 +1,37 @@
+{
+  "title": "3.5 Population Growth and Resource Availability",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "<strong>Population Growth</strong> refers to the rate a population can grow at with given limitations by surrounding environments. More specifically, population growth rate documents how competition (other species), biome (environment), and self-sufficiency leads to growth in a certain population. Almost always, a species with a higher population growth rate will outlive a species with a lower rate."
+    },
+    {
+      "type": "heading",
+      "text": "Exponential Growth"
+    },
+    {
+      "type": "paragraph",
+      "html": "An <strong>exponential growth</strong> is when populations grow at their intrinsic rate of increase (r) and are limited by resource increase by a fixed rate each year.  This type of exponential growth is described using a J Curve because of the shape of the accelerated growth rate. An example of a species with an exponential growth is bacteria. The population size of bacteria grows exponentially because there are no limiting factors on their growth."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Fexpon.JPG?alt=media&token=4a40a03c-8475-46ae-8901-dda7403db0f3",
+      "width": "432",
+      "height": "437"
+    },
+    {
+      "type": "heading",
+      "text": "Logistic Growth"
+    },
+    {
+      "type": "paragraph",
+      "html": "A <strong>logistic population</strong> growth model shows a population exponentially growing until environmental resistance such as limited factors make it reach its <strong>carrying capacity</strong>. The line at the top of the graph demonstrates this limit, and any population that exceeds it will go into <strong>overshoot</strong>. The population growth makes an S shaped curve."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Flog.JPG?alt=media&token=c3575771-c566-40fe-baf8-ec3ed3bb1df8",
+      "width": "430",
+      "height": "427"
+    }
+  ]
+}

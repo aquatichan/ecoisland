@@ -8,182 +8,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, Coins, ChevronDown, ChevronUp } from "lucide-react";
-
-const learningModules = [
-  {
-    title: "Unit 1 – The Living World: Ecosystems",
-    description: "Unit 1 Overview: The Living World: Ecosystems",
-    lessons: [
-      { code: "1.1", title: "Introduction to Ecosystems" },
-      { code: "1.2", title: "Terrestrial Biomes" },
-      { code: "1.3", title: "Aquatic Biomes" },
-      { code: "1.4", title: "The Carbon Cycle" },
-      { code: "1.5", title: "The Nitrogen Cycle" },
-      { code: "1.6", title: "The Phosphorous Cycle" },
-      { code: "1.7", title: "The Hydrologic Cycle" },
-      { code: "1.8", title: "Primary Productivity" },
-      { code: "1.9", title: "Trophic Levels" },
-      { code: "1.10", title: "Energy Flow and the 10% Rule" },
-      { code: "1.11", title: "Food Chains and Food Webs" },
-    ],
-    duration: "5-6 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 2 – The Living World: Biodiversity",
-    description: "Unit 2 Overview: The Living World: Biodiversity",
-    lessons: [
-      { code: "2.1", title: "Introduction to Biodiversity" },
-      { code: "2.2", title: "Ecosystem Services" },
-      { code: "2.3", title: "Island Biogeography" },
-      { code: "2.4", title: "Ecological Tolerance" },
-      { code: "2.5", title: "Natural Disruptions to Ecosystems" },
-      { code: "2.6", title: "Adaptations" },
-      { code: "2.7", title: "Ecological Succession" },
-    ],
-    duration: "3-4 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 3 – Populations",
-    description: "Unit 3 Overview: Populations",
-    lessons: [
-      { code: "3.1", title: "Generalist and Specialist Species" },
-      { code: "3.2", title: "K-Selected r-Selected Species" },
-      { code: "3.3", title: "Survivorship Curves" },
-      { code: "3.4", title: "Carrying Capacity" },
-      { code: "3.5", title: "Population Growth and Resource Availability" },
-      { code: "3.6", title: "Age Structure Diagrams" },
-      { code: "3.7", title: "Total Fertility Rate" },
-      { code: "3.8", title: "Human Population Dynamics" },
-      { code: "3.9", title: "Demographic Transition" },
-    ],
-    duration: "4-5 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 4 – Earth Systems & Resources",
-    description: "Unit 4 Overview: Earth Systems and Resources",
-    lessons: [
-      { code: "4.1", title: "Tectonic Plates" },
-      { code: "4.2", title: "Soil Formation and Erosion" },
-      { code: "4.3", title: "Soil Composition and Properties" },
-      { code: "4.4", title: "Earth's Atmosphere" },
-      { code: "4.5", title: "Global Wind Patterns" },
-      { code: "4.6", title: "Watersheds" },
-      { code: "4.7", title: "Solar Radiation and Earth's Seasons" },
-      { code: "4.8", title: "Earth's Geography and Climate" },
-      { code: "4.9", title: "El Niño and La Niña" },
-    ],
-    duration: "4-5 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 5 – Land & Water Use",
-    description: "Unit 5 Overview: Land and Water Use",
-    lessons: [
-      { code: "5.0", title: "Required Environmental Legislation" },
-      { code: "5.1", title: "The Tragedy of the Commons" },
-      { code: "5.2", title: "Clearcutting" },
-      { code: "5.3", title: "The Green Revolution" },
-      { code: "5.4", title: "Impacts of Agricultural Practices" },
-      { code: "5.5", title: "Irrigation Methods" },
-      { code: "5.6", title: "Pest Control Methods" },
-      { code: "5.7", title: "Meat Production Methods" },
-      { code: "5.8", title: "Impacts of Overfishing" },
-      { code: "5.9", title: "Impacts of Mining" },
-      { code: "5.10", title: "Impacts of Urbanization" },
-      { code: "5.11", title: "Ecological Footprints" },
-      { code: "5.12", title: "Intro to Sustainability" },
-      { code: "5.13", title: "Methods to Reduce Urban Runoff" },
-      { code: "5.14", title: "Integrated Pest Management" },
-      { code: "5.15", title: "Sustainable Agriculture" },
-      { code: "5.16", title: "Aquaculture" },
-      { code: "5.17", title: "Sustainable Forestry" },
-    ],
-    duration: "8-9 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 6 – Energy Resources & Consumption",
-    description: "Unit 6 Overview: Energy Resources and Consumption",
-    lessons: [
-      { code: "6.1", title: "Renewable and Nonrenewable Resources" },
-      { code: "6.2", title: "Global Energy Consumption" },
-      { code: "6.3", title: "Fuel Types and Uses" },
-      { code: "6.4", title: "Distribution of Natural Resources" },
-      { code: "6.5", title: "Fossil Fuels" },
-      { code: "6.6", title: "Nuclear Power" },
-      { code: "6.7", title: "Energy from Biomass" },
-      { code: "6.8", title: "Solar Energy" },
-      { code: "6.9", title: "Hydroelectric Power" },
-      { code: "6.10", title: "Geothermal Energy" },
-      { code: "6.11", title: "Hydrogen Fuel Cell" },
-      { code: "6.12", title: "Wind Energy" },
-      { code: "6.13", title: "Energy Conservation" },
-    ],
-    duration: "6-7 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 7 – Atmospheric Pollution",
-    description: "Unit 7 Overview: Atmospheric Pollution",
-    lessons: [
-      { code: "7.1", title: "Introduction to Air Pollution" },
-      { code: "7.2", title: "Photochemical Smog" },
-      { code: "7.3", title: "Thermal Inversion" },
-      { code: "7.4", title: "Atmospheric CO2 and Particulates" },
-      { code: "7.5", title: "Indoor Air Pollutants" },
-      { code: "7.6", title: "Reduction of Air Pollutants" },
-      { code: "7.7", title: "Acid Rain" },
-      { code: "7.8", title: "Noise Pollution" },
-    ],
-    duration: "4 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 8 – Aquatic & Terrestrial Pollution",
-    description: "Unit 8 Overview: Aquatic & Terrestrial Pollution",
-    lessons: [
-      { code: "8.1", title: "Sources of Pollution" },
-      { code: "8.2", title: "Human Impacts on Ecosystems" },
-      { code: "8.3", title: "Endocrine Disruptors" },
-      { code: "8.4", title: "Human Impacts on Wetlands and Mangroves" },
-      { code: "8.5", title: "Eutrophication" },
-      { code: "8.6", title: "Thermal Pollution" },
-      { code: "8.7", title: "Persistent Organic Pollutants (POPs)" },
-      { code: "8.8", title: "Bioaccumulation and Biomagnification" },
-      { code: "8.9", title: "Solid Waste Disposal" },
-      { code: "8.10", title: "Waste Reduction Methods" },
-      { code: "8.11", title: "Sewage Treatment" },
-      { code: "8.12", title: "Lethal Dose 50% (LD50)" },
-      { code: "8.13", title: "Dose Response Curve" },
-      { code: "8.14", title: "Pollution and Human Health" },
-      { code: "8.15", title: "Pathogens and Infectious Diseases" },
-    ],
-    duration: "7-8 hours",
-    treecoins: 900
-  },
-  {
-    title: "Unit 9 – Global Change",
-    description: "Unit 9 Overview: Global Change",
-    lessons: [
-      { code: "9.1", title: "Major Environmental Disasters" },
-      { code: "9.2", title: "Stratospheric Ozone Depletion" },
-      { code: "9.3", title: "Reducing Ozone Depletion" },
-      { code: "9.4", title: "The Greenhouse Effect" },
-      { code: "9.5", title: "Increases in the Greenhouse Gases" },
-      { code: "9.6", title: "Global Climate Change" },
-      { code: "9.7", title: "Ocean Warming" },
-      { code: "9.8", title: "Ocean Acidification" },
-      { code: "9.9", title: "Invasive Species" },
-      { code: "9.10", title: "Endangered Species" },
-      { code: "9.11", title: "Human Impacts on Biodiversity" },
-    ],
-    duration: "5-6 hours",
-    treecoins: 900
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { learningModules } from "../data/units"
 
 export default function ApesPage() {
   const [openModules, setOpenModules] = useState({});
@@ -196,6 +22,8 @@ export default function ApesPage() {
   const [view, setView] = useState("dashboard");
   const [flashIndex, setFlashIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let interval;
@@ -224,6 +52,15 @@ export default function ApesPage() {
       console.error("Failed to load unit:", err);
     }
   };
+
+  const goToLesson = (lesson) => {
+    const unit = lesson.code.split(".")[0]
+
+    const folderName =
+      lesson.code + "_" + lesson.title.replaceAll(" ", "_")
+
+    navigate(`/apes/unit/${unit}/${folderName}`)
+  }
 
   const loadAllQuestions = async () => {
     try {
@@ -393,7 +230,12 @@ export default function ApesPage() {
                   <ul className="mt-2 list-disc list-inside text-gray-600 text-sm space-y-1">
                     {module.lessons.map((lesson, i) => (
                       <li key={i}>
-                        {lesson.code}: {lesson.title}
+                        <button
+                          onClick={() => goToLesson(lesson)}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {lesson.code}: {lesson.title}
+                        </button>
                       </li>
                     ))}
                   </ul>

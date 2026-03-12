@@ -1,0 +1,81 @@
+{
+  "title": "7.2 Photochemical Smog",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "<strong>Smog</strong> is derived from the combination of smoke and fog. It was normally seen in industrial cities due to the use of coal and factory emissions. These sulfurous (sulfur dioxide) emissions are called grey smog."
+    },
+    {
+      "type": "paragraph",
+      "html": "Smog is a type of air pollution that is characterized by a haze or fog-like appearance. It is a mixture of pollutants that can have adverse effects on human health and the environment. There are two main types of smog: photochemical smog and industrial smog."
+    },
+    {
+      "type": "paragraph",
+      "html": "Photochemical smog is a type of smog that is formed by the reaction of sunlight with pollutants in the air, such as nitrogen oxides and volatile organic compounds (VOCs). It is most commonly found in urban areas with high levels of traffic and industrial activity. Photochemical smog is a major contributor to air pollution in cities and is characterized by a brownish-gray haze. It can have adverse effects on human health, including respiratory problems, and it can also damage plants and crops."
+    },
+    {
+      "type": "paragraph",
+      "html": "The formation of photochemical smog begins with the emission of nitrogen oxides and VOCs from sources such as vehicles, industrial processes, and power plants. These pollutants react with sunlight to form ozone, which is a highly reactive gas. The reaction between sunlight, nitrogen oxides, and VOCs also produces a range of other pollutants, including particulate matter, aldehydes, and peroxyacyl nitrates (PANs). These pollutants contribute to the formation of photochemical smog.Photochemical smog is most commonly found in urban areas with high levels of traffic and industrial activity. It is typically more severe during the summer months when temperatures are higher and there is more sunlight. Photochemical smog can have adverse effects on human health, including respiratory problems, and it can also damage plants and crops."
+    },
+    {
+      "type": "paragraph",
+      "html": "Industrial smog is a type of smog that is formed by the emission of pollutants from industrial processes and the burning of fossil fuels. It is characterized by a thick, yellowish haze, and it is most commonly found in areas with heavy industrial activity, such as power plants and factories. Industrial smog can have adverse effects on human health, including respiratory problems, and it can also damage plants and crops.The formation of industrial smog begins with the emission of pollutants from industrial processes and the burning of fossil fuels. These pollutants, which include sulfur dioxide, particulate matter, and nitrogen oxides, react with each other and with other chemicals in the air to form a range of pollutants, including sulfuric acid, particulate matter, and nitrogen dioxide. These pollutants contribute to the formation of industrial smog."
+    },
+    {
+      "type": "heading",
+      "text": "Formation"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Photochemical smog (brown smog)</strong> is formed by the reaction of nitrogen oxides and <strong>VOCs</strong> with <strong>tropospheric ozone</strong>."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2FCapture%206.PNG?alt=media&token=46fa134c-81d7-42f2-845a-99b7506bf8ee",
+      "width": "508",
+      "height": "275"
+    },
+    {
+      "type": "paragraph",
+      "html": "Nitrogen dioxide is from both natural and anthropogenic sources. Sunlight breaks a bond and releases one oxygen forming nitrogen oxide (NO). The lone oxygen then bonds to atmospheric oxygen (O2) with the assistance of sunlight. This forms tropospheric ozone (O3). As the sun goes down, ozone undergoes a reaction with the recently made NO resulting in NO2 and O2."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2FCapture%207.PNG?alt=media&token=6d9457d6-88e8-44c7-b209-b29093cc89a7",
+      "width": "612",
+      "height": "290"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Volatile organic compounds (VOCs)</strong> are also natural and anthropogenic. When they come into contact with the NO produced in the earlier equation, photochemical oxidants are formed. This disrupts the breakdown of the O3. The combination of the photochemical oxidants and ozone create photochemical smog. It is commonly known as brown smog due to the nitrogen compounds."
+    },
+    {
+      "type": "paragraph",
+      "html": "As many VOCs are from gasoline fumes, it should be understood that there is more brown smog in larger cities and warmer, sunny days. Trees are also emitters of VOCs so forested areas are also likely candidates of brown smog, though their ambient temperature is lower."
+    },
+    {
+      "type": "heading",
+      "text": "Health Concerns"
+    },
+    {
+      "type": "paragraph",
+      "html": "Photochemical smog can have a range of adverse effects on human health."
+    },
+    {
+      "type": "paragraph",
+      "html": "The pollutants that contribute to photochemical smog, including ozone and particulate matter, can have a range of negative effects on human health. Ozone can irritate the respiratory system and cause coughing, wheezing, and shortness of breath. It can also reduce lung function and exacerbate existing respiratory problems, such as asthma. Particulate matter can also irritate the respiratory system and cause coughing, wheezing, and shortness of breath. It can also increase the risk of cardiovascular disease, such as heart attacks and stroke."
+    },
+    {
+      "type": "paragraph",
+      "html": "In addition to the direct effects on human health, photochemical smog can also have indirect effects by damaging plants and crops. Ozone and other pollutants can reduce crop yields and quality, which can have economic and social impacts."
+    },
+    {
+      "type": "paragraph",
+      "html": "Overall, photochemical smog can have serious health consequences, including respiratory problems and cardiovascular disease. It is important to reduce the levels of photochemical smog in the air to protect public health and the environment. This can be achieved through measures such as reducing vehicle emissions and increasing the use of renewable energy."
+    },
+    {
+      "type": "paragraph",
+      "html": "Many people in heavily affected cities and regions in China will opt to wear surgical face masks in an attempt to lessen these health effects."
+    }
+  ]
+}

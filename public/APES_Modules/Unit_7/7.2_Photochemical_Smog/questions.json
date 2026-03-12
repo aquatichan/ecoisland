@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A study compared traffic volume and ground-level ozone at six urban highways on summer afternoons. Observations 45 ppb at 500 vehicles/hour, 78 ppb at 2,000, 92 ppb at 4,500, 98 ppb at 6,000, 99 ppb at 7,500, and 100 ppb at 9,000. Which statement best characterizes this relationship?",
+    "answers": [
+      "Ozone decreases as traffic rises because vehicle haze reduces sunlight.",
+      "No consistent relationship exists because smog also depends on temperature and time.",
+      "Ozone rises with traffic but plateaus near 100 ppb beyond 6,000 vehicles/hour.",
+      "Ozone increases linearly with traffic, producing proportional rises at all volumes."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A city experiences peak ozone concentrations of 0.15 ppm in mid-afternoon during summer, but concentrations drop to 0.02 ppm by early morning. Nitrogen oxide levels are highest during morning rush hour (7-9 AM) when traffic is heaviest, then decline throughout the day. Which of the following best describes the environmental problem indicated by this temporal pattern?",
+    "answers": [
+      "Ozone concentrations peak in the afternoon because morning traffic congestion depletes atmospheric oxygen, which is replenished by afternoon wind patterns that bring fresh ozone from the upper atmosphere",
+      "Morning nitrogen oxide emissions are oxidized by atmospheric water vapor, producing ozone that accumulates throughout the day until evening when temperature drops and ozone dissolves back into the air",
+      "Photochemical smog formation is driven by morning nitrogen oxide emissions from vehicles, which react with sunlight and VOCs throughout the day to produce peak ozone concentrations in the afternoon",
+      "Industrial emissions during morning hours create a layer of nitrogen oxides that traps heat, preventing ozone from dispersing and causing afternoon concentration peaks"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Researchers measured summer ozone only on clear sunny days. If they added cloudy and humid days, how would that affect their assessment of ozone formation mechanisms?",
+    "answers": [
+      "Average ozone would increase due to assumed reduced atmospheric mixing on cloudy days",
+      "Allow testing sunlight dependence by comparing ozone formation across weather conditions",
+      "Nitrogen oxide concentrations would drop on cloudy days preventing study of the reaction",
+      "Findings would seem less reliable because ozone levels vary with weather"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers investigating the relationship between traffic volume and photochemical smog formation measured nitrogen oxide (NOx) concentrations and ground-level ozone (O₃) at 12 monitoring stations positioned at varying distances from major highways in Phoenix, Arizona. Measurements were taken hourly throughout the summer season. The data showed that NOx concentrations were highest near highways in early morning hours, while ozone concentrations peaked in mid-afternoon at all locations. Which of the following sampling strategies did the researchers employ to capture this temporal pattern?",
+    "answers": [
+      "Hourly measurements throughout the summer season to document how pollutant concentrations vary across time of day and across weeks",
+      "Hourly measurements throughout the summer season to document how pollutant concentrations vary across weeks",
+      "Morning and afternoon measurements throughout the summer season to document how pollutant concentrations vary across time of day and across weeks",
+      "Hourly measurements on a single representative day to document how pollutant concentrations vary across time of day"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A five-year study found summer ozone peaks in Los Angeles between 2 PM and 4 PM despite morning rush producing most nitrogen oxides. The author links the afternoon peak to sunlight-driven photochemical reactions among nitrogen oxides and volatile organic compounds and notes winter ozone is about 60% lower even with similar traffic. Which choice best states the author's main claim?",
+    "answers": [
+      "Winter ozone is about 60% lower even though traffic is comparable.",
+      "Reducing morning vehicle emissions alone will not prevent afternoon ozone peaks.",
+      "Peak summer ozone in Los Angeles occurs between 2 PM and 4 PM.",
+      "Nitrogen oxides and volatile organic compounds react with sunlight to form ozone."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers measured July ozone in three cities with equal populations and similar summer climate. City A has heavy traffic and 72 ppb. City B has moderate traffic and 48 ppb. City C is forested with light traffic and 51 ppb. Which conclusion about traffic and photochemical smog is best supported by these data?",
+    "answers": [
+      "Ozone depends only on temperature and sunlight and not on traffic.",
+      "Higher traffic correlates with higher ozone, implicating vehicle NOx emissions.",
+      "Forest VOCs can raise ozone even with low traffic, partially explaining City C.",
+      "Forest vegetation removes ozone and thereby prevents photochemical smog formation."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "During a summer heat wave in Los Angeles, ozone concentrations reached 0.18 ppm on a clear, sunny day with light winds, but only 0.08 ppm the following day when clouds covered the sky and temperatures dropped 8°C. Vehicle emissions on both days were similar. Which of the following best describes the environmental factors controlling photochemical smog formation in this scenario?",
+    "answers": [
+      "Sunlight intensity and temperature both directly control the rate of photochemical reactions between nitrogen oxides and VOCs, with clear skies and heat maximizing ozone production",
+      "High temperatures on the first day increased the solubility of ozone in atmospheric water vapor, concentrating ozone molecules in the air, while cooler temperatures on the second day reduced ozone solubility and allowed it to escape to the upper atmosphere",
+      "Cloud cover reduces atmospheric pressure, which causes nitrogen oxides to condense and precipitate out of the air, thereby reducing ozone formation on cloudy days",
+      "Clear skies increase wind speeds that disperse nitrogen oxides away from the city, while cloudy conditions trap pollutants near the surface, explaining the inverse relationship between cloud cover and ozone"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An air quality agency measured nitrogen oxide (NOx) concentrations and photochemical smog severity at 6 AM, 12 PM, and 6 PM across three days with different weather conditions. Clear sunny day: 6 AM NOx = 120 ppb and smog = 25 ppb, 12 PM NOx = 95 ppb and smog = 78 ppb, 6 PM NOx = 110 ppb and smog = 42 ppb. Cloudy day: 6 AM NOx = 125 ppb and smog = 28 ppb, 12 PM NOx = 100 ppb and smog = 35 ppb, 6 PM NOx = 115 ppb and smog = 30 ppb. Which statement best explains how weather conditions affect the relationship between NOx and smog formation?",
+    "answers": [
+      "On both days, declining NOx concentrations correlate with increasing smog formation through sunlight-driven photochemical conversion, but cloudy conditions reduce the magnitude of smog production while maintaining the same inverse relationship pattern.",
+      "On the clear sunny day, declining NOx concentrations correlate with increasing smog until afternoon, indicating that afternoon heat drives conversion of NOx into ozone-based smog; cloudy conditions show minimal smog formation despite similar NOx levels.",
+      "On the clear sunny day, declining NOx concentrations correlate with increasing smog until afternoon, indicating that sunlight drives evaporation of volatile organic compounds that combine with NOx to form smog; cloudy conditions show minimal smog formation despite similar NOx levels.",
+      "On the clear sunny day, declining NOx concentrations correlate with increasing smog until afternoon, indicating that sunlight drives conversion of NOx into ozone-based smog; cloudy conditions show minimal smog formation despite similar NOx levels."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Researchers measured traffic volume (vehicles/hour), temperature (°C), and peak ozone (ppb) in five cities on a summer afternoon. Which statement best characterizes the relationship between traffic volume and ozone concentration?",
+    "answers": [
+      "Ozone increases with traffic but plateaus at high traffic because temperature matters.",
+      "Temperature alone determines ozone and traffic shows no consistent influence.",
+      "Ozone concentration increases proportionally with traffic volume across all cities.",
+      "Ozone decreases as traffic increases because higher traffic disperses pollutants."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An urban environmental health advocate writes: 'Photochemical smog in Los Angeles peaks on hot, sunny afternoons when vehicle emissions from morning rush hour react with sunlight. Reducing this health threat requires strict emission standards on vehicles, even if implementation costs burden manufacturers. The respiratory damage to children and elderly residents justifies these economic investments.' Which stakeholder perspective does this statement most clearly represent?",
+    "answers": [
+      "Urban planners and environmental advocates who prioritize immediate health protection over economic costs of emission controls",
+      "Urban planners and environmental advocates who prioritize long-term economic benefits of reduced healthcare costs over immediate implementation costs of emission controls",
+      "Automotive industry representatives who prioritize immediate health protection over economic costs of emission controls",
+      "Urban planners and environmental advocates who prioritize immediate health protection through voluntary manufacturer compliance rather than strict emission standards"
+    ],
+    "correct": "!"
+  }
+]

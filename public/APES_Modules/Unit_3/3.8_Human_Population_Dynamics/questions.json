@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A country's data by year are 1950 population 12 million birth rate 48/1,000 death rate 20/1,000 1980 population 38 million birth rate 42/1,000 death rate 12/1,000 2010 population 68 million birth rate 28/1,000 death rate 8/1,000 2023 population 82 million birth rate 18/1,000 death rate 7/1,000 Which pattern best illustrates the country's progression through population growth stages?",
+    "answers": [
+      "Population rose to 82 million implying the country overshot carrying capacity and will collapse.",
+      "Declining death rates followed by falling birth rates, showing demographic transition.",
+      "Falling death rates alone caused sustained population acceleration from medical improvements.",
+      "Birth and death rates changed independently of development, implying random environmental control."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "In sub-Saharan Africa, several countries have experienced rapid population growth despite limited access to clean water and sanitation infrastructure. Which of the following best describes how these density-dependent factors affect population growth rates in this region?",
+    "answers": [
+      "Limited access to clean water reduces birth rates because families cannot support children without adequate sanitation infrastructure.",
+      "Limited access to clean water increases disease transmission rates, which raises infant and child mortality, thereby slowing population growth despite high birth rates.",
+      "Limited access to clean water causes populations to migrate to regions with better sanitation, reducing local population density and allowing growth rates to increase.",
+      "Limited access to clean water is a density-independent factor that affects all populations equally regardless of their size, so it does not explain regional variation in growth rates."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The scatterplot shows infant mortality and total fertility rates for 20 countries. Which statement best explains their relationship?",
+    "answers": [
+      "Higher infant mortality leads to lower fertility by reducing women's reproductive capacity.",
+      "Higher infant mortality is paired with higher fertility due to misattributed healthcare gains.",
+      "No clear relationship exists because infant mortality and fertility are independent.",
+      "Higher infant mortality is associated with higher fertility because families have more births."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An economist argues investments in female education, maternal healthcare, and economic opportunities produced demographic transition in Bangladesh, Rwanda, and Vietnam. What behavioral assumption does this claim rely on?",
+    "answers": [
+      "Lack of contraceptives alone does not fully explain high population growth",
+      "People will choose smaller families when education and opportunities increase",
+      "Cultural values can shift as opportunities expand and preferences change",
+      "Female education reduces fertility but works together with healthcare and jobs"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "After a three-year severe drought, crop yields fell 15%, disease transmission rose 40%, and population growth dropped from 2.2% to 0.8% annually. Which best explains the change in population growth rate?",
+    "answers": [
+      "Population decline due only to temporarily halted reproduction from water scarcity.",
+      "Carrying capacity permanently fell and the population will never recover.",
+      "Drought is density-dependent and thus affected larger populations more.",
+      "Drought was density-independent and triggered density-dependent food and disease limits."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Which claim best expresses the author's main point in the passage?",
+    "answers": [
+      "Infrastructure investment and disaster preparedness can reduce population vulnerability.",
+      "Extreme weather impacts depend on event intensity, population density, and adaptive capacity.",
+      "Some argue that climate change impacts are inevitable consequences of warming.",
+      "About 55,000 people died in Russia in the 2010 heat wave, a major mortality event."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A developing nation implements a comprehensive family planning program that provides free contraception, reproductive health education, and economic incentives for delaying marriage. Which of the following represents an unintended consequence of this population control intervention?",
+    "answers": [
+      "Reduced birth rates may lead to an aging population structure, but developing nations have sufficient economic resources to support increased dependency ratios",
+      "Reduced birth rates may be prevented by cultural resistance to contraception, maintaining high fertility rates and rapid population growth",
+      "Reduced birth rates may lead to an aging population structure with fewer working-age individuals to support retirees",
+      "Reduced birth rates may lead to immediate economic burden from program costs that exceed the nation's healthcare budget"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Researchers studied infant mortality in 60 villages—30 with new water treatment systems and 30 without. They measured mortality before installation and annually for five years in both groups. Which research design best describes this study?",
+    "answers": [
+      "Observational study measuring mortality but not confirming water quality improvements",
+      "Randomized controlled trial with villages randomly assigned to treatment",
+      "Cross-sectional comparison measuring villages at one postinstallation time point",
+      "Quasi-experimental before-after study with a nonrandom comparison group"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Two regions start with 5 million people and follow different 20-year growth paths. Region A maintains 2.8% annual growth. Region B's growth falls from 3.1% to 1.2%. Using the rule of 70, which statement best describes their population trajectories?",
+    "answers": [
+      "Constant percentage growth does not indicate carrying capacity and declining growth suggests limits",
+      "Equal starting populations do not determine doubling time, growth rates do",
+      "Region B's declining growth still implies continued population growth, not extinction",
+      "Region A doubles in 25 years and Region B's doubling rises 23-58 years"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "The graph shows birth rates, death rates, and population growth rate for Country X over 50 years. During the first 25 years, birth rates declined from 45 to 25 per 1,000 people while death rates remained stable at 10 per 1,000 people. During the second 25 years, birth rates stabilized at 25 while death rates increased to 12 per 1,000 people. Which statement best explains the relationship between changing birth and death rates and the population growth rate shown in the graph?",
+    "answers": [
+      "Population growth rate remained constant throughout both periods because birth rates and death rates both changed proportionally, maintaining the same ratio.",
+      "Population growth rate declined only during the first period because birth rate changes have a stronger effect on growth than death rate changes, making the second period's death rate increase irrelevant.",
+      "Population growth rate increased during the second period because death rates increased, which always stimulates higher birth rates as populations compensate for mortality losses.",
+      "Population growth rate declined during both periods because the gap between birth and death rates narrowed, from 35 to 15 per 1,000 people in the first period and from 15 to 13 in the second period."
+    ],
+    "correct": "D"
+  }
+]

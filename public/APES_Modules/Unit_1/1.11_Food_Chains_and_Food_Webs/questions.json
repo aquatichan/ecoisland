@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A marine biologist reports that where sea otters were hunted to near extinction, sea urchins increased 15-fold, kelp coverage dropped 90%, and fish species richness fell from 47 to 12. Which choice best describes a limitation in how this evidence supports the claim that sea otters are critical to kelp forest health?",
+    "answers": [
+      "Shows correlation but lacks direct evidence of the causal trophic mechanism.",
+      "Uses only a few regions so results may not generalize to all ecosystems.",
+      "Reports multiple species responses which could obscure which factor caused change.",
+      "Relies on species counts rather than measuring energy flow through trophic levels."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A pond food web shows producers, primary consumers, secondary consumers, and tertiary consumers. Which statement best describes how organisms are grouped by trophic level?",
+    "answers": [
+      "Organisms do not share a trophic level simply because they use sunlight.",
+      "Producers form the energy base and consumers eat organisms at lower levels.",
+      "Trophic positions are set by feeding relationships not by body size.",
+      "Herons appear at the highest level here but are not inherently most important."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A coral reef ecosystem includes coral polyps (primary consumers feeding on zooplankton), parrotfish (secondary consumers feeding on algae and coral), and groupers (tertiary consumers feeding on parrotfish). When grouper populations are overfished and decline by 90%, parrotfish populations increase significantly over the following years. Which of the following best explains the increase in parrotfish populations?",
+    "answers": [
+      "Removal of groupers eliminates a major predator of parrotfish, reducing predation pressure and allowing parrotfish populations to increase through bottom-up resource availability.",
+      "Removal of groupers eliminates a major predator of parrotfish, reducing predation pressure and allowing parrotfish populations to increase through a trophic cascade.",
+      "Removal of groupers eliminates a major predator of parrotfish, reducing predation pressure and allowing coral populations to increase through a trophic cascade.",
+      "Removal of groupers eliminates competition with parrotfish for territorial space on the reef, allowing parrotfish populations to increase through a trophic cascade."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "In a marine ecosystem, sea urchins (primary consumers) feed on kelp (producers). Sea otters (secondary consumers) feed on sea urchins. When sea otter populations decline due to disease, sea urchin populations increase dramatically within one year. The increased sea urchins consume kelp at rates exceeding kelp growth, causing kelp forests to decline by 90% within three years. Which of the following best describes the type of feedback loop created by sea otter population decline?",
+    "answers": [
+      "A trophic cascade in which sea otter decline directly causes kelp decline by removing a competitor for kelp resources.",
+      "A negative feedback loop in which sea otter decline triggers sea urchin increase, but urchin populations eventually stabilize as kelp becomes scarce, restoring ecosystem balance.",
+      "A compensatory response in which kelp decline triggers increased sea urchin mortality, which allows sea otter populations to recover and restore the ecosystem to its original state.",
+      "A positive feedback loop in which sea otter decline leads to sea urchin increase, which causes kelp decline, which further reduces food for sea otters, amplifying the original change."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A lake ecosystem contains algae (producers), zooplankton (primary consumers), small fish (secondary consumers), and largemouth bass (tertiary consumers). When a drought reduces water volume by 40%, zooplankton populations initially decline due to habitat loss. Which of the following best explains the subsequent effect on largemouth bass populations?",
+    "answers": [
+      "Largemouth bass populations will decline because reduced zooplankton availability limits food for small fish, decreasing the energy available at higher trophic levels.",
+      "Small fish populations will decline because reduced zooplankton availability limits their food source, decreasing the energy available at higher trophic levels, but bass populations remain stable by consuming alternative prey.",
+      "Largemouth bass populations will increase because reduced zooplankton availability limits food for small fish, causing small fish populations to weaken and become easier prey for bass.",
+      "Largemouth bass populations will decline because reduced zooplankton availability increases competition among bass for remaining small fish, decreasing survival rates at higher trophic levels."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An invasive species of herbivorous insect is introduced to a forest ecosystem where native plants have no evolved defenses against this insect. The insect population grows exponentially, consuming large quantities of native plant foliage. Over three years, native plant biomass decreases by 70%, and populations of native herbivorous insects that feed on the same plants decline by 85%. Which of the following best explains the decline in native herbivorous insect populations?",
+    "answers": [
+      "Native herbivorous insects decline because the invasive insect produces toxins that poison native insects, preventing them from feeding on plants.",
+      "Native herbivorous insects decline because they evolve to avoid the invasive insect, causing them to migrate to other forest patches where food is scarcer.",
+      "Native herbivorous insects decline because predators of the invasive insect increase in population and accidentally consume native insects as well.",
+      "Competition with the invasive insect for limited plant resources reduces food availability for native herbivorous insects, causing their populations to decline."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "In a coastal ecosystem, agricultural runoff raises phytoplankton biomass by 300%. Zooplankton briefly increase but then crash after two weeks. Why did zooplankton decline despite abundant food?",
+    "answers": [
+      "Algal blooms usually lower diversity, so reduced food quality is unlikely to cause collapse",
+      "Predator response is too slow and indirect to explain the rapid zooplankton crash",
+      "Zooplankton cannot consume an ecosystem-wide 300% phytoplankton increase in two weeks",
+      "Decomposition of the algal bloom consumes oxygen, causing hypoxia that kills zooplankton"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A biologist reports California sea otters declined about 90 percent in the 20th century from fur hunting, causing urchin outbreaks that converted kelp forests to barren rock. Recent otter recovery reduced urchin density and allowed kelp to regenerate. Which statement best expresses the author's main conclusion?",
+    "answers": [
+      "Sea otters declined about 90 percent in the 20th century from fur hunting",
+      "Sea urchin populations increased when sea otter numbers declined",
+      "Restoring apex predators can reverse ecosystem damage via trophic cascades",
+      "Kelp forests became barren rock after sea otter decline and urchin outbreaks"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Sea otters prey on sea urchins that eat kelp. In the 1800s sea otters were hunted nearly to extinction, sea urchin numbers exploded, and kelp forests collapsed. Which best explains why losing sea otters caused kelp collapse?",
+    "answers": [
+      "Sea urchin increase resulted from rapid evolution of predation resistance.",
+      "Removal of sea otters let sea urchin numbers explode, overgrazing kelp.",
+      "Kelp declined because sea otters were incorrectly claimed to be kelp consumers.",
+      "Removing sea otters reduced energy available to the kelp forest ecosystem."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A fisheries biologist summarizes changes in a North Atlantic cod food web and argues that restoring cod alone will not fix the ecosystem. Which sentence best expresses the author's main claim?",
+    "answers": [
+      "Seal and sea lion populations increased when their primary predator Atlantic cod was removed.",
+      "Marine mammals now consume fish species that were historically secondary prey.",
+      "Atlantic cod populations declined 95% between 1960 and 1995 due to commercial fishing.",
+      "Effective restoration requires managing the reorganized food web, not only restoring cod."
+    ],
+    "correct": "D"
+  }
+]

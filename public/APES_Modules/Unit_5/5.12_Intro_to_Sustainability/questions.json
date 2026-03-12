@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A fishery agency recorded Atlantic cod harvests and population sizes for 30 years. When annual harvest exceeded 200,000 metric tons, populations fell below replacement within 2–3 years. When harvest stayed below 150,000 metric tons, populations stabilized near 800,000 individuals. Which harvest policy best supports long-term sustainability of the cod fishery?",
+    "answers": [
+      "Implement variable quotas between 150,000 and 200,000 metric tons to boost returns",
+      "Harvest 30 percent of the population annually regardless of population size",
+      "Maintain harvest at 200,000 metric tons because it was historically attainable",
+      "Set a maximum annual harvest of 140,000 metric tons to ensure sustainability"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Fishery data show these trends: 1985–1995 biomass averaged 450,000 tons with 180,000-ton annual catch; 1995–2005 biomass fell to 120,000 tons while catch rose to 220,000 tons; 2005–2015 biomass stabilized near 80,000 tons with catch reduced to 25,000 tons. Maximum population growth is about 35% annually at low density. Which conclusion about sustainable yield and population dynamics is best supported by these data?",
+    "answers": [
+      "A fixed 35% rule guarantees sustainability regardless of depletion",
+      "Sustainable yield equals the 180,000 tons taken during 1985-1995",
+      "35% growth cannot sustain any commercial harvest so sustainability is impossible",
+      "Sustainable yield equals population growth capacity and depends on current biomass"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Over 30 years a region's population rises from 5 million to 15 million and per capita resource use increases 40 percent. Agricultural output rose 80 percent through expanded irrigation and fertilizer use. Why might the region still be unsustainable despite higher food production?",
+    "answers": [
+      "Higher production alone does not prove sustainability despite exceeding demand growth",
+      "Population growth always outstrips food production regardless of technology",
+      "Agriculture using intensive irrigation and fertilizers depletes groundwater and soil",
+      "Any rise in per capita consumption makes sustainability impossible"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A semi-arid region depends on groundwater. Annual recharge is 45 million m3/yr and extraction is 78 million m3/yr. Which research question best guides investigation of whether current use is sustainable?",
+    "answers": [
+      "Does annual extraction exceed recharge and cause long-term overdraft?",
+      "Groundwater must be protected and current extraction is unsustainable.",
+      "How have extraction rates changed over 20 years and why?",
+      "Should farmers reduce irrigation to secure municipal water supplies?"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A coastal region produces 8 million tons of food per year while using 12 billion gallons of irrigation water. Soil erosion averages 2.5 t/ha/year and soil formation 0.5 t/ha/year. Farmers apply 150,000 tons of synthetic fertilizer yearly to maintain yields. Which modification does the data best support?",
+    "answers": [
+      "Reduce fertilizer to 100,000 tons yearly while ignoring erosion causes",
+      "Increase irrigation to 15 billion gallons yearly to boost production to 10 million tons",
+      "Adopt conservation tillage and cover crops to cut erosion to 0.8 t/ha/year",
+      "Accept current erosion and increase fertilizer to 200,000 tons yearly"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A fishery estimated sustainable catch from 10 years of annual landings. Researchers add monthly surveys of population size, recruitment, and age structure. Which change most improves sustainability assessments?",
+    "answers": [
+      "Collect data but do not directly change fishing effort or catches",
+      "Landing records alone cannot assess sustainability without population size and recruitment data",
+      "Allows direct measurement of population replenishment rate and reproductive capacity",
+      "Reveal that sustainable yields may be lower than landing-based estimates"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Groundwater in an agricultural region has been pumped at 45 million cubic meters annually for irrigation over the past 30 years. Hydrological surveys indicate natural recharge to the aquifer averages 12 million cubic meters per year. Water table elevation has declined 15 meters during this period. Which environmental problem is best described by this scenario?",
+    "answers": [
+      "Agricultural irrigation has contaminated the aquifer with fertilizer and pesticide residues, reducing water quality below drinking water standards",
+      "The aquifer is being depleted at a sustainable rate because the 15-meter decline over 30 years represents a manageable loss of storage capacity",
+      "Natural recharge has decreased due to reduced precipitation, making current extraction rates unsustainable despite historical adequacy",
+      "Extraction rates exceed natural recharge, causing unsustainable groundwater depletion that will eventually exhaust the aquifer"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A timber company harvests 2,500 hectares annually from a 100,000-hectare forest. Trees reach harvestable size in 40 years, so the forest is rotated every 40 years. After 20 years of this practice, yields fall by 30 percent. Which explanation best accounts for the decline despite matching harvest interval to tree growth?",
+    "answers": [
+      "This misattributes decline to carrying capacity rather than harvest damage.",
+      "Rotation length matches tree maturity, so recovery time is not the problem.",
+      "Harvesting damages soil and biodiversity, reducing forest regeneration.",
+      "Stem gives no evidence of climate change, while harvest practices explain decline."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A national government protects 30% of its forests to conserve biodiversity and ecosystem services. The protected areas ban hunting and timber harvesting that indigenous communities have practiced for generations. Which choice describes a disadvantage of this approach?",
+    "answers": [
+      "Claims protecting forests increases greenhouse gases, which contradicts carbon sequestration.",
+      "Assumes human activity entirely prevents forest regeneration, which is false.",
+      "Asserts protected areas cannot sustain biodiversity due to insufficient size.",
+      "Loss of indigenous access reduces food security and undermines cultural practices."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "The diagram shows freshwater depletion rates (cubic kilometers per year) for three aquifer systems: the Ogallala Aquifer (North America), the North China Plain Aquifer, and the Indo-Gangetic Aquifer. The recharge rate for each aquifer is also shown. Which statement best explains the relationship between depletion rate and aquifer sustainability based on the visual comparison?",
+    "answers": [
+      "Aquifers with depletion rates exceeding recharge rates are being used unsustainably because extraction removes water faster than natural replenishment can replace it, but this only causes temporary shortages that resolve when extraction decreases.",
+      "Aquifers with depletion rates exceeding recharge rates are being used unsustainably because extraction removes water faster than natural replenishment can replace it, eventually depleting the resource.",
+      "Aquifers with depletion rates exceeding recharge rates are being used unsustainably because contamination from agricultural runoff degrades water quality faster than natural filtration can purify it, eventually depleting usable water.",
+      "Aquifers with high recharge rates are more sustainable than those with low recharge rates because natural replenishment determines water availability, regardless of how much faster extraction removes water compared to recharge."
+    ],
+    "correct": "B"
+  }
+]
