@@ -52,12 +52,20 @@
       "html": "One example of a power plant leading to thermal pollution is the James A. FitzPatrick Nuclear Power Plant in New York, USA. The plant cools its equipment by drawing in water from Lake Ontario and discharging it back into the lake at a higher temperature. This has led to an increase in the water temperature in the surrounding area, which has harmed fish and other aquatic life. The plant has been under scrutiny for its impact on the lake and the state has implemented several measures to reduce the thermal pollution caused by the plant, such as reducing the intake and discharge of water during certain times of the year and installing cooling towers to reduce the temperature of the water that is discharged back into the lake."
     },
     {
+      "type": "heading",
+      "text": "Industrial Facilities"
+    },
+    {
       "type": "paragraph",
       "html": "Many industrial facilities, such as factories, refineries, and chemical plants, use large amounts of water in their operations. The water is often heated during the process and then discharged into nearby waterways. This can raise the temperature of the water and harm fish, plants, and other aquatic life."
     },
     {
       "type": "paragraph",
       "html": "The James River Power Station in Virginia, USA is an example of industrial facilities leading to thermal pollution. The power station is a coal-fired power plant that uses large amounts of water for cooling. The water used in the cooling process is then released back into the James River at a temperature that is significantly higher than the natural temperature of the river. This thermal pollution can have a range of negative impacts on the ecosystem of the James River, including changes in the behavior and reproduction of fish, and reductions in the dissolved oxygen levels of the water. The thermal pollution can also harm the aquatic life and make it difficult for them to survive in that area."
+    },
+    {
+      "type": "heading",
+      "text": "Urbanization"
     },
     {
       "type": "paragraph",
@@ -68,12 +76,22 @@
       "html": "An example of urbanization leading to thermal pollution is in the city of Los Angeles, California, USA. The city has a large urban heat island effect due to its high density of concrete and asphalt surfaces, as well as a lack of vegetation. This has led to temperatures in the city being significantly higher than in surrounding rural areas. This increased heat can have a range of negative impacts on the environment and human health, including increased air conditioning usage which leads to more energy consumption and more power plants are needed to meet the demand, which in turn leads to thermal pollution as a byproduct of power generation. Additionally, higher temperatures can also lead to increased smog and air pollution, which can have negative impacts on human health."
     },
     {
+    
+      "type": "heading",
+      "text": "Agriculture"
+    },
+    {
       "type": "paragraph",
       "html": "In agriculture, irrigation and other farming activities can contribute to thermal pollution by increasing the temperature of water in nearby waterways. This can be caused by excess water from irrigation or from the use of water to cool equipment."
     },
     {
       "type": "paragraph",
       "html": "We can see that agriculture led to thermal pollution through the use of irrigation systems in large-scale agriculture. Irrigation systems, such as center-pivot and flood irrigation, use large amounts of water to cultivate crops, and this water is often taken from rivers or other bodies of water. This can lead to thermal pollution if the water is returned to the source at a higher temperature than it was taken. For example, in Central Valley of California, USA, many farmers use center-pivot irrigation systems to water their crops. The water is pumped from the Sacramento-San Joaquin Delta and returned at a much higher temperature, which can harm the aquatic life in the delta and reduce the dissolved oxygen levels in the water. This thermal pollution can also have a negative impact on the environment and the ecosystem of the area."
+    },
+    {
+    
+      "type": "heading",
+      "text": "Recreational Activities"
     },
     {
       "type": "paragraph",

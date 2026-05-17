@@ -56,12 +56,24 @@
       "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Air pollutants: These include chemicals and particles that are released into the air, such as carbon monoxide, sulfur dioxide, nitrogen oxides, particulate matter, and volatile organic compounds. These pollutants can have negative impacts on human health, as well as on the environment.</li>\n<li>Water pollutants: These include chemicals and organisms that are present in water, such as bacteria, viruses, pesticides, heavy metals, and nutrients such as nitrogen and phosphorus. These pollutants can have negative impacts on human health and on the health of aquatic organisms.</li>\n<li>Soil pollutants: These include chemicals and other substances that are present in soil, such as pesticides, heavy metals, and toxic industrial chemicals. These pollutants can have negative impacts on human health, as well as on the health of plants and other organisms that live in the soil.</li>\n<li>Food contaminants: These include chemicals and organisms that are present in food, such as bacteria, viruses, pesticides, and heavy metals. These contaminants can have negative impacts on human health, and can also cause food spoilage.</li>\n<li>Radiological contaminants: These include substances that emit radiation, such as radioactive isotopes. They can have negative impacts on human health, as well as on the environment.</li>\n</ul>"
     },
     {
+      "type": "heading",
+      "text": "Arsenic"
+    },
+    {
       "type": "paragraph",
       "html": "Arsenic is a naturally occurring element found in the environment in various forms such as water, soil, dust, air and food. Exposure to arsenic can occur through various ways such as through drinking water, food, breathing dust containing arsenic and wood treated with chromated copper arsenate. It is a known human carcinogen and has been linked to various types of cancer including skin, lung, bladder, kidney and liver cancer. It can also interfere with the body's endocrine system and is a global concern, with high levels found in countries such as Bangladesh, Chile, China, Vietnam, Taiwan, India, and the United States."
     },
     {
+      "type": "heading",
+      "text": "Mercury"
+    },
+    {
       "type": "paragraph",
       "html": "Mercury is a naturally occurring metal that can exist in several forms, including methylmercury and elemental mercury. Elemental mercury is a liquid at room temperature and can produce a harmful vapor, while methylmercury is an organic compound that can build up in the bodies of long-living predatory fish. People can be exposed to mercury through products such as fluorescent lights and button-cell batteries, as well as by consuming fish and shellfish that contain high levels of mercury. Pregnant women who regularly eat fish high in mercury risk permanently damaging their developing fetuses, and children born to these mothers may exhibit motor difficulties, sensory problems, and cognitive deficits. To reduce exposure to mercury, it is important to dispose of mercury-containing products properly and to be aware of the typical levels of mercury in commonly consumed commercial and sport-caught fish."
+    },
+    {
+      "type": "heading",
+      "text": "BPA"
     },
     {
       "type": "paragraph",
@@ -85,8 +97,16 @@
       "html": "It's also important to note that, although some steps can be taken to reduce exposure to BPA, it is a ubiquitous chemical, and it is impossible to completely eliminate exposure to it."
     },
     {
+      "type": "heading",
+      "text": "Phthalates"
+    },
+    {
       "type": "paragraph",
       "html": "Phthalates are a group of chemicals used to soften and increase the flexibility of plastic and vinyl products. They are commonly found in hundreds of consumer products, such as cosmetics and personal care products like perfume, hair spray, soap, shampoo, nail polish, and skin moisturizers. They are also used in toys, shower curtains, wallpaper, vinyl mini-blinds, food packaging, and plastic wrap. People can be exposed to phthalates through ingestion of food packaged in plastic containing phthalates, breathing dust in rooms with vinyl mini-blinds, wallpaper, or recently installed flooring that contains phthalates, and drinking water that contains phthalates. Phthalates have been identified as a potential endocrine disruptor and are associated with various health risks, such as reproductive and developmental problems and cancer. To reduce exposure to phthalates, individuals can opt for phthalate-free products, properly wash their hands after handling products that contain phthalates, and avoid heating food in plastic containers."
+    },
+    {
+      "type": "heading",
+      "text": "Lead"
     },
     {
       "type": "paragraph",
@@ -95,6 +115,10 @@
     {
       "type": "paragraph",
       "html": "Lead and lead compounds are listed as \"reasonably anticipated to be a human carcinogen\" and can have harmful effects on the body, whether inhaled or ingested. The central nervous system is particularly sensitive to lead exposure, and children are more vulnerable to lead poisoning than adults. High levels of lead exposure in children can lead to brain damage, convulsions, death, blood anemia, kidney damage, colic and muscle weakness. Low levels of exposure can also cause developmental and behavioral problems. Pregnant women exposed to high levels of lead may face risks such as miscarriage, premature births, and smaller babies. Chronic or repeated exposure can cause lead to build up in the body and lead to lead poisoning."
+    },
+    {
+      "type": "heading",
+      "text": "Formaldehyde"
     },
     {
       "type": "paragraph",

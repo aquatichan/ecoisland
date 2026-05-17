@@ -16,10 +16,6 @@
       "height": null
     },
     {
-      "type": "paragraph",
-      "html": "<a href=\"https://pixabay.com/photos/smoke-pollution-environment-steam-637620/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/smoke-pollution-environment-steam-637620/\">Smoke Stack</span></a> and <a href=\"https://pixabay.com/photos/outfall-pipe-waste-water-effluent-3491306/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/outfall-pipe-waste-water-effluent-3491306/\">Water Runoff</span></a>"
-    },
-    {
       "type": "heading",
       "text": "Point Source Pollution"
     },
@@ -111,10 +107,6 @@
     {
       "type": "paragraph",
       "html": "B! Remember that with point source pollution, you can point to a direct source. With nonpoint source, you will have a combination of pollutants from different sources."
-    },
-    {
-      "type": "paragraph",
-      "html": "Need more practice with Source of Pollution? Check out a trivia game"
     }
   ]
 }
