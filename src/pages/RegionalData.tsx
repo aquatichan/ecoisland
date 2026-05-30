@@ -4,304 +4,308 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Globe, AlertCircle, Search, ExternalLink, Loader2 } from "lucide-react";
+import { Globe, AlertCircle, Search, ExternalLink, Loader2, MapPin, Zap, RefreshCw } from "lucide-react";
 import { User } from "@/entities/User";
+import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
 
-// First 10 countries that came to mind
-const countries = [
-  "United States", 
-  "Canada", 
-  "United Kingdom", 
-  "China", 
-  "India", 
-  "Japan", 
-  "Australia", 
-  "Brazil", 
-  "Germany", 
-  "France",
-];
+// Fix leaflet default marker icon
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 
-const defaultData = {
-  position: [29.7604, -95.3698],
-  cityName: "Houston, TX",
-  ecoScore: {
-    score: 85,
-    recycling: 86,
-    air_quality: 84,
-    green_space: 82,
-    policy: 88,
+// JSON schema for AI response
+const REGIONAL_SCHEMA = {
+  type: "object",
+  properties: {
+    coordinates: { type: "object", properties: { lat: { type: "number" }, lng: { type: "number" } }, required: ["lat", "lng"] },
+    displayName: { type: "string" },
+    ecoScore: {
+      type: "object",
+      properties: {
+        overall: { type: "number" },
+        recycling: { type: "number" },
+        airQuality: { type: "number" },
+        greenSpace: { type: "number" },
+        policy: { type: "number" },
+      },
+      required: ["overall", "recycling", "airQuality", "greenSpace", "policy"],
+    },
+    sources: { type: "array", items: { type: "string" } },
+    initiatives: { type: "array", items: { type: "string" } },
+    summary: { type: "string" },
   },
-  sources: [
-    "EPA Air Quality Data",
-    "Houston Parks & Recreation Department",
-    "Texas Environmental Research",
-    "Climate Action Houston",
-  ],
-  initiatives: [
-    "Host a local school cleanup",
-    "Participate in the 'Adopt-a-Drain' program to prevent waterway pollution",
-    "Join the 'Volunteer Initiatives Program' sponsored by the Houston city government",
-    "Plant a few trees with Trees for Houston",
-    "Volunteer with Houston Parks Board's Green Team for native species restoration",
-    "Help with conservation and community science at Houston Arboretum & Nature Center",
-    "Volunteer with Memorial Park Conservancy in park maintenance",
-    "Participate in Keep Houston Beautiful's Clean Neighborhoods Program",
-    "Join 'One Clean Houston' for neighborhood cleanups and litter prevention",
-    "Volunteer with Houston Flood Control District for bayou and stormwater cleanups",
-    "Participate in grassroots campaigns with Texas Campaign for the Environment (TCE)",
-    "Join Texas Environmental Justice Advocacy Services (TEJAS) in community projects",
-    "Volunteer at the Houston Zoo for wildlife conservation and education",
-    "Help with habitat restoration at Edith L. Moore Nature Sanctuary",
-  ],
+  required: ["coordinates", "displayName", "ecoScore", "sources", "initiatives", "summary"],
 };
 
+async function fetchRegionalData(city, zipCode, country) {
+  const locationQuery = [city, zipCode, country].filter(Boolean).join(", ");
+
+  const systemPrompt = `You are an environmental data analyst. Return ONLY valid JSON matching this schema — no markdown, no text outside JSON:
+${JSON.stringify(REGIONAL_SCHEMA, null, 2)}
+
+Rules:
+- coordinates must be accurate latitude and longitude for the given location
+- ecoScore values are integers 0-100 based on real publicly-known environmental data; don't natively select round numbers like 60 and 75, figure out what numbers measure categories objectively best
+- sources should be real, credible environmental databases/organizations for that region
+- initiatives should be 8-12 specific, actionable local sustainability programs that are still currently active
+- summary is 1-2 sentences about this region's environmental profile
+
+- if you are absolutely uncertain about the location the user wishes to find, return Antarctica and default all values to 0`;
+
+  const userPrompt = `Generate environmental data for: "${locationQuery}"`;
+
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+      "HTTP-Referer": window.location.origin,
+      "X-Title": "Ecoisland",
+    },
+    body: JSON.stringify({
+      model: OPENROUTER_MODEL,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      temperature: 0.3,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`API error ${res.status}`);
+  const data = await res.json();
+  const raw = data.choices?.[0]?.message?.content || "";
+
+  // Strip markdown fences if present
+  const clean = raw.replace(/```json|```/g, "").trim();
+  return JSON.parse(clean);
+}
+
+// Also geocode via Nominatim as fallback for coordinates
+async function geocodeLocation(query) {
+  const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
+    headers: { "User-Agent": "Ecoisland/2026" }
+  });
+  const data = await res.json();
+  if (data?.[0]) return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+  return null;
+}
+
+const ScoreBar = ({ label, value, color }) => (
+  <div className="mb-3">
+    <div className="flex justify-between text-sm mb-1">
+      <span className="text-slate-300">{label}</span>
+      <span className="font-bold" style={{ color }}>{value}</span>
+    </div>
+    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+      <div className="h-full rounded-full transition-all duration-700" style={{ width: `${value}%`, background: `linear-gradient(90deg, ${color}88, ${color})` }} />
+    </div>
+  </div>
+);
+
 export default function RegionalData() {
-  const [selectedCountry, setSelectedCountry] = useState("United States");
-  const [cityInput, setCityInput] = useState("Houston");
-  const [citySuggestions, setCitySuggestions] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [currentData, setCurrentData] = useState(defaultData);
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [country, setCountry] = useState("United States");
+  const [regionData, setRegionData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    User.me().then(setUser).catch(() => {});
+    User.me().then(u => {
+      setUser(u);
+      // Auto-populate from user profile if available
+      if (u?.city) setCity(u.city);
+      if (u?.zip_code) setZipCode(u.zip_code);
+      if (u?.country) setCountry(u.country);
+    }).catch(() => {});
   }, []);
 
-  const loadCityData = async (city, country) => {
-  setIsLoading(true);
-  try {
-    setCurrentData({
-      position: [40.7128, -74.006], // fallback to New York City
-      cityName: `${city}, ${country}`,
-      ecoScore: {
-        score: 70,
-        recycling: 70,
-        air_quality: 70,
-        green_space: 70,
-        policy: 70,
-      },
-      initiatives: [],
-      sources: [
-        "Environmental Protection Agency",
-        "Local Government Data",
-        "World Air Quality Index",
-        "International Climate Databases",
-      ],
-    });
-  } catch {
-    alert("Could not load data for this city. Please try another.");
-  } finally {
-    setIsLoading(false);
-  }
-};
+  const handleSearch = async () => {
+    setRegionData(null);
+    if (!city.trim() && !zipCode.trim()) { setError("Please enter a city or ZIP code."); return; }
+    setIsLoading(true);
+    setError(null);
+    try {
+      let data = await fetchRegionalData(city, zipCode, country);
 
+      // Verify/fix coordinates via Nominatim
+      const query = [city, zipCode, country].filter(Boolean).join(", ");
+      const geo = await geocodeLocation(query).catch(() => null);
+      if (geo) { data.coordinates.lat = geo.lat; data.coordinates.lng = geo.lng; }
 
-  const getCityKey = (pos) => (Array.isArray(pos) ? pos.join(",") : String(pos));
+      setRegionData(data);
+    } catch (e) {
+      console.error(e);
+      setError("Could not load environmental data. Please check your API key in src/config/ai.ts or try another location.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 80) return "#10b981";
+    if (score >= 60) return "#f59e0b";
+    if (score >= 40) return "#f97316";
+    return "#ef4444";
+  };
 
   return (
-    <div className="p-4 md:p-8 bg-gray-50">
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Regional Sustainability
-          </h1>
-          <p className="text-gray-600 mt-2">
-            Explore local environmental data and take action in your area
-          </p>
+          <div className="flex items-center gap-3 mb-2">
+            <Globe className="w-7 h-7 text-cyan-600" />
+            <h1 className="text-3xl md:text-4xl font-black text-slate-900" style={{ letterSpacing: "-0.03em" }}>Regional Sustainability</h1>
+          </div>
+          <p className="text-slate-500">AI-powered environmental intelligence for any location in the world.</p>
         </div>
 
-        {/* Location Search */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Search className="w-5 h-5 text-teal-600" />
-              Select Your Location
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col md:flex-row gap-4 items-end">
-              <div className="flex-1">
-                <Label>Country</Label>
-                <Select
-                  value={selectedCountry}
-                  onValueChange={setSelectedCountry}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white shadow-lg rounded-md">
-                    {countries.map((country) => (
-                      <SelectItem key={country} value={country}>
-                        {country}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex-1 relative">
-                <Label>City</Label>
-                <Input
-                  value={cityInput}
-                  onChange={(e) => setCityInput(e.target.value)}
-                  placeholder="Type city name..."
-                />
-              </div>
-
-              <Button
-                onClick={() => loadCityData(cityInput, selectedCountry)}
-                disabled={isLoading}
-                className="bg-gradient-to-r from-teal-500 to-green-500"
-              >
-                {isLoading ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  "Search"
-                )}
-              </Button>
+        {/* Search card */}
+        <div className="eco-card p-6 mb-6">
+          <h2 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-cyan-600" /> Search Location
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="md:col-span-1">
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">City</label>
+              <input
+                className="eco-input"
+                placeholder="e.g. Houston"
+                value={city}
+                onChange={e => setCity(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleSearch()}
+              />
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">ZIP Code</label>
+            <input
+              className="eco-input"
+              placeholder="e.g. 77077"
+              value={zipCode}
+              onChange={e => setZipCode(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && handleSearch()}
+            />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Country</label>
+              <input
+                className="eco-input"
+                placeholder="e.g. United States"
+                value={country}
+                onChange={e => setCountry(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleSearch()}
+              />
+            </div>
+            <div className="flex items-end">
+              <button
+                onClick={handleSearch}
+                disabled={isLoading}
+                className="w-full py-2.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all"
+                style={{ background: isLoading ? "#64748b" : "linear-gradient(135deg, #06b6d4, #0ea5e9)", boxShadow: isLoading ? "none" : "0 4px 15px rgba(6,182,212,0.3)" }}
+              >
+                {isLoading ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyzing...</> : <><Search className="w-4 h-4" /> Search</>}
+              </button>
+            </div>
+          </div>
+          {error && <p className="text-red-500 text-sm mt-3 flex items-center gap-2"><AlertCircle className="w-4 h-4" />{error}</p>}
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-          {/* Map */}
-          <Card
-            className="lg:col-span-2 h-[600px] shadow-lg"
-            style={{ position: "relative", zIndex: 0 }}
-          >
-            {isLoading ? (
-              <div className="flex items-center justify-center h-full">
-                <Loader2 className="w-8 h-8 animate-spin text-teal-500" />
-              </div>
-            ) : (
+        {/* Results */}
+        {regionData && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            {/* Map */}
+            <div className="lg:col-span-2 eco-card overflow-hidden" style={{ height: 520, position: "relative", zIndex: 0, padding: 0 }}>
               <MapContainer
-                key={getCityKey(currentData.position)}
-                center={currentData.position}
+                key={`${regionData.coordinates.lat},${regionData.coordinates.lng}`}
+                center={[regionData.coordinates.lat, regionData.coordinates.lng]}
                 zoom={11}
                 scrollWheelZoom={false}
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  borderRadius: "0.75rem",
-                }}
+                style={{ height: "100%", width: "100%" }}
               >
-                <TileLayer
-                  attribution='&copy; OpenStreetMap contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={currentData.position}>
+                <TileLayer attribution='&copy; OpenStreetMap' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <Marker position={[regionData.coordinates.lat, regionData.coordinates.lng]}>
                   <Popup>
-                    <h4 className="font-bold">{currentData.cityName}</h4>
-                    <p>EcoScore: {currentData.ecoScore.score}/100</p>
+                    <strong>{regionData.displayName}</strong><br />
+                    EcoScore: {regionData.ecoScore.overall}/100
                   </Popup>
                 </Marker>
               </MapContainer>
-            )}
-          </Card>
+            </div>
 
-          <div className="space-y-6">
-            <Card className="bg-gradient-to-br from-teal-50 to-green-50 border-0">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-teal-600" />
-                  {currentData.cityName} EcoScore
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                {isLoading ? (
-                  <Loader2 className="w-8 h-8 mx-auto animate-spin" />
-                ) : (
-                  <>
-                    <div className="text-6xl font-bold text-green-600">
-                      {currentData.ecoScore.score}
-                    </div>
-                    <p className="text-gray-500">out of 100</p>
-                    <div className="mt-4 space-y-2 text-left">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Recycling</span>
-                        <Badge className="bg-blue-100 text-blue-700">
-                          {currentData.ecoScore.recycling}
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Air Quality</span>
-                        <Badge className="bg-purple-100 text-purple-700">
-                          {currentData.ecoScore.air_quality}
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Green Space</span>
-                        <Badge className="bg-green-100 text-green-700">
-                          {currentData.ecoScore.green_space}
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm">Policy</span>
-                        <Badge className="bg-orange-100 text-orange-700">
-                          {currentData.ecoScore.policy}
-                        </Badge>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </CardContent>
-            </Card>
+            {/* Scores */}
+            <div className="space-y-5">
+              {/* Overall score */}
+              <div className="rounded-2xl overflow-hidden p-6" style={{ background: "linear-gradient(135deg, #020c08, #051a10)", border: "1.5px solid rgba(0,200,150,0.25)" }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <Globe className="w-5 h-5 text-emerald-400" />
+                  <h3 className="font-bold text-white text-sm">{regionData.displayName}</h3>
+                </div>
+                <div className="text-center mb-4">
+                  <div className="text-7xl font-black mb-1" style={{ color: getScoreColor(regionData.ecoScore.overall), textShadow: `0 0 20px ${getScoreColor(regionData.ecoScore.overall)}50` }}>
+                    {regionData.ecoScore.overall}
+                  </div>
+                  <p className="text-slate-400 text-sm">EcoScore / 100</p>
+                </div>
+                {regionData.summary && <p className="text-slate-400 text-xs italic text-center border-t border-white/10 pt-3">{regionData.summary}</p>}
+              </div>
 
-            <Card className="bg-blue-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700">
-                  <ExternalLink className="w-5 h-5" />
-                  Data Sources
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {currentData.sources.map((source, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 text-sm text-blue-600"
-                    >
-                      <div className="w-1 h-1 bg-blue-500 rounded-full" />
-                      {source}
+              {/* Category scores */}
+              <div className="eco-card-dark p-5">
+                <ScoreBar label="♻️ Recycling" value={regionData.ecoScore.recycling} color="#10b981" />
+                <ScoreBar label="💨 Air Quality" value={regionData.ecoScore.airQuality} color="#06b6d4" />
+                <ScoreBar label="🌿 Green Space" value={regionData.ecoScore.greenSpace} color="#00c896" />
+                <ScoreBar label="📋 Policy" value={regionData.ecoScore.policy} color="#f59e0b" />
+              </div>
+
+              {/* Data sources */}
+              <div className="eco-card p-4">
+                <h4 className="font-bold text-slate-700 mb-3 flex items-center gap-2 text-sm"><ExternalLink className="w-4 h-4 text-blue-500" /> Data Sources</h4>
+                <div className="space-y-1.5">
+                  {regionData.sources.map((src, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs text-blue-600">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                      {src}
                     </div>
                   ))}
                 </div>
-                <p className="text-xs mt-3 text-blue-500">
-                  Data collected from local and national environmental agencies.
-                </p>
-              </CardContent>
-            </Card>
+                <p className="text-xs text-slate-400 mt-3">AI-synthesized from regional environmental agencies.</p>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-red-500" />
-              Reach Out & Take Action
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <Loader2 className="w-6 h-6 mx-auto animate-spin" />
-            ) : (
-              <ul className="space-y-3">
-                {currentData.initiatives.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 bg-teal-500 rounded-full flex-shrink-0" />
-                    <span className="text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </CardContent>
-        </Card>
+        {/* Initiatives */}
+        {regionData?.initiatives?.length > 0 && (
+          <div className="eco-card p-6">
+            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-emerald-600" /> Reach Out & Take Action in {regionData.displayName}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {regionData.initiatives.map((item, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-xl" style={{ background: "var(--bg-success)", border: "1px solid var(--border-success)" }}>
+                  <div className="mt-1 w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+                  <span className="text-sm text-slate-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Empty state */}
+        {!regionData && !isLoading && (
+          <div className="eco-card p-16 text-center">
+            <Globe className="w-16 h-16 text-slate-200 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-slate-400 mb-2">Search any location</h3>
+            <p className="text-slate-400 text-sm">Enter a city, ZIP code, and country to get AI-powered environmental scores and local sustainability opportunities.</p>
+          </div>
+        )}
       </div>
     </div>
   );

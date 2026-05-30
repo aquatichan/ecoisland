@@ -1,41 +1,421 @@
 @import "tailwindcss";
 
+/* ============================================================
+   ECOISLAND 2026 — GLOBAL DESIGN TOKEN SYSTEM
+   
+   RULE: No hardcoded colors anywhere in components.
+   Everything references a CSS var. Toggling .dark on <html>
+   swaps every color on every surface simultaneously.
+   ============================================================ */
+
+/* ── LIGHT TOKENS ── */
+:root {
+  /* Surfaces */
+  --bg-app:         #f0faf5;
+  --bg-page:        #f0faf5;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #f8fffe;
+  --bg-input:       #f8fafc;
+  --bg-subtle:      #f1f5f9;
+  --bg-muted:       #e8f0ec;
+  --bg-modal:       #ffffff;
+  --bg-drawer:      #ffffff;
+
+  /* Sidebar / header */
+  --bg-sidebar:     #0a1f17;
+  --bg-sidebar-item-active: rgba(0,200,150,0.12);
+  --border-sidebar: rgba(0,200,150,0.15);
+  --bg-header:      rgba(10,31,23,0.97);
+  --border-header:  rgba(0,200,150,0.18);
+  --text-sidebar:   #e2e8f0;
+  --text-sidebar-muted: #64748b;
+
+  /* Borders */
+  --border-card:    #dde9e3;
+  --border-input:   #cbd5e1;
+  --border-modal:   #e2e8f0;
+  --border-drawer:  #e2e8f0;
+  --border-success: #bbf7d0;
+  --border-error:   #fecaca;
+  --border-warning: #fde68a;
+  --border-info:    #bfdbfe;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #1e293b;
+  --text-body:      #334155;
+  --text-muted:     #64748b;
+  --text-faint:     #94a3b8;
+  --text-inverted:  #ffffff;
+
+  /* Status surfaces */
+  --bg-success:   #f0fdf4;
+  --bg-error:     #fef2f2;
+  --bg-warning:   #fffbeb;
+  --bg-info:      #eff6ff;
+
+  /* Shadows */
+  --shadow-card:  0 4px 20px rgba(0,0,0,0.05);
+  --shadow-modal: rgba(0,0,0,0.15);
+
+  /* shadcn compat */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+}
+
+/* ── DARK TOKENS ── */
+.dark {
+  /* Surfaces */
+  --bg-app:         #030d07;
+  --bg-page:        #030d07;
+  --bg-card:        #0d2318;
+  --bg-card-hover:  #122d1e;
+  --bg-input:       #0d2318;
+  --bg-subtle:      rgba(255,255,255,0.05);
+  --bg-muted:       rgba(255,255,255,0.08);
+  --bg-modal:       #0d2318;
+  --bg-drawer:      #0d2318;
+
+  /* Sidebar / header get LIGHTER in dark mode for contrast */
+  --bg-sidebar:     #061510;
+  --bg-sidebar-item-active: rgba(0,200,150,0.15);
+  --border-sidebar: rgba(0,200,150,0.18);
+  --bg-header:      rgba(4,15,10,0.98);
+  --border-header:  rgba(0,200,150,0.18);
+  --text-sidebar:   #e2e8f0;
+  --text-sidebar-muted: #64748b;
+
+  /* Borders */
+  --border-card:    rgba(0,200,150,0.18);
+  --border-input:   rgba(255,255,255,0.12);
+  --border-modal:   rgba(0,200,150,0.2);
+  --border-drawer:  rgba(0,200,150,0.18);
+  --border-success: rgba(0,200,150,0.3);
+  --border-error:   rgba(239,68,68,0.3);
+  --border-warning: rgba(245,158,11,0.3);
+  --border-info:    rgba(59,130,246,0.3);
+
+  /* Text — high contrast in dark mode */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #e2e8f0;
+  --text-body:      #cbd5e1;
+  --text-muted:     #94a3b8;
+  --text-faint:     #475569;
+  --text-inverted:  #0f172a;
+
+  /* Status surfaces */
+  --bg-success:  rgba(0,200,150,0.1);
+  --bg-error:    rgba(239,68,68,0.1);
+  --bg-warning:  rgba(245,158,11,0.1);
+  --bg-info:     rgba(59,130,246,0.1);
+
+  /* Shadows */
+  --shadow-card:  0 4px 24px rgba(0,0,0,0.3);
+  --shadow-modal: rgba(0,0,0,0.6);
+
+  /* shadcn dark */
+  --background: 160 50% 4%;
+  --foreground: 210 40% 95%;
+  --card: 160 40% 8%;
+  --card-foreground: 210 40% 95%;
+  --border: 160 20% 15%;
+  --input: 160 20% 15%;
+  --muted: 160 30% 10%;
+  --muted-foreground: 215 16% 60%;
+  --popover: 160 40% 8%;
+  --popover-foreground: 210 40% 95%;
+}
+
+/* ============================================================
+   BASE — everything inherits from vars
+   ============================================================ */
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    /* Smooth theme transition on the root */
+    transition: background-color 0.25s ease, color 0.2s ease;
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: 'Outfit', system-ui, sans-serif;
+    transition: background-color 0.25s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Make ALL Tailwind text-slate-* classes respond to theme */
+  .text-slate-900 { color: var(--text-primary) !important; }
+  .text-slate-800 { color: var(--text-secondary) !important; }
+  .text-slate-700 { color: var(--text-body) !important; }
+  .text-slate-600 { color: var(--text-muted) !important; }
+  .text-slate-500 { color: var(--text-faint) !important; }
+  .text-slate-400 { color: var(--text-faint) !important; }
+
+  /* Background utilities */
+  .bg-white     { background-color: var(--bg-card) !important; }
+  .bg-slate-50  { background-color: var(--bg-subtle) !important; }
+  .bg-slate-100 { background-color: var(--bg-muted) !important; }
+
+  /* Border utilities */
+  .border-slate-100 { border-color: var(--border-card) !important; }
+  .border-slate-200 { border-color: var(--border-input) !important; }
+
+  /* Inputs globally */
+  input:not([type=range]):not([type=checkbox]):not([type=radio]),
+  textarea,
+  select {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-color: var(--border-input);
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-faint);
+  }
+  select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
   }
 }
 
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-  body {
-    background: hsl(var(--background));
-    color: hsl(var(--foreground));
-  }
+/* ============================================================
+   COMPONENT CLASSES
+   ============================================================ */
+
+/* ── Page root ── */
+.page-root {
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.2s ease;
 }
+@media (min-width: 768px) { .page-root { padding: 2rem; } }
+
+/* ── Cards ── */
+.eco-card {
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-card);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  color: var(--text-primary);
+  transition: background-color 0.25s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.eco-card:hover {
+  border-color: #00c896;
+  box-shadow: 0 8px 30px rgba(0,200,150,0.12);
+  transform: translateY(-2px);
+}
+
+/* Dark-always card (inside Impact, dark panels) */
+.eco-card-dark {
+  background: rgba(10,31,23,0.9);
+  border: 1.5px solid rgba(0,200,150,0.2);
+  border-radius: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.eco-card-dark:hover {
+  border-color: rgba(0,200,150,0.4);
+  box-shadow: 0 8px 40px rgba(0,200,150,0.12);
+}
+
+.delete-account-panel {
+  background-color: #fef2f2;
+}
+.dark .delete-account-panel {
+  background-color: rgba(190, 18, 18, 0.18);
+  border-color: #7f1d1d;
+}
+
+/* ── Inputs ── */
+.eco-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--border-input);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.eco-input:focus { border-color: #00c896; }
+.eco-input::placeholder { color: var(--text-faint); }
+
+/* ── Modals & drawers ── */
+.eco-modal {
+  background-color: var(--bg-modal);
+  border: 2px solid var(--border-modal);
+  box-shadow: 0 24px 60px var(--shadow-modal);
+  color: var(--text-primary);
+  transition: background-color 0.25s;
+}
+.eco-drawer {
+  background-color: var(--bg-drawer);
+  border-color: var(--border-drawer);
+  color: var(--text-primary);
+  transition: background-color 0.25s;
+}
+
+/* ── Status banners ── */
+.status-success {
+  background-color: var(--bg-success);
+  border: 2px solid var(--border-success);
+  color: #059669;
+}
+.status-error {
+  background-color: var(--bg-error);
+  border: 2px solid var(--border-error);
+  color: #dc2626;
+}
+.dark .status-success { color: #34d399; }
+.dark .status-error   { color: #f87171; }
+
+/* ── Header (always dark, both modes) ── */
+.eco-header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-header);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* From Uiverse.io by mrhyddenn */ 
+.uiverse {
+  position: relative;
+  background: #f0faf5;
+  color: #000;
+  padding: 6px;
+  margin: 2px;
+  border-radius: 50px;
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 14px;
+  background: #f0faf5;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  top: -4px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, 0.55, 0.265, 1.55);
+}
+
+.uiverse:hover .tooltip {
+  transform: translate(-50%, 10px);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+svg:hover span,
+svg:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.uiverse:hover,
+.uiverse:hover .tooltip,
+.uiverse:hover .tooltip::before {
+  background: linear-gradient(320deg, rgb(3, 77, 146), rgb(0, 60, 255));
+  color: #ffffff;
+}
+
+/* ── Sidebar (always dark-tinted, both modes) ── */
+.eco-sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-sidebar);
+}
+
+/* ── Glass / glow helpers ── */
+.glass-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.glass-card-dark {
+  background: rgba(0,20,12,0.75);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0,200,150,0.15);
+}
+.dropdown-glass {
+  background: rgba(6,20,14,0.95) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(0,200,150,0.2) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5) !important;
+}
+.neon-glow-green { text-shadow: 0 0 10px #00c896, 0 0 30px rgba(0,200,150,0.4); }
+.box-glow-green  { box-shadow: 0 0 20px rgba(0,200,150,0.3), 0 0 60px rgba(0,200,150,0.1); }
+.pixel-border    { box-shadow: 0 0 0 2px #00c896, 0 0 0 4px rgba(0,200,150,0.3); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes floatY    { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-12px)} }
+@keyframes pulse-glow{ 0%,100%{box-shadow:0 0 12px rgba(0,200,150,0.2)} 50%{box-shadow:0 0 28px rgba(0,200,150,0.5)} }
+@keyframes fadeInUp  { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes shimmer   { 0%{background-position:-200% center} 100%{background-position:200% center} }
+@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes drift     { 0%,100%{transform:translateX(0) translateY(0)} 25%{transform:translateX(6px) translateY(-4px)} 50%{transform:translateX(-4px) translateY(-8px)} 75%{transform:translateX(-6px) translateY(4px)} }
+@keyframes cloudFloat{ 0%,100%{transform:translateX(0)} 50%{transform:translateX(20px)} }
+
+.animate-float      { animation: floatY 4s ease-in-out infinite; }
+.animate-float-slow { animation: floatY 7s ease-in-out infinite; }
+.animate-drift      { animation: drift 9s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 20s linear infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease both; }
+.animate-cloud      { animation: cloudFloat 12s ease-in-out infinite; }
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-subtle); }
+::-webkit-scrollbar-thumb { background: #00c896; border-radius: 3px; }

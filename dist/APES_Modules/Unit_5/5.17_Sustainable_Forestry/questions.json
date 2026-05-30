@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A timber company shifts from clear-cutting to selective harvesting, removing only mature trees above a diameter threshold while retaining younger trees and understory. Which best explains how selective harvesting reduces environmental impact compared to clear-cutting?",
+    "answers": [
+      "Removing diseased trees to stop pests misstates selective harvesting's primary environmental benefit",
+      "Retaining canopy and seed sources preserves habitat, reduces erosion, and enables regeneration",
+      "Less carbon release from removing fewer trees ignores habitat and erosion effects",
+      "Lower labor and equipment needs improve economics but do not explain environmental benefits"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A temperate European forest has been managed 150 years by clear-cutting and replanting with single-species spruce. Spruce now covers 60% of the forest and shows reduced biodiversity, increased pest outbreaks, and declining timber quality. Managers want to restore ecological function while maintaining timber production. Which strategy most effectively achieves both goals?",
+    "answers": [
+      "Gradually convert spruce monocultures to mixed native-species stands",
+      "Use integrated pest management to control outbreaks while keeping monocultures",
+      "Keep clear-cutting spruce monocultures but extend rotation from 40 to 60 years",
+      "Clear-cut all spruce and replant solely with native hardwoods"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A timber company compared forest recovery rates in three regions: Region A used clear-cutting with no reforestation, Region B replanted native tree species after harvesting, and Region C implemented selective logging with natural regeneration. The table shows forest canopy cover (%) at 5-year intervals after harvesting began.\nYear Region A Region B Region C\n0 95 95 95\n5 15 25 78\n10 18 52 88\n15 22 71 91\n20 28 82 94\nWhich statement best describes how reforestation efforts affect the relationship between time and forest recovery?",
+    "answers": [
+      "Reforestation accelerates canopy recovery compared to clear-cutting alone, with Region B showing steeper recovery rates than Region A primarily in the 10-20 year period after initial establishment",
+      "Reforestation accelerates early canopy recovery compared to clear-cutting alone, but Region B and Region A show similar recovery rates in later time periods as both approach natural succession patterns",
+      "Reforestation increases canopy recovery at a constant rate compared to clear-cutting alone, with Region B showing linear improvement while Region A remains relatively stable across all time periods",
+      "Reforestation accelerates canopy recovery compared to clear-cutting alone, with Region B showing steeper recovery rates than Region A across all time periods"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Researchers planted native seedlings and tracked 50 trees annually for five years. If they add unplanted control plots and extend monitoring to 15 years, what change in understanding is most likely?",
+    "answers": [
+      "Adding control plots does not require reducing the 50 planted trees monitored.",
+      "Comparison with control plots and 15-year data will show long-term effectiveness.",
+      "Control plots could match planted areas, implying planting may be unnecessary.",
+      "Fifteen-year monitoring will reveal long-term growth trajectories but not causes of decline."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Decades of fire suppression have allowed dense understory and dead wood to build up in a Pacific Northwest forest. When wildfires occur they burn so intensely they kill mature trees and sterilize soil. Which management method best breaks this cycle and explains the ecological process involved?",
+    "answers": [
+      "Use integrated pest management to limit insect-caused tree mortality but not reduce fuels.",
+      "Manually remove dead wood and understory vegetation but not restore fire regimes.",
+      "Use prescribed burns to reduce fuel loads and restore the forest's natural fire regime.",
+      "Increase tree density to shade understory but this adds more combustible fuel."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A timber company's sustainability report describes selective harvesting, replanting, and third-party certification. Which sentence expresses the company's main claim about its forestry practices?",
+    "answers": [
+      "Selective harvesting preserves younger growth and understory while removing mature trees.",
+      "The company harvests 50,000 hectares annually and replants 45,000 with native species.",
+      "Third-party certification verifies that harvested wood meets sustainable forestry standards.",
+      "Timber production can coexist with forest health when managers protect ecosystem function."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Forest pathologists test whether removing visibly infected trees reduces pine bark beetle spread. They set up 18 lodgepole pine plots: 9 treated (infected trees removed) and 9 controls. Beetle density, percent trees with galleries, and mortality are measured annually for four years. Which hypothesis best fits this experimental design?",
+    "answers": [
+      "Treated plots will show lower beetle density and fewer newly infested trees.",
+      "Removing infected trees should be implemented as standard management during outbreaks.",
+      "Removing infected trees will lower beetle numbers but not reduce new infestations.",
+      "Beetles will infest both treated and control plots equally over the study."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A boreal forest in Canada experiences severe outbreaks of spruce budworm every 8-10 years, with infestations killing 30-40% of mature spruce trees across thousands of hectares. Forest managers must decide whether to apply broad-spectrum insecticide, remove infested trees, or allow natural population cycles to continue. Which strategy would best protect forest health while minimizing ecosystem disruption?",
+    "answers": [
+      "Implement integrated pest management by removing heavily infested trees while preserving unaffected stands to maintain ecosystem structure",
+      "Allow natural budworm population cycles to continue without intervention, accepting the 30-40% tree mortality as part of natural forest dynamics",
+      "Apply broad-spectrum insecticide across the entire forest to eliminate budworm populations and prevent future outbreaks",
+      "Replace infested spruce forests with fast-growing pine plantations that are naturally resistant to budworm damage"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A tropical rainforest loses 8,000 hectares yearly to cattle ranching. Cleared pastures are abandoned after 5–10 years when soils fail, and only 12% are reforested due to high costs and slow growth. Local communities depend on ranching income. Which solution would most effectively reduce deforestation while supporting livelihoods?",
+    "answers": [
+      "Pay landowners to reforest with native species and certify sustainable timber sales",
+      "Ban ranching and convert all pastures to no-use protected reserves",
+      "Promote fast-growing exotic trees for quick reforestation despite lower biodiversity",
+      "Subsidize current ranching to prevent expansion without restoring degraded land"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An environmental justice organization states: 'Reforestation and sustainable forestry initiatives often fail to benefit the communities most impacted by deforestation. Indigenous and low-income populations who depend on forests for subsistence lose access to traditional resources when land is converted to timber plantations or protected reserves. Genuine forest mitigation must center the rights and knowledge of forest-dependent communities, not just environmental restoration metrics.' What does this argument prioritize in forest management?",
+    "answers": [
+      "Maximizing tree cover and forest area regardless of management approach or community involvement",
+      "Equitable distribution of forest benefits and decision-making power among affected communities",
+      "Protecting forests from all human use to preserve ecological integrity",
+      "Implementing international conservation standards uniformly across all forest regions"
+    ],
+    "correct": "B"
+  }
+]

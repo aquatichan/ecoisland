@@ -1,0 +1,122 @@
+{
+  "title": "Unit 2 Overview: The Living World: Biodiversity",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "Unit 1 was a really in-depth look into the foundational cycles and processes that drive biological processes. Now with unit 2, we will begin to look at how organisms interact with their environment and what that means for humans! "
+    },
+    {
+      "type": "heading",
+      "text": "Biodiversity"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Biodiversity</strong> represents how varied or diverse a given location or ecosystem is. Mathematically, this calculation can be made to rate an area on its <strong>ecological relevance</strong>. This allows us to understand where one may place a landfill, which regions are better for urbanization, etcetera, since we can understand a lot of things about a region based on species presence. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Numerically, <strong>species diversity</strong> is the total number of species present in a specific ecosystem. And since a few species means a lot of individual members of any given ecosystem, <strong>genetic diversity</strong> will continue to create even more variance in populations. This term defines the number of different <strong>alleles</strong> (variations of a gene, like hair/eye color) present that could account for different <strong>phenotypes</strong> (the physical features/manifestations of those alleles). That is to say, alleles are part of genetic codes that determine how future offspring will look. These offspring's physical features are phenotypes. Genetic diversity and variation of alleles and phenotypes allows certain ecosystems to avoid extreme consequences of disaster like climate change or disease. Similarly, any ecosystem with high species diversity can survive environmental changes more readily than ecosystems with fewer species."
+    },
+    {
+      "type": "paragraph",
+      "html": "In an ecosystem, the number of species is measured as <strong>species richness</strong>, while species proportionality is measured as <strong>species evenness</strong>. These two terms can be confusing next to each other, so let's look at an example. A tundra has 100 individual animals and in those 100 are 3 individual species. Therefore, the species richness of this tundra is 3, the number of different species present. If 90 of these animals are wolves, 5 are foxes, and 5 are owls, the species evenness is low, or uneven. If there are 30 wolves, 35 foxes, and 35 owls, the species evenness is high, or even. In short, species richness is how many different species are present, while species evenness simply compares the equality of the distinct species populations. These two measurements can be used in combination with <strong>Shannon's Index</strong> to allow ecologists to more accurately calculate the health levels of ecosystems."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-1uTrImyFCd3p.png?alt=media&token=7b598e5a-d50d-432c-96e7-2d5c1c1643a5",
+      "width": 615,
+      "height": 408
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://pixabay.com/photos/giraffe-zebra-africa-safari-1082168/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/giraffe-zebra-africa-safari-1082168/\">Image from Pixabay</span></a> "
+    },
+    {
+      "type": "heading",
+      "text": "Ecosystem Services"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-1gmv3NKe5Ksy.png?alt=media&token=776439ac-c0c4-4a31-9ae5-69276c10722f",
+      "width": 615,
+      "height": 406
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://pixabay.com/photos/bee-flower-macro-pollinate-pollen-1726659/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/bee-flower-macro-pollinate-pollen-1726659/\">Image from Pixabay</span></a>"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Ecosystem services</strong> are things that humans benefit from located in the natural world. These can be divided into two main categories"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Provisioning</strong>: Products that are directly provided.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Example: Wood from trees and food from animals.</li>\n</ul>\n</li>\n<li><strong>Regulating</strong>: Maintain processes.- Example: Climate regulation by recycling CO2.</li>\n<li><strong>Cultural</strong>: Nonmaterial benefits, habits or traditions.- Example: Recreation or emotional–enjoying a view or visiting a park.</li>\n<li><strong>Supporting</strong>: Allow for other services to exist.- Example: Life cycles and primary production.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Humans rely on ecosystem services. Without natural processes like decomposition and honey bees pollinating fruiting plants, we would not be able to survive. "
+    },
+    {
+      "type": "heading",
+      "text": "Ecological Tolerance"
+    },
+    {
+      "type": "paragraph",
+      "html": "Any individual or species adapts to specific conditions (temperature, available water, food, etc.) and can reach a certain limit before its death. This is its <strong>ecological tolerance</strong>. <strong>Resistance</strong> and <strong>resilience</strong> are specific measures of certain ecosystems that allow scientists to better predict which species are more prone to extinction or population loss. Resistance is defined as one's ability to withstand or survive a disaster, while resilience measures the ability to recover and rebuild after the disaster occurs. For example, some grasses will experience low levels of resistance to brush fires, but grow back quickly and demonstrate high resilience. Conversely, if a panda habitat was destroyed, resilience would be lower and recovery attempts would be much more difficult."
+    },
+    {
+      "type": "heading",
+      "text": "Natural Disruptions to Ecosystems"
+    },
+    {
+      "type": "paragraph",
+      "html": "Since the Earth's life cycles are constant, our planet experiences constant change naturally that end up having drastic effects on both individual ecosystems and surrounding, larger environments. These cycles and changes are not perfect, though, and create certain issues such as natural disasters or catastrophic events. Sometimes, these events can have more or similar impact to manmade disasters; climate change and certain geological processes, for example, greatly affect many species' populations. Climate change is an example of a <strong>metabolic process</strong>, chemical processes like photosynthesis or the carbon cycle that cause slow but drastic change to our planet. "
+    },
+    {
+      "type": "heading",
+      "text": "Ecological Succession"
+    },
+    {
+      "type": "paragraph",
+      "html": "When an environment experiences a disaster, its progress is somewhat reset, and its path to regrowth can exhibit a few different patterns. Any specific pattern is called an ecosystem's <strong>ecological succession</strong> and looks at how they tend to heal with <strong>pioneer species</strong> (lichens, etc) and at what rate they can introduce more complex or different plant species. The two different types of ecological succession depend on how drastic the disaster was, so let's look at the difference."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Primary Succession</strong>:  Starts with <strong>no soil</strong>."
+    },
+    {
+      "type": "paragraph",
+      "html": "This is caused by a complete disruption of the ecosystem–something like a volcanic eruption or geologic change that leaves only bedrock exposed. Humans create primary succession by paving land. Think of how long it would take an abandoned parking lot to turn back into a forest! Soil and essential nutrients from it are missing, so growth of new plants or consistent vegetation is difficult."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-kBemXLlvvMqs.png?alt=media&token=b35c4021-ae01-4d90-8981-27309515cf89",
+      "width": 426,
+      "height": 308
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://commons.wikimedia.org/wiki/File:Abandoned_parking_lot_in_Love_Canal.jpg\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://commons.wikimedia.org/wiki/File:Abandoned_parking_lot_in_Love_Canal.jpg\">Image from Wikipedia</span></a>"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Secondary Succession</strong>: Starts <strong>with soil</strong>. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Secondary succession events are much more likely. More common natural disasters like fires or floods can cause this damage, which, importantly, can leave soil intact and send up new roots to plants such as grasses or reeds. This is not considered a complete wipeout and can harvest regrowth much faster."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-peZv8EHisypN.png?alt=media&token=16d7f513-9aef-41ba-9913-1e2ce613865a",
+      "width": 560,
+      "height": 374
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://pixabay.com/photos/forest-fire-san-diego-la-jolla-396186/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/forest-fire-san-diego-la-jolla-396186/\">Image from Pixabay</span></a>"
+    }
+  ]
+}

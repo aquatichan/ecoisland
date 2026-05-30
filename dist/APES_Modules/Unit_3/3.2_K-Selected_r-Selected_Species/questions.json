@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A conservation biologist contrasts sea turtles and sea urchins. Turtles have K-selected traits—large size, delayed maturity (20 to 50 years), low fecundity (50 to 200 eggs), and long lifespans—and declined about 90 percent last century from fishing, habitat loss, and climate change. Sea urchins, as r-selected species, rebounded rapidly after disease because they mature early and produce many offspring. Which claim best expresses the author's main argument?",
+    "answers": [
+      "Sea urchins rebounded rapidly after disease due to early maturity and high fecundity.",
+      "K-selected species require long-term management while r-selected species often recover.",
+      "Sea turtles declined about 90 percent from fishing, habitat loss, and climate change.",
+      "Sea turtles typically reach sexual maturity between 20 and 50 years."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Dandelions produce thousands of wind-dispersed seeds yearly. Most seeds fail but a few germinate and flower within one season. Which best explains why this reproductive strategy is r-selected?",
+    "answers": [
+      "Slow maturation and single reproduction contradicts rapid flowering within a season",
+      "Producing many low-investment seeds and rapid maturation suits unpredictable habitats",
+      "Parachute structures do not indicate substantial parental investment per seed",
+      "Producing few seeds for intense sibling competition describes K-selected strategy"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A savanna elephant population faces a severe three-year drought that reduces food availability. Why are elephants more vulnerable than locusts in the same region?",
+    "answers": [
+      "Higher genetic diversity in elephants does not explain short-term drought vulnerability.",
+      "Elephants consume more biomass per individual but consumption does not explain recovery.",
+      "Locusts do not reproduce only once or survive droughts by lifelong dormancy.",
+      "Elephants have low reproductive rates and long generation times, so recovery is slow."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A graph shows two species' populations over 24 months with abundant resources and no predators. Species A reaches 10,000 by month 12 then stabilizes. Species B reaches 50,000 by month 6 and continues exponential growth. Which statement best explains how reproductive strategies produce these trajectories?",
+    "answers": [
+      "A stabilizes because it reproduces only once while B reproduces multiple times.",
+      "B grows faster due to greater resource access while A suffers depletion.",
+      "B is r-selected with high fecundity and rapid growth while A is K-selected.",
+      "A is r-selected because it plateaus while B is K-selected and grows exponentially."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A fisheries biologist argues that Pacific salmon populations will decline if ocean temperatures continue rising, providing evidence that salmon are K-selected species with low reproductive rates (spawning once in their lifetime after 3-5 years at sea), long pre-reproductive development periods, and significant parental investment in egg placement and protection. The biologist also notes that ocean temperature increases of 2-3°C over the past two decades have coincided with declining salmon catches. Which of the following best describes what additional information would most strengthen the reasoning connecting reproductive strategy to temperature sensitivity?",
+    "answers": [
+      "Evidence that warmer ocean temperatures specifically reduce salmon egg survival, larval development success, or food availability during critical early life stages when K-selected species have limited reproductive capacity to compensate for losses.",
+      "Evidence that warmer ocean temperatures specifically reduce egg survival, larval development success, or food availability during critical early life stages when r-selected species have high reproductive capacity but still experience population declines.",
+      "Evidence that warmer ocean temperatures specifically reduce adult salmon thermal tolerance and migration success when K-selected species have limited reproductive capacity to compensate for losses.",
+      "Evidence that warmer ocean temperatures specifically reduce salmon egg survival, larval development success, or food availability during critical early life stages when K-selected species can increase reproductive output to compensate for losses."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "After a forest fire destroys 80% of vegetation, pioneer plants colonize bare soil within weeks while shade-tolerant trees appear only after 15+ years. Which statement best explains how reproductive strategy affects succession timing?",
+    "answers": [
+      "Pioneers are K-selected with large size and competitive dominance in early succession",
+      "Pioneers are r-selected with rapid reproduction and short maturation enabling quick colonization",
+      "Shade-tolerant trees establish late due to slow maturation while pioneers reproduce repeatedly",
+      "Pioneers colonize early because disturbance increases resources while shade-tolerant species arrive later"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "After a large fire, herbs and shrubs dominate first, then shade-tolerant trees replace them. Which best describes pioneer versus late-successional reproductive strategies?",
+    "answers": [
+      "Pioneers are K-selected with delayed reproduction and few offspring",
+      "Pioneers colonize after disturbance while late species replace them by shading",
+      "Pioneers grow faster because they are smaller and need fewer resources",
+      "Pioneers are r-selected, reproduce early and produce many small offspring"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A field study tracked reproductive traits and population stability for six grassland plant species over 15 years. Species 1: 50,000 seeds per year, immediate germination, 1-year lifespan. Species 2: 500 seeds per year, 2-year seed dormancy, 40-year lifespan. Species 3: 5,000 seeds per year, germinates within 1 year, 3–5-year lifespan. Species 4: 100 seeds per year, germinates within 1 year, 30-year lifespan. Species 5: 200,000 seeds per year, minimal dormancy, 1-year lifespan. Species 6: 1,000 seeds per year, 1-year dormancy, 20-year lifespan. Over 15 years Species 1 and 5 showed extreme boom-bust cycles, Species 2, 4, and 6 remained stable, and Species 3 showed moderate fluctuations. Which conclusion about reproductive strategy and population stability is best supported?",
+    "answers": [
+      "Highest seed production alone does not ensure stable population success.",
+      "Lack of seed dormancy increases fluctuations but does not remove environmental variation.",
+      "Species with high fecundity, short lifespans, and no dormancy show boom-bust cycles.",
+      "Lifespan alone does not determine stability because fecundity and dormancy interact."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "In a newly abandoned field, ragweed and crabgrass dominate year one while oaks and maples appear 20–30 years later. Why are pioneer species typically r-selected rather than K-selected?",
+    "answers": [
+      "Smaller size correlates with faster reproduction but does not explain selection.",
+      "Oak and maple are K-selected because stable soils favor slow growth and investment.",
+      "High fecundity is an adaptive response not a genetic lack of variation.",
+      "Unstable low-competition conditions favor rapid reproduction and many offspring."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A wildlife manager argues that introducing r-selected rodents will control invasive plants better than introducing K-selected herbivores, citing rodents' rapid maturity and high litter frequency versus herbivores' slower maturity and lower annual reproduction. Which choice best identifies a reasoning gap in this argument?",
+    "answers": [
+      "Data compare reproduction but not total plant consumption by rodent populations.",
+      "Plant reproductive rate is irrelevant to the comparison of herbivore strategies.",
+      "K-selected herbivores live longer and may control plants over extended periods.",
+      "Rodents are smaller and eat less per individual than larger herbivores."
+    ],
+    "correct": "!"
+  }
+]

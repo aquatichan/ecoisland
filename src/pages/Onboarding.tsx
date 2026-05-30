@@ -1,501 +1,339 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { User } from "@/entities/User";
 import { UploadFile } from "@/integrations/Core";
 import { useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Trees, 
-  ArrowRight, 
-  ArrowLeft, 
-  Upload, 
-  Sparkles, 
-  CheckCircle,
-  Leaf,
-  Globe,
-  Users,
-  TrendingUp,
-  Trophy
+import {
+  TreePine, ArrowRight, ArrowLeft, Upload, Sparkles,
+  CheckCircle, Globe, Users, TrendingUp, Trophy, Zap, Leaf
 } from "lucide-react";
-import ElectricBorder from "@/components/ElectricBorder";
 
-// First 10 countries that came to mind
-const countries = [
-  "United States", 
-  "Canada", 
-  "United Kingdom", 
-  "China", 
-  "India", 
-  "Japan", 
-  "Australia", 
-  "Brazil", 
-  "Germany", 
-  "France",
-];
+const SLIDE_COUNT = 4;
 
-const slideTransitions = {
-  enter: (direction) => ({
-    x: direction > 0 ? 1000 : -1000,
-    opacity: 0
-  }),
-  center: {
-    zIndex: 1,
-    x: 0,
-    opacity: 1
-  },
-  exit: (direction) => ({
-    zIndex: 0,
-    x: direction < 0 ? 1000 : -1000,
-    opacity: 0
-  })
+const slideVariants = {
+  enter: (dir) => ({ x: dir > 0 ? 600 : -600, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir) => ({ x: dir < 0 ? 600 : -600, opacity: 0 }),
 };
 
 export default function Onboarding() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [authMode, setAuthMode] = useState(null);
-  const [formData, setFormData] = useState({
-    username: "",
-    bio: "",
-    zip_code: "",
-    city: "",
-    country: ""
-  });
-  const [idFile, setIdFile] = useState(null);
-  const [idPreview, setIdPreview] = useState(null);
-  const [errors, setErrors] = useState({});
+  const [slide, setSlide] = useState(0);
+  const [dir, setDir] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({ username: "", bio: "", zip_code: "", city: "", country: "United States" });
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const user = await User.me();
-        setCurrentUser(user);
+    User.me()
+      .then(u => {
+        setCurrentUser(u);
+        if (u.onboarding_complete) navigate(createPageUrl("Dashboard"), { replace: true });
+        else if (u.username) setFormData(p => ({ ...p, username: u.username || u.full_name || "" }));
+      })
+      .catch(() => {});
+  }, []);
 
-        if (user.onboarding_complete) {
-          setAuthMode('signup');
-          setFormData(prev => ({
-            ...prev,
-            username: user.username || user.full_name || '',
-          }));
-          navigate(createPageUrl("Dashboard"), { replace: true });
-        } else if (user && user.username) {
-          // User is logged in but hasn't finished onboarding
-          setAuthMode('signup');
-          setCurrentSlide(0);
-          setFormData(prev => ({
-            ...prev,
-            username: user.username || user.full_name || '',
-          }));
-        } else {
-          setAuthMode(null);
-          setCurrentSlide(0);
-        }
-      } catch (e) {
-        // Not authenticated -> stay on onboarding
-        setAuthMode(null);
-        setCurrentSlide(0);
-      }
-    };
-    checkUser();
-  }, [navigate]);
-
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentSlide(prev => prev + 1);
-  };
-
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentSlide(prev => Math.max(prev - 1, 0));
-  };
-
-  // call User.login() then re-fetch Firestore user with User.me()
-  const handleAuthChoice = async (mode) => {
-    setAuthMode(mode);
+  const handleLogin = async () => {
     setIsLoading(true);
-
     try {
       await User.login();
-      const userData = await User.me();
-      setCurrentUser(userData);
-
-      if (userData.onboarding_complete) {
-        navigate(createPageUrl("Dashboard"), { replace: true });
-      } else {
-        nextSlide();
-      }
+      const u = await User.me();
+      setCurrentUser(u);
+      if (u.onboarding_complete) navigate(createPageUrl("Dashboard"), { replace: true });
+      else goNext();
     } catch (error) {
-      console.error("Auth error:", error);
-      alert("Login/signup failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+      alert(`Login failed. ${error?.message || "Please try again."}`);
+    } finally { setIsLoading(false); }
   };
 
-  const handleIdUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setIdFile(file);
-      const reader = new FileReader();
-      reader.onload = (ev) => setIdPreview(ev.target.result);
-      reader.readAsDataURL(file);
-      setErrors(prev => ({ ...prev, id: '' }));
-    }
+  const validate = () => {
+    const e = {};
+    if (slide === 1 && !formData.username.trim()) e.username = "Username is required";
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const validateSlide2 = () => {
-    const newErrors = {};
-    if (!formData.username.trim()) newErrors.username = "Username required";
-    if (formData.username.length < 3) newErrors.username = "Username must be 3+ characters";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const goNext = () => {
+    if (!validate()) return;
+    setDir(1);
+    setSlide(s => Math.min(s + 1, SLIDE_COUNT - 1));
   };
+  const goBack = () => { setDir(-1); setSlide(s => Math.max(s - 1, 0)); };
 
-  const validateSlide3 = () => {
-    const newErrors = {};
-    if (!formData.zip_code || !formData.zip_code.trim()) newErrors.zip_code = "ZIP code required";
-    if (!formData.city || !formData.city.trim()) newErrors.city = "City required";
-    if (!formData.country) newErrors.country = "Country required";
-    if (!idFile) newErrors.id = "Valid ID required for verification";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSlide2Next = async () => {
-    if (!validateSlide2()) return;
-    nextSlide();
-  };
-
-  const handleFinalSubmit = async () => {
-    if (!validateSlide3()) return;
-
+  const handleFinish = async () => {
     setIsLoading(true);
     try {
-      const updates = {
-        full_name: formData.username || "Anonymous User",
-        username: formData.username || "Anonymous User",
-        bio: formData.bio || "",
-        zip_code: formData.zip_code || "",
-        city: formData.city || "",
-        country: formData.country || "",
-        onboarding_complete: true,
-        verification_status: "pending",
-      };
-
-      const updatedUser = await User.updateMyUserData(updates);
-
-      setCurrentUser(updatedUser);
-      if (updatedUser && updatedUser.onboarding_complete) {
-        navigate(createPageUrl("Dashboard"), { replace: true });
-      } else {
-        const fresh = await User.me();
-        setCurrentUser(fresh);
-        if (fresh.onboarding_complete) {
-          navigate(createPageUrl("Dashboard"), { replace: true });
-        } else {
-          console.warn("Onboarding flag not set after update.");
-          alert("We couldn't confirm your onboarding — try again in a moment.");
-        }
+      let avatarUrl = currentUser?.avatar_url || "";
+      if (avatarFile) {
+        const { file_url } = await UploadFile({ file: avatarFile });
+        avatarUrl = file_url;
       }
-    } catch (error) {
-      console.error("Final submit failed:", error);
-      alert("Signup failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+      await User.updateMyUserData({
+        username: formData.username.trim(),
+        bio: formData.bio.trim(),
+        zip_code: formData.zip_code.trim(),
+        city: formData.city.trim(),
+        country: formData.country,
+        avatar_url: avatarUrl,
+        onboarding_complete: true,
+      });
+      navigate(createPageUrl("Dashboard"), { replace: true });
+    } catch { alert("Could not save profile. Please try again."); }
+    finally { setIsLoading(false); }
+  };
+
+  const handleAvatarChange = (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setAvatarFile(f);
+    const r = new FileReader();
+    r.onload = (ev) => setAvatarPreview(ev.target.result);
+    r.readAsDataURL(f);
   };
 
   const slides = [
-    // Slide 0: Welcome Overview
-    <motion.div
-      key="welcome"
-      className="flex flex-col items-center justify-center text-center space-y-8 min-h-[600px]"
-      variants={slideTransitions}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      custom={direction}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
+    // Slide 0: Welcome / Login
+    <div key="s0" className="text-center flex flex-col items-center justify-center h-full gap-6 px-4 py-1">
       <motion.div
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-        className="relative flex items-center justify-center"
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+        className="relative"
       >
-        
-        <div className="w-36 h-36 bg-gradient-to-br from-purple-300 via-white-200 to-white-200 rounded-full flex items-center justify-center shadow-2xl relative z-10">
-          <ElectricBorder className="absolute inset-0 w-36 h-36 rounded-full pointer-events-none">
-            <img
-              src="/ecoisland.png"
-              alt="Ecoisland Logo"
-              className="w-28 h-28 object-contain z-10 translate-y-4"
-              style={{ display: "inline" }}
-            />
-          </ElectricBorder>
-        </div>
+        <div className="absolute inset-0 rounded-full blur-2xl opacity-40" style={{ background: "radial-gradient(circle, #00c896, transparent)" }} />
       </motion.div>
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white-600 via-emerald-600 to-white-600 bg-clip-text text-white-600">
-          Welcome to Ecoisland
+      <div>
+        <h1 className="text-4xl md:text-5xl font-black text-white mb-3" style={{ letterSpacing: "-0.03em" }}>
+          Welcome to <span style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Ecoisland</span>
         </h1>
-        <p className="text-xl text-gray-600 mt-4 max-w-2xl">
-          We're thrilled that you're taking the first step towards building a cleaner, more sustainable future.
+        <p className="text-slate-400 text-lg max-w-md mx-auto">
+          The gamified sustainability platform for a greener future. Sign in to begin your journey.
         </p>
-      </motion.div>
-
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl w-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+      </div>
+      <motion.button
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
+        onClick={handleLogin}
+        disabled={isLoading}
+        className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg text-black"
+        style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 0 30px rgba(0,200,150,0.35)", minWidth: 260, justifyContent: "center" }}
       >
-        <Card className="bg-gradient-to-br from-green-100 to-emerald-100 border-4 border-green-300">
-          <CardContent className="p-6 text-center">
-            <Trees className="w-12 h-12 mx-auto mb-3 text-green-500" />
-            <h3 className="font-semibold text-gray-900">1. Track Impact</h3>
-            <p className="text-sm text-gray-600 mt-2">Track your carbon footprint and explore sustainability options</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-4 border-orange-200">
-          <CardContent className="p-6 text-center">
-            <Trophy className="w-12 h-12 mx-auto mb-3 text-orange-400" />
-            <h3 className="font-semibold text-gray-900">2. Earn Rewards</h3>
-            <p className="text-sm text-gray-600 mt-2">Get Treecoins for sustainable actions and level up</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-4 border-purple-200">
-          <CardContent className="p-6 text-center">
-            <Users className="w-12 h-12 mx-auto mb-3 text-purple-500" />
-            <h3 className="font-semibold text-gray-900">3. Join a Community</h3>
-            <p className="text-sm text-gray-600 mt-2">Connect with numerous environmental activists worldwide</p>
-          </CardContent>
-        </Card>
-      </motion.div>
+        {isLoading ? (
+          <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+        ) : (
+          <>
+            <svg className="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+              <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+              <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+              <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+            </svg>
+            Continue with Google
+          </>
+        )}
+      </motion.button>
+      <p className="text-slate-600 text-sm">By continuing, you agree to adhere to our <Link to="/tos" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">Terms of Service</Link> and <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">Privacy Policy</Link>.</p>
+    </div>,
 
-      <motion.div
-        className="flex flex-col sm:flex-row gap-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-      >
-        <Button
-          onClick={() => handleAuthChoice('signup')}
-          disabled={isLoading}
-          className="bg-gradient-to-r from-teal-500 to-green-500 hover:from-teal-600 hover:to-green-600 border-2 border-black border-dotted text-white px-8 py-6 text-lg shadow-lg"
-        >
-          {isLoading && authMode === 'signup' ? 'Loading...' : 'Create Account'}
-          <ArrowRight className="ml-2 w-5 h-5" />
-        </Button>
-        <Button
-          onClick={() => handleAuthChoice('login')}
-          disabled={isLoading}
-          variant="outline"
-          className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg"
-        >
-          {isLoading && authMode === 'login' ? 'Loading...' : 'I have an Account'}
-        </Button>
-      </motion.div>
-    </motion.div>,
+    // Slide 1: Username + Bio
+    <div key="s1" className="flex flex-col gap-6 px-2 py-3">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <Users className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-2xl font-black text-white">Your Identity</h2>
+        </div>
+        <p className="text-slate-400 text-sm">How will the community know you?</p>
+      </div>
 
-    // Slide 1: Profile Setup
-    <motion.div
-      key="profile"
-      className="max-w-2xl mx-auto space-y-6"
-      variants={slideTransitions}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      custom={direction}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-gray-900 mb-2">Create Your Profile</h2>
-        <p className="text-gray-600">Tell us about yourself</p>
-        <div className="flex items-center justify-center gap-2 mt-4">
-          <div className="w-3 h-3 rounded-full bg-teal-500"></div>
-          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Username <span className="text-red-400">*</span></label>
+        <input
+          className="w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 outline-none transition-all"
+          style={{ background: "rgba(255,255,255,0.05)", border: errors.username ? "1.5px solid #ef4444" : "1.5px solid rgba(255,255,255,0.1)", boxShadow: "inset 0 1px 4px rgba(0,0,0,0.3)" }}
+          placeholder="Choose a unique username..."
+          value={formData.username}
+          onChange={e => setFormData(p => ({ ...p, username: e.target.value }))}
+          onFocus={e => e.target.style.borderColor = "#00c896"}
+          onBlur={e => e.target.style.borderColor = errors.username ? "#ef4444" : "rgba(255,255,255,0.1)"}
+        />
+        {errors.username && <p className="text-red-400 text-xs mt-1">{errors.username}</p>}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Bio <span className="text-slate-500 text-xs">(optional)</span></label>
+        <textarea
+          className="w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 outline-none transition-all resize-none"
+          style={{ background: "rgba(255,255,255,0.05)", border: "1.5px solid rgba(255,255,255,0.1)", minHeight: 90 }}
+          placeholder="What's your story? (e.g. `I'm on a mission to plant 100 trees!`)"
+          value={formData.bio}
+          onChange={e => setFormData(p => ({ ...p, bio: e.target.value }))}
+          onFocus={e => e.target.style.borderColor = "#00c896"}
+          onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+        />
+      </div>
+
+      {/* Avatar upload */}
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Profile Picture <span className="text-slate-500 text-xs">(optional)</span></label>
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0" style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.3)" }}>
+            {avatarPreview ? <img src={avatarPreview} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-emerald-400"><Upload className="w-5 h-5" /></div>}
+          </div>
+          <label className="cursor-pointer">
+            <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
+            <span className="px-4 py-2 rounded-lg text-sm font-medium text-emerald-300 transition-colors" style={{ background: "rgba(0,200,150,0.1)", border: "1px solid rgba(0,200,150,0.25)" }}>
+              Upload Photo
+            </span>
+          </label>
         </div>
       </div>
+    </div>,
 
-      <div className="rounded-2xl p-4 bg-gradient-to-br from-blue-400/20 to-green-500/20">
-        <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-xl transition-all duration-300">
-          <CardContent className="p-8 space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="username">Username <span className="text-red-500 text-sm">*</span> </Label>
-              <Input
-                id="username"
-                value={formData.username}
-                onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
-                className={errors.username ? "border-red-300" : ""}
-                placeholder="3+ characters..."
-              />
-              {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="bio">Bio (Optional)</Label>
-              <Input
-                id="bio"
-                value={formData.bio}
-                onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                placeholder="Tell us about your eco journey..."
-              />
-            </div>
-
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={prevSlide}>
-                <ArrowLeft className="mr-2 w-4 h-4" />
-                Back
-              </Button>
-              <Button
-                onClick={handleSlide2Next}
-                disabled={isLoading}
-                className="bg-gradient-to-r from-teal-500 to-green-500"
-              >
-                {isLoading ? 'Processing...' : 'Next'}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </motion.div>,
-
-    // Slide 2: Location & ID
-    <motion.div
-      key="location"
-      className="max-w-2xl mx-auto space-y-6"
-      variants={slideTransitions}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      custom={direction}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-gray-900 mb-2">Where Are You?</h2>
-        <p className="text-gray-600">Help us personalize your experience</p>
-        <div className="flex items-center justify-center gap-2 mt-4">
-          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-          <div className="w-3 h-3 rounded-full bg-teal-500"></div>
-          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+    // Slide 2: Location
+    <div key="s2" className="flex flex-col gap-6 px-2 py-3">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <Globe className="w-5 h-5 text-cyan-400" />
+          <h2 className="text-2xl font-black text-white">Your Location</h2>
         </div>
+        <p className="text-slate-400 text-sm">Used to personalize regional environmental data for you.</p>
       </div>
+      {[
+        { label: "City", key: "city", placeholder: "Houston", color: "#06b6d4" },
+        { label: "ZIP Code", key: "zip_code", placeholder: "77077", color: "#06b6d4" },
+        { label: "Country", key: "country", placeholder: "United States", color: "#06b6d4" },
+      ].map(f => (
+        <div key={f.key}>
+          <label className="block text-sm font-medium text-slate-300 mb-2">{f.label}</label>
+          <input
+            className="w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 outline-none transition-all"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1.5px solid rgba(255,255,255,0.1)" }}
+            placeholder={f.placeholder}
+            value={formData[f.key]}
+            onChange={e => setFormData(p => ({ ...p, [f.key]: e.target.value }))}
+            onFocus={e => e.target.style.borderColor = f.color}
+            onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+          />
+        </div>
+      ))}
+    </div>,
 
-      <div className="rounded-2xl p-4 bg-gradient-to-br from-blue-400/20 to-green-500/20">
-        <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-xl transition-all duration-300">
-          <CardContent className="p-8 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="zip_code">ZIP Code <span className="text-red-500 text-sm">*</span> </Label>
-                <Input
-                  id="zip_code"
-                  value={formData.zip_code}
-                  onChange={(e) => setFormData(prev => ({ ...prev, zip_code: e.target.value }))}
-                  className={errors.zip_code ? "border-red-300" : ""}
-                  placeholder="12345"
-                />
-                {errors.zip_code && <p className="text-red-500 text-sm">{errors.zip_code}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="city">City <span className="text-red-500 text-sm">*</span> </Label>
-                <Input
-                  id="city"
-                  value={formData.city}
-                  onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
-                  className={errors.city ? "border-red-300" : ""}
-                  placeholder="Houston"
-                />
-                {errors.city && <p className="text-red-500 text-sm">{errors.city}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="country">Country <span className="text-red-500 text-sm">*</span> </Label>
-                <Select value={formData.country} onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}>
-                  <SelectTrigger className={errors.country ? "border-red-300" : ""}>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white text-black border border-gray-200 shadow-md rounded-md">
-                    {countries.map(country => (
-                      <SelectItem key={country} value={country}>{country}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <Label>Upload Valid ID <span className="text-red-500 text-sm">*</span> <span className="text-sm text-gray-500">(Admin verification only)</span></Label>
-              <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${errors.id ? 'border-red-300 bg-red-50' : 'border-teal-300 bg-teal-50/30 hover:bg-teal-50'}`}>
-                <input type="file" accept="image/*" onChange={handleIdUpload} className="hidden" id="id-upload" />
-                <label htmlFor="id-upload" className="cursor-pointer block">
-                  {idPreview ? (
-                    <div className="space-y-2">
-                      <img src={idPreview} alt="ID Preview" className="w-32 h-32 object-cover mx-auto rounded-lg shadow-md" />
-                      <p className="text-sm text-teal-600 font-medium">ID uploaded ✓ - Click to change</p>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <Upload className="w-12 h-12 mx-auto text-teal-500" />
-                      <p className="text-gray-700 font-medium">Click to upload your valid ID</p>
-                      <p className="text-sm text-gray-500">Driver's license, passport, or government ID</p>
-                    </div>
-                  )}
-                </label>
-              </div>
-              {errors.id && <p className="text-red-500 text-sm">{errors.id}</p>}
-            </div>
-
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={prevSlide}>
-                <ArrowLeft className="mr-2 w-4 h-4" />
-                Back
-              </Button>
-              <Button
-                onClick={handleFinalSubmit}
-                disabled={isLoading}
-                className="bg-gradient-to-r from-teal-500 to-green-500"
-              >
-                {isLoading ? (
-                  <>Processing...</>
-                ) : (
-                  <>
-                    Complete Setup
-                    <CheckCircle className="ml-2 w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+    // Slide 3: Final confirmation
+    <div key="s3" className="flex flex-col items-center gap-6 text-center px-2 py-1">
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className="w-20 h-20 rounded-full flex items-center justify-center"
+        style={{ background: "linear-gradient(135deg, rgba(0,200,150,0.3), rgba(6,182,212,0.3))", border: "2px solid rgba(0,200,150,0.5)", boxShadow: "0 0 30px rgba(0,200,150,0.25)" }}
+      >
+        <CheckCircle className="w-10 h-10 text-emerald-400" />
+      </motion.div>
+      <div>
+        <h2 className="text-3xl font-black text-white mb-2">You're all set, {formData.username || "Explorer"}!</h2>
+        <p className="text-slate-400 text-base max-w-sm mx-auto">Your Ecoisland is ready to flourish. Start your sustainability journey with a 50 Treecoin new user gift!</p>
       </div>
-    </motion.div>
+      <div className="w-full grid grid-cols-3 gap-3">
+        {[
+          { icon: Leaf, label: "Track Footprint", color: "#10b981" },
+          { icon: TreePine, label: "Decorate Island", color: "#06b6d4" },
+          { icon: Trophy, label: "Climb Leaderboard", color: "#f59e0b" },
+        ].map(f => (
+          <div key={f.label} className="p-4 rounded-xl text-center" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <f.icon className="w-6 h-6 mx-auto mb-2" style={{ color: f.color }} />
+            <p className="text-xs text-slate-400">{f.label}</p>
+          </div>
+        ))}
+      </div>
+      <motion.button
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
+        onClick={handleFinish}
+        disabled={isLoading}
+        className="w-full py-4 rounded-2xl font-bold text-lg text-black flex items-center justify-center gap-2"
+        style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 0 30px rgba(0,200,150,0.35)" }}
+      >
+        {isLoading ? <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" /> : <><Sparkles className="w-5 h-5" /> Launch My Island!</>}
+      </motion.button>
+    </div>,
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-teal-400 to-green-400 p-4 flex items-center justify-center relative overflow-hidden">
-      <div className="w-full max-w-6xl relative z-10">
-        <AnimatePresence mode="wait" custom={direction}>
-          {slides[currentSlide]}
-        </AnimatePresence>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 30% 20%, #0a1f17 0%, #020c08 60%)" }}>
+      {/* Ambient glows */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(0,200,150,0.06)" }} />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(6,182,212,0.06)" }} />
+
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-xl mx-4">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <img src="/ecoisland_logo_new.png" alt="Ecoisland" className="w-24 h-24 mx-auto object-contain" style={{ filter: "drop-shadow(0 0 10px rgba(0,200,150,0.5))" }} />
+        </div>
+
+        {/* Progress dots */}
+        {slide > 0 && (
+          <div className="flex items-center justify-center gap-2 mb-6">
+            {[1, 2, 3].map(i => (
+              <motion.div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: slide === i ? 24 : 8,
+                  height: 8,
+                  background: slide >= i ? "#00c896" : "rgba(255,255,255,0.15)",
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Card body */}
+        <div className="rounded-3xl overflow-hidden" style={{ background: "rgba(8,24,16,0.85)", border: "1.5px solid rgba(0,200,150,0.2)", backdropFilter: "blur(20px)", boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,200,150,0.1)" }}>
+          <div className="relative overflow-y-auto overflow-x-hidden" style={{ minHeight: "clamp(420px,55vh,640px)", maxHeight: "calc(100vh - 6rem)", padding: "26px 24px" }}>
+            <AnimatePresence initial={false} custom={dir}>
+              <motion.div
+                key={slide}
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="absolute inset-0 p-6"
+              >
+                {slides[slide]}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation buttons (skip slide 0 — has its own button) */}
+          {slide > 0 && slide < SLIDE_COUNT - 1 && (
+            <div className="flex items-center justify-between px-8 pb-8 gap-4">
+              <button
+                onClick={goBack}
+                className="flex items-center gap-2 px-5 py-3 rounded-xl text-slate-400 hover:text-white transition-colors text-sm font-medium"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+              >
+                <ArrowLeft className="w-4 h-4" /> Back
+              </button>
+              <button
+                onClick={goNext}
+                className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black"
+                style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)" }}
+              >
+                Continue <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,152 @@
+{
+  "title": "Unit 4 Overview: Earth Systems and Resources",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Big Ideas"
+    },
+    {
+      "type": "paragraph",
+      "html": "The theme of this unit is <strong>Earth’s Systems and Resources</strong>. This allows us to understand the Earth and its processes, as well as how we affect/how we are affected by them. These systems also all work together to sustain life on this planet, and by understanding them, we can learn how they do this, as well as how they sustain each other. The main systems and resources we look at in this unit are tectonic plates, soil, atmospheric convection cells, climate and geography, and El Niños and La Niñas."
+    },
+    {
+      "type": "heading",
+      "text": "Plate Tectonics"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-EAgUa76Owq2O.png?alt=media&token=40409876-611a-4e6c-bee0-dde8f4331922",
+      "width": "640",
+      "height": "437"
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://en.wikipedia.org/wiki/Plate_tectonics#/media/File:Plates_tect2_en.svg\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://en.wikipedia.org/wiki/Plate_tectonics#/media/File:Plates_tect2_en.svg\"></span></a>"
+    },
+    {
+      "type": "paragraph",
+      "html": "The Earth's crust is broken into sections called <strong>plates.</strong>  Due to the Earth's molten core, these plates act like ice cubes in water; they are pushed around by forces and move. Where two plates meet is called a <strong>fault</strong>. Fault lines interact differently based on how the plates are moving and can be classified into three major groups: "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Convergent faults</strong> are where the plates come together.  This typically results in mountains, earthquakes, and volcanoes. They go at each other, which forces land to move up and form peaks.</li>\n<li><strong>Divergent faults</strong> are where the plates move apart creating seafloor spreading, earthquakes, and volcanoes. They never meet, but instead drift apart.</li>\n<li>Finally, <strong>transform faults</strong> move past each other and create earthquakes. Also called a strike-slip fault, these faults shift against each other which creates friction and movement.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Understanding the location and type of fault, we can predict the locations of potential earthquakes and volcanoes as well as the resulting impact they can have on human health.  "
+    },
+    {
+      "type": "heading",
+      "text": "Soil Formation and Erosion"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-Iwgila1jX5OU.gif?alt=media&token=58290e92-7d46-4bf5-b461-70767fa1f890",
+      "width": "360",
+      "height": "415"
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://en.wikipedia.org/wiki/Soil_horizon#/media/File:Profil_glebowy.jpg\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://en.wikipedia.org/wiki/Soil_horizon#/media/File:Profil_glebowy.jpg\"></span></a>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Over time, soil is formed from rocks with the help of <strong>erosion</strong>, <strong>deposition</strong>, and <strong>decomposition</strong>. Decomposition simply states that soil is formed somewhat from added organic matter."
+    },
+    {
+      "type": "paragraph",
+      "html": "These other two terms are often confused.. so let's look at them more specifically. <strong>Weathering</strong> is when parent rock is broken apart by wind, water, or the actions of plants and animals. These rocks grow smaller and smaller and are transported by both natural and manmade causes (e.g. wind or being moved by a car). Then the smaller pieces of rock are <strong>eroded</strong> away... or moved from one place to another, often by water. They are eventually <strong>deposited</strong>  (dropped in a new place), often piling up to create a layer of soil. These small pieces of rock and minerals are then joined by organic matter (decomposed plant and animal parts) over time.  The more time soil has to build up and collect decomposed organic matter the more nutrient-rich it becomes. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Soil is classified by horizons or layers in the following order: "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>O</strong> horizon - Organic</li>\n<li><strong>A</strong> horizon - Topsoil</li>\n<li><strong>B</strong> horizon - Subsoil</li>\n<li><strong>C</strong> horizon - Weathered bedrock</li>\n<li><strong>R</strong> horizon - Bedrock</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Humans have dramatically increased the geologic timeline for erosion with large-scale farming. Our technology caused floods and massive nutrient drainage from almost all cultivatable soil. This means humans are responsible for adding more nutrients in our soils due to what we lost."
+    },
+    {
+      "type": "heading",
+      "text": "Earth’s Atmosphere"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-Rts7dG4fUxsu.webp?alt=media&token=1c504c83-d62d-4a03-8ecc-2cb1b4c9d7ac",
+      "width": "0",
+      "height": "0"
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://pixabay.com/photos/mountains-sun-clouds-peak-summit-190055/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/mountains-sun-clouds-peak-summit-190055/\"></span></a><a href=\"https://pixabay.com/photos/mountains-sun-clouds-peak-summit-190055/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://pixabay.com/photos/mountains-sun-clouds-peak-summit-190055/\"></span></a>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Earth’s atmosphere is broken into distinct layers based on composition and temperature.  Human actions have impacted or dramatically altered these different layers in different ways. The layers of the atmosphere from the most outside to the closest to land are as follows:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Exosphere</li>\n<li>Thermosphere</li>\n<li>Mesosphere</li>\n<li>Stratosphere (this is where we can find the <strong>ozone layer</strong>)</li>\n<li>Troposphere (<strong>greenhouse gases</strong> are here)</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Humans have impacted these two closest layers the most drastically.  In the stratosphere, the release of <strong>chlorofluorocarbons</strong> (CFC’s) caused the unintentional depletion of the natural ozone layer. These chemicals directly cause holes in the ozone which is, as a result, unable to filter out harmful solar rays. Increased UVA and UVB rays reach Earth's surface and cause damage to organisms in the form of sunburns and cataracts. This also increases risks of skin cancer."
+    },
+    {
+      "type": "paragraph",
+      "html": "In the troposphere, where all living organisms are, humans have offset the natural composition of greenhouse gasses. By burning fossil fuels like coal, oil, and gas for heat or energy, humans have caused a dramatic increase in global average temperatures. "
+    },
+    {
+      "type": "heading",
+      "text": "Solar Radiation and Earth’s Seasons"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-aLXLboUMmUQ4.jpg?alt=media&token=07ff19d4-37e6-4864-8481-90d0888d4949",
+      "width": "0",
+      "height": "0"
+    },
+    {
+      "type": "paragraph",
+      "html": "Incoming radiation from the sun is the main source of energy on Earth and is distributed unevenly due to <strong>seasons</strong> and <strong>latitude</strong>. Latitude measures horizontal distance away from the equator. As you look at points farther away from the equator, the rays of light from the sun hit Earth at a more indirect angle and deposit less solar radiation.  This causes the environment farther from the equator to be colder and to support less plant life. This can also help explain the regional location of biomes!"
+    },
+    {
+      "type": "paragraph",
+      "html": "Seasons are caused by the fact that Earth is tilted on its axis. As our planet moves around the sun, the northern hemisphere is pointed at the sun in June-August and the southern hemisphere is pointed at the sun around December-February. "
+    },
+    {
+      "type": "heading",
+      "text": "Earth’s Geography and Climate"
+    },
+    {
+      "type": "paragraph",
+      "html": "Weather and climate are both influenced by solar radiation and the geographic features on Earth. First, we have to understand the difference in these terms in regards to time or chronology. <strong>Climate</strong> is long-term trends or patterns in atmospheric conditions (think 30+ years of temperature and rainfall averages). Climate is what is used to describe the general patterns of a region; for example, a biome located at five degrees latitude could attribute its long-term warm climate to equatorial proximity. The <strong>weather</strong> is short-term events or conditions that occur; for example, a statement like \"It's raining outside\" is a comment on the current weather. The combination of wind patterns and geographic features like mountains create weather and climate conditions on land. Because water and land heat up at different rates, temperature differences occur throughout the day."
+    },
+    {
+      "type": "paragraph",
+      "html": "One special condition is the development of <strong>rain shadows</strong>, which are a region of land that has become drier because a higher elevation area blocks precipitation from reaching the land.  Often, deserts are located behind large mountain ranges that are blocking precipitation. "
+    },
+    {
+      "type": "heading",
+      "text": "El Niño and La Niña"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>El Niño</strong> is a climate pattern that occurs when the surface waters of the tropical Pacific Ocean become warmer than normal. This warming can have a number of impacts on weather patterns around the world, including heavy rains and floods in some areas and drought in others. El Niño events typically occur every two to seven years and can last for several months."
+    },
+    {
+      "type": "paragraph",
+      "html": "During an El Niño event, the warmer-than-normal surface waters of the tropical Pacific Ocean can alter the normal patterns of atmospheric circulation, leading to changes in the distribution of heat and moisture around the globe. These changes can lead to an increase in the frequency and intensity of extreme weather events, such as heavy rain and floods in some areas and drought in others. In some cases, El Niño can also lead to an increase in the frequency and intensity of hurricanes and typhoons."
+    },
+    {
+      "type": "paragraph",
+      "html": "El Niño is one of two phases of a natural climate pattern that occurs in the tropical Pacific Ocean. The other phase is called <strong>La Niña</strong>, which is characterized by cooler-than-normal surface waters in the tropical Pacific Ocean. The two phases of the ENSO cycle can influence weather patterns around the world and are important factors that meteorologists and climate scientists consider when making long-term weather forecasts."
+    }
+  ]
+}

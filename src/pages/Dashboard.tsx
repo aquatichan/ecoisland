@@ -1,216 +1,301 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
-import { User } from "@/entities/User";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { createPageUrl } from "@/utils";
+import { User } from "@/entities/User";
 import {
-  Palmtree,
-  Leaf,
-  Globe,
-  Camera,
-  Recycle,
-  BarChart3,
-  ArrowRight,
-  Sparkles,
-  Trophy,
-  Users,
-  TrendingUp,
-  Rocket,
+  Palmtree, Leaf, Globe, Camera, BarChart3, Recycle,
+  BookOpen, ArrowRight, TreePine, Zap, Trophy, TrendingUp,
+  Sparkles, ChevronRight, Activity
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { db, auth } from "@/firebase";
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import ElectricBorder from "@/components/ElectricBorder";
 
-const dashboardTiles = [
+const FEATURE_CARDS = [
   {
     title: "Your Island",
     description: "Customize your Ecoisland with earned Treecoins!",
+    url: createPageUrl("Island"),
     icon: Palmtree,
-    url: "Island",
-    gradient: "from-teal-600 to-orange-400",
-    bgGradient: "from-teal-100 to-orange-100",
+    color: "#00c896",
+    gradient: "linear-gradient(135deg, #00c896, #059669)",
+    emoji: "🌴",
   },
   {
     title: "Carbon Footprint",
-    description: "Track and reduce your environmental footprint!",
+    description: "Track and reduce your emissions footprint!",
+    url: createPageUrl("CarbonFootprint"),
     icon: Leaf,
-    url: "CarbonFootprint",
-    gradient: "from-emerald-500 to-purple-500",
-    bgGradient: "from-emerald-100 to-purple-100",
+    color: "#10b981",
+    gradient: "linear-gradient(135deg, #10b981, #047857)",
+    emoji: "🌿",
   },
   {
     title: "Regional Data",
-    description: "Explore local sustainability insights and take action!",
+    description: "Explore local sustainability insights!",
+    url: createPageUrl("RegionalData"),
     icon: Globe,
-    url: "RegionalData",
-    gradient: "from-cyan-500 to-pink-500",
-    bgGradient: "from-cyan-100 to-pink-100",
+    color: "#06b6d4",
+    gradient: "linear-gradient(135deg, #06b6d4, #0284c7)",
+    emoji: "🌍",
   },
   {
     title: "Danger Scan",
     description: "Report environmental issues with AI image recognition!",
+    url: createPageUrl("DangerScan"),
     icon: Camera,
-    url: "DangerScan",
-    gradient: "from-gray-500 to-red-600",
-    bgGradient: "from-gray-100 to-red-100",
+    color: "#f97316",
+    gradient: "linear-gradient(135deg, #f97316, #dc2626)",
+    emoji: "📸",
   },
   {
     title: "Action Feed",
-    description: "Join the community through environmental initiatives!",
+    description: "Join the community by taking initiative!",
+    url: createPageUrl("ActionFeed"),
     icon: Recycle,
-    url: "ActionFeed",
-    gradient: "from-green-600 to-blue-400",
-    bgGradient: "from-green-100 to-blue-100",
+    color: "#8b5cf6",
+    gradient: "linear-gradient(135deg, #8b5cf6, #6d28d9)",
+    emoji: "♻️",
   },
   {
     title: "Impact Visualizer",
     description: "See your progress and contributions come to life!",
+    url: createPageUrl("Impact"),
     icon: BarChart3,
-    url: "Impact",
-    gradient: "from-yellow-500 to-pink-400",
-    bgGradient: "from-yellow-50 to-pink-50",
+    color: "#ec4899",
+    gradient: "linear-gradient(135deg, #ec4899, #be185d)",
+    emoji: "📊",
   },
 ];
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
+  const [recentLogs, setRecentLogs] = useState([]);
+  const [recentPosts, setRecentPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [greeting, setGreeting] = useState("Welcome back");
 
   useEffect(() => {
-    const loadData = async () => {
-      const userData = await User.me();
-      setUser(userData);
-      setIsLoading(false);
-    };
+    const h = new Date().getHours();
+    if (h < 12) setGreeting("Good morning");
+    else if (h < 18) setGreeting("Good afternoon");
+    else setGreeting("Good evening");
 
-    loadData();
-    window.addEventListener("focus", loadData);
-
-    return () => {
-      window.removeEventListener("focus", loadData);
-    };
+    async function load() {
+      try {
+        const u = await User.me();
+        setUser(u);
+        const uid = auth.currentUser?.uid;
+        if (uid) {
+          const [logsSnap, postsSnap] = await Promise.all([
+            getDocs(query(collection(db, "carbon_logs"), where("userId", "==", uid), orderBy("date", "desc"), limit(3))).catch(() => ({ docs: [] })),
+            getDocs(query(collection(db, "posts"), where("userId", "==", uid), orderBy("createdAt", "desc"), limit(3))).catch(() => ({ docs: [] })),
+          ]);
+          setRecentLogs(logsSnap.docs.map(d => ({ id: d.id, ...d.data() })));
+          setRecentPosts(postsSnap.docs.map(d => ({ id: d.id, ...d.data() })));
+        }
+      } catch (e) { console.error(e); }
+      finally { setIsLoading(false); }
+    }
+    load();
   }, []);
 
-  const weightUnit = user?.preferences?.weight_unit || "kg";
+  const xpPct = user ? Math.min(((user.xp || 0) / (user.xp_to_next_level || 100)) * 100, 100) : 0;
 
-  if (isLoading) {
-    return (
-      <div className="p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse space-y-8">
-            <div className="h-8 bg-gray-200 rounded w-1/3" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-48 bg-gray-200 rounded-xl" />
+  return (
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
+      <div className="max-w-7xl mx-auto">
+
+        {/* ===== WELCOME HERO ===== */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-3xl overflow-hidden mb-8 relative"
+          style={{ background: "linear-gradient(135deg, #020c08 0%, #051a10 50%, #020c08 100%)", border: "1.5px solid rgba(0,200,150,0.2)", minHeight: 180 }}
+        >
+          {/* Background decoration */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, #00c896, transparent)" }} />
+            <div className="absolute -bottom-8 -left-8 w-48 h-48 rounded-full blur-3xl opacity-10" style={{ background: "radial-gradient(circle, #06b6d4, transparent)" }} />
+            {/* Pixel dots */}
+            {[...Array(12)].map((_, i) => (
+              <div key={i} className="absolute rounded-sm opacity-20" style={{ background: "#00c896", width: 4, height: 4, left: `${10 + i * 8}%`, top: `${20 + (i % 3) * 25}%` }} />
+            ))}
+          </div>
+
+          <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <p className="text-emerald-400 text-sm font-medium mb-1">{greeting},</p>
+              <h1 className="text-2xl md:text-3xl font-black text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
+                {user?.username || user?.full_name || "Explorer"}! 👋
+              </h1>
+              <p className="text-slate-400 text-sm">Our planet needs saving... we're glad you're here.</p>
+
+              {/* XP bar */}
+              {user && (
+                <div className="mt-4 w-64">
+                  <div className="flex justify-between text-xs mb-1.5">
+                    <span className="text-slate-400">Level {user.eco_level || 1}</span>
+                    <span className="text-slate-500">{user.xp || 0} / {user.xp_to_next_level || 100} XP</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${xpPct}%` }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                      className="h-full rounded-full"
+                      style={{ background: "linear-gradient(90deg, #00c896, #06b6d4)" }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Stats row */}
+            <div className="flex items-center gap-4">
+              {[
+                { icon: TreePine, value: user?.treecoins ?? 0, label: "Treecoins", color: "#00c896" },
+                { icon: Zap, value: user?.eco_level || 1, label: "Level", color: "#f59e0b" },
+                { icon: Trophy, value: recentPosts.length, label: "Posts", color: "#8b5cf6" },
+              ].map(stat => (
+                <div key={stat.label} className="text-center px-4 py-3 rounded-2xl" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <stat.icon className="w-5 h-5 mx-auto mb-1" style={{ color: stat.color }} />
+                  <div className="text-xl font-black text-white">{stat.value}</div>
+                  <div className="text-xs text-slate-500">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
+        </motion.div>
 
-  return (
-    <div className="p-4 md:p-8 bg-gray-50 text-gray-900">
-      <div className="max-w-6xl mx-auto">
-        {/* Welcome Section */}
+        {/* ===== FEATURE GRID ===== */}
         <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Welcome back, {user?.username || "unknown"}!
-              </h1>
-              <p className="text-gray-600 mt-2">
-                Ready to make a positive impact on our planet today?
-              </p>
-            </div>
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-emerald-500" />
+            <h2 className="font-black text-slate-800 text-xl" style={{ letterSpacing: "-0.02em" }}>Explore</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {FEATURE_CARDS.map((card, i) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+              >
+                <Link to={card.url}>
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <ElectricBorder
+                      color={card.color}
+                      thickness={2}
+                      className="rounded-2xl h-full"
+                    >
+                      <div
+                        className="p-5 flex flex-col h-full cursor-pointer group"
+                        style={{
+                          background: "var(--bg-card)",
+                          borderRadius: "1rem",
+                          color: "var(--text-primary)",
+                        }}
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div
+                            className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-200 group-hover:scale-110"
+                            style={{
+                              background: `${card.color}12`,
+                            }}
+                          >
+                            {card.emoji}
+                          </div>
 
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold text-teal-600">
-                    {user?.treecoins || 0}
-                  </span>
-                  <Leaf className="w-5 h-5 text-green-500" />
-                </div>
-                <p className="text-sm text-gray-500">Treecoins available</p>
-              </div>
+                          <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 transition-colors mt-1" />
+                        </div>
 
-              <Badge variant="secondary" className="bg-green-100 text-green-700">
-                Level {user?.eco_level || 1}
-              </Badge>
-            </div>
+                        <h3 className="font-black text-slate-800 text-base mb-1">
+                          {card.title}
+                        </h3>
+
+                        <p className="text-slate-500 text-sm leading-relaxed flex-1">
+                          {card.description}
+                        </p>
+
+                        <div
+                          className="mt-3 text-xs font-bold"
+                          style={{ color: card.color }}
+                        >
+                          Start exploring →
+                        </div>
+                      </div>
+                    </ElectricBorder>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dashboardTiles.map((tile) => (
-            <Link key={tile.title} to={createPageUrl(tile.url)}>
-              <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 border-0 overflow-hidden">
-                <div className={`bg-gradient-to-br ${tile.bgGradient} p-1 rounded-xl`}>
-                  <CardHeader className="bg-white/90 text-gray-900 backdrop-blur-sm rounded-t-lg p-6">
-                    <div className="flex items-center justify-between">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${tile.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                        <tile.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <ArrowRight className="text-gray-400 group-hover:text-gray-600 w-5 h-5 transition-colors" />
-                    </div>
-                    <CardTitle className="text-xl font-bold mt-4 text-gray-900">{tile.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="bg-white/90 text-gray-600 backdrop-blur-sm rounded-b-lg p-6 pt-2">
-                    <p className="text-sm leading-relaxed text-gray-600">{tile.description}</p>
-                    <div className="mt-4 flex items-center gap-2 text-sm">
-                      <Sparkles className="w-4 h-4 text-teal-500" />
-                      <span className="text-teal-600 font-medium">Start exploring</span>
-                    </div>
-                  </CardContent>
+        {/* ===== RECENT ACTIVITY ===== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Recent carbon logs */}
+          <div className="eco-card p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                <Activity className="w-4 h-4 text-emerald-600" /> Recent Carbon Logs
+              </h3>
+              <Link to={createPageUrl("CarbonFootprint")} className="text-xs text-emerald-600 font-semibold hover:underline">View all</Link>
+            </div>
+            {recentLogs.length === 0 ? (
+              <div className="text-center py-6">
+                <Leaf className="w-10 h-10 text-slate-200 mx-auto mb-2" />
+                <p className="text-slate-400 text-sm">No logs yet</p>
+                <Link to={createPageUrl("CarbonFootprint")} className="text-emerald-500 text-xs font-semibold mt-1 block hover:underline">Start logging →</Link>
+              </div>
+            ) : recentLogs.map((log, i) => (
+              <div key={log.id} className="flex items-center justify-between py-3 border-b last:border-0" style={{ borderColor: "var(--border-card)" }}>
+                <div>
+                  <p className="text-sm font-semibold text-slate-700">{log.date || "Recent"}</p>
+                  <p className="text-xs text-slate-400 capitalize">{log.diet || "Mixed"} diet</p>
                 </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-12">
-          <Card className="bg-gradient-to-r from-teal-50 to-green-50 border-teal-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-teal-600">
-                <Rocket className="w-6 h-6 text-teal-600" />
-                "How can I get started?"
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/60 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-gray-900">⛰ Build Your Island</h4>
-                  <p className="text-sm text-gray-600">
-                    Purchase your first Ecoisland and begin customizing with effects, decorations, and more!
-                  </p>
-                </div>
-
-                <div className="bg-white/60 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-gray-900">💪 Track Your Impact</h4>
-                  <p className="text-sm text-gray-600">
-                    Log your daily activities to see your carbon footprint and earn more Treecoins through sustainable choices!
-                  </p>
-                </div>
-
-                <div className="bg-white/60 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-gray-900">👥 Join the Community</h4>
-                  <p className="text-sm text-gray-600">
-                    Share environmental news in the Action Feed and connect with fellow Ecoislanders!
-                  </p>
-                </div>
-
-                <div className="bg-white/60 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-gray-900">📍 Explore Locally</h4>
-                  <p className="text-sm text-gray-600">
-                    Check out your region's sustainability data and seek ways to make a difference!
-                  </p>
+                <div className="text-right">
+                  <p className="text-sm font-black text-slate-800">{(log.total_co2 || 0).toFixed(1)} kg</p>
+                  <p className="text-xs text-slate-400">CO₂</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            ))}
+          </div>
+
+          {/* Recent posts */}
+          <div className="eco-card p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                <Recycle className="w-4 h-4 text-purple-500" /> Recent Posts
+              </h3>
+              <Link to={createPageUrl("ActionFeed")} className="text-xs text-purple-500 font-semibold hover:underline">View all</Link>
+            </div>
+            {recentPosts.length === 0 ? (
+              <div className="text-center py-6">
+                <Recycle className="w-10 h-10 text-slate-200 mx-auto mb-2" />
+                <p className="text-slate-400 text-sm">Nothing shared yet</p>
+                <Link to={createPageUrl("ActionFeed")} className="text-purple-500 text-xs font-semibold mt-1 block hover:underline">Share an action →</Link>
+              </div>
+            ) : recentPosts.map((post, i) => (
+              <div key={post.id} className="flex items-center gap-3 py-3 border-b last:border-0" style={{ borderColor: "var(--border-card)" }}>
+                <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ background: "var(--bg-info)", border: "1px solid rgba(139,92,246,0.2)" }}>
+                  {post.mediaUrl ? <img src={post.mediaUrl} alt="" className="w-full h-full object-cover" /> : <Recycle className="w-4 h-4 text-purple-300" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-slate-700 truncate">{post.title}</p>
+                  <p className="text-xs text-slate-400">❤️ {post.likesCount || 0} · 💬 {post.commentsCount || 0}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     </div>
   );

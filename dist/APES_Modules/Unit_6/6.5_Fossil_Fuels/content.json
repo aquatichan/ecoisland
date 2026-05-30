@@ -1,0 +1,100 @@
+{
+  "title": "6.5 Fossil Fuels",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Fossil Fuels"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Fossil fuels</strong> are a type of non-renewable energy source that are formed from the remains of plants and animals that lived millions of years ago. Fossil fuels are the main source of energy for the world's electricity and transportation needs, and they have played a major role in the development of modern society. However, the use of fossil fuels also has negative impacts on the environment, including air pollution and the contribution to climate change through the emission of greenhouse gases. As such, there is a growing movement to transition to renewable energy sources and reduce our reliance on fossil fuels."
+    },
+    {
+      "type": "paragraph",
+      "html": "The world is dependent on fossil fuels because they are easy to access. The three main types of fossil fuels are coal, oil (petroleum) and natural gas. "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Coal</strong> ➱ Formed from millions of years of decomposed plant buildup, coal is made of of carbon, hydrogen and water</li>\n<li><strong>Oil</strong> ➱ Formed from millions of years of heat and pressure of aquatic organisms, oil is made up of carbon and hydrogen</li>\n<li><strong>Natural Gas</strong> ➱ Formed from plant and animal organic matter trapped under a sedimentary layer of Earth’s layer, natural gas is made up mostly of methane (CH4)</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Combustion of Fossil Fuels"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Fossil fuel combustion</strong> is the process of a fuel type reacting with heat and oxygen which leads to chemicals, light and energy being released. Complete combustion releases non-toxic chemicals such as water vapor and heat however in majority of the cases incomplete combustion occurs. "
+    },
+    {
+      "type": "heading",
+      "text": "Natural Gas Combustion"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F1.jpg?alt=media&token=1a777c35-b0c8-4ba6-8b30-22f634d095c0",
+      "width": "640",
+      "height": "97"
+    },
+    {
+      "type": "heading",
+      "text": "Methane Combustion"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-MsgDUClXgXK9.JPG?alt=media&token=407a082b-a0ee-488c-8dd1-c0bd20427907",
+      "width": "640",
+      "height": "95"
+    },
+    {
+      "type": "heading",
+      "text": "Coal Combustion"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F3.JPG?alt=media&token=750a7cb1-fe82-4d3d-b41a-74db29d077f1",
+      "width": "640",
+      "height": "94"
+    },
+    {
+      "type": "heading",
+      "text": "Hydraulic Fracturing"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Hydraulic Fracturing</strong> is a process that involves drilling through rock to unlock oil and natural gas in the ground. As mentioned, gas is formed on top of layers of dead organisms that over time have been exposed to pressure. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Hydraulic factoring involves steel cement pipes that pump out fluid. The fluid opens up fractures in the shell, water, sand, and surface. The sand for example allows the oil to go up. As the wheel reaches its kickoff point then that is well the horizontal drilling of the holes allows the oil to escape through the cracks."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2Fapes6-YPsWMRjYh6DY.JPG?alt=media&token=3ec5de4b-59cb-4de6-a2b2-1a88e8f81815",
+      "width": "0",
+      "height": "0"
+    },
+    {
+      "type": "paragraph",
+      "html": "Risks of hydraulic fracking include: "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Contaminating underground drinking water</li>\n<li>Increases threat of earthquakes which puts infrastructure at risk</li>\n<li>Methane is released during drilling</li>\n<li>Natural gas supplies are nonrenewable</li>\n<li>Damaging ecosystems and disturbing local environments with machinery</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Impact of Fossil Fuels"
+    },
+    {
+      "type": "paragraph",
+      "html": "An impact of the production and combustion of fossil fuels is the byproduct of sulfur dioxide, nitrogen oxide, and carbon dioxide. "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>When <strong>coal</strong> is burned, it releases CO2, nitrogen oxides, and sulfur dioxide, as well as particulates that are known to pollute the atmosphere. As a result of these pollutants being produced, <strong>acid rain</strong> forms. Acid rain is comprised of any type of precipitation, wet or dry, that combines atmospheric pollutants with water droplets, such as snow and hail. This rain is toxic and harmful to ecosystems around the world.</li>\n<li>The use of <strong>oil</strong> pollutes the environment through the burning of <strong>petroleum,</strong> which creates and releases greenhouse gases. Oil is not a clean source of energy as it contributes to global warming due to the release of toxic gases such as carbon monoxide.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Another impact of oil is the risk of oil spills which are difficult to clean up and can harm marine life at devastating levels.</li>\n<li>Oil is a non-renewable energy source because the pace at which petrol replenishes will not be nearly high enough to satisfy increasing demand.</li>\n</ul>\n</li>\n</ul>"
+    }
+  ]
+}

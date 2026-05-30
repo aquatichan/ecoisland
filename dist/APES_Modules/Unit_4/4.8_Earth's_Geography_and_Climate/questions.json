@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Coastal cities like San Francisco experience mild temperatures year-round, while inland cities at similar latitudes experience much greater temperature variation between seasons. Which of the following best describes the geographic factor responsible for this difference?",
+    "answers": [
+      "Ocean currents transport cold water to coastal regions, which directly lowers air temperature through evaporative cooling throughout the year",
+      "Coastal fog formation reduces solar radiation reaching the surface, which prevents temperature extremes that occur in inland areas with clearer skies",
+      "Ocean water has high heat capacity, absorbing solar energy in summer and releasing it in winter, which moderates coastal temperature fluctuations",
+      "Coastal areas receive more solar radiation than inland areas because the ocean reflects sunlight more efficiently than land surfaces"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A climate diagram shows two locations at the same latitude (35°N): Location A in the interior of a large continent receives 400 mm annual precipitation concentrated in summer months, while Location B on the western coast of the same continent receives 800 mm precipitation distributed throughout the year. Both locations have similar average annual temperatures. Which geographic factor most directly explains the precipitation difference shown?",
+    "answers": [
+      "Prevailing westerly winds carry moisture-laden air masses from the ocean to the coast, while inland areas are distant from moisture sources and receive less precipitation.",
+      "The interior location's continental position creates a high-pressure system that suppresses precipitation year-round, while coastal areas have lower pressure that enhances rainfall.",
+      "Coastal areas have higher ocean temperatures that evaporate more water, but this moisture is carried inland by winds before precipitating over the interior.",
+      "The interior location receives more solar radiation during summer, triggering convective precipitation, while coastal areas have cloud cover that reduces summer precipitation."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers measured annual precipitation at 500 m on both sides of a coastal mountain. If they instead sampled at sea level, 500 m, 1000 m, and 1500 m on both sides, how would this change most likely affect their understanding of precipitation patterns?",
+    "answers": [
+      "Would not raise total rainfall but reveal spatial patterns instead of totals.",
+      "Reveals precipitation changes with elevation, showing windward peaks and leeward shadow.",
+      "Would incorrectly predict higher leeward precipitation at altitude, contradicting rain shadow.",
+      "Would suggest measurement accuracy decreases because higher winds bias gauge readings."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A mountain peak at 3,800 meters elevation experiences an average temperature of -8°C. The base of the mountain at 200 meters elevation has an average temperature of 16°C. Assuming a constant temperature lapse rate with elevation, what is the approximate temperature decrease per 1,000 meters of elevation gain?",
+    "answers": [
+      "24°C per 1,000 m",
+      "0.63°C per 1,000 m",
+      "6.3°C per 1,000 m",
+      "4.2°C per 1,000 m"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A coastal city on the western edge of a continent experiences mild winters and cool summers, while an inland city at the same latitude 1,500 km away experiences extreme temperature fluctuations. Which geographic factor best explains this difference in climate?",
+    "answers": [
+      "Ocean currents transport warm water along the coast, moderating temperature extremes through evaporative cooling from the ocean surface.",
+      "Ocean currents transport warm water along the coast, creating consistent temperatures year-round through the ocean's high heat capacity.",
+      "Ocean currents transport warm water along the coast, moderating temperature extremes through the ocean's high heat capacity.",
+      "Prevailing winds transport warm air along the coast, moderating temperature extremes through the ocean's high heat capacity."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "The Mediterranean region experiences hot, dry summers and mild, wet winters, while regions at the same latitude in the interior of continents experience cold, dry winters and warm, wet summers. Which of the following best describes the geographic factor that creates this climate difference?",
+    "answers": [
+      "Proximity to the Mediterranean Sea moderates temperatures through thermal mass effects, but both coastal and continental regions at the same latitude receive similar total annual precipitation distributed across different seasons",
+      "Proximity to the Mediterranean Sea reflects incoming solar radiation back to the atmosphere, reducing heat absorption in coastal areas and creating cooler summers and milder winters compared to continental interiors",
+      "Proximity to the Mediterranean Sea moderates temperatures and shifts precipitation patterns because the Mediterranean region is located at higher latitudes where ocean influence is stronger than in continental interiors at lower latitudes",
+      "Proximity to the Mediterranean Sea moderates temperatures and shifts precipitation patterns, with ocean currents bringing warm water that influences seasonal weather patterns"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Researchers compared temperature and precipitation from lowland stations on both sides of a mountain range. If they add summit and mid-elevation stations on windward and leeward slopes, what geographic relationship would appear?",
+    "answers": [
+      "A clearer rain shadow pattern with decreasing precipitation on leeward slopes",
+      "Atmospheric pressure differences result from elevation and are not the primary factor",
+      "Apparent valley uniformity caused by limited sampling rather than true stability",
+      "A temperature lapse rate with stronger rain shadow effects on leeward slopes"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Researchers measured wind speed and direction every 30 minutes for two years at 10 windward and 10 leeward sites at the same elevation. What is the independent variable?",
+    "answers": [
+      "Site position on mountain slope classified as windward or leeward",
+      "Elevation of sites held constant throughout the study",
+      "Thirty-minute interval specifying how often measurements were taken",
+      "Wind speed and direction measured at each site over time"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A scientist measured mean annual temperature and precipitation at 20 sites from sea level to 3500 m. Temperature declines from 22°C to -8°C with r = -0.89. Precipitation rises to 3200 mm by 2500 m then falls to 1400 mm at 3500 m. Which statement best describes these relationships with elevation?",
+    "answers": [
+      "Temperature decreases with elevation while precipitation increases across all elevations.",
+      "Temperature falls 8.6°C per 1000 m and precipitation peaks at 2500 m.",
+      "Both temperature and precipitation increase with elevation at these sites.",
+      "Temperature and precipitation show no clear relationship and vary randomly."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The diagram illustrates ocean currents flowing along a continental coastline at 40° North latitude. A warm current from the equator moves northward along the coast, while a cold current from polar regions moves southward offshore. Which characteristic of the coastal climate is most directly influenced by the presence of the warm ocean current shown in the diagram?",
+    "answers": [
+      "The warm current increases atmospheric moisture and moderates temperature extremes, resulting in milder winters and cooler summers than inland areas at the same latitude",
+      "The warm current increases atmospheric moisture and heat transfer to the atmosphere, resulting in higher annual precipitation and increased frequency of coastal storms compared to inland areas at the same latitude",
+      "The warm current increases atmospheric moisture and moderates temperature extremes in the offshore marine environment, but has minimal effect on the coastal land climate at this latitude",
+      "The warm current increases atmospheric moisture and coastal precipitation, resulting in persistent fog and cloud cover that blocks solar radiation and cools the coastal region"
+    ],
+    "correct": "!"
+  }
+]

@@ -1,0 +1,186 @@
+{
+  "title": "9.4 Increases in the Greenhouse Gases",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Global Effects of Increasing Greenhouse Gases"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Climate</strong> is defined as the long-term (30+ years) weather patterns in a given area. This includes temperature and average precipitation. An increase in the amount of greenhouse gases can cause more thermal energy to be trapped in the troposphere. This will result in an increase in the average global temperature. If the average global temperature increases by even one degree, it can cause widespread environmental changes. These changes can make the environment uninhabitable for human and animal populations, affecting population movements and dynamics. "
+    },
+    {
+      "type": "paragraph",
+      "html": "The <strong>Intergovernmental Panel on Climate Change (IPCC)</strong> was formed in 1988 as a group of 3,000 scientists with the goal of working together to assess climate change. IPCC’s goal is to determine the environmental and economical impact potential of climate change. IPCC scientists have developed an in-depth understanding of how increasing carbon dioxide dictates temperature increases and the environmental consequences of these changes. "
+    },
+    {
+      "type": "paragraph",
+      "html": "The chart above depicts the increase in CO2 production by countries individually and collectively.  Overall, the industrialization of nations creates a demand for energy.  This energy is primarily generated from the burning of fossil fuels, which results in a sharp increase in CO2 and other greenhouse gases. "
+    },
+    {
+      "type": "heading",
+      "text": "Changes to The Environment"
+    },
+    {
+      "type": "paragraph",
+      "html": "Increasing global temperatures are expected to have a large range of impacts on the environment. Some of these effects include: "
+    },
+    {
+      "type": "heading",
+      "text": "Rising Sea Levels 🌊"
+    },
+    {
+      "type": "paragraph",
+      "html": "The melting of polar ice caps, ice sheets, permafrost, and glaciers can contribute to rising sea levels and flooding, which can have serious impacts, like erosion, on coastal communities and ecosystems. Rising temperatures increase the rate at which melted water flows from the land into the oceans. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Additionally, as the temperature of the Earth's oceans increases, the water expands. This is a result of warmer water taking up more space than colder water, due to the increased movement and vibration of the water molecules. As the oceans warm, they expand. "
+    },
+    {
+      "type": "heading",
+      "text": "Spread of Disease Vectors 🦠🦟"
+    },
+    {
+      "type": "paragraph",
+      "html": "Diseases that were previously confined to the tropics will begin to spread toward the poles. As the Earth's temperature increases, some disease vectors, such as mosquitoes and ticks, are able to survive and reproduce in areas where they previously could not. This can lead to the expansion of the range of these vectors and the diseases they transmit."
+    },
+    {
+      "type": "paragraph",
+      "html": "Since warming can also affect the distribution and abundance of the animals and plants that serve as hosts for disease vectors. As the climate changes, the ranges of host species may shift, bringing them into contact with new populations of vectors and increasing the risk of disease transmission. Or warmer temperatures may lead to changes in the distribution and abundance of certain species, which can disrupt the balance of ecosystems and increase the risk of disease outbreaks due to population density impacts."
+    },
+    {
+      "type": "heading",
+      "text": "Ocean Acidification 🐚"
+    },
+    {
+      "type": "paragraph",
+      "html": "Climate change and ocean acidification are both caused by the increasing levels of carbon dioxide in the Earth's atmosphere. When excess amounts of carbon dioxide are released into the air through the burning of fossil fuels, some of it is absorbed by the oceans. This process increases the concentration of dissolved carbon dioxide in the water, which in turn decreases the pH of the ocean, making it more acidic."
+    },
+    {
+      "type": "paragraph",
+      "html": "The process of ocean acidification can affect the ability of some marine organisms, such as corals and shellfish, to build and maintain their shells and skeletons, by reducing access to calcium—an effect that can lead to declines in their populations. Acidification can also have indirect effects on other species by altering the food chain and the overall structure of marine communities."
+    },
+    {
+      "type": "heading",
+      "text": "Extreme Weather Events and Changing Weather Patterns 🌧️"
+    },
+    {
+      "type": "paragraph",
+      "html": "It is important to note that the relationship between warming trends and extreme weather events is complex, and it is not possible to attribute any single extreme weather event directly to global warming. However, the overall trend is for an increase in the frequency and intensity of extreme weather events, including droughts, heatwaves, flooding, and hurricanes, due to climate change. "
+    },
+    {
+      "type": "paragraph",
+      "html": "The increase in global temperatures caused by rising levels of greenhouse gases in the atmosphere can lead to changes in atmospheric and oceanic circulation patterns, which can in turn affect the occurrence of extreme weather events. For example, higher temperatures can lead to more evaporation, which can contribute to drought severity. Or an increase in the amount of water vapor in the atmosphere may change precipitation patterns and fuel more intense storms, heavy rainfall, and hurricanes. "
+    },
+    {
+      "type": "heading",
+      "text": "Loss of Biodiversity 🐘"
+    },
+    {
+      "type": "paragraph",
+      "html": "Changes in climate can have a variety of impacts on ecosystems and species, leading to the loss of biodiversity."
+    },
+    {
+      "type": "paragraph",
+      "html": "As temperatures rise, many species may find it increasingly difficult to survive in their current habitats. This can lead to the displacement of species, as they are forced to move to new areas in search of more suitable conditions. However, if suitable habitats are not available, or if species are unable to migrate or evolve fast enough to keep up with the changing climate, they may become extinct."
+    },
+    {
+      "type": "paragraph",
+      "html": "In addition to the direct impacts of rising temperatures, warming can also indirectly contribute to the loss of biodiversity through its effects on other environmental factors, such as the availability of water, the severity of natural disasters, and the spread of diseases. For example, when droughts and heat waves caused by increased global temperatures reduce the availability of water, rising resource competition can contribute to declines in certain species. Similarly, more frequent and severe natural disasters, such as floods and hurricanes, can create genetic drift and disrupt ecosystems to cause species loss."
+    },
+    {
+      "type": "heading",
+      "text": "Review: Why are Greenhouse Gases Increasing?"
+    },
+    {
+      "type": "paragraph",
+      "html": "Natural sources of carbon dioxide emissions:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Carbon dioxide naturally occurs as a byproduct of the metabolic reaction of cellular respiration.</li>\n<li>Volcanic eruptions release a large amount of CO2 and ash, which upon release can have significant short-term effects on climate. Historic large-scale eruptions have been at fault for reducing the global average temperature by blocking solar radiation.</li>\n<li>The decay of organic matter is another natural source of CO2. As plants and animals die, they decompose, releasing CO2 into the atmosphere.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Human-induced sources of increased CO2 emissions include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Carbon dioxide is produced during the combustion of fossil fuels. Burning of fossil fuels, including the use of coal, oil, and natural gas for electricity generation, transportation, and industrial processes, is the largest source of CO2 emissions into the atmosphere.</li>\n<li>Deforestation is another human-induced source of CO2 emission issues. Trees absorb CO2 from the atmosphere as they grow and photosynthesize. When trees are cut down, the carbon dioxide intake process is disrupted, leading to an increase in atmospheric CO2. An example of this is mass deforestation in the Amazon Rainforest, which is a terrestrial carbon dioxide sink.</li>\n<li>Land use changes feed into deforestation and CO2 emissions. Changes in land use, such as the conversion of forests to agricultural land can increase the release of CO2 into the atmosphere.</li>\n<li>Industrial manufacturing and processes also emit carbon dioxide. From cement production to waste decomposition, industries also contribute to increased carbon dioxide.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Methane"
+    },
+    {
+      "type": "paragraph",
+      "html": "Natural sources of methane emissions include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Wetlands, such as swamps and marshes, produce methane through the decomposition of organic matter.</li>\n<li>In the guts of animals, methane can be produced, meaning animals can create methane through the digestion of their food.</li>\n<li>Wildfires can also release methane into the atmosphere.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Human-induced sources of methane include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Fossil fuel extraction and transportation can contribute to methane emissions. The extraction and transportation of fossil fuels, including coal, oil, and natural gas, can release methane into the atmosphere.</li>\n<li>Landfills are a significant source of methane emissions, as organic waste breaks down in low-oxygen conditions and releases methane gas into the atmosphere.</li>\n<li>Agricultural activities are a significant source of increased atmospheric methane. The raising of livestock, including cows, sheep, and goats, is a major source of methane emissions due to the digestion of their food and the decomposition of manure. Increased cattle farming created a large-scale methane increase.</li>\n<li>Some industrial processes, such as the production of iron and steel, also emit methane.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Natural sources of water vapor include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Water vapor is released into the atmosphere through the process of evaporation, which occurs when the sun's energy heats the surface of oceans, lakes, and other bodies of water.</li>\n<li>Plants release water vapor into the atmosphere through a process called transpiration, which occurs when water is absorbed by the roots and transported to the leaves, where it is released into the air through small pores called stomata.</li>\n<li>Animals release water vapor into the atmosphere through the process of cellular respiration, which occurs when they breathe out air that contains water vapor.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Human-induced sources of increased water vapor include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Some industrial processes, such as the production of electricity, can release water vapor into the atmosphere as a byproduct of burning fossil fuels.</li>\n<li>Agricultural activities, such as irrigation and the application of fertilizers, can also release water vapor into the atmosphere.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Natural sources of nitrous oxide include:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Nitrous oxide is naturally produced in soil through the decomposition of organic matter and denitrification during the nitrogen cycle, especially in low-oxygen environments like wetlands and the oceans.</li>\n<li>Lightning also can break down nitrogen molecules and produce nitrous oxide in the atmosphere.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "Human-induced sources of increased atmospheric nitrous oxide:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Agricultural activities are the main source of increased nitrous oxide. Nitrous oxide is produced in agriculture through the use of nitrogen-based fertilizers and the application of animal manure to fields.</li>\n<li>The industrial production of nitric acid and the burning of fossil fuels, especially the burning of coal for electric power generation, can also release a significant amount of nitrous oxide into the atmosphere.</li>\n<li>The decomposition of organic waste in landfills and sewage treatment plants can also release nitrous oxide into the atmosphere.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "All of the main sources of CFCs are human-induced:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>CFCs were widely used as refrigerants in refrigerators, air conditioners, and other cooling systems.</li>\n<li>Solvents to clean electronic equipment and manufacture metal.</li>\n<li>CFCs were used as foam-blowing agents in the production of foam products, such as insulation and packaging materials.</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "CFCs are no longer produced or used in many countries due to the negative impacts they have on the ozone layer and their exceptionally high GWP, but existing CFCs in the atmosphere continue to have detrimental effects on warming. "
+    }
+  ]
+}

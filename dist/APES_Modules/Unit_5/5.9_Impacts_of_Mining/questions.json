@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Researchers compared median household income, unemployment, and property values in coal-mining and matched non-mining counties. Data were collected in 1990, 2000, 2010, and 2020. Why does measuring outcomes at multiple time points strengthen conclusions about mining's economic impacts?",
+    "answers": [
+      "Multiple time points increase observations but do not create independent samples",
+      "Multiple time points improve timing info but do not expand which variables are measured",
+      "Multiple time points show if economic changes preceded or followed mining",
+      "Multiple time points do not remove the need to match counties on baseline indicators"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A mining company claims switching from open-pit to underground copper mining will reduce environmental damage. It reports open-pit removes 500 meters of overburden annually and exposes 2,000 hectares to erosion while underground tunnels affect 50 hectares. Which limitation best describes how these data support the company's claim?",
+    "answers": [
+      "It lacks explanation of how overburden removal causes widespread erosion.",
+      "It compares different measures but not direct environmental outcomes.",
+      "It brings economic costs into an environmental comparison not relevant.",
+      "It omits subsurface harms such as groundwater contamination and instability."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An engineer notes open-pit operations now extract ore at about 0.4% copper versus 2% fifty years ago and claims technology lets miners process four times more rock economically. Which assumption about resource availability underlies this claim?",
+    "answers": [
+      "Global copper demand will continue to grow over the long term",
+      "Technological advances will offset higher costs of mining lower-grade ore",
+      "Easily accessible copper deposits have already been largely depleted",
+      "Lower-grade mining causes less environmental harm than halting extraction"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The diagram shows a cross-section of a mining operation with a tailings pond, surrounding soil layers, and an aquifer below. Which of the following best describes the ecological impact pathway shown by the arrows connecting the tailings pond to the groundwater?",
+    "answers": [
+      "Heavy metals in tailings accumulate in sediment at the pond bottom, then leach into groundwater through cracks in the impermeable liner, contaminating aquifers that supply drinking water.",
+      "Heavy metals in tailings accumulate in sediment at the pond bottom, then leach into groundwater through permeable soil layers, contaminating aquifers that supply drinking water.",
+      "Heavy metals in tailings accumulate in sediment at the pond bottom, then leach into soil layers where they bind to clay particles, preventing contamination of aquifers that supply drinking water.",
+      "Heavy metals in tailings accumulate in sediment at the pond bottom, then diffuse into groundwater through concentration gradients in soil pore water, contaminating aquifers that supply drinking water."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A coal industry representative argues mountaintop removal is most cost-effective, creates local jobs and tax revenue, and reclamation can restore land. Which value does this prioritize?",
+    "answers": [
+      "Prioritizing ecosystem restoration instead of coal extraction and jobs",
+      "Worker safety concerns favoring underground mining over surface cost savings",
+      "Immediate economic benefits for local communities over ecosystem integrity",
+      "Preserving mountain landscapes instead of providing jobs and tax revenue"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A mining reclamation study compares soil recovery at three abandoned coal mines closed 10 years ago. Mine A no reclamation: organic matter 0.3%, pH 3.8, vegetation 2%. Mine B topsoil replacement only: organic matter 2.1%, pH 5.2, vegetation 18%. Mine C topsoil replacement plus native seeding: organic matter 3.8%, pH 6.1, vegetation 62%. Which conclusion about reclamation effectiveness is best supported by these data?",
+    "answers": [
+      "Natural recovery alone is extremely slow and insufficient after ten years",
+      "All sites show complete recovery to pre mining soil conditions after ten years",
+      "Topsoil replacement alone yields weaker recovery than adding native plant seeding",
+      "Restoring topsoil and seeding native plants substantially improves soil recovery"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An underground coal mining operation in China produces 50,000 tons of coal annually but generates 200,000 tons of mining waste (tailings and slag) containing heavy metals and sulfur compounds. The waste is currently stored in surface impoundments that are contaminating nearby agricultural soil. The mining company must reduce soil contamination while maintaining coal production. Which approach would most cost-effectively prevent ongoing soil contamination from mining waste?",
+    "answers": [
+      "Purchasing uncontaminated soil from distant regions to replace the contaminated agricultural land",
+      "Constructing lined tailings storage facilities with impermeable barriers to prevent leachate from infiltrating soil",
+      "Reducing coal production by 50% to generate half the mining waste and proportionally reduce contamination",
+      "Implementing phytoremediation by planting hyperaccumulator plants to extract heavy metals from contaminated soil"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "An underground coal mine produces 12,000 metric tons of coal annually while generating 8,500 metric tons of tailings (waste rock and mineral residue) per year. If the mine operates for 35 years before reserves are depleted, what is the total mass of tailings that will accumulate at the site?",
+    "answers": [
+      "2.98 × 10⁸ metric tons",
+      "4.20 × 10⁵ metric tons",
+      "1.49 × 10⁵ metric tons",
+      "2.98 × 10⁵ metric tons"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An environmental agency monitored soil properties in reclaimed areas after copper mining ceased. The table shows measurements at different times since mining stopped.\nYears Since Mining Ceased Soil pH Organic Matter (%) Copper Concentration (ppm) Earthworm Density (per m²)\n0 (Active mining site) 3.8 0.5 420 0\n5 4.2 1.2 380 8\n10 5.1 2.8 310 24\n15 6.4 4.1 240 42\n20 7.0 5.2 180 58\nUndisturbed Reference Site 7.2 5.8 45 62\nWhat do these data reveal about the long-term ecological impacts of mining waste on soil recovery?",
+    "answers": [
+      "Copper levels decline slowly and remain far above reference even after 20 years.",
+      "Mining causes long-lasting soil degradation with persistent metals and slow recovery.",
+      "Earthworm populations remain well below reference at 10 years and keep increasing.",
+      "Soil pH rebounds faster than copper but metal contamination limits recovery."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A report claims declining ore grades raised the environmental cost per unit of gold. Average grade fell from 2.5 g/ton in 2000 to 1.2 g/ton in 2020, and annual waste rose from 3 million to 7.5 million tons. Which observation most directly supports the claim that lower ore grades caused higher environmental costs?",
+    "answers": [
+      "Reports of new processing equipment that reduced waste per ton processed.",
+      "Record of rising gold prices that kept low grade mines profitable.",
+      "Data showing waste per ounce of gold recovered rose as ore grade fell.",
+      "Data from other regions showing waste rose following ore grade declines."
+    ],
+    "correct": "C"
+  }
+]

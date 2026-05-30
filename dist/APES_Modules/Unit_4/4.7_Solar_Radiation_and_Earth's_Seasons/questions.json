@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Scientists studying climate change in the Arctic measure solar radiation intensity at three locations: 70°N latitude, 45°N latitude, and 15°N latitude. They use identical pyranometers (solar radiation sensors) installed at each site and record measurements every hour for one full year. Which of the following best describes the independent variable in this study?",
+    "answers": [
+      "The type of sensor used to collect solar radiation data",
+      "The hourly solar radiation intensity recorded by the pyranometers",
+      "The latitude at which solar radiation is measured",
+      "The one-year time period over which measurements were collected"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "At one location researchers measured solar elevation and radiation at three times: 9 AM 15° 280 W/m², 12 PM 65° 920 W/m², 3 PM 35° 510 W/m². Which conclusion about solar angle and radiation intensity is best supported by these data?",
+    "answers": [
+      "Radiation decreases as angle increases due to the sun being farther away.",
+      "Radiation depends only on time and atmospheric conditions not on angle.",
+      "Solar radiation increases with solar elevation and peaks near solar noon.",
+      "Radiation peaks at three PM because afternoon conditions favor transmission."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A site at 30°N receives about 1,800 kJ/m²/day at the summer solstice and 600 kJ/m²/day at the winter solstice. Which best explains this three-fold seasonal difference?",
+    "answers": [
+      "Daylight hours vary at 30°N and summer days are longer than winter days.",
+      "Atmospheric refraction does not substantially reduce winter surface insolation.",
+      "Earth's orbital distance does not cause the seasonal insolation change.",
+      "Higher sun angle and longer daylight in summer increase insolation greatly."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A weather station records daily solar radiation (W/m²) for a year at one location. To test whether seasonal temperature variations correlate with changes in solar radiation, which calculation should you use?",
+    "answers": [
+      "Use the single highest measurement day to represent the entire summer season.",
+      "Sum daily values to get an annual total and use it to explain seasons.",
+      "Compare measurements to a different latitude to explain this location's seasonal changes.",
+      "Compute average daily radiation for each season and compare the seasonal averages."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A location at 40°S has its longest day on December 21 and shortest on June 21. Why is this pattern opposite that at 40°N latitude?",
+    "answers": [
+      "Earth's orbit eccentricity is small so distance does not cause opposite seasons",
+      "Both hemispheres rotate the same direction so rotation does not reverse seasons",
+      "Earth's axial tilt tilts the Southern Hemisphere toward the sun in December",
+      "More ocean in the Southern Hemisphere changes heat distribution but not daylight"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A research team is studying how seasonal changes in solar radiation affect ice melt rates in two mountain valleys at the same elevation and latitude. Valley A has a north-facing slope, while Valley B has a south-facing slope. In the Northern Hemisphere during late spring, Valley B's snow melts approximately three weeks earlier than Valley A's snow. Which of the following best explains this difference?",
+    "answers": [
+      "South-facing slopes in the Northern Hemisphere receive solar radiation at a more direct angle during spring because the sun's path crosses the southern sky, whereas north-facing slopes receive more oblique radiation that travels through more atmosphere.",
+      "South-facing slopes in the Northern Hemisphere receive solar radiation at a more direct angle throughout the year because the sun's path crosses the southern sky, whereas north-facing slopes consistently receive more oblique radiation that travels through more atmosphere regardless of season.",
+      "South-facing slopes in the Northern Hemisphere receive solar radiation from a higher elevation angle in the sky during spring because the sun's path crosses the southern sky, whereas north-facing slopes receive radiation from a lower elevation angle that travels through more atmosphere.",
+      "South-facing slopes in the Northern Hemisphere receive solar radiation at a more direct angle during spring because the sun's path crosses the southern sky, resulting in longer daily exposure periods compared to north-facing slopes that receive oblique radiation for shorter durations."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "During the Northern Hemisphere June solstice the sun is most direct and daylight is longest. Why do the warmest temperatures usually occur in July or August instead of June?",
+    "answers": [
+      "Oceans and atmosphere store heat, causing peak temperatures weeks after peak insolation.",
+      "The solstice gives the maximum sun angle, which then decreases afterward.",
+      "Atmospheric refraction does not increase in summer and cannot cause the timing lag.",
+      "Southern Hemisphere winter does not delay Northern Hemisphere summer temperatures."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Scientists measured solar radiation at a coastal station with a horizontal pyranometer every hour from sunrise to sunset on the summer solstice. If they also measured at the same location on the winter solstice, which change would most likely appear in the data?",
+    "answers": [
+      "Measurement precision might increase slightly but the main effect is revealing seasonal variation",
+      "Total daily radiation would not increase in winter because seasonal geometry reduces it",
+      "Average hourly intensity would differ between seasons rather than remain constant",
+      "Lower daily solar radiation in winter from lower sun angle and shorter days"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A city located at 45°N latitude experiences significantly less solar radiation per unit area during winter compared to a city at the equator during the same season. Which of the following best describes the primary reason for this difference?",
+    "answers": [
+      "The sun's rays strike the Earth's surface at a lower angle at higher latitudes, spreading the same amount of energy over a larger surface area",
+      "The atmosphere is thicker at higher latitudes, absorbing more solar radiation before it reaches the surface",
+      "The equator receives more total solar radiation because it is closer to the sun than higher latitudes",
+      "Higher latitudes experience reduced solar radiation because the tilt of Earth's axis prevents direct sunlight from reaching those regions"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "An environmental educator notes that equatorial regions have roughly equal day and night lengths yet remain warm, while polar regions can have continuous summer daylight but stay frozen. The educator attributes this difference to the angle at which the sun's rays strike the surface. Which statement best expresses the educator's main claim?",
+    "answers": [
+      "Polar regions have extreme seasonal daylight variation, including months of continuous summer sun.",
+      "Sun angle, not day length, determines temperature differences between equator and poles.",
+      "At the poles, shallow sun angle spreads energy over a larger surface area.",
+      "Equatorial regions receive about 12 hours of daylight and 12 hours of darkness."
+    ],
+    "correct": "B"
+  }
+]

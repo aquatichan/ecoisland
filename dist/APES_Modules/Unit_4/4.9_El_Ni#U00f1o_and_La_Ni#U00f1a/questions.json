@@ -1,0 +1,102 @@
+[
+  {
+    "question": "During an El Niño event, weakened trade winds allow warm surface water to spread eastward across the Pacific Ocean, and the thermocline deepens. Which of the following best explains why this deepening thermocline reduces upwelling of nutrient-rich water along the South American coast?",
+    "answers": [
+      "The deeper thermocline reduces the temperature gradient between surface and deep water, reducing the density differences that drive upwelling processes.",
+      "The deeper thermocline increases the distance cold, nutrient-rich water must travel to reach the surface, redirecting upwelling horizontally along the coast rather than vertically.",
+      "The deeper thermocline increases the distance warm surface water must travel to reach deeper layers, reducing the efficiency of downward mixing processes.",
+      "The deeper thermocline increases the distance cold, nutrient-rich water must travel to reach the surface, reducing the efficiency of upwelling processes."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A study examining El Niño's effect on Pacific upwelling intensity measured nutrient concentrations (nitrogen and phosphorus) in surface water at a single coastal location in Peru once per month for two years. If researchers modified the procedure to measure nutrient concentrations at multiple depths (surface, 25-meter, 50-meter, and 100-meter depths) at the same location with the same monthly frequency, how would this modification most likely affect their understanding of El Niño's impact on ocean productivity?",
+    "answers": [
+      "Depth-stratified measurements would provide minimal additional insight because the monthly temporal sampling already captures how El Niño's thermocline deepening reduces upwelling intensity and surface nutrient availability.",
+      "Depth-stratified measurements would reveal how El Niño's thermocline deepening prevents vertical mixing by showing nutrient depletion in surface waters and nutrient retention at depth.",
+      "Depth-stratified measurements would reveal how El Niño's thermocline deepening reduces upwelling intensity by showing uniform nutrient depletion across all measured depths.",
+      "Depth-stratified measurements would reveal how El Niño's thermocline deepening reduces upwelling intensity by showing nutrient depletion in surface waters and nutrient retention at depth."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Some North American migratory birds arrive at breeding grounds 1–2 weeks earlier during El Niño years. Which best explains this shift in migration timing?",
+    "answers": [
+      "El Niño shifts regional temperatures and precipitation, changing food and habitat timing.",
+      "El Niño causes uniform global precipitation increases that shift breeding earlier everywhere.",
+      "Warmer ocean temperatures can alter winds but do not directly cause earlier arrival.",
+      "Innate genetic programming causes birds to migrate earlier in warmer years."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A fisheries scientist analyzed catch data from the Peru Current region over 20 years, comparing El Niño years to non-El Niño years. El Niño years (5 years total) averaged 240,000 metric tons of anchoveta catch annually. Non-El Niño years (15 years total) averaged 890,000 metric tons annually. During El Niño years, sea surface temperatures in the region increased by 2–3°C above the 20-year average. Which conclusion about the environmental effects of El Niño on Pacific fisheries is best supported by these data?",
+    "answers": [
+      "Anchoveta catches remain relatively stable at approximately 500,000 metric tons annually regardless of El Niño occurrence, indicating that ocean temperature changes have minimal impact on fish populations.",
+      "El Niño years produce higher anchoveta catches because warmer ocean temperatures increase metabolic rates and fish growth rates.",
+      "El Niño warming reduces anchoveta catches substantially, likely because warmer waters and altered upwelling patterns disrupt the cold-water habitat and food availability these fish require.",
+      "The data prove that El Niño causes all marine fisheries worldwide to collapse, as demonstrated by the Peru Current anchoveta decline."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A scientist claims El Niño suppresses Atlantic hurricanes by increasing wind shear. They cite weaker Pacific trade winds and a 35 percent decline in Atlantic hurricanes in 2015–2016 versus the prior five-year average but provide no Atlantic wind shear measurements. Why is this evidence alone insufficient to support the wind shear mechanism?",
+    "answers": [
+      "A 35 percent decline is substantial and does not confirm the proposed mechanism.",
+      "Broader event sampling improves confidence but does not replace missing shear measurements.",
+      "Observed hurricane decline shows correlation but not that Atlantic wind shear rose.",
+      "Basins are connected by atmospheric teleconnections so geographic separation is false."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A climate researcher argues that La Niña events increase drought risk in Southeast Asia by strengthening trade winds that suppress rainfall. The researcher provides evidence that during the 2010–2011 La Niña, trade wind speeds in the equatorial Pacific increased 15% above the 30-year average, and precipitation in Thailand and Cambodia declined 30% below normal. Which of the following identifies an assumption the researcher's reasoning depends on?",
+    "answers": [
+      "Stronger trade winds in the equatorial Pacific directly influence atmospheric circulation patterns that determine rainfall delivery to Southeast Asian regions.",
+      "Stronger trade winds in the equatorial Pacific directly influence atmospheric circulation patterns that determine ocean surface temperatures in Southeast Asian regions.",
+      "Stronger trade winds within Southeast Asian regions directly influence atmospheric circulation patterns that determine rainfall delivery to those areas.",
+      "Stronger trade winds in the equatorial Pacific influence ocean current patterns that indirectly determine rainfall delivery to Southeast Asian regions."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A marine biologist observes that during a La Niña event, kelp forests along the Chilean coast become more productive, with increased growth rates and expanded spatial distribution. Which of the following best explains this increased kelp productivity?",
+    "answers": [
+      "Intensified upwelling during La Niña brings cold, nutrient-rich water to the surface, increasing nutrient availability for kelp photosynthesis and growth.",
+      "La Niña events reduce ocean acidification, allowing kelp to more efficiently absorb dissolved inorganic carbon for photosynthesis.",
+      "Stronger currents during La Niña increase water movement through kelp forests, enhancing oxygen delivery and reducing hypoxic stress on kelp tissues.",
+      "Colder water temperatures during La Niña reduce kelp respiration rates, allowing more photosynthetically fixed energy to be allocated to growth."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "During an El Niño event, trade winds in the equatorial Pacific weaken significantly, allowing warm surface water to spread eastward toward South America. Which of the following best describes how this change in ocean conditions affects the thermocline depth and the availability of nutrients for marine ecosystems?",
+    "answers": [
+      "The thermocline remains at constant depth, but nutrient availability increases because warm water dissolves more nutrients from sediments",
+      "The thermocline disappears entirely during El Niño, allowing uniform nutrient distribution throughout the water column",
+      "The thermocline shallows as warm water sinks, increasing upwelling and enhancing nutrient availability in surface waters",
+      "The thermocline deepens as warm water expands, reducing upwelling and decreasing nutrient availability in surface waters"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "The diagram shows upwelling off Peru: strong (500–700 m³/s) during normal and La Niña and weak (50–100 m³/s) during El Niño. How does this change best explain the contrasting impacts on the Peruvian fishing industry?",
+    "answers": [
+      "Upwelling supplies nutrients that fuel plankton and fish and weak upwelling collapses stocks.",
+      "Warmer surface waters can raise metabolism briefly but nutrient loss reduces catches.",
+      "Trade wind changes drive coastal upwelling so El Niño weakens upwelling.",
+      "Fish are adapted to cold nutrient-rich upwelled waters so reduced upwelling harms fisheries."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The diagram shows ocean conditions in the tropical Pacific during an El Niño event compared to normal conditions. Which characteristic of the thermocline change shown best explains why El Niño causes warmer ocean surface temperatures along the South American coast?",
+    "answers": [
+      "The thermocline deepens, allowing warm surface water to extend further down and reducing the upwelling of cold deep water",
+      "The thermocline disappears entirely, allowing warm surface water to mix uniformly with deeper ocean layers",
+      "The thermocline becomes shallower, causing increased upwelling that brings warm water from deeper ocean layers to the surface",
+      "The thermocline strengthens, creating a more pronounced temperature barrier that traps warm water at the surface"
+    ],
+    "correct": "!"
+  }
+]

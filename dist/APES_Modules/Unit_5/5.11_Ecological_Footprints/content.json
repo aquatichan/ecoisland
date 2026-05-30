@@ -1,0 +1,52 @@
+{
+  "title": "5.11 Ecological Footprints",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Human Impact"
+    },
+    {
+      "type": "paragraph",
+      "html": "Human beings have a drastic effect on the environments and ecosystems they inhabit. An <strong>ecological footprint</strong> demonstrates one individual's map of environmental \"participation\"; food consumption, pollution output, etc. Ecological footprints can vary based on how careful one is about contributing to the environment or, in general, how many resources one uses to sustain themselves."
+    },
+    {
+      "type": "heading",
+      "text": "Calculating a Footprint"
+    },
+    {
+      "type": "paragraph",
+      "html": "Ecological footprints can be determined for an individual, community, town, region, country, and planet Earth. There is a “cost” to produce goods and provide services. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Examples of questions or criteria that are used to calculate an ecological footprint include the following: "
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "html": "<ol class=\"MuiBox-root mui-19idom\">\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">How do you get around? Walking, driving, etc. </p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">How often do you fly in an airplane? Are your flights international?</p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">How do you eat (Do you eat meat?  Are you a vegetarian?)? Where do you get your food from?</p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">How often do you buy new clothes and other things? Is your answer different regarding secondhand items?</p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">Do you use renewable energy (solar, wind, etc.) for heating your housing? </p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">How long do you shower? </p>\n</li>\n<li>\n<p class=\"MuiTypography-root MuiTypography-body1 mui-pou9by\">What temperature do you keep your housing at in the winter?</p>\n</li>\n</ol>"
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2016%2F11%2F18%2F21%2F26%2Fbike-1836934_960_720.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Individuals and Corporations"
+    },
+    {
+      "type": "paragraph",
+      "html": "Some individuals or companies have a much bigger footprint or impact they will leave on the environment than others. We can compare and even calculate the impact a person has. Look at these two scenarios as examples: Person A. lives in an apartment, bikes to work and eat a vegetarian diet and Person B has a very large house, drives a large car a long way to work and eats a mostly red meat based diet. These two people would have a very different lasting impact on the world around them."
+    },
+    {
+      "type": "paragraph",
+      "html": "However, an individual's impact will be small compared to a corporation’s. Some very large corporations are responsible for massive amounts of CO2 production, plastic pollution, deforestation, and water usage among other environmental impacts."
+    },
+    {
+      "type": "paragraph",
+      "html": "The ecological footprint is often used as a way to assess the sustainability of human activities. If the ecological footprint of a population is larger than the available ecological resources, then that population is living unsustainably and is overshooting its resource limits. This can lead to environmental degradation and a decline in the long-term well-being of the population. "
+    }
+  ]
+}

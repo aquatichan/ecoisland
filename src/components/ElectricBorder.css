@@ -1,8 +1,9 @@
 .electric-border {
   --electric-light-color: oklch(from var(--electric-border-color) l c h);
   --eb-border-width: 2px;
+  --eb-radius: 1rem;
   position: relative;
-  border-radius: inherit;
+  border-radius: var(--eb-radius);
   overflow: visible;
   isolation: isolate;
 }
@@ -19,14 +20,14 @@
 
 .eb-content {
   position: relative;
-  border-radius: inherit;
+  border-radius: var(--eb-radius);
   z-index: 1;
 }
 
 .eb-layers {
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: var(--eb-radius);
   pointer-events: none;
   z-index: 2;
 }
@@ -38,10 +39,17 @@
 .eb-overlay-2,
 .eb-background-glow {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  border-radius: var(--eb-radius);
   pointer-events: none;
   box-sizing: border-box;
+}
+
+.eb-stroke,
+.eb-glow-1,
+.eb-glow-2,
+.eb-overlay-1,
+.eb-overlay-2 {
+  inset: 0;
 }
 
 .eb-stroke {
@@ -62,7 +70,8 @@
 
 .eb-background-glow {
   z-index: -1;
-  transform: scale(1.08);
+  inset: -8%;
+  transform: none;
   filter: blur(32px);
   opacity: 0.3;
   background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));

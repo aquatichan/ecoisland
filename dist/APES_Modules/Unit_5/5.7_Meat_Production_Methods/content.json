@@ -1,0 +1,63 @@
+{
+  "title": "5.7 Meat Production Methods",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Reasons for Change"
+    },
+    {
+      "type": "paragraph",
+      "html": "Livestock meat farming or production has changed significantly over the years. With increased populations and more demand, agriculture has begun to need much larger supplies of meat to ship out and provide. Shifts in the industry have resulted in more, smaller, and more dangerous feeding operations to produce an excess of meat versus older, more traditional, smaller and family-owned farming businesses. Change in the meat industry comes with associated damages (inflation, animal endangerment), but these changes were necessary due to environmental growth and the Earth's demand for product to feed its ci"
+    },
+    {
+      "type": "heading",
+      "text": "Concentrated Animal Feeding Operations (CAFO)"
+    },
+    {
+      "type": "paragraph",
+      "html": "One method of meat production uses the concept of <strong>Concentrated Animal Feeding Operations (CAFO</strong><strong>)</strong>. This method concentrates on mass space conservation and having the most animals per area of land owned. CAFOs work by species of animal, how many individual animals are present, and how waste or pollution from each enter the water supply. All major meat industries (beef, lamb, poultry...) use CAFOs."
+    },
+    {
+      "type": "paragraph",
+      "html": "There are pros and cons in using CAFO farming. Job opportunities are aplenty, costs are lowered for consumers, and it is possible for farmers to have more than one species in one farm separated by pens. However, CAFOs cause a lot of pollutants and are widely considered to be torturous/dangerous for the animals they raise. Conditions inside them are unfavorable and can lead to issues with the animal's health."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F1%2F1c%2FConfined-animal-feeding-operation.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Free-range"
+    },
+    {
+      "type": "paragraph",
+      "html": "You may hear these words a lot in the grocery store, or see them on certain animal products. Free-range essentially is the opposite of a CAFO; animals are allowed to roam and graze whenever; there are no pens, fences, or gates, and they are permitted to go wherever at any time. Animals in free-range environments are happier and healthier (with much fewer antibiotics in their systems!), but it's an expensive product to buy and the waste on a free-range farm is much less controlled."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fe0%2FFree_Range_Hens_-_geograph.org.uk_-_342791.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Overgrazing"
+    },
+    {
+      "type": "paragraph",
+      "html": "Soil erodes and vegetation is lost when animals (or other species) consume land and grass resources at a rate faster than they're able to grow back. Overgrazing can lead to desertification, which occurs in dry areas with low precipitation and depleted water supplies. "
+    },
+    {
+      "type": "image",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Desertification_Control_Project%2C_Ningxia_China_-_Planet_Labs_satellite_image.jpg/960px-Desertification_Control_Project%2C_Ningxia_China_-_Planet_Labs_satellite_image.jpg?_=20150124004607",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "paragraph",
+      "html": "Meat production is an incredibly important economic stronghold in countries like Brazil, the United States, and China. Meat production has only increased, but there is research suggesting to reduce meat consumption. One reason is for a healthier diet and consuming less meat as humans can lead to reduced methane, carbon dioxide, and nitrogen based gases.  Also, reducing meat consumption will help conserve water and decrease the use of antibiotics used to help animals grow faster. "
+    }
+  ]
+}

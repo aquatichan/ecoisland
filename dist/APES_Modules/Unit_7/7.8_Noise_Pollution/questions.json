@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Researchers measured urban noise with decibel meters at five fixed stations. If they add mobile measurements across neighborhoods, how would this affect their ability to detect spatial variation in noise exposure?",
+    "answers": [
+      "Mobile sampling would reveal spatial gradients and hotspots of noise exposure.",
+      "Mobile sampling does not replace fixed stations because those provide temporal continuity.",
+      "Mobile sampling improves spatial coverage but cannot measure every location simultaneously.",
+      "Mobile sampling can be less reliable if timing and protocols are inconsistent."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A graph shows ambient noise (dB) and successful bird vocalizations (%) in an urban park over 24 hours: rush hours (7–9 AM, 5–7 PM) 75 dB and 15% success; midday (10 AM–4 PM) 65 dB and 45% success; night (10 PM–6 AM) 50 dB and 80% success. Which statement best explains the relationship between noise pollution and bird communication effectiveness?",
+    "answers": [
+      "Ambient noise masks bird calls, reducing signal detectability and communication range.",
+      "Noise does not stop birds from calling, it just reduces transmission success.",
+      "Noise does not improve success, frequency shifts often fail to restore communication.",
+      "Time of day influences vocal behavior, but noise levels better explain success differences."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers measured weekly noise and stress hormones in urban rats in a downtown district for eight weeks. If they instead sampled rats in three urban zones during the same eight weeks, which understanding would most improve?",
+    "answers": [
+      "No change in temporal replication because sampling spans eight weeks",
+      "Need for more blood samples complicates statistical analysis",
+      "Correlation of stress hormones with noise across urban zones",
+      "Lower stress hormone levels in park rats due to quieter environment"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "In urban areas, noise from traffic, construction, and industrial facilities often exceeds 85 decibels. Which of the following best explains why prolonged exposure to noise at this level causes hearing loss in humans?",
+    "answers": [
+      "Sound waves at high decibel levels cause excessive vibration of the cochlear structures in the inner ear, temporarily fatiguing hair cells that convert sound vibrations into nerve signals, resulting in reversible hearing threshold shifts",
+      "Sound waves at high decibel levels cause chemical stress in the cochlear structures of the inner ear, damaging hair cells that convert sound vibrations into nerve signals, resulting in permanent hearing impairment",
+      "Sound waves at high decibel levels cause excessive vibration of the cochlear structures in the inner ear, damaging hair cells that convert sound vibrations into nerve signals, resulting in permanent hearing impairment",
+      "Sound waves at high decibel levels cause excessive vibration of the tectorial membrane in the inner ear, damaging hair cells where they attach to this membrane, resulting in permanent hearing impairment"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A wildlife refuge near a city reports migratory songbird numbers fell 35% over a decade. Urban noise averaged 70 dB and increased 15 dB in that time. Ornithologists propose a 2 km vegetated buffer of trees and shrubs that would cut refuge noise by 8–12 dB. Which best justifies the buffer?",
+    "answers": [
+      "Buffer increases carbon sequestration, providing climate benefits while reducing some noise.",
+      "Buffer prevents hearing loss in songbirds by ensuring they never hear loud sounds.",
+      "Buffer reduces noise masking of bird vocalizations, restoring conditions for breeding success.",
+      "Buffer creates a complete sound barrier eliminating urban noise in the refuge."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A major airport in a coastal region experiences high noise levels from aircraft operations. Migratory bird populations that historically crossed the airport airspace have begun altering their flight paths to avoid the area, increasing energy expenditure and reducing breeding success. Which solution would most effectively address the noise pollution affecting these birds?",
+    "answers": [
+      "Establish noise-reduction zones around the airport perimeter by planting dense tree and shrub corridors that absorb sound and redirect migratory bird flight paths away from high-noise areas.",
+      "Establish noise-reduction zones within the airport grounds by planting dense tree and shrub corridors that absorb sound and redirect migratory bird flight paths away from high-noise areas near runways.",
+      "Establish noise-reduction zones around the airport perimeter by installing reflective sound barriers that deflect aircraft noise and redirect migratory bird flight paths away from high-noise areas.",
+      "Establish noise-reduction zones around the airport perimeter by planting dense tree and shrub corridors that absorb sound and allow migratory birds to maintain their historical flight paths through the airport airspace."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers studying noise pollution effects on insect communication recorded sounds produced by crickets and cicadas at five urban park locations and five rural forest locations. They measured the dominant frequency and call rate of insects at each site. Which of the following best explains why the researchers collected data from multiple locations within each environment type?",
+    "answers": [
+      "To account for natural variation in insect populations and compare differences between individual urban park sites and individual rural forest sites",
+      "To account for natural variation in insect populations and ensure results represent typical urban and rural conditions",
+      "To increase the total sample size of measurements and improve the statistical power of the comparison between urban and rural environments",
+      "To account for natural variation between cricket and cicada species and ensure results represent both insect types in urban and rural conditions"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Which research question best guides a testable investigation using five years of sonar logs, acoustic recordings, and dolphin sightings?",
+    "answers": [
+      "Do dolphin vocalizations show reduced frequency range and shifted timing in sonar areas?",
+      "Does sonar exposure cause hearing loss and reduced foraging that lower dolphin survival?",
+      "Do multiple human activities including sonar collectively alter marine ecosystem health?",
+      "Should naval sonar be banned to protect dolphin populations from harm?"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Marine mammals such as dolphins and whales are altering migration routes to avoid shipping lanes. Which mechanism best explains how shipping noise causes these behavioral changes?",
+    "answers": [
+      "Noise physically damages inner ear, producing hearing loss that impairs navigation.",
+      "Ship activity raises local water temperature enough to cause thermal stress.",
+      "Noise masks echolocation and communication, forcing animals to move to quieter areas.",
+      "Ship noise reduces dissolved oxygen causing hypoxia and forcing migration."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An urban airport operates 24-hour flight operations with aircraft takeoffs and landings every 3-5 minutes, producing noise levels of 85-100 decibels in surrounding neighborhoods. Researchers compare health outcomes in residents living within 2 kilometers of the airport to residents living 10 kilometers away. The near-airport population shows higher rates of hypertension, sleep disorders, and cardiovascular disease. Which of the following best explains why chronic airport noise exposure produces these health outcomes?",
+    "answers": [
+      "Aircraft engines emit toxic exhaust fumes that accumulate in near-airport neighborhoods, causing respiratory inflammation that manifests as hypertension and sleep disorders.",
+      "Aircraft noise masks environmental sounds that residents normally use for relaxation and stress reduction, such as bird songs and wind sounds, removing protective acoustic factors.",
+      "The 85-100 decibel noise directly damages the inner ear structures of near-airport residents, causing hearing loss that impairs communication and increases social isolation leading to cardiovascular disease.",
+      "Repeated noise exposure above 85 decibels triggers sustained physiological stress responses, elevating blood pressure and stress hormones that increase cardiovascular disease risk and disrupt sleep architecture."
+    ],
+    "correct": "D"
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A study finds nitrous oxide rose 20 percent since pre-industrial times, mainly from agricultural nitrogen fertilizer. The researchers conclude reducing fertilizer is essential to stabilize atmospheric nitrous oxide. Which additional information would most strengthen that reasoning?",
+    "answers": [
+      "Data on nitrous oxide's global warming potential and long atmospheric lifetime.",
+      "Evidence that nitrous oxide levels were stable for centuries before industrial times.",
+      "Agriculture produces most human nitrous oxide and fertilizer is the main controllable source.",
+      "Evidence that alternative fertilizers or precision methods sustain yields with less nitrogen."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A wetland ecologist reports that wetlands naturally emit methane via anaerobic decomposition and that human actions alter those dynamics. Drainage removes methane sources but destroys carbon storage. Restoration increases local methane while providing flood control, water filtration, and habitat. Which sentence best expresses the ecologist's central claim?",
+    "answers": [
+      "Draining wetlands removes methane sources but destroys long term carbon storage",
+      "Restoring wetlands raises local methane emissions while providing flood control and filtration",
+      "Wetlands produce methane by anaerobic decomposition in low oxygen environments",
+      "Wetland ecosystem services justify accepting their methane emissions in sustainable management"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An analyst notes CFCs have a global warming potential above 13,000, were phased out by the Montreal Protocol, and persist 50 to 100 years. Some argue policy should now prioritize abundant gases like CO2. The analyst counters that policy must account for gas potency not just emission volume. Which statement best captures the author's main claim?",
+    "answers": [
+      "CFCs emitted before the ban persist 50 to 100 years and deplete ozone",
+      "CFCs have global warming potential above 13000 and were used in refrigeration",
+      "Climate policy should prioritize greenhouse gas potency over emission volume",
+      "The Montreal Protocol showed international cooperation can address atmospheric threats"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An agricultural scientist reports that cattle emit about 200 to 500 liters of methane annually through enteric fermentation. Global cattle exceed one billion, so livestock contributes roughly 14 to 18 percent of anthropogenic greenhouse gases. Methane has a global warming potential of 25 and a shorter atmospheric lifetime than carbon dioxide. The scientist recommends reducing livestock methane via alternative proteins or on-farm methane digesters. Which choice best expresses the author's prescriptive claim?",
+    "answers": [
+      "Methane's shorter atmospheric lifetime makes it less important for climate policy.",
+      "Reducing livestock methane emissions is essential because methane is highly potent.",
+      "Each mature cow emits about 200 to 500 liters of methane annually.",
+      "Livestock agriculture contributes about 14 to 18 percent of global greenhouse emissions."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers measure gas composition at a landfill and a composting facility to evaluate their contributions to climate change. They identify methane and carbon dioxide as primary emissions. Which hypothesis best investigates the relative global warming potential of these gases?",
+    "answers": [
+      "Methane traps more infrared radiation per molecule than carbon dioxide, but only over a 20-year period.",
+      "Methane and carbon dioxide trap equal amounts of infrared radiation per molecule over a 100-year period.",
+      "Methane traps more infrared radiation per molecule than carbon dioxide over a 100-year period.",
+      "Carbon dioxide has a higher global warming potential per molecule than methane over a 100-year period."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A study examines the impact of land-use change on the carbon cycle. Researchers compare a mature tropical forest with a recently burned and cleared plot. Which hypothesis identifies the primary greenhouse gas source associated with this clearing?",
+    "answers": [
+      "The cleared plot releases more carbon dioxide from biomass combustion than the forest plot.",
+      "The forest plot releases more carbon dioxide from decomposition of dead organic matter than the cleared plot.",
+      "The cleared plot releases more methane from anaerobic decomposition of remaining biomass than the forest plot.",
+      "The cleared plot releases more nitrous oxide from soil disturbance and microbial activity than the forest plot."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers measured wetland methane using 30-minute chambers and continuous sensors 2 meters above the surface. Why does combining both methods yield more reliable data than either alone?",
+    "answers": [
+      "Chambers are more accurate so sensors can be adjusted using chamber values",
+      "Sensors cannot measure methane accurately so chambers provide the only reliable data",
+      "Chambers give precise local fluxes while sensors capture continuous temporal trends",
+      "Multiple methods reduce replication needs so researchers sample fewer locations"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An agricultural scientist wants to study the greenhouse gas emissions associated with synthetic fertilizer use on corn fields. Which of the following represents a testable hypothesis for this investigation?",
+    "answers": [
+      "Nitrogen fertilizer application increases soil nitrous oxide emissions.",
+      "Nitrogen fertilizer application increases soil nitrate leaching into groundwater.",
+      "Nitrogen fertilizer application increases soil carbon dioxide emissions.",
+      "Nitrogen fertilizer application increases soil ammonia volatilization rates."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Researchers collected gas samples from the top 5 centimeters of agricultural soil using sealed surface chambers weekly for 12 weeks after nitrogen fertilizer application. If they added sampling at 15 and 30 centimeters depth, which change in understanding of nitrous oxide sources would most likely result?",
+    "answers": [
+      "They could conclude concentrations increase with depth because of overlying pressure.",
+      "They could claim sampling depths removes seasonal variation in emissions.",
+      "They would measure concentrations at specific depths but not total soil inventory.",
+      "They would reveal the vertical distribution of N₂O production in the soil."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Researchers measured nitrous oxide emissions from plots treated with two fertilizers, synthetic urea and organic compost. Each treatment had six replicate plots and weekly gas sampling for eight weeks. Why does using six replicate plots per treatment strengthen conclusions about the fertilizers' effects on nitrous oxide emissions?",
+    "answers": [
+      "Replicates are repeats of the same treatment not different fertilizer types.",
+      "Replication addresses variability within treatments rather than guaranteeing full field coverage.",
+      "Multiple replicates reduce random variation by averaging natural soil heterogeneity.",
+      "Larger sample sizes increase power but replication primarily reveals treatment variability."
+    ],
+    "correct": "C"
+  }
+]

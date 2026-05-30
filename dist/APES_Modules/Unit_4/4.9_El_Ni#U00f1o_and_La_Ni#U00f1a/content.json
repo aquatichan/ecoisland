@@ -1,0 +1,49 @@
+{
+  "title": "4.9 El Niño and La Niña",
+  "content": [
+    {
+      "type": "heading",
+      "text": "El Niño"
+    },
+    {
+      "type": "paragraph",
+      "html": "An <strong>El Niño</strong> is a warming of the Pacific Ocean between South America and Papua New Guinea (just north of Australia, an island in the Southwest Pacific). This occurs when the trade winds in that region weaken, which causes the west coast of South America to experience warmer waters. This effect also allows the <strong>thermocline</strong> to move deeper. This layer of the ocean represents a shallow depth at which a lot of heat is lost. By moving deeper, this demonstrates that the thermocline has receded into the depths and given rise to more warm ocean. This is shown in the image below. El Niño events cause higher precipitation in drier climates on the West Coast but create colder winters in the southeastern US."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F9%2F9b%2FEl_Ni%25C3%25B1o_Conditions.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fstatic.prod.fiveable.me%2Fap-images%2FAP%2520Bio%2520%2FU5S368pLCyWCQ.webp&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "La Niña"
+    },
+    {
+      "type": "paragraph",
+      "html": "When a <strong>La Niña</strong> occurs, it is a cooling of the Pacific Ocean between Papua New Guinea and South America, essentially the opposite of an El Niño. The formation of a La Niña begins when the trade winds get stronger, which pushes warm coastal water further and further away from the South American coastline. Deeper and colder water from the ocean will rise, which is called <strong>upwelling</strong>. This means that the thermocline has instead moved up, creating less room for warm ocean. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Instead of generally rising temperatures, we see cooler temperatures as well as wet conditions. However, in the southeastern US, we see the opposite, warmer and drier conditions."
+    },
+    {
+      "type": "heading",
+      "text": "Greater Environmental Impacts"
+    },
+    {
+      "type": "paragraph",
+      "html": "An El Niño can have impacts that are shown around the world. The rapid change in climate may cause some species to suffer or require relocation due to their niche not allowing for extremely warm or cold environments. Additionally, migration seasons for birds may change entirely."
+    },
+    {
+      "type": "paragraph",
+      "html": "On a more global scale, the ocean heat capacity decreases and it is unable to absorb as much energy as needed, which in turn warms the planet. As for the weather, temperature changes will affect precipitations and contribute to either flooding or drought."
+    }
+  ]
+}

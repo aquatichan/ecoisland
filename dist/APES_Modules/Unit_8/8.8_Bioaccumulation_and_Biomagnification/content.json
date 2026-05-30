@@ -1,0 +1,156 @@
+{
+  "title": "8.8 Bioaccumulation and Biomagnification",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Environmental Bioaccumulation"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Biomagnification</strong> refers to the process by which toxins or pollutants become more concentrated as they move up the food chain. This occurs because animals at the top of the food chain consume many smaller organisms that have already accumulated the toxins, thereby increasing the concentration of the toxins in their own bodies. This can have harmful effects on the health of animals and humans that consume contaminated organisms."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Bioaccumulation</strong> refers to the process by which certain substances, such as toxins or pollutants, build up in the tissues of living organisms over time. Some organisms, such as fish, shellfish, and certain types of algae, are particularly effective at bioaccumulating certain substances, and are referred to as bioaccumulators. These organisms can have high levels of toxins in their tissue, even if the surrounding environment has low levels of the same toxins. This can be harmful to both the bioaccumulator and animals that consume it, as the toxins can accumulate in the body and potentially cause health problems."
+    },
+    {
+      "type": "heading",
+      "text": "How Does Biomagnification Work?"
+    },
+    {
+      "type": "paragraph",
+      "html": "In biomagnification, toxic chemicals or pollutants enter the ecosystem and are taken up by small organisms at the bottom of the food chain, such as phytoplankton or insects. As these small organisms are consumed by larger organisms, the toxins or pollutants are passed on and become increasingly concentrated in the bodies of the larger organisms. This process continues as larger and larger organisms consume the smaller organisms, with the highest concentrations of toxins or pollutants found in the top predators of the food chain. This can lead to harmful effects on the health of both animals and humans that consume contaminated organisms. Additionally, the accumulation of such toxic substances in the apex predator may lead to reproductive failure, behavioral changes, and even death."
+    },
+    {
+      "type": "paragraph",
+      "html": "Below is an example of how biomagnification works in the Arctic Marine Food Web: "
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-SL6CxkE2LXQc.png?alt=media&token=ba16dfbb-864f-40d1-b46f-590fea101182",
+      "width": "383",
+      "height": "304"
+    },
+    {
+      "type": "heading",
+      "text": "Why is Biomagnification Dangerous?"
+    },
+    {
+      "type": "paragraph",
+      "html": "Biomagnification can be dangerous because it can lead to the accumulation of toxic substances in the tissues of organisms at the top of the food chain, such as humans. These toxins can have a variety of harmful effects on the health of the organisms that consume them, including reproductive failure, behavioral changes, and death. For example, certain pesticides and industrial chemicals can accumulate in fish and shellfish, which are then consumed by humans, leading to potential health problems. Additionally, certain pollutants such as mercury, can also accumulate in the food chain and can have harmful effects on the nervous system and other organs."
+    },
+    {
+      "type": "paragraph",
+      "html": "Furthermore, biomagnification can also lead to population declines and even extinction of certain species. The accumulation of toxins in the tissues of organisms at the top of the food chain can lead to reduced fertility, increased mortality, and other population-level effects that can ultimately lead to population declines and even extinction."
+    },
+    {
+      "type": "paragraph",
+      "html": "In summary, biomagnification can have serious consequences for the health of animals and humans, as well as for the populations of species and the balance of entire ecosystems."
+    },
+    {
+      "type": "paragraph",
+      "html": "If the <strong>keystone species</strong> is eliminated due to biomagnification, the surrounding organism populations in the food web will also be affected. "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>KEY VOCABULARY</strong> "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Keystone species</strong>: A keystone species is a species that plays a critical role in maintaining the structure and function of an ecosystem. These species have a disproportionate effect on their environment relative to their abundance. Their loss can lead to significant changes in the ecosystem and the disappearance of many other species. The loss of keystone species can cause an ecological domino effect, leading to cascading extinctions of many other species that rely on them.For example, sea otters are a keystone species in the nearshore marine ecosystem of the Pacific Northwest. They feed on sea urchins, which in turn feed on kelp. Without sea otters, sea urchins can overpopulate and consume all the kelp, changing the entire ecosystem and impacting other species that rely on the kelp forest. Similarly, elephants in the African savannah can have a significant impact on their ecosystem by spreading seeds and shaping the vegetation, which in turn affects other animals that rely on the vegetation.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Examples in the World"
+    },
+    {
+      "type": "heading",
+      "text": "In the Present"
+    },
+    {
+      "type": "paragraph",
+      "html": "Methylmercury is a toxic chemical that can be found in the ocean and in fish. It forms when certain types of bacteria in the ocean convert inorganic mercury into organic methylmercury. This chemical can then be taken up by small organisms such as algae and small fish, and can accumulate in the tissues of larger organisms as they consume the smaller organisms. Biomagnification of methylmercury has been observed in a number of marine species, including Bluefin Tuna in the Atlantic."
+    },
+    {
+      "type": "paragraph",
+      "html": "It is important to be aware of the presence of methylmercury in seafood, as it can have harmful effects on human health if consumed in high enough quantities. The consumption of seafood contaminated with methylmercury can lead to a range of health problems, including damage to the nervous system, developmental delays in children, and other health issues."
+    },
+    {
+      "type": "paragraph",
+      "html": "Climate change is a factor that can contribute to the increased presence of methylmercury in the ocean and in fish. The extra heat of the ocean can lead to increased metabolism in fish and other organisms, causing them to consume more fish and increasing the levels of methylmercury in the larger, predatory species. As a result, it is important to monitor the levels of methylmercury in seafood, and to take steps to reduce human exposure to this toxic chemical."
+    },
+    {
+      "type": "heading",
+      "text": "In the Past"
+    },
+    {
+      "type": "paragraph",
+      "html": "DDT (Dichlorodiphenyltrichloroethane) is a pesticide that was widely used in the United States and other countries in the 1940s-1970s to control mosquitoes and other insects. It was sprayed on water to eliminate mosquito larvae and decrease the spread of malaria among the human population."
+    },
+    {
+      "type": "paragraph",
+      "html": "DDT can bioaccumulate in the food chain. When DDT is sprayed on water, algae absorb it and pass it on to primary consumers, such as small fish and microorganisms. As these organisms are consumed by larger organisms, the DDT is passed on and becomes increasingly concentrated in the bodies of the larger organisms, leading to biomagnification. The DDT reaches its highest concentration in apex predators."
+    },
+    {
+      "type": "paragraph",
+      "html": "The effects of DDT on wildlife were severe and still have some lasting effects. For example, DDT caused the thinning of the eggshells of birds of prey, such as the Bald eagle, which led to a decline in their population. Also, DDT was found to be toxic to fish and other aquatic life, which in turn affected the entire aquatic ecosystem."
+    },
+    {
+      "type": "paragraph",
+      "html": "Due to the negative impacts on both human health and the environment, DDT was banned in the United States in 1972, and subsequently banned or severely restricted in many other countries. However, DDT can still be found in the environment today as it takes a long time to degrade, and it can still be found in some areas in the world where it is still used for malaria control."
+    },
+    {
+      "type": "paragraph",
+      "html": "One way to think about this is to recall Plankton from Spongebob. Imagine that he manages to steal the secret formula in an alternate universe. <strong>The secret formula is the toxins</strong>, and it is passed onto Plankton. From here, Plankton spreads his “formula,” or toxins, to everyone at the <strong>Chum Bucket</strong>, or in this case, his <strong>predators</strong>. "
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-YKWyT4uGHmsd.gif?alt=media&token=b587b4d3-88d2-44cb-aff5-2bc02f5f73b1",
+      "width": "0",
+      "height": "0"
+    },
+    {
+      "type": "heading",
+      "text": "Biomagnification in Action"
+    },
+    {
+      "type": "paragraph",
+      "html": "Biomagnification in action refers to the process by which toxins or pollutants become more concentrated as they move up the food chain. This occurs because animals at the top of the food chain consume many smaller organisms that have already accumulated the toxins, thereby increasing the concentration of the toxins in their own bodies."
+    },
+    {
+      "type": "paragraph",
+      "html": "An example of biomagnification in action is the case of DDT, a pesticide that was widely used in the United States and other countries in the 1940s-1970s. When DDT was sprayed on water, it was absorbed by algae and passed on to small fish and other primary consumers. As these organisms were consumed by larger fish and other animals, the DDT was passed on and became increasingly concentrated in the bodies of the larger organisms. This process continued as larger and larger animals consumed the smaller organisms, with the highest concentrations of DDT found in the top predators of the food chain, such as birds of prey."
+    },
+    {
+      "type": "paragraph",
+      "html": "Another example is the presence of methylmercury in the ocean and seafood. Methylmercury forms when certain types of bacteria in the ocean convert inorganic mercury into organic methylmercury. This chemical can then be taken up by small organisms such as algae and small fish, and can accumulate in the tissues of larger organisms as they consume the smaller organisms. Biomagnification of methylmercury has been observed in a number of marine species, including Bluefin Tuna in the Atlantic."
+    },
+    {
+      "type": "paragraph",
+      "html": "In both examples, the concentration of the toxins increases as it moves up the food chain, reaching the highest level in the apex predator, which can have serious consequences for the health of animals and humans, as well as for the populations of species and the balance of entire ecosystems."
+    },
+    {
+      "type": "heading",
+      "text": "Graphic Organizer"
+    },
+    {
+      "type": "paragraph",
+      "html": "For those of you who are more <em>visual learners</em>, check out this fantastic graphic organizer below, which simplifies all of <strong>biomagnification</strong> and <strong>bioaccumulation</strong>:"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-pEnVR2NfGYss.png?alt=media&token=5a22a2bd-88ba-4c0a-809a-34ff02834035",
+      "width": "0",
+      "height": "0"
+    },
+    {
+      "type": "paragraph",
+      "html": "Well, that’s all there is to bioaccumulation and biomagnification! Hope this helps, and good luck studying! "
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a><a href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration:none;pointer-events:auto\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a>"
+    }
+  ]
+}

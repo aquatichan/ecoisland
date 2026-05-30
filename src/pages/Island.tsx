@@ -1,383 +1,963 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { User } from "@/entities/User";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
-  Coins,
   ShoppingCart,
-  Mountain,
-  Cloud,
-  Sun,
-  CloudRain,
-  Sunset,
-  Leaf,
-  Settings,
-  Trash2,
-  Wind,
-  Gem,
+  TreePine,
+  CheckCircle,
+  Loader2,
+  Star,
+  Lock,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import Galaxy from "../components/Galaxy";
 
-const islandItems = [
-  { id: "skybox_basic", name: "Basic Skybox", cost: 5, category: "skybox", icon: Cloud, description: "Simple, sky blue (no gradient)", color: "bg-blue-100 text-blue-700" },
-  { id: "skybox_rainy", name: "Rainy Sky", cost: 10, category: "skybox", icon: CloudRain, description: "Gloomy, gray skies with a foggy blur (no gradient)", color: "bg-gray-100 text-gray-700" },
-  { id: "skybox_sunny", name: "Sunny Sky", cost: 15, category: "skybox", icon: Sun, description: "Sunny gradient with bright blue skies", color: "bg-yellow-100 text-yellow-700" },
-  { id: "skybox_sunset", name: "Beautiful Sunset", cost: 30, category: "skybox", icon: Sunset, description: "Stunning sunset with golden, orange, and pink hues", color: "bg-orange-100 text-orange-700" },
+type IslandCategory = "skybox" | "island" | "decoration";
 
-  { id: "island_grass", name: "Grass Island", cost: 5, category: "island", icon: Leaf, description: "The starter island, lush and green for a tranquil experience", color: "bg-green-100 text-green-700" },
-  { id: "island_volcanic", name: "Volcanic Island", cost: 50, category: "island", icon: Mountain, description: "A dramatic volcanic island, for the experienced", color: "bg-red-100 text-red-700" },
+type IslandItem = {
+  id: string;
+  name: string;
+  cost: number;
+  category: IslandCategory;
+  description: string;
+  emoji: string;
+  color: string;
+  image: string;
+};
 
-  { id: "forest_small", name: "Small Forest", cost: 10, category: "decoration", icon: Leaf, description: "An elaborate arrangement of small trees for a sonder vibe", color: "bg-emerald-100 text-emerald-700" },
-  { id: "windmill", name: "Wind Turbine", cost: 10, category: "decoration", icon: Wind, description: "Animated wind turbine generating clean energy", color: "bg-blue-100 text-blue-700" },
-  { id: "solar_panel", name: "Solar Array", cost: 15, category: "decoration", icon: Sun, description: "Harness the power of the sun (comes with a shine effect)", color: "bg-yellow-100 text-yellow-700" },
-  { id: "waterfall", name: "Crystal Waterfall", cost: 20, category: "decoration", icon: Gem, description: "A waterfall flowing down your island for a serene vibe", color: "bg-cyan-100 text-cyan-700" },
+type IslandOwnership = {
+  item_id: string;
+  item_type: IslandCategory;
+  active: boolean;
+  purchased_date?: string;
+};
+
+type IslandLayoutEntry = {
+  item_id: string;
+  x: number; // normalized 0..1 (center-based)
+  y: number; // normalized 0..1 (center-based)
+  width: number;
+  height: number;
+  zIndex: number;
+  rotation?: number;
+};
+
+type MessageState = { type: "success" | "error"; text: string } | null;
+
+const ASSET_BASE = "/islandDecor";
+
+const ISLAND_ITEMS: IslandItem[] = [
+  // * SKYBOXES *
+  {
+    id: "aurora_dreams",
+    name: "Aurora Dreams",
+    cost: 100,
+    category: "skybox",
+    description: "Glistening with the color of jewels",
+    emoji: "🌈",
+    color: "#b008d6",
+    image: `${ASSET_BASE}/Aurora Dreams.png`,
+  },
+  {
+    id: "environment_advocate",
+    name: "Environment Advocate",
+    cost: 5,
+    category: "skybox",
+    description: "Probably your first skybox, also Ecoisland's favorite",
+    emoji: "🍃",
+    color: "#32fd50",
+    image: `${ASSET_BASE}/Environment Advocate.png`,
+  },
+  {
+    id: "faint_snowfall",
+    name: "Faint Snowfall",
+    cost: 50,
+    category: "skybox",
+    description: "The comfort of snowflakes and shivers",
+    emoji: "🌨",
+    color: "#88deee",
+    image: `${ASSET_BASE}/Faint Snowfall.png`,
+  },
+  {
+    id: "futurismo",
+    name: "Futurismo",
+    cost: 220,
+    category: "skybox",
+    description: "Pixels worthy for a startup pitch",
+    emoji: "🔮",
+    color: "#5512ac",
+    image: `${ASSET_BASE}/Futurismo.png`,
+  },
+  {
+    id: "glitchy",
+    name: "GLITCHY",
+    cost: 666,
+    category: "skybox",
+    description: "!Ëćøįšłåñ∂ îś šō çöòł¡",
+    emoji: "👾",
+    color: "#063104",
+    image: `${ASSET_BASE}/GLITCHY.png`,
+  },
+  {
+    id: "metropolis_sunset",
+    name: "Metropolis Sunset",
+    cost: 210,
+    category: "skybox",
+    description: "Imagine a drive in this environment, makes you want to save it",
+    emoji: "🌅",
+    color: "#f97316",
+    image: `${ASSET_BASE}/Metropolis Sunset.png`,
+  },
+  {
+    id: "moonshine",
+    name: "Moonshine",
+    cost: 130,
+    category: "skybox",
+    description: "Fun fact: our moon dictates our tides",
+    emoji: "🌕",
+    color: "#f1d983",
+    image: `${ASSET_BASE}/Moonshine.png`,
+  },
+  {
+    id: "mystic_divinity",
+    name: "Mystic Divinity",
+    cost: 1111,
+    category: "skybox",
+    description: "YOU, ALONE, ARE THE CHOSEN ONE.",
+    emoji: "👑",
+    color: "#e8cd01",
+    image: `${ASSET_BASE}/Mystic Divinity.png`,
+  },
+  {
+    id: "partly_cloudy",
+    name: "Partly cloudy",
+    cost: 25,
+    category: "skybox",
+    description: "Calm, clear horizons with clouds",
+    emoji: "⛅️",
+    color: "#61d4fe",
+    image: `${ASSET_BASE}/Partly Cloudy.png`,
+  },
+  {
+    id: "perfection",
+    name: "Perfection",
+    cost: 999,
+    category: "skybox",
+    description: "The best looking skyline. Can Earth be like this more?",
+    emoji: "🤩",
+    color: "#ec854d",
+    image: `${ASSET_BASE}/Perfection.png`,
+  },
+  {
+    id: "retrowave",
+    name: "Retrowave",
+    cost: 380,
+    category: "skybox",
+    description: "Headphones on type shi",
+    emoji: "🦄",
+    color: "#9626dc",
+    image: `${ASSET_BASE}/Retrowave.png`,
+  },
+  {
+    id: "the_cosmos",
+    name: "The Cosmos",
+    cost: 420,
+    category: "skybox",
+    description: "Intergalactic visuals",
+    emoji: "🪐",
+    color: "#13035a",
+    image: `${ASSET_BASE}/The Cosmos.png`,
+  },
+  // * ISLAND BASES *
+  {
+    id: "desertified",
+    name: "Desertified",
+    cost: 90,
+    category: "island",
+    description: "PLEASE find water",
+    emoji: "🌵",
+    color: "#b2e00b",
+    image: `${ASSET_BASE}/Desertified.png`,
+  },
+  {
+    id: "lush_grass",
+    name: "Lush Grass",
+    cost: 10,
+    category: "island",
+    description: "The gold standard of islands",
+    emoji: "🌱",
+    color: "#6ef613",
+    image: `${ASSET_BASE}/Lush Grass.png`,
+  },
+  {
+    id: "magma_bed",
+    name: "Magma Bed",
+    cost: 50,
+    category: "island",
+    description: "Don't dig straight down",
+    emoji: "🔥",
+    color: "#a6410f",
+    image: `${ASSET_BASE}/Magma Bed.png`,
+  },
+  {
+    id: "purple_mountains",
+    name: "Purple Mountains",
+    cost: 125,
+    category: "island",
+    description: "Notice the symmetry?",
+    emoji: "🗻",
+    color: "#9b5ee5",
+    image: `${ASSET_BASE}/Purple Mountains.png`,
+  },
+  {
+    id: "reflection",
+    name: "Reflection",
+    cost: 240,
+    category: "island",
+    description: "¿ʎuunɟ os s,ʇɐɥʍ",
+    emoji: "🪞",
+    color: "#c7c7c7",
+    image: `${ASSET_BASE}/Reflection.png`,
+  },
+  {
+    id: "sand_dunes",
+    name: "Sand Dunes",
+    cost: 75,
+    category: "island",
+    description: "Dune 3 is coming soon!",
+    emoji: "🏜️",
+    color: "#a6a10f",
+    image: `${ASSET_BASE}/Sand Dunes.png`,
+  },
+  {
+    id: "the_end",
+    name: "The End",
+    cost: 150,
+    category: "island",
+    description: "But this time, you have to beat the Ecoisland dragon",
+    emoji: "🕳️",
+    color: "#d3ca8b",
+    image: `${ASSET_BASE}/The End.png`,
+  },
+  {
+    id: "uneven_elevation",
+    name: "Uneven Elevation",
+    cost: 60,
+    category: "island",
+    description: "We always love some variety in our islands",
+    emoji: "🛗",
+    color: "#33bf89",
+    image: `${ASSET_BASE}/Uneven Elevation.png`,
+  },
+  // * DECORATIONS *
+  {
+    id: "ambassador_badge",
+    name: "Ambassador Badge",
+    cost: 999999999,
+    category: "decoration",
+    description: "Unobtainable except if you're an ambassador",
+    emoji: "🎖️",
+    color: "#116fff",
+    image: `${ASSET_BASE}/Ambassador Badge.png`,
+  },
+  {
+    id: "blazing_comet",
+    name: "Blazing Comet",
+    cost: 160,
+    category: "decoration",
+    description: "Lightspeed jumble of ice and rock",
+    emoji: "☄️",
+    color: "#00ffff",
+    image: `${ASSET_BASE}/Blazing Comet.png`,
+  },
+    {
+    id: "crops",
+    name: "Crops",
+    cost: 35,
+    category: "decoration",
+    description: "A basket of whole foods for healthy routines",
+    emoji: "🧺",
+    color: "#84cc16",
+    image: `${ASSET_BASE}/Crops.png`,
+  },
+  {
+    id: "crystal_waterfall",
+    name: "Crystal Waterfall",
+    cost: 120,
+    category: "decoration",
+    description: "A shimmering glacier cascade",
+    emoji: "💎",
+    color: "#38bdf8",
+    image: `${ASSET_BASE}/Crystal Waterfall.png`,
+  },
+  {
+    id: "emblem_of_care",
+    name: "Emblem of Care",
+    cost: 50,
+    category: "decoration",
+    description: "A symbol celebrating stewardship and compassion to our planet",
+    emoji: "🫶",
+    color: "#22c55e",
+    image: `${ASSET_BASE}/Emblem of Care.png`,
+  },
+  {
+    id: "environmental_orbs",
+    name: "Environmental Orbs",
+    cost: 140,
+    category: "decoration",
+    description: "Floating spheres radiating environmental content",
+    emoji: "🟢",
+    color: "#10b981",
+    image: `${ASSET_BASE}/Environmental Orbs.png`,
+  },
+  {
+    id: "giant_cursor",
+    name: "Giant Cursor",
+    cost: 100,
+    category: "decoration",
+    description: "An oversized computer cursor",
+    emoji: "🖱️",
+    color: "#a855f7",
+    image: `${ASSET_BASE}/Giant Cursor.png`,
+  },
+  {
+    id: "limitless_rocket",
+    name: "Limitless Rocket",
+    cost: 225,
+    category: "decoration",
+    description: "To Infinity, And Beyond!",
+    emoji: "🚀",
+    color: "#f97316",
+    image: `${ASSET_BASE}/Limitless Rocket.png`,
+  },
+  {
+    id: "mini_earth",
+    name: "Mini Earth",
+    cost: 75,
+    category: "decoration",
+    description: "A tiny world reminding us what we're protecting",
+    emoji: "🌎",
+    color: "#3b82f6",
+    image: `${ASSET_BASE}/Mini Earth.png`,
+  },
+  {
+    id: "pine_duo",
+    name: "Pine Duo",
+    cost: 60,
+    category: "decoration",
+    description: "Two pines standing strong together.",
+    emoji: "🌲",
+    color: "#15803d",
+    image: `${ASSET_BASE}/Pine Duo.png`,
+  },
+  {
+    id: "renewable_energy",
+    name: "Renewable Energy",
+    cost: 120,
+    category: "decoration",
+    description: "A tribute to sustainable power generation (wind, solar, hydro, etc.)",
+    emoji: "⚡",
+    color: "#eab308",
+    image: `${ASSET_BASE}/Renewable Energy.png`,
+  },
+  {
+    id: "the_old_oak",
+    name: "The Old Oak",
+    cost: 45,
+    category: "decoration",
+    description: "A timeless giant that has witnessed generations of change",
+    emoji: "🌳",
+    color: "#166534",
+    image: `${ASSET_BASE}/The Old Oak.png`,
+  },
+  {
+    id: "together",
+    name: "Together",
+    cost: 70,
+    category: "decoration",
+    description: "A reminder that change happens together.",
+    emoji: "🤝",
+    color: "#ec4899",
+    image: `${ASSET_BASE}/Together.png`,
+  },
+  {
+    id: "treecoins",
+    name: "Treecoins",
+    cost: 65,
+    category: "decoration",
+    description: "This guy is rich!",
+    emoji: "🪙",
+    color: "#dffa15",
+    image: `${ASSET_BASE}/Treecoins.png`,
+  },
+  {
+    id: "trophy",
+    name: "Trophy",
+    cost: 140,
+    category: "decoration",
+    description: "Awarded to those who go above and beyond",
+    emoji: "🏆",
+    color: "#f59e0b",
+    image: `${ASSET_BASE}/Trophy.png`,
+  },
+  {
+    id: "volcano",
+    name: "Volcano",
+    cost: 200,
+    category: "decoration",
+    description: "A powerful peak with molten magma energy inside",
+    emoji: "🌋",
+    color: "#dc2626",
+    image: `${ASSET_BASE}/Volcano.png`,
+  },
+  
 ];
 
+const CATEGORIES = [
+  { key: "all", label: "All Items" },
+  { key: "skybox", label: "Skyboxes" },
+  { key: "island", label: "Islands" },
+  { key: "decoration", label: "Decorations" },
+] as const;
+
+const ITEM_BY_ID = Object.fromEntries(ISLAND_ITEMS.map((item) => [item.id, item]));
+
+const DEFAULT_LAYOUT: Record<string, IslandLayoutEntry> = {
+  forest_small: { item_id: "forest_small", x: 0.28, y: 0.62, width: 110, height: 110, zIndex: 30 },
+  windmill: { item_id: "windmill", x: 0.76, y: 0.56, width: 90, height: 130, zIndex: 35 },
+  solar_panel: { item_id: "solar_panel", x: 0.58, y: 0.67, width: 120, height: 75, zIndex: 32 },
+  waterfall: { item_id: "waterfall", x: 0.82, y: 0.66, width: 120, height: 150, zIndex: 33 },
+  volcano: { item_id: "volcano", x: 0.52, y: 0.52, width: 150, height: 150, zIndex: 40 },
+};
+
+function clamp(n: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, n));
+}
+
+function toLayoutMap(layout: any): Record<string, IslandLayoutEntry> {
+  const entries: Record<string, IslandLayoutEntry> = {};
+  if (!Array.isArray(layout)) return entries;
+
+  for (const raw of layout) {
+    if (!raw?.item_id) continue;
+    entries[raw.item_id] = {
+      item_id: raw.item_id,
+      x: typeof raw.x === "number" ? raw.x : 0.5,
+      y: typeof raw.y === "number" ? raw.y : 0.5,
+      width: typeof raw.width === "number" ? raw.width : 120,
+      height: typeof raw.height === "number" ? raw.height : 120,
+      zIndex: typeof raw.zIndex === "number" ? raw.zIndex : 20,
+      rotation: typeof raw.rotation === "number" ? raw.rotation : 0,
+    };
+  }
+
+  return entries;
+}
+
+function getLayoutForItem(itemId: string, current?: IslandLayoutEntry) {
+  return current || DEFAULT_LAYOUT[itemId] || {
+    item_id: itemId,
+    x: 0.5,
+    y: 0.55,
+    width: 120,
+    height: 120,
+    zIndex: 25,
+    rotation: 0,
+  };
+}
+
+function IslandScene({
+  skybox,
+  island,
+  decorations,
+  layoutMap,
+  onDragEndItem,
+  sceneRef,
+}: {
+  skybox: IslandItem | null;
+  island: IslandItem | null;
+  decorations: IslandItem[];
+  layoutMap: Record<string, IslandLayoutEntry>;
+  onDragEndItem: (itemId: string, info: any, node: HTMLImageElement | null) => void;
+  sceneRef: React.RefObject<HTMLDivElement>;
+}) {
+  return (
+    <div
+      ref={sceneRef}
+      className="relative w-full overflow-hidden rounded-2xl"
+      style={{ height: 340, background: "#0f172a" }}
+    >
+      {/* Sky background */}
+      {skybox ? (
+        <img
+          src={skybox.image}
+          alt={skybox.name}
+          className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+          draggable={false}
+        />
+      ) : (
+        <div className="absolute inset-0">
+          <Galaxy mouseRepulsion mouseInteraction density={1.5} glowIntensity={0.8} saturation={0.8} hueShift={240} />
+        </div>
+      )}
+
+      {/* Distant haze / horizon overlay */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[36%] pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(15,23,42,0.45), rgba(15,23,42,0.02))" }}
+      />
+
+      {/* Base island image */}
+      {island && (
+        <img
+          src={island.image}
+          alt={island.name}
+          className="absolute left-1/2 bottom-[10px] h-[190px] w-[330px] -translate-x-1/2 select-none pointer-events-none"
+          draggable={false}
+          style={{ objectFit: "contain", zIndex: 20 }}
+        />
+      )}
+
+      {/* Decorations / placeable objects */}
+      {decorations.map((item) => {
+        const layout = getLayoutForItem(item.id, layoutMap[item.id]);
+        return (
+          <motion.img
+            key={item.id}
+            src={item.image}
+            alt={item.name}
+            drag
+            dragMomentum={false}
+            dragElastic={0.08}
+            dragConstraints={sceneRef}
+            onDragEnd={(e, info) => onDragEndItem(item.id, info, e.currentTarget as HTMLImageElement)}
+            className="absolute select-none cursor-grab active:cursor-grabbing"
+            draggable={false}
+            style={{
+              left: `${layout.x * 100}%`,
+              top: `${layout.y * 100}%`,
+              width: layout.width,
+              height: layout.height,
+              zIndex: layout.zIndex,
+              transform: `translate(-50%, -50%) rotate(${layout.rotation || 0}deg)`,
+              filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.28))",
+            }}
+            whileDrag={{ scale: 1.03 }}
+          />
+        );
+      })}
+
+      {/* Subtle foreground grass line */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[26px] pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(34,197,94,0.28), rgba(34,197,94,0))" }}
+      />
+    </div>
+  );
+}
+
 export default function Island() {
-  const [user, setUser] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [message, setMessage] = useState(null);
+  const [user, setUser] = useState<any>(null);
+  const [category, setCategory] = useState<string>("all");
+  const [message, setMessage] = useState<MessageState>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSkybox, setActiveSkybox] = useState("space");
-  const [activeIsland, setActiveIsland] = useState("none");
-  const [activeDecorations, setActiveDecorations] = useState([]);
+
+  const [activeSkybox, setActiveSkybox] = useState<string | null>(null);
+  const [activeIsland, setActiveIsland] = useState<string | null>(null);
+  const [activeDecorations, setActiveDecorations] = useState<string[]>([]);
+  const [layoutMap, setLayoutMap] = useState<Record<string, IslandLayoutEntry>>({});
+
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const saveTimerRef = useRef<any>(null);
+
+  const showMessage = (next: MessageState, ms = 2500) => {
+    setMessage(next);
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => setMessage(null), ms);
+  };
 
   useEffect(() => {
-    loadUser();
+    let mounted = true;
+
+    User.me()
+      .then((u: any) => {
+        if (!mounted) return;
+        setUser(u);
+
+        const items: IslandOwnership[] = u?.island_items || [];
+        const skyboxId = items.find((i) => i.item_type === "skybox" && i.active)?.item_id || null;
+        const islandId = items.find((i) => i.item_type === "island" && i.active)?.item_id || null;
+        const decorationIds = items.filter((i) => i.item_type === "decoration" && i.active).map((i) => i.item_id);
+
+        setActiveSkybox(skyboxId);
+        setActiveIsland(islandId);
+        setActiveDecorations(decorationIds);
+
+        const savedLayout = toLayoutMap(u?.island_layout || []);
+        const merged: Record<string, IslandLayoutEntry> = { ...savedLayout };
+
+        // Give every active decoration a sane default position if no saved layout exists yet.
+        for (const id of decorationIds) {
+          if (!merged[id]) merged[id] = { ...getLayoutForItem(id) };
+        }
+
+        setLayoutMap(merged);
+      })
+      .catch(() => {
+        // keep empty state
+      })
+      .finally(() => {
+        if (mounted) setIsLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    };
   }, []);
 
-  const loadUser = async () => {
-    try {
-      const userData = await User.me();
-      setUser(userData);
+  const ownedItemIds = useMemo(() => (user?.island_items || []).map((i: IslandOwnership) => i.item_id), [user]);
 
-      if (userData.island_items) {
-        const skybox = userData.island_items.find((item) => item.item_type === "skybox" && item.active);
-        const island = userData.island_items.find((item) => item.item_type === "island" && item.active);
-        const decorations = userData.island_items.filter((item) => item.item_type === "decoration" && item.active);
+  const activeSkyboxItem = activeSkybox ? ITEM_BY_ID[activeSkybox] || null : null;
+  const activeIslandItem = activeIsland ? ITEM_BY_ID[activeIsland] || null : null;
+  const activeDecorationItems = activeDecorations.map((id) => ITEM_BY_ID[id]).filter(Boolean) as IslandItem[];
 
-        setActiveSkybox(skybox?.item_id || "space");
-        setActiveIsland(island?.item_id || "none");
-        setActiveDecorations(decorations.map((d) => d.item_id));
-      }
-    } catch (error) {
-      console.error("Error loading user:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const saveIslandData = async (nextUserPatch: Record<string, any>, nextLayoutMap?: Record<string, IslandLayoutEntry>) => {
+    const payload: Record<string, any> = { ...nextUserPatch };
+    if (nextLayoutMap) payload.island_layout = Object.values(nextLayoutMap);
+    await User.updateMyUserData(payload);
   };
 
-  const purchaseItem = async (item) => {
-    const currentBalance = user.treecoins || 0;
+  const handleBuy = async (item: IslandItem) => {
+    if (!user) return;
 
-    if (currentBalance < item.cost) {
-      setMessage({ type: "error", text: `Not enough Treecoins! You need ${item.cost} but only have ${currentBalance}.` });
-      setTimeout(() => setMessage(null), 10000);
+    if ((user.treecoins || 0) < item.cost) {
+      showMessage({ type: "error", text: "Not enough Treecoins!" }, 3000);
       return;
     }
 
-    const alreadyOwned = user.island_items?.some((owned) => owned.item_id === item.id);
-    if (alreadyOwned) {
-      setMessage({ type: "error", text: "You already own this item!" });
-      setTimeout(() => setMessage(null), 10000);
-      return;
-    }
+    const existing: IslandOwnership[] = user.island_items || [];
+    const alreadyOwned = existing.some((i) => i.item_id === item.id);
+    const nextItems = alreadyOwned
+      ? existing
+      : [
+          ...existing,
+          {
+            item_id: item.id,
+            item_type: item.category,
+            active: false,
+            purchased_date: new Date().toISOString(),
+          },
+        ];
 
-    try {
-      const newTreecoins = currentBalance - item.cost;
-      const newIslandItems = [
-        ...(user.island_items || []),
-        {
-          item_id: item.id,
-          item_name: item.name,
-          item_type: item.category,
-          cost: item.cost,
-          active: false,
-          purchased_date: new Date().toISOString(),
-        },
-      ];
+    const updatedUser = {
+      treecoins: (user.treecoins || 0) - item.cost,
+      island_items: nextItems,
+    };
 
-      await User.updateMyUserData({ treecoins: newTreecoins, island_items: newIslandItems });
-
-      setUser((prev) => ({ ...prev, treecoins: newTreecoins, island_items: newIslandItems }));
-      setMessage({ type: "success", text: `Successfully purchased ${item.name}!` });
-      setTimeout(() => setMessage(null), 10000);
-    } catch {
-      setMessage({ type: "error", text: "Failed to purchase item. Please try again." });
-      setTimeout(() => setMessage(null), 10000);
-    }
+    await saveIslandData(updatedUser, layoutMap);
+    setUser((prev: any) => ({ ...prev, ...updatedUser }));
+    showMessage({ type: "success", text: `${item.name} purchased! 🎉` }, 2500);
   };
 
-  const sellItem = async (itemIdToSell) => {
-    const itemToSell = user.island_items.find((i) => i.item_id === itemIdToSell);
-    if (!itemToSell) return;
-
-    const refundAmount = Math.ceil(itemToSell.cost / 2);
-    const newTreecoins = (user.treecoins || 0) + refundAmount;
-    const newIslandItems = user.island_items.filter((i) => i.item_id !== itemIdToSell);
-
-    try {
-      await User.updateMyUserData({ treecoins: newTreecoins, island_items: newIslandItems });
-
-      const updatedUser = { ...user, treecoins: newTreecoins, island_items: newIslandItems };
-      setUser(updatedUser);
-
-      const skybox = newIslandItems.find((item) => item.item_type === "skybox" && item.active);
-      const island = newIslandItems.find((item) => item.item_type === "island" && item.active);
-      const decorations = newIslandItems.filter((item) => item.item_type === "decoration" && item.active);
-
-      setActiveSkybox(skybox?.item_id || "space");
-      setActiveIsland(island?.item_id || "none");
-      setActiveDecorations(decorations.map((d) => d.item_id));
-
-      setMessage({ type: "success", text: `Sold ${itemToSell.item_name} for ${refundAmount} Treecoins!` });
-      setTimeout(() => setMessage(null), 10000);
-    } catch {
-      setMessage({ type: "error", text: "Failed to sell item. Please try again." });
-      setTimeout(() => setMessage(null), 10000);
-    }
+  const activateDecorationWithDefaultLayout = (itemId: string, currentMap: Record<string, IslandLayoutEntry>) => {
+    const nextMap = { ...currentMap };
+    if (!nextMap[itemId]) nextMap[itemId] = { ...getLayoutForItem(itemId) };
+    return nextMap;
   };
 
-  const toggleItemActive = async (itemId, itemType) => {
-    const updatedItems = [...(user.island_items || [])];
+  const handleActivate = async (item: IslandItem) => {
+    if (!user) return;
 
-    if (itemType === "skybox" || itemType === "island") {
-      updatedItems.forEach((item) => {
-        if (item.item_type === itemType) item.active = item.item_id === itemId;
+    const currentItems: IslandOwnership[] = user.island_items || [];
+    let nextItems = currentItems;
+    let nextSkybox = activeSkybox;
+    let nextIsland = activeIsland;
+    let nextDecorations = [...activeDecorations];
+    let nextLayout = { ...layoutMap };
+
+    if (item.category === "skybox") {
+      nextItems = currentItems.map((i) => {
+        if (i.item_type !== "skybox") return i;
+        return { ...i, active: i.item_id === item.id ? !i.active : false };
       });
-    } else if (itemType === "decoration") {
-      const activeDecorations = updatedItems.filter((item) => item.item_type === "decoration" && item.active);
-      const targetItem = updatedItems.find((item) => item.item_id === itemId);
+      nextSkybox = nextSkybox === item.id ? null : item.id;
+    }
 
-      if (targetItem.active) {
-        targetItem.active = false;
-      } else if (activeDecorations.length < 3) {
-        targetItem.active = true;
+    if (item.category === "island") {
+      nextItems = currentItems.map((i) => {
+        if (i.item_type !== "island") return i;
+        return { ...i, active: i.item_id === item.id ? !i.active : false };
+      });
+      nextIsland = nextIsland === item.id ? null : item.id;
+    }
+
+    if (item.category === "decoration") {
+      const currentlyActive = nextDecorations.includes(item.id);
+
+      nextItems = currentItems.map((i) => {
+        if (i.item_id !== item.id) return i;
+        return { ...i, active: !currentlyActive };
+      });
+
+      if (currentlyActive) {
+        nextDecorations = nextDecorations.filter((d) => d !== item.id);
       } else {
-        setMessage({ type: "error", text: "You can only have 3 decorations active at once!" });
-        setTimeout(() => setMessage(null), 3000);
-        return;
+        nextDecorations = [...nextDecorations, item.id];
+        nextLayout = activateDecorationWithDefaultLayout(item.id, nextLayout);
       }
     }
 
+    const updatedUser = { island_items: nextItems };
+    await saveIslandData(updatedUser, nextLayout);
+
+    setUser((prev: any) => ({ ...prev, ...updatedUser, island_layout: Object.values(nextLayout) }));
+    setActiveSkybox(nextSkybox);
+    setActiveIsland(nextIsland);
+    setActiveDecorations(nextDecorations);
+    setLayoutMap(nextLayout);
+    showMessage({ type: "success", text: "Island updated!" }, 2200);
+  };
+
+  const handleDragEndItem = async (itemId: string, info: any, node: HTMLImageElement | null) => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+
+    const rect = scene.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const layout = layoutMap[itemId] || getLayoutForItem(itemId);
+    const targetW = node?.getBoundingClientRect().width || layout.width;
+    const targetH = node?.getBoundingClientRect().height || layout.height;
+
+    const normalizedX = clamp((info.point.x - rect.left) / rect.width, 0, 1);
+    const normalizedY = clamp((info.point.y - rect.top) / rect.height, 0, 1);
+
+    const nextLayout = {
+      ...layoutMap,
+      [itemId]: {
+        ...layout,
+        item_id: itemId,
+        x: normalizedX,
+        y: normalizedY,
+        width: targetW,
+        height: targetH,
+      },
+    };
+
+    setLayoutMap(nextLayout);
+
     try {
-      await User.updateMyUserData({ island_items: updatedItems });
-      const updatedUser = { ...user, island_items: updatedItems };
-      setUser(updatedUser);
-
-      const newActiveSkybox = updatedItems.find((item) => item.item_type === "skybox" && item.active)?.item_id || "space";
-      const newActiveIsland = updatedItems.find((item) => item.item_type === "island" && item.active)?.item_id || "none";
-      const newActiveDecorations = updatedItems.filter((item) => item.item_type === "decoration" && item.active).map((d) => d.item_id);
-
-      setActiveSkybox(newActiveSkybox);
-      setActiveIsland(newActiveIsland);
-      setActiveDecorations(newActiveDecorations);
+      await saveIslandData({ island_layout: Object.values(nextLayout) }, nextLayout);
+      showMessage({ type: "success", text: "Position saved." }, 1500);
     } catch {
-      setMessage({ type: "error", text: "Failed to update item. Please try again." });
+      showMessage({ type: "error", text: "Could not save position." }, 2200);
     }
   };
 
-  const categories = ["all", "skybox", "island", "decoration"];
-  const filteredItems = selectedCategory === "all" ? islandItems : islandItems.filter((item) => item.category === selectedCategory);
-
-  const isItemOwned = (itemId) => user?.island_items?.some((owned) => owned.item_id === itemId) || false;
-  const isItemActive = (itemId) => user?.island_items?.some((owned) => owned.item_id === itemId && owned.active) || false;
-
-  const getIslandBackground = () => {
-    if (activeSkybox === "skybox_sunset") return "bg-gradient-to-b from-orange-400 via-pink-400 to-purple-500";
-    if (activeSkybox === "skybox_rainy") return "bg-gradient-to-b from-gray-300 to-gray-300";
-    if (activeSkybox === "skybox_sunny") return "bg-gradient-to-b from-blue-300 via-blue-300 to-blue-200";
-    if (activeSkybox === "skybox_basic") return "bg-gradient-to-b from-blue-400 to-blue-400";
-    return "bg-gradient-to-b from-black via-gray-900 to-black"; // Space
-  };
+  const filtered = category === "all" ? ISLAND_ITEMS : ISLAND_ITEMS.filter((i) => i.category === category);
+  const nothingActive = !activeSkybox && !activeIsland && activeDecorations.length === 0;
 
   if (isLoading) {
     return (
-      <div className="p-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 rounded w-1/3 bg-gray-200" />
-            <div className="h-24 rounded-xl bg-gray-200" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-48 rounded-xl bg-gray-200" />)}
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--bg-page)" }}>
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-500" />
       </div>
     );
   }
 
   return (
-    <div className="p-4 md:p-8 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">View Your Island</h1>
-            <p className="text-gray-600 mt-2">Customize your virtual ecoisland with earned Treecoins</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="rounded-xl p-4 bg-gradient-to-r from-teal-100 to-green-100">
-              <div className="flex items-center gap-3">
-                <Coins className="w-6 h-6 text-teal-600" />
-                <div>
-                  <p className="text-2xl font-bold text-teal-700">{user?.treecoins || 0}</p>
-                  <p className="text-sm text-gray-600">Treecoins</p>
-                </div>
-              </div>
+        <div className="mb-8">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3" style={{ letterSpacing: "-0.03em" }}>
+                🏝️ Your Island
+              </h1>
+              <p className="text-slate-500 mt-1">Customize your Ecoisland with Treecoins</p>
+            </div>
+            <div
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl"
+              style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.25)" }}
+            >
+              <TreePine className="w-5 h-5 text-emerald-500" />
+              <span className="font-black text-emerald-700 text-lg">{user?.treecoins ?? 0}</span>
+              <span className="text-emerald-500 text-sm font-medium">Treecoins</span>
             </div>
           </div>
         </div>
 
-        <Card className="mb-8 border-0 overflow-hidden bg-gradient-to-br from-blue-100 via-teal-50 to-green-100">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-center gap-3 text-xl font-bold text-gray-900">View Your Island</CardTitle>
-            <CardTitle className="flex items-center justify-center gap-3 text-sm font-bold text-gray-500">You can't have an island in space...</CardTitle>
-          </CardHeader>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* Island preview */}
+          <div className="lg:col-span-3">
+            <div className="eco-card p-4 mb-4">
+              <h3 className="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                <Star className="w-4 h-4 text-amber-500" /> Island Preview
+              </h3>
 
-          <CardContent>
-            <div className={`${getIslandBackground()} rounded-xl p-0 min-h-[500px] relative overflow-hidden transition-colors duration-500`}>
-              {activeSkybox === "space" && (
-                <div style={{ width: "100%", height: 500, position: "relative" }}>
-                  <Galaxy mouseRepulsion mouseInteraction density={1.5} glowIntensity={0.5} saturation={0.8} hueShift={240} />
-                </div>
-              )}
-
-              <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                {activeIsland !== "none" && (
-                  <div className="absolute -bottom-150 flex flex-col items-center w-full">
-                    {activeIsland === "island_grass" && (
-                      <div className="w-200 h-50 bg-gradient-to-b from-green-400 to-green-800 rounded-full relative shadow-2xl" />
-                    )}
-                    {activeIsland === "island_volcanic" && (
-                      <div className="w-200 h-50 bg-gradient-to-b from-red-500 via-gray-800 to-gray-800 rounded-full relative shadow-2xl" />
-                    )}
-
-                    <div className="absolute inset-0 flex items-center justify-center gap-4 mt-4">
-                      {activeDecorations.slice(0, 3).map((decorationId, index) => {
-                        const decoration = islandItems.find((item) => item.id === decorationId);
-                        return decoration ? (
-                          <div key={decorationId} className="bg-white/20 backdrop-blur-sm rounded-lg p-2 animate-bounce -translate-y-32" style={{ animationDelay: `${index * 0.2}s` }}>
-                            <decoration.icon className="w-6 h-6 text-white" />
-                          </div>
-                        ) : null;
-                      })}
-                    </div>
+              <div className="rounded-2xl overflow-hidden" style={{ border: "2px solid #e2e8f0" }}>
+                {nothingActive ? (
+                  <div style={{ width: "100%", height: 340, position: "relative" }}>
+                    <Galaxy mouseRepulsion mouseInteraction density={1.5} glowIntensity={0.8} saturation={0.8} hueShift={240} />
                   </div>
+                ) : (
+                  <IslandScene
+                    skybox={activeSkyboxItem}
+                    island={activeIslandItem}
+                    decorations={activeDecorationItems}
+                    layoutMap={layoutMap}
+                    onDragEndItem={handleDragEndItem}
+                    sceneRef={sceneRef}
+                  />
                 )}
               </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {activeSkyboxItem && (
+                  <span className="text-xs px-2 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600">
+                    {activeSkyboxItem.emoji} {activeSkyboxItem.name}
+                  </span>
+                )}
+                {activeIslandItem && (
+                  <span className="text-xs px-2 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600">
+                    {activeIslandItem.emoji} {activeIslandItem.name}
+                  </span>
+                )}
+                {activeDecorationItems.map((d) => (
+                  <span key={d.id} className="text-xs px-2 py-1 rounded-full bg-purple-50 border border-purple-100 text-purple-600">
+                    {d.emoji} {d.name}
+                  </span>
+                ))}
+                {nothingActive && <span className="text-xs text-slate-400 italic">No items equipped — purchase and activate items from the shop</span>}
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
 
-        {user?.island_items?.length > 0 && (
-          <Card className="mb-8 bg-gradient-to-r from-green-50 to-teal-50 border-green-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-green-600">
-                <Settings className="w-6 h-6 text-green-600" />
-                My Items - Customize Your Island
-              </CardTitle>
-            </CardHeader>
+          {/* Shop */}
+          <div className="lg:col-span-2">
+            <div className="eco-card p-4">
+              <div className="flex items-center gap-2 mb-4">
+                <ShoppingCart className="w-5 h-5 text-emerald-600" />
+                <h3 className="font-bold text-slate-800">Island Shop</h3>
+              </div>
 
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {["skybox", "island", "decoration"].map((category) => (
-                  <div key={category}>
-                    <h4 className="font-semibold mb-2 capitalize text-gray-700">
-                      {category === "decoration" ? "Decorations" : category === "skybox" ? "Skyboxes" : `${category}s`}
-                    </h4>
-                    <div className="space-y-2">
-                      {user.island_items.filter((item) => item.item_type === category).map((item) => (
-                        <Button
-                          key={item.item_id}
-                          variant={isItemActive(item.item_id) ? "default" : "outline"}
-                          onClick={() => toggleItemActive(item.item_id, item.item_type)}
-                          className={`w-full justify-start ${isItemActive(item.item_id) ? "bg-gradient-to-r from-teal-500 to-green-500 text-white" : "hover:bg-gray-100"}`}
-                        >
-                          {item.item_name}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
+              {/* Category filter */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.key}
+                    onClick={() => setCategory(cat.key)}
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+                    style={
+                      category === cat.key
+                        ? { background: "linear-gradient(135deg, #00c896, #06b6d4)", color: "white" }
+                        : { background: "var(--bg-subtle)", color: "var(--text-muted)" }
+                    }
+                  >
+                    {cat.label}
+                  </button>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        )}
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className={selectedCategory === category ? "bg-gradient-to-r from-teal-500 to-green-500 text-white" : "hover:bg-teal-50"}
-            >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </Button>
-          ))}
-        </div>
+              {/* Message */}
+              <AnimatePresence>
+                {message && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className={`flex items-center gap-2 p-3 rounded-xl mb-3 text-sm ${
+                      message.type === "success"
+                        ? "status-success rounded-xl text-emerald-700 dark:text-emerald-300"
+                        : "status-error rounded-xl text-red-700 dark:text-red-400"
+                    }`}
+                  >
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                    {message.text}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => {
-            const owned = isItemOwned(item.id);
-            const canAfford = user && (user.treecoins || 0) >= item.cost;
+              {/* Items */}
+              <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
+                {filtered.map((item) => {
+                  const owned = ownedItemIds.includes(item.id);
+                  const active =
+                    item.category === "skybox"
+                      ? activeSkybox === item.id
+                      : item.category === "island"
+                      ? activeIsland === item.id
+                      : activeDecorations.includes(item.id);
 
-            return (
-              <Card key={item.id} className={`transition-all duration-300 ${owned ? "bg-green-50 border-green-200" : "hover:shadow-lg"}`}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.color}`}>
-                      <item.icon />
-                    </div>
-
-                    <Badge variant="secondary" className="bg-teal-100 text-teal-700">{item.category}</Badge>
-                  </div>
-
-                  <CardTitle className="text-lg text-gray-900">{item.name}</CardTitle>
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-gray-600">{item.description}</p>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Coins className="w-4 h-4 text-teal-600" />
-                      <span className="font-bold text-teal-700">{item.cost}</span>
-                    </div>
-
-                    {owned ? (
-                      <Button onClick={() => sellItem(item.id)} variant="destructive" size="sm">
-                        <Trash2 className="w-4 h-4 mr-2" />
-                        Sell ({Math.ceil(item.cost / 2)} 🌱)
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => purchaseItem(item)}
-                        disabled={!canAfford}
-                        size="sm"
-                        className={canAfford ? "bg-gradient-to-r from-teal-500 to-green-500 hover:from-teal-600 hover:to-green-600" : "opacity-50 cursor-not-allowed"}
-                      >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        {canAfford ? "Buy" : "Can't Afford"}
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {filteredItems.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No items found in this category.</p>
+                  return (
+                    <motion.div
+                      key={item.id}
+                      layout
+                      className="flex items-center gap-3 p-3 rounded-xl border-2 transition-all"
+                      style={{
+                        borderColor: active ? item.color : owned ? "#e2e8f0" : "#f1f5f9",
+                        background: `${item.color}08`,
+                      }}
+                    >
+                      <div className="text-2xl flex-shrink-0">{item.emoji}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <p className="font-bold text-slate-800 text-sm truncate">{item.name}</p>
+                          {active && (
+                            <span className="text-xs font-bold px-1.5 py-0.5 rounded-md text-white" style={{ background: item.color }}>
+                              ON
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-400">{item.description}</p>
+                        <p className="text-xs font-bold mt-0.5" style={{ color: item.color }}>
+                          🌱 {item.cost} TC
+                        </p>
+                      </div>
+                      <div className="flex-shrink-0">
+                        {owned ? (
+                          <button
+                            onClick={() => handleActivate(item)}
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+                            style={
+                              active
+                                ? { background: `${item.color}20`, color: item.color, border: `1.5px solid ${item.color}` }
+                                : { background: "#f8fafc", color: "#64748b", border: "1.5px solid #e2e8f0" }
+                            }
+                          >
+                            {active ? "Remove" : "Equip"}
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleBuy(item)}
+                            disabled={(user?.treecoins || 0) < item.cost}
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all"
+                            style={{
+                              background: (user?.treecoins || 0) >= item.cost ? item.color : "#94a3b8",
+                              cursor: (user?.treecoins || 0) >= item.cost ? "pointer" : "not-allowed",
+                            }}
+                          >
+                            Buy
+                          </button>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        )}
+        </div>
+
+        {/* Small footer hint */}
+        <div className="mt-6 text-xs text-slate-400 flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5" />
+          Drag decorations anywhere on the island and their saved positions will return next time.
+        </div>
       </div>
     </div>
   );

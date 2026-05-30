@@ -1,0 +1,38 @@
+[
+  {
+    "question": "Which of the following is a renewable natural resource?",
+    "difficulty": "Easy",
+    "A": "Coal",
+    "B": "Natural gas",
+    "C": "Water",
+    "D": "Uranium",
+    "answer": "C"
+  },
+  {
+    "question": "Soils that develop under tropical rainforests are typically nutrient-poor because:",
+    "difficulty": "Medium",
+    "A": "Most nutrients are stored in living biomass rather than in soil",
+    "B": "High rainfall removes salts and prevents mineral formation",
+    "C": "Decomposition rates are low due to cool temperatures",
+    "D": "The parent material is volcanic ash",
+    "answer": "A"
+  },
+  {
+    "question": "During an El Niño event, which of the following typically occurs along the western coast of South America?",
+    "difficulty": "Hard",
+    "A": "Increased upwelling and higher fish populations",
+    "B": "Decreased sea surface temperatures and drought",
+    "C": "Suppressed upwelling leading to warmer surface waters",
+    "D": "Higher nutrient availability and stronger trade winds",
+    "answer": "C"
+  },
+  {
+    "question": "If a region’s water table declines significantly, which is the most likely cause?",
+    "difficulty": "Challenge",
+    "A": "Decreased surface runoff due to urbanization",
+    "B": "Excessive groundwater withdrawal for irrigation",
+    "C": "Increased infiltration from rainfall",
+    "D": "Expansion of wetland ecosystems",
+    "answer": "B"
+  }
+]

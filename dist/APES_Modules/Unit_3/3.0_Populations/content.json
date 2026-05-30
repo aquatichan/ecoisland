@@ -1,0 +1,112 @@
+{
+  "title": "Unit 3 Overview: Populations",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "Unit 3 in APES covers the relationship between ecosystems and corresponding environmental shifts. The main questions to focus on throughout this unit are: "
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>What are the major characteristics of populations?</li>\n<li>How do populations react to environmental conditions changing?</li>\n<li>What are the differences in species’ reproductive patterns?</li>\n<li>How can a population change be calculated using a formula?</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "⚡ Study Guide Breakdowns"
+    },
+    {
+      "type": "paragraph",
+      "html": "This list will help you better understand the content and prepare you for the multiple choice section of the exam and FRQ. "
+    },
+    {
+      "type": "heading",
+      "text": "3.1 Generalist and Specialist Species"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Generalists</strong> are species with a broad <strong>ecological niche</strong>, meaning that their range of what is considered survivable is quite vast and diverse. <strong>Specialists</strong> are the opposite, experiencing a narrow niche in which their environmental conditions must be both specific and stable to uphold proper survival and reproduction rates."
+    },
+    {
+      "type": "heading",
+      "text": "3.2 K Selected and r selected species"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>K-selected species</strong> focus on low reproductive rates with higher investment in their young. For example, a USA family has just under two kids on average, and attention to individual development is high. In an <strong>r-selected species</strong>, many offspring are born and individual care rates are low, with survival simply depending on factors like size, genetic advantage, luck, and ability to survive with competition. Rodents, for example, are an r-selected species. K-selected species members are much more likely to reach late adulthood than members of an r-selected species, who, on average, die much sooner."
+    },
+    {
+      "type": "heading",
+      "text": "3.3  Survivorship curves"
+    },
+    {
+      "type": "paragraph",
+      "html": "A survivorship curve is a graphical representation of the mortality rate of a population over time. It is a useful tool for understanding the mortality patterns of a species and how they change as individuals age. There are three general types of survivorship curves: type I, type II, and type III. Type I experiences the most death late in life (like humans), type II experiences most of it in the middle-aged range (like reptiles or mammals), and type III experiences death early, with only some individuals surviving (like rodents, mentioned above)."
+    },
+    {
+      "type": "heading",
+      "text": "3.4 Carrying Capacity"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Carrying capacity</strong> is the maximum population size that one environment can hold. It is determined by the availability of resources such as food, water, and habitat, as well as by the presence of limiting factors such as competition, predation, and disease. When a population exceeds its carrying capacity, it is said to be in \"<strong>overshoot</strong>.\" Overshoot can lead to increased mortality rates, resource depletion, and reduced reproductive success. It can have significant impacts on both the population in question and the broader ecosystem. For example, overfishing can lead to overshoot of fish populations, while deforestation can lead to overshoot of certain animal populations."
+    },
+    {
+      "type": "heading",
+      "text": "3.5 Population Growth and Resource Availability"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Exponential growth</strong> is characterized by a constant rate of increase, with the population size increasing by a fixed percentage each time period. This results in an exponential curve, with the population growing more and more quickly over time. Exponential growth can occur when a population is not limited by any external factors, such as resources or predators."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Logistic growth</strong>, on the other hand, is characterized by a slowing of the rate of increase as the population approaches its carrying capacity (as previously discussed). Since the carrying capacity represents the maximums that that environment can hold, this population type must level off before that maximum is reached and stress to its population is caused."
+    },
+    {
+      "type": "heading",
+      "text": "3.6 Age Structure Diagrams"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Age structure diagrams</strong> are graphical representations of the age distribution of a population. They are used to visualize the relative proportions of individuals in different age groups within a population and can provide valuable insights into the demographic trends and characteristics of a population. Different types of these graphs exist which demonstrate different populations with more children, more adults, or more elderly people at one given time."
+    },
+    {
+      "type": "heading",
+      "text": "3.7 Total fertility rate"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Replacement level fertility</strong> is the fertility rate at which a population is able to replace itself, without any net population growth. It is typically defined as the average number of children per woman that is needed to maintain a stable population size, assuming that child mortality rates are constant and that there is no <strong>immigration</strong> or <strong>emigration</strong>. Replacement level fertility is combined with numbers such as the <strong>crude birth rate</strong> (all births) and <strong>crude death rate</strong> (all deaths) to allow for more in-depth <strong>family planning</strong>. Life expectancies and infant mortality rates can become predictable by environment."
+    },
+    {
+      "type": "heading",
+      "text": "3.8 Human Population Dynamics"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Population density</strong> is the measure of how many people live in one confined area. While this number is dependent on the reproductive rates and amount of births/deaths occurring, it also relies on immigration and emigration for external societal participants. Society and population can change based on <strong>density-dependent</strong> and <strong>density-independent</strong> factors. A density-dependent factor means that it will affect a population differently if it has more people versus less. For example, food will become scarcer as more residents are introduced to the population, so its allocation is dependent on the population density. A density-independent factor is one that is equal no matter the population density, like the effect of a natural disaster on the ecosystem.  The <strong>rule of 70</strong> is a rough estimate of how long it takes for a population or quantity to double in size. It is calculated by dividing the number 70 by the growth rate of the population or quantity."
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Immigration and Emigration</li>\n<li>Density dependent factor</li>\n<li>Density independent factor</li>\n<li>Rule of 70</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "3.9 Demographic Transition"
+    },
+    {
+      "type": "paragraph",
+      "html": "The demographic transition is a process that occurs when a country or region experiences changes in its population growth and structure. It is characterized by a transition from high fertility and mortality rates to low fertility and mortality rates, resulting in a shift from high population growth to low population growth or population stability. Described in stages (<strong>pre-industrial, transitional, industrial, and post industrial</strong>), these allow us to view what stage an ecosystem is in and how much time it has left in its current stage."
+    },
+    {
+      "type": "heading",
+      "text": "⚡ Quick Study - Key Terms"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Age structure diagrams:</strong> An age structure diagram shows the distribution of population for a country. If a population is stable then there will be an equal distribution amongst the age groups. If a population is predicted to decline then there will be a large group of elders.</li>\n<li><strong>Biotic potential</strong> ➪ Refers to the maximum reproductive rate of a population in ideal conditions - how many times an organism can reproduce- r is much higher than K- exponential growth without limited</li>\n<li><strong>Carrying capacity</strong> ➪  The maximum population size of the species that the environment can sustain, given the food, habitat, water and other necessities available in the environment</li>\n<li><strong>Density-dependent Factors</strong> ➪  The size of the population will affect survival ➪ access to clean water and air, food availability ,disease, territory size</li>\n<li><strong>Density-independent Factors</strong> ➪ Affect population regardless of population density (size) ➪ weather, climate, storms fires, heatwaves, droughts</li>\n<li><strong>Survivorship curve</strong> ➪  A line that displays the relative survival rates of a cohort - a group of individuals of the same age- in a population, from birth to the maximum age reached by any one cohort member. Type 1,2,3 curves</li>\n<li><strong>The Rule of 70</strong> ➪ The rule of 70 states that dividing the number of 70 by the percentage population growth rate approximates the populations doubling it</li>\n</ul>"
+    }
+  ]
+}

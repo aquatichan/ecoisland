@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A construction company compacts soil heavily during site preparation for a new building. After construction, the site is revegetated, but plants grow poorly despite regular irrigation and fertilizer application. Which of the following best describes how soil compaction affects plant growth in this scenario?",
+    "answers": [
+      "Compaction increases the density of soil particles, which increases water-holding capacity and causes waterlogging that suffocates plant roots",
+      "Compaction changes the soil pH to become more acidic, which prevents plants from absorbing the nutrients provided by irrigation and fertilizer",
+      "Compaction reduces pore space, decreasing soil aeration and permeability, which limits root oxygen availability and nutrient movement to plant roots",
+      "Compaction increases soil fertility by forcing organic matter deeper into the soil profile where it becomes more concentrated and available to plant roots"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A soil scientist uses a soil texture triangle to classify four soil samples collected from different depths in a single soil profile. The surface sample (0-5 cm) plots as loam (40% clay, 40% silt, 20% sand). The subsurface sample (20-30 cm) plots as clay loam (35% clay, 45% silt, 20% sand). The deeper sample (50-60 cm) plots as sandy clay loam (25% clay, 35% silt, 40% sand). The deepest sample (80-90 cm) plots as sandy loam (10% clay, 20% silt, 70% sand). Which statement best describes the relationship between soil texture changes and soil permeability in this profile?",
+    "answers": [
+      "Permeability decreases with depth because sand percentage increases from 20% at the surface to 70% at depth, creating larger pores that reduce the soil's ability to retain water",
+      "Permeability increases with depth because sand percentage increases from 20% at the surface to 70% at depth, creating larger pores that allow faster water movement",
+      "Permeability increases with depth because sand percentage increases from 20% at the surface to 70% at depth, reducing water retention capacity that allows faster drainage",
+      "Permeability increases with depth because clay percentage decreases from 40% at the surface to 10% at depth, creating larger pores that allow faster water movement"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A construction company is planning to build a landfill in a region with two potential soil types: Site A has silty clay soil with high cation exchange capacity, while Site B has sandy soil with low cation exchange capacity. Environmental regulations require soil that can minimize contaminant migration to groundwater. Which of the following best explains why Site A's soil would be more effective at meeting this regulatory requirement?",
+    "answers": [
+      "Silty clay soil's smaller particles and higher cation exchange capacity allow it to chemically bind positively charged contaminants (cations) so strongly that contaminants accumulate in the upper soil layers rather than being immobilized throughout the profile.",
+      "Silty clay soil's smaller particles and higher cation exchange capacity allow it to chemically bind positively charged contaminants (cations) to soil particles, reducing their mobility through the soil profile toward groundwater.",
+      "Silty clay soil's smaller particles and higher cation exchange capacity allow it to chemically bind positively charged contaminants (cations) to soil particles, reducing their transport in surface runoff to nearby water bodies.",
+      "Silty clay soil's smaller particles create smaller pore spaces that physically trap contaminant particles, preventing their downward movement through the soil profile toward groundwater."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A farmer wants to improve water retention in sandy soil without adding irrigation infrastructure. A soil scientist recommends incorporating organic matter through composting. Which of the following best explains why adding organic matter would increase the sandy soil's water-holding capacity?",
+    "answers": [
+      "Organic matter absorbs and retains water in its structure, increasing the total volume of water the soil can hold despite the large particle size of sand",
+      "Organic matter chemically converts sand particles into smaller silt and clay particles, which have higher water-holding capacity than sand",
+      "Organic matter reduces soil compaction by creating larger pores, which paradoxically increases water retention by preventing water from draining too quickly",
+      "Organic matter increases soil pH, which increases the positive charge on sand particles, allowing them to attract and hold more water molecules"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A soil scientist poured 500 mL of water into 30 cm columns of pure sand, pure clay, and loam (equal parts sand, silt, clay). Drainage times were sand 8 minutes, loam 45 minutes, and clay 180 minutes. Which best explains these results in terms of particle size and soil properties?",
+    "answers": [
+      "Individual particles do not absorb water and drainage occurs through pores between particles",
+      "Clay holds more water but this describes retention not the drainage rate observed",
+      "Soil fertility does not influence drainage because nutrient content is unrelated to permeability",
+      "Sand's large particles create big pores and rapid drainage while clay restricts flow"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A construction crew stripped the top 30 cm of soil and abandoned a parking lot project. The exposed B and C horizons remained bare for five years. Why does vegetation not reestablish easily on this exposed subsoil compared to undisturbed soil?",
+    "answers": [
+      "Subsoil compaction limits root penetration and reduces growth potential.",
+      "Lower permeability can cause surface waterlogging and inhibit germination.",
+      "Subsoil toxicity from leached chemicals prevents plant establishment.",
+      "Stripped topsoil removed organic matter, nutrients, and microbes plants need."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An environmental consultant is hired to assess whether a proposed construction site has soil suitable for a septic system, which requires soil that allows water to percolate downward at a specific rate. The consultant collects soil samples from the site and performs a percolation test by pouring a measured volume of water into a hole and timing how long it takes for the water to drain completely. Which of the following best describes what property the consultant is measuring?",
+    "answers": [
+      "Soil fertility, which indicates the nutrient content and capacity of soil to support plant growth based on organic matter and mineral composition",
+      "Soil porosity, which describes the total volume of pore space in soil regardless of how quickly water moves through those pores",
+      "Soil water-holding capacity, which measures the total amount of water soil can retain in its pores after gravitational drainage",
+      "Soil permeability, which indicates the rate at which water and nutrients move through soil horizons and depends on particle size and pore space"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A farmer wants to choose fields for water-intensive crops. He collects soil samples at 0–15, 15–30, and 30–60 cm, saturates them, and measures how much water remains after 24 hours of drainage. What is he measuring?",
+    "answers": [
+      "Soil permeability indicating rate of water movement through horizons.",
+      "Soil biological activity like organic matter decomposition rates.",
+      "Soil pH level that determines nutrient availability to plants.",
+      "Soil water-holding capacity measured as water retained after drainage."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A farmer tests soil from two fields using standard soil testing methods. Field A shows high water-holding capacity, moderate permeability, and high cation exchange capacity. Field B shows low water-holding capacity, high permeability, and low cation exchange capacity. Which of the following best describes the soil texture of Field A compared to Field B?",
+    "answers": [
+      "Field A is loamy soil with balanced clay, silt, and sand content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in all three measured properties",
+      "Field A is loamy soil with balanced clay, silt, and sand content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in water-holding capacity and permeability",
+      "Field A is silty soil with high silt and moderate clay content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in all three measured properties",
+      "Field A is loamy soil with high silt content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in water-holding capacity and permeability but not cation exchange capacity"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The diagram shows soil horizons in a temperate forest with distinct layers labeled O, A, B, and C. The B horizon appears darker and more compacted than the A horizon above it. Which characteristic of the B horizon best explains why it typically has lower permeability than the A horizon?",
+    "answers": [
+      "Clay and silt particles leached from the A horizon accumulate in the B horizon, reducing pore size and water movement",
+      "The B horizon is more compacted because it experiences greater pressure from overlying soil layers, which reduces pore space uniformly",
+      "The A horizon has higher permeability because it contains more sand particles mixed with organic matter",
+      "The B horizon contains more organic matter than the A horizon, which increases soil compaction and reduces drainage"
+    ],
+    "correct": "!"
+  }
+]

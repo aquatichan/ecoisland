@@ -1,0 +1,38 @@
+[
+  {
+    "question": "Which of the following is a greenhouse gas?",
+    "difficulty": "Easy",
+    "A": "Nitrogen",
+    "B": "Oxygen",
+    "C": "Carbon dioxide",
+    "D": "Argon",
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following global initiatives specifically targets the reduction of greenhouse gas emissions?",
+    "difficulty": "Medium",
+    "A": "Montreal Protocol",
+    "B": "Kyoto Protocol",
+    "C": "Basel Convention",
+    "D": "CITES Treaty",
+    "answer": "B"
+  },
+  {
+    "question": "Which feedback loop would most likely accelerate global climate change?",
+    "difficulty": "Hard",
+    "A": "Increased plant growth removing more CO2 from the atmosphere",
+    "B": "Melting of polar ice reducing Earth’s albedo",
+    "C": "Expansion of glaciers reflecting more solar radiation",
+    "D": "Formation of more stratospheric ozone",
+    "answer": "B"
+  },
+  {
+    "question": "If global average temperatures increase by 2°C, which region is expected to experience the greatest relative warming?",
+    "difficulty": "Challenge",
+    "A": "Tropical rainforests",
+    "B": "Temperate grasslands",
+    "C": "Polar regions",
+    "D": "Coastal deserts",
+    "answer": "C"
+  }
+]

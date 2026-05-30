@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A hydrologist says an upstream dam will cut peak floods by 40% and secure downstream water, though some aquatic habitat will be lost. The hydrologist claims economic gains and flood protection far outweigh ecological costs. What assumption underlies this argument?",
+    "answers": [
+      "Habitat loss behind reservoirs is reversible and can be restored.",
+      "Economic and flood control benefits justify losing aquatic habitat.",
+      "Downstream farms lack alternative water supplies or flood management options.",
+      "Peak floods are the main threat to downstream agriculture."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A hydrologist studying the Susquehanna River watershed claims that the region's steep topography contributes significantly to rapid stormwater runoff and increased flood risk. As evidence, the hydrologist notes that the watershed's average slope is 8% and that peak discharge occurs within 6 hours of heavy rainfall, compared to 18 hours in the flatter Coastal Plain watersheds to the east. Which of the following best describes the reasoning connecting this evidence to the flood risk claim?",
+    "answers": [
+      "Steeper slopes reduce water infiltration time through decreased soil contact duration, which explains why steeper watersheds generate faster runoff and higher peak flows that increase flood potential.",
+      "Steeper slopes accelerate water movement downslope through gravitational force, which explains why steeper watersheds generate faster runoff and higher peak flows that increase flood potential.",
+      "Steeper slopes accelerate water movement downslope through gravitational force, which explains why steeper watersheds generate greater total runoff volume that increases flood potential.",
+      "Steeper slopes accelerate water movement downslope through gravitational force, but this only explains faster runoff if both watersheds received equal rainfall intensity during the storm events being compared."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "An ecologist measures vegetation cover and erosion rates in five similar watersheds. Watersheds with dense cover (>70%) had erosion of 0.5-1.2 t/ha/yr, while sparse cover (<30%) had 4.5-6.8 t/ha/yr. What relationship does the data show between vegetation density and watershed erosion?",
+    "answers": [
+      "Vegetation density shows no consistent relationship because erosion depends solely on slope.",
+      "Dense vegetation reduces erosion by lowering soil temperature through shading.",
+      "Dense vegetation lowers erosion by increasing infiltration and stabilizing soil.",
+      "Dense vegetation increases erosion by blocking infiltration and raising runoff."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A researcher measured streamflow from three tributaries. Tributary A is steep, 15 km, forested with peak 45 m³/s at 8 hours. Tributary B is gentle, 35 km, agricultural with peak 28 m³/s at 24 hours. Tributary C is moderate slope, 22 km, urban with peak 62 m³/s at 4 hours. Which conclusion about watershed characteristics and runoff timing is best supported by these data?",
+    "answers": [
+      "Slope and length affect timing but urban impervious surfaces speed peak discharge",
+      "Longer watersheds do not always produce higher peaks because infiltration and impervious cover vary",
+      "Lower peak in agricultural areas reflects slope and infiltration not farming practices alone",
+      "Slope alone determines peak timing but vegetation and travel distance also matter"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A team is testing how slope affects stream erosion in three adjacent mountainous watersheds (5°, 15°, 25°) with similar soils, vegetation, and precipitation. Which research question best guides a testable investigation of slope's effect on erosion?",
+    "answers": [
+      "How does watershed slope affect suspended sediment concentration in mg/L during spring runoff?",
+      "Will climate change alter erosion rates differently in steep and gentle slope watersheds?",
+      "Which watershed has the most erosion and why is that environmentally important?",
+      "Do steeper slopes cause more erosion in watersheds with greater vegetation cover?"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A watershed receives 85 centimeters of precipitation annually and covers 1,200 hectares. Which calculation determines the total annual water volume entering the watershed in cubic meters?",
+    "answers": [
+      "Convert hectares and centimeters to meters, then multiply area by depth",
+      "Convert hectares to square kilometers then divide precipitation depth by area",
+      "Multiply precipitation in centimeters by area in hectares without converting units",
+      "Divide precipitation depth by watershed area to calculate total water volume"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Hydrologists measured peak streamflow times for four similarly sized (~50 km²) watersheds with different characteristics. Watershed A has steep slopes, is 8 km long, and has minimal vegetation — peak flow at 6 hours. Watershed B has gentle slopes, is 18 km long, and has dense forest — peak flow at 28 hours. Watershed C has moderate slopes, is 12 km long, and is 60% impervious urban area — peak flow at 3 hours. Watershed D has steep slopes, is 10 km long, and is agricultural with moderate infiltration — peak flow at 14 hours. Which conclusion about how watershed characteristics affect runoff timing is best supported by these data?",
+    "answers": [
+      "High impervious cover and low infiltration speed runoff, vegetation delays it.",
+      "Steep slopes alone do not guarantee the fastest runoff response.",
+      "Equal basin size does not produce identical peaks, land cover controls timing.",
+      "Longer channel length may increase travel time but is not the primary control."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Headwaters 1,200 m, discharge 180 m, horizontal distance 22 km. Which sequence finds the average gradient?",
+    "answers": [
+      "Subtract elevations to get 1,020 m then divide by 22 km",
+      "Subtract elevations to get 1,020 m then multiply by 22 km",
+      "Divide the 1,020 m drop by the headwater elevation 1,200 m",
+      "Divide discharge elevation by headwater elevation then multiply by distance"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Hydrologists studying how watershed slope affects runoff velocity install monitoring stations at three locations along a stream: one in the headwaters (steep terrain, 8% slope), one in the mid-watershed (moderate terrain, 3% slope), and one near the discharge point (flat terrain, 0.5% slope). They measure water velocity and discharge volume at each station during the same rainfall event. Which of the following best describes what this research design allows the scientists to determine?",
+    "answers": [
+      "The correlation between slope and runoff rate across different locations in the watershed",
+      "How slope influences runoff rate and travel time within a single watershed",
+      "How slope influences runoff rate and travel time when comparing different watersheds",
+      "How slope influences total discharge volume within a single watershed"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A watershed ecologist examining a map of the region writes: 'Watershed divides are topographic boundaries that separate adjacent watersheds, determining which direction surface runoff flows and which discharge point it reaches. Understanding these divides is essential for predicting how pollution in one watershed might affect neighboring systems.' What is the ecologist's claim about watershed divides?",
+    "answers": [
+      "Watershed divides determine which direction surface runoff flows and which discharge point it reaches.",
+      "Watershed divides determine which direction surface runoff flows but not which specific discharge point it ultimately reaches.",
+      "Watershed divides determine which direction groundwater recharge flows and which aquifer system it reaches.",
+      "Watershed divides are vegetation boundaries that determine which direction surface runoff flows and which discharge point it reaches."
+    ],
+    "correct": "!"
+  }
+]

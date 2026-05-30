@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A marine biologist collected data on polychlorinated biphenyls (PCBs) in a food chain: phytoplankton (0.5 ppm), small fish (5 ppm), large fish (50 ppm), and seals (500 ppm). Which calculation approach would determine the biomagnification factor for each trophic transfer?",
+    "answers": [
+      "Subtract the concentration of PCBs in the prey from the concentration in the predator to determine how much additional pollutant accumulated",
+      "Divide the concentration of PCBs in the predator by the total number of prey organisms consumed to determine the biomagnification factor",
+      "Divide the concentration of PCBs in each predator by the concentration in its prey organism to calculate the biomagnification factor for that trophic transfer",
+      "Divide the concentration of PCBs in the predator by the concentration in the prey and multiply by 100 to express biomagnification as a percentage increase"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Researchers studying mercury bioaccumulation in a marine food web collected fish tissue samples from a commercial fishing area and measured methylmercury concentration. They found that large predatory fish (tuna, swordfish) had methylmercury concentrations 10-100 times higher than small forage fish (sardines, anchovies) from the same area. Before concluding that this difference demonstrates biomagnification, researchers should verify that",
+    "answers": [
+      "The large and small fish species occupy different trophic levels in the food web but feed on independent food chains that do not overlap",
+      "The large and small fish species occupy different trophic levels and show consumption relationships, but the small fish were caught in a different geographic region with lower baseline mercury contamination",
+      "The large and small fish species occupy different trophic levels in the food web and the large fish consume the small fish or their prey",
+      "The large and small fish species occupy different depth zones or geographic microhabitats within the commercial fishing area and are exposed to different mercury sources"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "PCBs are fat-soluble persistent pollutants. Measured concentrations in a Great Lakes food chain are phytoplankton 0.05 ppm, zooplankton 0.5 ppm, small fish 5 ppm, and lake trout 50 ppm. Which best explains the increasing concentrations?",
+    "answers": [
+      "Larger organisms contain more total PCBs but this does not raise tissue concentration.",
+      "Differences in metabolic rate do not explain the tenfold increase across trophic levels.",
+      "PCBs bioaccumulate in fat and biomagnify up the food chain tenfold per level.",
+      "Organisms do not actively concentrate toxins as a defense and PCBs accumulate passively."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Local fish have mercury levels 100 times seawater while shellfish are 10 times. What best explains the difference?",
+    "answers": [
+      "Larger body size does not raise concentration measured per unit mass.",
+      "A single prey-to-predator transfer cannot produce such exponential increase.",
+      "Predatory fish biomagnify mercury by eating contaminated prey across trophic transfers.",
+      "More efficient excretion by shellfish does not account for the tenfold difference."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Pike contain 40 times more mercury than zooplankton. Which research question best tests whether biomagnification or sediment uptake explains this difference?",
+    "answers": [
+      "Why do pike accumulate more mercury than zooplankton and what actions follow?",
+      "Is mercury contamination a serious threat to pike populations?",
+      "Do pike in lakes with polluted sediment have higher tissue mercury?",
+      "Do pike eating prey with higher mercury have higher tissue mercury?"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A study measured lead in an urban food chain: soil 180 ppm, earthworms 42 ppm, robins 185 ppm, and hawk pellets 310 ppm. Rainwater lead was negligible. Which conclusion about lead bioaccumulation and biomagnification is best supported?",
+    "answers": [
+      "Lead does not biomagnify because earthworm concentrations are lower than soil.",
+      "Earthworms bioaccumulate lead from soil and it biomagnifies to hawks.",
+      "Robin lead levels result from direct soil ingestion not biomagnification.",
+      "Hawk lead levels reflect larger body size allowing greater lead storage."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers studying mercury bioaccumulation in a freshwater lake collected fish tissue samples from a single location near the lake's outlet and measured total mercury concentration in whole fish (including all tissues). If they modified the procedure to collect fish from multiple locations throughout the lake and measure mercury concentration only in fish muscle tissue (excluding liver, kidney, and other organs), which changes in understanding would most likely result?",
+    "answers": [
+      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide data more relevant to human consumption and food web transfer, since muscle is the primary tissue consumed.",
+      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide more relevant data because muscle tissue accumulates mercury faster than liver and kidney, making it a better indicator of recent exposure.",
+      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide data more relevant to biomagnification between trophic levels, since comparing muscle tissue across species standardizes measurements.",
+      "Spatial variation in mercury bioaccumulation could be identified, but focusing on muscle tissue would provide less relevant data for food web transfer since whole-fish measurements better represent what predators consume."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A study measured mercury in an estuary: phytoplankton 0.1 ppm, small fish 1.5 ppm, osprey 25 ppm. Which process explains this pattern?",
+    "answers": [
+      "Higher mercury from greater food intake without trophic concentration",
+      "Biomagnification of fat-soluble mercury through trophic transfer and retention",
+      "Organisms deliberately accumulate mercury to maintain physiological balance",
+      "Phytoplankton convert mercury to methylmercury and concentrations dilute higher up"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A pesticide enters a freshwater lake. Zooplankton absorb it, small fish eat many zooplankton, and predatory fish eat small fish. Why are pesticide concentrations highest in predatory fish?",
+    "answers": [
+      "Higher metabolic rates would increase toxin breakdown rather than concentration.",
+      "Larger body size does not reduce concentration because predators eat many contaminated prey.",
+      "Predatory fish consume many contaminated prey and bioaccumulate fat-soluble pesticide.",
+      "Pesticide does not bond to proteins and instead dissolves in lipids."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A marine toxicologist reports: 'Methylmercury forms when bacteria in the ocean convert inorganic mercury into an organic form that organisms can absorb. Small fish and zooplankton take up methylmercury from water and sediments. As larger predatory fish consume these smaller organisms, methylmercury concentrations increase dramatically. Bluefin tuna, which consume many smaller fish, accumulate methylmercury at levels that pose significant health risks to humans who consume the tuna. This biomagnification pattern means that seafood consumers may experience nervous system damage, developmental delays, and other health effects.' Which statement best represents the author's main claim?",
+    "answers": [
+      "Methylmercury biomagnifies in aquatic food webs, causing small fish and zooplankton to accumulate concentrations that pose health risks from nervous system damage.",
+      "Methylmercury biomagnifies in aquatic food webs, causing apex predators like tuna to accumulate concentrations that pose health risks to human consumers.",
+      "Inorganic mercury biomagnifies in aquatic food webs, causing apex predators like tuna to accumulate concentrations that pose health risks to human consumers.",
+      "Methylmercury bioaccumulates in aquatic food webs, causing apex predators like tuna to accumulate concentrations that pose health risks to human consumers."
+    ],
+    "correct": "B"
+  }
+]

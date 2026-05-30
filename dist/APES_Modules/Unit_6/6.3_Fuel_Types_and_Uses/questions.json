@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Biodiesel comes from vegetable oils and animal fats while petroleum diesel comes from crude oil. What explains biodiesel's renewable classification?",
+    "answers": [
+      "Feedstocks regenerate on human timescales via agriculture while crude oil forms geologically",
+      "Biodiesel is renewable because feedstocks can be chemically recycled and reused indefinitely",
+      "Biodiesel is renewable because it produces fewer emissions when burned and pollutes less",
+      "Biodiesel is renewable because plants capture solar energy via photosynthesis unlike fossil diesel"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A Polish coal plant burns anthracite and uses combustion waste heat to supply district heating. Why does this increase overall energy efficiency compared to a plant producing only electricity?",
+    "answers": [
+      "Lower building heating demand is a benefit, not the plant's efficiency mechanism.",
+      "Anthracite's lower emissions do not cause the plant's higher efficiency.",
+      "Higher anthracite heat content does not explain the efficiency gain.",
+      "Cogeneration captures waste heat for district heating, raising useful energy per fuel."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An industrial nation converts several coal-fired power plants to natural gas facilities to reduce air pollution and greenhouse gas emissions. Which of the following represents an unintended consequence of this fuel-switching strategy?",
+    "answers": [
+      "Increased natural gas demand requires expansion of storage tanks and distribution pipelines at power plant sites, fragmenting local habitats and disrupting ecosystems near converted facilities",
+      "Increased natural gas demand drives expansion of drilling and pipeline infrastructure, contaminating groundwater supplies in extraction regions through hydraulic fracturing",
+      "Increased natural gas demand drives expansion of extraction and distribution systems, releasing fugitive methane emissions that offset greenhouse gas reductions from switching away from coal",
+      "Increased natural gas demand drives expansion of drilling and pipeline infrastructure, fragmenting landscapes and disrupting ecosystems in extraction regions"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An energy engineer analyzes cogeneration systems in industrial facilities: 'Traditional power plants generate electricity through steam turbines and release waste heat into the environment or cooling systems, typically achieving 35-40% overall energy efficiency. Cogeneration systems capture this waste heat for space heating, hot water, or industrial processes, increasing total useful energy output to 60-80% efficiency from the same fuel input. A manufacturing facility implementing cogeneration with natural gas can reduce its combined electricity and heating costs by 20-30% while simultaneously decreasing greenhouse gas emissions by 25-35%. Some facility managers hesitate to adopt cogeneration due to higher initial capital costs and perceived operational complexity. However, the payback period typically ranges from 3-5 years, after which the facility benefits from 15-20 years of reduced operating costs and lower emissions.'",
+    "answers": [
+      "Cogeneration systems offer economic and environmental advantages that justify adoption despite higher initial capital costs.",
+      "Some facility managers hesitate to adopt cogeneration due to higher initial capital costs and perceived operational complexity.",
+      "Cogeneration systems increase total useful energy output to 60-80% efficiency compared to 35-40% for traditional power plants.",
+      "Cogeneration systems capture waste heat for space heating, hot water, or industrial processes."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A facility uses cogeneration to produce electricity while capturing waste heat for heating and hot water. A conventional plant at the same facility produces only electricity and discards its waste heat. Which best explains why cogeneration is more efficient than the conventional plant?",
+    "answers": [
+      "Cogeneration relies on heat recovery not on using renewable fuels for efficiency.",
+      "Cogeneration captures waste heat and uses it for heating and hot water.",
+      "Cogeneration uses less fuel overall because it provides both electricity and useful heat.",
+      "Cogeneration operates at higher combustion temperatures to extract more fuel energy."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Biodiesel is made from vegetable oils and animal fats that can be regrown. Petroleum diesel forms from fossil fuels over millions of years. Why is biodiesel classified as renewable while petroleum diesel is not?",
+    "answers": [
+      "Being organic does not guarantee renewability because regeneration rate matters.",
+      "Lower emissions do not make a fuel renewable, renewability depends on regeneration.",
+      "Geographic availability differs but does not determine renewability of a fuel.",
+      "Biodiesel feedstocks regrow within years while petroleum forms over millions of years."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An environmental health researcher examines fuel use in rural households: 'In regions of sub-Saharan Africa and South Asia where electricity access is limited, households depend on biomass fuels—primarily wood, charcoal, and agricultural residues—for cooking and heating. Burning these fuels in poorly ventilated indoor spaces exposes household members, particularly women and children, to smoke concentrations 10-40 times higher than outdoor air pollution levels. This chronic exposure causes respiratory infections, reduced lung function, cardiovascular disease, and premature mortality at rates comparable to smoking 1-2 packs of cigarettes daily. Charcoal, produced by partially burning wood in low-oxygen conditions, releases less smoke than raw firewood and provides more consistent heat, making it preferable for indoor cooking. However, charcoal production itself requires substantial wood inputs—approximately 3-4 kg of wood produces 1 kg of charcoal—creating pressure on forest resources. Transitioning households to cleaner fuels like natural gas or improved biomass stoves with better ventilation would reduce health impacts, but such transitions require either fuel infrastructure development or technology adoption that many rural households cannot afford without external support.'",
+    "answers": [
+      "Charcoal production requires approximately 3-4 kg of wood to produce 1 kg of charcoal, creating pressure on forest resources.",
+      "Burning biomass fuels in poorly ventilated indoor spaces exposes household members to smoke concentrations 10-40 times higher than outdoor air pollution levels.",
+      "Reducing indoor air pollution from biomass burning requires external support to help rural households access cleaner fuels or improved technology.",
+      "Charcoal releases less smoke than raw firewood and provides more consistent heat, making it preferable for indoor cooking."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A study compared household wood fuel use across five regions with these GDP per capita and usage rates: Region A low income $2,000 78% use wood; Region B $5,500 42%; Region C $12,000 8%; Region D $35,000 2%; Region E $48,000 less than 1%. Which conclusion is best supported by these data?",
+    "answers": [
+      "Residual wood use in wealthy regions often reflects culture or aesthetics.",
+      "Data do not justify abandoning wood globally or favoring fossil fuels.",
+      "High income regions use more wood because they can afford it.",
+      "Household wood use falls sharply as GDP per capita increases."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Natural gas and coal are fossil fuels, yet natural gas burns cleaner. Which best explains this difference?",
+    "answers": [
+      "Methane emits less CO2 per energy because it has more hydrogen",
+      "Natural gas is mostly methane and emits CO2 and water instead of sulfur",
+      "Lower flame temperatures reduce nitrogen oxide formation but not sulfur emissions",
+      "Depth of extraction does not purify fuel and does not determine emissions"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A coal-dependent power plant in the Appalachian region currently operates traditional steam turbines that release 65% of fuel energy as waste heat into cooling towers. Plant engineers propose installing a cogeneration system that captures this waste heat for district heating of nearby industrial facilities and municipal buildings. Thermal efficiency analysis shows this would increase overall fuel utilization from 35% to 72%. Which advantage best justifies implementing cogeneration at this facility?",
+    "answers": [
+      "Cogeneration captures waste heat that would otherwise be lost, increasing overall fuel utilization efficiency from 35% to 72% at this facility.",
+      "Cogeneration reduces waste heat generation during coal combustion, reducing the total coal consumption required to meet both electricity and heating demands by approximately 50%.",
+      "Cogeneration captures waste heat that would otherwise be lost, reducing the total coal consumption required to meet both electricity and heating demands by approximately 50%.",
+      "Cogeneration captures waste heat that would otherwise be lost, reducing the coal consumption required for electricity generation at this facility by approximately 50%."
+    ],
+    "correct": "C"
+  }
+]

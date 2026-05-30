@@ -1,280 +1,160 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { User } from "@/entities/User";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Trophy, Medal, Award, Crown, Leaf, TrendingUp, Globe } from "lucide-react";
+import { Trophy, Crown, Medal, Award, Leaf, TrendingUp, Globe, TreePine, Loader2, Star } from "lucide-react";
+
+const TABS = [
+  { key: "treecoins", label: "Treecoins", icon: TreePine, color: "#00c896" },
+  { key: "level", label: "Level", icon: TrendingUp, color: "#8b5cf6" },
+  { key: "ambassadors", label: "Ambassadors", icon: Award, color: "#f59e0b" },
+];
+
+function RankIcon({ rank }) {
+  if (rank === 1) return <Crown className="w-5 h-5 text-amber-400" />;
+  if (rank === 2) return <Trophy className="w-5 h-5 text-slate-400" />;
+  if (rank === 3) return <Medal className="w-5 h-5 text-amber-600" />;
+  return <span className="text-sm font-black text-slate-400">#{rank}</span>;
+}
+
+function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor }) {
+  const isMe = user.id === currentUserId;
+  const initials = (user.username || user.full_name || "U")[0]?.toUpperCase();
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: Math.min(rank * 0.04, 0.5) }}
+      className="flex items-center gap-4 p-4 rounded-2xl transition-all"
+      style={{
+        background: isMe ? "rgba(0,200,150,0.06)" : rank <= 3 ? "rgba(245,158,11,0.04)" : "white",
+        border: isMe ? "2px solid rgba(0,200,150,0.3)" : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "2px solid #f1f5f9",
+      }}
+    >
+      {/* Rank */}
+      <div className="w-10 flex items-center justify-center flex-shrink-0">
+        <RankIcon rank={rank} />
+      </div>
+
+      {/* Avatar */}
+      <div className="w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center font-black text-white text-base"
+        style={{ background: isMe ? "linear-gradient(135deg, #00c896, #06b6d4)" : `hsl(${(rank * 47) % 360}, 60%, 50%)` }}>
+        {user.avatar_url ? <img src={user.avatar_url} alt="" className="w-full h-full object-cover" /> : initials}
+      </div>
+
+      {/* Info */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          <p className="font-black text-slate-800 text-sm truncate">{user.username || user.full_name || "Unknown"}</p>
+          {isMe && <span className="text-xs font-bold px-2 py-0.5 rounded-full text-emerald-700 bg-emerald-100">You</span>}
+          {user.verification_status === "ambassador" && <span className="text-xs font-bold px-2 py-0.5 rounded-full text-amber-700 bg-amber-100">Ambassador</span>}
+          {user.verification_status === "verified" && <span className="text-xs font-bold px-2 py-0.5 rounded-full text-blue-700 bg-blue-100">Verified</span>}
+        </div>
+        <p className="text-xs text-slate-400">{[user.city, user.country].filter(Boolean).join(", ") || "Global"}</p>
+      </div>
+
+      {/* Value */}
+      <div className="text-right flex-shrink-0">
+        <div className="text-xl font-black" style={{ color: valueColor }}>{user[valueKey] ?? 0}</div>
+        <div className="text-xs text-slate-400">{valueSuffix}</div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Leaderboard() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [tab, setTab] = useState("treecoins");
 
   useEffect(() => {
-    loadData();
+    async function load() {
+      setIsLoading(true);
+      try {
+        const [me, all] = await Promise.all([User.me(), User.list("-treecoins", 100)]);
+        setCurrentUser(me);
+        setUsers(all);
+      } catch { setUsers([]); }
+      finally { setIsLoading(false); }
+    }
+    load();
   }, []);
 
-  const loadData = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const [userData, allUsers] = await Promise.all([User.me(), User.list("-treecoins", 100)]);
-      setCurrentUser(userData);
-      setUsers(allUsers);
-    } catch (e) {
-      setError("Could not load leaderboard data. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
+  const sorted = {
+    treecoins: [...users].sort((a, b) => (b.treecoins || 0) - (a.treecoins || 0)),
+    level: [...users].sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1)),
+    ambassadors: users.filter(u => u.verification_status === "ambassador"),
   };
 
-  const getRankIcon = (rank) => {
-    if (rank === 1) return <Crown className="w-6 h-6 text-yellow-500" />;
-    if (rank === 2) return <Trophy className="w-6 h-6 text-gray-400" />;
-    if (rank === 3) return <Medal className="w-6 h-6 text-orange-500" />;
-    return <span className="text-lg font-bold text-gray-500">#{rank}</span>;
-  };
-
-  const getVerificationBadge = (status) => {
-    if (status === "ambassador") return <Badge className="bg-purple-100 text-purple-700">Ambassador</Badge>;
-    if (status === "verified") return <Badge className="bg-blue-100 text-blue-700">Verified</Badge>;
-    return null;
-  };
-
-  const testUsers = [
-    {
-      id: "test-gold",
-      username: "Lizzie Fletcher",
-      avatar_url: "https://files.catbox.moe/3i5hsk.png",
-      state: "Houston, Texas",
-      country: "USA",
-      treecoins: 1000,
-      eco_level: 12,
-      verification_status: "verified",
-      placement: "gold",
-    },
-    {
-      id: "test-silver",
-      username: "Sal Khan",
-      avatar_url: "https://files.catbox.moe/k57zvd.avif",
-      state: "California",
-      country: "USA",
-      treecoins: 750,
-      eco_level: 8,
-      verification_status: null,
-      placement: "silver",
-    },
-    {
-      id: "test-bronze",
-      username: "Cristiano Ronaldo",
-      avatar_url: "https://files.catbox.moe/gsq33m.png",
-      state: "Riyadh",
-      country: "Saudi Arabia",
-      treecoins: 500,
-      eco_level: 5,
-      verification_status: null,
-      placement: "bronze",
-    },
-    {
-      id: "test-none",
-      username: "Aaron Qin",
-      avatar_url: null,
-      state: "Texas",
-      country: "USA",
-      treecoins: 250,
-      eco_level: 3,
-      verification_status: null,
-      placement: "none",
-    },
-  ];
-
-  if (isLoading) {
-    return (
-      <div className="p-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto space-y-4">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <div key={i} className="animate-pulse bg-gray-200 h-20 rounded-xl" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="p-8 text-center bg-gray-50 text-red-600">
-        <p>{error}</p>
-      </div>
-    );
-  }
+  const myRankTc = sorted.treecoins.findIndex(u => u.id === currentUser?.id) + 1;
 
   return (
-    <div className="p-4 md:p-8 bg-gray-50">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Global Leaderboard</h1>
-          <p className="text-gray-600 mt-2">See how you rank among Ecoislanders worldwide</p>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" style={{ background: "linear-gradient(135deg, #f59e0b, #f97316)", boxShadow: "0 8px 24px rgba(245,158,11,0.3)" }}>
+            <Trophy className="w-8 h-8 text-white" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-2" style={{ letterSpacing: "-0.03em" }}>Global Leaderboard</h1>
+          <p className="text-slate-500">See how you rank among Ecoislanders worldwide</p>
+          {currentUser && myRankTc > 0 && (
+            <div className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-xl text-sm font-bold text-emerald-700" style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.2)" }}>
+              <Star className="w-4 h-4" /> Your Rank: #{myRankTc} · {currentUser.treecoins || 0} Treecoins
+            </div>
+          )}
         </div>
 
-        <Tabs defaultValue="treecoins" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-gray-100">
-            <TabsTrigger value="treecoins">
-              <Leaf className="w-4 h-4 mr-2" />
-              All-Time Treecoins
-            </TabsTrigger>
-            <TabsTrigger value="level">
-              <TrendingUp className="w-4 h-4 mr-2" />
-              Level
-            </TabsTrigger>
-            <TabsTrigger value="regional">
-              <Globe className="w-4 h-4 mr-2" />
-              Regional
-            </TabsTrigger>
-            <TabsTrigger value="ambassadors">
-              <Award className="w-4 h-4 mr-2" />
-              Ambassadors
-            </TabsTrigger>
-          </TabsList>
+        {/* Tabs */}
+        <div className="flex items-center gap-1 mb-5 p-1 rounded-xl" style={{ background: "var(--bg-card)", border: "2px solid var(--border-card)" }}>
+          {TABS.map(t => (
+            <button
+              key={t.key}
+              onClick={() => setTab(t.key)}
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-bold transition-all"
+              style={tab === t.key ? { background: t.color, color: "white" } : { color: "#64748b" }}
+            >
+              <t.icon className="w-4 h-4" />
+              <span className="hidden sm:inline">{t.label}</span>
+            </button>
+          ))}
+        </div>
 
-          <TabsContent value="treecoins" className="space-y-4 mt-4">
-            {users.map((user, index) => (
-              <Card
-                key={user.id}
-                className={`transition-all duration-300 hover:shadow-lg ${
-                  currentUser?.id === user.id ? "bg-gradient-to-r from-teal-50 to-green-50 border-teal-200" : "bg-white"
-                }`}
-              >
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-teal-100 to-green-100">
-                        {getRankIcon(index + 1)}
-                      </div>
-
-                      <Avatar className="w-12 h-12">
-                        <AvatarImage src={user.avatar_url} />
-                        <AvatarFallback className="bg-gradient-to-br from-teal-500 to-green-500 text-white">
-                          {user.username?.[0]?.toUpperCase() || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-
-                      <div>
-                        <h3 className="font-bold text-gray-900">{user.username}</h3>
-                        <p className="text-sm text-gray-500">
-                          {user.state}, {user.country}
-                        </p>
-                        {getVerificationBadge(user.verification_status)}
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl font-bold text-teal-600">{user.treecoins || 0}</span>
-                        <Leaf className="w-5 h-5 text-green-500" />
-                      </div>
-                      <p className="text-sm text-gray-500">Level {user.eco_level || 1}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </TabsContent>
-
-          <TabsContent value="level" className="space-y-4 mt-4">
-            {users
-              .slice()
-              .sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1))
-              .map((user, index) => (
-                <Card
-                  key={user.id}
-                  className={`transition-all duration-300 hover:shadow-lg ${
-                    currentUser?.id === user.id ? "bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200" : "bg-white"
-                  }`}
-                >
-                  <CardContent className="p-4 md:p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-purple-100 to-pink-100">
-                          {getRankIcon(index + 1)}
-                        </div>
-
-                        <Avatar className="w-12 h-12">
-                          <AvatarImage src={user.avatar_url} />
-                          <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
-                            {user.username?.[0]?.toUpperCase() || "U"}
-                          </AvatarFallback>
-                        </Avatar>
-
-                        <div>
-                          <h3 className="font-bold text-gray-900">{user.username}</h3>
-                          <p className="text-sm text-gray-500">
-                            {user.state}, {user.country}
-                          </p>
-                          {getVerificationBadge(user.verification_status)}
-                        </div>
-                      </div>
-
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-purple-600">Level {user.eco_level || 1}</p>
-                        <p className="text-sm text-gray-500">{user.treecoins || 0} Treecoins</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+        {/* Content */}
+        {isLoading ? (
+          <div className="flex justify-center py-16"><Loader2 className="w-8 h-8 animate-spin text-emerald-400" /></div>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div key={tab} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-2">
+              {tab === "treecoins" && sorted.treecoins.map((u, i) => (
+                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#00c896" />
               ))}
-          </TabsContent>
-
-          <TabsContent value="regional" className="space-y-4 mt-4">
-            <div className="text-center py-12 text-gray-400">
-              <Globe className="w-16 h-16 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">Regional Rankings</h3>
-              <p>Coming soon! See how you and your area rank globally.</p>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="ambassadors" className="space-y-4 mt-4">
-            {users.filter((u) => u.verification_status === "ambassador").map((user) => (
-              <Card key={user.id} className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200">
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <Award className="w-8 h-8 text-purple-500" />
-
-                      <Avatar className="w-12 h-12">
-                        <AvatarImage src={user.avatar_url} />
-                        <AvatarFallback className="bg-gradient-to-br from-purple-500 to-indigo-500 text-white">
-                          {user.username?.[0]?.toUpperCase() || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-
-                      <div>
-                        <h3 className="font-bold text-gray-900">{user.username}</h3>
-                        <p className="text-sm text-gray-500">{user.state}, {user.country}</p>
-                        <Badge className="bg-purple-100 text-purple-700">Ecoisland Ambassador</Badge>
-                      </div>
-                    </div>
-
-                    <div className="text-right">
-                      <p className="text-xl font-bold text-purple-600">{user.treecoins || 0} Treecoins</p>
-                      <p className="text-sm text-gray-500">Level {user.eco_level || 1}</p>
-                    </div>
+              {tab === "level" && sorted.level.map((u, i) => (
+                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="eco_level" valueSuffix="Level" valueColor="#8b5cf6" />
+              ))}
+              {tab === "ambassadors" && (
+                sorted.ambassadors.length === 0 ? (
+                  <div className="eco-card p-12 text-center">
+                    <Award className="w-14 h-14 text-slate-200 mx-auto mb-4" />
+                    <p className="font-bold text-slate-400 mb-1">No Ambassadors Yet</p>
+                    <p className="text-slate-400 text-sm">Ambassadors are trusted community leaders. Apply in Settings!</p>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-
-            {users.filter((u) => u.verification_status === "ambassador").length === 0 && (
-              <div className="text-center py-12 text-gray-400">
-                <Award className="w-16 h-16 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">No Ambassadors Yet</h3>
-                <p>Ambassadors are trusted leaders in the Ecoisland community. <br /> Apply in Settings!</p>
-              </div>
-            )}
-          </TabsContent>
-        </Tabs>
+                ) : sorted.ambassadors.map((u, i) => (
+                  <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#f59e0b" />
+                ))
+              )}
+              {(tab === "treecoins" || tab === "level") && sorted[tab].length === 0 && (
+                <div className="eco-card p-12 text-center">
+                  <Trophy className="w-14 h-14 text-slate-200 mx-auto mb-4" />
+                  <p className="text-slate-400 text-sm">No users to show yet. Be the first to log eco-actions!</p>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
     </div>
   );

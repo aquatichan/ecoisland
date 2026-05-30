@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Researchers studied the provisioning ecosystem service of freshwater supply by measuring water flow and quality at a single downstream location in a river once per month. If they modified the study to include measurements at multiple upstream locations representing different land uses (forest, agriculture, urban development) and increased sampling frequency to weekly, how would this modification most likely affect their ability to identify sources of water quality disruption?",
+    "answers": [
+      "The study would become less reliable because different land uses have different natural water quality characteristics, introducing confounding variables that mask the true effect of human disruption.",
+      "Weekly measurements would produce more variable data than monthly measurements, making it harder to identify true trends in water quality.",
+      "Spatial patterns of water quality degradation could be linked to specific land uses, and temporal variability could reveal how disruptions respond to seasonal changes and precipitation events.",
+      "Water quality measurements would show improvement because sampling at upstream locations would capture cleaner water before it becomes polluted."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Agricultural intensification in a region increases crop yields through irrigation, fertilizer application, and pesticide use. Which of the following represents an unintended consequence for ecosystem services in downstream aquatic ecosystems?",
+    "answers": [
+      "Sediment runoff from soil erosion increases turbidity, disrupting the regulating service of water purification and the supporting service of aquatic biodiversity.",
+      "Nutrient runoff from fertilizers causes eutrophication, disrupting the regulating service of water purification and the supporting service of aquatic biodiversity.",
+      "Nutrient runoff from fertilizers causes eutrophication, disrupting the provisioning service of fish production and the cultural service of recreational water use.",
+      "Nutrient runoff from fertilizers causes direct toxicity to aquatic organisms, disrupting the regulating service of water purification and the supporting service of aquatic biodiversity."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A research team studying agricultural impacts on water purification services in a watershed compared stream water quality upstream and downstream of a large corn and soybean farming region. They measured dissolved oxygen, nitrate concentration, and phosphate concentration at five locations upstream of farms and five locations downstream of farms. All measurements were taken monthly for three years. Which of the following aspects of this study design most directly enables researchers to attribute water quality changes to agricultural activity?",
+    "answers": [
+      "Sampling upstream locations provides baseline water quality conditions unaffected by agriculture, allowing comparison to downstream locations affected by agricultural runoff",
+      "Sampling upstream locations provides initial water quality conditions before agricultural impacts occur, allowing comparison to downstream locations measured after agricultural runoff exposure",
+      "Sampling upstream locations provides baseline water quality conditions that may also be affected by agriculture, requiring additional control sites outside the watershed to enable valid comparison",
+      "Sampling upstream locations provides baseline water quality conditions unaffected by agriculture, allowing detection of which pollutants are present in downstream locations"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Coral reefs support food webs and protect coasts by attenuating waves. Ocean acidification lowers seawater pH and reduces carbonate ion availability. How does acidification disrupt reef ecosystem services?",
+    "answers": [
+      "Reduced carbonate limits coral calcification, weakening reefs and coastal protection.",
+      "Additional dissolved CO2 does not boost coral calcification or skeletal growth.",
+      "Bleaching results mainly from warming rather than lowered pH and affects tourism.",
+      "Acidification can harm fish larvae but mainly reduces reef structure and services."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Phosphorus (mg/L): pre 0.015, year 1 0.042, year 3 0.068, year 5 0.089. Aquatic plant biomass (g/m²): pre 180, year 1 220, year 3 310, year 5 480. Bottom dissolved oxygen (mg/L): pre 6.8, year 1 5.2, year 3 2.1, year 5 0.3. Which conclusion about disruption of nutrient cycling services is best supported by these data?",
+    "answers": [
+      "Dissolved oxygen declined because plants consume oxygen during photosynthesis.",
+      "Phosphorus and oxygen changes are unrelated so sewage could not have caused both.",
+      "Sewage increased phosphorus, triggering plant overgrowth and oxygen depletion.",
+      "Increased plant growth followed by oxygen loss indicates disrupted nutrient cycling."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Measured nitrate concentrations in groundwater (mg/L) at four locations across three seasons. Spring high runoff values were Location A forested 2.1, B pasture 8.4, C row crop 24.6, D urban 18.3. Summer low runoff values were A 1.8, B 6.2, C 19.8, D 14.1. Fall moderate runoff values were A 2.0, B 7.1, C 22.5, D 16.2. Which statement best describes the pattern of nitrogen cycling service disruption?",
+    "answers": [
+      "Seasonal patterns are identical across land uses despite different magnitudes.",
+      "Nitrate rises with land-use intensity and peaks in high-runoff spring.",
+      "Nitrate concentrations are constant across locations and seasons.",
+      "Forested areas show highest nitrate and row crops lowest reversing trend."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers measured bee abundance and crop yield in four regions with increasing pesticide use: Region A low (450 bees/ha, 8,200 kg/ha), Region B moderate (280 bees/ha, 7,900 kg/ha), Region C high (85 bees/ha, 6,400 kg/ha), Region D very high (12 bees/ha, 5,100 kg/ha). Which conclusion about disruption of pollination services is best supported by these data?",
+    "answers": [
+      "Higher pesticide use correlates with lower bee abundance and crop yield",
+      "Pesticides have no effect since Region D still produces some crop yield",
+      "Crop yields are solely determined by bee abundance without other influences",
+      "High pesticide use increases bee abundance and raises crop yields"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A city's water treatment costs have increased 40% over five years as upstream wetlands have been drained for agricultural expansion. The city's water intake now experiences seasonal flooding and elevated nutrient levels. Which restoration approach would most directly address the underlying cause of these problems?",
+    "answers": [
+      "Restoring the wetland will improve water quality through nutrient cycling, but this benefit will only apply to the immediate local area and not reach the city's water intake downstream.",
+      "Restoring the wetland will create a nature preserve that prevents future development but will not significantly reduce the city's flooding problems.",
+      "Restoring the wetland will increase fish populations and provide recreational hunting opportunities that improve local economic activity.",
+      "Restoring the wetland will re-establish water filtration and flood buffering services that reduce downstream flooding and improve water quality for the city's intake."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Seagrass meadows provide nursery habitat for juvenile fish, trap sediment, and cycle nutrients. Coastal development and pollution have reduced seagrass cover by 90% in some estuaries over 40 years. Why does seagrass loss disrupt both fishery productivity and water quality in coastal ecosystems?",
+    "answers": [
+      "Loss of seagrass removes nursery habitat and stops sediment and nutrient filtration",
+      "Mangroves and marshes replace seagrass services so only cultural value is lost",
+      "Seagrass loss increases water clarity and boosts phytoplankton productivity improving fisheries",
+      "Adult fish can use alternative spawning sites so fisheries remain unchanged"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A coastal research team compared fish populations in a mangrove forest adjacent to a shrimp aquaculture facility with fish populations in a mangrove forest 15 kilometers away with no aquaculture nearby. Both forests were similar in size, age, and water salinity. Fish were sampled using identical nets at five locations within each forest monthly for two years. Which of the following represents a key limitation of this observational study design for determining whether aquaculture disrupts the mangrove's provisioning services?",
+    "answers": [
+      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to isolate aquaculture as the cause of any differences observed",
+      "The researchers selected forests that may already differ systematically in ways related to aquaculture presence, making it impossible to isolate aquaculture as the cause of any differences observed",
+      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to generalize findings to other mangrove forests with different characteristics",
+      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to detect whether differences in fish populations exist between the forests"
+    ],
+    "correct": "!"
+  }
+]

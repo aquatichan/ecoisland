@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Public forests are open to logging firms with minimal harvest limits. Each firm seeks to maximize profit. Why does this often cause forest depletion?",
+    "answers": [
+      "Each firm overharvests to maximize profit so collective extraction exceeds regeneration",
+      "Selective cutting removes mature trees while preserving young growth for future harvest",
+      "Intensive logging increases sunlight and thus accelerates forest regeneration",
+      "Restricting access drives firms to illegal harvesting in protected areas and depletes forests"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A hydrogeologist finds farmers pump 8 billion gallons annually while the aquifer recharges 5 billion. The hydrogeologist predicts farmers will keep pumping despite awareness of the decline. Which assumption most directly supports this prediction?",
+    "answers": [
+      "Farmers keep pumping because no feasible alternative water sources exist",
+      "Each farmer assumes their pumping is negligible so they keep extracting water",
+      "Individual farmers will voluntarily reduce pumping to protect the shared aquifer",
+      "Farmers pump because they favor short term profits and ignore long term effects"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A region's groundwater aquifer is shared by agricultural, industrial, and municipal users. Annual recharge from precipitation is 50 million cubic meters, but current extraction totals 75 million cubic meters per year. Which calculation approach would identify whether this aquifer is experiencing tragedy of commons depletion?",
+    "answers": [
+      "Determine that current extraction (75 million m³) is sustainable because the aquifer still contains water and has not yet been completely depleted",
+      "Measure total aquifer volume and divide by number of users to determine each user's fair share of water",
+      "Calculate the difference between annual recharge (50 million m³) and annual extraction (75 million m³) to quantify the unsustainable deficit",
+      "Set extraction limits based on which user group has used the aquifer longest rather than comparing recharge rates to extraction rates"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A diagram illustrates an aquifer system with arrows showing water extraction by individual farmers and natural recharge from precipitation. A table displays water table depth (meters below surface) over 25 years: Year 0 = 5 m, Year 5 = 8 m, Year 10 = 12 m, Year 15 = 18 m, Year 20 = 25 m, Year 25 = 35 m. Which statement best explains the relationship between individual farmer irrigation decisions and the accelerating water table decline shown in the data?",
+    "answers": [
+      "Individual farmers pump groundwater to maximize crop yields, but collective extraction exceeds aquifer recharge rate, causing water table decline that eventually makes pumping economically unfeasible for all.",
+      "Individual farmers pump groundwater to maximize crop yields, but collective extraction is filtered through soil layers, removing contaminants and improving water quality for all users.",
+      "Individual farmers pump groundwater to maximize crop yields, but collective extraction stimulates deeper aquifer recharge from surrounding regions, maintaining stable water availability.",
+      "Municipal water authorities pump groundwater to maximize crop yields, but collective extraction exceeds aquifer recharge rate, causing water table decline that eventually makes pumping economically unfeasible."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A fisheries economist reports the fishery fell from 500,000 tons in 1990 to 50,000 tons in 2024 while fishing effort rose 300 percent. The economist argues this shows a tragedy of the commons because vessels keep maximizing catch despite collapsing stocks. Which implicit assumption best underlies the author's argument?",
+    "answers": [
+      "Government rules permit high catches in international waters so boats keep maximizing.",
+      "Vessels lack knowledge of sustainable harvest rates and overfish from ignorance.",
+      "Vessels will voluntarily reduce catch because they can organize collective restraint.",
+      "Each vessel treats its own catch as negligible so it keeps maximizing harvest."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A watershed shared by multiple municipalities experiences nitrogen pollution from agricultural runoff and sewage discharge, degrading water quality. To address this tragedy of the commons, the region implements strict regulations limiting nitrogen discharge from all sources, with violations subject to substantial fines. Which of the following represents a disadvantage of this regulatory solution?",
+    "answers": [
+      "Compliance costs may burden all farms and municipalities equally, requiring them to allocate similar proportions of their budgets to meet nitrogen discharge standards",
+      "Compliance costs may disproportionately burden small farms and municipalities with limited budgets, potentially forcing them out of business or reducing essential services",
+      "Compliance costs may disproportionately burden small farms and municipalities with limited budgets, potentially causing them to delay compliance while seeking additional funding",
+      "Compliance costs may disproportionately burden large industrial facilities with complex nitrogen treatment systems, potentially forcing them to reduce production capacity"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A shared aquifer supplies three municipalities. Municipality A extracts 180 million cubic meters annually, Municipality B extracts 220 million cubic meters annually, and Municipality C extracts 195 million cubic meters annually. The aquifer recharges naturally at 520 million cubic meters per year. By what volume does annual extraction exceed natural recharge?",
+    "answers": [
+      "Annual recharge exceeds extraction by 75 million cubic meters, demonstrating sustainable commons use",
+      "Annual extraction exceeds recharge by 65 million cubic meters, demonstrating unsustainable commons use",
+      "Annual extraction exceeds recharge by 75 million cubic meters, demonstrating unsustainable commons use",
+      "Annual extraction exceeds recharge by 25 million cubic meters per municipality, demonstrating unsustainable commons use"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A city's daily vehicle trips rose from 50,000 to 200,000 over twenty years. Drivers value personal convenience and view their own pollution as negligible. Respiratory disease rates rose citywide, yet no driver cut back. Which best explains why collective air pollution worsened despite individually rational driving choices?",
+    "answers": [
+      "Each driver perceives negligible harm so no restraint, producing collective pollution.",
+      "Weak enforcement of emission standards allowed more polluting vehicles on roads.",
+      "Changes in weather patterns could reduce pollutant dispersal and worsen air quality.",
+      "Simultaneous industrial emissions could also raise pollution, complicating attribution."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Which research question best tests whether the tragedy of the commons explains aquifer depletion in unregulated versus quota-regulated areas?",
+    "answers": [
+      "Is unregulated groundwater extraction unsustainable for long-term agricultural production?",
+      "Do unregulated groundwater areas maintain aquifer levels because recharge offsets extraction?",
+      "Do unregulated groundwater areas show larger aquifer declines than surface water regions?",
+      "Do unregulated groundwater areas show faster aquifer declines than quota-regulated areas?"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An economist analyzes High Plains groundwater depletion. Farmers pump at eight times natural recharge and the Ogallala Aquifer, shared by eight states, loses 26 cubic kilometers annually. Farmers keep extracting because any conserved water can be taken by others. Which statement best represents the economist's claim?",
+    "answers": [
+      "Farmers should reduce irrigation and accept lower income to preserve groundwater.",
+      "Voluntary conservation cannot stop depletion because farmers gain from extra extraction.",
+      "Natural recharge is insufficient to support current agricultural demand.",
+      "The Ogallala Aquifer is being depleted 26 cubic kilometers annually across eight states."
+    ],
+    "correct": "B"
+  }
+]

@@ -1,1 +1,15 @@
-[{"origin":["http://localhost:5173"],"method":["GET","POST","PUT","HEAD"],"responseHeader":["Content-Type"],"maxAgeSeconds":3600}]
+[
+  {
+    "origin": ["*"],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+    "responseHeader": [
+      "Content-Type",
+      "Content-Length",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Methods",
+      "Access-Control-Allow-Headers",
+      "Cache-Control"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]

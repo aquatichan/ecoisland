@@ -1,0 +1,102 @@
+[
+  {
+    "question": "The Montreal Protocol, signed in 1987, required countries to phase out CFC production. Which of the following best explains why eliminating CFCs specifically addresses the mechanism of stratospheric ozone depletion?",
+    "answers": [
+      "CFCs persist longer in the atmosphere than other ozone-depleting substances",
+      "CFCs absorb ultraviolet radiation and prevent ozone production in the stratosphere",
+      "CFCs release chlorine atoms that catalytically destroy ozone molecules",
+      "CFCs warm the stratosphere and prevent ice crystal formation needed for ozone loss"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "In 1980, stratospheric ozone concentration above a monitoring station was 320 Dobson Units (DU). By 2020, it had declined to 280 DU. Which calculation determines the average annual percent decrease in ozone concentration over this period?",
+    "answers": [
+      "Divide the difference (320-280) by the final value (280), multiply by 100, then divide by 40",
+      "Divide the difference (320-280) by the initial value (320), multiply by 100, then multiply by 40",
+      "Divide the difference (320-280) by the initial value (320), multiply by 100, then divide by 40",
+      "Divide the difference (320-280) by the final value (280), multiply by 100, then multiply by 40"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Increased ultraviolet radiation reaching Earth's surface due to stratospheric ozone depletion can cause skin cancer and cataracts in humans. Which of the following best describes the biological mechanism by which UV radiation leads to these health effects?",
+    "answers": [
+      "UV radiation damages DNA in skin cells and eye tissues, causing mutations that lead to cancer development and protein damage in the lens",
+      "UV radiation increases body temperature in exposed tissues, causing burns that develop into skin cancer over time",
+      "UV radiation causes inflammation in the eye that permanently damages the cornea, leading to both cataracts and skin cancer",
+      "UV radiation depletes vitamin D production in skin, weakening the immune system and allowing cancer cells to develop unchecked"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The total atmospheric burden of CFC-12 is 20 million metric tons, and the removal rate is 0.2 million metric tons per year. Which approach calculates the average residence time of CFC-12 in the atmosphere?",
+    "answers": [
+      "Multiply the total burden of 20 million tons by the removal rate of 0.2 million tons per year",
+      "Divide the removal rate of 0.2 million tons per year by the total burden of 20 million tons",
+      "Divide the total burden of 20 million tons by the removal rate of 0.2 million tons per year",
+      "Subtract the removal rate of 0.2 million tons per year from the total burden of 20 million tons"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Experimental data shows that soybean yield decreases by 1.5% for every 1% increase in UV-B radiation. If UV-B radiation increases by 8%, which calculation determines the percent loss in soybean yield?",
+    "answers": [
+      "Divide the 8% UV-B increase by the 1.5% yield loss factor per unit of UV-B increase",
+      "Multiply the 8% UV-B increase by the 1.5% yield loss factor per unit of UV-B increase",
+      "Add the 8% UV-B increase to the 1.5% yield loss factor per unit of UV-B increase",
+      "Subtract the 1.5% yield loss factor per unit of UV-B increase from the 8% UV-B increase"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The ozone layer has existed naturally in the stratosphere for billions of years, yet ozone depletion became a significant problem only in the late 20th century. Which of the following best explains why anthropogenic chlorofluorocarbons (CFCs) caused rapid ozone depletion?",
+    "answers": [
+      "CFCs absorb ultraviolet radiation and prevent ozone-forming reactions in the stratosphere",
+      "CFCs release larger quantities of ozone-depleting substances than natural sources",
+      "CFCs accelerate natural ozone breakdown occurring at slower geological timescales",
+      "CFCs release chlorine atoms that catalytically destroy hundreds of ozone molecules each"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "In Antarctica, ozone levels drop from 300 DU in July to 100 DU in October (3 months). Which approach calculates the average monthly rate of ozone loss during this period?",
+    "answers": [
+      "Subtract 100 DU from 300 DU, then divide the result by the 3-month duration",
+      "Subtract 100 DU from 300 DU, then multiply the result by the 3-month duration",
+      "Add 100 DU to 300 DU, then multiply the result by the 3-month duration",
+      "Add 100 DU to 300 DU, then divide the result by the 3-month duration"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "The ozone layer absorbs approximately 98% of incoming UV-B radiation. If the incoming UV-B intensity is 500 milliwatts per square meter, which method calculates the intensity reaching Earth's surface?",
+    "answers": [
+      "Multiply the 500 mW/m² intensity by 0.98 to represent the fraction of radiation transmitted",
+      "Divide the 500 mW/m² intensity by 0.02 to represent the fraction of radiation transmitted",
+      "Multiply the 500 mW/m² intensity by 0.02 to represent the fraction of radiation transmitted",
+      "Divide the 500 mW/m² intensity by 0.98 to represent the fraction of radiation transmitted"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A single chlorine atom can destroy 100,000 ozone molecules before being removed from the stratosphere. If a CFC-12 molecule releases two chlorine atoms upon decomposition, which method calculates the total ozone molecules destroyed by 50 CFC-12 molecules?",
+    "answers": [
+      "Add 50 CFC molecules to 2 Cl atoms, then multiply by 100,000 ozone molecules",
+      "Multiply 50 CFC molecules by 2 Cl atoms, then multiply by 100,000 ozone molecules",
+      "Multiply 50 CFC molecules by 2 Cl atoms, then divide by 100,000 ozone molecules",
+      "Divide 50 CFC molecules by 2 Cl atoms, then multiply by 100,000 ozone molecules"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Epidemiologists hypothesized that increased UV-B radiation from ozone depletion would cause a measurable increase in skin cancer incidence in populations at high southern latitudes. They compared age-adjusted melanoma incidence rates (cases per 100,000 people per year) in Australia before and after significant ozone depletion began in the 1980s. Data show: 1970-1980 mean = 18.2 cases/100,000 (±2.1 SD); 1985-1995 mean = 24.6 cases/100,000 (±2.8 SD); 2000-2010 mean = 31.5 cases/100,000 (±3.2 SD). Which conclusion about the hypothesis is best supported?",
+    "answers": [
+      "The data partially support the hypothesis; melanoma rates increased, but the increases could result from improved cancer detection and reporting rather than actual increases in UV-B exposure from ozone depletion.",
+      "The data are inconclusive because standard deviations overlap between time periods, making it impossible to determine whether melanoma increases are due to ozone depletion or other factors like increased sun exposure awareness and screening.",
+      "The data refute the hypothesis because melanoma incidence increased even during the 1970-1980 period before significant ozone depletion occurred, indicating other factors drive skin cancer rates.",
+      "The data support the hypothesis; melanoma incidence increased progressively as ozone depletion intensified, with each decade showing higher rates and non-overlapping confidence intervals indicating statistically significant increases."
+    ],
+    "correct": "D"
+  }
+]

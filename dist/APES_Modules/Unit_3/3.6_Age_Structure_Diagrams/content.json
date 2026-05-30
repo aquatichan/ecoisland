@@ -1,0 +1,48 @@
+{
+  "title": "3.6 Age Structure Diagrams",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Age Structure Diagrams"
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F6a%2FPopulation_pyramid_example.svg%2F1280px-Population_pyramid_example.svg.png&w=640&q=75",
+      "width": "100%",
+      "height": "auto"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>An age structure diagram</strong> is a model that predicts the population growth rate by a shape. It shows a comparative ratio of males to females and the bars show various age groups from infants to adolescents to reproductive and post-reproductive stages. Certain age structure diagrams will have more representation at one end, while others will have more representation at the other end (or in the middle!)."
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Pre-reproductive age: 0-14</li>\n<li>Reproductive age: 15-44</li>\n<li>Post-reproductive age: 45+</li>\n</ul>"
+    },
+    {
+      "type": "paragraph",
+      "html": "By using an age structure diagram, it can be predicted whether a population will increase, decrease or maintain stability. Predictions can also be made as to why this trend is showing: for example, is a population dying out because a majority of their individuals are above 45?\nThe image below shows an age structure diagram for Ethiopia, and a classic example of a population in rapid growth. There are many more children in each generation than their parents, meaning that couples are having a lot of children. In this example the majority of the population is very young. "
+    },
+    {
+      "type": "image",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Ethiopia_single_age_population_pyramid_2020.png",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "paragraph",
+      "html": "The diagram below shows New Zealand and an example of a population with stable numbers. This population has about the same amount of individuals in each age bracket. This suggests parents have access to reproductive education and can choose replacement level reproduction, or to have about two children per each couple. "
+    },
+    {
+      "type": "image",
+      "src": "https://images.populationpyramid.net/capture/?selector=%23pyramid-share-container&url=https%3A%2F%2Fwww.populationpyramid.net/new-zealand/2021/%3Fshare%3Dtrue",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "paragraph",
+      "html": "In conclusion, age structure diagrams help us visualize at which point a society currently is in terms of average age and how they may react given a change in birth/death rate."
+    }
+  ]
+}

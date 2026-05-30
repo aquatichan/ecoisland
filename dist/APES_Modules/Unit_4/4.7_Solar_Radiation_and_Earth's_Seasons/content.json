@@ -1,0 +1,31 @@
+{
+  "title": "4.7 Solar Radiation and Earth's Seasons",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "The main source of energy for our earth is from our sun; called <strong>solar radiation</strong>, it affects different biomes during any season in specific ways. In these four seasons, the length of a day's light/darkness changes, as does the angle of the Sun in comparison. In the winter, the sun's angle is not favorable, as night lengths are much longer and not as much solar radiation (heat, sunlight) is received. In summer, the opposite is true."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Latitude</strong> also plays an important factor in solar radiation reception since at the equator, or 0° latitude, solar radiation hits the surface straight on. Anyone on or near the equator will experience more solar radiation per unit of area. However, at higher and lower latitudes, the earth experiences curvature, so the same amount of solar radiation is spread over an area. That is to say, the equator at the horizontal center line of our planet receives more solar radiation because of its lack of curvature."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F4%2F40%2FAxial_tilt_vs_tropical_and_polar_circles.svg%2F1280px-Axial_tilt_vs_tropical_and_polar_circles.svg.png&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Seasons and Earth’s Tilt"
+    },
+    {
+      "type": "paragraph",
+      "html": "As the Earth orbits the sun, different parts of the Earth receive more or less direct sunlight, which causes the temperature differences also known as seasons. When the Earth tilts towards the sun, the daytimes are longer and the solar radiation hits the Earth's surface at a more direct angle, causing hotter temperatures. When the Earth tilts away from the sun, nights become longer and temperatures drop."
+    },
+    {
+      "type": "paragraph",
+      "html": "The transition periods between summer and winter occur when the Earth's tilt changes from pointing toward or away from the sun. These are the <strong>equinoxes</strong>, and they occur every spring and fall/autumn. These two days represent the closest margins of the year between the lengths of day and night. Don't confuse this with the <strong>solstices</strong>! The summer and winter solstices represent the highest and lowest points of the sun throughout the year, or the longest days and nights. The equinoxes mark the start of spring/fall where the day and night are approximately even in length."
+    }
+  ]
+}

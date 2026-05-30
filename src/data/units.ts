@@ -137,7 +137,7 @@ const units: Record<number, string[]> = {
 
 const learningModules = [
   {
-    title: "Unit 1 – The Living World: Ecosystems",
+    title: "Unit 1 ~ The Living World: Ecosystems",
     description: "Unit 1 Overview: The Living World: Ecosystems",
     lessons: [
       { code: "1.0", title: "The Living World Ecosystems", realTitle: "The Living World: Ecosystems"},
@@ -154,10 +154,10 @@ const learningModules = [
       { code: "1.11", title: "Food Chains and Food Webs" },
     ],
     duration: "5-6 hours",
-    treecoins: 900
+    treecoins: 300
   },
   {
-    title: "Unit 2 – The Living World: Biodiversity",
+    title: "Unit 2 ~ The Living World: Biodiversity",
     description: "Unit 2 Overview: The Living World: Biodiversity",
     lessons: [
       { code: "2.0", title: "The Living World Biodiversity", realTitle: "The Living World: Biodiversity"},
@@ -170,10 +170,10 @@ const learningModules = [
       { code: "2.7", title: "Ecological Succession" },
     ],
     duration: "3-4 hours",
-    treecoins: 900
+    treecoins: 200
   },
   {
-    title: "Unit 3 – Populations",
+    title: "Unit 3 ~ Populations",
     description: "Unit 3 Overview: Populations",
     lessons: [
       { code: "3.0", title: "Populations"},
@@ -188,10 +188,10 @@ const learningModules = [
       { code: "3.9", title: "Demographic Transition" },
     ],
     duration: "4-5 hours",
-    treecoins: 900
+    treecoins: 250
   },
   {
-    title: "Unit 4 – Earth Systems & Resources",
+    title: "Unit 4 ~ Earth Systems & Resources",
     description: "Unit 4 Overview: Earth Systems and Resources",
     lessons: [
       { code: "4.0", title: "Earth Systems and Resources"},
@@ -206,10 +206,10 @@ const learningModules = [
       { code: "4.9", title: "El Niño and La Niña" },
     ],
     duration: "4-5 hours",
-    treecoins: 900
+    treecoins: 250
   },
   {
-    title: "Unit 5 – Land & Water Use",
+    title: "Unit 5 ~ Land & Water Use",
     description: "Unit 5 Overview: Land and Water Use",
     lessons: [
       { code: "5.0", title: "Required Environmental Legislation"},
@@ -232,10 +232,10 @@ const learningModules = [
       { code: "5.17", title: "Sustainable Forestry" },
     ],
     duration: "8-9 hours",
-    treecoins: 900
+    treecoins: 450
   },
   {
-    title: "Unit 6 – Energy Resources & Consumption",
+    title: "Unit 6 ~ Energy Resources & Consumption",
     description: "Unit 6 Overview: Energy Resources and Consumption",
     lessons: [
       { code: "6.0", title: "Energy Resources and Consumption"},
@@ -254,10 +254,10 @@ const learningModules = [
       { code: "6.13", title: "Energy Conservation" },
     ],
     duration: "6-7 hours",
-    treecoins: 900
+    treecoins: 350
   },
   {
-    title: "Unit 7 – Atmospheric Pollution",
+    title: "Unit 7 ~ Atmospheric Pollution",
     description: "Unit 7 Overview: Atmospheric Pollution",
     lessons: [
       { code: "7.0", title: "Atmospheric Pollution"},
@@ -271,10 +271,10 @@ const learningModules = [
       { code: "7.8", title: "Noise Pollution" },
     ],
     duration: "4 hours",
-    treecoins: 900
+    treecoins: 225
   },
   {
-    title: "Unit 8 – Aquatic & Terrestrial Pollution",
+    title: "Unit 8 ~ Aquatic & Terrestrial Pollution",
     description: "Unit 8 Overview: Aquatic & Terrestrial Pollution",
     lessons: [
       { code: "8.0", title: "Aquatic & Terrestrial Pollution"},
@@ -295,10 +295,10 @@ const learningModules = [
       { code: "8.15", title: "Pathogens and Infectious Diseases" },
     ],
     duration: "7-8 hours",
-    treecoins: 900
+    treecoins: 400
   },
   {
-    title: "Unit 9 – Global Change",
+    title: "Unit 9 ~ Global Change",
     description: "Unit 9 Overview: Global Change",
     lessons: [
       { code: "9.0", title: "Global Change"},
@@ -314,7 +314,7 @@ const learningModules = [
       { code: "9.10", title: "Human Impacts on Biodiversity" },
     ],
     duration: "5-6 hours",
-    treecoins: 900
+    treecoins: 275
   },
 ];
 

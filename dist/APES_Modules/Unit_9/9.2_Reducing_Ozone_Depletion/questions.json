@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Hydrofluoroolefins (HFOs) are a newer class of CFC substitutes that are both ozone-safe and have very low global warming potential. HFOs decompose rapidly in the troposphere through reaction with hydroxyl radicals, similar to HFCs, but their molecular structure results in decomposition products that do not absorb infrared radiation. Which of the following best explains why HFOs represent an improvement over HFCs as ozone-layer protectants?",
+    "answers": [
+      "HFOs contain no fluorine atoms, eliminating the greenhouse gas problem that HFCs create through fluorine's heat-trapping properties",
+      "HFOs decompose faster than HFCs and produce breakdown products that do not trap heat, addressing both ozone depletion and climate warming concerns simultaneously",
+      "HFOs remain in the troposphere permanently and never reach the stratosphere, whereas HFCs can occasionally reach the stratosphere and release chlorine",
+      "HFOs absorb less solar radiation than HFCs, reducing the amount of energy available to drive atmospheric circulation patterns that transport ozone-depleting chemicals"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Propane is an effective natural refrigerant substitute for CFCs and HFCs. What is the primary operational hazard associated with its use?",
+    "answers": [
+      "Propane is an effective refrigerant but poses a significant environmental persistence hazard",
+      "Propane is an effective refrigerant but poses a significant pressure system rupture hazard",
+      "Propane is an effective refrigerant but poses a significant flammability hazard",
+      "Propane is an effective refrigerant but poses a significant ozone depletion hazard"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Which statement best compares the atmospheric lifetimes of HFCs and CFCs?",
+    "answers": [
+      "HFCs have variable atmospheric lifetimes unlike CFCs due to tropospheric oxidation",
+      "HFCs have shorter atmospheric lifetimes than CFCs due to tropospheric oxidation",
+      "HFCs have longer atmospheric lifetimes than CFCs due to tropospheric oxidation",
+      "HFCs have identical atmospheric lifetimes to CFCs due to tropospheric oxidation"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Air conditioning systems in developing nations are increasingly transitioning from CFC-based refrigerants to HFC-based alternatives following the Montreal Protocol. However, environmental scientists have identified a trade-off associated with this substitution. Which of the following best describes the environmental consequence of replacing CFCs with HFCs in refrigeration systems?",
+    "answers": [
+      "HFCs are completely inert in the atmosphere and therefore pose no environmental risks, making them an ideal long-term replacement for CFCs",
+      "HFCs do not deplete stratospheric ozone but contribute to climate change because they are potent greenhouse gases with high thermal retention properties",
+      "HFCs decompose in the troposphere and release chlorine atoms that cause ground-level ozone pollution, creating a new air quality problem",
+      "HFCs increase atmospheric water vapor concentrations through chemical reactions, which enhances cloud formation and reduces solar radiation reaching Earth's surface"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The Montreal Protocol successfully phased out CFCs globally, but scientists discovered that some HFC replacements are potent greenhouse gases with global warming potentials 1,000 to 4,000 times higher than carbon dioxide. This created an environmental trade-off: solving one atmospheric problem while potentially worsening another. Which of the following best explains why HFCs pose a greenhouse gas concern despite being ozone-safe?",
+    "answers": [
+      "HFCs decompose in the troposphere and release fluorine atoms that absorb solar radiation, warming the lower atmosphere",
+      "HFCs contain fluorine atoms that absorb and re-radiate infrared radiation, trapping heat in the atmosphere similar to how CFCs trapped heat before ozone depletion was discovered",
+      "HFCs are used in such large quantities that their cumulative mass in the atmosphere exceeds that of CFCs, creating a stronger warming effect",
+      "HFCs have long atmospheric lifetimes and strong infrared absorption properties, allowing them to accumulate in the atmosphere and trap heat effectively over decades"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Hydrochlorofluorocarbons (HCFCs) were introduced as transitional substitutes for CFCs. Which of the following best describes their environmental properties?",
+    "answers": [
+      "HCFCs have zero ozone depletion potential unlike CFCs and are harmless",
+      "HCFCs have equal ozone depletion potential to CFCs and are equally harmful",
+      "HCFCs have higher ozone depletion potential than CFCs and are more harmful",
+      "HCFCs have lower ozone depletion potential than CFCs but are still harmful"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Ammonia is an efficient refrigerant used as a substitute for CFCs in industrial settings. What is the primary safety drawback associated with its use?",
+    "answers": [
+      "Ammonia has zero ozone depletion potential but degrades into toxic byproducts during refrigeration cycles",
+      "Ammonia has zero ozone depletion potential but is toxic to humans at high concentrations",
+      "Ammonia has zero ozone depletion potential but requires expensive containment systems to prevent leaks",
+      "Ammonia has zero ozone depletion potential but is flammable and can form explosive mixtures with air"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Hydrofluoroolefins (HFOs) are a newer class of refrigerants being developed as alternatives to both CFCs and HFCs. Unlike CFCs, HFOs decompose in the troposphere before reaching the stratosphere. Unlike most HFCs, HFOs have minimal global warming potential. Which of the following best describes the chemical property that enables HFOs to achieve both of these environmental advantages?",
+    "answers": [
+      "HFOs are heavier than HFCs and therefore settle out of the atmosphere before reaching the stratosphere, while their density reduces heat-trapping capacity",
+      "HFOs contain only hydrogen and fluorine atoms, which prevents them from absorbing infrared radiation while allowing rapid atmospheric decomposition",
+      "HFOs react with stratospheric ozone to form stable compounds that prevent further ozone depletion while simultaneously reducing atmospheric heat retention",
+      "HFOs contain carbon-carbon double bonds that make them chemically reactive in the troposphere while their molecular structure minimizes infrared absorption"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Carbon dioxide (R-744) is increasingly used as a refrigerant in place of HFCs. Which description applies to CO2 in this context?",
+    "answers": [
+      "Carbon dioxide is a non-flammable refrigerant with a global warming potential of 25",
+      "Carbon dioxide is a non-flammable refrigerant with a global warming potential of 1",
+      "Carbon dioxide is a non-flammable refrigerant with a global warming potential of 1000",
+      "Carbon dioxide is a non-flammable refrigerant with a global warming potential of 0"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "The Montreal Protocol successfully phased out CFC production globally, yet atmospheric CFC concentrations remain elevated and will take decades to return to pre-industrial levels. Meanwhile, HFC concentrations are increasing as these substitutes are deployed worldwide. Which of the following best explains why atmospheric CFC concentrations remain high despite decades of production cessation?",
+    "answers": [
+      "CFCs are extremely stable in the atmosphere and persist for 50-100+ years, so CFCs released decades ago continue circulating in the troposphere and stratosphere",
+      "New CFCs are continuously produced illegally by nations that did not ratify the Montreal Protocol, replacing atmospheric CFCs as they decompose",
+      "CFCs decompose in the troposphere but reform into new CFC molecules through chemical reactions, preventing net atmospheric concentration decreases",
+      "Atmospheric circulation patterns trap CFCs in the stratosphere where they are protected from decomposition, preventing their removal from the atmosphere"
+    ],
+    "correct": "!"
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "title": "6.7 Energy from Biomass",
+  "content": [
+    {
+      "type": "heading",
+      "text": "What is Biomass Energy?🌱"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Biomass</strong> has been used since our very first ancestors, they used wood to burn it and produce heat. Now modernized, biomass energy is the burning of waste such as wood, garbage, crops, landfill gas, and alcohol fuels in order to produce heat that is converted into electricity. Biomass is renewable since waste is produced readily, and in countries where technology for more efficient energy production is scarce, biomass is always there to support energy production."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F2.JPG?alt=media&token=98be4f60-1a55-4af0-bd2f-4aa8c57e4aef",
+      "width": "380",
+      "height": "461"
+    },
+    {
+      "type": "paragraph",
+      "html": "Biomass resources are often available in large quantities, but different types of species take a longer time to replenish. For example, trees can grow rapidly, but quick use of a forest for biomass energy without accounting for how slowly they will regrow may lead to deforestation. Similarly, the use of an endangered species for biomass energy may put it into extinction."
+    },
+    {
+      "type": "paragraph",
+      "html": "Ethanol can be used as a substitute for gasoline. Burning ethanol does not introduce additional carbon into the atmosphere via combustion, but the energy return on energy investment for ethanol is low. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Many companies are actively working on sustainable biomass technologies to replace transportation fuels.   "
+    },
+    {
+      "type": "table",
+      "html": "<table class=\"mui-j7r226-table\"><thead><tr class=\"mui-wpa8fb-tableRow\"><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Benefits 👍🏻</strong></th><th class=\"mui-yvrfdh-tableHeaderCell\"><strong>Drawbacks 👎🏻</strong></th></tr></thead><tbody><tr class=\"mui-wpa8fb-tableRow\"><td class=\"mui-enerfg-tableCell\"><ul class=\"MuiBox-root mui-19idom\"><li>Widely available - organic material can be harvested anywhere</li><li>Carbon neutral</li></ul></td><td class=\"mui-enerfg-tableCell\"><ul class=\"MuiBox-root mui-19idom\"><li>Produces carbon dioxide, carbon monoxide, nitrogen oxides, particulates, and volatile organic compounds</li><li>Over harvesting trees can lead to deforestation</li><li>Expensive</li></ul></td></tr></tbody></table>"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "carrying capacity": "The maximum population size that an environment can sustain indefinitely given available resources and conditions.",
+  "environmental factors": "Physical and biological conditions in an environment that limit or support population growth, including resource availability and space.",
+  "fecundity": "The biological capacity of a population to reproduce, which decreases when resources become scarce.",
+  "mortality": "The death rate in a population, which increases when resource availability declines and resources are unequally distributed.",
+  "population growth": "The increase in the number of individuals in a population over time, which is limited by environmental factors and available resources.",
+  "resource availability": "The presence and accessibility of resources needed by a population, such as food, water, and space, which directly influences the rate and sustainability of population growth.",
+  "resource base": "The total amount of resources available to support a population, which is finite and limited over all time scales."
+}

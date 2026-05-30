@@ -1,0 +1,36 @@
+{
+  "title": "4.6 Watersheds",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "A <strong>watershed</strong> is a channel (stream, river) that concentrates runoff (water) to the main discharge point (a large body of water). Usually, the discharge point is at the lowest point in the watershed."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Headwaters</strong> are the beginning of a watershed. Watersheds are typically separated by ridges or mountains that form the highest part of the watershed. From here, runoff moves to lower elevations forming streams and rivers."
+    },
+    {
+      "type": "paragraph",
+      "html": "These streams and rivers can diverge and create <strong>sub-watersheds</strong>, but all of the runoff discharges into one point, a lake or ocean."
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2017%2F10%2F12%2F03%2F03%2Fview-2843338_960_720.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Characteristics of A Watershed"
+    },
+    {
+      "type": "paragraph",
+      "html": "The characteristics of a watershed, like size, length, slope, rate, and present plant life, impact its production and efficiency."
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>The <strong>size (area) of a watershed</strong> can be a reflection of the amount of runoff and what is created by the runoff, i.e. river, stream, or creek. It could also reflect how the runoff is discharged, i.e. the ocean or lake. It also plays a role in how much runoff can be held in the watershed.</li>\n<li>The <strong>length</strong> and <strong>slope</strong> of a watershed play a big factor in the runoff rate.\n<ul class=\"MuiBox-root mui-19idom\">\n<li>Runoff is increased by steeper slopes that allow water to flow downwards with the help of gravity.</li>\n<li>The <strong>length of a watershed</strong> is the distance between the headwaters and the discharge point. This mainly impacts how long it takes for runoff to reach the discharge point. Hence, the longer the watershed, the longer it would take for runoff to be discharged.</li>\n</ul>\n</li>\n<li>The <strong>type of soil</strong> found in watershed impacts the amount of runoff absorbed by soil as well as the vegetation. If the soil is very sandy or has large particles, the soil will take in more runoff water. In addition, if the soil is fertile, there will be more vegetation. Finally, soil can play a role in filtering water in a watershed.\n<ul class=\"MuiBox-root mui-19idom\">\n<li><strong>Vegetation</strong> plays an important role in soil erosion. The more plants in a watershed, the lesser amount of erosion that will take place. Vegetation can also improve soil fertility and water filtration.</li>\n</ul>\n</li>\n</ul>"
+    }
+  ]
+}

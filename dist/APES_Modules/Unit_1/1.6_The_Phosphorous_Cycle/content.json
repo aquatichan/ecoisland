@@ -1,0 +1,43 @@
+{
+  "title": "1.6 The Phosphorous Cycle",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Phosphorus Cycle 🗻"
+    },
+    {
+      "type": "paragraph",
+      "html": "Phosphorus is really similar to nitrogen. We need phosphorus for DNA, RNA, and ATP, and it is also a limiting <strong>macronutrient</strong>. However, phosphorus' interactions with the atmosphere are limited; it instead cycles between land and water. Additionally, unlike nitrogen, phosphorus is most often found in one chemical form, PO4, and doesn't undergo alteration throughout its cycle (yay!)."
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2FPhosphorus_cycle.png?alt=media&token=325bafe6-3d71-419d-87b5-5d9689790ddd",
+      "width": 538,
+      "height": 361
+    },
+    {
+      "type": "paragraph",
+      "html": "Firstly, when materials like rock are <strong>weathered</strong>, organic phosphorus is released into surrounding environments. This mean that natural processes such as natural disasters, rain, or wind cause rocks or other materials to break down, releasing phosphorus. It is then <strong>transported</strong> between land and water (remember, its atmospheric interactions are essentially nonexistent) through aquatic functions like rain or excess runoff."
+    },
+    {
+      "type": "paragraph",
+      "html": "After phosphorus has been transported between groundwater and soil, living organisms can <strong>absorb</strong> it and use it for production of DNA and other important biomolecules, as discussed above. Though, similar to all other cycles, these absorbers will eventually die, and their decomposition will release phosphorus back into the environment to restart the cycle. Though, if <strong>sedimentation</strong> occurs, this excess phosphorus remains stored in rocks or soil at the bottom of bodies of water."
+    },
+    {
+      "type": "paragraph",
+      "html": "Over time, a process called <strong>geologic uplift</strong> brings ocean layers up to become mountains, and the phosphate rocks weather, which brings the nutrient into the soil. Phosphate usually clings tightly onto soil, and like we’ve seen before, it doesn’t dissolve easily in water. Therefore, phosphate is a limiting nutrient for aquatic ecosystems. "
+    },
+    {
+      "type": "heading",
+      "text": "Human Impacts on the Phosphorus Cycle🙌"
+    },
+    {
+      "type": "paragraph",
+      "html": "The two main <strong>anthropogenic</strong> sources of phosphorus are laundry detergents and synthetic fertilizers."
+    },
+    {
+      "type": "paragraph",
+      "html": "Like nitrogen, phosphorus plays a big role in plant growth, so humans often add it to synthetic fertilizers. Phosphorus runoff can accumulate in groundwater, causing excess buildup which throws off the balance of specific ecosystems. As a result, these bodies of water experience <strong>eutrophication</strong>, where a body of water's quality drastically decreases due to an excess buildup of nutrients (specifically, like nitrogen and phosphorus). These dead zones are dangerous and can create problems for surrounding plant and animal life."
+    }
+  ]
+}

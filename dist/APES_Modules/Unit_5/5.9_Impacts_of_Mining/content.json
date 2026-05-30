@@ -1,0 +1,74 @@
+{
+  "title": "5.9 Impacts of Mining",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "<strong>Mining</strong> is the extraction or removal of minerals or material that is considered to be valuable and useful. Mining is essential for things like electricity and infrastructure, but can be ecologically damaging and expensive. "
+    },
+    {
+      "type": "heading",
+      "text": "Techniques"
+    },
+    {
+      "type": "paragraph",
+      "html": "There are several different techniques that can be used in mining, depending on the type of minerals being extracted and the location of the deposit. Here are a few examples of mining techniques:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "html": "<ul class=\"MuiBox-root mui-19idom\">\n<li>Open-pit mining: This technique involves removing the surface layer of the earth, called the <strong>overburden</strong>, to access buried minerals. Used for things like gold or copper, it is a lot less invasive and a lot less expensive than deeper mining operations.</li>\n<li>Underground mining: This technique involves accessing minerals that are buried deep underground. Underground mining can be done using various techniques and can be more expensive and more complex than open-pit mining.</li>\n<li>Heap leaching: This technique is used to extract minerals, such as gold and copper, from ore that has been mined and piled in a heap. Using a chemical solution, the minerals are extracted from the pile.</li>\n<li>Strip mining: This technique is similar to open-pit mining, but it is used for extracting coal and other minerals from seams that are close to the surface. Strip mining involves removing the overburden and then extracting the minerals in strips.</li>\n</ul>"
+    },
+    {
+      "type": "heading",
+      "text": "Open Pit Mining"
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F4%2F48%2FChino_copper_mine.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Strip Mining Coal"
+    },
+    {
+      "type": "image",
+      "src": "https://fiveable.me/_next/image?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F0%2F05%2FCoal_mine_Wyoming.jpg&w=640&q=75",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Mountain Top Removal"
+    },
+    {
+      "type": "image",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Mountaintop_removal_mine_in_Pike_County%2C_Kentucky.jpg/960px-Mountaintop_removal_mine_in_Pike_County%2C_Kentucky.jpg?_=20140618004328",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Underground Coal Mine"
+    },
+    {
+      "type": "image",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/New_Pinghsi_Coal_Tunnel.JPG/960px-New_Pinghsi_Coal_Tunnel.JPG?_=20110814033438",
+      "width": "50%",
+      "height": "auto"
+    },
+    {
+      "type": "heading",
+      "text": "Mining Waste"
+    },
+    {
+      "type": "paragraph",
+      "html": "Mining waste refers to the materials that are generated as a result of mining activities. These materials can include <strong>overburden</strong>, <strong>tailings/slag</strong>, and <strong>waste rock</strong>. Overburden is the layer of earth and rock that is removed to access the minerals being mined. Tailings are the materials that are left over after the minerals have been extracted from the ore. Waste rock is the rock that is removed to access the minerals but holds no value and thus is not processed."
+    },
+    {
+      "type": "paragraph",
+      "html": "Effects on the environment and human health are often negative. Tailings and waste rock, for example, contain toxic substances like heavy metals that can leach into soil or water. Storing waste from mining causes land to degrade and the natural landscape to decline in health and quality. Coal mining, for example, contaminates water supplies and destroys natural habitats by its excessive production of dust and methane. Tailings can also include more dangerous elements like mercury or arsenic. Since we are running out of coal, mining operations are forced to move deeper and deeper. This is both expensive and hazardous to the workers in the mines."
+    }
+  ]
+}

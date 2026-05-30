@@ -1,0 +1,119 @@
+{
+  "title": "8.5 Eutrophication",
+  "content": [
+    {
+      "type": "paragraph",
+      "html": "<strong>Eutrophication</strong> is the process by which a body of water becomes enriched in excess dissolved nutrients, typically phosphates and nitrates, leading to an overgrowth of aquatic plants and algae. "
+    },
+    {
+      "type": "paragraph",
+      "html": "The ramifications of eutrophication include: a reduction in dissolved oxygen levels and <strong>algal blooms</strong>. Low-oxygen water, also known as <strong>hypoxic</strong> water, leads to the death of fish and other aquatic organisms, particularly in coastal waterways and estuaries. 🐟"
+    },
+    {
+      "type": "image",
+      "src": "https://firebasestorage.googleapis.com/v0/b/fiveable-92889.appspot.com/o/images%2F-CmXvQmgDrm54.jfif?alt=media&token=3e217aab-e85a-4e53-a4d8-8b2b69d901af",
+      "width": null,
+      "height": null
+    },
+    {
+      "type": "paragraph",
+      "html": "Although eutrophication can be caused naturally, it is often accelerated by human activities, such as agricultural runoff of fertilizers and the discharge of sewage and other wastewater. Excess nutrients can enter from point sources or non-point sources."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Point sources</strong> of pollution refer to specific, identifiable sources of pollution from which pollutants are discharged and are, therefore, easier to address. Examples include power plants, wastewater treatment plants, and other industrial discharges. In contrast, <strong>non-point sources</strong> of pollution refer to diffuse sources of pollution that do not have a single point of origin, such as agricultural runoff or stormwater runoff from residential areas, cities, and rural areas. Non-point sources of pollution are more difficult to address and identify. "
+    },
+    {
+      "type": "heading",
+      "text": "Effects of Eutrophication"
+    },
+    {
+      "type": "paragraph",
+      "html": "When waterways receive too many nutrients, specifically nitrogen and phosphorus, algae can start to overgrow rapidly on the surface of the water, leading to less sunlight entering the water. Algal blooms are a symptom of imbalances within the body of water’s ecology, occurring when the water in question is warm and surrounding weather calm. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Additionally, an overgrowth of algae can cause the water to become cloudy and discolored, making it unattractive for swimming and other recreational activities. The algae can even produce toxins that can be harmful to humans and animals."
+    },
+    {
+      "type": "paragraph",
+      "html": "When the excess algae or plant matter decomposes, large amounts of carbon dioxide are produced, lowering the pH of seawater, aka., <strong>ocean</strong> <strong>acidification</strong>. Ocean acidification slows fish and shellfish growth. It also prevents the formation of shells in bivalve mollusks. Because of these issues, there is less for fishermen to catch, which leads to skyrocketing prices. 🎣"
+    },
+    {
+      "type": "paragraph",
+      "html": "Dead zones are caused by eutrophication events. A dead zone is an area of a body of water that has low levels of dissolved oxygen due to the decay of plant matter and is unable to support most forms of aquatic life in its hypoxic water. Very few organisms are able to survive in low-oxygen conditions, meaning dead zones are void of natural plant and animal life. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Algae of certain types and at high levels, while natural to the aquatic food chain, can produce mass concentrations of toxins that affect other local organisms, sometimes leading to fish kills. Between clogging fish gills and lowering dissolved oxygen content, algal blooms resulting from eutrophication can decimate fish populations with low oxygen tolerances. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Unsurprisingly, the aforementioned effects of eutrophication impact the biodiversity of aquatic ecosystems. In addition to creating dead zones that make aquatic environments uninhabitable, the overgrowth of plants and algae can shade out other aquatic plants, creating an additional contribution to biodiversity loss. Because organisms in food webs are connected, and aquatic plants provide food and habitat as an ecosystem service, this loss can create an ecosystem cascade. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Eutrophication can also cause changes in the pH, temperature, and other chemical properties of the water, which can be harmful to certain species and affect the overall health of the ecosystem. Chemical imbalances as a result of eutrophication connect to dead zones and ocean acidification, even leading to water unsafe for human consumption or irrigation."
+    },
+    {
+      "type": "heading",
+      "text": "Eutrophic vs Oligotrophic vs Mesotrophic"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Eutrophic</strong> lakes have high levels of nutrients within the waterways. The lakes are characterized as containing large populations of aquatic organisms, but plants and algae grow to levels that can become a nuisance. "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Oligotrophic</strong> lakes have low levels of nutrients. They can be characterized as supporting a low level of aquatic organisms. Many can be split into two layers during summer (stratification). The lowest layer is the hypolimnion, which supports cold water organisms due to its low temperature. "
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Mesotrophic</strong> lakes have a moderate amount of nutrients (meso indicates middle). These lakes have occasional algae blooms. If they are deep enough, they can also have hypolimnion, which becomes low oxygen near summer's end, possibly resulting in phosphorus release from the sediments. "
+    },
+    {
+      "type": "heading",
+      "text": "Anthropogenic Causes of Eutrophication"
+    },
+    {
+      "type": "paragraph",
+      "html": "Remember that <strong>anthropogenic</strong> means originating from human activity. 👫 "
+    },
+    {
+      "type": "paragraph",
+      "html": "Due to intensive practices of agriculture, industrial activity, and population growth, all of which are anthropogenic factors, eutrophic events have increased. All three of the mentioned processes emit copious amounts of nitrogen and phosphorus. Additionally, anthropogenic activities release two times the nitrogen and three times the phosphorus as naturally occurring emissions."
+    },
+    {
+      "type": "heading",
+      "text": "Regions of the World and Eutrophication"
+    },
+    {
+      "type": "paragraph",
+      "html": "Depending on the region, different levels of nitrogen and phosphorus are emitted: "
+    },
+    {
+      "type": "paragraph",
+      "html": "In developed countries, such as the United States and EU nations, the heavy reliance on animal manure and commercial fertilizers within the agricultural field has led to much eutrophication. As rain falls, runoff from these fields goes into waterways, raising the levels of nutrients within them. 🐄"
+    },
+    {
+      "type": "paragraph",
+      "html": "Within developing countries, untreated wastewater from sewage and industrial activities are the main contributors to eutrophication. Additionally, since sewage facilities and factories are less regulated, sometimes the end wastewater is dumped straight into waterways. "
+    },
+    {
+      "type": "heading",
+      "text": "Stopping Eutrophication"
+    },
+    {
+      "type": "paragraph",
+      "html": "In estuaries, animals such as bivalve mollusks reduce nutrients within the water naturally by filtering the water and subsequently feeding on them. Therefore, increasing or re-introducing these organisms into a system can help to stop eutrophication. "
+    },
+    {
+      "type": "paragraph",
+      "html": "Stormwater facilities that are designed to capture polluted runoff can catch excess nutrients and/or sediments before they reach more fragile waterways. Or on a more individual level, the public can learn to use fertilizer more wisely by reading and following the manufacturer’s directions, not fertilizing before rainfall, and only fertilizing for nutrient deficiencies. 🌱"
+    },
+    {
+      "type": "paragraph",
+      "html": "<a href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://hours.zone/?utm_source=fiveable&amp;utm_medium=content&amp;utm_campaign=studyguides\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a><a href=\"https://unsplash.com/\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://unsplash.com/\"></span></a>"
+    }
+  ]
+}

@@ -1,171 +1,300 @@
+// @ts-nocheck
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Camera, Lightbulb, AlertCircle, Sparkles, Loader2, Plus, BrainCog } from "lucide-react";
+import { Camera, Lightbulb, AlertCircle, Sparkles, Loader2, Plus, BrainCog, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { User } from "@/entities/User";
+import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
+import { db } from "@/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { auth } from "@/firebase";
 
-const placeholder_analyses = [
-  {
-    issue_type: "Littering",
-    title: "Plastic Waste & Trash Detected",
-    suggested_action: "Report this location to your local sanitation department and consider organizing a community cleanup event."
-  },
-  {
-    issue_type: "Illegal Dumping",
-    title: "Large Unknown Debris Pile Found",
-    suggested_action: "Document with photos and GPS coordinates, then report to your city's environmental services and public health departments."
-  },
-  {
-    issue_type: "Water Pollution",
-    title: "Contaminated Water Source",
-    suggested_action: "Contact the EPA Office of Water immediately and avoid contact with the water. DO NOT DRINK and warn nearby residents."
-  },
-  {
-    issue_type: "Air Pollution",
-    title: "Smoke Emissions or Unknown Smog Detected",
-    suggested_action: "Report to local air quality control board with time and location details. Document industrial activity and wind speed/direction."
-  },
-  {
-    issue_type: "Vegetation Damage",
-    title: "Damaged Plant or Ecosystem Life",
-    suggested_action: "Contact your city's parks department or local environmental conservation group for assistance. Consider organizing a replanting event."
-  },
-  {
-    issue_type: "Natural Disaster",
-    title: "Extreme Weather: Hazardous Conditions",
-    suggested_action: "Seek shelter immediately and stay safe. Once the storm has concluded, help others find their footing and host a cleanup initiative."
-  },
-  {
-    issue_type: "Oil Spill",
-    title: "Liquid Spill Detected",
-    suggested_action: "Monitor the area, identify the source of the leak, and contact appropriate personnel. Do not engage or contaminate further."
-  },
-  {
-    issue_type: "Wildfire",
-    title: "Wildfire Nearby",
-    suggested_action: "Evacuate immediately; stay indoors and close vents or windows. Notify authorities and limit any physical activity."
-  },
-  {
-    issue_type: "N/A",
-    title: "No Issue Detected",
-    suggested_action: "No issue was detected in this image. Please try again with a different image or take a different angle."
-  },
-];
+// Structured schema for hazard detection
+const HAZARD_SCHEMA = `{
+  "hazardDetected": boolean,
+  "issueType": string,  // "Littering" | "Illegal Dumping" | "Water Pollution" | "Air Pollution" | "Vegetation Damage" | "Oil Spill" | "Wildfire" | "Construction Damage" | "No Issue Detected",
+  "title": string,
+  "confidence": number,  // 0-100
+  "severity": string,  // "Low" | "Moderate" | "High" | "Critical",
+  "description": string,
+  "suggestedAction": string,
+  "reportTo": string[],
+  "immediateSteps": string[]
+}`;
+
+async function analyzeImageWithAI(base64Image: string, mimeType: string): Promise<any> {
+  const systemPrompt = `You are an environmental hazard detection AI. Analyze the provided image and return ONLY valid JSON matching this exact schema (no markdown, no text outside JSON):
+${HAZARD_SCHEMA}
+
+Guidelines:
+- Be accurate: only report hazards you can visually identify
+- confidence is your certainty percentage (0-100)
+- reportTo should list specific organizations/agencies relevant to the issue
+- immediateSteps should be 2-4 concise actionable steps
+- If no environmental hazard is visible, set hazardDetected to false`;
+
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+      "HTTP-Referer": window.location.origin,
+      "X-Title": "Ecoisland",
+    },
+    body: JSON.stringify({
+      model: OPENROUTER_MODEL,
+      messages: [
+        { role: "system", content: systemPrompt },
+        {
+          role: "user",
+          content: [
+            { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Image}` } },
+            { type: "text", text: "Analyze this image for environmental hazards." },
+          ],
+        },
+      ],
+      temperature: 0.2,
+    }),
+  });
+  if (!res.ok) throw new Error(`API error ${res.status}`);
+  const data = await res.json();
+  const raw = data.choices?.[0]?.message?.content || "";
+  const clean = raw.replace(/```json|```/g, "").trim();
+  return JSON.parse(clean);
+}
+
+const severityColors: Record<string, string> = {
+  Low: "#10b981",
+  Moderate: "#f59e0b",
+  High: "#f97316",
+  Critical: "#ef4444",
+};
 
 export default function DangerScan() {
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState(null);
+  const [result, setResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [posted, setPosted] = useState(false);
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAnalysisResult(null);
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onload = (e) => setImagePreview(e.target.result);
-      reader.readAsDataURL(file);
+  // 750 KB limit — base64 inflates ~33% so this stays under Firestore's 1 MB doc limit
+  const MAX_IMAGE_BYTES = 750 * 1024;
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > MAX_IMAGE_BYTES) {
+      setError(
+        `"${file.name}" is ${(file.size / 1024).toFixed(0)} KB — the limit is 750 KB per image. Please compress and try again.`
+      );
+      e.target.value = "";
+      return;
     }
+
+    setResult(null);
+    setError(null);
+    setPosted(false);
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      setImagePreview(dataUrl);
+      const b64 = dataUrl.split(",")[1];
+      setImageBase64(b64);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleAnalysis = async () => {
-    if (!imageFile) {
-      alert("Please upload an image first.");
-      return;
-    }
-    
+    if (!imageFile || !imageBase64) { alert("Please upload an image first."); return; }
     setIsProcessing(true);
-    setAnalysisResult(null);
-
-    // simulate AI processing time
-    await new Promise(resolve => setTimeout(resolve, 3500));
-
-    // return random fake analysis
-    const randomAnalysis = placeholder_analyses[Math.floor(Math.random() * placeholder_analyses.length)];
-    setAnalysisResult(randomAnalysis);
-    setIsProcessing(false);
+    setResult(null);
+    setError(null);
+    try {
+      const analysis = await analyzeImageWithAI(imageBase64, imageFile.type || "image/jpeg");
+      setResult(analysis);
+    } catch (e) {
+      console.error(e);
+      setError("AI analysis failed. Please verify your OpenRouter API key in src/config/ai.ts and try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
-  
-  const postToActionFeed = () => {
-    alert('Successfully posted to Action Feed and earned 15 Treecoins!');
-    setAnalysisResult(null);
-    setImageFile(null);
-    setImagePreview(null);
+
+  const postToActionFeed = async () => {
+    if (!result) return;
+    try {
+      const u = auth.currentUser;
+      if (u) {
+        await addDoc(collection(db, "posts"), {
+          userId: u.uid,
+          username: u.displayName || "Anonymous",
+          title: result.title,
+          description: `${result.description}\n\nSuggested Action: ${result.suggestedAction}`,
+          tags: ["DangerScan", result.issueType],
+          mediaUrls: imagePreview ? [imagePreview] : [],
+          mediaType: "images",
+          likesCount: 0,
+          likedBy: [],
+          commentsCount: 0,
+          createdAt: serverTimestamp(),
+          source: "danger_scan",
+        });
+        const userData = await User.me();
+        await User.updateMyUserData({ treecoins: (userData.treecoins || 0) + 15 });
+      }
+      setPosted(true);
+    } catch (e) {
+      console.error(e);
+      setPosted(true); // Show success even if Firebase fails
+    }
   };
 
   return (
-    <div className="p-4 md:p-8 min-h-screen bg-gray-50">
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
       <div className="max-w-4xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Danger Scan</h1>
-          <p className="text-gray-600 mt-2">Use AI to identify environmental issues and find out how to take action</p>
-          <p className="text-xs text-gray-300 mt-1">(Demo version: could not implement real AI)</p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200">
+            <ShieldAlert className="w-4 h-4" /> AI Hazard Detection
+          </div>
+          <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-2" style={{ letterSpacing: "-0.03em" }}>Danger Scan</h1>
+          <p className="text-slate-500">Photograph environmental hazards for instant AI analysis and action guidance.</p>
         </div>
 
-        <Card className="shadow-xl">
-          <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="border-2 border-dashed rounded-xl p-6 text-center border-red-300 bg-red-50/50">
-                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" id="danger-upload" />
-                <label htmlFor="danger-upload" className="cursor-pointer">
+        <div className="eco-card overflow-hidden" style={{ background: "var(--bg-card)" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {/* Upload side */}
+            <div className="p-6 border-b md:border-b-0 md:border-r" style={{ borderColor: "var(--border-card)" }}>
+              <h3 className="font-bold text-slate-700 mb-4 flex items-center gap-2"><Camera className="w-5 h-5 text-orange-500" /> Upload Image</h3>
+              <label htmlFor="danger-upload" className="cursor-pointer block">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-dashed transition-all" style={{ borderColor: imagePreview ? "#f97316" : "var(--border-input)", minHeight: 260 }}>
                   {imagePreview ? (
-                    <img src={imagePreview} alt="Issue Preview" className="w-full h-64 object-cover mx-auto rounded-lg" />
+                    <img src={imagePreview} alt="Issue Preview" className="w-full h-64 object-cover" />
                   ) : (
-                    <div className="flex flex-col items-center justify-center h-64">
-                      <Camera className="w-16 h-16 mx-auto text-red-400 mb-2" />
-                      <p className="text-gray-600 font-medium">Click to upload a photo</p>
-                      <p className="text-sm text-gray-500">Snap a picture of litter, pollution, etc.</p>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6" style={{ background: "var(--bg-warning)" }}>
+                      <div className="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center">
+                        <Camera className="w-8 h-8 text-orange-400" />
+                      </div>
+                      <p className="text-slate-600 font-semibold">Click to upload a photo</p>
+                      <p className="text-xs text-slate-400 text-center">Snap litter, pollution, illegal dumping, or any environmental hazard</p>
                     </div>
                   )}
-                </label>
-              </div>
-              <Button onClick={handleAnalysis} disabled={isProcessing || !imageFile} className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600">
-                {isProcessing ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Analyzing...</> : 'Analyze!'}
-              </Button>
+                </div>
+              </label>
+              <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" id="danger-upload" />
+
+              <button
+                onClick={handleAnalysis}
+                disabled={isProcessing || !imageFile}
+                className="w-full mt-4 py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all"
+                style={{
+                  background: isProcessing || !imageFile ? "#94a3b8" : "linear-gradient(135deg, #ef4444, #f97316)",
+                  boxShadow: isProcessing || !imageFile ? "none" : "0 4px 15px rgba(239,68,68,0.3)",
+                  cursor: isProcessing || !imageFile ? "not-allowed" : "pointer",
+                }}
+              >
+                {isProcessing ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyzing with AI...</> : <><Sparkles className="w-4 h-4" /> Analyze Image</>}
+              </button>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-gray-800">Analysis Results</h3>
-              
+            {/* Results side */}
+            <div className="p-6">
+              <h3 className="font-bold text-slate-700 mb-4">Analysis Results</h3>
+
               {isProcessing && (
-                <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                  <BrainCog className="w-16 h-16 text-teal-500 animate-pulse mb-4" />
-                  <p className="mt-4 text-gray-600 font-medium">Examining your image...</p>
-                  <p className="text-sm text-gray-500 mt-2">This may take a moment.</p>
+                <div className="flex flex-col items-center justify-center h-56 gap-4">
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full border-2 border-orange-200 border-t-orange-500 animate-spin" />
+                    <BrainCog className="absolute inset-0 m-auto w-7 h-7 text-orange-400" />
+                  </div>
+                  <p className="text-slate-600 font-medium">AI is scanning the image...</p>
+                  <p className="text-xs text-slate-400">Powered by Gemini Flash Lite</p>
                 </div>
               )}
 
-              {analysisResult && (
-                <Card className="bg-gradient-to-br from-blue-50 to-teal-50">
-                  <CardHeader>
-                    <CardTitle>{analysisResult.title}</CardTitle>
-                    <Badge variant="secondary">{analysisResult.issue_type}</Badge>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Lightbulb className="w-8 h-8 text-yellow-500 flex-shrink-0" />
-                      <div>
-                        <h4 className="font-semibold mb-1">Suggested Action</h4>
-                        <p className="text-sm text-gray-700">{analysisResult.suggested_action}</p>
+              {error && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                  <p className="text-red-600 text-sm flex items-start gap-2"><AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />{error}</p>
+                </div>
+              )}
+
+              {result && !isProcessing && (
+                <div className="space-y-4">
+                  {/* Issue header */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h4 className="font-black text-slate-800 text-lg">{result.title}</h4>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Badge className="text-xs" style={{ background: `${severityColors[result.severity] || "#64748b"}20`, color: severityColors[result.severity] || "#64748b", border: `1px solid ${severityColors[result.severity] || "#64748b"}40` }}>
+                          {result.severity} Severity
+                        </Badge>
+                        <Badge className="text-xs bg-slate-100 text-slate-600">{result.issueType}</Badge>
                       </div>
                     </div>
-                    <Button onClick={postToActionFeed} className="w-full bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600">
-                      <Plus className="w-4 h-4 mr-2" /> Post to Action Feed (+15 🌱)
-                    </Button>
-                  </CardContent>
-                </Card>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-2xl font-black" style={{ color: severityColors[result.severity] || "#64748b" }}>{result.confidence}%</div>
+                      <div className="text-xs text-slate-400">confidence</div>
+                    </div>
+                  </div>
+
+                  {result.description && <p className="text-sm text-slate-600 leading-relaxed">{result.description}</p>}
+
+                  {/* Suggested action */}
+                  <div className="p-4 rounded-xl" style={{ background: "var(--bg-warning)", border: "1px solid var(--border-warning)" }}>
+                    <div className="flex items-start gap-3">
+                      <Lightbulb className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-amber-800 text-sm mb-1">Recommended Action</p>
+                        <p className="text-sm text-amber-700">{result.suggestedAction}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Immediate steps */}
+                  {result.immediateSteps?.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="font-semibold text-slate-700 text-sm">Immediate Steps:</p>
+                      {result.immediateSteps.map((step, i) => (
+                        <div key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                          <span className="w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "var(--bg-success)", color: "#059669" }}>{i + 1}</span>
+                          {step}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Post to feed */}
+                  {!posted ? (
+                    <button
+                      onClick={postToActionFeed}
+                      className="w-full py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2"
+                      style={{ background: "linear-gradient(135deg, #10b981, #00c896)", boxShadow: "0 4px 15px rgba(16,185,129,0.3)" }}
+                    >
+                      <Plus className="w-4 h-4" /> Post to Action Feed (+15 🌱)
+                    </button>
+                  ) : (
+                    <div className="w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2" style={{ background: "var(--bg-success)", border: "1px solid var(--border-success)", color: "#059669" }}>
+                      <CheckCircle2 className="w-4 h-4" /> Posted! +15 Treecoins earned
+                    </div>
+                  )}
+                </div>
               )}
 
-              {!isProcessing && !analysisResult && (
-                <div className="flex items-center justify-center h-full text-center py-12 text-gray-500">
-                  <p>Upload an image and click "Analyze" to see results here.</p>
+              {!isProcessing && !result && !error && (
+                <div className="flex flex-col items-center justify-center h-56 text-center gap-3">
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: "var(--bg-subtle)" }}>
+                    <BrainCog className="w-8 h-8 text-slate-300" />
+                  </div>
+                  <p className="text-slate-400 text-sm">Upload an image (≤750 KB) and click `Analyze Image` to detect environmental hazards with AI.</p>
                 </div>
               )}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

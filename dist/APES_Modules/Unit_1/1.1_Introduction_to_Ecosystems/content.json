@@ -1,0 +1,65 @@
+{
+  "title": "1.1 Introduction to Ecosystems",
+  "content": [
+    {
+      "type": "heading",
+      "text": "Ecosystem Ecology"
+    },
+    {
+      "type": "paragraph",
+      "html": "An <strong>ecosystem</strong> is simply a particular location on Earth with interacting biotic and abiotic components. <strong>Biotic</strong> components are any components of ecosystems that are living, such as plants, animals, and bacteria. <strong>Abiotic</strong> components are any nonliving parts of ecosystems, like rocks, soil, or even the air we breathe. The combination of all ecosystems on Earth is called the <strong>biosphere</strong>. \nEcosystems can range in size from small, local systems, such as a pond or a forest, to large, global systems, such as the Earth's atmosphere or the oceans. They can be found in a variety of environments, including <strong>terrestrial</strong> (land-based), <strong>aquatic</strong> (water-based), and <strong>atmospheric</strong> (air-based).\nWhen studying environmental science, it is important to understand how ecosystems function and interact with each other. Everything that exists on the earth is related to one another, but we split different areas into ecosystems so that we can study them and their components more closely. <a href=\"https://cdn.pixabay.com/photo/2014/03/04/15/10/elephant-279505_960_720.jpg\" style=\"text-decoration: none; pointer-events: auto;\"><span as=\"a\" class=\"mui-1n4ngsc\" href=\"https://cdn.pixabay.com/photo/2014/03/04/15/10/elephant-279505_960_720.jpg\"></span></a>"
+    },
+    {
+      "type": "heading",
+      "text": "Community Ecology"
+    },
+    {
+      "type": "paragraph",
+      "html": "Organisms in an ecosystem must both rely on and compete with surrounding species, and there are a few ways in which these relationships can form. "
+    },
+    {
+      "type": "paragraph",
+      "html": "For example, in a <strong>predator-prey relationship</strong>, one animal will kill and consume another animal. Predators, at a higher <strong>trophic level</strong>, play an important role in regulating much larger prey populations. In turn, to avoid being eaten, prey have evolved <strong>behavioral</strong>, <strong>morphological</strong>, and/or <strong>chemical</strong> defenses. For example, prey can hide (behavioral), camouflage or attack (morphological), or be poisonous (chemical). Certain defenses involve the imitation of other organisms' defense mechanisms. "
+    },
+    {
+      "type": "paragraph",
+      "html": "In a <strong>symbiotic</strong> relationship, at least one of the species benefits from the relationship. Symbiotic relationships can be <strong>mutualistic</strong> (both benefit) <strong>, commensalistic</strong> (one benefits, one unharmed) , or <strong>parasitic</strong> (one benefits, one harmed)."
+    },
+    {
+      "type": "paragraph",
+      "html": "It's important to note that not all relationships between different species are considered to be symbiotic. Some relationships may be neutral, with neither species benefiting or being harmed, while others may be competitive or predatory."
+    },
+    {
+      "type": "heading",
+      "text": "Competition"
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Competition</strong> occurs when organisms must share a limited resource. Whether it be water, shelter, food, nutrients, or light, coexistence is dependent on access to resources. For example, if two competitors prey on one species, food will be limited and certain populations will decline."
+    },
+    {
+      "type": "paragraph",
+      "html": "Species who share common resources, though, are able to <strong>resource partition</strong>, or divide equally needed resources according to survival needs. If two species eat different parts of the same plant, they can share that <strong>niche</strong> without overlapping and depleting populations. Though, if two species eat the stem of the plant while one eats the leaves, <strong>evolution</strong> will favor the species with access to more resources, while species forced to over-artition will begin to die off."
+    },
+    {
+      "type": "paragraph",
+      "html": "This is the process of natural selection that occurs both within a species and between several species that live in the same environment."
+    },
+    {
+      "type": "heading",
+      "text": "Keystone Species"
+    },
+    {
+      "type": "paragraph",
+      "html": "A keystone species is one that plays a large role in its ecosystem despite being quite low in population. The removal of a keystone species can have cascading effects on the ecosystem, leading to significant changes in the abundance and distribution of other species. One example of a keystone species is the sea otter; it plays a critical role in maintaining the health of kelp forests, which are important habitats for many other species. Sea otters feed on sea urchins, which can graze on and destroy kelp beds if their populations are not kept in check. By controlling the population of sea urchins, sea otters help to maintain the health of kelp forests, which provide habitat and food for a variety of species. Unfortunately, many keystone species are extinct today."
+    },
+    {
+      "type": "paragraph",
+      "html": "<strong>Ecosystem engineers</strong> are special types of keystone species that create or maintain habitats for other species. Elephants, for example, prevent wildfires and create watering holes for smaller species just by taking giant steps. They also stomp down trees and bushes so that smaller animals can eat them, which maintains and regulates resource allocation."
+    },
+    {
+      "type": "paragraph",
+      "html": "Ecosystems are constantly changing and evolving, and the interactions between their living and non-living components can be complex and dynamic. Understanding the specific characteristics of an ecosystem can help us to better understand how it functions and how it may be affected by external factors, such as climate change or human activity."
+    }
+  ]
+}

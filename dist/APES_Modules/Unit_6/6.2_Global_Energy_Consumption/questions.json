@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Brazil gets about 60% of electricity from hydroelectric dams while Poland gets about 75% from coal. How do geography and resource availability explain this difference?",
+    "answers": [
+      "Brazil's smaller population allows reliance on hydro while Poland's larger population requires coal.",
+      "Brazil chose hydroelectric power for environmental reasons and Poland chose coal for economic growth.",
+      "Brazil's rivers and topography favor hydroelectric power and Poland's coal reserves favor coal.",
+      "The difference reflects Brazil's superior hydroelectric technology rather than resource availability."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A hydrogeologist studies energy production in East Africa: 'Ethiopia's Grand Renaissance Dam generates 16,000 megawatts of hydroelectric capacity, making it Africa's largest hydropower facility. The dam supplies electricity to Ethiopia's growing manufacturing sector and enables the country to export power to neighboring nations, generating government revenue. However, the dam reduced downstream water flow to Sudan and Egypt by 25%, affecting irrigation agriculture that supports 40 million people. Egypt's government has argued that the dam threatens water security and regional stability. Ethiopia counters that energy access is essential for economic development and poverty reduction. This conflict illustrates that energy infrastructure decisions involve trade-offs between national development needs and transnational water security.'",
+    "answers": [
+      "Ethiopia's need for economic development and poverty reduction justifies the Grand Renaissance Dam despite its impact on downstream water security.",
+      "The Grand Renaissance Dam reduced downstream water flow to Sudan and Egypt by 25%, affecting 40 million people dependent on irrigation agriculture.",
+      "Ethiopia's Grand Renaissance Dam generates 16,000 megawatts and is Africa's largest hydropower facility.",
+      "Energy infrastructure decisions involve trade-offs between national development needs and transnational water security."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A developed country with a stable population and mature industry has 2% annual energy consumption growth. A developing country with 3% population growth and expanding manufacturing has 8% annual energy growth. Both have similar per-capita GDP growth. Which best explains the difference?",
+    "answers": [
+      "Larger fossil fuel reserves enabling higher consumption growth in the developing nation.",
+      "Rapid industrialization and new infrastructure in the developing nation raise energy demand.",
+      "Higher population growth alone accounts for the developing nation's faster energy growth.",
+      "Complete transition to renewables in developed nation lowers its energy growth."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "In rural Kenya, many households rely on biomass from locally harvested wood and animal dung for cooking and heating, while urban areas increasingly use natural gas and electricity. Which of the following best explains why biomass remains the primary energy source in rural areas despite the availability of commercial energy options?",
+    "answers": [
+      "Biomass is locally available and requires minimal financial investment, making it the most economically accessible energy source for rural populations with limited income.",
+      "Commercial energy sources like natural gas and electricity are not distributed to rural areas because governments prioritize urban development over rural electrification.",
+      "Biomass produces less pollution than commercial energy sources, so rural communities deliberately choose it to protect their local environment.",
+      "Rural areas lack the technological infrastructure to use commercial energy sources, so biomass is the only viable option regardless of cost or preference."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "Coal consumption in China increased dramatically during the nation's rapid industrialization from 1990 to 2010. Which of the following best explains why coal became the primary fuel source for meeting China's rising energy demand?",
+    "answers": [
+      "The Chinese government mandated coal use through energy policy to reduce dependence on foreign energy imports and maintain energy security during industrialization.",
+      "China developed coal mining infrastructure and constructed coal-fired power plants rapidly, but hydroelectric and natural gas sources remained the primary fuel sources for meeting energy demand.",
+      "China has abundant domestic coal reserves, established mining infrastructure, and coal-fired power plants could be constructed rapidly to meet immediate electricity demand.",
+      "Coal was significantly cheaper than alternative energy sources during this period, making it the most economical choice for meeting China's rising energy demand."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "The US and China consume about 40% of global energy while Africa consumes under 6% despite over one billion people. What best explains this disparity?",
+    "answers": [
+      "Higher per capita energy use in industrialized and industrializing economies.",
+      "Larger land area raises energy use because of extended transport networks.",
+      "Africa lacks significant fossil fuel reserves, causing low energy use.",
+      "African countries intentionally limit energy use to protect the environment."
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "A sub-Saharan nation of 50 million has 40% urban electricity access and 8% rural access. It has minimal coal, no oil production, limited hydro potential from seasonal rainfall, and consistently high solar radiation. Government capacity for infrastructure maintenance is limited. Which energy solution would most effectively expand electricity access to underserved rural populations?",
+    "answers": [
+      "Build a centralized coal-fired plant and extend transmission to villages",
+      "Require rural households to buy diesel generators to meet electricity needs",
+      "Invest in large wind farms for export and fund electrification later",
+      "Deploy off-grid solar home systems and village solar mini-grids with batteries"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An analyst summarizes India's 2010–2022 energy data: consumption rose 68%, renewable capacity grew 15-fold to 40% of installed capacity, yet coal stayed above 70% of capacity and supplied about 72% of generation. Which claim does the author advance?",
+    "answers": [
+      "India should reduce coal use and transition to renewable electricity generation.",
+      "India's energy use rose 68% from 2010 to 2022 due to urban manufacturing.",
+      "Renewable capacity rose 15-fold while coal remained the primary electricity source.",
+      "Industrializing nations favor energy sources that deliver reliable baseload power."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Two Chinese industrial regions have similar output and population but different energy mixes and consumption growth. Region A is 87% coal with 6.2% annual energy consumption growth. Region B is 42% coal, 35% hydropower, and 23% natural gas with 3.1% growth. Which hypothesis is testable about whether energy-source diversity affects consumption growth?",
+    "answers": [
+      "Regions with more diverse energy mixes show lower annual energy consumption growth",
+      "Coal-dependent regions cause greater environmental harm and thus should adopt renewables",
+      "Region A uses more coal because it is locally cheaper and available",
+      "Regions with higher energy consumption growth have greater economic development levels"
+    ],
+    "correct": "!"
+  },
+  {
+    "question": "India is expanding large hydroelectric dams to meet rising industrial electricity demand. Which choice describes a significant disadvantage of large-scale hydropower in this context?",
+    "answers": [
+      "Hydropower produces long-lived radioactive waste similar to nuclear power",
+      "Large dams fragment rivers, block fish migration, and harm downstream agriculture",
+      "Large dams limit electricity distribution and can constrain industrial power access",
+      "Dams cannot generate power during monsoons because water levels are too high"
+    ],
+    "correct": "B"
+  }
+]

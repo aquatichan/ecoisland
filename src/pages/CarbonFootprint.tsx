@@ -1,497 +1,380 @@
 // @ts-nocheck
+// pending rework because i want to integrate AI with this as well
 import React, { useState, useEffect } from "react";
-import { User } from "@/entities/User.tsx";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+  Leaf, Car, Zap, Utensils, Plus, X, CheckCircle, Calendar,
+  TrendingDown, Award, Info, Loader2, ChevronDown
+} from "lucide-react";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, ReferenceLine
 } from "recharts";
 import { format, subDays } from "date-fns";
-import { Plus, Leaf, Car, Zap, Utensils, CheckCircle, X, Calendar } from "lucide-react";
-
 import { collection, query, orderBy, getDocs, doc, addDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { User } from "@/entities/User";
 
-// Units: transport = kg CO2 per passenger-km
-//        energy    = kg CO2 per kWh
-//        diet      = kg CO2 per kg of food (assumes 2000 kcal per 1 kg food)
 const EMISSION_FACTORS = {
   transport: {
-    walking: 0.0,                 // negligible direct CO2
-    cycling: 0.0,
-    electric_scooter: 0.05,       // mid-range life-cycle (30–124 g/km reported -> 0.03–0.12)
-    bus: 0.06,                    // per passenger-km (depends on occupancy; ~0.04–0.10 range)
-    train: 0.04,                  // passenger-km average for rail (electric rail is low)
-    car_gasoline: 0.17,           // typical petrol car, kg CO2 per km (central estimate)
-    car_electric: 0.085,          // blended BEV estimate (depends on grid; see note)
-    motorcycle: 0.11,
-    flight_domestic: 0.246,       // short-haul passenger km (approx. central reported)
-    flight_international: 0.10,   // long-haul per-km often lower per km due to efficiency (varies)
+    walking: 0.0, cycling: 0.0, electric_scooter: 0.05,
+    bus: 0.06, train: 0.04, car_gasoline: 0.17, car_electric: 0.085,
+    motorcycle: 0.11, flight_domestic: 0.246, flight_international: 0.10,
   },
-
-  energy: 0.37,                   // kg CO2 per kWh (US average ~0.37 kg/kWh)
-
-  // Diet: converted from kg CO2 per 1000 kcal to per kg of food assuming 2000 kcal/kg.
-  // source table from ** https://pmc.ncbi.nlm.nih.gov/articles/PMC10131583 **
-  // per_kg = per_1000kcal * (2000 / 1000) = per_1000kcal * 2
-
+  energy: 0.37,
   diet: {
-    vegan: 0.69 * 2.0,        // = 1.38 kg CO2 per kg food
-    vegetarian: 1.16 * 2.0,   // = 2.32
-    pescatarian: 1.66 * 2.0,  // = 3.32
-    omnivore: 2.23 * 2.0,     // = 4.46
-    carnivore: 2.23 * 2.0,    // treat carnivore ~ omnivore for now
-    keto: 2.91 * 2.0,         // = 5.82
-    paleo: 2.62 * 2.0,        // = 5.24
-    gluten_free: 4.70,        // ≈ omnivore × 1.05
-    intermittent: 3.57,       // ≈ omnivore × 0.8
-    raw: 1.25,                // ≈ vegan × 0.9
-    custom: NaN,              // NaN for now
+    vegan: 1.38, vegetarian: 2.32, pescatarian: 3.32,
+    omnivore: 4.46, carnivore: 4.46, keto: 5.82,
+    paleo: 5.24, gluten_free: 4.70, intermittent: 3.57, raw: 1.25,
   },
+};
+
+const TRANSPORT_LABELS = {
+  walking: "🚶 Walking", cycling: "🚲 Cycling", electric_scooter: "🛴 E-Scooter",
+  bus: "🚌 Bus", train: "🚆 Train", car_gasoline: "🚗 Car (Gas)",
+  car_electric: "⚡ Car (EV)", motorcycle: "🏍 Motorcycle",
+  flight_domestic: "✈️ Flight (Domestic)", flight_international: "✈️ Flight (Intl)",
 };
 
 const DAILY_LIMIT = 5;
 const COINS_PER_LOG = 10;
-const MAX_DAILY_COINS = 50;
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="px-3 py-2 rounded-xl text-xs text-white" style={{ background: "rgba(2,12,8,0.95)", border: "1px solid rgba(0,200,150,0.3)", backdropFilter: "blur(10px)" }}>
+      <p className="text-slate-400 mb-1">{label}</p>
+      {payload.filter(p => p.value != null).map((entry, i) => (
+        <p key={i} style={{ color: entry.color }}>{entry.name}: <strong>{Number(entry.value).toFixed(2)} kg</strong></p>
+      ))}
+    </div>
+  );
+};
 
 export default function CarbonFootprint() {
   const [user, setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
-
-  useEffect(() => {
-    User.me()
-      .then(setUser)
-      .finally(() => setLoadingUser(false));
-  }, []);
-  
   const [entries, setEntries] = useState([]);
-  
-  useEffect(() => {
-    if (!user) return;
-
-    const loadEntries = async () => {
-      const q = query(
-        collection(db, "users", user.id, "carbon_entries"),
-        orderBy("date", "desc")
-      );
-
-      const snap = await getDocs(q);
-      setEntries(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-    };
-
-    loadEntries();
-  }, [user]);
-  
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
-  const [todaysLogs, setTodaysLogs] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const [transportItems, setTransportItems] = useState([]);
-  const [energyUsage, setEnergyUsage] = useState([20]);
+  const [energyUsage, setEnergyUsage] = useState(20);
   const [dietType, setDietType] = useState("omnivore");
   const [message, setMessage] = useState(null);
+  const [isLogging, setIsLogging] = useState(false);
+  const [todaysLogs, setTodaysLogs] = useState(0);
 
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    setTodaysLogs(entries.filter(e => e.date === today).length);
-  }, [entries]);
+    User.me().then(u => {
+      setUser(u);
+      loadEntries(u.id);
+    }).catch(() => {});
+  }, []);
 
-  const addTransportItem = () => {
-    setTransportItems([...transportItems, { type: "walking", distance: 0 }]);
-  };
-
-  const updateTransportItem = (index, field, value) => {
-    const updated = [...transportItems];
-    updated[index] = { ...updated[index], [field]: value };
-    setTransportItems(updated);
-  };
-
-  const removeTransportItem = (index) => {
-    setTransportItems(transportItems.filter((_, i) => i !== index));
+  const loadEntries = async (userId) => {
+    try {
+      const snap = await getDocs(query(collection(db, "users", userId, "carbon_entries"), orderBy("date", "desc")));
+      const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      setEntries(data);
+      const today = format(new Date(), "yyyy-MM-dd");
+      setTodaysLogs(data.filter(e => e.date === today).length);
+    } catch (e) { console.error(e); }
   };
 
   const calculateEmissions = () => {
-    const distanceMultiplier = user?.preferences?.distance_unit === "mi" ? 1.60934 : 1;
-
-    const transport_emissions = transportItems.reduce(
-      (sum, item) =>
-        sum + item.distance * distanceMultiplier * EMISSION_FACTORS.transport[item.type],
-      0
-    );
-    const energy_emissions = energyUsage[0] * EMISSION_FACTORS.energy;
-    const diet_emissions = EMISSION_FACTORS.diet[dietType];
-
+    const transportCO2 = transportItems.reduce((sum, item) => {
+      const factor = EMISSION_FACTORS.transport[item.type] || 0;
+      return sum + factor * (item.distance || 0);
+    }, 0);
+    const energyCO2 = EMISSION_FACTORS.energy * energyUsage;
+    const dietCO2 = EMISSION_FACTORS.diet[dietType] || 0;
     return {
-      transport_emissions: parseFloat(transport_emissions.toFixed(2)),
-      energy_emissions: parseFloat(energy_emissions.toFixed(2)),
-      diet_emissions: parseFloat(diet_emissions.toFixed(2)),
-      total_emissions: parseFloat((transport_emissions + energy_emissions + diet_emissions).toFixed(2)),
+      transportation_co2: +transportCO2.toFixed(3),
+      energy_co2: +energyCO2.toFixed(3),
+      diet_co2: +dietCO2.toFixed(3),
+      total_co2: +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
+      // Keep backward compat field name
+      total_emissions: +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
+      diet: dietType,
+      date: selectedDate,
+      userId: user?.id,
     };
   };
 
   const handleLogEmissions = async () => {
     if (!user) return;
-
-    const emissions = calculateEmissions();
-    const now = new Date().toISOString();
-    const existing = entries.find(e => e.date === selectedDate);
-
-    if (existing) {
-      // Update entry
-      await updateDoc(
-        doc(db, "users", user.id, "carbon_entries", existing.id),
-        {
-          ...emissions,
-          notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
-          updated_date: now
-        }
-      );
-    } else {
-      // Create entry
-      await addDoc(
-        collection(db, "users", user.id, "carbon_entries"),
-        {
-          date: selectedDate,
-          ...emissions,
-          notes: `Transport: ${transportItems.length} items, Energy: ${energyUsage[0]} kWh, Diet: ${dietType}`,
-          created_date: now
-        }
-      );
-
-      // Award coins using your User entity
-      await User.updateMyUserData({
-        treecoins: (user.treecoins || 0) + COINS_PER_LOG
-      });
-    }
-
-    // Reload entries
-    const q = query(
-      collection(db, "users", user.id, "carbon_entries"),
-      orderBy("date", "desc")
-    );
-    const snap = await getDocs(q);
-    setEntries(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-
-    setTransportItems([]);
-    setEnergyUsage([20]);
-    setDietType("omnivore");
+    if (todaysLogs >= DAILY_LIMIT) { setMessage({ type: "error", text: `Max ${DAILY_LIMIT} logs per day.` }); return; }
+    setIsLogging(true);
+    try {
+      const data = calculateEmissions();
+      const existing = entries.find(e => e.date === selectedDate);
+      if (existing) {
+        await updateDoc(doc(db, "users", user.id, "carbon_entries", existing.id), data);
+      } else {
+        await addDoc(collection(db, "users", user.id, "carbon_entries"), data);
+        // Also write to top-level carbon_logs for Impact Visualizer
+        await addDoc(collection(db, "carbon_logs"), { ...data });
+        await User.updateMyUserData({ treecoins: (user.treecoins || 0) + COINS_PER_LOG });
+        setUser(prev => ({ ...prev, treecoins: (prev.treecoins || 0) + COINS_PER_LOG }));
+      }
+      await loadEntries(user.id);
+      setMessage({ type: "success", text: existing ? "Entry updated!" : `Logged! +${COINS_PER_LOG} Treecoins 🌱` });
+      setTimeout(() => setMessage(null), 3000);
+      setTransportItems([]);
+      setEnergyUsage(20);
+    } catch (e) {
+      console.error(e);
+      setMessage({ type: "error", text: "Failed to save. Please try again." });
+    } finally { setIsLogging(false); }
   };
 
+  const current = calculateEmissions();
+  const validEntries = entries.filter(e => e.total_emissions != null);
+  const avgEmissions = validEntries.length > 0 ? validEntries.reduce((s, e) => s + e.total_emissions, 0) / validEntries.length : 0;
+
   const chartData = Array.from({ length: 30 }).map((_, i) => {
-    const date = subDays(new Date(), 29 - i);
-    const dateStr = format(date, "yyyy-MM-dd");
-    const entry = entries.find((e) => e.date === dateStr);
-    
+    const d = subDays(new Date(), 29 - i);
+    const ds = format(d, "yyyy-MM-dd");
+    const entry = entries.find(e => e.date === ds);
     return {
-      date: format(date, "MMM d"),
-      yourEmissions: entry ? entry.total_emissions : null,
-      averageHuman: 16.4,
-      target: 4.8,
+      date: format(d, "MMM d"),
+      yourEmissions: entry ? +(entry.total_emissions || entry.total_co2 || 0) : null,
+      globalAvg: 16.4,
+      parisTarget: 4.8,
     };
   });
 
-  const validEntries = entries.filter(e => e.total_emissions != null);
-  const avgEmissions = validEntries.length > 0 
-    ? validEntries.reduce((sum, e) => sum + e.total_emissions, 0) / validEntries.length 
-    : 0;
-    
-  const weightUnit = user?.preferences?.weight_unit || "kg";
-  const weightMultiplier = weightUnit === "lbs" ? 2.20462 : 1;
+  const evalStatus = (() => {
+    if (!validEntries.length) return { text: "Log your first entry below.", color: "#64748b", emoji: "📊" };
+    if (avgEmissions < 4.8) return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#10b981", emoji: "🌟" };
+    if (avgEmissions < 7) return { text: "Good progress! You're below the sustainable threshold.", color: "#06b6d4", emoji: "✅" };
+    if (avgEmissions < 12) return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚡" };
+    return { text: "High impact. Focus on reducing transportation and energy use.", color: "#ef4444", emoji: "⚠️" };
+  })();
 
-  const getEmissionEvaluation = () => {
-    if (avgEmissions === 0)
-      return {
-        status: "neutral",
-        text: "Log your first entry to see your impact evaluation.",
-        color: "text-gray-600",
-      };
-    if (avgEmissions < 4.8)
-      return {
-        status: "excellent",
-        text: "Excellent! You're meeting Paris Agreement targets!",
-        color: "text-green-600",
-      };
-    if (avgEmissions < 7)
-      return {
-        status: "good",
-        text: "Good progress! You're below the sustainable threshold.",
-        color: "text-blue-600",
-      };
-    if (avgEmissions < 12)
-      return {
-        status: "moderate",
-        text: "Room for improvement. Consider more sustainable choices.",
-        color: "text-yellow-600",
-      };
-    return {
-      status: "high",
-      text: "High concern. Focus on reducing transportation and energy use.",
-      color: "text-red-600",
-    };
-  };
-
-  const evaluation = getEmissionEvaluation();
-
-  if (loadingUser) return <div>Loading...</div>;
-  if (!user) return <div>Please sign in</div>;
-  
   return (
-    <div className="p-4 md:p-8 bg-gray-50">
+    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
       <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Your Carbon Footprint</h1>
-          <p className="text-gray-600 mt-2">Track your daily habits and see your impact on the planet</p>
+          <div className="flex items-center gap-3 mb-2">
+            <Leaf className="w-7 h-7 text-emerald-600" />
+            <h1 className="text-3xl md:text-4xl font-black text-slate-900" style={{ letterSpacing: "-0.03em" }}>Carbon Footprint</h1>
+          </div>
+          <p className="text-slate-500">Track your daily habits and see your real environmental impact.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card className="lg:col-span-1 shadow-lg bg-white/80 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <Leaf className="w-6 h-6 text-teal-600" />
-                Log Daily Impact
-              </CardTitle>
-            </CardHeader>
+          {/* ===== LOG PANEL ===== */}
+          <div className="lg:col-span-1 space-y-4">
+            <div className="eco-card p-5">
+              <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2"><Calendar className="w-5 h-5 text-emerald-600" /> Log Daily Impact</h3>
 
-            <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="date" className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  Date
-                </Label>
-                <Input
-                  id="date"
+              {/* Date */}
+              <div className="mb-4">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">Date</label>
+                <input
                   type="date"
+                  className="eco-input"
                   value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  max={new Date().toISOString().split("T")[0]}
+                  onChange={e => setSelectedDate(e.target.value)}
+                  max={format(new Date(), "yyyy-MM-dd")}
                 />
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <Label className="flex items-center gap-2">
-                    <Car className="w-4 h-4" /> Transportation
-                  </Label>
-                  <Button size="sm" variant="outline" onClick={addTransportItem}>
-                    <Plus className="w-3 h-3" />
-                  </Button>
+              {/* Transport */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wide flex items-center gap-1.5"><Car className="w-3.5 h-3.5" /> Transportation</label>
+                  <button
+                    onClick={() => setTransportItems(p => [...p, { type: "bus", distance: 0 }])}
+                    className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center hover:bg-emerald-200 transition-colors"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
                 </div>
+                <div className="space-y-2">
+                  {transportItems.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 rounded-xl space-y-2" style={{ background: "var(--bg-subtle)", border: "2px solid var(--border-card)" }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <select
+                          className="eco-input text-xs py-1.5 px-2"
+                          value={item.type}
+                          onChange={e => setTransportItems(p => p.map((t, i) => i === idx ? { ...t, type: e.target.value } : t))}
+                        >
+                          {Object.entries(TRANSPORT_LABELS).map(([val, label]) => (
+                            <option key={val} value={val}>{label}</option>
+                          ))}
+                        </select>
+                        <button onClick={() => setTransportItems(p => p.filter((_, i) => i !== idx))} className="text-red-400 hover:text-red-600 p-1">
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          className="eco-input text-xs py-1.5 px-2"
+                          placeholder="Distance (km)"
+                          min={0}
+                          value={item.distance || ""}
+                          onChange={e => setTransportItems(p => p.map((t, i) => i === idx ? { ...t, distance: parseFloat(e.target.value) || 0 } : t))}
+                        />
+                        <span className="text-xs text-slate-400 font-medium">km</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                  {transportItems.length === 0 && (
+                    <p className="text-xs text-slate-400 text-center py-2">No transport added. Click + to add.</p>
+                  )}
+                </div>
+              </div>
 
-                {transportItems.map((item, index) => (
-                  <div key={index} className="rounded-lg p-3 space-y-2 bg-gray-50">
-                    <div className="flex justify-between items-center gap-2">
-                      <Select value={item.type} onValueChange={(value) => updateTransportItem(index, "type", value)}>
-                        <SelectTrigger className="flex-1">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white shadow-lg rounded-md">
-                          <SelectItem value="walking">Walking</SelectItem>
-                          <SelectItem value="cycling">Cycling</SelectItem>
-                          <SelectItem value="electric_scooter">Electric Scooter</SelectItem>
-                          <SelectItem value="bus">Bus</SelectItem>
-                          <SelectItem value="train">Train</SelectItem>
-                          <SelectItem value="car_gasoline">Car (Gasoline)</SelectItem>
-                          <SelectItem value="car_electric">Car (Electric)</SelectItem>
-                          <SelectItem value="motorcycle">Motorcycle</SelectItem>
-                          <SelectItem value="flight_domestic">Flight (Domestic)</SelectItem>
-                          <SelectItem value="flight_international">Flight (International)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <Button size="sm" variant="ghost" onClick={() => removeTransportItem(index)}>
-                        <X className="w-3 h-3" />
-                      </Button>
-                    </div>
+              {/* Energy */}
+              <div className="mb-4">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" /> Energy Use: <span className="text-emerald-600 ml-1">{energyUsage} kWh</span></label>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-slate-400">0</span>
+                  <input
+                    type="range" min={0} max={100} step={0.5}
+                    value={energyUsage}
+                    onChange={e => setEnergyUsage(parseFloat(e.target.value))}
+                    className="flex-1 accent-emerald-500 h-2 rounded-full"
+                  />
+                  <span className="text-xs text-slate-400">100</span>
+                </div>
+              </div>
 
-                    <div className="flex items-center gap-2">
-                      <Input
-                        type="number"
-                        placeholder={`Distance (${user?.preferences?.distance_unit || 'km'})`}
-                        value={item.distance}
-                        onChange={(e) => updateTransportItem(index, "distance", parseFloat(e.target.value) || 0)}
-                        className="flex-1"
-                      />
-                      <Card className="text-sm w-9 h-7 flex justify-center items-center">
-                        {user?.preferences?.distance_unit || "km"}
-                      </Card>
-                    </div>
+              {/* Diet */}
+              <div className="mb-5">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center gap-1.5"><Utensils className="w-3.5 h-3.5" /> Today's Diet</label>
+                <select
+                  className="eco-input"
+                  value={dietType}
+                  onChange={e => setDietType(e.target.value)}
+                >
+                  {Object.entries({ vegan: "🥦 Vegan", vegetarian: "🥗 Vegetarian", pescatarian: "🐟 Pescatarian", omnivore: "🍽️ Omnivore", carnivore: "🥩 Carnivore", keto: "🥑 Keto", paleo: "🍖 Paleo", gluten_free: "🌾 Gluten-Free", intermittent: "⏱ Intermittent", raw: "🥕 Raw" }).map(([val, label]) => (
+                    <option key={val} value={val}>{label}</option>
+                  ))}
+                </select>
+              </div>
 
+              {/* Total */}
+              <div className="p-4 rounded-2xl mb-4" style={{ background: "var(--bg-success)", border: "2px solid var(--border-success)" }}>
+                <p className="text-xs font-bold text-emerald-600 uppercase tracking-wide mb-1">Today's Total</p>
+                <p className="text-3xl font-black text-emerald-700">{current.total_co2.toFixed(2)}<span className="text-base font-medium ml-1 text-emerald-500">kg CO₂</span></p>
+                <div className="flex gap-3 mt-2 text-xs text-emerald-600">
+                  <span>🚗 {current.transportation_co2.toFixed(2)}</span>
+                  <span>⚡ {current.energy_co2.toFixed(2)}</span>
+                  <span>🍽️ {current.diet_co2.toFixed(2)}</span>
+                </div>
+              </div>
+
+              {/* Message */}
+              <AnimatePresence>
+                {message && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className={`flex items-center gap-2 p-3 rounded-xl mb-3 text-sm ${message.type === "success" ? "status-success rounded-xl text-emerald-700 dark:text-emerald-300" : "status-error rounded-xl text-red-700 dark:text-red-400"}`}
+                  >
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                    {message.text}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <button
+                onClick={handleLogEmissions}
+                disabled={isLogging || todaysLogs >= DAILY_LIMIT}
+                className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 transition-all"
+                style={{
+                  background: isLogging || todaysLogs >= DAILY_LIMIT ? "#94a3b8" : "linear-gradient(135deg, #00c896, #059669)",
+                  boxShadow: isLogging || todaysLogs >= DAILY_LIMIT ? "none" : "0 4px 15px rgba(0,200,150,0.3)",
+                  cursor: isLogging || todaysLogs >= DAILY_LIMIT ? "not-allowed" : "pointer",
+                }}
+              >
+                {isLogging ? <Loader2 className="w-4 h-4 animate-spin" /> : entries.find(e => e.date === selectedDate) ? "Update Entry" : <><Award className="w-4 h-4" /> Log & Earn {COINS_PER_LOG} Treecoins</>}
+              </button>
+              <p className="text-xs text-slate-400 text-center mt-2">{todaysLogs}/{DAILY_LIMIT} logs today</p>
+            </div>
+          </div>
+
+          {/* ===== CHARTS PANEL ===== */}
+          <div className="lg:col-span-2 space-y-5">
+            {/* Eval banner */}
+            <div className="eco-card p-5">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">{evalStatus.emoji}</span>
+                <p className="font-semibold text-slate-700 text-sm">{evalStatus.text}</p>
+              </div>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                {[
+                  { label: "Your Average", val: avgEmissions, color: "#00c896" },
+                  { label: "Global Avg", val: 16.4, color: "#ef4444" },
+                  { label: "Paris Target", val: 4.8, color: "#10b981" },
+                ].map(s => (
+                  <div key={s.label} className="p-3 rounded-xl" style={{ background: `${s.color}08`, border: `1.5px solid ${s.color}20` }}>
+                    <div className="text-2xl font-black" style={{ color: s.color }}>{s.val.toFixed(2)}</div>
+                    <div className="text-xs text-slate-500 mt-0.5">{s.label} (kg CO₂)</div>
                   </div>
                 ))}
               </div>
-
-              <div className="space-y-3">
-                <Label htmlFor="energy" className="flex items-center gap-2">
-                  <Zap className="w-4 h-4" /> Energy Use (kWh)
-                </Label>
-                <Slider
-                  id="energy"
-                  max={100}
-                  step={0.5}
-                  value={energyUsage}
-                  onValueChange={setEnergyUsage}
-                  className="bg-gray-200 border border-gray-400 h-3 rounded-full"
-                />
-                <span className="text-sm font-medium text-gray-600">{energyUsage[0]} kWh</span>
-              </div>
-
-              <div className="space-y-3">
-                <Label className="flex items-center gap-2">
-                  <Utensils className="w-4 h-4" /> Today's Diet
-                </Label>
-                <Select value={dietType} onValueChange={setDietType}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white shadow-lg rounded-md">
-                    <SelectItem value="vegan">Vegan</SelectItem>
-                    <SelectItem value="vegetarian">Vegetarian</SelectItem>
-                    <SelectItem value="pescatarian">Pescatarian</SelectItem>
-                    <SelectItem value="omnivore">Omnivore</SelectItem>
-                    <SelectItem value="carnivore">Carnivore</SelectItem>
-                    <SelectItem value="keto">Keto</SelectItem>
-                    <SelectItem value="paleo">Paleo</SelectItem>
-                    <SelectItem value="gluten_free">Gluten-Free</SelectItem>
-                    <SelectItem value="intermittent">Intermittent Fasting</SelectItem>
-                    <SelectItem value="raw">Raw</SelectItem>
-                    <SelectItem value="custom">Custom</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="rounded-lg p-4 bg-teal-50">
-                <h4 className="font-semibold text-teal-700">Today's Total</h4>
-                <p className="text-2xl font-bold text-teal-600">
-                  {(calculateEmissions().total_emissions * weightMultiplier).toFixed(2)} {weightUnit} CO₂
-                </p>
-              </div>
-
-              {message && (
-                <Alert
-                  className={
-                    message.type === "success"
-                      ? "bg-green-50 border-green-200 text-green-700"
-                      : "bg-red-50 border-red-200 text-red-700"
-                  }
-                >
-                  <CheckCircle className="h-4 w-4" />
-                  <AlertDescription>{message.text}</AlertDescription>
-                </Alert>
-              )}
-
-              <Button
-                onClick={handleLogEmissions}
-                className="w-full bg-gradient-to-r from-teal-500 to-green-500"
-              >
-                {entries.find(e => e.date === selectedDate) 
-                  ? 'Update Entry' 
-                  : `Log & Earn ${Math.min(COINS_PER_LOG, MAX_DAILY_COINS - todaysLogs * COINS_PER_LOG)} Treecoins`
-                }
-              </Button>
-              <p className="text-xs text-center text-gray-500">
-                {todaysLogs}/{DAILY_LIMIT} logs today
+              <p className="text-xs text-slate-400 mt-3 text-center">
+                Sources: IEA, IPCC, EPA · Global avg 16.4 kg/day · Paris target 4.8 kg/day
               </p>
-            </CardContent>
-          </Card>
+            </div>
 
-          <div className="lg:col-span-2 space-y-6">
-            {/* Evaluation Panel */}
-            <Card className="bg-gradient-to-br from-blue-50 to-teal-50 border-0">
-              <CardHeader>
-                <CardTitle className={evaluation.color}>Impact Evaluation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className={`text-lg font-medium ${evaluation.color}`}>{evaluation.text}</p>
-                <div className="grid grid-cols-3 gap-4 mt-4">
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-teal-600">{(avgEmissions * weightMultiplier).toFixed(2)}</p>
-                    <p className="text-sm text-gray-600">Your Average ({weightUnit} CO₂)</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-red-500">{(16.4 * weightMultiplier).toFixed(2)}</p>
-                    <p className="text-sm text-gray-600">Global Average ({weightUnit} CO₂)</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-green-600">{(4.8 * weightMultiplier).toFixed(2)}</p>
-                    <p className="text-sm text-gray-600">Paris Target ({weightUnit} CO₂)</p>
-                  </div>
+            {/* Chart */}
+            <div className="eco-card p-5">
+              <h3 className="font-bold text-slate-800 mb-5">Your Emissions vs. Global Targets (30 days)</h3>
+              {entries.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-56 text-center gap-3">
+                  <TrendingDown className="w-12 h-12 text-slate-200" />
+                  <p className="text-slate-400 text-sm">Log your first entry to see your progress chart.</p>
                 </div>
-              </CardContent>
-            </Card>
+              ) : (
+                <ResponsiveContainer width="100%" height={280}>
+                  <LineChart data={chartData} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                    <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} interval={4} />
+                    <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} unit=" kg" />
+                    <Tooltip content={<CustomTooltip />} />
+                    <ReferenceLine y={16.4} stroke="#ef444440" strokeDasharray="4 2" />
+                    <ReferenceLine y={4.8} stroke="#10b98140" strokeDasharray="4 2" />
+                    <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#00c896" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={false} />
+                    <Line type="monotone" dataKey="globalAvg" name="Global Average" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
+                    <Line type="monotone" dataKey="parisTarget" name="Paris Target" stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
+            </div>
 
-            <Card className="shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Your Emissions vs. Global Targets</CardTitle>
-              </CardHeader>
-              <CardContent className="h-80">
-                {entries.length === 0 ? (
-                  <div className="flex items-center justify-center h-full">
-                    <div className="text-center">
-                      <Plus className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                      <p className="text-gray-600 font-medium">No data yet</p>
-                      <p className="text-sm text-gray-500 mt-2">Start logging your daily emissions to see your progress!</p>
+            {/* Recent entries table */}
+            {entries.length > 0 && (
+              <div className="eco-card p-5">
+                <h3 className="font-bold text-slate-800 mb-4">Recent Entries</h3>
+                <div className="space-y-2">
+                  {entries.slice(0, 7).map(e => (
+                    <div key={e.id} className="flex items-center justify-between py-2.5 border-b border-slate-100 last:border-0">
+                      <div>
+                        <p className="font-semibold text-slate-700 text-sm">{e.date}</p>
+                        <p className="text-xs text-slate-400 capitalize">{e.diet || "Mixed"} diet</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-black text-slate-800">{((e.total_emissions || e.total_co2 || 0)).toFixed(2)} kg</p>
+                        <p className="text-xs" style={{ color: (e.total_emissions || e.total_co2) < 4.8 ? "#10b981" : (e.total_emissions || e.total_co2) < 16.4 ? "#f59e0b" : "#ef4444" }}>
+                          {(e.total_emissions || e.total_co2) < 4.8 ? "✅ On target" : (e.total_emissions || e.total_co2) < 16.4 ? "⚠️ Above target" : "🚨 Above avg"}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                      <XAxis dataKey="date" tick={{ fontSize: 12, fill: "black" }} />
-                      <YAxis unit={` ${weightUnit}`} tick={{ fontSize: 12, fill: "black" }} domain={[0, (dataMax) => Math.round(dataMax + 11.4)]} />
-                      <Tooltip
-                        contentStyle={{ backgroundColor: "white", border: "1px solid #e0e0e0", color: "black" }}
-                        formatter={(value) =>
-                          value ? `${(value * weightMultiplier).toFixed(2)} ${weightUnit}` : "No data"
-                        }
-                      />
-                      <Legend wrapperStyle={{ color: "black" }} />
-                      <Line 
-                        type="monotone" 
-                        dataKey="yourEmissions" 
-                        name="Your Emissions" 
-                        stroke="#14B8A6" 
-                        strokeWidth={3} 
-                        dot={{ r: 5, fill: "#14B8A6" }} 
-                        connectNulls={false}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="averageHuman" 
-                        name="Global Average" 
-                        stroke="#EF4444" 
-                        strokeWidth={2} 
-                        strokeDasharray="5 5" 
-                        dot={false}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="target" 
-                        name="Paris Agreement Target" 
-                        stroke="#10B981" 
-                        strokeWidth={2} 
-                        strokeDasharray="10 5"
-                        dot={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                )}
-              </CardContent>
-            </Card>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
