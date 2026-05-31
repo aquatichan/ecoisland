@@ -42,7 +42,7 @@ export default function LevelUpBar({ currentXp = 0, xpToNextLevel = 100, treecoi
           className="flex items-center gap-1 text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           style={{ color: treecoins >= 20 ? "#00c896" : "#64748b" }}
         >
-          <Sparkles className="w-3 h-3" /> Buy 10 XP (20 TC)
+          <Sparkles className="w-3 h-3" /> Buy 10 XP (15 TC)
         </button>
       </div>
     </div>

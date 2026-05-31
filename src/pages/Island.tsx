@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 import { User } from "@/entities/User";
 import {
   ShoppingCart,
@@ -226,7 +226,7 @@ const ISLAND_ITEMS: IslandItem[] = [
     name: "Sand Dunes",
     cost: 75,
     category: "island",
-    description: "Dune 3 is coming soon!",
+    description: "Geometrically amazing.",
     emoji: "🏜️",
     color: "#a6a10f",
     image: `${ASSET_BASE}/Sand Dunes.png`,
@@ -263,14 +263,14 @@ const ISLAND_ITEMS: IslandItem[] = [
     image: `${ASSET_BASE}/Ambassador Badge.png`,
   },
   {
-    id: "blazing_comet",
-    name: "Blazing Comet",
+    id: "rock_shower",
+    name: "Rock Shower",
     cost: 160,
     category: "decoration",
-    description: "Lightspeed jumble of ice and rock",
+    description: "A dance of fire and ice. Wait...",
     emoji: "☄️",
     color: "#00ffff",
-    image: `${ASSET_BASE}/Blazing Comet.png`,
+    image: `${ASSET_BASE}/Rock Shower.png`,
   },
     {
     id: "crops",
@@ -298,7 +298,7 @@ const ISLAND_ITEMS: IslandItem[] = [
     cost: 50,
     category: "decoration",
     description: "A symbol celebrating stewardship and compassion to our planet",
-    emoji: "🫶",
+    emoji: "💚",
     color: "#22c55e",
     image: `${ASSET_BASE}/Emblem of Care.png`,
   },
@@ -323,34 +323,34 @@ const ISLAND_ITEMS: IslandItem[] = [
     image: `${ASSET_BASE}/Giant Cursor.png`,
   },
   {
-    id: "limitless_rocket",
-    name: "Limitless Rocket",
-    cost: 225,
-    category: "decoration",
-    description: "To Infinity, And Beyond!",
-    emoji: "🚀",
-    color: "#f97316",
-    image: `${ASSET_BASE}/Limitless Rocket.png`,
-  },
-  {
-    id: "mini_earth",
-    name: "Mini Earth",
+    id: "thunderstorm",
+    name: "Thunderstorm",
     cost: 75,
     category: "decoration",
-    description: "A tiny world reminding us what we're protecting",
-    emoji: "🌎",
-    color: "#3b82f6",
-    image: `${ASSET_BASE}/Mini Earth.png`,
+    description: "Just a natural form of weather, don't worry",
+    emoji: "⛈",
+    color: "#f97316",
+    image: `${ASSET_BASE}/Thunderstorm.png`,
   },
   {
-    id: "pine_duo",
-    name: "Pine Duo",
+    id: "suburban_beachhouse",
+    name: "Suburban Beachhouse",
+    cost: 125,
+    category: "decoration",
+    description: "A sizeable home for the conscious families",
+    emoji: "🏠",
+    color: "#3b82f6",
+    image: `${ASSET_BASE}/Suburban Beachhouse.png`,
+  },
+  {
+    id: "forest",
+    name: "Forest",
     cost: 60,
     category: "decoration",
-    description: "Two pines standing strong together.",
+    description: "Premium oxygen suppliers",
     emoji: "🌲",
     color: "#15803d",
-    image: `${ASSET_BASE}/Pine Duo.png`,
+    image: `${ASSET_BASE}/Forest.png`,
   },
   {
     id: "renewable_energy",
@@ -358,19 +358,19 @@ const ISLAND_ITEMS: IslandItem[] = [
     cost: 120,
     category: "decoration",
     description: "A tribute to sustainable power generation (wind, solar, hydro, etc.)",
-    emoji: "⚡",
+    emoji: "⚡️",
     color: "#eab308",
     image: `${ASSET_BASE}/Renewable Energy.png`,
   },
   {
-    id: "the_old_oak",
-    name: "The Old Oak",
+    id: "the_grand_oak",
+    name: "The Grand Oak",
     cost: 45,
     category: "decoration",
     description: "A timeless giant that has witnessed generations of change",
     emoji: "🌳",
     color: "#166534",
-    image: `${ASSET_BASE}/The Old Oak.png`,
+    image: `${ASSET_BASE}/The Grand Oak.png`,
   },
   {
     id: "together",
@@ -395,9 +395,9 @@ const ISLAND_ITEMS: IslandItem[] = [
   {
     id: "trophy",
     name: "Trophy",
-    cost: 140,
+    cost: 200,
     category: "decoration",
-    description: "Awarded to those who go above and beyond",
+    description: "For those who go above and beyond",
     emoji: "🏆",
     color: "#f59e0b",
     image: `${ASSET_BASE}/Trophy.png`,
@@ -405,12 +405,32 @@ const ISLAND_ITEMS: IslandItem[] = [
   {
     id: "volcano",
     name: "Volcano",
-    cost: 200,
+    cost: 240,
     category: "decoration",
     description: "A powerful peak with molten magma energy inside",
     emoji: "🌋",
     color: "#dc2626",
     image: `${ASSET_BASE}/Volcano.png`,
+  },
+  {
+    id: "eco_car",
+    name: "Eco Car",
+    cost: 95,
+    category: "decoration",
+    description: "Reminder: go log your carbon emissions!",
+    emoji: "🚗",
+    color: "#dc2626",
+    image: `${ASSET_BASE}/Eco Car.png`,
+  },
+  {
+    id: "nuke",
+    name: "Nuke",
+    cost: 350,
+    category: "decoration",
+    description: "A mushroom cloud frozen in time, right before your island fades away",
+    emoji: "💥",
+    color: "#dc2626",
+    image: `${ASSET_BASE}/Nuke.png`,
   },
   
 ];
@@ -468,6 +488,94 @@ function getLayoutForItem(itemId: string, current?: IslandLayoutEntry) {
   };
 }
 
+/**
+ * DraggableDecoration
+ *
+ * Why offset-based and not point-based:
+ *   Framer Motion's `drag` applies its own CSS transform on top of the element's
+ *   existing `left/top` position. When we read `info.point` (viewport coords) at
+ *   drag-end the element has already been visually moved, but `left/top` in the
+ *   DOM still reflects the OLD position — so converting `info.point` → scene
+ *   coords produces a jump/clamp artifact.
+ *
+ *   Instead we:
+ *     1. Record the scene's pixel dimensions at pointer-down.
+ *     2. On drag-end, take the accumulated pixel offset (`info.offset`) and
+ *        convert it to a normalized delta (0..1) relative to the scene size.
+ *     3. Add that delta to the item's previous normalized x/y — no snapping,
+ *        full floating-point precision.
+ *     4. Reset Framer's internal transform to zero (via `motionValue`) so the
+ *        element re-renders at the new `left/top` without a visual jump.
+ */
+function DraggableDecoration({
+  item,
+  layout,
+  sceneRef,
+  onDragEndItem,
+}: {
+  item: IslandItem;
+  layout: IslandLayoutEntry;
+  sceneRef: React.RefObject<HTMLDivElement>;
+  onDragEndItem: (itemId: string, offsetNorm: { dx: number; dy: number }) => void;
+}) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  // Keep a ref to the scene rect captured at pointer-down so it doesn't change mid-drag
+  const sceneSizeRef = useRef<{ width: number; height: number } | null>(null);
+
+  const handleDragStart = () => {
+    if (!sceneRef.current) return;
+    const r = sceneRef.current.getBoundingClientRect();
+    sceneSizeRef.current = { width: r.width, height: r.height };
+  };
+
+  const handleDragEnd = (_e: any, info: any) => {
+    const size = sceneSizeRef.current;
+    if (!size || !size.width || !size.height) return;
+
+    const dx = info.offset.x / size.width;
+    const dy = info.offset.y / size.height;
+
+    // Reset Framer's internal translate so the element sits cleanly on the
+    // new CSS left/top after the parent re-renders with updated layout.
+    x.set(0);
+    y.set(0);
+
+    onDragEndItem(item.id, { dx, dy });
+  };
+
+  return (
+    <motion.img
+      src={item.image}
+      alt={item.name}
+      drag
+      dragMomentum={false}
+      dragElastic={0}
+      dragConstraints={sceneRef}
+      style={{
+        position: "absolute",
+        left: `${layout.x * 100}%`,
+        top: `${layout.y * 100}%`,
+        width: layout.width,
+        height: layout.height,
+        zIndex: layout.zIndex,
+        x,
+        y,
+        translateX: "-50%",
+        translateY: "-50%",
+        rotate: layout.rotation || 0,
+        filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.28))",
+        cursor: "grab",
+      }}
+      className="absolute select-none active:cursor-grabbing"
+      draggable={false}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      whileDrag={{ scale: 1.04 }}
+    />
+  );
+}
+
 function IslandScene({
   skybox,
   island,
@@ -480,7 +588,7 @@ function IslandScene({
   island: IslandItem | null;
   decorations: IslandItem[];
   layoutMap: Record<string, IslandLayoutEntry>;
-  onDragEndItem: (itemId: string, info: any, node: HTMLImageElement | null) => void;
+  onDragEndItem: (itemId: string, offsetNorm: { dx: number; dy: number }) => void;
   sceneRef: React.RefObject<HTMLDivElement>;
 }) {
   return (
@@ -514,9 +622,20 @@ function IslandScene({
         <img
           src={island.image}
           alt={island.name}
-          className="absolute left-1/2 bottom-[10px] h-[190px] w-[330px] -translate-x-1/2 select-none pointer-events-none"
+          className="absolute inset-x-0 bottom-0 w-full select-none pointer-events-none"
           draggable={false}
-          style={{ objectFit: "contain", zIndex: 20 }}
+          style={{
+            objectFit: "cover",
+            objectPosition: "top center",
+            height: "115%",
+            zIndex: 20,
+            // Reflection island is upside-down by design — anchor it to the top instead of bottom
+            ...(island.id === "reflection" && {
+              top: 0,
+              bottom: "auto",
+              objectPosition: "bottom center",
+            }),
+          }}
         />
       )}
 
@@ -524,27 +643,12 @@ function IslandScene({
       {decorations.map((item) => {
         const layout = getLayoutForItem(item.id, layoutMap[item.id]);
         return (
-          <motion.img
+          <DraggableDecoration
             key={item.id}
-            src={item.image}
-            alt={item.name}
-            drag
-            dragMomentum={false}
-            dragElastic={0.08}
-            dragConstraints={sceneRef}
-            onDragEnd={(e, info) => onDragEndItem(item.id, info, e.currentTarget as HTMLImageElement)}
-            className="absolute select-none cursor-grab active:cursor-grabbing"
-            draggable={false}
-            style={{
-              left: `${layout.x * 100}%`,
-              top: `${layout.y * 100}%`,
-              width: layout.width,
-              height: layout.height,
-              zIndex: layout.zIndex,
-              transform: `translate(-50%, -50%) rotate(${layout.rotation || 0}deg)`,
-              filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.28))",
-            }}
-            whileDrag={{ scale: 1.03 }}
+            item={item}
+            layout={layout}
+            sceneRef={sceneRef}
+            onDragEndItem={onDragEndItem}
           />
         );
       })}
@@ -721,29 +825,19 @@ export default function Island() {
     showMessage({ type: "success", text: "Island updated!" }, 2200);
   };
 
-  const handleDragEndItem = async (itemId: string, info: any, node: HTMLImageElement | null) => {
-    const scene = sceneRef.current;
-    if (!scene) return;
-
-    const rect = scene.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-
+  const handleDragEndItem = async (itemId: string, offsetNorm: { dx: number; dy: number }) => {
     const layout = layoutMap[itemId] || getLayoutForItem(itemId);
-    const targetW = node?.getBoundingClientRect().width || layout.width;
-    const targetH = node?.getBoundingClientRect().height || layout.height;
 
-    const normalizedX = clamp((info.point.x - rect.left) / rect.width, 0, 1);
-    const normalizedY = clamp((info.point.y - rect.top) / rect.height, 0, 1);
+    const nextX = clamp(layout.x + offsetNorm.dx, 0, 1);
+    const nextY = clamp(layout.y + offsetNorm.dy, 0, 1);
 
     const nextLayout = {
       ...layoutMap,
       [itemId]: {
         ...layout,
         item_id: itemId,
-        x: normalizedX,
-        y: normalizedY,
-        width: targetW,
-        height: targetH,
+        x: nextX,
+        y: nextY,
       },
     };
 

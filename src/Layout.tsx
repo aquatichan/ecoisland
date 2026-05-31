@@ -54,7 +54,7 @@ export default function Layout({ children, currentPageName }) {
   }, [user, isLoading, currentPageName, navigate]);
 
   const handleBuyXp = async () => {
-    const cost = 20;
+    const cost = 15;
     const xpGain = 10;
     if ((user.treecoins || 0) < cost) { alert("Not enough Treecoins!"); return; }
     let xp = (user.xp || 0) + xpGain;
