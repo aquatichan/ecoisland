@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User } from "@/entities/User";
 import { Trophy, Crown, Medal, Award, Leaf, TrendingUp, Globe, TreePine, Loader2, Star } from "lucide-react";
+import UserProfileModal from "@/components/UserProfileModal";
 
 const TABS = [
   { key: "treecoins", label: "Treecoins", icon: TreePine, color: "#00c896" },
@@ -17,7 +18,7 @@ function RankIcon({ rank }) {
   return <span className="text-sm font-black text-slate-400">#{rank}</span>;
 }
 
-function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor }) {
+function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor, onViewProfile }) {
   const isMe = user.id === currentUserId;
   const initials = (user.username || user.full_name || "U")[0]?.toUpperCase();
 
@@ -27,11 +28,13 @@ function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor 
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(rank * 0.04, 0.5) }}
-      className="flex items-center gap-4 p-4 rounded-2xl transition-all"
+      className="flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer hover:shadow-md"
       style={{
         background: isMe ? "rgba(0,200,150,0.06)" : rank <= 3 ? "rgba(245,158,11,0.04)" : "white",
         border: isMe ? "2px solid rgba(0,200,150,0.3)" : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "2px solid #f1f5f9",
       }}
+      onClick={() => !isMe && onViewProfile(user.id)}
+      title={isMe ? "This is you" : `View ${user.username || user.full_name}'s profile`}
     >
       {/* Rank */}
       <div className="w-10 flex items-center justify-center flex-shrink-0">
@@ -69,6 +72,7 @@ export default function Leaderboard() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [tab, setTab] = useState("treecoins");
+  const [profileUserId, setProfileUserId] = useState(null);
 
   useEffect(() => {
     async function load() {
@@ -100,7 +104,7 @@ export default function Leaderboard() {
             <Trophy className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-2" style={{ letterSpacing: "-0.03em" }}>Global Leaderboard</h1>
-          <p className="text-slate-500">See how you rank among Ecoislanders worldwide</p>
+          <p className="text-slate-500">See how you rank among Ecoislanders worldwide · click any row to view their profile</p>
           {currentUser && myRankTc > 0 && (
             <div className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-xl text-sm font-bold text-emerald-700" style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.2)" }}>
               <Star className="w-4 h-4" /> Your Rank: #{myRankTc} · {currentUser.treecoins || 0} Treecoins
@@ -130,10 +134,10 @@ export default function Leaderboard() {
           <AnimatePresence mode="wait">
             <motion.div key={tab} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-2">
               {tab === "treecoins" && sorted.treecoins.map((u, i) => (
-                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#00c896" />
+                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#00c896" onViewProfile={setProfileUserId} />
               ))}
               {tab === "level" && sorted.level.map((u, i) => (
-                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="eco_level" valueSuffix="Level" valueColor="#8b5cf6" />
+                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="eco_level" valueSuffix="Level" valueColor="#8b5cf6" onViewProfile={setProfileUserId} />
               ))}
               {tab === "ambassadors" && (
                 sorted.ambassadors.length === 0 ? (
@@ -143,7 +147,7 @@ export default function Leaderboard() {
                     <p className="text-slate-400 text-sm">Ambassadors are trusted community leaders. Apply in Settings!</p>
                   </div>
                 ) : sorted.ambassadors.map((u, i) => (
-                  <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#f59e0b" />
+                  <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#f59e0b" onViewProfile={setProfileUserId} />
                 ))
               )}
               {(tab === "treecoins" || tab === "level") && sorted[tab].length === 0 && (
@@ -156,6 +160,12 @@ export default function Leaderboard() {
           </AnimatePresence>
         )}
       </div>
+
+      {/* User Profile Modal */}
+      <UserProfileModal
+        userId={profileUserId}
+        onClose={() => setProfileUserId(null)}
+      />
     </div>
   );
 }

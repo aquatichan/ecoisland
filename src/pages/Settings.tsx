@@ -9,13 +9,15 @@ import {
 import { User } from "@/entities/User";
 import { UploadFile } from "@/integrations/Core";
 import { db, auth } from "@/firebase";
-import { collection, query, getDocs, where, orderBy } from "firebase/firestore";
+import { collection, query, getDocs, where, orderBy, onSnapshot } from "firebase/firestore";
 import { deleteUser } from "firebase/auth";
+import UserProfileModal from "@/components/UserProfileModal";
 
 const TABS = [
   { key: "profile", label: "Profile", icon: UserIcon },
   { key: "discover", label: "Discover Users", icon: Search },
-  { key: "account", label: "Account", icon: Shield },
+  { key: "privacy", label: "Privacy", icon: Shield },
+  { key: "account", label: "Account", icon: AlertTriangle },
 ];
 
 // ─── ProfileTab ───────────────────────────────────────────────────────────────
@@ -130,7 +132,32 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
 }
 
 // ─── DiscoverTab ──────────────────────────────────────────────────────────────
-function DiscoverTab({ searchQuery, handleSearch, searchResults, allUsers }) {
+function DiscoverTab({ onViewProfile }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Live Firestore listener
+  useEffect(() => {
+    setIsLoading(true);
+    const unsub = onSnapshot(collection(db, "users"), snap => {
+      setAllUsers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      setIsLoading(false);
+    }, () => setIsLoading(false));
+    return () => unsub();
+  }, []);
+
+  const filtered = searchQuery.trim()
+    ? allUsers.filter(u => {
+        const lower = searchQuery.toLowerCase();
+        return (
+          u.username?.toLowerCase().includes(lower) ||
+          u.full_name?.toLowerCase().includes(lower) ||
+          u.bio?.toLowerCase().includes(lower)
+        );
+      }).slice(0, 20)
+    : allUsers.slice(0, 10);
+
   return (
     <div className="space-y-5">
       <div className="eco-card p-5">
@@ -141,21 +168,27 @@ function DiscoverTab({ searchQuery, handleSearch, searchResults, allUsers }) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             className="eco-input pl-10"
-            placeholder="Search by username or bio..."
+            placeholder="Search by username or bio… (live)"
             value={searchQuery}
-            onChange={e => handleSearch(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
+        {isLoading && (
+          <div className="flex items-center gap-2 mt-3 text-sm text-slate-400">
+            <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading community members…
+          </div>
+        )}
       </div>
 
       <div className="space-y-3">
-        {(searchQuery ? searchResults : allUsers.slice(0, 10)).map((u, i) => (
+        {filtered.map((u, i) => (
           <motion.div
             key={u.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.04 }}
-            className="eco-card p-4 flex items-center gap-4"
+            className="eco-card p-4 flex items-center gap-4 cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => onViewProfile(u.id)}
           >
             <div className="w-12 h-12 rounded-xl overflow-hidden bg-emerald-50 border-2 border-emerald-100 flex-shrink-0 flex items-center justify-center">
               {u.avatar_url ? (
@@ -172,6 +205,9 @@ function DiscoverTab({ searchQuery, handleSearch, searchResults, allUsers }) {
               <div className="flex items-center gap-3 mt-1">
                 {u.city && <span className="text-xs text-slate-400">📍 {u.city}</span>}
                 {u.eco_level && <span className="text-xs text-emerald-600 font-medium">Lv. {u.eco_level}</span>}
+                {u.privacy_public === false && (
+                  <span className="text-xs text-slate-400 flex items-center gap-0.5">🔒 Private</span>
+                )}
               </div>
             </div>
             <div className="text-right flex-shrink-0">
@@ -180,12 +216,109 @@ function DiscoverTab({ searchQuery, handleSearch, searchResults, allUsers }) {
             </div>
           </motion.div>
         ))}
-        {searchQuery && searchResults.length === 0 && (
+        {!isLoading && searchQuery && filtered.length === 0 && (
           <div className="eco-card p-10 text-center">
             <Search className="w-10 h-10 text-slate-200 mx-auto mb-3" />
             <p className="text-slate-400 text-sm">No users match "{searchQuery}"</p>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ─── PrivacyTab ───────────────────────────────────────────────────────────────
+function PrivacyTab({ user, onSaved }) {
+  const [isPublic, setIsPublic] = useState(user?.privacy_public !== false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await User.updateMyUserData({ privacy_public: isPublic });
+      setSaved(true);
+      onSaved({ privacy_public: isPublic });
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
+      alert("Failed to save privacy settings.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="eco-card p-6">
+        <h3 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-blue-500" /> Profile Visibility
+        </h3>
+        <p className="text-sm text-slate-500 mb-5">
+          Control what other Ecoislanders can see when they view your profile.
+        </p>
+
+        <div className="space-y-4">
+          {/* Public */}
+          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-white"}`}>
+            <input
+              type="radio"
+              className="mt-1 accent-emerald-500"
+              checked={isPublic}
+              onChange={() => setIsPublic(true)}
+            />
+            <div>
+              <p className="font-bold text-slate-800">🌍 Public Profile</p>
+              <p className="text-sm text-slate-500 mt-0.5">
+                Everyone can see your avatar, bio, level, Treecoins, island, inventory, posts, and carbon logs.
+              </p>
+            </div>
+          </label>
+
+          {/* Private */}
+          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${!isPublic ? "border-blue-300 bg-blue-50" : "border-slate-200 bg-white"}`}>
+            <input
+              type="radio"
+              className="mt-1 accent-blue-500"
+              checked={!isPublic}
+              onChange={() => setIsPublic(false)}
+            />
+            <div>
+              <p className="font-bold text-slate-800">🔒 Private Profile</p>
+              <p className="text-sm text-slate-500 mt-0.5">
+                Other users can see your name in the Leaderboard and Discover, but your bio, island, inventory, posts, and carbon logs are hidden.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <div className="flex items-center gap-3 mt-5">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleSave}
+            disabled={isSaving}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm"
+            style={{
+              background: isSaving ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
+              boxShadow: isSaving ? "none" : "0 4px 15px rgba(0,200,150,0.3)"
+            }}
+          >
+            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {isSaving ? "Saving..." : "Save Privacy Settings"}
+          </motion.button>
+          <AnimatePresence>
+            {saved && (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                className="flex items-center gap-1.5 text-sm text-emerald-600 font-medium"
+              >
+                <CheckCircle className="w-4 h-4" /> Saved!
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -298,12 +431,11 @@ export default function Settings() {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
-
   const [deleteStep, setDeleteStep] = useState(0);
   const [deleteConfirm, setDeleteConfirm] = useState("");
+
+  // User profile modal
+  const [profileUserId, setProfileUserId] = useState(null);
 
   useEffect(() => {
     User.me().then(u => {
@@ -318,27 +450,6 @@ export default function Settings() {
       setAvatarPreview(u.avatar_url || null);
     }).catch(() => {});
   }, []);
-
-  useEffect(() => {
-    if (activeTab === "discover") {
-      getDocs(collection(db, "users")).then(snap => {
-        setAllUsers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      }).catch(() => {});
-    }
-  }, [activeTab]);
-
-  const handleSearch = (q) => {
-    setSearchQuery(q);
-    if (!q.trim()) { setSearchResults([]); return; }
-    const lower = q.toLowerCase();
-    setSearchResults(
-      allUsers.filter(u =>
-        u.username?.toLowerCase().includes(lower) ||
-        u.full_name?.toLowerCase().includes(lower) ||
-        u.bio?.toLowerCase().includes(lower)
-      ).slice(0, 20)
-    );
-  };
 
   const handleAvatarChange = (e) => {
     const f = e.target.files?.[0]; if (!f) return;
@@ -425,11 +536,12 @@ export default function Settings() {
               />
             )}
             {activeTab === "discover" && (
-              <DiscoverTab
-                searchQuery={searchQuery}
-                handleSearch={handleSearch}
-                searchResults={searchResults}
-                allUsers={allUsers}
+              <DiscoverTab onViewProfile={setProfileUserId} />
+            )}
+            {activeTab === "privacy" && user && (
+              <PrivacyTab
+                user={user}
+                onSaved={(updates) => setUser(prev => ({ ...prev, ...updates }))}
               />
             )}
             {activeTab === "account" && (
@@ -445,6 +557,12 @@ export default function Settings() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* User Profile Modal */}
+      <UserProfileModal
+        userId={profileUserId}
+        onClose={() => setProfileUserId(null)}
+      />
     </div>
   );
 }

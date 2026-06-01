@@ -16,7 +16,7 @@ import Impact from "@/pages/Impact";
 import Settings from "@/pages/Settings";
 import Leaderboard from "@/pages/Leaderboard";
 import APES from "@/pages/APES";
-import LessonPage from "./pages/LessonPage";
+import LessonPage from "@/pages/LessonPage";
 
 import PrivacyPolicy from "@/pages/misc/PrivacyPolicy";
 import TOS from "@/pages/misc/TOS";

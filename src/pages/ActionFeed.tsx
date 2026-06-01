@@ -14,6 +14,7 @@ import {
   serverTimestamp, getDoc, increment
 } from "firebase/firestore";
 import { User } from "@/entities/User";
+import UserProfileModal from "@/components/UserProfileModal";
 
 type SortMode = "newest" | "top" | "hot" | "rising";
 
@@ -41,7 +42,7 @@ async function fetchComments(postId: string) {
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
-function PostCard({ post, currentUser, onLike, onDelete, onOpenComments }) {
+function PostCard({ post, currentUser, onLike, onDelete, onOpenComments, onViewProfile }) {
   const isLiked = post.likedBy?.includes(currentUser?.id);
   const isOwn = post.userId === currentUser?.id;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -65,11 +66,22 @@ function PostCard({ post, currentUser, onLike, onDelete, onOpenComments }) {
     >
       {/* Post header */}
       <div className="flex items-center gap-3 px-5 pt-4 pb-3" >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden">
+        <div
+          className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden cursor-pointer hover:ring-2 hover:ring-emerald-400/50 transition-all"
+          onClick={() => post.userId && !isOwn && onViewProfile(post.userId)}
+          title={isOwn ? "Your post" : `View ${post.username}'s profile`}
+        >
           {post.avatarUrl ? <img src={post.avatarUrl} alt="" className="w-full h-full object-cover" /> : (post.username?.[0] || "U").toUpperCase()}
         </div>
         <div className="flex-1 min-w-0">
-          <span className="font-bold text-sm" style={{ color: "var(--text-secondary)" }}>{post.username || "Anonymous"}</span>
+          <button
+            className="font-bold text-sm hover:underline text-left"
+            style={{ color: "var(--text-secondary)" }}
+            onClick={() => post.userId && !isOwn && onViewProfile(post.userId)}
+            disabled={isOwn}
+          >
+            {post.username || "Anonymous"}
+          </button>
           <span className="text-slate-400 text-xs ml-2">{timeAgo}</span>
         </div>
         {/* Tags */}
@@ -184,6 +196,7 @@ export default function ActionFeed() {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [loadingComments, setLoadingComments] = useState(false);
+  const [profileUserId, setProfileUserId] = useState(null);
 
   useEffect(() => {
     User.me().then(setCurrentUser).catch(() => {});
@@ -356,6 +369,7 @@ export default function ActionFeed() {
                     onLike={handleLike}
                     onDelete={handleDelete}
                     onOpenComments={handleOpenComments}
+                    onViewProfile={setProfileUserId}
                   />
                 ))
               )}
@@ -522,6 +536,12 @@ export default function ActionFeed() {
           </>
         )}
       </AnimatePresence>
+
+      {/* User Profile Modal */}
+      <UserProfileModal
+        userId={profileUserId}
+        onClose={() => setProfileUserId(null)}
+      />
     </div>
   );
 }
