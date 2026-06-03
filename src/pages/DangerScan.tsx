@@ -129,9 +129,13 @@ export default function DangerScan() {
     try {
       const u = auth.currentUser;
       if (u) {
+        // Fetch full profile first so we get avatar_url and the canonical username,
+        // not just the OAuth displayName which may differ and carries no avatar.
+        const userData = await User.me();
         await addDoc(collection(db, "posts"), {
           userId: u.uid,
-          username: u.displayName || "Anonymous",
+          username: userData.username || u.displayName || "Anonymous",
+          avatarUrl: userData.avatar_url || "",
           title: result.title,
           description: `${result.description}\n\nSuggested Action: ${result.suggestedAction}`,
           tags: ["DangerScan", result.issueType],
@@ -143,7 +147,6 @@ export default function DangerScan() {
           createdAt: serverTimestamp(),
           source: "danger_scan",
         });
-        const userData = await User.me();
         await User.updateMyUserData({ treecoins: (userData.treecoins || 0) + 15 });
       }
       setPosted(true);

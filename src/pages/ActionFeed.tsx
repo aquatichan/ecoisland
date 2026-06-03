@@ -170,13 +170,6 @@ function PostCard({ post, currentUser, onLike, onDelete, onOpenComments, onViewP
           <MessageCircle className="w-4 h-4" />
           <span>{post.commentsCount || 0}</span>
         </button>
-        <button
-          onClick={() => { navigator.clipboard?.writeText(window.location.href); }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-emerald-500 transition-all"
-        >
-          <Share2 className="w-4 h-4" />
-          <span className="hidden sm:inline">Share</span>
-        </button>
       </div>
     </motion.div>
   );
@@ -302,6 +295,7 @@ export default function ActionFeed() {
       const commentData = {
         userId: currentUser.id,
         username: currentUser.username || currentUser.full_name || "Anonymous",
+        avatarUrl: currentUser.avatar_url || "",
         text: commentText.trim(),
         createdAt: serverTimestamp(),
       };
@@ -506,8 +500,10 @@ export default function ActionFeed() {
                 ) : (
                   comments.map((c, i) => (
                     <div key={i} className="flex gap-3">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                        {(c.username?.[0] || "U").toUpperCase()}
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0 overflow-hidden">
+                        {c.avatarUrl
+                          ? <img src={c.avatarUrl} alt="" className="w-full h-full object-cover" />
+                          : (c.username?.[0] || "U").toUpperCase()}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">

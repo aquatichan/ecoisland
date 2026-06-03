@@ -419,3 +419,42 @@ svg:hover .tooltip {
 ::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-subtle); }
 ::-webkit-scrollbar-thumb { background: #00c896; border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   IMPACT EXPERIENCE — append these rules to the BOTTOM of index.css
+   DO NOT modify any existing rules above.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Impact Fullscreen Mode ── */
+.impact-fullscreen header,
+.impact-fullscreen nav {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.impact-fullscreen {
+  overflow: hidden;
+}
+
+/* ── Impact floating particles ── */
+@keyframes impact-particle-rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+}
+
+.impact-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: impact-particle-rise linear infinite;
+}
+
+/* ── Progress dot labels on wider screens ── */
+@media (min-width: 1024px) {
+  .impact-dot-label {
+    display: block !important;
+  }
+}
