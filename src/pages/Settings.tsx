@@ -47,7 +47,7 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
           <div>
             <label className="cursor-pointer">
               <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-700 bg-emerald-50 border-2 border-emerald-200 hover:bg-emerald-100 transition-colors cursor-pointer">
+              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 border-2 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer">
                 <Upload className="w-4 h-4" /> Upload Photo
               </span>
             </label>
@@ -190,7 +190,7 @@ function DiscoverTab({ onViewProfile }) {
             className="eco-card p-4 flex items-center gap-4 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => onViewProfile(u.id)}
           >
-            <div className="w-12 h-12 rounded-xl overflow-hidden bg-emerald-50 border-2 border-emerald-100 flex-shrink-0 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl overflow-hidden bg-emerald-50 dark:bg-emerald-900/12 border-2 border-emerald-100 dark:border-emerald-800 flex-shrink-0 flex items-center justify-center">
               {u.avatar_url ? (
                 <img src={u.avatar_url} alt="" className="w-full h-full object-cover" />
               ) : (
@@ -259,7 +259,7 @@ function PrivacyTab({ user, onSaved }) {
 
         <div className="space-y-4">
           {/* Public */}
-          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-white"}`}>
+          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 dark:bg-emerald-900/12 bg-emerald-50" : "border-slate-200 bg-white"}`}>
             <input
               type="radio"
               className="mt-1 accent-emerald-500"
@@ -275,7 +275,7 @@ function PrivacyTab({ user, onSaved }) {
           </label>
 
           {/* Private */}
-          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${!isPublic ? "border-blue-300 bg-blue-50" : "border-slate-200 bg-white"}`}>
+          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${!isPublic ? "border-blue-300 bg-blue-50 dark:bg-blue-900/12" : "border-slate-200 bg-white"}`}>
             <input
               type="radio"
               className="mt-1 accent-blue-500"

@@ -22,7 +22,7 @@ export const User = {
             username: user.displayName || 'Anonymous User',
             treecoins: 0,
             xp: 0,
-            xp_to_next_level: 100,
+            xp_to_next_level: 25,
             eco_level: 1,
             avatar_url: user.photoURL || '',
             onboarding_complete: false,

@@ -9,8 +9,8 @@ interface LevelUpBarProps {
   onBuyXp?: () => void;
 }
 
-export default function LevelUpBar({ currentXp = 0, xpToNextLevel = 100, treecoins = 0, onBuyXp }: LevelUpBarProps) {
-  const pct = Math.min((currentXp / (xpToNextLevel || 100)) * 100, 100);
+export default function LevelUpBar({ currentXp = 0, xpToNextLevel = 25, treecoins = 0, onBuyXp }: LevelUpBarProps) {
+  const pct = Math.min((currentXp / (xpToNextLevel || 25)) * 100, 100);
 
   return (
     <div className="space-y-3">
@@ -38,11 +38,11 @@ export default function LevelUpBar({ currentXp = 0, xpToNextLevel = 100, treecoi
         </div>
         <button
           onClick={onBuyXp}
-          disabled={treecoins < 20}
+          disabled={treecoins < 4}
           className="flex items-center gap-1 text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{ color: treecoins >= 20 ? "#00c896" : "#64748b" }}
+          style={{ color: treecoins >= 4 ? "#00c896" : "#64748b" }}
         >
-          <Sparkles className="w-3 h-3" /> Buy 10 XP (15 TC)
+          <Sparkles className="w-3 h-3" /> Buy 5 XP (4 TC)
         </button>
       </div>
     </div>

@@ -33,6 +33,8 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<Homepage />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/tos" element={<TOS />} />
 
           {/* App routes use Layout */}
           <Route path="/dashboard" element={<Layout currentPageName="Dashboard"><Dashboard /></Layout>} />

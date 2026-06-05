@@ -695,7 +695,7 @@ export default function Homepage() {
                   { action: "Log daily carbon footprint", coins: "+10 TC", color: "#10b981" },
                   { action: "Report environmental hazard", coins: "+15 TC", color: "#f97316" },
                   { action: "Post to Action Feed", coins: "+5 TC", color: "#8b5cf6" },
-                  { action: "Reach Eco Level 5", coins: "+50 TC", color: "#06b6d4" },
+                  { action: "Accepted as an Ambassador", coins: "+100 TC", color: "#06b6d4" },
                 ].map(item => (
                   <div key={item.action} className="flex items-center justify-between p-4 rounded-xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
                     <span className="text-slate-300 text-sm">{item.action}</span>

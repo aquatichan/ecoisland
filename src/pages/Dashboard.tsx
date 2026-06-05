@@ -102,7 +102,7 @@ export default function Dashboard() {
     load();
   }, []);
 
-  const xpPct = user ? Math.min(((user.xp || 0) / (user.xp_to_next_level || 100)) * 100, 100) : 0;
+  const xpPct = user ? Math.min(((user.xp || 0) / (user.xp_to_next_level || 25)) * 100, 100) : 0;
 
   return (
     <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
@@ -138,7 +138,7 @@ export default function Dashboard() {
                 <div className="mt-4 w-64">
                   <div className="flex justify-between text-xs mb-1.5">
                     <span className="text-slate-400">Level {user.eco_level || 1}</span>
-                    <span className="text-slate-500">{user.xp || 0} / {user.xp_to_next_level || 100} XP</span>
+                    <span className="text-slate-500">{user.xp || 0} / {user.xp_to_next_level || 25} XP</span>
                   </div>
                   <div className="h-2 rounded-full bg-white/10 overflow-hidden">
                     <motion.div

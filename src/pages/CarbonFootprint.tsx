@@ -146,8 +146,8 @@ export default function CarbonFootprint() {
     if (!validEntries.length) return { text: "Log your first entry below.", color: "#64748b", emoji: "📊" };
     if (avgEmissions < 4.8) return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#10b981", emoji: "🌟" };
     if (avgEmissions < 7) return { text: "Good progress! You're below the sustainable threshold.", color: "#06b6d4", emoji: "✅" };
-    if (avgEmissions < 12) return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚡" };
-    return { text: "High impact. Focus on reducing transportation and energy use.", color: "#ef4444", emoji: "⚠️" };
+    if (avgEmissions < 12) return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚠️" };
+    return { text: "High impact. Focus on reducing transportation and energy use.", color: "#ef4444", emoji: "🚨" };
   })();
 
   return (

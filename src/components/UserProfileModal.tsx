@@ -275,7 +275,7 @@ export default function UserProfileModal({ userId, onClose }: UserProfileModalPr
   const isPrivate = profile?.privacy_public === false;
   const initials  = (profile?.username || profile?.full_name || "U")[0]?.toUpperCase();
   const xpPct     = profile
-    ? Math.min(((profile.xp || 0) / (profile.xp_to_next_level || 100)) * 100, 100)
+    ? Math.min(((profile.xp || 0) / (profile.xp_to_next_level || 25)) * 100, 100)
     : 0;
 
   return (
@@ -408,7 +408,7 @@ export default function UserProfileModal({ userId, onClose }: UserProfileModalPr
                     <div className="mt-3">
                       <div className="flex justify-between text-xs mb-1" style={{ color: "var(--text-faint)" }}>
                         <span>XP Progress</span>
-                        <span>{profile.xp ?? 0} / {profile.xp_to_next_level ?? 100}</span>
+                        <span>{profile.xp ?? 0} / {profile.xp_to_next_level ?? 25}</span>
                       </div>
                       <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
                         <div

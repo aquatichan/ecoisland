@@ -21,6 +21,8 @@ import {
   startAt, endAt, or
 } from "firebase/firestore";
 import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const navigationItems = [
   { title: "Your Island", url: createPageUrl("Island"), icon: Palmtree, description: "Customize your Ecoisland", color: "#00c896" },
@@ -142,11 +144,26 @@ function EcoAIChatbot({ user, onClose }: { user: any; onClose: () => void }) {
     e.target.value = "";
   };
 
-  // Render simple markdown bold (**text**)
-  const renderText = (text: string) => {
-    const parts = text.split(/\*\*(.+?)\*\*/g);
-    return parts.map((p, i) => i % 2 === 1 ? <strong key={i}>{p}</strong> : p);
-  };
+  // Use react-markdown + remark-gfm for richer markdown rendering in messages
+  const MarkdownContent = ({ text }: { text: string }) => (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" className="text-emerald-300 underline" />,
+        ul: ({ node, ...props }) => <ul {...props} className="list-disc pl-5 ml-1 space-y-1" />,
+        ol: ({ node, ...props }) => <ol {...props} className="list-decimal pl-5 ml-1 space-y-1" />,
+        li: ({ node, ...props }) => <li {...props} className="ml-1" />,
+        code: ({ node, inline, className, children, ...props }) =>
+          inline ? (
+            <code className="bg-black/10 px-1 rounded text-sm" {...props}>{children}</code>
+          ) : (
+            <pre className="bg-black/5 p-2 rounded overflow-auto" {...props}><code>{children}</code></pre>
+          ),
+      }}
+    >
+      {text}
+    </ReactMarkdown>
+  );
 
   return (
     <motion.div
@@ -200,7 +217,9 @@ function EcoAIChatbot({ user, onClose }: { user: any; onClose: () => void }) {
               {msg.imagePreview && (
                 <img src={msg.imagePreview} alt="" className="w-full rounded-lg mb-2 max-h-28 object-cover" />
               )}
-              {renderText(msg.content)}
+              <div className="prose prose-sm prose-invert max-w-full break-words">
+                <MarkdownContent text={msg.content} />
+              </div>
             </div>
           </div>
         ))}
@@ -476,13 +495,13 @@ export default function Layout({ children, currentPageName }) {
   }, [user, isLoading, currentPageName, navigate]);
 
   const handleBuyXp = async () => {
-    const cost = 15;
-    const xpGain = 10;
+    const cost = 4;
+    const xpGain = 5;
     if ((user.treecoins || 0) < cost) { alert("Not enough Treecoins!"); return; }
     let xp = (user.xp || 0) + xpGain;
     let level = user.eco_level || 1;
-    let xpNext = user.xp_to_next_level || 100;
-    if (xp >= xpNext) { level++; xp -= xpNext; xpNext = Math.floor(xpNext * 1.5); alert(`Level ${level} reached!`); }
+    let xpNext = user.xp_to_next_level || 25;
+    if (xp >= xpNext) { level++; xp -= xpNext; xpNext = Math.floor(xpNext * 1.2); alert(`Level ${level} reached!`); }
     const updated = { treecoins: user.treecoins - cost, xp, eco_level: level, xp_to_next_level: xpNext };
     await User.updateMyUserData(updated);
     setUser(prev => ({ ...prev, ...updated }));
@@ -625,7 +644,7 @@ export default function Layout({ children, currentPageName }) {
                     style={chatbotOpen ? { background: "linear-gradient(320deg, #00c896, #06b6d4)", color: "white" } : {}}
                   >
                     <BotMessageSquare className="w-6 h-6" />
-                    <span className="tooltip">EcoAI</span>
+                    <span className="tooltip">Chatbot</span>
                   </button>
                 </motion.div>
               )}
