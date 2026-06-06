@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Globe, AlertCircle, Search, ExternalLink, Loader2, MapPin, Zap, RefreshCw } from "lucide-react";
 import { User } from "@/entities/User";
-import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
+import { callGemini, parseAIJson } from "@/config/ai";
 
 // Fix leaflet default marker icon
 delete L.Icon.Default.prototype._getIconUrl;
@@ -58,31 +58,14 @@ Rules:
 
   const userPrompt = `Generate environmental data for: "${locationQuery}"`;
 
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-      "HTTP-Referer": window.location.origin,
-      "X-Title": "Ecoisland",
-    },
-    body: JSON.stringify({
-      model: OPENROUTER_MODEL,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      temperature: 0.3,
-    }),
+  const raw = await callGemini({
+    systemPrompt,
+    contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+    temperature: 0.3,
+    responseMimeType: "application/json",
+    maxOutputTokens: 2048,
   });
-
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  const data = await res.json();
-  const raw = data.choices?.[0]?.message?.content || "";
-
-  // Strip markdown fences if present
-  const clean = raw.replace(/```json|```/g, "").trim();
-  return JSON.parse(clean);
+  return parseAIJson(raw);
 }
 
 // Also geocode via Nominatim as fallback for coordinates
@@ -142,7 +125,7 @@ export default function RegionalData() {
       setRegionData(data);
     } catch (e) {
       console.error(e);
-      setError("Could not load environmental data. Please check your API key in src/config/ai.ts or try another location.");
+      setError("Could not load environmental data. Please check your Gemini API key in src/config/ai.ts or try another location.");
     } finally {
       setIsLoading(false);
     }

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Camera, Lightbulb, AlertCircle, Sparkles, Loader2, Plus, BrainCog, ShieldAlert, CheckCircle2 } from "lucide-react";
 import { User } from "@/entities/User";
-import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
+import { callGemini, parseAIJson } from "@/config/ai";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { auth } from "@/firebase";
@@ -33,34 +33,22 @@ Guidelines:
 - immediateSteps should be 2-4 concise actionable steps
 - If no environmental hazard is visible, set hazardDetected to false`;
 
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-      "HTTP-Referer": window.location.origin,
-      "X-Title": "Ecoisland",
-    },
-    body: JSON.stringify({
-      model: OPENROUTER_MODEL,
-      messages: [
-        { role: "system", content: systemPrompt },
-        {
-          role: "user",
-          content: [
-            { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Image}` } },
-            { type: "text", text: "Analyze this image for environmental hazards." },
-          ],
-        },
-      ],
-      temperature: 0.2,
-    }),
+  const raw = await callGemini({
+    systemPrompt,
+    contents: [
+      {
+        role: "user",
+        parts: [
+          { inline_data: { mime_type: mimeType, data: base64Image } },
+          { text: "Analyze this image for environmental hazards." },
+        ],
+      },
+    ],
+    temperature: 0.2,
+    responseMimeType: "application/json",
+    maxOutputTokens: 2048,
   });
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  const data = await res.json();
-  const raw = data.choices?.[0]?.message?.content || "";
-  const clean = raw.replace(/```json|```/g, "").trim();
-  return JSON.parse(clean);
+  return parseAIJson(raw);
 }
 
 const severityColors: Record<string, string> = {
@@ -118,7 +106,7 @@ export default function DangerScan() {
       setResult(analysis);
     } catch (e) {
       console.error(e);
-      setError("AI analysis failed. Please verify your OpenRouter API key in src/config/ai.ts and try again.");
+      setError("AI analysis failed. Please verify your Gemini API key in src/config/ai.ts and try again.");
     } finally {
       setIsProcessing(false);
     }
@@ -277,7 +265,7 @@ export default function DangerScan() {
                       className="w-full py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2"
                       style={{ background: "linear-gradient(135deg, #10b981, #00c896)", boxShadow: "0 4px 15px rgba(16,185,129,0.3)" }}
                     >
-                      <Plus className="w-4 h-4" /> Post to Action Feed (+15 🌱)
+                      <Plus className="w-4 h-4" /> Post to Action Feed (+15 TC)
                     </button>
                   ) : (
                     <div className="w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2" style={{ background: "var(--bg-success)", border: "1px solid var(--border-success)", color: "#059669" }}>

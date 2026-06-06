@@ -20,7 +20,7 @@ import {
   collection, query, where, orderBy, limit, getDocs,
   startAt, endAt, or
 } from "firebase/firestore";
-import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from "@/config/ai";
+import { callGemini } from "@/config/ai";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -84,50 +84,36 @@ function EcoAIChatbot({ user, onClose }: { user: any; onClose: () => void }) {
     setIsThinking(true);
 
     try {
-      // Build messages for API
-      const apiMessages: any[] = [
-        { role: "system", content: ECOAI_SYSTEM },
-        ...messages.slice(-10).map(m => ({ role: m.role, content: m.content })),
-      ];
-
-      // If image, add vision content
-      if (capturedImage) {
-        const base64 = capturedImage.preview.split(",")[1];
-        const mimeType = capturedImage.file.type || "image/jpeg";
-        apiMessages.push({
-          role: "user",
-          content: [
-            { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64}` } },
-            { type: "text", text: text || "Analyze this image for environmental hazards, sustainability concerns, or eco-relevant insights." },
-          ],
-        });
-      } else {
-        apiMessages.push({ role: "user", content: text });
-      }
-
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-          "HTTP-Referer": window.location.origin,
-          "X-Title": "Ecoisland EcoAI",
-        },
-        body: JSON.stringify({
-          model: OPENROUTER_MODEL,
-          messages: apiMessages,
-          temperature: 0.5,
-          max_tokens: 600,
-        }),
+      const conversation = [...messages.slice(-10), userMsg];
+      const contents = conversation.map((message, index) => {
+        const isLatestUserImage = index === conversation.length - 1 && capturedImage;
+        if (isLatestUserImage && capturedImage) {
+          const base64 = capturedImage.preview.split(",")[1];
+          const mimeType = capturedImage.file.type || "image/jpeg";
+          return {
+            role: "user" as const,
+            parts: [
+              { inline_data: { mime_type: mimeType, data: base64 } },
+              { text: message.content || "Analyze this image for environmental hazards, sustainability concerns, or eco-relevant insights." },
+            ],
+          };
+        }
+        return {
+          role: message.role === "assistant" ? "model" as const : "user" as const,
+          parts: [{ text: message.content }],
+        };
       });
 
-      if (!res.ok) throw new Error(`API error ${res.status}`);
-      const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response. Please try again.";
+      const reply = await callGemini({
+        systemPrompt: ECOAI_SYSTEM,
+        contents,
+        temperature: 0.5,
+        maxOutputTokens: 600,
+      });
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
       console.error("EcoAI error:", e);
-      setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Something went wrong. Check your OpenRouter API key in `.env` and try again." }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Something went wrong. Check your Gemini API key in `.env` and try again." }]);
     } finally {
       setIsThinking(false);
     }

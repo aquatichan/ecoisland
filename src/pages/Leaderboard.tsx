@@ -30,8 +30,8 @@ function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor,
       transition={{ delay: Math.min(rank * 0.04, 0.5) }}
       className="flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer hover:shadow-md"
       style={{
-        background: isMe ? "rgba(0,200,150,0.06)" : rank <= 3 ? "rgba(245,158,11,0.04)" : "white",
-        border: isMe ? "2px solid rgba(0,200,150,0.3)" : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "2px solid #f1f5f9",
+        background: isMe ? "rgba(0,200,150,0.06)" : rank <= 3 ? "rgba(245,158,11,0.04)" : "var(--bg-page)",
+        border: isMe ? "2px solid rgba(0,200,150,0.3)" : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "0px solid transparent",
       }}
       onClick={() => !isMe && onViewProfile(user.id)}
       title={isMe ? "This is you" : `View ${user.username || user.full_name}'s profile`}

@@ -1,41 +1,75 @@
 // =============================================
 // Ecoisland AI Configuration
 // =============================================
-// Replace ADD_YOUR_API_KEY with your OpenRouter key from https://openrouter.ai
-// Get a free key at: https://openrouter.ai/keys
+// Add your Gemini API key to .env.local as:
+// GEMINI_API_KEY=your_key_here  (no VITE_ prefix — never bundled)
 
-export const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || "YOUR_API_KEY_HERE";
-export const OPENROUTER_MODEL = "google/gemini-2.5-flash-lite";
+export const GEMINI_MODEL = "gemini-2.5-flash-lite";
 
-// =============================================
-// HOW TO SET YOUR KEY:
-// 1. Create a .env file in the project root
-// 2. Add: VITE_OPENROUTER_API_KEY=your_key_here
-// 3. Restart the dev server
-// =============================================
+export type GeminiPart =
+  | { text: string }
+  | { inline_data: { mime_type: string; data: string } };
 
-// Shared AI request helper
-export async function callAI(systemPrompt: string, userPrompt: string, temperature = 0.4): Promise<string> {
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+export type GeminiContent = {
+  role: "user" | "model";
+  parts: GeminiPart[];
+};
+
+type GeminiRequestOptions = {
+  systemPrompt?: string;
+  contents: GeminiContent[];
+  temperature?: number;
+  maxOutputTokens?: number;
+  responseMimeType?: "text/plain" | "application/json";
+};
+
+function extractGeminiText(data: any): string {
+  const parts = data?.candidates?.[0]?.content?.parts;
+  if (!Array.isArray(parts)) return "";
+  return parts
+    .map((part: { text?: string }) => (typeof part?.text === "string" ? part.text : ""))
+    .join("")
+    .trim();
+}
+
+export async function callGemini({
+  systemPrompt,
+  contents,
+  temperature = 0.4,
+  maxOutputTokens = 1024,
+  responseMimeType = "text/plain",
+}: GeminiRequestOptions): Promise<string> {
+  const res = await fetch("/api/ai", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-      "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "https://ecoisland.app",
-      "X-Title": "Ecoisland 2026",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: OPENROUTER_MODEL,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      temperature,
+      model: GEMINI_MODEL,
+      systemInstruction: systemPrompt ? { parts: [{ text: systemPrompt }] } : undefined,
+      contents,
+      generationConfig: {
+        temperature,
+        maxOutputTokens,
+        responseMimeType,
+      },
     }),
   });
-  if (!res.ok) throw new Error(`OpenRouter API error: ${res.status}`);
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Gemini API error: ${res.status}${body ? ` - ${body}` : ""}`);
+  }
+
   const data = await res.json();
-  return data.choices?.[0]?.message?.content || "";
+  return extractGeminiText(data);
+}
+
+// Shared AI request helper for one-shot text prompts.
+export async function callAI(systemPrompt: string, userPrompt: string, temperature = 0.4): Promise<string> {
+  return callGemini({
+    systemPrompt,
+    contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+    temperature,
+  });
 }
 
 // Strip markdown fences and parse JSON safely

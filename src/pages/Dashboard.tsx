@@ -12,6 +12,7 @@ import {
 import { db, auth } from "@/firebase";
 import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
 import ElectricBorder from "@/components/ElectricBorder";
+import DotField from "@/components/DotField";
 
 const FEATURE_CARDS = [
   {
@@ -117,12 +118,17 @@ export default function Dashboard() {
         >
           {/* Background decoration */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, #00c896, transparent)" }} />
-            <div className="absolute -bottom-8 -left-8 w-48 h-48 rounded-full blur-3xl opacity-10" style={{ background: "radial-gradient(circle, #06b6d4, transparent)" }} />
-            {/* Pixel dots */}
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="absolute rounded-sm opacity-20" style={{ background: "#00c896", width: 4, height: 4, left: `${10 + i * 8}%`, top: `${20 + (i % 3) * 25}%` }} />
-            ))}
+            <DotField
+              dotRadius={1.6}
+              dotSpacing={18}
+              cursorRadius={420}
+              bulgeStrength={52}
+              gradientFrom="rgba(0, 200, 150, 0.42)"
+              gradientTo="rgba(117, 205, 221, 0.26)"
+              glowColor="#00c896"
+              glowRadius={100}
+              sparkle
+            />
           </div>
 
           <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">

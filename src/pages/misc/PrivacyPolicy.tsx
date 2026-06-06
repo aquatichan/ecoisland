@@ -125,7 +125,7 @@ export default function PrivacyPolicy() {
           gradientFrom="rgba(0, 200, 150, 0.42)"
           gradientTo="rgba(117, 205, 221, 0.26)"
           glowColor="#00c896"
-          glowRadius={190}
+          glowRadius={100}
           sparkle
         />
       </div>

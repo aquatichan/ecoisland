@@ -141,7 +141,7 @@ export default function TOS() {
           gradientFrom="rgba(0, 200, 150, 0.42)"
           gradientTo="rgba(6, 182, 212, 0.26)"
           glowColor="#00c896"
-          glowRadius={190}
+          glowRadius={100}
           sparkle
         />
       </div>

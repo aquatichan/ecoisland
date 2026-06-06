@@ -13,10 +13,10 @@ import { Mouse } from "lucide-react";
 
 import DarkVeil from "@/components/DarkVeil";
 import SoftAurora from "@/components/SoftAurora";
-import DotField from "@/components/DotField";
 import Radar from "@/components/Radar";
-import FaultyTerminal from "@/components/FaultyTerminal";
-import Lightfall from "@/components/Lightfall";
+import { GridScan } from "@/components/GridScan";
+import PrismaticBurst from "@/components/PrismaticBurst";
+import LetterGlitch from "@/components/LetterGlitch";
 import Orb from "@/components/Orb";
 import TextType from "@/components/TextType";
 import ScrollFloat from "@/components/ScrollFloat";
@@ -219,7 +219,7 @@ function InitSection({ data, scrollRef }) {
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
         <BgWrap><DarkVeil speed={0.4} noiseIntensity={0.02} warpAmount={0.1} /></BgWrap>
         <div style={{ position: "relative", zIndex: 10, padding: "5vh 5vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", left: -SIDEBAR_W()/2, }}>
-          <GlassCard style={{ maxWidth: 640, width: "100%", textAlign: "center" }}>
+          <GlassCard style={{ maxWidth: 800, width: "100%", textAlign: "center" }}>
             <TextType
               text={["Ecoisland Impact Visualizer", user.username || user.full_name || "Explorer"]}
               typingSpeed={45}
@@ -262,10 +262,10 @@ function C1Section({ data, scrollRef }) {
     <section style={{ position: "relative", minHeight: "250vh" }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
         <BgWrap>
-          <SoftAurora speed={0.5} brightness={0.9} color1="#00c896" color2="#7b61ff" noiseFrequency={2.0} bandHeight={0.5} bandSpread={1.2} enableMouseInteraction />
+          <SoftAurora speed={0.5} brightness={0.9} color1="#f7f7f7" color2="#e100ff" noiseFrequency={2.0} bandHeight={0.5} bandSpread={1.2} enableMouseInteraction />
         </BgWrap>
       </div>
-      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 700, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
+      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 1000, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
         <GlassCard>
           <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-emerald-300" style={{ fontSize: "clamp(3rem,8vw,6rem)", fontWeight: 900 }}>
             {`Level ${user.eco_level || 1}`}
@@ -329,10 +329,26 @@ function C2Section({ data, scrollRef }) {
     <section style={{ position: "relative", minHeight: "300vh" }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
         <BgWrap>
-          <DotField enableMouseInteraction />
+          <GridScan
+            sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#2F293A"
+          gridScale={0.1}
+          scanColor="#FF9FFC"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+          lineJitter={0.1}
+          scanGlow={0.5}
+          scanSoftness={2}
+          enableWebcam={false}
+          showPreview={false}
+          />
         </BgWrap>
       </div>
-      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 700, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
+      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 1200, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
         {!stats ? (
           <GlassCard>
             <ScrollReveal scrollContainerRef={scrollRef}>
@@ -345,14 +361,14 @@ function C2Section({ data, scrollRef }) {
               <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-cyan-300">
                 {`${stats.avgDaily.toFixed(1)} kg CO₂ / day`}
               </ScrollFloat>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Global average: 13.7 kg/day</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Global average: 13.7 kg/day (5,000 kg/year)</p>
             </GlassCard>
 
             <GlassCard>
               <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-blue-300">
-                {`${stats.annualProjected.toFixed(0)} kg projected this year`}
+                {`${stats.annualProjected.toFixed(0)} kg CO₂ / year (projected)`}
               </ScrollFloat>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Paris Agreement target: 2,300 kg/year (</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Paris Agreement target: below 2,300 kg/year (6.3 kg/day)</p>
             </GlassCard>
 
             <GlassCard>
@@ -369,8 +385,14 @@ function C2Section({ data, scrollRef }) {
             )}
 
             <GlassCard>
-              <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
-                {`Your emissions ${stats.trend} over the past two weeks. Your highest-emission day tends to be ${stats.peakDay}.`}
+              <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-orange-300">
+                {`Your emissions ${stats.trend} over the past two weeks.`}
+              </ScrollReveal>
+            </GlassCard>
+
+            <GlassCard>
+              <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-purple-300">
+                {`Your highest-emission day tends to be ${stats.peakDay}.`}
               </ScrollReveal>
             </GlassCard>
           </>
@@ -391,40 +413,17 @@ function C3Section({ data, scrollRef }) {
           <Radar speed={0.8} color="#00c896" backgroundColor="#030d0a" ringCount={6} sweepSpeed={1.5} sweepWidth={0.4} brightness={1.1} enableMouseInteraction />
         </BgWrap>
       </div>
-      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 700, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
-        <GlassCard style={{ textAlign: "center" }}>
-          <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-emerald-300">
-            {`Based in ${user.city || "the world"}`}
-          </ScrollFloat>
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            style={{ marginTop: 20, display: "flex", justifyContent: "center" }}
-          >
-            <svg width="36" height="44" viewBox="0 0 36 44" fill="none">
-              <path d="M18 0C8.06 0 0 8.06 0 18c0 13.5 18 26 18 26S36 31.5 36 18C36 8.06 27.94 0 18 0z" fill="#00c896" opacity="0.85" />
-              <circle cx="18" cy="18" r="6" fill="#fff" opacity="0.9" />
-            </svg>
-          </motion.div>
-        </GlassCard>
-
+      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 1000, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
         <GlassCard>
-          <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+          <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-cyan-300">
             {`You've logged ${carbonDocs.length} environmental actions from ${user.city || "your location"}.`}
           </ScrollReveal>
         </GlassCard>
 
         <GlassCard>
-          <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+          <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-purple-300">
             {`${postDocs.length} community posts published. Your local voice is part of a global movement.`}
           </ScrollReveal>
-        </GlassCard>
-
-        <GlassCard style={{ textAlign: "center" }}>
-          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, lineHeight: 1.6 }}>
-            Explore your region's eco-score on the{" "}
-            <span style={{ color: "#00c896" }}>Regional Data</span> page.
-          </p>
         </GlassCard>
       </div>
     </section>
@@ -445,12 +444,19 @@ function C4Section({ data, scrollRef }) {
 
   return (
     <section style={{ position: "relative", minHeight: "250vh" }}>
-      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", opacity: 0.8 }}>
         <BgWrap>
-          <FaultyTerminal glitchAmount={0.3} scanlineIntensity={0.2} tint="#7b61ff" speed={0.6} noiseAmp={0.05} enableMouseInteraction/>
+          <LetterGlitch
+            glitchColors={["#7b61ff", "#00c896", "#06b6d4"]}
+            glitchSpeed={45}
+            centerVignette={false}
+            outerVignette={true}
+            smooth={true}
+            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789"
+          />
         </BgWrap>
       </div>
-      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 700, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
+      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 1000, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
         <GlassCard>
           <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-purple-300">
             {`${postDocs.length} posts shared`}
@@ -470,7 +476,7 @@ function C4Section({ data, scrollRef }) {
         </GlassCard>
 
         <GlassCard>
-          <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+          <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-blue-300">
             {stats.topPost
               ? `Your most resonant post: "${stats.topPost.title || stats.topPost.tag || "Untitled"}" — ${stats.topPost.likesCount || 0} likes.`
               : "Share your first action on the Action Feed to start your community story."}
@@ -478,7 +484,7 @@ function C4Section({ data, scrollRef }) {
         </GlassCard>
 
         <GlassCard>
-          <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+          <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-green-300">
             {`Your signature tag: #${stats.topTag || "sustainability"}`}
           </ScrollReveal>
         </GlassCard>
@@ -520,40 +526,53 @@ function C5Section({ data, scrollRef }) {
     <section style={{ position: "relative", minHeight: "200vh" }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
         <BgWrap>
-          <Lightfall enableMouseInteraction />
+          <PrismaticBurst
+            animationType="rotate3d"
+            intensity={2}
+            speed={0.5}
+            distort={0}
+            paused={false}
+            offset={{ x: 0, y: 0 }}
+            hoverDampness={0.25}
+            rayCount={0}
+            mixBlendMode="lighten"
+            color0="#A855F7"
+            color1="#7C3AED"
+            color2="#6366F1"
+          />
         </BgWrap>
       </div>
-      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 700, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
+      <div style={{ position: "relative", zIndex: 10, padding: "20vh 5vw", display: "flex", flexDirection: "column", gap: 48, maxWidth: 1000, margin: "0 auto", left: -SIDEBAR_W()/2, }}>
         {!stats ? (
           <GlassCard>
-            <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+            <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-red-300">
               {"No quiz sessions yet. Head to AP Environmental Science to start practicing."}
             </ScrollReveal>
           </GlassCard>
         ) : (
           <>
             <GlassCard>
-              <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-amber-300">
+              <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-orange-300">
                 {`${apesDocs.length} quizzes completed`}
               </ScrollFloat>
             </GlassCard>
 
             <GlassCard>
               <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-yellow-300">
-                {`${stats.bestScore.toFixed(0)}% best score`}
+                {`${stats.bestScore.toFixed(0)}% - best score`}
               </ScrollFloat>
             </GlassCard>
 
             <GlassCard>
-              <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-orange-300">
-                {`${stats.avgScore.toFixed(0)}% average score`}
+              <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-blue-300">
+                {`${stats.avgScore.toFixed(0)}% - average score`}
               </ScrollFloat>
             </GlassCard>
 
             <GlassCard style={{ border: "1px solid rgba(245,158,11,0.3)", boxShadow: "0 0 40px rgba(245,158,11,0.12)" }}>
               <ScrollFloat
                 scrollContainerRef={scrollRef}
-                textClassName="text-amber-400"
+                textClassName="text-cyan-300"
                 style={{ fontSize: "clamp(2.5rem,6vw,5rem)", fontWeight: 900, textShadow: "0 0 30px rgba(245,158,11,0.5)" }}
               >
                 {`Predicted AP Score: ${stats.predictedAP}`}
@@ -561,14 +580,14 @@ function C5Section({ data, scrollRef }) {
             </GlassCard>
 
             <GlassCard>
-              <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+              <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-green-300">
                 {`Units studied: ${stats.unitsStudied || "None yet"}`}
               </ScrollReveal>
             </GlassCard>
 
             <GlassCard>
-              <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
-                {"Every correct answer is one step closer to a 5. Keep going."}
+              <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-red-300">
+                {"Every correct answer is one step closer to a 5. Keep going!"}
               </ScrollReveal>
             </GlassCard>
           </>
@@ -607,7 +626,7 @@ function C6Section({ data, scrollRef, onExit }) {
           typingSpeed={50}
           pauseDuration={2200}
           deletingSpeed={25}
-          loop={false}
+          loop={true}
           className="text-center"
           style={{ fontSize: "clamp(2.5rem,7vw,6rem)", fontWeight: 900, color: "#fff", lineHeight: 1.15 }}
           showCursor
@@ -618,7 +637,7 @@ function C6Section({ data, scrollRef, onExit }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3, duration: 0.8 }}
-          style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 32 }}
+          style={{ color: "rgba(255,255,255,0.3)", fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 32 }}
         >
           {postDocs.length} posts · Level {user.eco_level || 1} · {(user.treecoins || 0).toLocaleString()} TC
         </motion.div>
@@ -646,14 +665,14 @@ function C6Section({ data, scrollRef, onExit }) {
             borderRadius: 999,
             border: "none",
             cursor: "pointer",
-            fontSize: 11,
+            fontSize: 14,
             fontWeight: 600,
             color: "#fff",
-            background: "linear-gradient(135deg, #00c896, #06b6d4)",
-            boxShadow: "0 8px 32px rgba(0,200,150,0.3)",
+            background: "linear-gradient(135deg, #c80000, #900000)",
+            boxShadow: "0 0 36px rgba(175, 0, 0, 0.6)",
           }}
         >
-          Exit Experience
+          EXIT EXPERIENCE
         </motion.button>
       </div>
     </section>
@@ -1003,4 +1022,3 @@ export default function Impact() {
     </div>
   );
 }
-

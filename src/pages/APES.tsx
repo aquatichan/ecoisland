@@ -257,9 +257,9 @@ export default function ApesPage() {
         {/* Quick actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
-            { icon: Layers,         label: "All Units Quiz",  sub: "Practice every unit",  action: loadAllQuestions, color: "#00c896" },
-            { icon: FlipHorizontal, label: "Flashcards",      sub: "Key terms & vocab",    action: loadFlashcards,   color: "#06b6d4" },
-            { icon: TestTube,       label: "Practice Tests",  sub: "Full-length exams",    action: () => window.open("https://highschooltestprep.com/ap/environmental-science/", "_blank"), color: "#8b5cf6" },
+            { icon: Layers,         label: "All-Unit Quiz",  sub: "Practice every unit",  action: loadAllQuestions, color: "#00c896" },
+            { icon: FlipHorizontal, label: "Flashcards",      sub: "Key terms & vocabulary",    action: loadFlashcards,   color: "#06b6d4" },
+            { icon: TestTube,       label: "Practice Tests",  sub: "Full-length exams (coming soon)",    action: () => window.open("https://highschooltestprep.com/ap/environmental-science/", "_blank"), color: "#8b5cf6" },
             { icon: BarChart2,      label: "Key Diagrams",    sub: "Coming soon",          action: null,             color: "#f59e0b" },
           ].map(item => (
             <motion.button
