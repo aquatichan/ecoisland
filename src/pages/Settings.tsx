@@ -2,22 +2,21 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Settings as SettingsIcon, User as UserIcon, Search, Trash2,
-  Upload, Save, AlertTriangle, CheckCircle, Loader2, Eye,
-  Bell, Shield, Palette, ChevronRight, LogOut, X, Award
+  Settings as SettingsIcon, User as UserIcon,
+  Upload, Save, AlertTriangle, CheckCircle, Loader2,
+  Shield, Palette, LogOut, Award
 } from "lucide-react";
 import { User } from "@/entities/User";
 import { UploadFile } from "@/integrations/Core";
-import { db, auth } from "@/firebase";
-import { collection, query, getDocs, where, orderBy, onSnapshot } from "firebase/firestore";
+import { auth } from "@/firebase";
 import { deleteUser } from "firebase/auth";
-import UserProfileModal from "@/components/UserProfileModal";
+import { useTheme } from "@/context/ThemeContext";
 
 const TABS = [
-  { key: "profile", label: "Profile", icon: UserIcon },
-  { key: "discover", label: "Discover Users", icon: Search },
-  { key: "privacy", label: "Privacy", icon: Shield },
-  { key: "account", label: "Account", icon: AlertTriangle },
+  { key: "profile",     label: "Profile",     icon: UserIcon },
+  { key: "preferences", label: "Preferences", icon: Palette },
+  { key: "privacy",     label: "Privacy",     icon: Shield },
+  { key: "account",     label: "Account",     icon: AlertTriangle },
 ];
 
 // ─── ProfileTab ───────────────────────────────────────────────────────────────
@@ -62,7 +61,7 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {[
             { label: "Username", key: "username", placeholder: "new user" },
-            { label: "City", key: "city", placeholder: "Houston" },
+            { label: "City",     key: "city",     placeholder: "Houston" },
             { label: "ZIP Code", key: "zip_code", placeholder: "77077" },
           ].map(f => (
             <div key={f.key}>
@@ -131,97 +130,97 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
   );
 }
 
-// ─── DiscoverTab ──────────────────────────────────────────────────────────────
-function DiscoverTab({ onViewProfile }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+// ─── PreferencesTab ───────────────────────────────────────────────────────────
+function PreferencesTab() {
+  const { theme, toggleTheme } = useTheme();
+  const [distanceUnit, setDistanceUnit] = useState(() => localStorage.getItem("ecoisland-distance-unit") || "km");
+  const [weightUnit,   setWeightUnit]   = useState(() => localStorage.getItem("ecoisland-weight-unit")   || "kg");
+  const [tempUnit,     setTempUnit]     = useState(() => localStorage.getItem("ecoisland-temp-unit")     || "celsius");
+  const [saved, setSaved] = useState(false);
 
-  // Live Firestore listener
-  useEffect(() => {
-    setIsLoading(true);
-    const unsub = onSnapshot(collection(db, "users"), snap => {
-      setAllUsers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      setIsLoading(false);
-    }, () => setIsLoading(false));
-    return () => unsub();
-  }, []);
-
-  const filtered = searchQuery.trim()
-    ? allUsers.filter(u => {
-        const lower = searchQuery.toLowerCase();
-        return (
-          u.username?.toLowerCase().includes(lower) ||
-          u.full_name?.toLowerCase().includes(lower) ||
-          u.bio?.toLowerCase().includes(lower)
-        );
-      }).slice(0, 20)
-    : allUsers.slice(0, 10);
+  const handleSave = () => {
+    localStorage.setItem("ecoisland-distance-unit", distanceUnit);
+    localStorage.setItem("ecoisland-weight-unit",   weightUnit);
+    localStorage.setItem("ecoisland-temp-unit",     tempUnit);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 3000);
+  };
 
   return (
     <div className="space-y-5">
-      <div className="eco-card p-5">
-        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-          <Search className="w-5 h-5 text-blue-500" /> Find Community Members
+      <div className="eco-card p-6">
+        <h3 className="font-bold text-slate-800 mb-5 flex items-center gap-2">
+          <Palette className="w-5 h-5 text-emerald-600" /> App Preferences
         </h3>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <input
-            className="eco-input pl-10"
-            placeholder="Search by username or bio… (live)"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Theme</label>
+            <select
+              className="eco-input"
+              value={theme}
+              onChange={e => { if (e.target.value !== theme) toggleTheme(); }}
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Distance Unit</label>
+            <select
+              className="eco-input"
+              value={distanceUnit}
+              onChange={e => setDistanceUnit(e.target.value)}
+            >
+              <option value="km">Kilometers (km)</option>
+              <option value="mi">Miles (mi)</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Weight Unit</label>
+            <select
+              className="eco-input"
+              value={weightUnit}
+              onChange={e => setWeightUnit(e.target.value)}
+            >
+              <option value="kg">Kilograms (kg)</option>
+              <option value="lbs">Pounds (lbs)</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Temperature Unit</label>
+            <select
+              className="eco-input"
+              value={tempUnit}
+              onChange={e => setTempUnit(e.target.value)}
+            >
+              <option value="celsius">Celsius (°C)</option>
+              <option value="fahrenheit">Fahrenheit (°F)</option>
+            </select>
+          </div>
         </div>
-        {isLoading && (
-          <div className="flex items-center gap-2 mt-3 text-sm text-slate-400">
-            <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading community members…
-          </div>
-        )}
-      </div>
-
-      <div className="space-y-3">
-        {filtered.map((u, i) => (
-          <motion.div
-            key={u.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.04 }}
-            className="eco-card p-4 flex items-center gap-4 cursor-pointer hover:shadow-md transition-shadow"
-            onClick={() => onViewProfile(u.id)}
+        <div className="flex items-center gap-3 mt-5">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleSave}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm transition-all"
+            style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 4px 15px rgba(0,200,150,0.3)" }}
           >
-            <div className="w-12 h-12 rounded-xl overflow-hidden bg-emerald-50 dark:bg-emerald-900/12 border-2 border-emerald-100 dark:border-emerald-800 flex-shrink-0 flex items-center justify-center">
-              {u.avatar_url ? (
-                <img src={u.avatar_url} alt="" className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-xl font-black text-emerald-500">
-                  {(u.username || u.full_name || "U")[0]?.toUpperCase()}
-                </span>
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-bold text-slate-800 text-sm">{u.username || u.full_name || "Unknown"}</p>
-              {u.bio && <p className="text-xs text-slate-400 truncate mt-0.5">{u.bio}</p>}
-              <div className="flex items-center gap-3 mt-1">
-                {u.city && <span className="text-xs text-slate-400">📍 {u.city}</span>}
-                {u.eco_level && <span className="text-xs text-emerald-600 font-medium">Lv. {u.eco_level}</span>}
-                {u.privacy_public === false && (
-                  <span className="text-xs text-slate-400 flex items-center gap-0.5">🔒 Private</span>
-                )}
-              </div>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <div className="text-sm font-bold text-amber-500">{u.treecoins || 0} TC</div>
-              <div className="text-xs text-slate-400">Treecoins</div>
-            </div>
-          </motion.div>
-        ))}
-        {!isLoading && searchQuery && filtered.length === 0 && (
-          <div className="eco-card p-10 text-center">
-            <Search className="w-10 h-10 text-slate-200 mx-auto mb-3" />
-            <p className="text-slate-400 text-sm">No users match "{searchQuery}"</p>
-          </div>
-        )}
+            <Save className="w-4 h-4" /> Save Changes
+          </motion.button>
+          <AnimatePresence>
+            {saved && (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                className="flex items-center gap-1.5 text-sm text-emerald-600 font-medium"
+              >
+                <CheckCircle className="w-4 h-4" /> Saved!
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -258,7 +257,6 @@ function PrivacyTab({ user, onSaved }) {
         </p>
 
         <div className="space-y-4">
-          {/* Public */}
           <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 dark:bg-emerald-900/12 bg-emerald-50" : "border-slate-200 bg-white"}`}>
             <input
               type="radio"
@@ -274,7 +272,6 @@ function PrivacyTab({ user, onSaved }) {
             </div>
           </label>
 
-          {/* Private */}
           <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${!isPublic ? "border-blue-300 bg-blue-50 dark:bg-blue-900/12" : "border-slate-200 bg-white"}`}>
             <input
               type="radio"
@@ -430,22 +427,18 @@ export default function Settings() {
   const [formData, setFormData] = useState({ username: "", bio: "", city: "", zip_code: "", country: "" });
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
-
   const [deleteStep, setDeleteStep] = useState(0);
   const [deleteConfirm, setDeleteConfirm] = useState("");
-
-  // User profile modal
-  const [profileUserId, setProfileUserId] = useState(null);
 
   useEffect(() => {
     User.me().then(u => {
       setUser(u);
       setFormData({
         username: u.username || "",
-        bio: u.bio || "",
-        city: u.city || "",
+        bio:      u.bio      || "",
+        city:     u.city     || "",
         zip_code: u.zip_code || "",
-        country: u.country || "United States",
+        country:  u.country  || "United States",
       });
       setAvatarPreview(u.avatar_url || null);
     }).catch(() => {});
@@ -469,7 +462,7 @@ export default function Settings() {
       setUser(prev => ({ ...prev, ...formData, avatar_url: avatarUrl }));
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (e) { alert("Failed to save. Please try again."); }
+    } catch { alert("Failed to save. Please try again."); }
     finally { setIsSaving(false); }
   };
 
@@ -482,7 +475,7 @@ export default function Settings() {
       await User.updateMyUserData({ deleted: true });
       await deleteUser(auth.currentUser);
       window.location.href = "/";
-    } catch (e) { alert("Could not delete account. Please re-login and try again."); }
+    } catch { alert("Could not delete account. Please re-login and try again."); }
   };
 
   return (
@@ -535,9 +528,7 @@ export default function Settings() {
                 saveSuccess={saveSuccess}
               />
             )}
-            {activeTab === "discover" && (
-              <DiscoverTab onViewProfile={setProfileUserId} />
-            )}
+            {activeTab === "preferences" && <PreferencesTab />}
             {activeTab === "privacy" && user && (
               <PrivacyTab
                 user={user}
@@ -557,12 +548,6 @@ export default function Settings() {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* User Profile Modal */}
-      <UserProfileModal
-        userId={profileUserId}
-        onClose={() => setProfileUserId(null)}
-      />
     </div>
   );
 }

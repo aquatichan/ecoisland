@@ -14,6 +14,7 @@ import { format, subDays } from "date-fns";
 import { collection, query, orderBy, getDocs, doc, addDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { User } from "@/entities/User";
+import { getDistanceUnit, getWeightUnit, toStorageDist, toDisplayWt } from "@/utils/units";
 
 const EMISSION_FACTORS = {
   transport: {
@@ -39,17 +40,21 @@ const TRANSPORT_LABELS = {
 const DAILY_LIMIT = 5;
 const COINS_PER_LOG = 10;
 
-const CustomTooltip = ({ active, payload, label }) => {
+// Reference values in kg CO₂
+const GLOBAL_AVG_KG  = 16.4;
+const PARIS_TARGET_KG = 4.8;
+
+function CustomTooltip({ active, payload, label, weightUnit = "kg" }) {
   if (!active || !payload?.length) return null;
   return (
     <div className="px-3 py-2 rounded-xl text-xs text-white" style={{ background: "rgba(2,12,8,0.95)", border: "1px solid rgba(0,200,150,0.3)", backdropFilter: "blur(10px)" }}>
       <p className="text-slate-400 mb-1">{label}</p>
       {payload.filter(p => p.value != null).map((entry, i) => (
-        <p key={i} style={{ color: entry.color }}>{entry.name}: <strong>{Number(entry.value).toFixed(2)} kg</strong></p>
+        <p key={i} style={{ color: entry.color }}>{entry.name}: <strong>{Number(entry.value).toFixed(2)} {weightUnit}</strong></p>
       ))}
     </div>
   );
-};
+}
 
 export default function CarbonFootprint() {
   const [user, setUser] = useState(null);
@@ -61,6 +66,15 @@ export default function CarbonFootprint() {
   const [message, setMessage] = useState(null);
   const [isLogging, setIsLogging] = useState(false);
   const [todaysLogs, setTodaysLogs] = useState(0);
+
+  // Read unit preferences once on mount (re-read on each page visit since component re-mounts)
+  const distanceUnit = getDistanceUnit();
+  const weightUnit   = getWeightUnit();
+
+  // Convenience: convert kg → display weight unit, fixed to 2dp
+  const dispWt  = (kg)  => toDisplayWt(kg, weightUnit);
+  // Convenience: convert user-entered distance to km for emission factor math
+  const storeDist = (val) => toStorageDist(val, distanceUnit);
 
   useEffect(() => {
     User.me().then(u => {
@@ -79,23 +93,24 @@ export default function CarbonFootprint() {
     } catch (e) { console.error(e); }
   };
 
+  // calculateEmissions always returns kg CO₂ for storage.
+  // storeDist() converts user input (km or mi) → km before multiplying by emission factor.
   const calculateEmissions = () => {
     const transportCO2 = transportItems.reduce((sum, item) => {
       const factor = EMISSION_FACTORS.transport[item.type] || 0;
-      return sum + factor * (item.distance || 0);
+      return sum + factor * storeDist(item.distance || 0);
     }, 0);
     const energyCO2 = EMISSION_FACTORS.energy * energyUsage;
-    const dietCO2 = EMISSION_FACTORS.diet[dietType] || 0;
+    const dietCO2   = EMISSION_FACTORS.diet[dietType] || 0;
     return {
       transportation_co2: +transportCO2.toFixed(3),
-      energy_co2: +energyCO2.toFixed(3),
-      diet_co2: +dietCO2.toFixed(3),
-      total_co2: +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
-      // Keep backward compat field name
-      total_emissions: +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
-      diet: dietType,
-      date: selectedDate,
-      userId: user?.id,
+      energy_co2:         +energyCO2.toFixed(3),
+      diet_co2:           +dietCO2.toFixed(3),
+      total_co2:          +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
+      total_emissions:    +(transportCO2 + energyCO2 + dietCO2).toFixed(3),
+      diet:     dietType,
+      date:     selectedDate,
+      userId:   user?.id,
     };
   };
 
@@ -110,7 +125,6 @@ export default function CarbonFootprint() {
         await updateDoc(doc(db, "users", user.id, "carbon_entries", existing.id), data);
       } else {
         await addDoc(collection(db, "users", user.id, "carbon_entries"), data);
-        // Also write to top-level carbon_logs for Impact Visualizer
         await addDoc(collection(db, "carbon_logs"), { ...data });
         await User.updateMyUserData({ treecoins: (user.treecoins || 0) + COINS_PER_LOG });
         setUser(prev => ({ ...prev, treecoins: (prev.treecoins || 0) + COINS_PER_LOG }));
@@ -128,25 +142,30 @@ export default function CarbonFootprint() {
 
   const current = calculateEmissions();
   const validEntries = entries.filter(e => e.total_emissions != null);
-  const avgEmissions = validEntries.length > 0 ? validEntries.reduce((s, e) => s + e.total_emissions, 0) / validEntries.length : 0;
+  // avgEmissions stays in kg for threshold comparisons; convert for display
+  const avgEmissions = validEntries.length > 0
+    ? validEntries.reduce((s, e) => s + e.total_emissions, 0) / validEntries.length
+    : 0;
 
+  // Chart data — stored values are kg CO₂; convert to display unit
   const chartData = Array.from({ length: 30 }).map((_, i) => {
-    const d = subDays(new Date(), 29 - i);
+    const d  = subDays(new Date(), 29 - i);
     const ds = format(d, "yyyy-MM-dd");
     const entry = entries.find(e => e.date === ds);
     return {
-      date: format(d, "MMM d"),
-      yourEmissions: entry ? +(entry.total_emissions || entry.total_co2 || 0) : null,
-      globalAvg: 16.4,
-      parisTarget: 4.8,
+      date:         format(d, "MMM d"),
+      yourEmissions: entry ? +dispWt(entry.total_emissions || entry.total_co2 || 0).toFixed(3) : null,
+      globalAvg:    +dispWt(GLOBAL_AVG_KG).toFixed(3),
+      parisTarget:  +dispWt(PARIS_TARGET_KG).toFixed(3),
     };
   });
 
+  // Eval status thresholds compare against raw kg (avgEmissions is kg)
   const evalStatus = (() => {
     if (!validEntries.length) return { text: "Log your first entry below.", color: "#64748b", emoji: "📊" };
-    if (avgEmissions < 4.8) return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#10b981", emoji: "🌟" };
-    if (avgEmissions < 7) return { text: "Good progress! You're below the sustainable threshold.", color: "#06b6d4", emoji: "✅" };
-    if (avgEmissions < 12) return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚠️" };
+    if (avgEmissions < 4.8)  return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#10b981", emoji: "🌟" };
+    if (avgEmissions < 7)    return { text: "Good progress! You're below the sustainable threshold.", color: "#06b6d4", emoji: "✅" };
+    if (avgEmissions < 12)   return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚠️" };
     return { text: "High impact. Focus on reducing transportation and energy use.", color: "#ef4444", emoji: "🚨" };
   })();
 
@@ -217,12 +236,12 @@ export default function CarbonFootprint() {
                         <input
                           type="number"
                           className="eco-input text-xs py-1.5 px-2"
-                          placeholder="Distance (km)"
+                          placeholder={`Distance (${distanceUnit})`}
                           min={0}
                           value={item.distance || ""}
                           onChange={e => setTransportItems(p => p.map((t, i) => i === idx ? { ...t, distance: parseFloat(e.target.value) || 0 } : t))}
                         />
-                        <span className="text-xs text-slate-400 font-medium">km</span>
+                        <span className="text-xs text-slate-400 font-medium">{distanceUnit}</span>
                       </div>
                     </motion.div>
                   ))}
@@ -264,11 +283,14 @@ export default function CarbonFootprint() {
               {/* Total */}
               <div className="p-4 rounded-2xl mb-4" style={{ background: "var(--bg-success)", border: "2px solid var(--border-success)" }}>
                 <p className="text-xs font-bold text-emerald-600 uppercase tracking-wide mb-1">Today's Total</p>
-                <p className="text-3xl font-black text-emerald-700">{current.total_co2.toFixed(2)}<span className="text-base font-medium ml-1 text-emerald-500">kg CO₂</span></p>
+                <p className="text-3xl font-black text-emerald-700">
+                  {dispWt(current.total_co2).toFixed(2)}
+                  <span className="text-base font-medium ml-1 text-emerald-500">{weightUnit} CO₂</span>
+                </p>
                 <div className="flex gap-3 mt-2 text-xs text-emerald-600">
-                  <span>🚗 {current.transportation_co2.toFixed(2)}</span>
-                  <span>⚡ {current.energy_co2.toFixed(2)}</span>
-                  <span>🍽️ {current.diet_co2.toFixed(2)}</span>
+                  <span>🚗 {dispWt(current.transportation_co2).toFixed(2)}</span>
+                  <span>⚡ {dispWt(current.energy_co2).toFixed(2)}</span>
+                  <span>🍽️ {dispWt(current.diet_co2).toFixed(2)}</span>
                 </div>
               </div>
 
@@ -313,18 +335,18 @@ export default function CarbonFootprint() {
               </div>
               <div className="grid grid-cols-3 gap-4 text-center">
                 {[
-                  { label: "Your Average", val: avgEmissions, color: "#00c896" },
-                  { label: "Global Avg", val: 16.4, color: "#ef4444" },
-                  { label: "Paris Target", val: 4.8, color: "#10b981" },
+                  { label: "Your Average", val: dispWt(avgEmissions), color: "#00c896" },
+                  { label: "Global Avg",   val: dispWt(GLOBAL_AVG_KG), color: "#ef4444" },
+                  { label: "Paris Target", val: dispWt(PARIS_TARGET_KG), color: "#10b981" },
                 ].map(s => (
                   <div key={s.label} className="p-3 rounded-xl" style={{ background: `${s.color}08`, border: `1.5px solid ${s.color}20` }}>
                     <div className="text-2xl font-black" style={{ color: s.color }}>{s.val.toFixed(2)}</div>
-                    <div className="text-xs text-slate-500 mt-0.5">{s.label} (kg CO₂)</div>
+                    <div className="text-xs text-slate-500 mt-0.5">{s.label} ({weightUnit} CO₂)</div>
                   </div>
                 ))}
               </div>
               <p className="text-xs text-slate-400 mt-3 text-center">
-                Sources: IEA, IPCC, EPA · Global avg 16.4 kg/day · Paris target 4.8 kg/day
+                Sources: IEA, IPCC, EPA · Global avg {dispWt(16.4).toFixed(1)} {weightUnit}/day · Paris target {dispWt(4.8).toFixed(1)} {weightUnit}/day
               </p>
             </div>
 
@@ -341,13 +363,13 @@ export default function CarbonFootprint() {
                   <LineChart data={chartData} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                     <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} interval={4} />
-                    <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} unit=" kg" />
-                    <Tooltip content={<CustomTooltip />} />
-                    <ReferenceLine y={16.4} stroke="#ef444440" strokeDasharray="4 2" />
-                    <ReferenceLine y={4.8} stroke="#10b98140" strokeDasharray="4 2" />
+                    <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} unit={` ${weightUnit}`} />
+                    <Tooltip content={<CustomTooltip weightUnit={weightUnit} />} />
+                    <ReferenceLine y={dispWt(GLOBAL_AVG_KG)}  stroke="#ef444440" strokeDasharray="4 2" />
+                    <ReferenceLine y={dispWt(PARIS_TARGET_KG)} stroke="#10b98140" strokeDasharray="4 2" />
                     <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#00c896" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={false} />
-                    <Line type="monotone" dataKey="globalAvg" name="Global Average" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
-                    <Line type="monotone" dataKey="parisTarget" name="Paris Target" stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
+                    <Line type="monotone" dataKey="globalAvg"    name="Global Average" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
+                    <Line type="monotone" dataKey="parisTarget"  name="Paris Target"   stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
               )}
@@ -358,20 +380,23 @@ export default function CarbonFootprint() {
               <div className="eco-card p-5">
                 <h3 className="font-bold text-slate-800 mb-4">Recent Entries</h3>
                 <div className="space-y-2">
-                  {entries.slice(0, 7).map(e => (
-                    <div key={e.id} className="flex items-center justify-between py-2.5 border-b border-slate-100 last:border-0">
-                      <div>
-                        <p className="font-semibold text-slate-700 text-sm">{e.date}</p>
-                        <p className="text-xs text-slate-400 capitalize">{e.diet || "Mixed"} diet</p>
+                  {entries.slice(0, 7).map(e => {
+                    const raw = e.total_emissions || e.total_co2 || 0;
+                    return (
+                      <div key={e.id} className="flex items-center justify-between py-2.5 border-b border-slate-100 last:border-0">
+                        <div>
+                          <p className="font-semibold text-slate-700 text-sm">{e.date}</p>
+                          <p className="text-xs text-slate-400 capitalize">{e.diet || "Mixed"} diet</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-black text-slate-800">{dispWt(raw).toFixed(2)} {weightUnit}</p>
+                          <p className="text-xs" style={{ color: raw < 4.8 ? "#10b981" : raw < 16.4 ? "#f59e0b" : "#ef4444" }}>
+                            {raw < 4.8 ? "✅ On target" : raw < 16.4 ? "⚠️ Above target" : "🚨 Above avg"}
+                          </p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="font-black text-slate-800">{((e.total_emissions || e.total_co2 || 0)).toFixed(2)} kg</p>
-                        <p className="text-xs" style={{ color: (e.total_emissions || e.total_co2) < 4.8 ? "#10b981" : (e.total_emissions || e.total_co2) < 16.4 ? "#f59e0b" : "#ef4444" }}>
-                          {(e.total_emissions || e.total_co2) < 4.8 ? "✅ On target" : (e.total_emissions || e.total_co2) < 16.4 ? "⚠️ Above target" : "🚨 Above avg"}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

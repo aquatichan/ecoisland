@@ -893,10 +893,10 @@ export default function Island() {
                 <Star className="w-4 h-4 text-amber-500" /> Island Preview
               </h3>
 
-              <div className="rounded-2xl overflow-hidden" style={{ border: "2px solid #e2e8f0" }}>
+              <div className="rounded-2xl overflow-hidden" style={{ border: "2px solid #e2e8f0", backgroundColor: "#000" }}>
                 {nothingActive ? (
                   <div style={{ width: "100%", height: 340, position: "relative" }}>
-                    <Galaxy mouseRepulsion mouseInteraction density={1.5} glowIntensity={0.8} saturation={0.8} hueShift={240} />
+                    <Galaxy mouseRepulsion mouseInteraction density={1.5} glowIntensity={0.5} saturation={0.8} hueShift={240} />
                   </div>
                 ) : (
                   <IslandScene

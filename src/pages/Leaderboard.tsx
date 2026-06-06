@@ -2,13 +2,16 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User } from "@/entities/User";
-import { Trophy, Crown, Medal, Award, Leaf, TrendingUp, Globe, TreePine, Loader2, Star } from "lucide-react";
+import { Trophy, Crown, Medal, Award, Leaf, TrendingUp, Globe, TreePine, Loader2, Star, Search } from "lucide-react";
 import UserProfileModal from "@/components/UserProfileModal";
+import { db } from "@/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 const TABS = [
-  { key: "treecoins", label: "Treecoins", icon: TreePine, color: "#00c896" },
-  { key: "level", label: "Level", icon: TrendingUp, color: "#8b5cf6" },
-  { key: "ambassadors", label: "Ambassadors", icon: Award, color: "#f59e0b" },
+  { key: "treecoins",  label: "Treecoins",  icon: TreePine,   color: "#00c896" },
+  { key: "level",      label: "Level",      icon: TrendingUp, color: "#8b5cf6" },
+  { key: "ambassadors",label: "Ambassadors",icon: Award,      color: "#f59e0b" },
+  { key: "discover",   label: "Discover",   icon: Search,     color: "#3b82f6" },
 ];
 
 function RankIcon({ rank }) {
@@ -67,6 +70,104 @@ function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor,
   );
 }
 
+// ─── DiscoverSection ──────────────────────────────────────────────────────────
+function DiscoverSection({ onViewProfile }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const unsub = onSnapshot(collection(db, "users"), snap => {
+      setAllUsers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      setIsLoading(false);
+    }, () => setIsLoading(false));
+    return () => unsub();
+  }, []);
+
+  const filtered = searchQuery.trim()
+    ? allUsers.filter(u => {
+        const lower = searchQuery.toLowerCase();
+        return (
+          u.username?.toLowerCase().includes(lower) ||
+          u.full_name?.toLowerCase().includes(lower) ||
+          u.bio?.toLowerCase().includes(lower)
+        );
+      }).slice(0, 20)
+    : allUsers.slice(0, 10);
+
+  return (
+    <div className="space-y-5">
+      <div className="eco-card p-5">
+        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <Search className="w-5 h-5 text-blue-500" /> Find Community Members
+        </h3>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            className="eco-input pl-10"
+            placeholder="Search by username or bio… (live)"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+        </div>
+        {isLoading && (
+          <div className="flex items-center gap-2 mt-3 text-sm text-slate-400">
+            <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading community members…
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        {filtered.map((u, i) => (
+          <motion.div
+            key={u.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.04 }}
+            className="eco-card p-4 flex items-center gap-4 cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => onViewProfile(u.id)}
+          >
+            <div
+              className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center"
+              style={{ background: "var(--bg-success)", border: "2px solid var(--border-success)" }}
+            >
+              {u.avatar_url ? (
+                <img src={u.avatar_url} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-xl font-black text-emerald-500">
+                  {(u.username || u.full_name || "U")[0]?.toUpperCase()}
+                </span>
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-slate-800 text-sm">{u.username || u.full_name || "Unknown"}</p>
+              {u.bio && <p className="text-xs text-slate-400 truncate mt-0.5">{u.bio}</p>}
+              <div className="flex items-center gap-3 mt-1">
+                {u.city && <span className="text-xs text-slate-400">📍 {u.city}</span>}
+                {u.eco_level && <span className="text-xs text-emerald-600 font-medium">Lv. {u.eco_level}</span>}
+                {u.privacy_public === false && (
+                  <span className="text-xs text-slate-400">🔒 Private</span>
+                )}
+              </div>
+            </div>
+            <div className="text-right flex-shrink-0">
+              <div className="text-sm font-bold text-amber-500">{u.treecoins || 0} TC</div>
+              <div className="text-xs text-slate-400">Treecoins</div>
+            </div>
+          </motion.div>
+        ))}
+        {!isLoading && searchQuery && filtered.length === 0 && (
+          <div className="eco-card p-10 text-center">
+            <Search className="w-10 h-10 text-slate-200 mx-auto mb-3" />
+            <p className="text-slate-400 text-sm">No users match "{searchQuery}"</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Leaderboard() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -88,8 +189,8 @@ export default function Leaderboard() {
   }, []);
 
   const sorted = {
-    treecoins: [...users].sort((a, b) => (b.treecoins || 0) - (a.treecoins || 0)),
-    level: [...users].sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1)),
+    treecoins:   [...users].sort((a, b) => (b.treecoins || 0) - (a.treecoins || 0)),
+    level:       [...users].sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1)),
     ambassadors: users.filter(u => u.verification_status === "ambassador"),
   };
 
@@ -128,7 +229,13 @@ export default function Leaderboard() {
         </div>
 
         {/* Content */}
-        {isLoading ? (
+        {tab === "discover" ? (
+          <AnimatePresence mode="wait">
+            <motion.div key="discover" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <DiscoverSection onViewProfile={setProfileUserId} />
+            </motion.div>
+          </AnimatePresence>
+        ) : isLoading ? (
           <div className="flex justify-center py-16"><Loader2 className="w-8 h-8 animate-spin text-emerald-400" /></div>
         ) : (
           <AnimatePresence mode="wait">

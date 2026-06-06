@@ -10,6 +10,7 @@ import confetti from 'canvas-confetti';
 import { callAI, parseAIJson } from "@/config/ai";
 
 import { Mouse } from "lucide-react";
+import { getWeightUnit, toDisplayWt } from "@/utils/units";
 
 import DarkVeil from "@/components/DarkVeil";
 import SoftAurora from "@/components/SoftAurora";
@@ -296,6 +297,10 @@ function C2Section({ data, scrollRef }) {
   const { carbonDocs, user } = data;
   const [cityTip, setCityTip] = useState("");
 
+  // Read unit preferences — all stored values are kg CO₂; convert for display only
+  const weightUnit = getWeightUnit();
+  const dispWt = (kg) => toDisplayWt(kg, weightUnit);
+
   const stats = useMemo(() => {
     if (!carbonDocs || carbonDocs.length === 0) return null;
     const avgDaily = mean(carbonDocs.map((e) => e.total_co2 || 0));
@@ -359,16 +364,20 @@ function C2Section({ data, scrollRef }) {
           <>
             <GlassCard>
               <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-cyan-300">
-                {`${stats.avgDaily.toFixed(1)} kg CO₂ / day`}
+                {`${dispWt(stats.avgDaily).toFixed(1)} ${weightUnit} CO₂ / day`}
               </ScrollFloat>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Global average: 13.7 kg/day (5,000 kg/year)</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
+                {`Global average: ${dispWt(13.7).toFixed(1)} ${weightUnit}/day (${dispWt(5000).toFixed(0)} ${weightUnit}/year)`}
+              </p>
             </GlassCard>
 
             <GlassCard>
               <ScrollFloat scrollContainerRef={scrollRef} textClassName="text-blue-300">
-                {`${stats.annualProjected.toFixed(0)} kg CO₂ / year (projected)`}
+                {`${dispWt(stats.annualProjected).toFixed(0)} ${weightUnit} CO₂ / year (projected)`}
               </ScrollFloat>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Paris Agreement target: below 2,300 kg/year (6.3 kg/day)</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
+                {`Paris Agreement target: below ${dispWt(2300).toFixed(0)} ${weightUnit}/year (${dispWt(6.3).toFixed(1)} ${weightUnit}/day)`}
+              </p>
             </GlassCard>
 
             <GlassCard>
