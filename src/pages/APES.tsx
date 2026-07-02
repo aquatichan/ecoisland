@@ -244,7 +244,7 @@ export default function ApesPage() {
         <div className="mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold mb-4"
             style={{ background: "rgba(0,200,150,0.1)", border: "1px solid rgba(0,200,150,0.2)", color: "#00c896" }}>
-            <BookOpen className="w-3.5 h-3.5" /> AP Environmental Science
+            <CheckCircle className="w-3.5 h-3.5" /> Verified For 2026-2027
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-3" style={{ letterSpacing: "-0.03em", color: "var(--text-primary)" }}>
             APES Study Guide

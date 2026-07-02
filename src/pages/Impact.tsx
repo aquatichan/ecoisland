@@ -387,7 +387,7 @@ function C2Section({ data, scrollRef }) {
 
             {cityTip && (
               <GlassCard>
-                <ScrollReveal scrollContainerRef={scrollRef} enableBlur>
+                <ScrollReveal scrollContainerRef={scrollRef} enableBlur textClassName="text-red-300">
                   {cityTip}
                 </ScrollReveal>
               </GlassCard>

@@ -446,7 +446,7 @@ export default function ActionFeed() {
                       ) : (
                         <div className="flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-dashed transition-colors" style={{ borderColor: "var(--border-input)" }}>
                           <ImageIcon className="w-4 h-4 text-slate-400" />
-                          <span className="text-sm text-slate-400">Add photos (optional) — multiple allowed</span>
+                          <span className="text-sm text-slate-400">Add photos (optional, total ≤750 KB)</span>
                         </div>
                       )}
                     </label>

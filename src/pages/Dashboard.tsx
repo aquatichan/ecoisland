@@ -7,7 +7,7 @@ import { User } from "@/entities/User";
 import {
   Palmtree, Leaf, Globe, Camera, BarChart3, Recycle,
   BookOpen, ArrowRight, TreePine, Zap, Trophy, TrendingUp,
-  Sparkles, ChevronRight, Activity
+  Sparkles, ChevronRight, Activity, Rocket, Dumbbell, Users, MapPin
 } from "lucide-react";
 import { db, auth } from "@/firebase";
 import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
@@ -91,11 +91,15 @@ export default function Dashboard() {
         const uid = auth.currentUser?.uid;
         if (uid) {
           const [logsSnap, postsSnap] = await Promise.all([
-            getDocs(query(collection(db, "carbon_logs"), where("userId", "==", uid), orderBy("date", "desc"), limit(3))).catch(() => ({ docs: [] })),
-            getDocs(query(collection(db, "posts"), where("userId", "==", uid), orderBy("createdAt", "desc"), limit(3))).catch(() => ({ docs: [] })),
+            getDocs(query(collection(db, "users", uid, "carbon_entries"), orderBy("date", "desc"), limit(3))).catch(() => ({ docs: [] })),
+            getDocs(query(collection(db, "posts"), where("userId", "==", uid), limit(20))).catch(() => ({ docs: [] })),
           ]);
           setRecentLogs(logsSnap.docs.map(d => ({ id: d.id, ...d.data() })));
-          setRecentPosts(postsSnap.docs.map(d => ({ id: d.id, ...d.data() })));
+          const sorted = postsSnap.docs
+            .map(d => ({ id: d.id, ...d.data() }))
+            .sort((a: any, b: any) => (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0))
+            .slice(0, 3);
+          setRecentPosts(sorted);
         }
       } catch (e) { console.error(e); }
       finally { setIsLoading(false); }
@@ -301,6 +305,66 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
+
+        {/* ===== GET STARTED ===== */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-6 eco-card p-6"
+        >
+          <div className="flex items-center gap-2 mb-5">
+            <Rocket className="w-5 h-5 text-emerald-500" />
+            <h2 className="font-black text-emerald-600 text-lg" style={{ letterSpacing: "-0.01em" }}>
+              "How can I get started?"
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              {
+                icon: "🏔️",
+                title: "Build Your Island",
+                desc: "Purchase your first island and begin making it your own, with effects, decorations, and more!",
+                url: createPageUrl("Island"),
+              },
+              {
+                icon: "💪",
+                title: "Track Your Impact",
+                desc: "Log your daily activities and earn Treecoins through a more sustainable carbon footprint!",
+                url: createPageUrl("CarbonFootprint"),
+              },
+              {
+                icon: "👥",
+                title: "Join the Community",
+                desc: "Share environmental news in the Action Feed and connect with eco-conscious individuals!",
+                url: createPageUrl("ActionFeed"),
+              },
+              {
+                icon: "📍",
+                title: "Explore Locally",
+                desc: "Check out your region's local sustainability data and seek ways to make a difference!",
+                url: createPageUrl("RegionalData"),
+              },
+            ].map((item) => (
+              <Link key={item.title} to={item.url}>
+                <motion.div
+                  whileHover={{ borderColor: "#00c896", boxShadow: "0 4px 16px rgba(0,200,150,0.1)" }}
+                  className="p-4 rounded-xl h-full"
+                  style={{
+                    border: "2px solid var(--border-card)",
+                    background: "var(--bg-subtle)",
+                    transition: "border-color 0.2s, box-shadow 0.2s",
+                  }}
+                >
+                  <h3 className="font-black text-slate-800 text-sm mb-1.5 flex items-center gap-2">
+                    <span className="text-base">{item.icon}</span> {item.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
     </div>

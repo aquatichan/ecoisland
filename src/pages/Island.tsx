@@ -92,10 +92,10 @@ const ISLAND_ITEMS: IslandItem[] = [
   },
   {
     id: "glitchy",
-    name: "GLITCHY",
+    name: "ĞŁĨȚĊĦŶ",
     cost: 666,
     category: "skybox",
-    description: "!Ëćøįšłåñ∂ îś šō çöòł¡",
+    description: "!Ëćøįšłåñð îś šō çöòł¡",
     emoji: "👾",
     color: "#063104",
     image: `${ASSET_BASE}/GLITCHY.png`,
@@ -105,7 +105,7 @@ const ISLAND_ITEMS: IslandItem[] = [
     name: "Metropolis Sunset",
     cost: 210,
     category: "skybox",
-    description: "Imagine a drive in this environment, makes you want to save it",
+    description: "Imagine a drive in this environment, makes you want to savor it",
     emoji: "🌅",
     color: "#f97316",
     image: `${ASSET_BASE}/Metropolis Sunset.png`,
@@ -115,7 +115,7 @@ const ISLAND_ITEMS: IslandItem[] = [
     name: "Moonshine",
     cost: 130,
     category: "skybox",
-    description: "Fun fact: our moon dictates our tides",
+    description: "Fun fact: the moon dictates our tides",
     emoji: "🌕",
     color: "#f1d983",
     image: `${ASSET_BASE}/Moonshine.png`,
@@ -1045,12 +1045,6 @@ export default function Island() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Small footer hint */}
-        <div className="mt-6 text-xs text-slate-400 flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5" />
-          Drag decorations anywhere on the island and their saved positions will return next time.
         </div>
       </div>
     </div>

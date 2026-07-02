@@ -314,7 +314,7 @@ export default function CarbonFootprint() {
                 disabled={isLogging || todaysLogs >= DAILY_LIMIT}
                 className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 transition-all"
                 style={{
-                  background: isLogging || todaysLogs >= DAILY_LIMIT ? "#94a3b8" : "linear-gradient(135deg, #00c896, #059669)",
+                  background: isLogging || todaysLogs >= DAILY_LIMIT ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
                   boxShadow: isLogging || todaysLogs >= DAILY_LIMIT ? "none" : "0 4px 15px rgba(0,200,150,0.3)",
                   cursor: isLogging || todaysLogs >= DAILY_LIMIT ? "not-allowed" : "pointer",
                 }}
@@ -367,7 +367,7 @@ export default function CarbonFootprint() {
                     <Tooltip content={<CustomTooltip weightUnit={weightUnit} />} />
                     <ReferenceLine y={dispWt(GLOBAL_AVG_KG)}  stroke="#ef444440" strokeDasharray="4 2" />
                     <ReferenceLine y={dispWt(PARIS_TARGET_KG)} stroke="#10b98140" strokeDasharray="4 2" />
-                    <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#00c896" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={false} />
+                    <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#00c896" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={true} />
                     <Line type="monotone" dataKey="globalAvg"    name="Global Average" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
                     <Line type="monotone" dataKey="parisTarget"  name="Paris Target"   stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
                   </LineChart>

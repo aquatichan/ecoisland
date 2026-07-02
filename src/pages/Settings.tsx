@@ -46,7 +46,10 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
           <div>
             <label className="cursor-pointer">
               <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 border-2 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer">
+              <span 
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer" 
+                style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.2)" }}
+              > 
                 <Upload className="w-4 h-4" /> Upload Photo
               </span>
             </label>
@@ -257,7 +260,7 @@ function PrivacyTab({ user, onSaved }) {
         </p>
 
         <div className="space-y-4">
-          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 dark:bg-emerald-900/12 bg-emerald-50" : "border-slate-200 bg-white"}`}>
+          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 bg-emerald-50 dark:bg-emerald-900/12" : "border-slate-200 bg-white"}`}>
             <input
               type="radio"
               className="mt-1 accent-emerald-500"
