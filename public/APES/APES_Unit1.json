@@ -1,38 +1,651 @@
 [
   {
-    "question": "Which process converts solar energy into chemical energy stored in glucose?",
+    "question": "Which of the following best describes the difference between how energy and matter move through an ecosystem?",
     "difficulty": "Easy",
-    "A": "Respiration",
+    "A": "Energy flows in one direction and is eventually lost as heat, while matter is recycled among biotic and abiotic components",
+    "B": "Both energy and matter cycle repeatedly through an ecosystem without being lost",
+    "C": "Energy is recycled among trophic levels, while matter flows in one direction and leaves the ecosystem",
+    "D": "Both energy and matter flow in a single direction and are lost from the ecosystem after one pass",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Fate of Energy vs. Matter in an Ecosystem",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Component", "Movement Pattern", "Ultimate Fate"],
+      "rows": [
+        ["Energy", "One-directional through trophic levels", "Lost as heat"],
+        ["Matter (e.g., carbon, nitrogen)", "Cycles among biotic and abiotic pools", "Recycled, not lost"]
+      ]
+    }
+  },
+  {
+    "question": "A biome is best defined as a large geographic region characterized primarily by which of the following?",
+    "difficulty": "Easy",
+    "A": "Its characteristic climate (temperature and precipitation patterns) and the resulting dominant vegetation and animal communities",
+    "B": "The specific set of individual species present, regardless of climate",
+    "C": "Its political boundaries and the human land-use activities that occur there",
+    "D": "The single limiting nutrient that controls productivity in that region",
+    "answer": "A"
+  },
+  {
+    "question": "A biologist samples a desert biome and a tropical rainforest biome to compare annual precipitation and mean temperature. Based on typical biome classifications, which combination of climate values would most likely describe the desert site compared to the rainforest site?",
+    "difficulty": "Easy",
+    "A": "Much lower annual precipitation and greater daily temperature fluctuation than the rainforest",
+    "B": "Higher annual precipitation and less daily temperature fluctuation than the rainforest",
+    "C": "Similar annual precipitation but colder average annual temperature than the rainforest",
+    "D": "Similar precipitation and similar temperature fluctuation to the rainforest",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Approximate Climate Data for Two Biomes",
+      "sourceNote": "Textbook-standard approximate ranges",
+      "headers": ["Biome", "Annual Precipitation (cm)", "Mean Temperature (C)"],
+      "rows": [
+        ["Desert", "less than 25", "highly variable, large daily swings"],
+        ["Tropical rainforest", "200-400", "20-25, little daily variation"]
+      ]
+    }
+  },
+  {
+    "question": "Which aquatic zone in a lake receives the most sunlight and supports the highest rate of photosynthesis?",
+    "difficulty": "Easy",
+    "A": "The photic (limnetic) zone",
+    "B": "The aphotic zone",
+    "C": "The benthic zone",
+    "D": "The abyssal zone",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Lake Zones and Light Availability",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Zone", "Light Level", "Photosynthesis Rate"],
+      "rows": [
+        ["Photic (limnetic)", "High", "High"],
+        ["Aphotic", "None", "None"],
+        ["Benthic", "Low to none", "Low to none"]
+      ]
+    }
+  },
+  {
+    "question": "An estuary is best described as a transitional ecosystem where which of the following occurs?",
+    "difficulty": "Easy",
+    "A": "Freshwater from rivers mixes with saltwater from the ocean, creating a brackish, highly productive habitat",
+    "B": "Only freshwater organisms can survive due to the complete absence of salt",
+    "C": "Water salinity remains constant and equal to open ocean salinity year-round",
+    "D": "Photosynthesis is impossible due to consistently turbid, light-blocked water",
+    "answer": "A"
+  },
+  {
+    "question": "In the carbon cycle, which process directly returns carbon dioxide from living organisms to the atmosphere?",
+    "difficulty": "Easy",
+    "A": "Cellular respiration",
     "B": "Photosynthesis",
-    "C": "Decomposition",
-    "D": "Transpiration",
-    "answer": "B"
+    "C": "Sedimentation",
+    "D": "Nitrogen fixation",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Carbon Cycle Processes",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Process", "Direction of Carbon Flow"],
+      "rows": [
+        ["Photosynthesis", "Atmosphere -> living tissue"],
+        ["Cellular respiration", "Living tissue -> atmosphere"],
+        ["Sedimentation", "Ocean/biomass -> long-term rock storage"]
+      ]
+    }
   },
   {
-    "question": "Which statement best describes the flow of energy in an ecosystem?",
+    "question": "Which of the following is the primary long-term reservoir for carbon on Earth?",
     "difficulty": "Medium",
-    "A": "Energy cycles through ecosystems while matter flows in one direction",
-    "B": "Both matter and energy cycle within ecosystems",
-    "C": "Energy flows in one direction while matter cycles",
-    "D": "Energy and matter both flow in one direction",
-    "answer": "C"
+    "A": "Sedimentary rock and fossil fuel deposits",
+    "B": "The atmosphere",
+    "C": "Living plant biomass",
+    "D": "Freshwater lakes and rivers",
+    "answer": "A",
+    "stimulus": {
+      "type": "pie",
+      "title": "Approximate Distribution of Earth's Carbon Reservoirs",
+      "sourceNote": "Hypothetical simplified proportions for this exercise, based on textbook-standard relative reservoir sizes",
+      "slices": [
+        {"label": "Sedimentary rock & fossil fuels", "value": 78},
+        {"label": "Ocean (dissolved)", "value": 20},
+        {"label": "Atmosphere", "value": 1},
+        {"label": "Living biomass & soil", "value": 1}
+      ]
+    }
   },
   {
-    "question": "Which of the following best describes a regulating ecosystem service provided by wetlands?",
+    "question": "Which of the following processes converts atmospheric nitrogen gas (N2) into a form usable by plants?",
+    "difficulty": "Easy",
+    "A": "Nitrogen fixation by bacteria such as Rhizobium",
+    "B": "Denitrification by anaerobic bacteria",
+    "C": "Ammonification by decomposers",
+    "D": "Assimilation by plant roots",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Key Nitrogen Cycle Processes",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Process", "Description"],
+      "rows": [
+        ["Nitrogen fixation", "N2 gas converted to ammonia/ammonium by bacteria"],
+        ["Nitrification", "Ammonium converted to nitrite then nitrate"],
+        ["Denitrification", "Nitrate converted back to N2 gas, returned to atmosphere"]
+      ]
+    }
+  },
+  {
+    "question": "Farmers in a river valley apply nitrogen fertilizer to their fields each spring. Runoff data collected downstream over four years show a rise in nitrate concentration and a corresponding decline in dissolved oxygen during summer months. Which sequence of nitrogen-cycle processes best explains the observed decline in dissolved oxygen?",
+    "difficulty": "Medium",
+    "A": "Excess nitrate stimulates algal growth; when algae die, bacterial decomposition of the biomass consumes dissolved oxygen",
+    "B": "Nitrate is directly toxic to the bacteria that normally produce oxygen in the river, halting oxygen production",
+    "C": "Denitrification converts nitrate into oxygen gas, which then escapes to the atmosphere and lowers dissolved oxygen",
+    "D": "Nitrogen fixation consumes dissolved oxygen directly as bacteria convert nitrate into ammonia",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Downstream Nitrate and Dissolved Oxygen, Four-Year Trend",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {"name": "Nitrate (mg/L)", "points": [{"x": 1, "y": 2.1}, {"x": 2, "y": 3.4}, {"x": 3, "y": 5.0}, {"x": 4, "y": 6.8}]},
+        {"name": "Dissolved oxygen (mg/L)", "points": [{"x": 1, "y": 7.8}, {"x": 2, "y": 6.5}, {"x": 3, "y": 4.2}, {"x": 4, "y": 2.6}]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Concentration (mg/L)"
+    }
+  },
+  {
+    "question": "Unlike the carbon and nitrogen cycles, the phosphorus cycle has no significant atmospheric gas phase. Which of the following best explains why phosphorus moves so slowly through ecosystems compared to carbon or nitrogen?",
+    "difficulty": "Medium",
+    "A": "Phosphorus is released mainly through the slow weathering of phosphate-containing rock, rather than through fast atmospheric exchange",
+    "B": "Phosphorus is highly volatile and evaporates quickly from soil into the atmosphere before plants can use it",
+    "C": "Phosphorus is consumed entirely by decomposers before it can re-enter the soil or water",
+    "D": "Phosphorus exists only in living organisms and has no abiotic reservoirs at all",
+    "answer": "A"
+  },
+  {
+    "question": "A lake receives phosphorus-laden runoff from surrounding farmland for many years. Researchers record the following changes in the lake over that time. Which explanation best accounts for the trend shown?",
+    "difficulty": "Medium",
+    "A": "Excess phosphorus input is driving cultural eutrophication, fueling algal growth that depletes dissolved oxygen as it decomposes",
+    "B": "The rising phosphorus levels are unrelated to the algal bloom, which is instead caused by increasing water temperature alone",
+    "C": "Declining dissolved oxygen is causing the phosphorus level to rise, reversing the normal cause-and-effect relationship",
+    "D": "Phosphorus and dissolved oxygen levels shown are within the range of normal, undisturbed lake variability",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Lake Water Quality Over a 20-Year Period",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Year", "Phosphorus (mg/L)", "Algal Cover (%)", "Dissolved Oxygen (mg/L)"],
+      "rows": [
+        [0, 0.02, 5, 8.5],
+        [5, 0.06, 15, 7.0],
+        [10, 0.12, 35, 5.0],
+        [15, 0.20, 55, 3.0],
+        [20, 0.28, 70, 1.5]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes the role of transpiration in the hydrologic cycle?",
+    "difficulty": "Easy",
+    "A": "The release of water vapor from plant leaves into the atmosphere",
+    "B": "The downward movement of water through soil into groundwater",
+    "C": "The condensation of water vapor into clouds",
+    "D": "The direct runoff of precipitation into rivers and streams",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Hydrologic Cycle Processes",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Process", "Description"],
+      "rows": [
+        ["Evaporation", "Liquid water at a surface becomes water vapor"],
+        ["Transpiration", "Water vapor released from plant leaves"],
+        ["Condensation", "Water vapor forms liquid droplets (clouds)"],
+        ["Infiltration", "Water moves into soil and groundwater"]
+      ]
+    }
+  },
+  {
+    "question": "A watershed is deforested for agriculture. Hydrologists predict this will increase the volume and speed of surface runoff during storms compared to the forested condition. Which mechanism best explains this prediction?",
+    "difficulty": "Medium",
+    "A": "Removing tree canopy and root systems reduces interception and infiltration, so more precipitation flows overland rather than soaking into the soil",
+    "B": "Deforestation increases the rate of transpiration, which directly increases surface runoff during storms",
+    "C": "Removing trees increases the soil's water-holding capacity, causing water to pool and then run off rapidly",
+    "D": "Deforestation has no effect on runoff because precipitation amounts are determined only by atmospheric conditions",
+    "answer": "A"
+  },
+  {
+    "question": "Gross primary productivity (GPP) minus respiration by producers (R) equals which of the following?",
+    "difficulty": "Easy",
+    "A": "Net primary productivity (NPP)",
+    "B": "Secondary productivity",
+    "C": "Total biomass",
+    "D": "The 10% transfer rate",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Productivity Formula",
+      "sourceNote": "Hypothetical example for this exercise",
+      "headers": ["Term", "Example Value (g C/m^2/yr)"],
+      "rows": [
+        ["GPP", 1000],
+        ["Respiration (R)", 400],
+        ["NPP = GPP - R", 600]
+      ]
+    }
+  },
+  {
+    "question": "Researchers measured gross primary productivity (GPP) and net primary productivity (NPP) in four biomes. Based on the data, which biome allocates the largest proportion of its GPP to autotrophic respiration rather than to new biomass (NPP)?",
     "difficulty": "Hard",
-    "A": "Providing recreational fishing opportunities",
-    "B": "Purifying water by trapping sediments and pollutants",
-    "C": "Producing large amounts of biomass for human consumption",
-    "D": "Providing habitat for crop pollinators",
-    "answer": "B"
+    "A": "Tropical rainforest",
+    "B": "Temperate grassland",
+    "C": "Desert",
+    "D": "Tundra",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "GPP and NPP in Four Biomes (g C/m^2/yr)",
+      "sourceNote": "Hypothetical data loosely based on textbook-standard productivity ranges",
+      "headers": ["Biome", "GPP", "NPP"],
+      "rows": [
+        ["Tropical rainforest", 4500, 2200],
+        ["Temperate grassland", 1200, 750],
+        ["Desert", 300, 210],
+        ["Tundra", 250, 190]
+      ]
+    }
   },
   {
-    "question": "Researchers measure dissolved oxygen (DO) in a stream before and after wastewater input. DO levels drop from 8.0 mg/L to 2.5 mg/L. Which conclusion is best supported?",
-    "difficulty": "Challenge",
-    "A": "Photosynthesis increased due to nutrient enrichment",
-    "B": "Bacterial decomposition of organic matter increased oxygen demand",
-    "C": "The stream temperature decreased, reducing oxygen solubility",
-    "D": "Turbidity decreased, allowing more oxygen exchange",
-    "answer": "B"
+    "question": "Which of the following aquatic ecosystems typically has the highest net primary productivity per unit area?",
+    "difficulty": "Medium",
+    "A": "Estuaries",
+    "B": "Open ocean",
+    "C": "Deep lakes",
+    "D": "Polar seas",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Net Primary Productivity of Aquatic Ecosystems",
+      "sourceNote": "Hypothetical data based on textbook-standard relative productivity rankings",
+      "data": [
+        {"label": "Estuaries", "value": 1500},
+        {"label": "Coral reefs", "value": 1200},
+        {"label": "Open ocean", "value": 125},
+        {"label": "Polar seas", "value": 70}
+      ],
+      "xLabel": "Ecosystem",
+      "yLabel": "NPP (g C/m^2/yr)"
+    }
+  },
+  {
+    "question": "In a simple food chain, which organisms occupy the first trophic level?",
+    "difficulty": "Easy",
+    "A": "Producers, such as plants and algae",
+    "B": "Primary consumers, such as herbivores",
+    "C": "Secondary consumers, such as carnivores that eat herbivores",
+    "D": "Decomposers, such as fungi and bacteria",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Trophic Levels in a Grassland Food Chain",
+      "sourceNote": "Hypothetical example for this exercise",
+      "headers": ["Trophic Level", "Example Organism"],
+      "rows": [
+        ["1st (producer)", "Grass"],
+        ["2nd (primary consumer)", "Grasshopper"],
+        ["3rd (secondary consumer)", "Songbird"],
+        ["4th (tertiary consumer)", "Hawk"]
+      ]
+    }
+  },
+  {
+    "question": "According to the 10% rule, if a population of producers contains 100,000 kcal of energy, approximately how much energy is available to tertiary consumers (three trophic transfers away)?",
+    "difficulty": "Medium",
+    "A": "100 kcal",
+    "B": "1,000 kcal",
+    "C": "10,000 kcal",
+    "D": "10 kcal",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Energy at Each Trophic Level",
+      "sourceNote": "Hypothetical data illustrating the 10% rule",
+      "data": [
+        {"label": "Producers", "value": 100000},
+        {"label": "Primary consumers", "value": 10000},
+        {"label": "Secondary consumers", "value": 1000},
+        {"label": "Tertiary consumers", "value": 100}
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Energy (kcal)"
+    }
+  },
+  {
+    "question": "Why do food chains rarely extend beyond four or five trophic levels?",
+    "difficulty": "Medium",
+    "A": "The progressive loss of energy at each trophic transfer leaves too little energy to support an additional, viable population at a higher level",
+    "B": "Predators at high trophic levels always go extinct due to disease before a fifth level can form",
+    "C": "Ecosystems are legally or physically prevented from supporting more than four trophic levels",
+    "D": "Decomposers consume all organisms above the fourth trophic level before predation can occur",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Available Energy by Trophic Level",
+      "sourceNote": "Hypothetical data illustrating the 10% rule over five levels",
+      "data": [
+        {"label": "Level 1", "value": 1000000},
+        {"label": "Level 2", "value": 100000},
+        {"label": "Level 3", "value": 10000},
+        {"label": "Level 4", "value": 1000},
+        {"label": "Level 5", "value": 100}
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Energy (kcal)"
+    }
+  },
+  {
+    "question": "A food web, as opposed to a simple food chain, is best described as which of the following?",
+    "difficulty": "Easy",
+    "A": "A network of interconnected food chains showing multiple feeding relationships among species in an ecosystem",
+    "B": "A single linear sequence showing energy flow from one producer to one final consumer",
+    "C": "A diagram that shows only the producers in an ecosystem and excludes all consumers",
+    "D": "A model that tracks only nutrient cycling and excludes energy flow entirely",
+    "answer": "A"
+  },
+  {
+    "question": "Sea otters prey on sea urchins, which graze on kelp. When sea otter populations were nearly eliminated by hunting along parts of the Pacific coast, kelp forests declined dramatically in affected areas before partially recovering after otter protections were enacted. Which term best describes the otter's ecological role in this system?",
+    "difficulty": "Medium",
+    "A": "Keystone species",
+    "B": "Primary producer",
+    "C": "Decomposer",
+    "D": "Detritivore",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Kelp Forest Condition With and Without Sea Otters",
+      "sourceNote": "Hypothetical data modeled on real observed otter-urchin-kelp dynamics",
+      "headers": ["Condition", "Sea Urchin Density", "Kelp Coverage"],
+      "rows": [
+        ["Otters present", "Low", "High"],
+        ["Otters removed (hunted)", "High", "Low"]
+      ]
+    }
+  },
+  {
+    "question": "A researcher removes the top predator from a small experimental pond food web and monitors the abundance of species at each trophic level over the following two years. Populations of the predator's prey (mid-level consumers) increase sharply, while populations of the prey's food source (primary producers) decline sharply. This pattern best illustrates which ecological concept?",
+    "difficulty": "Hard",
+    "A": "A trophic cascade, in which the effects of removing a top predator propagate down through multiple trophic levels",
+    "B": "Primary succession, in which a community develops on newly exposed substrate with no prior soil",
+    "C": "The 10% rule, which describes energy loss between trophic levels but not population-level effects of predator removal",
+    "D": "Resource partitioning, in which competing species divide a limited resource to reduce competition",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Pond Community Response to Top Predator Removal",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {"name": "Mid-level consumers (relative abundance)", "points": [{"x": 0, "y": 20}, {"x": 6, "y": 45}, {"x": 12, "y": 70}, {"x": 18, "y": 85}, {"x": 24, "y": 90}]},
+        {"name": "Primary producers (relative abundance)", "points": [{"x": 0, "y": 90}, {"x": 6, "y": 65}, {"x": 12, "y": 40}, {"x": 18, "y": 20}, {"x": 24, "y": 12}]}
+      ],
+      "xLabel": "Months since predator removal",
+      "yLabel": "Relative abundance"
+    }
+  },
+  {
+    "question": "Which of the following best explains why biomass pyramids are typically depicted as wide at the base and narrow at the top?",
+    "difficulty": "Easy",
+    "A": "Energy losses at each trophic transfer limit how much biomass can be supported at higher trophic levels",
+    "B": "Producers are physically larger organisms than consumers in nearly all ecosystems",
+    "C": "Consumers reproduce more slowly than producers, which limits their total biomass regardless of energy availability",
+    "D": "Decomposers consume most producer biomass before it can be counted in the pyramid",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Biomass Pyramid: Grassland Ecosystem",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "Producers", "value": 5000},
+        {"label": "Primary consumers", "value": 500},
+        {"label": "Secondary consumers", "value": 50},
+        {"label": "Tertiary consumers", "value": 5}
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Biomass (kg/ha)"
+    }
+  },
+  {
+    "question": "A marine ecologist calculates that a certain patch of ocean has a phytoplankton biomass of 50,000 kg. Assuming standard 10% ecological efficiency at each trophic transfer, approximately how much biomass could be supported at the secondary consumer level (two transfers above phytoplankton)?",
+    "difficulty": "Medium",
+    "A": "500 kg",
+    "B": "5,000 kg",
+    "C": "50 kg",
+    "D": "5 kg",
+    "answer": "A"
+  },
+  {
+    "question": "Which biome is characterized by permanently frozen subsoil (permafrost), low biodiversity, and short growing seasons dominated by mosses, lichens, and low shrubs?",
+    "difficulty": "Easy",
+    "A": "Tundra",
+    "B": "Taiga (boreal forest)",
+    "C": "Temperate grassland",
+    "D": "Tropical savanna",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Key Features of Four Terrestrial Biomes",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Biome", "Soil Feature", "Dominant Vegetation"],
+      "rows": [
+        ["Tundra", "Permafrost", "Mosses, lichens, low shrubs"],
+        ["Taiga", "Acidic, nutrient-poor", "Coniferous trees"],
+        ["Temperate grassland", "Deep, fertile", "Grasses"],
+        ["Tropical savanna", "Well-drained", "Grasses with scattered trees"]
+      ]
+    }
+  },
+  {
+    "question": "A tropical rainforest and a desert both receive abundant sunlight year-round, yet the rainforest supports vastly higher net primary productivity and biodiversity. Which factor most directly explains this difference?",
+    "difficulty": "Medium",
+    "A": "The rainforest receives far more precipitation, which is the primary limiting factor for productivity in the desert but not in the rainforest",
+    "B": "The desert receives less sunlight overall than the rainforest, limiting photosynthesis",
+    "C": "Deserts have higher average temperatures, which directly reduces photosynthetic rates below those in rainforests",
+    "D": "Rainforest soils are inherently richer in nutrients than desert soils, independent of any difference in water availability",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following ocean zones is defined by depths that receive no sunlight at all, precluding photosynthesis?",
+    "difficulty": "Easy",
+    "A": "The aphotic zone",
+    "B": "The photic zone",
+    "C": "The intertidal zone",
+    "D": "The neritic zone",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Ocean Zones by Depth and Light",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Zone", "Approximate Depth", "Light Present?"],
+      "rows": [
+        ["Intertidal", "0 m (shoreline)", "Yes"],
+        ["Photic", "0-200 m", "Yes"],
+        ["Aphotic", "below 200 m", "No"]
+      ]
+    }
+  },
+  {
+    "question": "A stream ecologist samples macroinvertebrate communities at five sites along a river, from a forested headwater to an agricultural lowland reach. Based on typical patterns of nutrient input and productivity along a river's length, which of the following would most likely be observed moving downstream?",
+    "difficulty": "Hard",
+    "A": "Primary productivity generally increases downstream as nutrient inputs, sunlight exposure (due to a wider channel), and temperature increase",
+    "B": "Primary productivity is identical at every point along a river regardless of nutrient input or channel width",
+    "C": "Primary productivity decreases sharply and continuously downstream due to a steady decline in dissolved oxygen",
+    "D": "Primary productivity depends only on channel depth and is unrelated to nutrient input or light availability",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Primary Productivity Along a River Gradient",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 1, "y": 20}, {"x": 2, "y": 35}, {"x": 3, "y": 55}, {"x": 4, "y": 80}, {"x": 5, "y": 110}
+      ],
+      "xLabel": "Sampling site (1 = headwater, 5 = lowland)",
+      "yLabel": "Primary productivity (g C/m^2/day)"
+    }
+  },
+  {
+    "question": "Ammonification is best described as which of the following processes in the nitrogen cycle?",
+    "difficulty": "Medium",
+    "A": "The conversion of organic nitrogen (from dead organisms and waste) into ammonia/ammonium by decomposer bacteria and fungi",
+    "B": "The conversion of atmospheric nitrogen gas directly into nitrate by lightning strikes",
+    "C": "The uptake of nitrate by plant roots for use in building proteins",
+    "D": "The conversion of nitrate back into nitrogen gas by anaerobic bacteria in waterlogged soils",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Nitrogen Cycle: Organic to Inorganic Forms",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Step", "Input", "Output", "Agent"],
+      "rows": [
+        ["Ammonification", "Organic nitrogen (waste, dead tissue)", "Ammonia/ammonium", "Decomposer bacteria & fungi"],
+        ["Nitrification", "Ammonium", "Nitrite, then nitrate", "Nitrifying bacteria"],
+        ["Assimilation", "Nitrate", "Plant proteins", "Plant roots"]
+      ]
+    }
+  },
+  {
+    "question": "A student claims that because energy is lost at every trophic transfer, ecosystems must eventually run out of usable energy entirely. Which of the following best explains why this claim is incorrect?",
+    "difficulty": "Hard",
+    "A": "Producers continuously convert new solar energy into chemical energy through photosynthesis, so each trophic level is resupplied with fresh energy input rather than only recycling what was previously fixed",
+    "B": "Energy lost as heat at each trophic level is eventually converted back into usable chemical energy by decomposers",
+    "C": "The 10% rule only applies to matter, not energy, so energy is not actually lost between trophic levels",
+    "D": "Ecosystems do eventually run out of usable energy, which is why all ecosystems have a finite, predictable lifespan",
+    "answer": "A"
+  },
+  {
+    "question": "Detritivores and decomposers both play essential roles in ecosystems, but they differ primarily in which way?",
+    "difficulty": "Medium",
+    "A": "Detritivores physically ingest dead organic matter, while decomposers chemically break it down through extracellular digestion and absorption",
+    "B": "Detritivores are exclusively microscopic, while decomposers are always visible to the naked eye",
+    "C": "Detritivores only consume plant matter, while decomposers only consume animal matter",
+    "D": "Detritivores return nutrients to the soil, while decomposers remove nutrients from the soil permanently",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Detritivores vs. Decomposers",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Group", "Example", "Method of Breakdown"],
+      "rows": [
+        ["Detritivores", "Earthworms, millipedes", "Physically ingest dead matter"],
+        ["Decomposers", "Fungi, bacteria", "Chemically break down matter externally and absorb nutrients"]
+      ]
+    }
+  },
+  {
+    "question": "Ecologists compare annual precipitation and net primary productivity (NPP) across nine terrestrial sites spanning multiple biomes. Based on the scatter plot, which statement best describes the relationship shown?",
+    "difficulty": "Medium",
+    "A": "NPP generally increases with annual precipitation, consistent with water availability being a major control on terrestrial productivity",
+    "B": "NPP is unrelated to precipitation, since some low-precipitation sites have the highest NPP values",
+    "C": "NPP decreases as precipitation increases across all nine sites without exception",
+    "D": "The data show that temperature, not precipitation, is the only factor controlling NPP",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Annual Precipitation vs. Net Primary Productivity",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 20, "y": 150}, {"x": 40, "y": 300}, {"x": 60, "y": 500}, {"x": 90, "y": 700},
+        {"x": 120, "y": 1000}, {"x": 150, "y": 1300}, {"x": 200, "y": 1900}, {"x": 250, "y": 2200}, {"x": 300, "y": 2400}
+      ],
+      "trendline": {"x1": 20, "y1": 200, "x2": 300, "y2": 2300},
+      "xLabel": "Annual precipitation (cm)",
+      "yLabel": "NPP (g C/m^2/yr)"
+    }
+  },
+  {
+    "question": "In which of the following biomes would you most expect to find fire-adapted plant traits, such as thick bark or fire-triggered seed release, as a dominant characteristic of the plant community?",
+    "difficulty": "Medium",
+    "A": "Chaparral / Mediterranean shrubland and savanna",
+    "B": "Tropical rainforest",
+    "C": "Tundra",
+    "D": "Deep ocean benthic zone",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Fire Frequency and Plant Traits by Biome",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Biome", "Typical Fire Frequency", "Common Plant Trait"],
+      "rows": [
+        ["Chaparral/savanna", "Frequent (seasonal dry period)", "Thick bark, fire-triggered seed release"],
+        ["Tropical rainforest", "Rare (naturally)", "Thin bark, no fire adaptation needed"],
+        ["Tundra", "Very rare", "Low-growing, no fire adaptation"]
+      ]
+    }
+  },
+  {
+    "question": "A limnologist samples a freshwater lake and finds phytoplankton concentrated almost entirely within the top 10 meters of the water column, even though the lake itself is 40 meters deep. Which explanation best accounts for this vertical distribution?",
+    "difficulty": "Medium",
+    "A": "Sunlight needed for photosynthesis penetrates only the upper portion of the water column, restricting phytoplankton to the photic zone",
+    "B": "Phytoplankton actively avoid deeper water because dissolved oxygen concentrations are always highest near the surface",
+    "C": "Water pressure at depths below 10 meters is too great for phytoplankton cell walls to withstand",
+    "D": "Nutrient concentrations are highest in the top 10 meters and are entirely absent below that depth",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best describes bioaccumulation as distinct from biomagnification?",
+    "difficulty": "Hard",
+    "A": "Bioaccumulation is the buildup of a substance within a single organism over its lifetime, while biomagnification is the increasing concentration of that substance across successive trophic levels",
+    "B": "Bioaccumulation occurs only in aquatic ecosystems, while biomagnification occurs only in terrestrial ecosystems",
+    "C": "Bioaccumulation refers to energy accumulation in producers, while biomagnification refers to matter accumulation in consumers",
+    "D": "Bioaccumulation and biomagnification are two names for the exact same single-organism process",
+    "answer": "A"
+  },
+  {
+    "question": "The Sonoran Desert receives an average of about 25-30 cm of precipitation annually, most of it concentrated in two short rainy seasons. Which of the following adaptations would be least useful for a plant species in this biome?",
+    "difficulty": "Medium",
+    "A": "Broad, thin leaves that maximize surface area for rapid transpiration",
+    "B": "Extensive shallow root systems that quickly absorb infrequent rainfall",
+    "C": "Waxy leaf cuticles that reduce water loss through transpiration",
+    "D": "Water storage tissues, such as those found in cactus stems",
+    "answer": "A"
+  },
+  {
+    "question": "Global carbon emissions from fossil fuel combustion have increased the atmospheric carbon dioxide reservoir while the ocean and terrestrial biosphere absorb a portion of that additional carbon. Based on the following simplified carbon budget, what percentage of total anthropogenic emissions was NOT absorbed by land or ocean sinks and instead remained in the atmosphere?",
+    "difficulty": "Hard",
+    "A": "46%",
+    "B": "31%",
+    "C": "23%",
+    "D": "100%",
+    "answer": "A",
+    "stimulus": {
+      "type": "pie",
+      "title": "Simplified Annual Global Carbon Budget",
+      "sourceNote": "Hypothetical simplified figures based on textbook-standard approximate carbon budget proportions",
+      "slices": [
+        {"label": "Remains in atmosphere", "value": 46},
+        {"label": "Absorbed by ocean", "value": 23},
+        {"label": "Absorbed by land/terrestrial biosphere", "value": 31}
+      ]
+    }
+  },
+  {
+    "question": "Which statement correctly compares gross primary productivity (GPP) and net primary productivity (NPP)?",
+    "difficulty": "Easy",
+    "A": "GPP is always greater than or equal to NPP because NPP subtracts the energy producers use for their own respiration",
+    "B": "NPP is always greater than GPP because NPP includes energy consumed by herbivores",
+    "C": "GPP and NPP are always numerically equal in any ecosystem, regardless of respiration",
+    "D": "GPP measures energy available to secondary consumers, while NPP measures energy available only to producers",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "GPP vs. NPP in Three Ecosystems",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Ecosystem", "GPP (g C/m^2/yr)", "Respiration (g C/m^2/yr)", "NPP (g C/m^2/yr)"],
+      "rows": [
+        ["Tropical rainforest", 4500, 2300, 2200],
+        ["Temperate forest", 2200, 1100, 1100],
+        ["Desert", 300, 90, 210]
+      ]
+    }
   }
 ]

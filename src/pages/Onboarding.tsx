@@ -8,10 +8,32 @@ import { createPageUrl } from "@/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   TreePine, ArrowRight, ArrowLeft, Upload, Sparkles,
-  CheckCircle, Globe, Users, TrendingUp, Trophy, Zap, Leaf
+  CheckCircle, Globe, Users, TrendingUp, Trophy, Zap, Leaf, AlertTriangle
 } from "lucide-react";
+import { db } from "@/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { REWARDS } from "@/utils/progression";
+import confetti from "canvas-confetti";
 
 const SLIDE_COUNT = 4;
+
+const USERNAME_PATTERN = /^[A-Za-z0-9._-]+$/;
+
+// Returns an error message string, or null when the (trimmed) username is valid.
+function validateUsernameFormat(raw) {
+  const candidate = (raw || "").trim();
+  if (!candidate) return "Username is required";
+  if (candidate.length < 3) return "Username must be at least 3 characters";
+  if (candidate.length > 20) return "Username must be 20 characters or fewer";
+  if (!USERNAME_PATTERN.test(candidate)) return "Only letters, numbers, underscores, hyphens, and periods are allowed";
+  return null;
+}
+
+// True if another account (different uid) already uses this username.
+async function isUsernameTaken(candidate, ownUid) {
+  const snap = await getDocs(query(collection(db, "users"), where("username", "==", candidate)));
+  return snap.docs.some(d => d.id !== ownUid);
+}
 
 const slideVariants = {
   enter: (dir) => ({ x: dir > 0 ? 600 : -600, opacity: 0 }),
@@ -29,6 +51,8 @@ export default function Onboarding() {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [errors, setErrors] = useState({});
+  const [banner, setBanner] = useState(null);
+  const [checkingUsername, setCheckingUsername] = useState(false);
 
   useEffect(() => {
     User.me()
@@ -42,6 +66,7 @@ export default function Onboarding() {
 
   const handleLogin = async () => {
     setIsLoading(true);
+    setBanner(null);
     try {
       await User.login();
       const u = await User.me();
@@ -49,33 +74,58 @@ export default function Onboarding() {
       if (u.onboarding_complete) navigate(createPageUrl("Dashboard"), { replace: true });
       else goNext();
     } catch (error) {
-      alert(`Login failed. ${error?.message || "Please try again."}`);
+      setBanner(`Login failed. ${error?.message || "Please try again."}`);
     } finally { setIsLoading(false); }
   };
 
-  const validate = () => {
-    const e = {};
-    if (slide === 1 && !formData.username.trim()) e.username = "Username is required";
-    setErrors(e);
-    return Object.keys(e).length === 0;
+  const validateUsernameSlide = async () => {
+    const formatError = validateUsernameFormat(formData.username);
+    if (formatError) {
+      setErrors({ username: formatError });
+      return false;
+    }
+    const candidate = formData.username.trim();
+    setCheckingUsername(true);
+    try {
+      const taken = await isUsernameTaken(candidate, currentUser?.id);
+      if (taken) {
+        setErrors({ username: "That username is already taken. Try another one." });
+        return false;
+      }
+    } catch {
+      setErrors({ username: "Couldn't check username availability. Please try again." });
+      return false;
+    } finally {
+      setCheckingUsername(false);
+    }
+    setErrors({});
+    setFormData(p => ({ ...p, username: candidate }));
+    return true;
   };
 
-  const goNext = () => {
-    if (!validate()) return;
+  const goNext = async () => {
+    setBanner(null);
+    if (slide === 1 && !(await validateUsernameSlide())) return;
     setDir(1);
     setSlide(s => Math.min(s + 1, SLIDE_COUNT - 1));
   };
-  const goBack = () => { setDir(-1); setSlide(s => Math.max(s - 1, 0)); };
+  const goBack = () => { setBanner(null); setDir(-1); setSlide(s => Math.max(s - 1, 0)); };
 
   const handleFinish = async () => {
     setIsLoading(true);
+    setBanner(null);
     try {
       let avatarUrl = currentUser?.avatar_url || "";
       if (avatarFile) {
         const { file_url } = await UploadFile({ file: avatarFile });
         avatarUrl = file_url;
       }
-      await User.updateMyUserData({
+      // Re-read the user right before saving so the welcome gift can never be
+      // granted twice (e.g. double-click, second device, stale state).
+      let freshUser = currentUser;
+      try { freshUser = await User.me(); } catch { /* fall back to state */ }
+
+      const updates = {
         username: formData.username.trim(),
         bio: formData.bio.trim(),
         zip_code: formData.zip_code.trim(),
@@ -83,10 +133,23 @@ export default function Onboarding() {
         country: formData.country,
         avatar_url: avatarUrl,
         onboarding_complete: true,
+      };
+      if (!freshUser?.onboarding_complete) {
+        updates.treecoins = (freshUser?.treecoins || 0) + REWARDS.ONBOARDING_GIFT_TC;
+      }
+      await User.updateMyUserData(updates);
+
+      confetti({
+        particleCount: 140,
+        spread: 75,
+        origin: { y: 0.6 },
+        colors: ["#00c896", "#06b6d4", "#10b981", "#fbbf24"],
       });
-      navigate(createPageUrl("Dashboard"), { replace: true });
-    } catch { alert("Could not save profile. Please try again."); }
-    finally { setIsLoading(false); }
+      setTimeout(() => navigate(createPageUrl("Dashboard"), { replace: true }), 900);
+    } catch {
+      setBanner("Could not save your profile. Please check your connection and try again.");
+      setIsLoading(false);
+    }
   };
 
   const handleAvatarChange = (e) => {
@@ -154,16 +217,25 @@ export default function Onboarding() {
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-2">Username <span className="text-red-400">*</span></label>
-        <input
-          className="w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 outline-none transition-all"
-          style={{ background: "rgba(255,255,255,0.05)", border: errors.username ? "1.5px solid #ef4444" : "1.5px solid rgba(255,255,255,0.1)", boxShadow: "inset 0 1px 4px rgba(0,0,0,0.3)" }}
-          placeholder="Choose a unique username..."
-          value={formData.username}
-          onChange={e => setFormData(p => ({ ...p, username: e.target.value }))}
-          onFocus={e => e.target.style.borderColor = "#00c896"}
-          onBlur={e => e.target.style.borderColor = errors.username ? "#ef4444" : "rgba(255,255,255,0.1)"}
-        />
-        {errors.username && <p className="text-red-400 text-xs mt-1">{errors.username}</p>}
+        <div className="relative">
+          <input
+            className="w-full px-4 py-3 rounded-xl text-white placeholder-slate-500 outline-none transition-all"
+            style={{ background: "rgba(255,255,255,0.05)", border: errors.username ? "1.5px solid #ef4444" : "1.5px solid rgba(255,255,255,0.1)", boxShadow: "inset 0 1px 4px rgba(0,0,0,0.3)", paddingRight: 44 }}
+            placeholder="Choose a unique username..."
+            value={formData.username}
+            onChange={e => { setFormData(p => ({ ...p, username: e.target.value })); setErrors(p => ({ ...p, username: null })); }}
+            onFocus={e => e.target.style.borderColor = "#00c896"}
+            onBlur={e => e.target.style.borderColor = errors.username ? "#ef4444" : "rgba(255,255,255,0.1)"}
+          />
+          {checkingUsername && (
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full animate-spin" style={{ border: "2px solid rgba(0,200,150,0.25)", borderTopColor: "#00c896" }} />
+          )}
+        </div>
+        {errors.username
+          ? <p className="text-red-400 text-xs mt-1">{errors.username}</p>
+          : checkingUsername
+            ? <p className="text-emerald-400/80 text-xs mt-1">Checking availability...</p>
+            : <p className="text-slate-500 text-xs mt-1">3-20 characters. Letters, numbers, underscores, hyphens, and periods.</p>}
       </div>
 
       <div>
@@ -297,6 +369,20 @@ export default function Onboarding() {
 
         {/* Card body */}
         <div className="rounded-3xl overflow-hidden" style={{ background: "rgba(8,24,16,0.85)", border: "1.5px solid rgba(0,200,150,0.2)", backdropFilter: "blur(20px)", boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,200,150,0.1)" }}>
+          <AnimatePresence>
+            {banner && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className="mx-6 mt-5 flex items-start gap-2.5 px-4 py-3 rounded-xl text-sm text-red-300"
+                style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.35)" }}
+              >
+                <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-400" />
+                <span>{banner}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <div className="relative overflow-y-auto overflow-x-hidden" style={{ minHeight: "clamp(420px,55vh,640px)", maxHeight: "calc(100vh - 6rem)", padding: "26px 24px" }}>
             <AnimatePresence initial={false} custom={dir}>
               <motion.div
@@ -326,10 +412,15 @@ export default function Onboarding() {
               </button>
               <button
                 onClick={goNext}
+                disabled={checkingUsername}
                 className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-black"
-                style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)" }}
+                style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", opacity: checkingUsername ? 0.7 : 1, cursor: checkingUsername ? "wait" : "pointer" }}
               >
-                Continue <ArrowRight className="w-4 h-4" />
+                {checkingUsername ? (
+                  <><div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" /> Checking...</>
+                ) : (
+                  <>Continue <ArrowRight className="w-4 h-4" /></>
+                )}
               </button>
             </div>
           )}

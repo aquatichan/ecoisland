@@ -50,24 +50,51 @@
     "correct": "D"
   },
   {
-    "question": "A diagram illustrates indicator species in an aquatic ecosystem, showing three scenarios: Scenario 1 displays mayfly nymphs, stonefly nymphs, and caddisfly larvae in a stream with clear water and high dissolved oxygen; Scenario 2 displays aquatic worms and leeches in a stream with cloudy water and moderate dissolved oxygen; Scenario 3 displays only midge larvae and no other macroinvertebrates in a stream with murky water and low dissolved oxygen. What does the presence or absence of specific macroinvertebrate groups best indicate about these streams?",
+    "question": "A diagram illustrates indicator species in an aquatic ecosystem across three scenarios: Scenario 1 shows mayfly nymphs, stonefly nymphs, and caddisfly larvae in a stream with clear water and high dissolved oxygen; Scenario 2 shows aquatic worms and leeches in a stream with cloudy water and moderate pollution; Scenario 3 shows only sludge worms in a heavily polluted stream with very low dissolved oxygen. What does this pattern best illustrate about the use of macroinvertebrates as bioindicators?",
     "answers": [
-      "Different macroinvertebrate groups tolerate different pollution levels and dissolved oxygen concentrations, so their presence indicates the stream's water quality and ecosystem health",
-      "Different macroinvertebrate groups prefer different habitat conditions based on behavioral selection, so their presence indicates the stream's preferred microhabitat characteristics and food availability",
-      "Different macroinvertebrate groups tolerate different pollution levels and dissolved oxygen concentrations, so their presence indicates longitudinal zones within a single stream from headwaters to mouth",
-      "Different macroinvertebrate groups tolerate different pollution levels and dissolved oxygen concentrations, so their presence indicates temporal changes as a single stream undergoes degradation over time"
+      "Different macroinvertebrate groups have different tolerances to pollution and low dissolved oxygen, so the composition of species present can indicate a stream's overall water quality",
+      "Different macroinvertebrate groups prefer different habitats based on behavioral choice alone, so their presence indicates only habitat preference rather than water quality",
+      "Different macroinvertebrate groups tolerate different pollution levels, and this pattern is used primarily to indicate the geographic location of a stream rather than its water quality",
+      "Different macroinvertebrate groups tolerate different pollution levels, and this pattern is used primarily to track seasonal temperature changes rather than pollution"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "In a temperate forest recovering from a severe wildfire that consumed all vegetation but left soil intact, grasses and herbaceous plants establish within the first year, followed by shrubs within 5-10 years, and eventually hardwood trees within 50-100 years. Which of the following best describes why this particular sequence of plant species occurs?",
+    "question": "In a temperate forest recovering from a severe wildfire that consumed all vegetation but left the soil intact, grasses and herbaceous plants establish within the first year, followed by shrubs within 5-10 years, and eventually hardwood trees within 50-100 years. Which of the following best explains why this sequence follows this particular order?",
     "answers": [
-      "Early colonizers have rapid growth rates and low resource requirements, allowing them to establish quickly in disturbed soil before shade-tolerant species can compete",
-      "Grasses and herbaceous plants actively prepare the soil by fixing nitrogen, which is necessary before shrubs and trees can establish",
-      "The soil must reach a specific nutrient threshold before each successive plant type can germinate, with grasses requiring the lowest nutrient levels",
-      "Each plant species secretes chemicals that inhibit the germination of the next species, creating a predetermined sequence that maximizes total ecosystem productivity"
+      "Early colonizers like grasses have rapid growth rates, produce abundant seeds, and have low resource requirements, allowing them to establish quickly in disturbed soil before slower-growing, shade-tolerant species can take hold",
+      "Grasses and herbaceous plants actively fix atmospheric nitrogen in a way that is strictly required before shrubs and trees are physiologically able to germinate",
+      "The soil must reach an exact, universally fixed nutrient threshold before each successive plant type is able to germinate at all",
+      "Each plant species in the sequence secretes chemicals that specifically inhibit the germination of the next species, creating a rigidly predetermined order"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Post-Fire Forest Succession Timeline",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Stage",
+        "Dominant Vegetation",
+        "Time Since Fire"
+      ],
+      "rows": [
+        [
+          "1",
+          "Grasses and herbaceous plants",
+          "0-1 year"
+        ],
+        [
+          "2",
+          "Shrubs",
+          "5-10 years"
+        ],
+        [
+          "3",
+          "Hardwood trees",
+          "50-100 years"
+        ]
+      ]
+    }
   },
   {
     "question": "A diagram shows species richness versus disturbance frequency with a peak at intermediate disturbance. Which statement best explains this pattern?",

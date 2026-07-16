@@ -60,14 +60,14 @@
     "correct": "B"
   },
   {
-    "question": "Researchers studying mercury bioaccumulation in a freshwater lake collected fish tissue samples from a single location near the lake's outlet and measured total mercury concentration in whole fish (including all tissues). If they modified the procedure to collect fish from multiple locations throughout the lake and measure mercury concentration only in fish muscle tissue (excluding liver, kidney, and other organs), which changes in understanding would most likely result?",
+    "question": "Which of the following best explains why top predators such as sharks, tuna, and eagles tend to show the highest tissue concentrations of persistent, fat-soluble pollutants like mercury and PCBs?",
     "answers": [
-      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide data more relevant to human consumption and food web transfer, since muscle is the primary tissue consumed.",
-      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide more relevant data because muscle tissue accumulates mercury faster than liver and kidney, making it a better indicator of recent exposure.",
-      "Spatial variation in mercury bioaccumulation could be identified, and focusing on muscle tissue would provide data more relevant to biomagnification between trophic levels, since comparing muscle tissue across species standardizes measurements.",
-      "Spatial variation in mercury bioaccumulation could be identified, but focusing on muscle tissue would provide less relevant data for food web transfer since whole-fish measurements better represent what predators consume."
+      "These pollutants biomagnify, becoming more concentrated at each successive trophic level as predators consume many contaminated prey organisms.",
+      "Top predators actively seek out contaminated prey because it is easier to catch.",
+      "Pollutants are more chemically reactive in the tissues of large-bodied animals, which accelerates their breakdown into more toxic forms.",
+      "Top predators have less efficient excretory systems than primary consumers, unrelated to diet or trophic position."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A study measured mercury in an estuary: phytoplankton 0.1 ppm, small fish 1.5 ppm, osprey 25 ppm. Which process explains this pattern?",

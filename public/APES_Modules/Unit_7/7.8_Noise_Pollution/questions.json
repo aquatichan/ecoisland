@@ -1,23 +1,34 @@
 [
   {
-    "question": "Researchers measured urban noise with decibel meters at five fixed stations. If they add mobile measurements across neighborhoods, how would this affect their ability to detect spatial variation in noise exposure?",
+    "question": "Which of the following is the most significant source of chronic noise pollution in urban environments, according to EPA assessments?",
     "answers": [
-      "Mobile sampling would reveal spatial gradients and hotspots of noise exposure.",
-      "Mobile sampling does not replace fixed stations because those provide temporal continuity.",
-      "Mobile sampling improves spatial coverage but cannot measure every location simultaneously.",
-      "Mobile sampling can be less reliable if timing and protocols are inconsistent."
+      "Motor vehicle traffic",
+      "Residential lawn equipment",
+      "Overhead aircraft at low-traffic regional airports",
+      "Construction activity occurring only during daytime hours"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A graph shows ambient noise (dB) and successful bird vocalizations (%) in an urban park over 24 hours: rush hours (7–9 AM, 5–7 PM) 75 dB and 15% success; midday (10 AM–4 PM) 65 dB and 45% success; night (10 PM–6 AM) 50 dB and 80% success. Which statement best explains the relationship between noise pollution and bird communication effectiveness?",
+    "stimulus": {
+      "type": "line",
+      "title": "Ambient Noise and Successful Bird Vocalizations in an Urban Park (24-hour cycle)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Ambient noise (dB)", "points": [ {"x": 0, "y": 50}, {"x": 8, "y": 75}, {"x": 12, "y": 65}, {"x": 18, "y": 75}, {"x": 22, "y": 50} ] },
+        { "name": "Successful vocalizations (%)", "points": [ {"x": 0, "y": 80}, {"x": 8, "y": 15}, {"x": 12, "y": 45}, {"x": 18, "y": 15}, {"x": 22, "y": 80} ] }
+      ],
+      "xLabel": "Hour of day",
+      "yLabel": "dB / % success"
+    },
+    "question": "Based on the graph, which statement best explains the relationship between ambient noise and bird vocalization success?",
     "answers": [
-      "Ambient noise masks bird calls, reducing signal detectability and communication range.",
-      "Noise does not stop birds from calling, it just reduces transmission success.",
-      "Noise does not improve success, frequency shifts often fail to restore communication.",
-      "Time of day influences vocal behavior, but noise levels better explain success differences."
+      "Ambient noise masks bird calls at the frequencies birds use, reducing signal detectability and lowering communication success during loud periods.",
+      "Noise has no effect on bird calls; the pattern is explained entirely by birds sleeping at night.",
+      "Higher noise increases vocalization success because birds call louder to compensate.",
+      "The two variables are unrelated and vary independently by coincidence."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers measured weekly noise and stress hormones in urban rats in a downtown district for eight weeks. If they instead sampled rats in three urban zones during the same eight weeks, which understanding would most improve?",
@@ -50,14 +61,14 @@
     "correct": "C"
   },
   {
-    "question": "A major airport in a coastal region experiences high noise levels from aircraft operations. Migratory bird populations that historically crossed the airport airspace have begun altering their flight paths to avoid the area, increasing energy expenditure and reducing breeding success. Which solution would most effectively address the noise pollution affecting these birds?",
+    "question": "Which of the following is a well-documented effect of chronic traffic noise on wildlife in fragmented urban and suburban habitats?",
     "answers": [
-      "Establish noise-reduction zones around the airport perimeter by planting dense tree and shrub corridors that absorb sound and redirect migratory bird flight paths away from high-noise areas.",
-      "Establish noise-reduction zones within the airport grounds by planting dense tree and shrub corridors that absorb sound and redirect migratory bird flight paths away from high-noise areas near runways.",
-      "Establish noise-reduction zones around the airport perimeter by installing reflective sound barriers that deflect aircraft noise and redirect migratory bird flight paths away from high-noise areas.",
-      "Establish noise-reduction zones around the airport perimeter by planting dense tree and shrub corridors that absorb sound and allow migratory birds to maintain their historical flight paths through the airport airspace."
+      "Some songbird species shift the pitch or timing of their calls to reduce overlap with traffic noise frequencies.",
+      "Traffic noise has been shown to have no measurable effect on any vertebrate behavior.",
+      "Noise exposure improves predator detection by masking irrelevant background sounds.",
+      "Noise pollution primarily affects plant species rather than animal species."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers studying noise pollution effects on insect communication recorded sounds produced by crickets and cicadas at five urban park locations and five rural forest locations. They measured the dominant frequency and call rate of insects at each site. Which of the following best explains why the researchers collected data from multiple locations within each environment type?",
@@ -70,14 +81,14 @@
     "correct": "B"
   },
   {
-    "question": "Which research question best guides a testable investigation using five years of sonar logs, acoustic recordings, and dolphin sightings?",
+    "question": "Naval sonar and shipping noise are of particular concern for cetaceans (whales and dolphins) because these animals primarily rely on which sense for navigation, communication, and locating prey?",
     "answers": [
-      "Do dolphin vocalizations show reduced frequency range and shifted timing in sonar areas?",
-      "Does sonar exposure cause hearing loss and reduced foraging that lower dolphin survival?",
-      "Do multiple human activities including sonar collectively alter marine ecosystem health?",
-      "Should naval sonar be banned to protect dolphin populations from harm?"
+      "Echolocation (biological sonar using sound waves)",
+      "Vision, since most cetacean habitats are shallow and well-lit",
+      "Chemoreception, similar to olfaction in terrestrial mammals",
+      "Magnetoreception using Earth's magnetic field"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Marine mammals such as dolphins and whales are altering migration routes to avoid shipping lanes. Which mechanism best explains how shipping noise causes these behavioral changes?",

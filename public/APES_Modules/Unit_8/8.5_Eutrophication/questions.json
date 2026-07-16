@@ -7,7 +7,7 @@
       "Algae consume dissolved oxygen during photosynthesis, depleting oxygen levels in the water column and suffocating fish dependent on aerobic respiration.",
       "Excess nitrogen fertilizer directly increases fish populations by providing more food, but the fish subsequently outcompete each other for oxygen, leading to die-offs."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A lake in a temperate region experiences seasonal stratification, with a warm epilimnion (upper layer) and a cold hypolimnion (lower layer) separated by a thermocline. During summer, the hypolimnion becomes hypoxic despite the lake receiving no additional nutrient inputs. Which of the following best explains why dissolved oxygen becomes depleted in the hypolimnion during summer stratification?",
@@ -17,7 +17,7 @@
       "The thermocline prevents mixing between layers, so decomposition of sinking organic matter binds oxygen into chemical compounds in the hypolimnion, making it unavailable to aquatic organisms even though total oxygen remains constant",
       "The warm epilimnion water has reduced oxygen-holding capacity due to higher temperatures, so less dissolved oxygen diffuses downward to replenish oxygen consumed by decomposition of sinking organic matter in the hypolimnion"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Three streams with different land uses were sampled for nitrate and algal biomass (chlorophyll-a). Stream A forested 2.1 mg/L nitrate 3.2 µg/L chlorophyll-a. Stream B agricultural 18.4 mg/L nitrate 47.8 µg/L chlorophyll-a. Stream C urban 12.6 mg/L nitrate 28.3 µg/L chlorophyll-a. Which conclusion is best supported about nutrient sources and algal response?",
@@ -37,7 +37,7 @@
       "Most phosphorus settles quickly to sediments and becomes unavailable for algae.",
       "Constant flow inhibits algal photosynthesis so blooms cannot form in rivers."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A wastewater treatment plant operator testifies before a city council that the facility removes most phosphorus and nitrogen from treated sewage yet river phosphorus has risen 40% over the past decade. The operator cites population growth from 140,000 to 200,000 residents and combined sewer overflows that bypass treatment during storms. What is the operator's main claim?",

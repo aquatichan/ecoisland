@@ -1,6 +1,18 @@
 [
   {
-    "question": "Which of the following is a greenhouse gas?",
+    "stimulus": {
+      "type": "table",
+      "title": "Composition of Earth's Atmosphere",
+      "sourceNote": "Approximate values, standard atmospheric composition",
+      "headers": ["Gas", "Approximate Concentration"],
+      "rows": [
+        ["Nitrogen (N2)", "78%"],
+        ["Oxygen (O2)", "21%"],
+        ["Argon (Ar)", "0.9%"],
+        ["Carbon dioxide (CO2)", "0.04%"]
+      ]
+    },
+    "question": "Based on the table, even though it makes up less than 1% of the atmosphere, which of the following gases listed is a greenhouse gas that traps infrared radiation?",
     "difficulty": "Easy",
     "A": "Nitrogen",
     "B": "Oxygen",
@@ -9,7 +21,19 @@
     "answer": "C"
   },
   {
-    "question": "Which of the following global initiatives specifically targets the reduction of greenhouse gas emissions?",
+    "stimulus": {
+      "type": "table",
+      "title": "Selected International Environmental Agreements",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Agreement", "Primary Target"],
+      "rows": [
+        ["Montreal Protocol (1987)", "Chlorofluorocarbons and ozone-depleting substances"],
+        ["Kyoto Protocol (1997)", "Greenhouse gas emissions"],
+        ["Basel Convention (1989)", "Transboundary movement of hazardous waste"],
+        ["CITES (1973)", "International trade in endangered species"]
+      ]
+    },
+    "question": "Based on the table, which of the following global initiatives specifically targets the reduction of greenhouse gas emissions?",
     "difficulty": "Medium",
     "A": "Montreal Protocol",
     "B": "Kyoto Protocol",
@@ -21,18 +45,486 @@
     "question": "Which feedback loop would most likely accelerate global climate change?",
     "difficulty": "Hard",
     "A": "Increased plant growth removing more CO2 from the atmosphere",
-    "B": "Melting of polar ice reducing Earth’s albedo",
+    "B": "Melting of polar ice reducing Earth's albedo, causing more solar absorption and further warming",
     "C": "Expansion of glaciers reflecting more solar radiation",
     "D": "Formation of more stratospheric ozone",
     "answer": "B"
   },
   {
-    "question": "If global average temperatures increase by 2°C, which region is expected to experience the greatest relative warming?",
-    "difficulty": "Challenge",
+    "stimulus": {
+      "type": "bar",
+      "title": "Projected Temperature Increase by Latitude Band Under a 2°C Global Average Warming Scenario",
+      "sourceNote": "Hypothetical data for this exercise, illustrating polar amplification",
+      "data": [
+        { "label": "Tropics (0-23°)", "value": 1.3 },
+        { "label": "Mid-latitudes (23-66°)", "value": 2.0 },
+        { "label": "Arctic (66-90°)", "value": 4.5 }
+      ],
+      "xLabel": "Latitude band",
+      "yLabel": "Projected temperature increase (°C)"
+    },
+    "question": "Based on the graph, if global average temperatures increase by 2°C, which region is expected to experience the greatest relative warming, a phenomenon known as polar amplification?",
+    "difficulty": "Hard",
     "A": "Tropical rainforests",
     "B": "Temperate grasslands",
     "C": "Polar regions",
     "D": "Coastal deserts",
     "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Estimated Ozone Molecules Destroyed per Chlorine Atom Released from CFC Breakdown",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Chlorine Atoms Released", "Approximate Ozone Molecules Destroyed"],
+      "rows": [
+        ["1", "~100,000"],
+        ["10", "~1,000,000"],
+        ["100", "~10,000,000"]
+      ]
+    },
+    "question": "Based on the table, which of the following best explains the mechanism by which chlorofluorocarbons (CFCs) deplete stratospheric ozone so disproportionately relative to the amount released?",
+    "difficulty": "Medium",
+    "A": "CFCs absorb ultraviolet radiation directly, preventing ozone formation",
+    "B": "UV radiation breaks down CFCs, releasing chlorine atoms that catalytically destroy ozone molecules, with each chlorine atom capable of destroying thousands of ozone molecules before being removed from the stratosphere",
+    "C": "CFCs react with nitrogen to form nitrous oxide, which displaces ozone",
+    "D": "CFCs increase stratospheric temperature, causing ozone to sublimate",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Antarctic Ozone Hole Area, 1980-2020",
+      "sourceNote": "Approximate values based on NASA/NOAA ozone monitoring data",
+      "series": [
+        { "name": "Ozone hole area (million km²)", "points": [ {"x": 1980, "y": 2}, {"x": 1990, "y": 22}, {"x": 2000, "y": 28}, {"x": 2006, "y": 29}, {"x": 2012, "y": 21}, {"x": 2020, "y": 20} ] }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Ozone hole area (million km²)"
+    },
+    "question": "Based on the graph, the Antarctic ozone hole grew rapidly from 1980 to the early 2000s, then began to show signs of recovery. Which policy is most directly credited with this recovery trend?",
+    "difficulty": "Medium",
+    "A": "The Kyoto Protocol's greenhouse gas emission targets",
+    "B": "The Montreal Protocol's phase-out of CFCs and other ozone-depleting substances",
+    "C": "The Paris Agreement's national emissions pledges",
+    "D": "Unilateral national bans on coal power plants",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best explains why HFCs (hydrofluorocarbons), which were adopted to replace ozone-depleting CFCs, created a new environmental trade-off?",
+    "difficulty": "Medium",
+    "A": "HFCs have zero ozone depletion potential but are extremely potent greenhouse gases, so their adoption reduced one problem while worsening another",
+    "B": "HFCs deplete ozone even more severely than CFCs did",
+    "C": "HFCs are completely inert and have no atmospheric effects of any kind",
+    "D": "HFCs directly cause acid rain through chlorine release",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Simplified Energy Balance: Incoming Solar Radiation vs. Outgoing Infrared Radiation",
+      "sourceNote": "Hypothetical illustrative data for this exercise",
+      "series": [
+        { "name": "Incoming shortwave radiation (W/m²)", "points": [ {"x": 0, "y": 340}, {"x": 1, "y": 340}, {"x": 2, "y": 340} ] },
+        { "name": "Outgoing longwave radiation without greenhouse gases (W/m²)", "points": [ {"x": 0, "y": 340}, {"x": 1, "y": 340}, {"x": 2, "y": 340} ] },
+        { "name": "Outgoing longwave radiation with greenhouse gases (W/m²)", "points": [ {"x": 0, "y": 240}, {"x": 1, "y": 240}, {"x": 2, "y": 240} ] }
+      ],
+      "xLabel": "Time",
+      "yLabel": "Radiative flux (W/m²)"
+    },
+    "question": "Based on the diagram, greenhouse gases reduce the amount of outgoing longwave radiation that escapes to space. The greenhouse effect is a natural process by which certain atmospheric gases",
+    "difficulty": "Easy",
+    "A": "reflect all incoming solar radiation back into space",
+    "B": "absorb and re-radiate infrared radiation emitted from Earth's surface, trapping heat within the atmosphere",
+    "C": "convert oxygen into ozone in the troposphere",
+    "D": "block ultraviolet radiation from reaching the stratosphere",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Global Warming Potential (GWP) of Selected Greenhouse Gases Relative to CO2 (100-year horizon)",
+      "sourceNote": "Approximate values based on IPCC Assessment Report data",
+      "data": [
+        { "label": "Carbon dioxide (CO2)", "value": 1 },
+        { "label": "Methane (CH4)", "value": 28 },
+        { "label": "Nitrous oxide (N2O)", "value": 265 },
+        { "label": "A common HFC refrigerant", "value": 1430 }
+      ],
+      "xLabel": "Greenhouse gas",
+      "yLabel": "Global Warming Potential (CO2 = 1)"
+    },
+    "question": "Based on the graph, which statement is best supported regarding the relative climate impact of these gases per unit mass released?",
+    "difficulty": "Medium",
+    "A": "Carbon dioxide has the greatest per-molecule warming effect of the gases shown",
+    "B": "Methane and nitrous oxide have no significant warming effect compared to CO2",
+    "C": "Even though it is emitted in far smaller quantities, the HFC refrigerant traps far more heat per unit mass than CO2, making emission volume alone a poor measure of climate impact",
+    "D": "All four gases have identical global warming potential",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Atmospheric CO2 Concentration, Selected Years",
+      "sourceNote": "Approximate values based on NOAA Mauna Loa Observatory records",
+      "headers": ["Year", "CO2 (ppm)"],
+      "rows": [
+        ["1960", "317"],
+        ["1990", "354"],
+        ["2020", "414"],
+        ["2024", "424"]
+      ]
+    },
+    "question": "Based on the table, which of the following is the primary anthropogenic driver of the increase in atmospheric CO2 concentration shown?",
+    "difficulty": "Easy",
+    "A": "Volcanic eruptions",
+    "B": "Combustion of fossil fuels and deforestation",
+    "C": "Ocean upwelling",
+    "D": "Increased solar radiation",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best explains why methane released from thawing Arctic permafrost represents a particularly concerning positive feedback loop for climate change?",
+    "difficulty": "Medium",
+    "A": "Warming causes permafrost to thaw, releasing previously frozen organic matter for microbial decomposition, which produces methane and CO2 that cause further warming and further thaw",
+    "B": "Permafrost thaw permanently removes carbon from the climate system with no further atmospheric effect",
+    "C": "Methane released from permafrost has a cooling effect that offsets other warming",
+    "D": "Permafrost thaw only affects local Arctic temperatures, not the global climate system",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Global Mean Sea Surface Temperature Anomaly, 1980-2020",
+      "sourceNote": "Approximate values based on NOAA global sea surface temperature records",
+      "series": [
+        { "name": "Temperature anomaly (°C above 1980 baseline)", "points": [ {"x": 1980, "y": 0}, {"x": 1990, "y": 0.15}, {"x": 2000, "y": 0.25}, {"x": 2010, "y": 0.4}, {"x": 2020, "y": 0.6} ] }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Temperature anomaly (°C)"
+    },
+    "question": "Based on the graph, ocean warming has increased steadily since 1980. Which of the following is a well-documented direct consequence of ocean warming?",
+    "difficulty": "Medium",
+    "A": "Increased frequency and severity of coral bleaching events as zooxanthellae are expelled from heat-stressed coral tissue",
+    "B": "Decreased sea level due to water contraction",
+    "C": "Increased dissolved oxygen availability in warmer surface water",
+    "D": "Reduced hurricane intensity in warmer ocean basins",
+    "answer": "A"
+  },
+  {
+    "question": "Thermal expansion of seawater and melting land ice both contribute to which observed global phenomenon?",
+    "difficulty": "Easy",
+    "A": "Decreasing sea level",
+    "B": "Rising sea level",
+    "C": "Increasing ocean salinity uniformly worldwide",
+    "D": "Decreasing global average temperature",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "scatter",
+      "title": "Coral Zooxanthellae Density vs. Water Temperature After 60 Days",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [ {"x": 26, "y": 2.0}, {"x": 28, "y": 1.9}, {"x": 30, "y": 1.4}, {"x": 32, "y": 0.3} ],
+      "xLabel": "Water temperature (°C)",
+      "yLabel": "Zooxanthellae density (million cells/cm²)"
+    },
+    "question": "Based on the scatter plot, which statement best describes the relationship between water temperature and zooxanthellae density in coral tissue?",
+    "difficulty": "Medium",
+    "A": "Zooxanthellae density is unaffected by temperature",
+    "B": "Zooxanthellae density declines sharply once temperature exceeds a thermal threshold, consistent with coral bleaching",
+    "C": "Zooxanthellae density increases steadily with temperature",
+    "D": "Zooxanthellae density peaks at the highest temperature tested",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Simplified Ocean Acidification Chemistry",
+      "sourceNote": "Standard ocean carbonate chemistry",
+      "headers": ["Step", "Reaction"],
+      "rows": [
+        ["1", "CO2 (atmosphere) dissolves into seawater"],
+        ["2", "CO2 + H2O → H2CO3 (carbonic acid)"],
+        ["3", "H2CO3 → H+ + HCO3- (releases hydrogen ions, lowering pH)"],
+        ["4", "Excess H+ reacts with CO3²⁻, reducing carbonate ion availability for shell-building organisms"]
+      ]
+    },
+    "question": "Based on the table, ocean acidification occurs primarily through which chemical process?",
+    "difficulty": "Medium",
+    "A": "Atmospheric CO2 dissolves into seawater and forms carbonic acid, which lowers ocean pH and reduces carbonate ion availability",
+    "B": "Industrial wastewater is discharged directly into the open ocean",
+    "C": "Increased ocean temperature directly lowers pH through thermal expansion",
+    "D": "Melting sea ice releases stored acids into the water column",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Pre-Industrial vs. Current Ocean Surface pH",
+      "sourceNote": "Approximate values based on published ocean chemistry estimates",
+      "headers": ["Time Period", "Average Ocean Surface pH"],
+      "rows": [
+        ["Pre-industrial (~1750)", "8.21"],
+        ["Present day", "8.10"],
+        ["Projected 2100 (high-emissions scenario)", "7.8-7.9"]
+      ]
+    },
+    "question": "Given that pH is measured on a logarithmic scale, the decline in ocean pH shown in the table from pre-industrial times to present represents approximately what change in hydrogen ion concentration?",
+    "difficulty": "Hard",
+    "A": "No meaningful change, since the pH values look similar",
+    "B": "About a 30% increase in hydrogen ion concentration (increased acidity)",
+    "C": "A 100-fold increase in hydrogen ion concentration",
+    "D": "A decrease in hydrogen ion concentration",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Percent Shell Damage in Pteropods Across an Ocean pH Gradient",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "pH 8.15", "value": 5 },
+        { "label": "pH 8.0", "value": 12 },
+        { "label": "pH 7.9", "value": 15 },
+        { "label": "pH 7.85", "value": 68 }
+      ],
+      "xLabel": "Seawater pH",
+      "yLabel": "Pteropods with shell damage (%)"
+    },
+    "question": "Based on the graph, which of the following organisms is most directly threatened by ocean acidification due to its reliance on calcium carbonate for shell or skeleton formation?",
+    "difficulty": "Easy",
+    "A": "Jellyfish",
+    "B": "Pteropods (sea butterflies) and reef-building corals",
+    "C": "Sharks",
+    "D": "Sea turtles",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Native Fish Biomass at Reef Sites with Varying Lionfish Density",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Low lionfish density", "value": 85 },
+        { "label": "Moderate lionfish density", "value": 52 },
+        { "label": "High lionfish density", "value": 21 }
+      ],
+      "xLabel": "Invasive lionfish density",
+      "yLabel": "Native fish biomass (g/m²)"
+    },
+    "question": "Based on the graph, which conclusion about the invasive lionfish's ecological impact is best supported?",
+    "difficulty": "Medium",
+    "A": "Native fish biomass decreases significantly as invasive lionfish density increases, consistent with predation and competition pressure",
+    "B": "Lionfish density has no relationship with native fish biomass",
+    "C": "Native fish biomass increases with lionfish density",
+    "D": "The data cannot be used to draw any conclusions about lionfish impact",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Traits Commonly Associated with Successful Invasive Species",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Trait", "Ecological Advantage in New Habitat"],
+      "rows": [
+        ["Rapid reproduction (r-selected)", "Quickly builds large populations before controls develop"],
+        ["Generalist diet", "Can exploit many available food resources"],
+        ["Broad environmental tolerance", "Can colonize a wide range of habitat conditions"],
+        ["Absence of natural predators/parasites", "Escapes the population controls present in native range"]
+      ]
+    },
+    "question": "Based on the table, which of the following best explains why many invasive species are able to outcompete native species after being introduced to a new ecosystem?",
+    "difficulty": "Medium",
+    "A": "Invasive species typically have specialized diets that limit their competitive ability",
+    "B": "Invasive species often lack natural predators, parasites, or diseases in the new environment, and many are generalist, r-selected species with rapid reproduction and broad resource use",
+    "C": "Invasive species are always physically larger than native species",
+    "D": "Native species always have higher reproductive rates than invasive species",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Minimum Winter Temperature Survival Rate of an Invasive Insect Pest",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Survival rate (%)", "points": [ {"x": -30, "y": 2}, {"x": -20, "y": 25}, {"x": -10, "y": 90}, {"x": 0, "y": 99} ] }
+      ],
+      "xLabel": "Minimum winter temperature (°C)",
+      "yLabel": "Survival rate (%)"
+    },
+    "question": "Based on the graph, which of the following is a likely consequence of climate change (warming winters) for the geographic range of this invasive insect pest?",
+    "difficulty": "Medium",
+    "A": "The pest's range would likely contract as fewer areas experience lethal cold temperatures",
+    "B": "The pest's range would likely expand poleward and to higher elevations as winter minimum temperatures become less lethal",
+    "C": "Winter temperature has no bearing on this species' range",
+    "D": "The pest would likely go extinct due to warming",
+    "answer": "B"
+  },
+  {
+    "question": "Zebra mussels, an invasive species in the Great Lakes, are considered r-selected generalists. Which of the following traits is most consistent with this classification and helps explain their invasive success?",
+    "difficulty": "Medium",
+    "A": "Long lifespan, few offspring, and high parental investment per offspring",
+    "B": "Rapid reproduction, broad tolerance of environmental conditions, and the ability to quickly colonize new habitats",
+    "C": "Highly specialized diet restricted to a single native food source",
+    "D": "Low reproductive rate and dependence on a stable, unchanging habitat",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "IUCN Red List Categories",
+      "sourceNote": "Based on official IUCN Red List classification system",
+      "headers": ["Category", "Definition"],
+      "rows": [
+        ["Least Concern", "Widespread and abundant"],
+        ["Vulnerable", "High risk of extinction in the wild"],
+        ["Endangered", "Very high risk of extinction in the wild"],
+        ["Critically Endangered", "Extremely high risk of extinction in the wild"],
+        ["Extinct in the Wild", "Survives only in captivity or cultivation"]
+      ]
+    },
+    "question": "Based on the table, which of the following best describes why K-selected species, such as elephants and rhinos, are particularly vulnerable to becoming endangered from overharvesting?",
+    "difficulty": "Medium",
+    "A": "K-selected species have very high reproductive rates that make them resilient to harvesting pressure",
+    "B": "K-selected species have low reproductive rates, long generation times, and few offspring, so populations recover slowly from population declines",
+    "C": "K-selected species are always generalists with broad diets",
+    "D": "K-selected species are unaffected by habitat loss",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes why habitat fragmentation reduces biodiversity even when the total remaining habitat area stays partially intact?",
+    "difficulty": "Hard",
+    "A": "Fragmentation has no meaningful ecological effect as long as some habitat remains",
+    "B": "Isolated habitat patches limit gene flow between populations, increasing inbreeding and vulnerability to local extinction, while also creating more edge habitat that favors generalist species over interior specialists",
+    "C": "Fragmentation always increases the total usable habitat area for wildlife",
+    "D": "Fragmentation exclusively affects aquatic species, not terrestrial ones",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Bird Species Richness in Large vs. Small, Isolated Forest Patches",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Large connected patches (~480 ha)", "value": 34 },
+        { "label": "Small isolated patches (~52 ha)", "value": 22 }
+      ],
+      "xLabel": "Forest patch type",
+      "yLabel": "Mean bird species richness"
+    },
+    "question": "Based on the graph, which conclusion about habitat fragmentation and biodiversity is best supported?",
+    "difficulty": "Medium",
+    "A": "Small, isolated forest patches support substantially lower bird species richness than large, connected patches, consistent with the effects of habitat fragmentation",
+    "B": "Patch size and connectivity have no effect on bird species richness",
+    "C": "Small isolated patches support more bird species than large patches",
+    "D": "The data show that fragmentation increases biodiversity",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Genetic Diversity in Carnivore Populations With and Without a Wildlife Corridor",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Population", "Connectivity", "Mean Allelic Richness"],
+      "rows": [
+        ["Park A", "Connected via corridor to Park B", "8.2"],
+        ["Park B", "Connected via corridor to Park A", "7.9"],
+        ["Park C (isolated, no corridor)", "None", "4.1"]
+      ]
+    },
+    "question": "Based on the table, wildlife corridors connecting fragmented habitat patches primarily help mitigate biodiversity loss by which mechanism?",
+    "difficulty": "Medium",
+    "A": "Increasing the total food supply available to a population",
+    "B": "Enabling gene flow between otherwise isolated populations, which reduces inbreeding depression and helps maintain genetic diversity",
+    "C": "Eliminating the need for any additional protected land",
+    "D": "Preventing all interaction between predator and prey species",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "pie",
+      "title": "Primary Threats to Globally Threatened Species",
+      "sourceNote": "Approximate values based on IUCN Red List threat assessment data",
+      "slices": [
+        { "label": "Habitat loss/degradation", "value": 47 },
+        { "label": "Overexploitation (hunting/fishing/harvesting)", "value": 25 },
+        { "label": "Invasive species", "value": 13 },
+        { "label": "Climate change", "value": 9 },
+        { "label": "Pollution", "value": 6 }
+      ]
+    },
+    "question": "Based on the pie chart, which factor is currently the leading driver of species endangerment worldwide?",
+    "difficulty": "Easy",
+    "A": "Climate change",
+    "B": "Habitat loss and degradation",
+    "C": "Pollution",
+    "D": "Invasive species",
+    "answer": "B"
+  },
+  {
+    "question": "The 'sixth mass extinction' refers to the current elevated rate of species extinction, which scientists attribute primarily to which cause?",
+    "difficulty": "Medium",
+    "A": "A large asteroid impact",
+    "B": "Cumulative human activities, including habitat destruction, overharvesting, pollution, invasive species introduction, and climate change",
+    "C": "A natural cyclical die-off unrelated to human activity",
+    "D": "A sudden, unexplained decline in solar radiation",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "African Elephant Population in a National Park, 1980-2020",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Elephant population", "points": [ {"x": 1980, "y": 10000}, {"x": 1990, "y": 7000}, {"x": 2000, "y": 4500}, {"x": 2010, "y": 2800}, {"x": 2020, "y": 1900} ] }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Elephant population"
+    },
+    "question": "Based on the graph, an elephant population has declined steadily despite adequate food and habitat, primarily due to poaching for ivory. Which of the following best explains why this K-selected species is particularly vulnerable to sustained harvesting at this level?",
+    "difficulty": "Hard",
+    "A": "Elephants have very short generation times and reproduce quickly enough to offset most harvesting",
+    "B": "Elephants' low reproductive rate and long generation time prevent the population from recovering as fast as individuals are being removed",
+    "C": "Elephants lack any behavioral response to human threats",
+    "D": "Protected status has eliminated all elephant mortality besides poaching, so the population should be stable",
+    "answer": "B"
+  },
+  {
+    "question": "Rising sea levels associated with climate change threaten coastal biodiversity primarily through which mechanism?",
+    "difficulty": "Medium",
+    "A": "Saltwater intrusion into freshwater aquifers and coastal habitats, which displaces species adapted to freshwater or terrestrial conditions",
+    "B": "A uniform, worldwide increase in coastal biodiversity due to new habitat creation",
+    "C": "Direct cooling of coastal waters that benefits cold-adapted species",
+    "D": "Complete elimination of tidal patterns",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Case Comparison: Two Species Recovery Efforts",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Species", "Habitat Context", "Recovery Outcome"],
+      "rows": [
+        ["Arabian oryx", "Remote desert, low human population density, captive breeding program", "Successfully reintroduced; population recovering"],
+        ["Javan rhinoceros", "Small fragment of developed tropical rainforest, high human pressure", "Remains critically endangered despite similar conservation efforts"]
+      ]
+    },
+    "question": "Based on the table, which factor best explains the difference in recovery success between these two species despite similar conservation interventions?",
+    "difficulty": "Hard",
+    "A": "The Arabian oryx inhabits a remote area with lower human population pressure, while the Javan rhinoceros depends on a small, highly pressured rainforest fragment, limiting available habitat for population growth",
+    "B": "The Javan rhinoceros is simply less intelligent than the Arabian oryx",
+    "C": "Captive breeding programs are only effective for desert species",
+    "D": "The Arabian oryx has a much higher reproductive rate than the Javan rhinoceros",
+    "answer": "A"
+  },
+  {
+    "question": "Commercial honeybee colonies kept near wild bee populations have been associated with declines in wild bee abundance. Which of the following best explains this pattern?",
+    "difficulty": "Hard",
+    "A": "Commercial honeybees compete with wild bees for limited nectar and pollen resources, and can spread diseases and parasites to wild bee populations",
+    "B": "Wild bees are physically displaced by honeybees through direct predation",
+    "C": "Honeybees eliminate the need for pollination services entirely, making wild bees redundant",
+    "D": "Wild bee decline in these areas is entirely unrelated to honeybee presence",
+    "answer": "A"
   }
 ]

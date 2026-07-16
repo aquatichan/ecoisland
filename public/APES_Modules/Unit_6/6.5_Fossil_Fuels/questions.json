@@ -1,13 +1,13 @@
 [
   {
-    "question": "Groundwater from 12 wells was sampled before and after hydraulic fracturing. Methane rose from 0.8 to 8.2 mg/L and VOCs increased from undetectable to 2.4 μg/L. What do these data indicate about fracturing's environmental effects?",
+    "question": "Groundwater from 12 wells near a hydraulic fracturing site was sampled before and after fracturing operations began. Average dissolved methane rose from 0.8 to 8.2 mg/L, and volatile organic compounds (VOCs) increased from undetectable levels to 2.4 micrograms per liter. What do these data indicate about the environmental effects of the fracturing operation?",
     "answers": [
-      "Hydraulic fracturing contaminated groundwater by raising methane and VOCs.",
-      "Fracturing reduces methane leaching and eliminates VOCs from groundwater.",
-      "Contamination was limited to methane and did not affect VOCs.",
-      "Observed increases reflect natural variability unrelated to fracturing."
+      "The data suggest hydraulic fracturing contaminated nearby groundwater, evidenced by substantial increases in both dissolved methane and VOC concentrations after operations began.",
+      "The data show that fracturing reduces methane leaching into groundwater while eliminating VOC contamination entirely.",
+      "The data indicate contamination was limited strictly to methane and did not measurably affect VOC concentrations.",
+      "The observed increases most likely reflect natural seasonal variability in groundwater chemistry unrelated to the fracturing operation."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Oil extraction in the Niger Delta region of Nigeria involves transporting crude oil through pipelines that frequently rupture due to corrosion and sabotage, spilling thousands of barrels into wetland ecosystems annually. The spilled oil forms a surface layer that prevents gas exchange between water and atmosphere. Aquatic plant photosynthesis rates decline, and anaerobic bacteria populations increase dramatically. Which of the following best explains why anaerobic bacteria populations increase following oil spills?",
@@ -30,14 +30,14 @@
     "correct": "D"
   },
   {
-    "question": "Mountaintop removal buries streams and wetlands with overburden. Why does this lead to long-term downstream aquatic degradation?",
+    "question": "Mountaintop removal mining buries streams and wetlands under overburden (excess rock and soil). Which explanation best accounts for why this practice leads to long-term downstream aquatic degradation?",
     "answers": [
-      "Loss of riparian filtration increases sediment and nutrients and causes acid mine drainage.",
-      "Compacted overburden reduces infiltration and lowers groundwater recharge and seasonal baseflow.",
-      "Buried wetlands can produce methane emissions, but these do not directly harm streams.",
-      "Valley fills bury channels but do not increase stream gradient or flow acceleration."
+      "Loss of riparian vegetation that would normally filter runoff increases sediment and nutrient loads downstream, and exposed sulfide minerals in the overburden can generate acid mine drainage that lowers water pH and releases toxic metals.",
+      "Compacted overburden reduces infiltration and lowers groundwater recharge, but this effect alone has no measurable impact on downstream water quality or seasonal baseflow.",
+      "Buried wetlands can produce methane emissions as they decompose, but this process has no direct chemical or physical effect on downstream streams.",
+      "Valley fills bury stream channels but do not otherwise change stream gradient, flow velocity, or sediment transport downstream."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An environmental health researcher publishes findings on oil refinery emissions: 'Residents living within 5 kilometers of oil refineries in the Houston Ship Channel area experience asthma hospitalization rates 2.5 times higher than residents in comparable neighborhoods distant from refineries. Refinery operations release volatile organic compounds, hydrogen sulfide, and particulate matter that accumulate in nearby residential areas due to prevailing wind patterns. Longitudinal health data spanning 15 years show that children born to mothers living near refineries have lower birth weights and higher rates of respiratory infections compared to children born to mothers in non-refinery areas, even after controlling for socioeconomic factors. These health disparities are not randomly distributed but concentrated in lower-income communities with limited political influence over industrial zoning decisions. The documented health impacts of oil refining operations demonstrate that fossil fuel processing creates disproportionate environmental health burdens on vulnerable populations.'",

@@ -30,14 +30,14 @@
     "correct": "B"
   },
   {
-    "question": "A farmer wants to improve water retention in sandy soil without adding irrigation infrastructure. A soil scientist recommends incorporating organic matter through composting. Which of the following best explains why adding organic matter would increase the sandy soil's water-holding capacity?",
+    "question": "A soil scientist recommends adding compost to a sandy garden plot to improve its ability to retain water for plants between waterings. Which of the following best explains why organic matter increases the water-holding capacity of sandy soil?",
     "answers": [
-      "Organic matter absorbs and retains water in its structure, increasing the total volume of water the soil can hold despite the large particle size of sand",
-      "Organic matter chemically converts sand particles into smaller silt and clay particles, which have higher water-holding capacity than sand",
-      "Organic matter reduces soil compaction by creating larger pores, which paradoxically increases water retention by preventing water from draining too quickly",
-      "Organic matter increases soil pH, which increases the positive charge on sand particles, allowing them to attract and hold more water molecules"
+      "Organic matter has a porous, spongy structure that physically absorbs and holds water molecules, adding water storage capacity that sand's large particles and pore spaces lack.",
+      "Organic matter reacts chemically with quartz in sand grains, converting them into clay minerals that hold water more effectively.",
+      "Organic matter lowers the soil's cation exchange capacity, which allows more water molecules to bind loosely to particle surfaces.",
+      "Organic matter increases the average particle size of the soil, which reduces the total pore space available for drainage."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A soil scientist poured 500 mL of water into 30 cm columns of pure sand, pure clay, and loam (equal parts sand, silt, clay). Drainage times were sand 8 minutes, loam 45 minutes, and clay 180 minutes. Which best explains these results in terms of particle size and soil properties?",
@@ -80,23 +80,23 @@
     "correct": "D"
   },
   {
-    "question": "A farmer tests soil from two fields using standard soil testing methods. Field A shows high water-holding capacity, moderate permeability, and high cation exchange capacity. Field B shows low water-holding capacity, high permeability, and low cation exchange capacity. Which of the following best describes the soil texture of Field A compared to Field B?",
+    "question": "A soil scientist tests two fields. Field A has high water-holding capacity, moderate permeability, and high cation exchange capacity (CEC). Field B has low water-holding capacity, high permeability, and low CEC. Which explanation best accounts for all three differences?",
     "answers": [
-      "Field A is loamy soil with balanced clay, silt, and sand content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in all three measured properties",
-      "Field A is loamy soil with balanced clay, silt, and sand content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in water-holding capacity and permeability",
-      "Field A is silty soil with high silt and moderate clay content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in all three measured properties",
-      "Field A is loamy soil with high silt content, while Field B is sandy soil with high sand content and minimal clay, explaining the differences in water-holding capacity and permeability but not cation exchange capacity"
+      "Field A is a clay-rich loam with abundant fine particles and surface area, while Field B is sandy with large particles and little surface area, which together explain the water retention, permeability, and CEC differences.",
+      "Field A has been recently fertilized while Field B has not, which temporarily raises water retention and CEC without altering permeability.",
+      "Field A sits at a lower elevation and receives more groundwater seepage, which explains its higher water content but not its CEC or permeability.",
+      "Field A has a higher organic content only, which fully explains the CEC difference but has no effect on permeability or water retention."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "The diagram shows soil horizons in a temperate forest with distinct layers labeled O, A, B, and C. The B horizon appears darker and more compacted than the A horizon above it. Which characteristic of the B horizon best explains why it typically has lower permeability than the A horizon?",
+    "question": "In a soil profile with distinct O, A, B, and C horizons, the B horizon is visibly darker in color and denser than the A horizon directly above it. Which process best explains why the B horizon typically has lower permeability than the A horizon?",
     "answers": [
-      "Clay and silt particles leached from the A horizon accumulate in the B horizon, reducing pore size and water movement",
-      "The B horizon is more compacted because it experiences greater pressure from overlying soil layers, which reduces pore space uniformly",
-      "The A horizon has higher permeability because it contains more sand particles mixed with organic matter",
-      "The B horizon contains more organic matter than the A horizon, which increases soil compaction and reduces drainage"
+      "Fine clay and mineral particles leached (eluviated) from the A horizon accumulate (illuviate) in the B horizon, filling pore spaces and slowing water movement.",
+      "The B horizon contains more decomposing leaf litter than the A horizon, and this organic material clogs pore spaces.",
+      "Plant roots are denser in the B horizon, and root growth physically compacts the surrounding mineral particles.",
+      "The B horizon experiences more freeze-thaw cycles than the A horizon, which repeatedly compacts its structure."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

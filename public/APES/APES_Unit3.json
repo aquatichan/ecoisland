@@ -1,38 +1,1292 @@
 [
   {
-    "question": "Which term describes the maximum population an environment can support indefinitely?",
+    "question": "Which of the following best describes a generalist species?",
     "difficulty": "Easy",
-    "A": "Carrying capacity",
-    "B": "Biotic potential",
-    "C": "Limiting factor",
-    "D": "Exponential growth rate",
+    "A": "A species that can survive on a wide variety of food sources and tolerate a broad range of environmental conditions",
+    "B": "A species that requires a narrow range of specific resources and environmental conditions to survive",
+    "C": "A species that reproduces only once in its lifetime, producing many offspring",
+    "D": "A species restricted to a single, isolated geographic location",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Generalist vs. Specialist Species",
+      "sourceNote": "Hypothetical examples for this exercise",
+      "headers": [
+        "Type",
+        "Diet/Habitat Breadth",
+        "Example"
+      ],
+      "rows": [
+        [
+          "Generalist",
+          "Broad",
+          "Raccoon, coyote"
+        ],
+        [
+          "Specialist",
+          "Narrow",
+          "Giant panda (bamboo), koala (eucalyptus)"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following organisms would be classified as a specialist species based on its resource requirements?",
+    "difficulty": "Easy",
+    "A": "The koala, which feeds almost exclusively on eucalyptus leaves",
+    "B": "The raccoon, which eats fruit, insects, small animals, and human refuse",
+    "C": "The coyote, which occupies habitats ranging from deserts to cities",
+    "D": "The rat, which thrives in nearly any urban or rural environment",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Diet Breadth of Four Species",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Species",
+        "Diet"
+      ],
+      "rows": [
+        [
+          "Koala",
+          "Eucalyptus leaves only"
+        ],
+        [
+          "Raccoon",
+          "Fruit, insects, small animals, refuse"
+        ],
+        [
+          "Coyote",
+          "Wide range of prey and habitats"
+        ],
+        [
+          "Rat",
+          "Nearly any available food source"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A habitat is altered by human development, and researchers track population changes in a generalist species and a specialist species over the following decade. Which pattern would be most consistent with ecological expectations for these two species types?",
+    "difficulty": "Medium",
+    "A": "The generalist population remains stable or increases, while the specialist population declines sharply due to loss of its specific required resources",
+    "B": "Both populations decline at identical rates, since habitat alteration affects generalists and specialists equally",
+    "C": "The specialist population increases because habitat alteration creates more diverse resources it can exploit",
+    "D": "The generalist population declines more than the specialist because generalists cannot tolerate any environmental change",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Population Trends After Habitat Alteration",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Generalist species (relative population)",
+          "points": [
+            {
+              "x": 0,
+              "y": 100
+            },
+            {
+              "x": 3,
+              "y": 105
+            },
+            {
+              "x": 6,
+              "y": 115
+            },
+            {
+              "x": 10,
+              "y": 130
+            }
+          ]
+        },
+        {
+          "name": "Specialist species (relative population)",
+          "points": [
+            {
+              "x": 0,
+              "y": 100
+            },
+            {
+              "x": 3,
+              "y": 70
+            },
+            {
+              "x": 6,
+              "y": 40
+            },
+            {
+              "x": 10,
+              "y": 15
+            }
+          ]
+        }
+      ],
+      "xLabel": "Years since habitat alteration",
+      "yLabel": "Relative population size"
+    }
+  },
+  {
+    "question": "Which of the following best characterizes an r-selected species?",
+    "difficulty": "Easy",
+    "A": "High reproductive rate, many offspring, little parental care, and short lifespan",
+    "B": "Low reproductive rate, few offspring, extensive parental care, and long lifespan",
+    "C": "Reproduction occurs only once near the end of a long lifespan with no offspring care",
+    "D": "Population size remains constant regardless of environmental carrying capacity",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "r-Selected vs. K-Selected Life History Traits",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Trait",
+        "r-Selected",
+        "K-Selected"
+      ],
+      "rows": [
+        [
+          "Offspring number",
+          "Many",
+          "Few"
+        ],
+        [
+          "Parental care",
+          "Little to none",
+          "Extensive"
+        ],
+        [
+          "Body size",
+          "Typically small",
+          "Typically large"
+        ],
+        [
+          "Lifespan",
+          "Short",
+          "Long"
+        ],
+        [
+          "Example",
+          "Insects, mice",
+          "Elephants, whales"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Elephants typically give birth to a single calf after a 22-month gestation, invest years in maternal care, and can live 60-70 years. Based on these traits, elephants are best classified as which type of species?",
+    "difficulty": "Easy",
+    "A": "K-selected",
+    "B": "r-selected",
+    "C": "A species with a Type III survivorship curve exclusively",
+    "D": "A generalist species specifically because of its long lifespan",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Elephant Life History Traits",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Trait",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Offspring per birth",
+          "1 (rarely twins)"
+        ],
+        [
+          "Gestation period",
+          "22 months"
+        ],
+        [
+          "Parental care",
+          "Years of maternal investment"
+        ],
+        [
+          "Lifespan",
+          "60-70 years"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A population ecologist compares two rodent species living in the same grassland: Species X produces 8-10 litters per year with 6-8 pups each and reaches sexual maturity at 6 weeks, while Species Y produces one litter of 1-2 pups per year and reaches sexual maturity at 2 years. Following a severe habitat disturbance that kills 90% of both populations, which species would be expected to recover its population size more quickly?",
+    "difficulty": "Hard",
+    "A": "Species X, because its r-selected traits (rapid maturation, high reproductive output) allow for fast exponential population recovery",
+    "B": "Species Y, because K-selected species always recover more quickly after a population crash",
+    "C": "Both species would recover at the same rate because recovery rate is unrelated to reproductive strategy",
+    "D": "Neither species could recover because a 90% population reduction always leads to extinction",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Reproductive Traits of Two Rodent Species",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Species",
+        "Litters/Year",
+        "Offspring/Litter",
+        "Age at Maturity"
+      ],
+      "rows": [
+        [
+          "Species X",
+          "8-10",
+          "6-8",
+          "6 weeks"
+        ],
+        [
+          "Species Y",
+          "1",
+          "1-2",
+          "2 years"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A Type I survivorship curve is best characterized by which pattern of mortality across the lifespan?",
+    "difficulty": "Easy",
+    "A": "Low mortality during infancy and youth, with mortality increasing sharply in old age",
+    "B": "Roughly constant mortality risk at all ages throughout life",
+    "C": "Very high mortality early in life, with survivors then experiencing low mortality",
+    "D": "Mortality that decreases steadily and continuously from birth to death",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Three Survivorship Curve Types",
+      "sourceNote": "Hypothetical data illustrating classic survivorship curve shapes",
+      "series": [
+        {
+          "name": "Type I",
+          "points": [
+            {
+              "x": 0,
+              "y": 1000
+            },
+            {
+              "x": 20,
+              "y": 980
+            },
+            {
+              "x": 40,
+              "y": 940
+            },
+            {
+              "x": 60,
+              "y": 800
+            },
+            {
+              "x": 80,
+              "y": 300
+            },
+            {
+              "x": 100,
+              "y": 10
+            }
+          ]
+        },
+        {
+          "name": "Type II",
+          "points": [
+            {
+              "x": 0,
+              "y": 1000
+            },
+            {
+              "x": 20,
+              "y": 700
+            },
+            {
+              "x": 40,
+              "y": 490
+            },
+            {
+              "x": 60,
+              "y": 340
+            },
+            {
+              "x": 80,
+              "y": 240
+            },
+            {
+              "x": 100,
+              "y": 165
+            }
+          ]
+        },
+        {
+          "name": "Type III",
+          "points": [
+            {
+              "x": 0,
+              "y": 1000
+            },
+            {
+              "x": 20,
+              "y": 60
+            },
+            {
+              "x": 40,
+              "y": 40
+            },
+            {
+              "x": 60,
+              "y": 30
+            },
+            {
+              "x": 80,
+              "y": 22
+            },
+            {
+              "x": 100,
+              "y": 18
+            }
+          ]
+        }
+      ],
+      "xLabel": "Percent of maximum lifespan",
+      "yLabel": "Number of survivors (log scale, out of 1000)"
+    }
+  },
+  {
+    "question": "Which of the following organisms would most likely exhibit a Type III survivorship curve?",
+    "difficulty": "Medium",
+    "A": "An oyster, which produces millions of larvae, most of which die shortly after hatching",
+    "B": "A human, which typically experiences low mortality until old age",
+    "C": "A large K-selected mammal with extensive parental care of one or two offspring",
+    "D": "A species with roughly equal mortality risk at every age throughout its life",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Reproductive Output and Early Mortality of Four Organisms",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Organism",
+        "Offspring per Reproductive Event",
+        "Early-Life Mortality"
+      ],
+      "rows": [
+        [
+          "Oyster",
+          "Millions of larvae",
+          "Extremely high"
+        ],
+        [
+          "Human",
+          "1 (typically)",
+          "Low"
+        ],
+        [
+          "Elephant",
+          "1",
+          "Low"
+        ],
+        [
+          "Songbird",
+          "3-6 eggs",
+          "Moderate, roughly constant"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A wildlife manager is deciding how to allocate limited conservation funding for a species known to exhibit a Type III survivorship curve. Based on this survivorship pattern, which conservation strategy would most directly target the life stage responsible for the greatest population loss?",
+    "difficulty": "Hard",
+    "A": "Protecting eggs, larvae, or juveniles from predation and environmental hazards during their most vulnerable early life stages",
+    "B": "Focusing exclusively on extending the lifespan of already-surviving adults through veterinary intervention",
+    "C": "Reducing adult mortality, since adults experience the highest mortality rate in a Type III curve",
+    "D": "Distributing conservation resources equally across all age classes regardless of survivorship pattern",
     "answer": "A"
   },
   {
-    "question": "A population that overshoots its carrying capacity will most likely experience which of the following?",
+    "question": "Carrying capacity (K) is best defined as which of the following?",
+    "difficulty": "Easy",
+    "A": "The maximum population size of a species that a given environment can sustain indefinitely, given available resources",
+    "B": "The absolute maximum number of offspring a single female can produce in her lifetime",
+    "C": "The rate at which a population grows when resources are unlimited",
+    "D": "The minimum population size needed to avoid genetic bottleneck effects",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Logistic Growth Curve with Carrying Capacity Labeled",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Population size",
+          "points": [
+            {
+              "x": 0,
+              "y": 10
+            },
+            {
+              "x": 2,
+              "y": 30
+            },
+            {
+              "x": 4,
+              "y": 90
+            },
+            {
+              "x": 6,
+              "y": 220
+            },
+            {
+              "x": 8,
+              "y": 380
+            },
+            {
+              "x": 10,
+              "y": 460
+            },
+            {
+              "x": 12,
+              "y": 490
+            },
+            {
+              "x": 14,
+              "y": 500
+            },
+            {
+              "x": 16,
+              "y": 500
+            }
+          ]
+        }
+      ],
+      "xLabel": "Time",
+      "yLabel": "Population size (K = 500)"
+    }
+  },
+  {
+    "question": "A population of deer is introduced to an island with abundant vegetation and no predators. Researchers track the population over 40 years. Based on the classic logistic growth model, which explanation best accounts for the pattern shown?",
     "difficulty": "Medium",
-    "A": "Stable equilibrium at a higher density",
-    "B": "A rapid decline in population size due to resource depletion",
-    "C": "An increase in biodiversity",
-    "D": "Reduced environmental resistance",
-    "answer": "B"
+    "A": "The population grew exponentially while resources were abundant, then growth slowed as the population approached the island's carrying capacity, eventually leveling off",
+    "B": "The population grew at a constant linear rate throughout the entire 40-year period regardless of resource availability",
+    "C": "The population's leveling off after year 25 indicates the deer are approaching extinction rather than stabilizing at carrying capacity",
+    "D": "Carrying capacity is irrelevant to this scenario because the island has no predators to limit the population",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Deer Population on an Island Over 40 Years",
+      "sourceNote": "Hypothetical data illustrating logistic growth",
+      "series": [
+        {
+          "name": "Population size",
+          "points": [
+            {
+              "x": 0,
+              "y": 20
+            },
+            {
+              "x": 5,
+              "y": 45
+            },
+            {
+              "x": 10,
+              "y": 100
+            },
+            {
+              "x": 15,
+              "y": 210
+            },
+            {
+              "x": 20,
+              "y": 350
+            },
+            {
+              "x": 25,
+              "y": 430
+            },
+            {
+              "x": 30,
+              "y": 460
+            },
+            {
+              "x": 35,
+              "y": 470
+            },
+            {
+              "x": 40,
+              "y": 475
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Deer population"
+    }
   },
   {
-    "question": "If a population grows from 1,000 to 2,000 individuals in 20 years, what is its approximate annual growth rate?",
+    "question": "A population that temporarily exceeds an environment's carrying capacity, depleting resources faster than they can regenerate, is described as undergoing which of the following?",
+    "difficulty": "Medium",
+    "A": "Overshoot, which is often followed by a population crash (die-off) as resources become insufficient to support the inflated population",
+    "B": "Exponential growth that will continue indefinitely without any resource limitation",
+    "C": "A stable equilibrium state that requires no further ecological monitoring",
+    "D": "Density-independent growth, meaning population size has no relationship to resource availability",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is an example of a density-dependent limiting factor on population growth?",
+    "difficulty": "Easy",
+    "A": "Competition for food that intensifies as population density increases",
+    "B": "A random early frost that kills a fixed percentage of a plant population regardless of density",
+    "C": "A volcanic eruption that destroys habitat regardless of population size",
+    "D": "A hurricane that reduces population size independent of how crowded the population was",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Density-Dependent vs. Density-Independent Limiting Factors",
+      "sourceNote": "Hypothetical examples for this exercise",
+      "headers": [
+        "Factor",
+        "Category"
+      ],
+      "rows": [
+        [
+          "Food competition",
+          "Density-dependent"
+        ],
+        [
+          "Disease transmission",
+          "Density-dependent"
+        ],
+        [
+          "Early frost",
+          "Density-independent"
+        ],
+        [
+          "Volcanic eruption",
+          "Density-independent"
+        ],
+        [
+          "Hurricane",
+          "Density-independent"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Researchers studying a population of songbirds in a fixed-size forest patch measure the following relationship between population density and average clutch size (number of eggs laid per female). Which conclusion is best supported by these data?",
+    "difficulty": "Medium",
+    "A": "Clutch size declines as population density increases, consistent with density-dependent regulation through resource competition",
+    "B": "Clutch size is entirely independent of population density based on these data",
+    "C": "Clutch size increases as population density increases, showing a density-independent relationship",
+    "D": "Population density has no known relationship to reproductive output in any bird species",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Songbird Population Density vs. Average Clutch Size",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {
+          "x": 5,
+          "y": 5.8
+        },
+        {
+          "x": 10,
+          "y": 5.2
+        },
+        {
+          "x": 15,
+          "y": 4.5
+        },
+        {
+          "x": 20,
+          "y": 3.9
+        },
+        {
+          "x": 25,
+          "y": 3.3
+        },
+        {
+          "x": 30,
+          "y": 2.7
+        },
+        {
+          "x": 35,
+          "y": 2.2
+        }
+      ],
+      "xLabel": "Population density (pairs/hectare)",
+      "yLabel": "Average clutch size (eggs)"
+    }
+  },
+  {
+    "question": "Which of the following best describes the relationship between resource availability and population growth rate in a logistic growth model?",
+    "difficulty": "Medium",
+    "A": "As resource availability per individual declines with increasing population size, population growth rate slows, approaching zero as the population nears carrying capacity",
+    "B": "Population growth rate remains constant regardless of resource availability until the population goes extinct",
+    "C": "Resource availability only affects population growth rate in exponential models, not logistic models",
+    "D": "Population growth rate increases continuously as population size increases, regardless of resource limitation",
+    "answer": "A"
+  },
+  {
+    "question": "A drought reduces forage availability for a wild horse population on a rangeland. Researchers record forage biomass and horse population growth rate over the following years. Which conclusion is best supported by the data?",
     "difficulty": "Hard",
-    "A": "2%",
-    "B": "3.5%",
-    "C": "5%",
-    "D": "10%",
-    "answer": "B"
+    "A": "Population growth rate tracks forage availability, declining when forage is scarce and recovering as forage biomass increases, consistent with resource-limited population growth",
+    "B": "Population growth rate is unrelated to forage biomass, since horses can survive indefinitely without adequate food",
+    "C": "Forage biomass and population growth rate move in opposite directions consistently throughout the study",
+    "D": "The horse population's growth rate is controlled entirely by predation rather than food availability",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Forage Biomass and Horse Population Growth Rate",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Forage biomass (relative)",
+          "points": [
+            {
+              "x": 1,
+              "y": 100
+            },
+            {
+              "x": 2,
+              "y": 60
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 55
+            },
+            {
+              "x": 5,
+              "y": 90
+            }
+          ]
+        },
+        {
+          "name": "Population growth rate (%)",
+          "points": [
+            {
+              "x": 1,
+              "y": 8
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 3,
+              "y": -4
+            },
+            {
+              "x": 4,
+              "y": 2
+            },
+            {
+              "x": 5,
+              "y": 7
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Relative forage / Growth rate (%)"
+    }
   },
   {
-    "question": "In a study, deer density increases while food availability per individual decreases. Which statement best describes this trend?",
-    "difficulty": "Challenge",
-    "A": "A density-independent factor is influencing the population",
-    "B": "The population has exceeded its carrying capacity",
-    "C": "The birth rate is increasing faster than the death rate",
-    "D": "Predator populations are declining",
-    "answer": "B"
+    "question": "An age structure diagram with a wide base that narrows sharply moving toward older age classes is most characteristic of which type of population?",
+    "difficulty": "Easy",
+    "A": "A rapidly growing population with high birth rates, typical of many developing countries",
+    "B": "A declining population with low birth rates and an aging population, typical of some developed countries",
+    "C": "A population that has reached zero population growth with equal numbers at every age",
+    "D": "A population with no reproductive-age individuals present",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Age Structure of a Rapidly Growing Population",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "0-14",
+          "value": 42
+        },
+        {
+          "label": "15-29",
+          "value": 28
+        },
+        {
+          "label": "30-44",
+          "value": 16
+        },
+        {
+          "label": "45-59",
+          "value": 9
+        },
+        {
+          "label": "60+",
+          "value": 5
+        }
+      ],
+      "xLabel": "Age group",
+      "yLabel": "Percent of population"
+    }
+  },
+  {
+    "question": "A country's age structure diagram shows a 'constrictive' (narrow-base) shape, with fewer young people than middle-aged adults. Which of the following population trends does this shape typically predict?",
+    "difficulty": "Medium",
+    "A": "Future population decline, as the smaller youth cohort will not fully replace the larger current adult population as it ages",
+    "B": "Continued rapid population growth, since a narrow base always indicates high future birth rates",
+    "C": "No relationship exists between age structure shape and future population trends",
+    "D": "Immediate population collapse to zero within a single generation",
+    "answer": "A"
+  },
+  {
+    "question": "Two countries have identical current population growth rates of 1.5% per year, but Country A has an expansive (wide-based) age structure while Country B has a stationary (rectangular) age structure. Which of the following best predicts their future population trajectories?",
+    "difficulty": "Hard",
+    "A": "Country A's population will likely continue growing for longer due to population momentum from its large youth cohort, while Country B's growth rate is more likely to stabilize sooner",
+    "B": "Both countries will have identical future population trajectories because their current growth rates are the same",
+    "C": "Country B's population will grow faster in the future because a stationary age structure indicates untapped reproductive potential",
+    "D": "Age structure shape provides no additional predictive information beyond the current growth rate",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Two Countries with Equal Current Growth Rate but Different Age Structures",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Country",
+        "Current Growth Rate",
+        "Age Structure Shape",
+        "% Under Age 15"
+      ],
+      "rows": [
+        [
+          "Country A",
+          "1.5%",
+          "Expansive (wide base)",
+          "38%"
+        ],
+        [
+          "Country B",
+          "1.5%",
+          "Stationary (rectangular)",
+          "19%"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Total fertility rate (TFR) is best defined as which of the following?",
+    "difficulty": "Easy",
+    "A": "The average number of children a woman would have during her reproductive years, given current age-specific birth rates",
+    "B": "The total number of births that occur in a country in a single calendar year",
+    "C": "The percentage of women in a country who have at least one child during their lifetime",
+    "D": "The number of children per 1,000 people in the total population, including men",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Total Fertility Rate in Selected Countries",
+      "sourceNote": "Hypothetical illustrative figures, not exact current statistics",
+      "headers": [
+        "Country Type",
+        "Approximate TFR"
+      ],
+      "rows": [
+        [
+          "High-fertility developing country",
+          "5.0+"
+        ],
+        [
+          "Country near replacement level",
+          "2.1"
+        ],
+        [
+          "Low-fertility developed country",
+          "1.3-1.6"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A total fertility rate of approximately 2.1 in a developed country with low infant mortality is generally considered to represent which of the following?",
+    "difficulty": "Medium",
+    "A": "Replacement-level fertility, at which a population would eventually stabilize in size in the absence of migration",
+    "B": "A rate guaranteed to produce rapid population growth over subsequent decades",
+    "C": "A rate that will cause immediate population decline within a single generation",
+    "D": "A rate with no defined demographic significance",
+    "answer": "A"
+  },
+  {
+    "question": "Researchers compare total fertility rate to female secondary school enrollment across eight countries. Based on the scatter plot, which conclusion about this relationship is best supported?",
+    "difficulty": "Medium",
+    "A": "Countries with higher female secondary school enrollment tend to have lower total fertility rates",
+    "B": "There is no relationship between female education and total fertility rate across these countries",
+    "C": "Total fertility rate increases consistently as female secondary school enrollment increases",
+    "D": "Female education is the only factor that determines total fertility rate in any country",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Female Secondary School Enrollment vs. Total Fertility Rate",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {
+          "x": 15,
+          "y": 6.2
+        },
+        {
+          "x": 25,
+          "y": 5.5
+        },
+        {
+          "x": 40,
+          "y": 4.3
+        },
+        {
+          "x": 55,
+          "y": 3.4
+        },
+        {
+          "x": 65,
+          "y": 2.8
+        },
+        {
+          "x": 78,
+          "y": 2.1
+        },
+        {
+          "x": 88,
+          "y": 1.7
+        },
+        {
+          "x": 95,
+          "y": 1.5
+        }
+      ],
+      "trendline": {
+        "x1": 15,
+        "y1": 6.0,
+        "x2": 95,
+        "y2": 1.6
+      },
+      "xLabel": "Female secondary school enrollment (%)",
+      "yLabel": "Total fertility rate"
+    }
+  },
+  {
+    "question": "Which of the following best explains why total fertility rate tends to decline as infant and child mortality rates decline in a developing country?",
+    "difficulty": "Medium",
+    "A": "As more children survive to adulthood, families no longer need to have as many births to ensure a desired number of surviving children, reducing the incentive for high fertility",
+    "B": "Declining child mortality directly and immediately reduces a woman's biological capacity to conceive additional children",
+    "C": "Declining child mortality has historically shown no relationship to total fertility rate in any studied population",
+    "D": "Total fertility rate declines only because of government-mandated fertility limits, unrelated to child mortality",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best describes the concept of an ecological footprint as applied to human population dynamics?",
+    "difficulty": "Easy",
+    "A": "A measure of the amount of biologically productive land and water area required to produce the resources a population consumes and absorb its waste",
+    "B": "A measure of the total land area physically occupied by human infrastructure such as buildings and roads",
+    "C": "A measure of the number of endangered species affected by a single country's population",
+    "D": "A fixed value that is identical for every country regardless of consumption patterns",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Components of an Ecological Footprint",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Component",
+        "Description"
+      ],
+      "rows": [
+        [
+          "Cropland",
+          "Land needed to grow food and fiber"
+        ],
+        [
+          "Grazing land",
+          "Land needed for livestock"
+        ],
+        [
+          "Forest land",
+          "Land needed for timber and carbon absorption"
+        ],
+        [
+          "Built-up land",
+          "Land occupied by infrastructure"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Two countries have similar total populations, but Country X has a much higher per capita ecological footprint than Country Y. Which of the following best explains a likely cause of this difference?",
+    "difficulty": "Medium",
+    "A": "Country X likely has substantially higher average per-person resource consumption and waste generation than Country Y",
+    "B": "Country X must have a much larger total population than Country Y, since footprint depends only on population size",
+    "C": "Ecological footprint is determined solely by land area and has no relationship to consumption patterns",
+    "D": "Country Y's lower footprint indicates it has a higher total fertility rate than Country X",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Per Capita Ecological Footprint of Two Countries",
+      "sourceNote": "Hypothetical data based on typical patterns in global footprint comparisons",
+      "data": [
+        {
+          "label": "Country X (high-consumption)",
+          "value": 8.5
+        },
+        {
+          "label": "Country Y (lower-consumption)",
+          "value": 1.8
+        }
+      ],
+      "xLabel": "Country",
+      "yLabel": "Ecological footprint (global hectares per person)"
+    }
+  },
+  {
+    "question": "The IPAT equation (Impact = Population x Affluence x Technology) is used to estimate which of the following?",
+    "difficulty": "Medium",
+    "A": "The overall environmental impact of a human population, accounting for both population size and per-capita consumption/technology effects",
+    "B": "The total fertility rate of a population based solely on its technological development",
+    "C": "The carrying capacity of an ecosystem independent of any human population factors",
+    "D": "The exact number of years remaining until a population reaches zero population growth",
+    "answer": "A"
+  },
+  {
+    "question": "The demographic transition model describes changes in birth and death rates as a country develops economically. In Stage 2 of this model, which pattern is typically observed?",
+    "difficulty": "Medium",
+    "A": "Death rates fall due to improved sanitation, medicine, and food security, while birth rates remain high, resulting in rapid population growth",
+    "B": "Both birth rates and death rates fall simultaneously, keeping the population growth rate low and stable",
+    "C": "Birth rates fall sharply while death rates remain high, resulting in population decline",
+    "D": "Both birth rates and death rates remain high with little change, resulting in slow overall growth",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Demographic Transition Model: Birth and Death Rates Over Time",
+      "sourceNote": "Hypothetical data illustrating the classic demographic transition model",
+      "series": [
+        {
+          "name": "Birth rate (per 1,000)",
+          "points": [
+            {
+              "x": 1,
+              "y": 45
+            },
+            {
+              "x": 2,
+              "y": 45
+            },
+            {
+              "x": 3,
+              "y": 30
+            },
+            {
+              "x": 4,
+              "y": 12
+            }
+          ]
+        },
+        {
+          "name": "Death rate (per 1,000)",
+          "points": [
+            {
+              "x": 1,
+              "y": 40
+            },
+            {
+              "x": 2,
+              "y": 15
+            },
+            {
+              "x": 3,
+              "y": 10
+            },
+            {
+              "x": 4,
+              "y": 10
+            }
+          ]
+        }
+      ],
+      "xLabel": "Demographic Transition Stage",
+      "yLabel": "Rate per 1,000 people"
+    }
+  },
+  {
+    "question": "A country in Stage 4 of the demographic transition model would most likely show which combination of demographic characteristics?",
+    "difficulty": "Medium",
+    "A": "Low birth rate, low death rate, and a slow or near-zero rate of natural population increase",
+    "B": "High birth rate, low death rate, and rapid population growth",
+    "C": "High birth rate, high death rate, and slow population growth",
+    "D": "Low birth rate, high death rate, and rapid population decline",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Demographic Transition Model Stages",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Stage",
+        "Birth Rate",
+        "Death Rate",
+        "Growth"
+      ],
+      "rows": [
+        [
+          "1",
+          "High",
+          "High",
+          "Slow/stable"
+        ],
+        [
+          "2",
+          "High",
+          "Falling",
+          "Rapid increase"
+        ],
+        [
+          "3",
+          "Falling",
+          "Low",
+          "Slowing increase"
+        ],
+        [
+          "4",
+          "Low",
+          "Low",
+          "Slow/near-zero"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A demographer studying a country notes that death rates fell from 35 to 12 per 1,000 between 1950 and 1980 due to improved medicine and sanitation, but birth rates remained at approximately 42 per 1,000 throughout the same period, only beginning to fall after 1980. Which stage of the demographic transition does the 1950-1980 period best represent?",
+    "difficulty": "Hard",
+    "A": "Stage 2, characterized by a widening gap between falling death rates and persistently high birth rates, producing rapid natural population increase",
+    "B": "Stage 4, characterized by low and stable birth and death rates",
+    "C": "Stage 1, characterized by consistently high birth and death rates with minimal population growth",
+    "D": "Stage 3, characterized by birth rates falling faster than death rates",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Birth and Death Rates, 1950-1980",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Year",
+        "Birth Rate (per 1,000)",
+        "Death Rate (per 1,000)"
+      ],
+      "rows": [
+        [
+          1950,
+          42,
+          35
+        ],
+        [
+          1960,
+          42,
+          24
+        ],
+        [
+          1970,
+          42,
+          16
+        ],
+        [
+          1980,
+          41,
+          12
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following social and economic changes is most commonly associated with a country's transition from Stage 3 to Stage 4 of the demographic transition model?",
+    "difficulty": "Medium",
+    "A": "Increased access to education and family planning, urbanization, and rising costs associated with raising children, all of which tend to reduce desired family size",
+    "B": "A sudden, sharp increase in death rates due to a new infectious disease outbreak",
+    "C": "A return to subsistence agriculture and a decline in access to modern medicine",
+    "D": "A mandatory decrease in life expectancy imposed by government population policy",
+    "answer": "A"
+  },
+  {
+    "question": "A population biologist calculates that a population of 500 individuals is growing at an annual rate of 3%. Using the approximation 'doubling time (years) = 70 / growth rate (%)', approximately how many years will it take this population to double in size?",
+    "difficulty": "Medium",
+    "A": "About 23 years",
+    "B": "About 35 years",
+    "C": "About 70 years",
+    "D": "About 3 years",
+    "answer": "A"
+  },
+  {
+    "question": "A population of 1,200 rabbits grows to 1,800 individuals over the course of one year. What is the population's percent growth rate over that year?",
+    "difficulty": "Medium",
+    "A": "50%",
+    "B": "60%",
+    "C": "150%",
+    "D": "33%",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Rabbit Population Change Over One Year",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Time Point",
+        "Population Size"
+      ],
+      "rows": [
+        [
+          "Start of year",
+          1200
+        ],
+        [
+          "End of year",
+          1800
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Immigration and emigration, in addition to birth and death rates, are important components of which demographic measure?",
+    "difficulty": "Easy",
+    "A": "A population's total (overall) growth rate, as opposed to its rate of natural increase",
+    "B": "A country's total fertility rate exclusively",
+    "C": "A population's carrying capacity, which is unaffected by migration",
+    "D": "A population's survivorship curve type",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Components of Population Change",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": [
+        "Component",
+        "Effect on Population"
+      ],
+      "rows": [
+        [
+          "Births",
+          "Increase"
+        ],
+        [
+          "Deaths",
+          "Decrease"
+        ],
+        [
+          "Immigration",
+          "Increase"
+        ],
+        [
+          "Emigration",
+          "Decrease"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes 'population momentum' in the context of human demography?",
+    "difficulty": "Hard",
+    "A": "The tendency of a population to continue growing for a period even after fertility rates drop to replacement level, due to a large existing proportion of young people who have not yet passed through their reproductive years",
+    "B": "The instantaneous rate of population change at any single point in time, independent of age structure",
+    "C": "A measure describing only how quickly a population's death rate is changing",
+    "D": "A phenomenon that only occurs in countries with declining, aging populations",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Age Structure of a Country That Just Reached Replacement-Level Fertility",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "0-14",
+          "value": 33
+        },
+        {
+          "label": "15-29",
+          "value": 27
+        },
+        {
+          "label": "30-44",
+          "value": 18
+        },
+        {
+          "label": "45-59",
+          "value": 13
+        },
+        {
+          "label": "60+",
+          "value": 9
+        }
+      ],
+      "xLabel": "Age group",
+      "yLabel": "Percent of population"
+    }
+  },
+  {
+    "question": "Which of the following best explains why countries with a high proportion of their population in the 15-29 age range but declining total fertility rates can still experience substantial population growth for several more decades?",
+    "difficulty": "Hard",
+    "A": "The large number of individuals entering reproductive age will produce a large absolute number of births even at a lower fertility rate per woman, a form of population momentum",
+    "B": "Declining fertility rates always translate immediately into declining total population size within one to two years",
+    "C": "Population growth is determined solely by death rate and is unaffected by the age structure of the reproductive-age population",
+    "D": "A young age structure has no bearing on future population size once fertility rate begins to decline",
+    "answer": "A"
+  },
+  {
+    "question": "A population ecologist studying an island lizard population finds that individuals are highly specialized, feeding only on one species of insect found in a narrow microhabitat. Following an unusually cold winter that reduces the target insect's abundance by 80%, the lizard population declines by 65%. Which concept does this scenario best illustrate?",
+    "difficulty": "Medium",
+    "A": "Specialist species are often more vulnerable to environmental change and resource fluctuations than generalist species, due to their narrow resource requirements",
+    "B": "Specialist species are always more resilient to environmental change than generalist species",
+    "C": "This decline demonstrates a Type I survivorship curve rather than a resource-driven population decline",
+    "D": "This decline is unrelated to the lizard's specialist status and is instead explained entirely by temperature tolerance alone",
+    "answer": "A"
+  },
+  {
+    "question": "A population of fish in a lake shows exponential growth (J-shaped curve) for the first 5 years after introduction, then growth slows and the population stabilizes near 8,000 individuals for the next 10 years. Which value does 8,000 individuals most likely represent?",
+    "difficulty": "Easy",
+    "A": "The lake's carrying capacity for this fish species",
+    "B": "The fish population's total fertility rate",
+    "C": "The fish population's intrinsic rate of increase (r)",
+    "D": "The minimum viable population size required to avoid extinction",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Fish Population in a Lake Over 15 Years",
+      "sourceNote": "Hypothetical data illustrating logistic growth",
+      "series": [
+        {
+          "name": "Population size",
+          "points": [
+            {
+              "x": 0,
+              "y": 200
+            },
+            {
+              "x": 1,
+              "y": 400
+            },
+            {
+              "x": 2,
+              "y": 900
+            },
+            {
+              "x": 3,
+              "y": 2200
+            },
+            {
+              "x": 4,
+              "y": 5000
+            },
+            {
+              "x": 5,
+              "y": 7500
+            },
+            {
+              "x": 8,
+              "y": 7950
+            },
+            {
+              "x": 12,
+              "y": 8000
+            },
+            {
+              "x": 15,
+              "y": 8000
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Fish population"
+    }
   }
 ]

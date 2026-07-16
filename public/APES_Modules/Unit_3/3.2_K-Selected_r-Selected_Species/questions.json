@@ -40,14 +40,41 @@
     "correct": "C"
   },
   {
-    "question": "A fisheries biologist argues that Pacific salmon populations will decline if ocean temperatures continue rising, providing evidence that salmon are K-selected species with low reproductive rates (spawning once in their lifetime after 3-5 years at sea), long pre-reproductive development periods, and significant parental investment in egg placement and protection. The biologist also notes that ocean temperature increases of 2-3°C over the past two decades have coincided with declining salmon catches. Which of the following best describes what additional information would most strengthen the reasoning connecting reproductive strategy to temperature sensitivity?",
+    "question": "A fisheries biologist argues that Pacific salmon populations will decline if ocean temperatures continue rising, citing that salmon are K-selected with low reproductive output (spawning once after 3-5 years at sea), long pre-reproductive development, and high parental investment in offspring. Which additional evidence would most strengthen the logical connection between rising ocean temperature and population decline?",
     "answers": [
-      "Evidence that warmer ocean temperatures specifically reduce salmon egg survival, larval development success, or food availability during critical early life stages when K-selected species have limited reproductive capacity to compensate for losses.",
-      "Evidence that warmer ocean temperatures specifically reduce egg survival, larval development success, or food availability during critical early life stages when r-selected species have high reproductive capacity but still experience population declines.",
-      "Evidence that warmer ocean temperatures specifically reduce adult salmon thermal tolerance and migration success when K-selected species have limited reproductive capacity to compensate for losses.",
-      "Evidence that warmer ocean temperatures specifically reduce salmon egg survival, larval development success, or food availability during critical early life stages when K-selected species can increase reproductive output to compensate for losses."
+      "Direct evidence that warmer ocean temperatures reduce salmon egg survival, larval development success, or food availability specifically during the critical early life stages when mortality is already naturally high",
+      "Evidence describing the general life history traits that classify salmon as a K-selected species, since this has already been established in the argument",
+      "Evidence of the total number of salmon currently harvested by commercial fisheries each year across the Pacific basin",
+      "Evidence describing the average water temperature tolerance range of unrelated freshwater fish species not found in the Pacific salmon's habitat"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Pacific Salmon Life History Traits",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Trait",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Reproductive events per lifetime",
+          1
+        ],
+        [
+          "Age at spawning",
+          "3-5 years"
+        ],
+        [
+          "Parental investment",
+          "High"
+        ],
+        [
+          "Classification",
+          "K-selected"
+        ]
+      ]
+    }
   },
   {
     "question": "After a forest fire destroys 80% of vegetation, pioneer plants colonize bare soil within weeks while shade-tolerant trees appear only after 15+ years. Which statement best explains how reproductive strategy affects succession timing?",
@@ -90,13 +117,13 @@
     "correct": "D"
   },
   {
-    "question": "A wildlife manager argues that introducing r-selected rodents will control invasive plants better than introducing K-selected herbivores, citing rodents' rapid maturity and high litter frequency versus herbivores' slower maturity and lower annual reproduction. Which choice best identifies a reasoning gap in this argument?",
+    "question": "A wildlife manager argues that introducing r-selected rodents will control an invasive plant more effectively than introducing K-selected herbivores, citing the rodents' rapid maturity and high litter frequency compared to the herbivores' slower maturity and lower annual reproduction. Which choice best identifies a reasoning gap in this argument?",
     "answers": [
-      "Data compare reproduction but not total plant consumption by rodent populations.",
-      "Plant reproductive rate is irrelevant to the comparison of herbivore strategies.",
-      "K-selected herbivores live longer and may control plants over extended periods.",
-      "Rodents are smaller and eat less per individual than larger herbivores."
+      "The argument compares reproductive rates but does not provide any data on the total amount of invasive plant biomass each type of consumer would actually eat over time",
+      "The argument is invalid because plant reproductive rate is entirely irrelevant to any comparison of herbivore population control strategies",
+      "K-selected herbivores are guaranteed to live longer than r-selected rodents, which alone proves they would control the plant more effectively over time",
+      "Rodents are physically smaller than herbivores and therefore must consume less vegetation per individual, which alone invalidates the manager's argument"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

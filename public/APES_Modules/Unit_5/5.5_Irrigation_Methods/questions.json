@@ -10,24 +10,24 @@
     "correct": "C"
   },
   {
-    "question": "An irrigation engineer presents findings from a pilot project in Morocco: 'We implemented drip irrigation across 50 hectares of date palm cultivation in the Draa Valley, replacing traditional flood irrigation. Water consumption decreased from 12,000 cubic meters per hectare annually to 600 cubic meters per hectare. Soil salinity levels, previously exceeding 8 dS/m in the root zone, stabilized at 2 dS/m within two growing seasons. Crop yields increased 35% while groundwater extraction declined proportionally. However, the system required $4,000 per hectare in initial infrastructure costs and ongoing maintenance by trained technicians. The project demonstrates that drip irrigation can simultaneously address water scarcity, salinization, and productivity in arid regions, but only where capital investment and technical capacity are available.'",
+    "question": "An irrigation engineer reports on a drip irrigation pilot project in Morocco's Draa Valley: water consumption for date palm cultivation fell from 12,000 to 600 cubic meters per hectare annually after switching from flood irrigation, and root-zone soil salinity fell from over 8 dS/m to 2 dS/m within two growing seasons, while crop yields rose 35%. The system required $4,000 per hectare in upfront infrastructure costs and ongoing technical maintenance. Which statement is the engineer's overall claim, rather than a specific piece of supporting evidence?",
     "answers": [
-      "Drip irrigation can resolve water scarcity and salinization problems in arid regions where capital and technical capacity exist",
-      "Drip irrigation requires $4,000 per hectare in initial costs and ongoing maintenance by trained technicians",
-      "Water consumption decreased from 12,000 to 600 cubic meters per hectare when drip irrigation replaced flood irrigation",
-      "Soil salinity in the Draa Valley decreased from 8 dS/m to 2 dS/m because drip irrigation's low water loss prevents salt accumulation"
+      "Drip irrigation can resolve water scarcity and salinization problems in arid regions where capital and technical capacity exist.",
+      "Drip irrigation requires $4,000 per hectare in initial costs and ongoing maintenance by trained technicians.",
+      "Water consumption decreased from 12,000 to 600 cubic meters per hectare when drip irrigation replaced flood irrigation.",
+      "Soil salinity in the Draa Valley decreased from 8 dS/m to 2 dS/m after drip irrigation was installed."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A farmer has been using drip irrigation for five years and observes that crop yields have plateaued despite the system's high water efficiency. Which of the following best explains this unintended consequence?",
+    "question": "A farmer has used drip irrigation for five years and observes that crop yields have plateaued despite the system's high water efficiency. Which of the following best explains this unintended consequence?",
     "answers": [
-      "Drip irrigation's precise water delivery to individual plants may concentrate salts near root zones if insufficient leaching occurs, eventually limiting nutrient uptake",
-      "Drip irrigation's precise water delivery to individual plants may concentrate salts near root zones if insufficient leaching occurs, eventually degrading soil structure and reducing water infiltration",
-      "Drip irrigation's precise water delivery to individual plants may alter soil pH near root zones if insufficient buffering occurs, eventually limiting nutrient uptake",
-      "Drip irrigation's precise water delivery to shallow-rooted crops may concentrate salts near root zones if insufficient leaching occurs, eventually limiting nutrient uptake"
+      "Because drip irrigation delivers water precisely to individual root zones with minimal excess, insufficient leaching may allow salts in the irrigation water to concentrate near plant roots over time, eventually limiting nutrient and water uptake.",
+      "Drip irrigation delivers so much excess water to the root zone that waterlogging, not salt accumulation, is the primary cause of the yield plateau.",
+      "Drip emitters clog with sediment after five years, and this clogging alone fully explains the yield plateau independent of salinity.",
+      "Drip irrigation increases soil pH uniformly across the field, and this pH shift is the sole cause of reduced nutrient availability."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A region experiencing severe waterlogging problems from flood irrigation proposes transitioning to drip irrigation. Flood irrigation leaves excess water sitting in fields, raising the water table and inhibiting plant root oxygen absorption. Which advantage best justifies this transition?",

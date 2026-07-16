@@ -105,7 +105,7 @@ const ISLAND_ITEMS: IslandItem[] = [
     name: "Metropolis Sunset",
     cost: 210,
     category: "skybox",
-    description: "Imagine a drive in this environment, makes you want to savor it",
+    description: "Imagine a drive in this environment, makes you want to save it",
     emoji: "🌅",
     color: "#f97316",
     image: `${ASSET_BASE}/Metropolis Sunset.png`,
@@ -444,13 +444,34 @@ const CATEGORIES = [
 
 const ITEM_BY_ID = Object.fromEntries(ISLAND_ITEMS.map((item) => [item.id, item]));
 
+// Only the volcano keeps a hand-tuned default. Every other decoration gets a
+// deterministic position derived from its item id (defaultLayoutForItem) so
+// newly-equipped decorations spread out instead of stacking at one spot.
 const DEFAULT_LAYOUT: Record<string, IslandLayoutEntry> = {
-  forest_small: { item_id: "forest_small", x: 0.28, y: 0.62, width: 110, height: 110, zIndex: 30 },
-  windmill: { item_id: "windmill", x: 0.76, y: 0.56, width: 90, height: 130, zIndex: 35 },
-  solar_panel: { item_id: "solar_panel", x: 0.58, y: 0.67, width: 120, height: 75, zIndex: 32 },
-  waterfall: { item_id: "waterfall", x: 0.82, y: 0.66, width: 120, height: 150, zIndex: 33 },
   volcano: { item_id: "volcano", x: 0.52, y: 0.52, width: 150, height: 150, zIndex: 40 },
 };
+
+function hashItemId(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+function defaultLayoutForItem(itemId: string): IslandLayoutEntry {
+  const h = hashItemId(itemId);
+  const x = 0.15 + ((h % 997) / 997) * 0.7; // 0.15..0.85
+  const y = 0.45 + ((Math.floor(h / 997) % 997) / 997) * 0.3; // 0.45..0.75
+  const size = 110 + (Math.floor(h / 994009) % 21); // 110..130
+  return {
+    item_id: itemId,
+    x: +x.toFixed(3),
+    y: +y.toFixed(3),
+    width: size,
+    height: size,
+    zIndex: 25 + (h % 10),
+    rotation: 0,
+  };
+}
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
@@ -477,15 +498,7 @@ function toLayoutMap(layout: any): Record<string, IslandLayoutEntry> {
 }
 
 function getLayoutForItem(itemId: string, current?: IslandLayoutEntry) {
-  return current || DEFAULT_LAYOUT[itemId] || {
-    item_id: itemId,
-    x: 0.5,
-    y: 0.55,
-    width: 120,
-    height: 120,
-    zIndex: 25,
-    rotation: 0,
-  };
+  return current || DEFAULT_LAYOUT[itemId] || defaultLayoutForItem(itemId);
 }
 
 /**
@@ -676,6 +689,10 @@ export default function Island() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const saveTimerRef = useRef<any>(null);
 
+  // Two-tap confirm for expensive purchases (>= 200 TC)
+  const [confirmingBuyId, setConfirmingBuyId] = useState<string | null>(null);
+  const confirmTimerRef = useRef<any>(null);
+
   const showMessage = (next: MessageState, ms = 2500) => {
     setMessage(next);
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
@@ -719,10 +736,24 @@ export default function Island() {
     return () => {
       mounted = false;
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      if (confirmTimerRef.current) clearTimeout(confirmTimerRef.current);
     };
   }, []);
 
   const ownedItemIds = useMemo(() => (user?.island_items || []).map((i: IslandOwnership) => i.item_id), [user]);
+
+  // Owned x/y counts per shop category filter
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, { owned: number; total: number }> = {};
+    for (const cat of CATEGORIES) {
+      const items = cat.key === "all" ? ISLAND_ITEMS : ISLAND_ITEMS.filter((i) => i.category === cat.key);
+      counts[cat.key] = {
+        owned: items.filter((i) => ownedItemIds.includes(i.id)).length,
+        total: items.length,
+      };
+    }
+    return counts;
+  }, [ownedItemIds]);
 
   const activeSkyboxItem = activeSkybox ? ITEM_BY_ID[activeSkybox] || null : null;
   const activeIslandItem = activeIsland ? ITEM_BY_ID[activeIsland] || null : null;
@@ -764,6 +795,20 @@ export default function Island() {
     await saveIslandData(updatedUser, layoutMap);
     setUser((prev: any) => ({ ...prev, ...updatedUser }));
     showMessage({ type: "success", text: `${item.name} purchased! 🎉` }, 2500);
+  };
+
+  // Expensive items (>= 200 TC) need a second tap to confirm; the confirm
+  // state reverts back to a normal Buy button after 3s.
+  const handleBuyClick = (item: IslandItem) => {
+    if (item.cost >= 200 && confirmingBuyId !== item.id) {
+      setConfirmingBuyId(item.id);
+      if (confirmTimerRef.current) clearTimeout(confirmTimerRef.current);
+      confirmTimerRef.current = setTimeout(() => setConfirmingBuyId(null), 3000);
+      return;
+    }
+    if (confirmTimerRef.current) clearTimeout(confirmTimerRef.current);
+    setConfirmingBuyId(null);
+    handleBuy(item);
   };
 
   const activateDecorationWithDefaultLayout = (itemId: string, currentMap: Record<string, IslandLayoutEntry>) => {
@@ -941,20 +986,25 @@ export default function Island() {
 
               {/* Category filter */}
               <div className="flex flex-wrap gap-1.5 mb-4">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat.key}
-                    onClick={() => setCategory(cat.key)}
-                    className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
-                    style={
-                      category === cat.key
-                        ? { background: "linear-gradient(135deg, #00c896, #06b6d4)", color: "white" }
-                        : { background: "var(--bg-subtle)", color: "var(--text-muted)" }
-                    }
-                  >
-                    {cat.label}
-                  </button>
-                ))}
+                {CATEGORIES.map((cat) => {
+                  const counts = categoryCounts[cat.key];
+                  return (
+                    <button
+                      key={cat.key}
+                      onClick={() => setCategory(cat.key)}
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
+                      title={`Owned ${counts.owned} of ${counts.total}`}
+                      style={
+                        category === cat.key
+                          ? { background: "linear-gradient(135deg, #00c896, #06b6d4)", color: "white" }
+                          : { background: "var(--bg-subtle)", color: "var(--text-muted)" }
+                      }
+                    >
+                      {cat.label}
+                      <span className="ml-1.5 font-semibold opacity-70">{counts.owned}/{counts.total}</span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Message */}
@@ -1025,17 +1075,30 @@ export default function Island() {
                           >
                             {active ? "Remove" : "Equip"}
                           </button>
+                        ) : item.cost > 100000 ? (
+                          <div
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold"
+                            style={{ background: "rgba(100,116,139,0.1)", color: "#94a3b8", border: "1.5px solid #e2e8f0" }}
+                            title={item.description}
+                          >
+                            <Lock className="w-3 h-3" /> Locked
+                          </div>
                         ) : (
                           <button
-                            onClick={() => handleBuy(item)}
+                            onClick={() => handleBuyClick(item)}
                             disabled={(user?.treecoins || 0) < item.cost}
-                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all"
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white transition-all whitespace-nowrap"
                             style={{
-                              background: (user?.treecoins || 0) >= item.cost ? item.color : "#94a3b8",
+                              background:
+                                (user?.treecoins || 0) < item.cost
+                                  ? "#94a3b8"
+                                  : confirmingBuyId === item.id
+                                  ? "#f59e0b"
+                                  : item.color,
                               cursor: (user?.treecoins || 0) >= item.cost ? "pointer" : "not-allowed",
                             }}
                           >
-                            Buy
+                            {confirmingBuyId === item.id ? `Confirm ${item.cost} TC?` : "Buy"}
                           </button>
                         )}
                       </div>

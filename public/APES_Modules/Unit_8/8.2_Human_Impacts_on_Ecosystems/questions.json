@@ -20,14 +20,14 @@
     "correct": "D"
   },
   {
-    "question": "Researchers sampled coral health at five reef sites only at 10 m depth during a two-week survey in August. If the study added sites at 5, 10, 15, and 20 m and switched to year-round monthly surveys, which outcome would most likely result?",
+    "question": "Coral bleaching occurs when environmental stress causes corals to expel the photosynthetic algae (zooxanthellae) living in their tissues. Which of the following is the most common trigger of mass coral bleaching events?",
     "answers": [
-      "Depth dependent thermal refugia and seasonal bleaching patterns would be revealed.",
-      "Monthly sampling would reveal temporal trends rather than improve measurement accuracy.",
-      "Bleaching percentages would decline because deeper sites receive less light.",
-      "Year round monitoring would reveal seasonal variation rather than erase it."
+      "Sustained increases in sea surface temperature above the coral's thermal tolerance",
+      "A sudden decrease in ocean salinity following heavy freshwater runoff",
+      "Increased dissolved oxygen concentrations in surface waters",
+      "A decline in local fish populations that graze on algae"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A tolerance curve shows reproduction reduced below 5°C and above 20°C, with death below 2°C and above 25°C. Which interpretation best fits the curve?",
@@ -87,7 +87,7 @@
       "The evidence documents plastic presence and ingestion in some fish, and the temporal correlation between plastic accumulation and population decline establishes causation, but does not address other potential pathways like habitat disruption or toxin introduction.",
       "The evidence documents plastic presence and ingestion in some fish, but does not establish that ingestion is causing mortality in individual fish, nor does it address other potential pathways like habitat disruption or toxin introduction."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Sediment runoff reduces river water clarity. Aquatic plants show reduced growth and visual predators become less effective hunters. Which statement best explains how increased sediment causes these cascading effects?",
@@ -97,6 +97,6 @@
       "Sediment settles and smothers benthic habitats, reducing bottom-dweller populations.",
       "Sediment raises water temperature, reducing dissolved oxygen and stressing organisms."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

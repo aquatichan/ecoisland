@@ -20,14 +20,14 @@
     "correct": "C"
   },
   {
-    "question": "A study of soil formation in a volcanic region measures the accumulation of weathered material. The B horizon (zone of accumulation) currently contains 18,000 kilograms of iron per hectare. If iron accumulates at a rate of 45 kilograms per hectare per year due to leaching from upper horizons, how many years did it take to accumulate the current iron content in the B horizon?",
+    "question": "A soil scientist studying a temperate forest measures the depth of the O horizon (organic layer) at two sites with identical climate and vegetation but different slope. The site with a 2% slope has an O horizon 8 cm deep, while the site with a 25% slope has an O horizon only 2 cm deep. Which process best explains this difference?",
     "answers": [
-      "400 years",
-      "4,000 years",
-      "40 years",
-      "810 years"
+      "Steeper slopes promote faster chemical weathering of parent material, converting organic matter into mineral soil more quickly.",
+      "Steeper slopes increase surface runoff velocity, which physically removes leaf litter and organic matter before it can accumulate and decompose in place.",
+      "Steeper slopes receive less precipitation on average, slowing the decomposition of leaf litter into organic soil.",
+      "Steeper slopes have cooler soil temperatures, which slow the rate of organic matter input from vegetation."
     ],
-    "correct": "!"
+    "correct": "B"
   },
   {
     "question": "Suspended sediment concentrations were measured at five sites: undisturbed forest 8 mg/L, grazed grassland 24 mg/L, recently logged forest 67 mg/L, agricultural field 89 mg/L, and urban parking lot 156 mg/L. Which conclusion about vegetation cover and soil erosion is best supported by these data?",
@@ -70,14 +70,14 @@
     "correct": "B"
   },
   {
-    "question": "In areas where vegetation has been removed by logging or erosion, soil loss accelerates dramatically compared to vegetated areas. Which of the following best explains how vegetation prevents soil erosion?",
+    "question": "A hillside is logged, removing nearly all tree cover, and within two years soil loss during storms increases roughly tenfold compared to nearby unlogged hillsides. Which explanation best accounts for this increase?",
     "answers": [
-      "Plant roots physically bind soil particles together and create a network that holds soil in place; vegetation also reduces the impact of rainfall and wind by absorbing their energy before it reaches the soil surface.",
-      "Plant roots physically bind soil particles together and create a network that holds soil in place; vegetation also reduces the impact of rainfall and wind by absorbing their energy, but this accelerates erosion by trapping moisture in the soil.",
-      "Soil particles physically bind together through clay mineral cohesion and create a network that holds soil in place; vegetation also reduces the impact of rainfall and wind by absorbing their energy.",
-      "Plant roots physically bind soil particles together; vegetation also increases soil fertility by adding nitrogen through biological fixation, which prevents erosion by strengthening soil structure."
+      "Without root systems to bind particles and canopy to intercept rainfall, raindrop impact directly detaches soil particles and runoff carries them away faster.",
+      "Logging increases soil pH, which weakens the chemical bonds holding clay particles together and accelerates erosion.",
+      "Removing trees increases the moisture content of the soil, causing it to become more fluid and prone to landslides regardless of rainfall.",
+      "Logging equipment compacts the soil surface, which increases infiltration and reduces surface runoff, paradoxically accelerating erosion."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A side-by-side comparison shows two soil profiles from the same region: Profile A (undisturbed forest) displays thick O and A horizons with abundant organic matter and a well-developed B horizon; Profile B (agricultural field after 50 years of tilling) shows a thin, compacted A horizon with minimal organic matter and an absent E horizon. Both profiles rest on the same C horizon parent material. What environmental consequence is most directly indicated by the differences between these two soil profiles?",

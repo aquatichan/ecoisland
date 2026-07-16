@@ -10,11 +10,11 @@ import {
 import { User } from "@/entities/User";
 import { useTheme } from "@/context/ThemeContext";
 import { db } from "@/firebase";
-import { collection, getDocs, orderBy, query, limit } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, limit, getCountFromServer, getAggregateFromServer, sum } from "firebase/firestore";
 
 const features = [
-  { icon: TreePine, title: "Your Island", desc: "Build and customize a living eco-island that grows with every sustainable action you take.", color: "#00c896", delay: 0.1 },
-  { icon: Leaf, title: "Carbon Footprint", desc: "Track and reduce your daily carbon output with intelligent logging and analysis.", color: "#02885c", delay: 0.1 },
+  { icon: TreePine, title: "Your Island", desc: "Build and customize a living Ecoisland that grows with every sustainable action you take.", color: "#00c896", delay: 0.1 },
+  { icon: Leaf, title: "Carbon Footprint", desc: "Track and reduce your daily carbon output with intelligent logging and analysis.", color: "#0d845d", delay: 0.1 },
   { icon: Globe, title: "Regional Data", desc: "Discover AI-powered environmental scores and volunteer opportunities in your city.", color: "#06b6d4", delay: 0.1 },
   { icon: Camera, title: "Danger Scan", desc: "Capture possible environmental hazards and get instant AI analysis alongside action plans.", color: "#f97316", delay: 0.1 },
   { icon: Recycle, title: "Action Feed", desc: "Post and share your actions with a global community of sustainability activists.", color: "#8b5cf6", delay: 0.1 },
@@ -414,7 +414,7 @@ export default function Homepage() {
     { value: "—", label: "Eco Actions", icon: Sparkles },
     { value: "—", label: "Active Members", icon: Users },
     { value: "—", label: "Treecoins Earned", icon: TreePine },
-    { value: "—", label: "Cities Impacted", icon: Globe },
+    { value: "—", label: "Carbon Logs", icon: Leaf },
   ]);
 
   useEffect(() => {
@@ -438,26 +438,26 @@ export default function Homepage() {
       })
       .catch(() => {});
 
-    // Compute live platform stats from Firebase
+    // Live platform stats via server-side aggregation — no document downloads.
+    const usersCol = collection(db, "users");
     Promise.all([
-      getDocs(collection(db, "carbon_logs")),
-      getDocs(collection(db, "users")),
-      getDocs(collection(db, "posts")),
-    ]).then(([logsSnap, usersSnap, postsSnap]) => {
-      const members = usersSnap.size;
-      const ecoActions = logsSnap.size + postsSnap.size;
-      const totalTC = usersSnap.docs.reduce((sum, d) => sum + (d.data().treecoins || 0), 0);
-      const cities = new Set(
-        usersSnap.docs.map(d => d.data().city).filter(Boolean)
-      ).size;
+      getCountFromServer(collection(db, "carbon_logs")),
+      getCountFromServer(usersCol),
+      getCountFromServer(collection(db, "posts")),
+      getAggregateFromServer(usersCol, { totalTreecoins: sum("treecoins") }),
+    ]).then(([logsCount, usersCount, postsCount, tcAgg]) => {
+      const logs = logsCount.data().count;
+      const members = usersCount.data().count;
+      const ecoActions = logs + postsCount.data().count;
+      const totalTC = tcAgg.data().totalTreecoins || 0;
 
       const fmt = (n) => n >= 1000 ? `${(n / 1000).toFixed(1)}K` : String(n);
 
       setSiteStats([
-        { value: fmt(ecoActions), label: "Actions Taken", icon: Sparkles },
+        { value: fmt(ecoActions), label: "Eco Actions", icon: Sparkles },
         { value: fmt(members),    label: "Active Members", icon: Users },
         { value: fmt(totalTC),    label: "Treecoins Earned", icon: TreePine },
-        { value: String(cities || "—"), label: "Cities Impacted", icon: Globe },
+        { value: fmt(logs),       label: "Carbon Logs", icon: Leaf },
       ]);
     }).catch(() => {});
   }, []);
@@ -465,7 +465,7 @@ export default function Homepage() {
   return (
     <div ref={containerRef} className="overflow-x-hidden">
       {/* ===== HERO SECTION - Sky World ===== */}
-      <section className="relative min-h-screen overflow-hidden" style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d2840 20%, #0f3d2e 55%, #062d1e 100%)" }}>
+      <section className="relative min-h-screen overflow-hidden" style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d2840 25%, #0f3d2e 75%, #062d1e 100%)" }}>
         {/* Stars */}
         {[...Array(50)].map((_, i) => (
           <motion.div
@@ -556,9 +556,6 @@ export default function Homepage() {
               </motion.button>
             </Link>
           </motion.div>
-
-          {/* Pixel Island */}
-          
         </div>
 
         {/* Scroll hint */}
@@ -567,7 +564,7 @@ export default function Homepage() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="w-6 h-6 text-emerald-400/60" />
+          <ChevronDown className="w-6 h-6 text-white" />
         </motion.div>
 
         {/* Underground transition gradient */}
@@ -637,7 +634,7 @@ export default function Homepage() {
               </span>
             </h2>
             <p className="text-slate-400 text-lg max-w-xl mx-auto">
-              Six powerful tools working together to make sustainability measurable, rewarding, and social.
+              Seven powerful tools working together to make sustainability measurable, rewarding, and social.
             </p>
           </motion.div>
 
@@ -661,9 +658,6 @@ export default function Homepage() {
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{feat.title}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">{feat.desc}</p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-medium" style={{ color: feat.color, opacity: 0.8 }}>
-                  Explore <ArrowRight className="w-3 h-3" />
-                </div>
               </motion.div>
             ))}
           </div>
@@ -772,7 +766,7 @@ export default function Homepage() {
             </span>
           </h2>
           <p className="text-slate-400 text-lg mb-10">
-            Join thousands of sustainability champions building a greener tomorrow — one action at a time.
+            Join students around the world building a greener tomorrow — one action at a time.
           </p>
           <Link to={createPageUrl("Onboarding")}>
             <motion.button

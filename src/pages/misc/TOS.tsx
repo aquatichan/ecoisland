@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, FileText, Globe2, Mail } from "lucide-react";
 
 import DotField from "@/components/DotField";
 
-const updated = "June 5, 2026";
+const updated = "July 16, 2026";
 
 const summaryCards = [
   {

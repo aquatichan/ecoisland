@@ -2,22 +2,22 @@
   {
     "question": "A developing nation with limited capital seeks to expand wind energy while protecting migratory bird populations that pass through its territory twice annually. Coastal offshore locations have strong, consistent winds but are adjacent to major migration routes. Inland desert regions have moderate winds but minimal bird activity. Which approach would best balance energy production with wildlife protection?",
     "answers": [
-      "Locate wind farms in offshore waters where migration routes are less concentrated and collision risk is lower than onshore locations.",
-      "Install ultrasonic deterrent devices around turbine bases to repel birds and bats from the area.",
-      "Locate wind farms in offshore waters to reduce visual and noise pollution for human communities while accepting wildlife collision risks.",
-      "Locate wind farms in high-wind desert regions where bird and bat populations are naturally sparse."
+      "Prioritize wind farm development in the inland desert regions, where wind resources are still viable but migratory bird activity is minimal, avoiding the coastal migration corridor entirely.",
+      "Install ultrasonic deterrent devices around turbine bases to repel birds and bats from the coastal area while still building there.",
+      "Build in offshore coastal waters to reduce visual and noise pollution for human communities while accepting the wildlife collision risk.",
+      "Build in the coastal zone because its stronger, more consistent winds justify the migratory bird collision risk on cost-efficiency grounds alone."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers studied avian collision risk at a wind farm by recording turbine blade rotation speed and bird flight altitude using radar at one central monitoring location for six months. If they modified the study to include radar stations at multiple locations surrounding the wind farm perimeter, which improvement in data interpretation would most likely result?",
     "answers": [
-      "Spatial variation in bird flight paths and collision risk zones around the wind farm could be identified and mapped",
-      "Bird flight altitude measurements would become more accurate due to redundant data collection at each location",
-      "Seasonal migration patterns would be more clearly detected because monitoring occurs at different elevations around the farm",
-      "Turbine blade rotation speed would need to be adjusted at different locations to account for varying wind conditions"
+      "Spatial variation in bird flight paths and collision risk zones around the wind farm could be identified and mapped.",
+      "Bird flight altitude measurements would become more accurate due to redundant data collection at each location.",
+      "Seasonal migration patterns would be more clearly detected because monitoring occurs at different elevations around the farm.",
+      "Turbine blade rotation speed would need to be adjusted at different locations to account for varying wind conditions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A wind farm operator collected data on turbine downtime and bat mortality over four seasons: Spring (migration): 12% downtime, 34 bat deaths; Summer (breeding): 3% downtime, 8 bat deaths; Fall (migration): 14% downtime, 41 bat deaths; Winter (low activity): 2% downtime, 3 bat deaths. The operator attributes downtime to maintenance and weather. Which conclusion about the relationship between turbine operation and bat mortality is best supported?",
@@ -30,14 +30,14 @@
     "correct": "D"
   },
   {
-    "question": "Wind turbines in coastal regions kill migratory seabirds that navigate using celestial cues during nighttime flights. Which of the following best explains the mechanism by which wind farms cause these bird fatalities?",
+    "question": "Wind turbines in coastal regions are documented to cause fatalities among migratory seabirds that navigate primarily using celestial cues during nighttime flights. Which of the following best explains the mechanism by which wind turbines cause these bird fatalities?",
     "answers": [
-      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in collision deaths during migration periods when birds travel through turbine-occupied airspace.",
-      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in wing injuries and disorientation during migration periods when birds travel through turbine-occupied airspace.",
-      "Spinning turbine blades rotate at speeds that birds cannot perceive or avoid, resulting in collision deaths during daytime feeding periods when birds forage near turbine bases.",
-      "Spinning turbine blades create motion blur that visually confuses birds during nighttime migration, resulting in collision deaths when birds travel through turbine-occupied airspace."
+      "Rapidly spinning turbine blades move too fast for birds to visually detect and avoid in time, causing collision deaths when nocturnal migrants pass through airspace occupied by the turbines.",
+      "Turbine blades rotate slowly enough for birds to see clearly, but the resulting wing injuries from near-misses cause disorientation rather than direct collision deaths.",
+      "Turbine blades primarily endanger birds during daytime foraging near turbine bases rather than during nighttime migratory flights.",
+      "Turbine towers emit low-frequency vibrations that physically disorient birds' inner ears, causing them to lose flight control independent of blade rotation."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A wildlife biologist claims that offshore wind farms pose a lower threat to bird populations than onshore wind farms. The biologist cites evidence that migratory bird species follow established flight corridors over land during spring and fall migrations, while offshore wind installations are located beyond typical migration routes. Which of the following best describes a limitation in how this evidence supports the biologist's claim?",
@@ -80,23 +80,23 @@
     "correct": "D"
   },
   {
-    "question": "A coastal site has steady 12 m/s winds. An inland prairie averages 10 m/s but varies 4–18 m/s. Both plan wind farms. Why will the coastal site likely produce more reliable electricity despite its lower average speed?",
+    "question": "A coastal wind site has steady 12 m/s winds. An inland prairie site averages 10 m/s but fluctuates between 4 and 18 m/s. Both locations are being considered for wind farms. Why will the coastal site likely produce more reliable electricity despite its similar or even lower average wind speed variability?",
     "answers": [
-      "Steady 12 m/s yields consistent power because energy scales with speed squared",
-      "Consistent winds reduce reliance on storage and improve operational reliability",
-      "Coastal salt aerosols do not significantly change air density or turbine power",
-      "Ocean thermal effects do not raise turbine efficiency enough to offset variability"
+      "Because wind power output scales with the cube of wind speed, the coastal site's steadier winds avoid the long low-output periods that occur at the inland site during its low-wind intervals, producing more predictable power delivery.",
+      "The coastal site's turbines require less maintenance than inland turbines, which is the primary factor determining reliability rather than wind consistency.",
+      "Coastal salt aerosols increase air density enough to meaningfully boost turbine power output compared to the inland site.",
+      "Ocean thermal effects directly increase turbine mechanical efficiency in a way unrelated to wind speed consistency."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A wind farm produces 150 megawatt-hours (MWh) of electricity in a month but can only deliver 108 MWh to the grid due to transmission losses and storage inefficiencies. Which calculation approach would determine the overall system efficiency?",
+    "question": "A wind farm produces 150 megawatt-hours (MWh) of electricity in a month but delivers only 108 MWh to the grid due to transmission losses and storage inefficiencies. Which calculation approach correctly determines the overall system efficiency?",
     "answers": [
-      "Divide energy delivered to grid by energy produced, then multiply by 100%",
-      "Divide energy produced by energy delivered to grid",
-      "Multiply energy delivered by energy produced, then divide by 100",
-      "Subtract energy delivered from energy produced, then divide by energy produced"
+      "Divide the energy delivered to the grid (108 MWh) by the energy produced (150 MWh), then multiply by 100% to express it as a percentage.",
+      "Divide the energy produced (150 MWh) by the energy delivered to the grid (108 MWh), then multiply by 100%.",
+      "Multiply the energy delivered by the energy produced, then divide the result by 100.",
+      "Subtract the energy delivered from the energy produced, then divide that difference by the energy produced."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

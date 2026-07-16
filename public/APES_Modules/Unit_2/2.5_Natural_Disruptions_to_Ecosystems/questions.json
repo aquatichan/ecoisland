@@ -20,24 +20,47 @@
     "correct": "B"
   },
   {
-    "question": "Glacial melt contributes to sea level rise through meltwater addition to the ocean. If mountain glaciers currently lose 280 billion metric tons of ice per year and the average density of glacial ice is 0.92 g/cm³, approximately how many cubic kilometers of glacial ice are lost annually? (1 km³ = 10¹⁵ cm³; 1 metric ton = 10⁶ grams)",
+    "question": "Glacial melt contributes to sea level rise through meltwater addition to the ocean. If mountain glaciers currently lose 280 billion metric tons of ice per year and the average density of glacial ice is 0.92 g/cm^3, approximately how many cubic kilometers of glacial ice are lost annually? (1 km^3 of water = 10^12 kg; mass = density x volume)",
     "answers": [
-      "304 km³",
-      "258 km³",
-      "3,040 km³",
-      "0.304 km³"
+      "About 304 km^3 (280 x 10^12 kg divided by 0.92 x 10^12 kg/km^3 is approximately 304 km^3)",
+      "About 258 km^3, obtained by multiplying 280 billion metric tons directly by the ice density of 0.92",
+      "About 3,040 km^3, obtained by treating the ice loss figure as 2,800 billion metric tons instead of 280",
+      "About 0.304 km^3, obtained by mistakenly treating billion metric tons as equivalent to million metric tons"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Glacial Ice Loss Calculation Inputs",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Variable",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Annual mass loss",
+          "280 billion metric tons"
+        ],
+        [
+          "Ice density",
+          "0.92 g/cm^3"
+        ],
+        [
+          "Conversion",
+          "1 km^3 water = 10^12 kg"
+        ]
+      ]
+    }
   },
   {
-    "question": "Engineers propose levees to stop periodic flooding that deposits nutrient-rich sediment on floodplain forests. Which is an unintended consequence of this strategy?",
+    "question": "Engineers propose building levees to stop periodic flooding that naturally deposits nutrient-rich sediment onto floodplain forests. Which of the following best describes an unintended consequence of this flood-control strategy?",
     "answers": [
-      "Levees block sediment deposition on floodplains, reducing soil fertility over time.",
-      "Levees increase channel erosion by accelerating flow and concentrating sediment",
-      "Levees remove the need for other flood management like wetland restoration",
-      "Levees eliminate all river flooding by confining water to the channel"
+      "Levees prevent the periodic sediment deposition that floodplain forests depend on for nutrient replenishment, gradually reducing soil fertility over time",
+      "Levees have no unintended ecological consequences because they only affect water flow and do not interact with sediment or nutrient cycling at all",
+      "Levees eliminate the need for any other flood management approach, such as wetland restoration, because they fully replace those ecological functions",
+      "Levees completely eliminate all future river flooding risk by permanently confining the river to its channel under all conditions"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers placed 25 plots at 5, 15, 30, and 50 m from the river and measured seedling density, species composition, and soil moisture annually for six years after a major flood. Why include plots at multiple distances from the channel?",
@@ -90,13 +113,35 @@
     "correct": "C"
   },
   {
-    "question": "A paleoclimatologist summarizes ice-core data. Atmospheric CO2 cycled between 180 and 280 ppm over 800,000 years due to orbital-driven glacial cycles on 40,000 to 100,000 year timescales. Ecosystems migrated slowly then, while modern CO2 at 420 ppm exceeds the natural range by about 50% and is rising 2 to 3 ppm per year roughly 100 times faster, creating novel adaptation challenges.",
+    "question": "A paleoclimatologist summarizes ice-core data: atmospheric CO2 cycled between 180 and 280 ppm over the past 800,000 years, driven by orbital variations on 40,000 to 100,000 year timescales, and ecosystems migrated slowly in response. Modern atmospheric CO2 is about 420 ppm, roughly 50% above the upper end of this natural range, and is rising over decades rather than millennia. Which conclusion is best supported by this comparison?",
     "answers": [
-      "Present climate change differs mainly in its much faster rate rather than magnitude.",
-      "Natural climate cycles were driven by orbital variations over 40,000 to 100,000 years.",
-      "Current CO2 levels of 420 ppm exceed the natural range by about 50%.",
-      "Atmospheric CO2 fluctuated between 180 and 280 ppm over 800,000 years."
+      "The current increase in atmospheric CO2 differs from past natural cycles primarily in its much faster rate of change, giving ecosystems far less time to adapt or migrate than during past glacial cycles",
+      "The current increase in atmospheric CO2 is essentially indistinguishable from past natural glacial cycles in both rate and total magnitude",
+      "Because CO2 has cycled naturally in the past, the current rise to 420 ppm poses no greater ecological risk than past natural fluctuations",
+      "Orbital variations are the primary driver of the current rise in atmospheric CO2, just as they were the primary driver of past glacial cycles"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Natural vs. Modern Atmospheric CO2 Trends",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Period",
+        "CO2 Range/Level",
+        "Timescale of Change"
+      ],
+      "rows": [
+        [
+          "Past 800,000 years (ice-core record)",
+          "180-280 ppm",
+          "40,000-100,000 years per cycle"
+        ],
+        [
+          "Modern era",
+          "~420 ppm",
+          "Decades"
+        ]
+      ]
+    }
   }
 ]

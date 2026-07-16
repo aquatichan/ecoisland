@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { db, auth } from "@/firebase";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where, limit } from "firebase/firestore";
 import { User } from "@/entities/User";
 import confetti from 'canvas-confetti';
 import { callAI, parseAIJson } from "@/config/ai";
@@ -835,11 +835,12 @@ export default function Impact() {
         const uid = auth.currentUser?.uid;
         if (!uid) throw new Error("No auth");
 
-        const [carbonSnap, postsSnap, apesSnap, allUsersSnap] = await Promise.allSettled([
+        const [carbonSnap, postsSnap, apesSnap, topUsersSnap] = await Promise.allSettled([
           getDocs(query(collection(db, "users", uid, "carbon_entries"), orderBy("date", "desc"))),
           getDocs(query(collection(db, "posts"), where("userId", "==", uid))),
           getDocs(collection(db, "users", uid, "apes_sessions")),
-          getDocs(collection(db, "users")),
+          // Rank only needs the top slice, not the whole user base.
+          getDocs(query(collection(db, "users"), orderBy("treecoins", "desc"), limit(100))),
         ]);
 
         const carbonDocs = carbonSnap.status === "fulfilled"
@@ -849,12 +850,12 @@ export default function Impact() {
         const apesDocs = apesSnap.status === "fulfilled"
           ? apesSnap.value.docs.map((d) => d.data()) : [];
 
-        let rank = 1;
-        if (allUsersSnap.status === "fulfilled") {
-          const sorted = allUsersSnap.value.docs
-            .map((d) => ({ id: d.id, treecoins: d.data().treecoins || 0 }))
-            .sort((a, b) => b.treecoins - a.treecoins);
-          rank = sorted.findIndex((u) => u.id === uid) + 1 || 1;
+        let rank = "100+";
+        if (topUsersSnap.status === "fulfilled") {
+          const idx = topUsersSnap.value.docs
+            .filter((d) => !d.data().deleted)
+            .findIndex((d) => d.id === uid);
+          if (idx >= 0) rank = idx + 1;
         }
 
         setData({ user, carbonDocs, postDocs, rank, apesDocs });

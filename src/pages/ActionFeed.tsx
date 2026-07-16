@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Heart, MessageCircle, Share2, Plus, Upload, Clock, Sparkles,
   Loader2, Trash2, MoreHorizontal, ArrowUp, ArrowDown, Bookmark,
-  Filter, TrendingUp, Flame, Star, Send, X, ImageIcon, Hash
+  Filter, TrendingUp, Flame, Star, Send, X, ImageIcon, Hash, AlertCircle
 } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
+import confetti from "canvas-confetti";
 import { db, auth } from "@/firebase";
 import {
   collection, addDoc, getDocs, updateDoc, deleteDoc, doc,
@@ -14,6 +15,7 @@ import {
   serverTimestamp, getDoc, increment
 } from "firebase/firestore";
 import { User } from "@/entities/User";
+import { REWARDS, buildRewardUpdate } from "@/utils/progression";
 import UserProfileModal from "@/components/UserProfileModal";
 
 type SortMode = "newest" | "top" | "hot" | "rising";
@@ -25,15 +27,39 @@ const SORT_OPTIONS: { key: SortMode; label: string; icon: any }[] = [
   { key: "rising", label: "Rising", icon: TrendingUp },
 ];
 
+// Hours elapsed since a post was created (0 for pending server timestamps).
+function hoursSince(post) {
+  const d = post.createdAt?.toDate ? post.createdAt.toDate() : null;
+  if (!d) return 0;
+  return Math.max(0, (Date.now() - d.getTime()) / 3_600_000);
+}
+
 async function fetchPosts(sortMode: SortMode) {
   const postsRef = collection(db, "posts");
-  let q;
-  if (sortMode === "newest") q = query(postsRef, orderBy("createdAt", "desc"), limit(50));
-  else if (sortMode === "top") q = query(postsRef, orderBy("likesCount", "desc"), limit(50));
-  else if (sortMode === "hot") q = query(postsRef, orderBy("commentsCount", "desc"), limit(50));
-  else q = query(postsRef, orderBy("createdAt", "desc"), limit(50));
+  // "Top" sorts server-side by likes; everything else works from the newest 50
+  // and ranks client-side.
+  const q = sortMode === "top"
+    ? query(postsRef, orderBy("likesCount", "desc"), limit(50))
+    : query(postsRef, orderBy("createdAt", "desc"), limit(50));
   const snap = await getDocs(q);
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  if (sortMode === "rising") {
+    // Likes per hour, dampened (+1 like / +2h) so a brand-new post with one
+    // like doesn't instantly outrank everything.
+    return posts
+      .map(p => ({ p, score: ((p.likesCount || 0) + 1) / (hoursSince(p) + 2) }))
+      .sort((a, b) => b.score - a.score)
+      .map(x => x.p);
+  }
+  if (sortMode === "hot") {
+    // Engagement blend — comments weighted 2x likes — with the same recency decay.
+    return posts
+      .map(p => ({ p, score: ((p.likesCount || 0) + 2 * (p.commentsCount || 0) + 1) / (hoursSince(p) + 2) }))
+      .sort((a, b) => b.score - a.score)
+      .map(x => x.p);
+  }
+  return posts;
 }
 
 async function fetchComments(postId: string) {
@@ -185,15 +211,25 @@ export default function ActionFeed() {
   const [newPostImages, setNewPostImages] = useState<File[]>([]);
   const [newPostPreviews, setNewPostPreviews] = useState<string[]>([]);
   const [isPosting, setIsPosting] = useState(false);
+  const [postError, setPostError] = useState("");
+  const [rewardToast, setRewardToast] = useState(null); // { message, leveledUp }
   const [commentPost, setCommentPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
   const [loadingComments, setLoadingComments] = useState(false);
   const [profileUserId, setProfileUserId] = useState(null);
 
   useEffect(() => {
     User.me().then(setCurrentUser).catch(() => {});
   }, []);
+
+  // Auto-dismiss the reward toast.
+  useEffect(() => {
+    if (!rewardToast) return;
+    const t = setTimeout(() => setRewardToast(null), 4000);
+    return () => clearTimeout(t);
+  }, [rewardToast]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -221,9 +257,24 @@ export default function ActionFeed() {
     setPosts(prev => prev.filter(p => p.id !== postId));
   };
 
-  // 750 KB per image — base64 inflates by ~33% so this keeps each
-  // Firestore document safely under the 1 MB document size limit.
-  const MAX_IMAGE_BYTES = 750 * 1024;
+  // Images are stored as base64 data-URLs inside the post document, so the
+  // COMBINED size is what matters: base64 inflates ~33% and the whole Firestore
+  // document must stay under 1 MB. 700 KB raw across all images keeps the post
+  // (base64 + text fields) safely under that ceiling.
+  const MAX_IMAGES = 4;
+  const MAX_TOTAL_IMAGE_BYTES = 700 * 1024;
+
+  // Returns an error string, or "" if the selection fits the budget.
+  const validateImageSelection = (files: File[]) => {
+    if (files.length > MAX_IMAGES) {
+      return `You can attach up to ${MAX_IMAGES} photos per post.`;
+    }
+    const totalBytes = files.reduce((sum, f) => sum + f.size, 0);
+    if (totalBytes > MAX_TOTAL_IMAGE_BYTES) {
+      return `Your photos total ${(totalBytes / 1024).toFixed(0)} KB — the combined limit is 700 KB. Try fewer or smaller images.`;
+    }
+    return "";
+  };
 
   const fileToBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -234,19 +285,15 @@ export default function ActionFeed() {
     });
 
   const handleNewPost = async () => {
-    if (!newPost.title.trim()) { alert("Please add a title."); return; }
-    if (!currentUser) { alert("Please log in."); return; }
+    if (isPosting) return;
+    if (!newPost.title.trim()) { setPostError("Please add a title."); return; }
+    if (!currentUser) { setPostError("Please log in to post."); return; }
 
-    // Validate image sizes before doing anything
-    for (const file of newPostImages) {
-      if (file.size > MAX_IMAGE_BYTES) {
-        alert(
-          `"${file.name}" is ${(file.size / 1024).toFixed(0)} KB — the limit is 750 KB per image. Please compress and try again.`
-        );
-        return;
-      }
-    }
+    // Re-validate the combined image budget before writing anything.
+    const imageErr = validateImageSelection(newPostImages);
+    if (imageErr) { setPostError(imageErr); return; }
 
+    setPostError("");
     setIsPosting(true);
     try {
       // Convert images to base64 DataURLs — stored directly in Firestore
@@ -271,13 +318,29 @@ export default function ActionFeed() {
       };
       const docRef = await addDoc(collection(db, "posts"), postData);
       setPosts(prev => [{ id: docRef.id, ...postData, createdAt: { toDate: () => new Date() } }, ...prev]);
-      // Award treecoins
-      await User.updateMyUserData({ treecoins: (currentUser.treecoins || 0) + 5 });
+      // Award Treecoins + XP through the shared progression helper.
+      const { update, result } = buildRewardUpdate(currentUser, REWARDS.FEED_POST);
+      await User.updateMyUserData(update);
+      setCurrentUser(prev => (prev ? { ...prev, ...update } : prev));
       setNewPost({ title: "", description: "", tags: "" });
       setNewPostImages([]);
       setNewPostPreviews([]);
       setShowNewPost(false);
-    } catch (e) { console.error(e); alert("Could not post. Please try again."); }
+      setRewardToast({
+        message: `Posted! +${REWARDS.FEED_POST.tc} TC · +${REWARDS.FEED_POST.xp} XP`,
+        leveledUp: result.leveledUp,
+      });
+      if (result.leveledUp) {
+        confetti({
+          particleCount: 80,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ["#00c896", "#06b6d4", "#7b61ff", "#ffffff"],
+          gravity: 0.8,
+          scalar: 1.2,
+        });
+      }
+    } catch (e) { console.error(e); setPostError("Could not post. Please try again."); }
     finally { setIsPosting(false); }
   };
 
@@ -290,7 +353,8 @@ export default function ActionFeed() {
   };
 
   const handleAddComment = async () => {
-    if (!commentText.trim() || !commentPost || !currentUser) return;
+    if (!commentText.trim() || !commentPost || !currentUser || isSubmittingComment) return;
+    setIsSubmittingComment(true);
     try {
       const commentData = {
         userId: currentUser.id,
@@ -305,6 +369,7 @@ export default function ActionFeed() {
       setComments(prev => [...prev, { ...commentData, createdAt: { toDate: () => new Date() } }]);
       setCommentText("");
     } catch (e) { console.error(e); }
+    finally { setIsSubmittingComment(false); }
   };
 
   return (
@@ -319,7 +384,7 @@ export default function ActionFeed() {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => setShowNewPost(true)}
+            onClick={() => { setPostError(""); setShowNewPost(true); }}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-white text-sm shadow-lg"
             style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 4px 15px rgba(0,200,150,0.3)" }}
           >
@@ -423,7 +488,12 @@ export default function ActionFeed() {
                         className="hidden"
                         onChange={e => {
                           const files = Array.from(e.target.files || []);
+                          e.target.value = ""; // allow re-selecting after an error
                           if (files.length === 0) return;
+                          // Validate the COMBINED budget right at selection time.
+                          const err = validateImageSelection(files);
+                          if (err) { setPostError(err); return; }
+                          setPostError("");
                           setNewPostImages(files);
                           // generate previews
                           const readers = files.map(f => new Promise<string>((res) => {
@@ -446,11 +516,18 @@ export default function ActionFeed() {
                       ) : (
                         <div className="flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-dashed transition-colors" style={{ borderColor: "var(--border-input)" }}>
                           <ImageIcon className="w-4 h-4 text-slate-400" />
-                          <span className="text-sm text-slate-400">Add photos (optional, total ≤750 KB)</span>
+                          <span className="text-sm text-slate-400">Add photos (optional, up to 4, total ≤700 KB)</span>
                         </div>
                       )}
                     </label>
                   </div>
+                  {/* Inline error banner */}
+                  {postError && (
+                    <div className="flex items-start gap-2 p-3 rounded-xl text-sm text-red-600 bg-red-50 border border-red-200">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <span>{postError}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex gap-3 mt-5">
                   <button onClick={() => setShowNewPost(false)} className="flex-1 py-3 rounded-xl font-bold text-sm transition-colors" style={{ border: "2px solid var(--border-card)", background: "var(--bg-subtle)", color: "var(--text-secondary)" }}>
@@ -460,9 +537,13 @@ export default function ActionFeed() {
                     onClick={handleNewPost}
                     disabled={isPosting}
                     className="flex-1 py-3 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)" }}
+                    style={{
+                      background: "linear-gradient(135deg, #00c896, #06b6d4)",
+                      opacity: isPosting ? 0.6 : 1,
+                      cursor: isPosting ? "not-allowed" : "pointer",
+                    }}
                   >
-                    {isPosting ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Sparkles className="w-4 h-4" /> Post (+5 Treecoins)</>}
+                    {isPosting ? <><Loader2 className="w-4 h-4 animate-spin" /> Posting…</> : <><Sparkles className="w-4 h-4" /> Post (+5 TC · +4 XP)</>}
                   </button>
                 </div>
               </div>
@@ -522,14 +603,40 @@ export default function ActionFeed() {
                   placeholder="Write a comment..."
                   value={commentText}
                   onChange={e => setCommentText(e.target.value)}
-                  onKeyDown={e => e.key === "Enter" && handleAddComment()}
+                  onKeyDown={e => { if (e.key === "Enter" && !isSubmittingComment) handleAddComment(); }}
                 />
-                <button onClick={handleAddComment} className="p-2.5 rounded-xl text-white" style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)" }}>
-                  <Send className="w-4 h-4" />
+                <button
+                  onClick={handleAddComment}
+                  disabled={isSubmittingComment}
+                  className="p-2.5 rounded-xl text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #00c896, #06b6d4)",
+                    opacity: isSubmittingComment ? 0.6 : 1,
+                    cursor: isSubmittingComment ? "not-allowed" : "pointer",
+                  }}
+                >
+                  {isSubmittingComment ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                 </button>
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Reward toast */}
+      <AnimatePresence>
+        {rewardToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 24, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 24, x: "-50%" }}
+            className="fixed bottom-6 left-1/2 z-50 px-5 py-3 rounded-2xl text-white font-bold text-sm flex items-center gap-2"
+            style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 8px 24px rgba(0,200,150,0.35)" }}
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>{rewardToast.message}</span>
+            {rewardToast.leveledUp && <span className="ml-1">Level up! 🎉</span>}
+          </motion.div>
         )}
       </AnimatePresence>
 

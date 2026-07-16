@@ -1,29 +1,1987 @@
-[{
-  "question": "A symbiotic relationship between two living organisms in which one organism benefits and the other is neither harmed nor helped is known as:",
-  "A": "Predation",
-  "B": "Parasitism",
-  "C": "Commensalism",
-  "D": "Mutualism",
-  "answer": "C"
-}, {
-  "question": "Which type of aquatic ecosystem is made up of salt-tolerant trees that are important in stabilizing tropical and subtropical coastlines?",
-  "A": "Salt Marshes",
-  "B": "Mangrove Swamps",
-  "C": "Freshwater Wetlands",
-  "D": "Intertidal Zones",
-  "answer": "B"
-}, {
-  "question": "A symbiotic relationship between two living organisms in which one organism benefits and the other is neither harmed nor helped is known as:",
-  "A": "Predation",
-  "B": "Parasitism",
-  "C": "Commensalism",
-  "D": "Mutualism",
-  "answer": "A"
-}, {
-  "question": "A symbiotic relationship between two living organisms in which one organism benefits and the other is neither harmed nor helped is known as:",
-  "A": "Predation",
-  "B": "Parasitism",
-  "C": "Commensalism",
-  "D": "Mutualism",
-  "answer": "A"
-}]
+[
+  {
+    "id": "u1-frq-1",
+    "unit": 1,
+    "title": "Energy Flow and Trophic Structure in a Lake Ecosystem",
+    "stimulus": {
+      "type": "table",
+      "title": "Energy Content at Each Trophic Level of a Lake Food Chain",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Trophic Level",
+        "Organism",
+        "Energy (kcal/m^2/yr)"
+      ],
+      "rows": [
+        [
+          "Producer",
+          "Phytoplankton",
+          20000
+        ],
+        [
+          "Primary consumer",
+          "Zooplankton",
+          2000
+        ],
+        [
+          "Secondary consumer",
+          "Minnows",
+          200
+        ],
+        [
+          "Tertiary consumer",
+          "Bass",
+          20
+        ]
+      ]
+    },
+    "prompt": "A team of limnologists measured the energy content at each trophic level of a lake food chain over one growing season, shown in the table. The lake has recently experienced increased agricultural runoff from surrounding farmland.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, calculate the percentage of energy transferred from the primary consumer (zooplankton) level to the secondary consumer (minnows) level. Show your work.",
+        "points": 2,
+        "rubric": "1 point for correctly setting up the calculation (200/2000) x 100. 1 point for the correct final answer of 10% (accept 9-11% range for minor rounding). Full credit requires both the setup/work shown and the correct numeric answer with a percent sign or explicit statement of percentage."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Identify the general ecological principle illustrated by the pattern of energy values shown in the table, and explain why this pattern occurs in terms of energy use by organisms at each trophic level.",
+        "points": 2,
+        "rubric": "1 point for identifying the principle as the 10% rule / energy transfer efficiency between trophic levels (or equivalent phrasing describing progressive energy loss up the food chain). 1 point for a valid explanation that organisms use most of the energy they consume for their own metabolic processes (respiration, movement, heat loss, growth of non-consumed tissue) rather than passing it on to the next level, so only roughly 10% remains available to the next trophic level."
+      },
+      {
+        "label": "(c)",
+        "prompt": "The increased agricultural runoff introduces excess nitrogen and phosphorus into the lake. Describe ONE likely effect this nutrient input will have on the phytoplankton population, and explain ONE consequence this effect could have for dissolved oxygen levels in the lake.",
+        "points": 3,
+        "rubric": "1 point for correctly identifying that excess nitrogen/phosphorus will cause an increase (bloom) in phytoplankton population, i.e., eutrophication. 1 point for explaining that when the large phytoplankton bloom dies, decomposer (bacterial) activity increases as they break down the dead biomass. 1 point for correctly linking this increased decomposition to a DECREASE in dissolved oxygen (bacteria consume oxygen during aerobic decomposition), potentially creating hypoxic or anoxic conditions harmful to fish."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose ONE specific, realistic management strategy that could reduce nutrient runoff from the surrounding farmland into the lake, and explain how this strategy would reduce the amount of nitrogen or phosphorus entering the water.",
+        "points": 2,
+        "rubric": "1 point for a specific, realistic strategy (e.g., planting a vegetated riparian buffer strip along the lake/stream edge, implementing no-till farming, using precision fertilizer application, constructing a retention pond/wetland to capture runoff, or contour plowing). Vague answers like 'reduce pollution' do not earn credit. 1 point for a valid mechanistic explanation of how the specific strategy reduces nutrient input (e.g., a buffer strip's vegetation and roots absorb/filter nutrients and trap sediment before runoff reaches the water; reduced tillage limits soil/nutrient erosion into waterways)."
+      }
+    ]
+  },
+  {
+    "id": "u1-frq-2",
+    "unit": 1,
+    "title": "Nutrient Cycling and Deforestation in a Tropical Watershed",
+    "stimulus": {
+      "type": "line",
+      "title": "Stream Nitrate Concentration Before and After Deforestation",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Nitrate concentration (mg/L)",
+          "points": [
+            {
+              "x": -2,
+              "y": 0.8
+            },
+            {
+              "x": -1,
+              "y": 0.9
+            },
+            {
+              "x": 0,
+              "y": 1.0
+            },
+            {
+              "x": 1,
+              "y": 3.5
+            },
+            {
+              "x": 2,
+              "y": 5.8
+            },
+            {
+              "x": 3,
+              "y": 6.2
+            }
+          ]
+        }
+      ],
+      "xLabel": "Years relative to deforestation event (year 0)",
+      "yLabel": "Stream nitrate concentration (mg/L)"
+    },
+    "prompt": "A watershed research station monitored nitrate concentrations in a stream draining a tropical forest catchment. In year 0, approximately 60% of the forest in the catchment was clear-cut for agriculture. The graph shows nitrate concentrations in the stream from two years before to three years after the deforestation event.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the trend in stream nitrate concentration shown in the graph before and after deforestation.",
+        "points": 2,
+        "rubric": "1 point for correctly describing that nitrate concentration was low and relatively stable (around 0.8-1.0 mg/L) before deforestation (years -2 to 0). 1 point for correctly describing that nitrate concentration increased sharply after deforestation, rising to over 6 mg/L by year 3."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the ecological mechanism by which removing forest vegetation causes an increase in nitrate leaching into the stream.",
+        "points": 3,
+        "rubric": "1 point for identifying that intact forest vegetation and root systems normally take up (assimilate) soil nitrogen for growth, keeping nitrogen cycling within the terrestrial system. 1 point for explaining that after deforestation, there is little to no vegetation left to take up nitrogen released by ongoing decomposition/mineralization of organic matter and continued nitrification. 1 point for explaining that this unused nitrate is then free to leach through the soil into groundwater and surface runoff, entering the stream, especially since tree roots also no longer help retain soil and slow water movement."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Identify ONE likely ecological consequence of sustained high nitrate concentrations for organisms living downstream in the river or a receiving lake, and explain the mechanism causing this consequence.",
+        "points": 3,
+        "rubric": "1 point for identifying a valid consequence such as eutrophication, algal blooms, or a resulting fish kill / dead zone. 1 point for explaining the mechanism: excess nitrate acts as a fertilizer that drives excessive algal/phytoplankton growth (a bloom). 1 point for completing the causal chain: when the algae die, decomposer bacteria consuming the dead biomass deplete dissolved oxygen, creating hypoxic conditions that can kill fish and other aquatic organisms."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Describe ONE land-use practice the local government could require of farmers in the newly cleared catchment to reduce nitrate export to the stream, and explain how it would reduce nitrogen loss specifically.",
+        "points": 2,
+        "rubric": "1 point for a specific, realistic practice (e.g., maintaining a forested/vegetated riparian buffer along the stream, planting cover crops during fallow periods, terracing on slopes, or using contour farming). 1 point for a valid explanation connecting the practice to reduced nitrogen loss (e.g., a riparian buffer's plant roots take up nitrate from groundwater/runoff before it reaches the stream and its vegetation slows surface flow, allowing more infiltration and uptake instead of direct runoff)."
+      }
+    ]
+  },
+  {
+    "id": "u1-frq-3",
+    "unit": 1,
+    "title": "Comparing Net Primary Productivity Across Biomes",
+    "stimulus": {
+      "type": "bar",
+      "title": "Net Primary Productivity (NPP) of Four Biomes",
+      "sourceNote": "Hypothetical data based on textbook-standard relative NPP rankings",
+      "data": [
+        {
+          "label": "Tropical rainforest",
+          "value": 2200
+        },
+        {
+          "label": "Temperate deciduous forest",
+          "value": 1200
+        },
+        {
+          "label": "Temperate grassland",
+          "value": 600
+        },
+        {
+          "label": "Desert",
+          "value": 90
+        }
+      ],
+      "xLabel": "Biome",
+      "yLabel": "NPP (g C/m^2/yr)"
+    },
+    "prompt": "The bar graph shows average net primary productivity (NPP) for four terrestrial biomes. A student claims that biomes with higher annual temperatures always have higher NPP, based on the fact that the tropical rainforest has the highest NPP of the four biomes shown.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Define net primary productivity (NPP) and explain how it differs from gross primary productivity (GPP).",
+        "points": 2,
+        "rubric": "1 point for correctly defining NPP as the rate at which producers store chemical energy as biomass after accounting for (subtracting) their own respiration (NPP = GPP - respiration by producers). 1 point for correctly distinguishing GPP as the total rate of energy/carbon fixed by photosynthesis before subtracting respiration."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Using the data in the graph, evaluate whether the student's claim that higher temperature always leads to higher NPP is well supported. Reference the desert biome specifically in your response.",
+        "points": 3,
+        "rubric": "1 point for concluding the claim is NOT well supported / is too simplistic based on the data. 1 point for correctly noting that deserts are also typically warm/hot but have the LOWEST NPP of the four biomes shown, which directly contradicts a temperature-only explanation. 1 point for identifying that water availability (precipitation) is a comparably or more important limiting factor than temperature alone, since deserts are limited primarily by low precipitation despite warm temperatures."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain ONE reason why temperate grassland has lower NPP than temperate deciduous forest, despite both biomes existing in similar temperature ranges.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid limiting factor difference, most commonly lower precipitation in grasslands compared to forests, or the difference in vegetation structure. 1 point for a valid mechanistic explanation (e.g., forests have greater vertical structure/leaf area index and taller woody biomass allowing more total photosynthetic capture over a growing season, or grasslands generally receive less annual precipitation, which limits plant growth compared to forests)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Explain how a multi-year drought would likely affect NPP in the temperate grassland biome shown in the graph, and identify ONE trophic-level consequence of this change for herbivores that depend on grassland vegetation.",
+        "points": 2,
+        "rubric": "1 point for correctly predicting that NPP would decrease during the drought, since reduced water availability limits photosynthesis and plant growth. 1 point for a valid trophic consequence, such as herbivore populations declining due to reduced food (forage) availability, or increased competition among herbivores for the reduced plant biomass available."
+      }
+    ]
+  },
+  {
+    "id": "u2-frq-1",
+    "unit": 2,
+    "title": "Island Biogeography and Habitat Fragmentation in a National Park",
+    "stimulus": {
+      "type": "table",
+      "title": "Forest Fragment Characteristics and Bird Species Richness",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Fragment",
+        "Area (hectares)",
+        "Distance from Continuous Forest (km)",
+        "Bird Species Richness"
+      ],
+      "rows": [
+        [
+          "Fragment A",
+          400,
+          0.5,
+          42
+        ],
+        [
+          "Fragment B",
+          150,
+          1.2,
+          27
+        ],
+        [
+          "Fragment C",
+          400,
+          8.0,
+          24
+        ],
+        [
+          "Fragment D",
+          25,
+          6.0,
+          9
+        ]
+      ]
+    },
+    "prompt": "A national park was subdivided by road construction and agricultural development into four forest fragments of varying size and distance from the nearest large area of continuous forest. Ecologists surveyed bird species richness in each fragment, shown in the table.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the theory of island biogeography, explain why Fragment D has much lower bird species richness than Fragment A.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying that Fragment D is both smaller in area AND farther from the continuous forest source than Fragment A. 1 point for a valid mechanistic explanation connecting these two factors to lower richness: smaller area supports smaller populations with higher local extinction rates and fewer available niches, while greater distance reduces immigration rate of new colonizing species, and both factors independently lower the equilibrium species richness predicted by island biogeography theory."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Compare Fragment B and Fragment C. Both differ in one major variable each from Fragment A. Using the data, identify which variable (area or distance) appears to have a stronger relationship with species richness in this data set, and justify your answer using specific values from the table.",
+        "points": 3,
+        "rubric": "1 point for correctly noting that Fragment B (smaller area, similar/close distance to A) has richness of 27, a moderate decline from Fragment A's 42. 1 point for correctly noting that Fragment C (same area as A, but far from continuous forest) has richness of 24, a similar or larger decline despite retaining A's large area. 1 point for a reasonable, data-supported conclusion (e.g., that distance appears to have at least as strong an effect as area in this data set, since Fragment C's richness dropped nearly as much as Fragment B's despite unchanged area) — full credit given for any conclusion that is logically and correctly justified using the specific values, since the two effects are comparable in this data set."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe ONE specific conservation strategy that could increase species richness in Fragment D without changing its size, and explain the ecological mechanism by which it would help.",
+        "points": 2,
+        "rubric": "1 point for a specific, realistic strategy such as establishing a habitat corridor connecting Fragment D to the continuous forest or to other fragments. 1 point for a valid mechanism: a corridor increases the effective immigration rate by allowing species to move between fragments and the continuous forest, functionally reducing isolation distance and supporting higher equilibrium species richness and gene flow, without requiring the fragment itself to be enlarged."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Explain ONE tradeoff that might make constructing a habitat corridor difficult or costly for the park to implement.",
+        "points": 2,
+        "rubric": "1 point for identifying a specific, realistic tradeoff (e.g., financial cost of land acquisition, the corridor land may currently be privately owned or in agricultural use requiring compensation or conflict with landowners, or a corridor could also facilitate movement of invasive species or disease between fragments). 1 point for a clear explanation of why this is a genuine tradeoff/cost of the strategy, not simply restating the strategy."
+      }
+    ]
+  },
+  {
+    "id": "u2-frq-2",
+    "unit": 2,
+    "title": "Ecological Succession After a Wildfire",
+    "stimulus": {
+      "type": "table",
+      "title": "Vegetation Cover and Soil Organic Matter After a Wildfire",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Years Since Fire",
+        "Dominant Vegetation",
+        "Percent Ground Cover",
+        "Soil Organic Matter (%)"
+      ],
+      "rows": [
+        [
+          0,
+          "Bare ground / ash",
+          5,
+          1.2
+        ],
+        [
+          3,
+          "Grasses and herbs",
+          55,
+          2.0
+        ],
+        [
+          15,
+          "Shrubs and young pines",
+          80,
+          3.4
+        ],
+        [
+          60,
+          "Mixed conifer-hardwood forest",
+          95,
+          6.8
+        ]
+      ]
+    },
+    "prompt": "A temperate forest experienced a severe wildfire that killed most above-ground vegetation but left the soil and root systems of some plants intact. Ecologists monitored the site's recovery over 60 years, recording the data in the table.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify whether this scenario represents primary or secondary succession, and justify your answer using evidence from the scenario description.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying this as secondary succession. 1 point for justification referencing that soil and some root systems remained intact after the fire (unlike primary succession, which begins on bare rock/substrate with no soil or prior biological legacy)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Using the data in the table, describe the relationship between time since the fire and soil organic matter, and explain the biological process most responsible for this trend.",
+        "points": 3,
+        "rubric": "1 point for correctly describing that soil organic matter increased over time, from 1.2% at year 0 to 6.8% at year 60. 1 point for identifying that this increase is driven by the accumulation of dead plant litter (leaves, branches, roots) as vegetation cover and biomass increase over succession. 1 point for explaining that decomposer activity (bacteria and fungi breaking down this organic matter) incorporates the resulting nutrients and organic material into the soil, building soil fertility over time."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain why grasses and herbs, rather than mature trees, were the dominant vegetation type just 3 years after the fire.",
+        "points": 2,
+        "rubric": "1 point for identifying that grasses/herbs are early-successional (pioneer) species with fast growth rates, short generation times, and the ability to tolerate the resource-poor, high-light conditions immediately after a disturbance. 1 point for explaining that mature trees require more time to establish and grow, and conditions (such as high light and low canopy competition immediately post-fire) initially favor fast colonizers over slower-growing, longer-lived species."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Predict how species diversity of birds would likely change between year 3 and year 60 of this succession, and explain your reasoning in terms of habitat structure.",
+        "points": 2,
+        "rubric": "1 point for predicting that bird species diversity would generally increase from year 3 to year 60. 1 point for a valid explanation connecting this increase to greater habitat structural complexity as succession proceeds (a mixed conifer-hardwood forest offers more vertical vegetation layers, nesting sites, and food niches than a simple grass/herb cover, supporting more bird species with different habitat requirements)."
+      }
+    ]
+  },
+  {
+    "id": "u2-frq-3",
+    "unit": 2,
+    "title": "Ecosystem Services and Coral Reef Degradation",
+    "stimulus": {
+      "type": "table",
+      "title": "Coral Reef Condition and Associated Economic Value",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Metric",
+        "Healthy Reef (1990)",
+        "Degraded Reef (2020)"
+      ],
+      "rows": [
+        [
+          "Live coral cover (%)",
+          65,
+          18
+        ],
+        [
+          "Fish catch (kg/ha/yr)",
+          4200,
+          900
+        ],
+        [
+          "Estimated coastal storm protection value ($/km/yr)",
+          "180,000",
+          "45,000"
+        ],
+        [
+          "Annual tourism revenue ($ millions)",
+          12,
+          3
+        ]
+      ]
+    },
+    "prompt": "A coastal coral reef ecosystem has degraded significantly between 1990 and 2020 due to warming ocean temperatures, coastal development, and overfishing. The table summarizes changes in reef condition and associated economic indicators over this period.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, identify and classify TWO different ecosystem services provided by the coral reef, one from the provisioning category and one from the regulating category. Justify each classification using specific data from the table.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying fish catch as a provisioning service (providing food/harvestable resources) with reference to the fish catch data (4200 down to 900 kg/ha/yr). 1 point for correctly identifying coastal storm protection as a regulating service (the reef physically buffers wave energy/storm surge) with reference to the storm protection value data ($180,000 down to $45,000/km/yr)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the ecological mechanism by which declining live coral cover leads to reduced fish catch.",
+        "points": 2,
+        "rubric": "1 point for identifying that live coral structure provides physical habitat, shelter from predators, and nursery grounds for juvenile and adult reef fish. 1 point for explaining that as coral cover declines, this habitat complexity is lost, reducing the reef's capacity to support fish populations, which lowers the sustainable fish catch available to fisheries."
+      },
+      {
+        "label": "(c)",
+        "prompt": "A coastal city is deciding whether to invest $10 million in coral reef restoration or in constructing an artificial seawall for storm protection. Using the concept of ecosystem services, explain ONE advantage that reef restoration might have over the seawall in terms of the range of benefits it provides.",
+        "points": 2,
+        "rubric": "1 point for identifying that reef restoration would restore MULTIPLE ecosystem services simultaneously (e.g., storm protection AND fisheries habitat AND tourism value), whereas a seawall provides only physical storm/erosion protection and no other ecosystem service. 1 point for a valid supporting explanation drawing on the table's data (e.g., that restoring coral could help recover both the $135,000/km/yr difference in storm protection value and contribute to recovering fisheries and tourism revenue, providing greater total economic and ecological value than a single-purpose seawall)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify ONE specific human activity contributing to coral reef decline described in the scenario, and propose ONE realistic policy or management action that could directly reduce that specific threat.",
+        "points": 2,
+        "rubric": "1 point for identifying a specific threat mentioned in the scenario (warming ocean temperatures/climate change, coastal development, or overfishing). 1 point for a specific, realistic, and correctly matched management action (e.g., for overfishing: establishing a marine protected area or fishing quotas; for coastal development: enforcing coastal setback zones or runoff/sediment regulations; for warming: reducing greenhouse gas emissions or establishing marine heat-resistant coral nurseries). The action must logically address the specific threat identified, not just be a generic conservation statement."
+      }
+    ]
+  },
+  {
+    "id": "u3-frq-1",
+    "unit": 3,
+    "title": "Age Structure and Population Momentum in Country X",
+    "stimulus": {
+      "type": "bar",
+      "title": "Age Structure Diagram for Country X",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "0-14",
+          "value": 38
+        },
+        {
+          "label": "15-29",
+          "value": 27
+        },
+        {
+          "label": "30-44",
+          "value": 17
+        },
+        {
+          "label": "45-59",
+          "value": 11
+        },
+        {
+          "label": "60+",
+          "value": 7
+        }
+      ],
+      "xLabel": "Age group",
+      "yLabel": "Percent of total population"
+    },
+    "prompt": "Country X is a developing nation whose age structure diagram is shown in the bar graph. The country's total fertility rate (TFR) has recently declined to 2.1, the replacement-level fertility rate, due to a successful national family planning and girls' education initiative launched 15 years ago.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the overall shape of Country X's age structure diagram and identify what type of population growth pattern (rapid growth, slow growth, zero growth, or decline) this shape is typically associated with.",
+        "points": 2,
+        "rubric": "1 point for correctly describing the diagram as expansive/pyramid-shaped, with a wide base that narrows in older age groups. 1 point for correctly identifying this shape as typically associated with rapid population growth (a young, expanding population)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Even though Country X's TFR has now reached replacement level (2.1), explain why the country's total population is still likely to continue growing substantially for the next few decades.",
+        "points": 3,
+        "rubric": "1 point for identifying the concept of population momentum. 1 point for explaining that the large number of individuals currently in the 0-14 and 15-29 age groups (38% + 27% = 65% of the population) will move into their reproductive years over the coming decades. 1 point for explaining that even at replacement-level fertility, this unusually large reproductive-age cohort will produce a large absolute number of births, driving continued population growth until the age structure eventually stabilizes into a more rectangular shape."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain ONE way that the girls' education initiative likely contributed to the decline in total fertility rate over the past 15 years.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid mechanism, such as increased education delaying the age of marriage and first childbirth, or increased education expanding women's access to career/economic opportunities that compete with early/frequent childbearing, or increased education improving knowledge of and access to family planning/contraception. 1 point for a clear explanation connecting the specific mechanism to reduced total fertility rate (e.g., women who spend more years in school marry and begin childbearing later, shortening their reproductive window and reducing lifetime births)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify ONE specific socioeconomic challenge Country X may face over the next 15 years as a result of the large youth cohort (ages 0-14) shown in the diagram, and explain the mechanism behind this challenge.",
+        "points": 2,
+        "rubric": "1 point for identifying a specific, realistic challenge (e.g., insufficient schools/educational infrastructure, insufficient job creation to employ this cohort as they reach working age, increased strain on healthcare systems, or increased demand for housing and resources). 1 point for a clear mechanistic explanation of why the large youth cohort specifically causes this challenge (e.g., as the large 0-14 cohort ages into the workforce over the next 15 years, the economy must create enough new jobs to absorb them or unemployment and underemployment will rise)."
+      }
+    ]
+  },
+  {
+    "id": "u3-frq-2",
+    "unit": 3,
+    "title": "Survivorship Curves and Conservation Strategy for a Sea Turtle Population",
+    "stimulus": {
+      "type": "line",
+      "title": "Survivorship Curve for a Sea Turtle Population",
+      "sourceNote": "Hypothetical data illustrating a Type III survivorship pattern",
+      "series": [
+        {
+          "name": "Survivors (per 1,000 eggs laid)",
+          "points": [
+            {
+              "x": 0,
+              "y": 1000
+            },
+            {
+              "x": 1,
+              "y": 60
+            },
+            {
+              "x": 5,
+              "y": 40
+            },
+            {
+              "x": 10,
+              "y": 33
+            },
+            {
+              "x": 20,
+              "y": 28
+            },
+            {
+              "x": 40,
+              "y": 22
+            },
+            {
+              "x": 60,
+              "y": 12
+            }
+          ]
+        }
+      ],
+      "xLabel": "Age (years)",
+      "yLabel": "Number of survivors (log scale, per 1,000 eggs)"
+    },
+    "prompt": "Researchers studying an endangered sea turtle population constructed the survivorship curve shown, based on tracking a cohort of 1,000 eggs from nesting beaches. Adult female turtles nest every 2-3 years, laying approximately 100 eggs per nest, and can live 60-80 years once they reach adulthood.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify the type of survivorship curve (I, II, or III) shown in the graph, and justify your answer using specific data from the graph.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying this as a Type III survivorship curve. 1 point for justification citing the specific pattern: extremely high mortality very early in life (from 1,000 to just 60 survivors within the first year) followed by a much shallower decline (relatively high survivorship) among the turtles that reach later ages."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain ONE life-history reason why sea turtles have evolved to produce approximately 100 eggs per nest rather than investing heavily in a small number of offspring.",
+        "points": 2,
+        "rubric": "1 point for identifying that this reproductive strategy compensates for extremely high, largely unavoidable early-life mortality (from predation, environmental exposure, and difficulty reaching the ocean). 1 point for explaining the evolutionary logic: producing a very large number of offspring increases the statistical likelihood that at least some individuals survive to reproductive age, given that the vast majority will not survive regardless of parental investment in each individual egg."
+      },
+      {
+        "label": "(c)",
+        "prompt": "A conservation organization with limited funding must choose between funding (1) predator-exclusion fencing around nesting beaches to protect eggs and hatchlings, or (2) a program that increases the survival of adult turtles caught incidentally in fishing nets (bycatch). Using the survivorship curve, evaluate which strategy would likely have a greater impact on long-term population growth, and justify your answer.",
+        "points": 3,
+        "rubric": "1 point for a reasonable conclusion (either strategy can be argued, but must be justified with curve-based reasoning — most defensible is that the bycatch/adult protection strategy has high impact because Type III species already produce huge numbers of eggs, so the survivorship curve shows population growth is more sensitive to changes in the number of individuals that survive to become reproductively active adults, since so few make it there in the first place, and each surviving adult represents decades of future reproductive output). 1 point for correctly referencing that early-life mortality is extremely high regardless of intervention (from the curve, over 94% die within the first year even under natural conditions), so protecting eggs/hatchlings, while helpful, addresses a stage where mortality is naturally very high to begin with. 1 point for explaining that protecting long-lived, slow-maturing adults preserves individuals who represent the most reproductive potential (each capable of laying eggs repeatedly over 60-80 years), so bycatch reduction can have an outsized effect on population growth rate. Full credit can also be earned by a well-justified answer favoring egg/hatchling protection if the reasoning is internally consistent and correctly uses curve data and turtle life history — grade for quality and specificity of reasoning, not just the conclusion reached."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify ONE assumption the researchers made in constructing this survivorship curve from a single cohort of 1,000 eggs, and explain why this assumption could limit the accuracy of the curve.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid assumption (e.g., that environmental and predation conditions remain relatively constant across the many decades needed to track the cohort to age 60, or that all eggs/hatchlings in the cohort were tracked with equal accuracy, or that the single cohort/beach is representative of the broader population). 1 point for a valid explanation of why violating this assumption limits accuracy (e.g., environmental conditions such as predator populations, climate, or human threats likely changed significantly over such a long tracking period, so mortality rates at a given age may not be consistent or representative of turtles born in different years)."
+      }
+    ]
+  },
+  {
+    "id": "u3-frq-3",
+    "unit": 3,
+    "title": "Carrying Capacity and Resource Limitation in a Reintroduced Herbivore Population",
+    "stimulus": {
+      "type": "line",
+      "title": "Elk Population Size Following Reintroduction to a Protected Area",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Elk population",
+          "points": [
+            {
+              "x": 0,
+              "y": 30
+            },
+            {
+              "x": 5,
+              "y": 90
+            },
+            {
+              "x": 10,
+              "y": 260
+            },
+            {
+              "x": 15,
+              "y": 520
+            },
+            {
+              "x": 20,
+              "y": 610
+            },
+            {
+              "x": 25,
+              "y": 580
+            },
+            {
+              "x": 30,
+              "y": 590
+            }
+          ]
+        }
+      ],
+      "xLabel": "Years since reintroduction",
+      "yLabel": "Elk population size"
+    },
+    "prompt": "Thirty elk were reintroduced to a protected grassland area with no natural predators present. Wildlife managers tracked the population over the following 30 years, shown in the graph. Vegetation surveys show that available forage biomass per elk declined substantially between years 10 and 20.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify the overall shape of the population growth curve shown in the graph, and state the name of this general growth model.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying the curve as S-shaped (sigmoidal). 1 point for correctly naming this the logistic growth model."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Using the graph, estimate the approximate carrying capacity (K) of the elk population in this protected area, and explain how you determined this value from the graph.",
+        "points": 2,
+        "rubric": "1 point for a reasonable estimate of carrying capacity, approximately 590-610 elk (accept any value in the range of about 580-620, since the population fluctuates and levels off around this range after year 20). 1 point for correctly explaining that carrying capacity is estimated as the population size at which growth levels off / stabilizes (the asymptote of the curve), rather than the peak value reached transiently at year 20."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain why the elk population size decreased slightly between year 20 and year 25, using the vegetation survey information provided in the scenario.",
+        "points": 2,
+        "rubric": "1 point for identifying that the population at year 20 (around 610) temporarily overshot the area's true sustainable carrying capacity. 1 point for explaining the mechanism using the forage decline: as elk density increased, forage biomass per elk declined (a density-dependent limiting factor), leading to insufficient food per individual, which caused increased mortality and/or reduced reproduction, bringing the population back down toward a more sustainable level around 580-590."
+      },
+      {
+        "label": "(d)",
+        "prompt": "The protected area has no natural predators. Propose ONE realistic wildlife management strategy to prevent the elk population from once again overshooting carrying capacity and degrading vegetation, and explain how your strategy would help maintain population size near carrying capacity.",
+        "points": 2,
+        "rubric": "1 point for a specific, realistic strategy (e.g., reintroducing a natural predator species such as wolves, implementing a regulated culling/hunting program, or elk relocation/translocation to other suitable habitats). 1 point for a valid explanation of the mechanism by which the strategy keeps population near carrying capacity (e.g., reintroducing a predator adds a top-down density-dependent control on elk numbers, preventing unchecked growth and allowing vegetation to recover and remain in balance with herbivore density)."
+      }
+    ]
+  },
+  {
+    "id": "u4-frq-1",
+    "unit": 4,
+    "title": "ENSO Cycles and the Peruvian Anchoveta Fishery",
+    "stimulus": {
+      "type": "table",
+      "title": "Sea Surface Temperature Anomaly and Anchoveta Catch off Peru",
+      "sourceNote": "Hypothetical data illustrating a typical ENSO cycle and its fishery impacts",
+      "headers": [
+        "Year",
+        "Phase",
+        "SST Anomaly (°C)",
+        "Anchoveta Catch (million metric tons)"
+      ],
+      "rows": [
+        [
+          "1",
+          "Normal",
+          0.1,
+          9.0
+        ],
+        [
+          "2",
+          "La Niña",
+          -0.9,
+          11.2
+        ],
+        [
+          "3",
+          "Normal",
+          0.2,
+          8.7
+        ],
+        [
+          "4",
+          "El Niño",
+          2.4,
+          2.3
+        ],
+        [
+          "5",
+          "Normal",
+          0.0,
+          8.5
+        ]
+      ]
+    },
+    "prompt": "The table above shows sea surface temperature (SST) anomalies off the coast of Peru and the corresponding annual anchoveta (a small forage fish) catch over a five-year period that included both a La Niña event (Year 2) and an El Niño event (Year 4). Peru's anchoveta fishery is one of the largest single-species fisheries in the world and supports both local food security and a major fishmeal export industry.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify the general trend shown in the data between SST anomaly and anchoveta catch, and propose a testable hypothesis that could explain this relationship.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying the trend: as SST anomaly increases (more positive/warmer), anchoveta catch decreases, and vice versa. 1 point for a hypothesis phrased as a testable if/then or comparative statement linking warmer SST to reduced anchoveta catch (e.g., 'If SST anomaly increases, then anchoveta catch will decrease because warmer water suppresses upwelling'), not simply restating the trend as a hypothesis without a proposed mechanism."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the oceanographic mechanism by which an El Niño event leads to reduced anchoveta catch off the coast of Peru.",
+        "points": 3,
+        "rubric": "1 point for explaining that El Niño weakens the easterly trade winds. 1 point for explaining that this weakening suppresses coastal upwelling of cold, nutrient-rich deep water. 1 point for explaining that reduced nutrient upwelling lowers phytoplankton (primary) productivity, which reduces the food supply for anchoveta (a filter feeder), causing catch/population declines. Full credit requires the causal chain (winds → upwelling → nutrients/productivity → fish), not just one link stated alone."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe ONE economic or social consequence for Peru of a strong El Niño year, and explain ONE strategy the Peruvian fishing industry could adopt to reduce its vulnerability to future ENSO-driven catch fluctuations.",
+        "points": 3,
+        "rubric": "1 point for a valid economic/social consequence with explanation (e.g., loss of export revenue from reduced fishmeal production, unemployment among fishing communities, higher fishmeal/fish oil prices globally, food insecurity in communities reliant on anchoveta). 2 points for a valid adaptation strategy explained with a specific mechanism of how it reduces vulnerability (e.g., diversifying the catch portfolio to include less climate-sensitive species; investing in early-warning ENSO forecasting to adjust fleet size/effort in advance; building economic diversification outside fisheries; setting adaptive catch quotas tied to real-time stock assessments rather than fixed historical quotas). 1 point only if the strategy is named but the mechanism/reasoning is missing or vague."
+      },
+      {
+        "label": "(d)",
+        "prompt": "A policy maker claims that setting a fixed annual catch quota (the same numeric limit every year regardless of ENSO phase) is the best way to protect the anchoveta population long term. Evaluate this claim using evidence from the table, and explain one limitation of a fixed quota approach.",
+        "points": 2,
+        "rubric": "1 point for evaluating the claim using the data (e.g., noting that catch and presumably population productivity vary substantially between La Niña years [higher catch/productivity] and El Niño years [much lower catch/productivity], so a single fixed number could not be simultaneously sustainable in both phases). 1 point for identifying a specific limitation of a fixed quota (e.g., a fixed quota set based on average or La Niña-year abundance could be unsustainably high during an El Niño year when the population is stressed and less productive, risking overfishing and stock collapse; conversely a quota set conservatively for El Niño years would forego harvestable surplus in productive years)."
+      }
+    ]
+  },
+  {
+    "id": "u4-frq-2",
+    "unit": 4,
+    "title": "Land Use and Watershed Hydrology",
+    "stimulus": {
+      "type": "bar",
+      "title": "Peak Stream Discharge Following a 5 cm Storm Event, by Watershed Land Cover",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Forested (85% canopy cover)",
+          "value": 12
+        },
+        {
+          "label": "Agricultural (row crops)",
+          "value": 34
+        },
+        {
+          "label": "Suburban (35% impervious)",
+          "value": 58
+        },
+        {
+          "label": "Urban (75% impervious)",
+          "value": 96
+        }
+      ],
+      "xLabel": "Watershed Land Cover Type",
+      "yLabel": "Peak Discharge (m³/s)"
+    },
+    "prompt": "The bar graph above shows the peak stream discharge recorded in four watersheds of similar size and total rainfall (5 cm) but different dominant land cover, following the same storm event. A rapidly growing suburb is planning to convert a currently forested watershed (similar to the 'Forested' watershed shown) into new suburban housing developments over the next 20 years.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the relationship between impervious surface cover and peak stream discharge shown in the graph.",
+        "points": 1,
+        "rubric": "1 point for correctly describing a positive relationship: as impervious/developed surface cover increases (forested → agricultural → suburban → urban), peak discharge increases."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain TWO specific mechanisms by which converting forested land to suburban development increases peak stream discharge during a storm event.",
+        "points": 4,
+        "rubric": "Up to 2 points per mechanism (4 points total for two mechanisms). Full credit for a mechanism requires both identification and explanation of cause and effect. Valid mechanisms include: (1) Loss of forest canopy interception — trees intercept and slow rainfall before it reaches the ground, so removing them allows more rain to reach the surface faster/directly. (2) Loss of root systems and leaf litter that promote infiltration — forested soils have higher infiltration capacity, so removing vegetation and compacting soil during construction increases the fraction of rainfall that becomes surface runoff rather than soaking in. (3) Addition of impervious surfaces (roofs, roads, driveways, parking lots) — these surfaces do not allow infiltration at all, so nearly all rain falling on them becomes immediate runoff. (4) Stormwater conveyance infrastructure (gutters, storm drains, curbs) — engineered to move water off-site quickly, reducing the time it takes runoff to reach the stream (shorter lag time) and concentrating flow, raising the peak."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Identify and explain ONE downstream environmental consequence of the increased peak discharge that would result from this land-use conversion.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid downstream consequence (e.g., increased flood frequency/severity, increased streambank/channel erosion, degraded aquatic habitat from scouring, higher sediment and pollutant loads reaching the stream, decreased baseflow/groundwater recharge during dry periods). 1 point for a mechanistic explanation connecting increased peak discharge to that consequence (e.g., 'higher peak flows increase water velocity, which increases the shear stress on stream banks and channel beds, causing erosion and channel widening')."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose ONE specific green infrastructure or land-use planning strategy the suburb could implement to reduce the hydrological impact of the development, and explain how it addresses the mechanism(s) described in part (b).",
+        "points": 2,
+        "rubric": "1 point for naming a specific, appropriate strategy (e.g., bioswales/rain gardens, permeable pavement, retention/detention ponds, preserving riparian buffers, minimum tree canopy retention requirements, green roofs). 1 point for explaining how the strategy directly counteracts a mechanism from part (b) (e.g., permeable pavement allows infiltration where impervious surface would otherwise have prevented it, directly reducing the runoff fraction and peak discharge)."
+      }
+    ]
+  },
+  {
+    "id": "u4-frq-3",
+    "unit": 4,
+    "title": "Soil Horizons and Erosion Following Deforestation",
+    "stimulus": {
+      "type": "table",
+      "title": "Soil Properties in a Forested Plot vs. an Adjacent Clearcut Plot (Same Slope, 3 Years After Cutting)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Property",
+        "Forested Plot",
+        "Clearcut Plot"
+      ],
+      "rows": [
+        [
+          "A-horizon depth (cm)",
+          18,
+          6
+        ],
+        [
+          "Organic matter (%)",
+          6.5,
+          1.8
+        ],
+        [
+          "Infiltration rate (cm/hr)",
+          12,
+          3
+        ],
+        [
+          "Annual soil loss (t/ha/yr)",
+          0.4,
+          9.2
+        ]
+      ]
+    },
+    "prompt": "The table above compares soil properties measured in an intact forest plot and an adjacent clearcut plot of the same slope and soil type, three years after the clearcut plot was logged. Researchers are studying the long-term effects of clearcutting on soil formation and stability in this region.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify which soil horizon is most directly represented by the 'A-horizon depth' measurement, and describe one characteristic of this horizon that makes it important for plant growth.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying the A horizon as the topsoil layer. 1 point for a valid characteristic relevant to plant growth (e.g., it contains the highest concentration of organic matter/humus and nutrients available to plants; it has the greatest root and microbial activity of the mineral horizons; it typically has better structure for water and nutrient retention than lower horizons)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Using the data in the table, explain how the loss of organic matter in the clearcut plot is connected to its lower infiltration rate and higher soil loss compared to the forested plot.",
+        "points": 3,
+        "rubric": "1 point for noting organic matter promotes soil aggregation/structure and porosity, which increases infiltration capacity; loss of organic matter reduces pore space and infiltration. 1 point for connecting reduced infiltration to increased surface runoff (water that cannot infiltrate must flow overland). 1 point for connecting increased surface runoff to higher soil loss (more runoff has greater capacity to detach and transport soil particles, i.e., erosion), completing the causal chain from organic matter loss to erosion."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain why soil formation is generally considered a process that operates on a much longer timescale than soil erosion, and describe why this matters for the long-term recovery of the clearcut plot.",
+        "points": 2,
+        "rubric": "1 point for explaining that soil formation (weathering of parent material, accumulation of organic matter, horizon development) typically takes centuries to thousands of years, while the erosion shown in the table (9.2 t/ha/yr) can remove that same accumulated soil in a matter of years to decades. 1 point for explaining the implication: because formation is so much slower than the observed erosion rate, the A horizon lost after clearcutting will not be replaced on a timescale relevant to forest regrowth or human land management, making the soil loss effectively irreversible in the short-to-medium term."
+      },
+      {
+        "label": "(e)",
+        "prompt": "Propose ONE land management practice that could have been used during or after the logging operation to reduce soil erosion, and explain the mechanism by which it would reduce soil loss.",
+        "points": 2,
+        "rubric": "1 point for a valid, specific practice (e.g., leaving a buffer strip of unlogged vegetation along the slope/waterways, replanting quickly with fast-growing groundcover or trees, using selective cutting instead of clearcutting, installing erosion control structures like silt fences or contour barriers, minimizing heavy equipment use on exposed soil to reduce compaction). 1 point for a correct mechanistic explanation of how the practice reduces erosion (e.g., a vegetated buffer intercepts rainfall and its roots stabilize soil, reducing the surface runoff's erosive capacity before it reaches a waterway)."
+      }
+    ]
+  },
+  {
+    "id": "u5-frq-1",
+    "unit": 5,
+    "title": "Open-Access Fisheries and the Tragedy of the Commons",
+    "stimulus": {
+      "type": "line",
+      "title": "Fishing Fleet Size and Fish Population in an Open-Access Coastal Fishery",
+      "sourceNote": "Hypothetical data illustrating tragedy-of-the-commons dynamics in a fishery",
+      "series": [
+        {
+          "name": "Number of Fishing Boats",
+          "points": [
+            {
+              "x": 0,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 90
+            },
+            {
+              "x": 10,
+              "y": 160
+            },
+            {
+              "x": 15,
+              "y": 210
+            },
+            {
+              "x": 20,
+              "y": 150
+            }
+          ]
+        },
+        {
+          "name": "Fish Population (thousands of tons)",
+          "points": [
+            {
+              "x": 0,
+              "y": 500
+            },
+            {
+              "x": 5,
+              "y": 420
+            },
+            {
+              "x": 10,
+              "y": 260
+            },
+            {
+              "x": 15,
+              "y": 90
+            },
+            {
+              "x": 20,
+              "y": 60
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Value (see series)"
+    },
+    "prompt": "The graph above shows the number of fishing boats operating in an open-access coastal fishery (one with no government-enforced catch limits or entry restrictions) and the estimated fish population over a 20-year period. Any fisher may enter the fishery and catch as many fish as they can, and no individual fisher owns the fish stock.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data, describe the relationship between fleet size and fish population from Year 0 to Year 15, and explain why fleet size declines after Year 15 even though fishing had been unrestricted throughout.",
+        "points": 3,
+        "rubric": "1 point for describing that as fleet size increased from Year 0-15, fish population declined sharply (inverse relationship). 2 points for explaining the Year 15-20 fleet decline: as the fish population collapsed to very low levels, catch per boat became too low to be economically profitable, so boats exited the fishery (fewer fish available makes fishing less profitable, driving fishers out) — must connect population scarcity to the economic driver of fleet reduction, not just state that boats 'left.'"
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain, using the concept of the tragedy of the commons, why individual fishers in this open-access system continued to enter the fishery and increase fishing effort even as the population was visibly declining.",
+        "points": 3,
+        "rubric": "1 point for correctly identifying this as a tragedy-of-the-commons scenario: the fishery is a shared, open-access (non-excludable) resource. 1 point for explaining that each individual fisher receives the full benefit of the fish they personally catch, while the cost of stock depletion (reduced future catch) is shared among all fishers collectively — meaning each individual's incentive is to maximize their own short-term catch. 1 point for explaining that because no single fisher can unilaterally stop the decline by reducing their own effort (others would simply catch the fish instead), rational individual behavior (continuing to fish) leads to a collectively irrational, harmful outcome (stock collapse)."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe ONE specific policy mechanism that could prevent this kind of fishery collapse, and explain how it addresses the underlying open-access problem identified in part (b).",
+        "points": 3,
+        "rubric": "1 point for a valid, specific policy mechanism (e.g., individual transferable quotas/ITQs, government-enforced total allowable catch with license limits, establishing a marine protected area/no-take zone, community-based co-management with defined user rights, gear or season restrictions enforced by a regulatory body). 2 points for explaining how the mechanism addresses the open-access problem specifically — i.e., it converts the resource from open-access to a form of restricted or defined access (e.g., an ITQ gives each fisher a secure, enforceable share of the total catch, so their individual incentive becomes protecting the long-term value of their quota rather than racing to catch fish before others do), directly countering the incentive structure described in part (b)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify ONE potential economic or social trade-off of implementing the policy mechanism you described in part (c).",
+        "points": 1,
+        "rubric": "1 point for a valid, specific trade-off connected to the proposed policy (e.g., ITQs can concentrate fishing rights among wealthier operators and push small-scale/subsistence fishers out of the industry; a marine protected area reduces short-term income for fishers who lose access to fishing grounds; enforcement of catch limits requires funding and monitoring infrastructure that may be costly for developing coastal communities)."
+      }
+    ]
+  },
+  {
+    "id": "u5-frq-2",
+    "unit": 5,
+    "title": "Comparing Conventional and Sustainable Agricultural Systems",
+    "stimulus": {
+      "type": "table",
+      "title": "Five-Year Comparison of a Conventional Monoculture Farm and a Diversified Sustainable Farm",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Metric",
+        "Conventional Farm",
+        "Sustainable Farm"
+      ],
+      "rows": [
+        [
+          "Average yield, normal years (metric tons/ha)",
+          8.4,
+          7.6
+        ],
+        [
+          "Yield in drought year (metric tons/ha)",
+          2.9,
+          6.1
+        ],
+        [
+          "Synthetic fertilizer use (kg N/ha/yr)",
+          180,
+          40
+        ],
+        [
+          "Soil organic matter after 5 years (%)",
+          1.8,
+          4.2
+        ],
+        [
+          "Annual pesticide applications",
+          6,
+          1
+        ]
+      ]
+    },
+    "prompt": "The table above compares a conventional monoculture corn farm and a diversified sustainable farm (using crop rotation, cover cropping, and integrated pest management) over the same five-year period, which included one severe drought year. Both farms are the same size and located in the same region.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify ONE metric in the table for which the conventional farm outperforms the sustainable farm, and ONE metric for which the sustainable farm outperforms the conventional farm.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying a metric favoring the conventional farm (average yield in normal years: 8.4 vs. 7.6 t/ha). 1 point for correctly identifying a metric favoring the sustainable farm (any of: drought-year yield, soil organic matter, lower fertilizer use, or fewer pesticide applications, with correct direction stated)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain why the sustainable farm's yield declined much less than the conventional farm's yield during the drought year, connecting your answer to the soil organic matter data in the table.",
+        "points": 3,
+        "rubric": "1 point for identifying that the sustainable farm has substantially higher soil organic matter (4.2% vs. 1.8%). 1 point for explaining that higher soil organic matter increases the soil's water-holding capacity, allowing the soil to retain more moisture available to plant roots during periods of low rainfall. 1 point for connecting this to the outcome: greater available soil moisture during the drought buffered the sustainable farm's crop against water stress, resulting in a smaller yield decline compared to the conventional farm's lower-organic-matter soil, which could not retain as much water."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain how crop rotation, one practice used on the sustainable farm, contributes to both the lower synthetic fertilizer use AND the lower number of pesticide applications shown in the table.",
+        "points": 3,
+        "rubric": "1.5 points for the fertilizer connection: rotating in nitrogen-fixing legume crops adds usable nitrogen to the soil via symbiotic bacteria, reducing the farm's need for synthetic nitrogen fertilizer to achieve adequate yields. 1.5 points for the pesticide connection: rotating crop species disrupts the life cycles of pests and pathogens that are specialized to a particular crop (since their host plant is not present in the same field every year, and monoculture-adapted pest populations cannot persist and build up as easily), reducing pest pressure and the need for chemical pesticide applications."
+      },
+      {
+        "label": "(d)",
+        "prompt": "A farming cooperative is deciding which system to adopt region-wide. Using evidence from the table, argue for ONE system and explain ONE limitation or risk of your recommended system that the cooperative should also consider.",
+        "points": 2,
+        "rubric": "1 point for a data-supported recommendation (either system is acceptable if properly justified with specific data from the table — e.g., recommending sustainable practices citing drought resilience and long-term soil health, or recommending conventional practices citing higher average yield in normal years for regions with reliable rainfall and immediate food security needs). 1 point for a valid, specific limitation of the recommended system (e.g., for sustainable: lower yield in normal (non-drought) years could reduce short-term income or regional food supply; for conventional: high fertilizer/pesticide dependence increases vulnerability to input price volatility and continues to degrade soil organic matter long-term, worsening future drought vulnerability)."
+      }
+    ]
+  },
+  {
+    "id": "u5-frq-3",
+    "unit": 5,
+    "title": "Urbanization, Impervious Surfaces, and Stormwater Management",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Watershed Impervious Surface Cover vs. Annual Flood Events (12 Sub-Watersheds)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 12,
+          "y": 1
+        },
+        {
+          "x": 18,
+          "y": 1
+        },
+        {
+          "x": 25,
+          "y": 2
+        },
+        {
+          "x": 33,
+          "y": 3
+        },
+        {
+          "x": 41,
+          "y": 4
+        },
+        {
+          "x": 48,
+          "y": 5
+        },
+        {
+          "x": 55,
+          "y": 6
+        },
+        {
+          "x": 62,
+          "y": 7
+        },
+        {
+          "x": 70,
+          "y": 9
+        },
+        {
+          "x": 78,
+          "y": 10
+        },
+        {
+          "x": 85,
+          "y": 12
+        }
+      ],
+      "trendline": {
+        "x1": 5,
+        "y1": 0,
+        "x2": 85,
+        "y2": 12
+      },
+      "xLabel": "Impervious Surface Cover (%)",
+      "yLabel": "Annual Flood Events (>minor threshold)"
+    },
+    "prompt": "The scatter plot above shows the relationship between impervious surface cover and the number of annual flood events across twelve sub-watersheds in a rapidly growing metropolitan region. City planners are deciding whether to approve a new development that would increase impervious surface cover in one currently low-impervious watershed from 20% to an estimated 65%.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the relationship shown in the scatter plot and use it to predict the approximate change in annual flood events if the watershed's impervious cover increases from 20% to 65% as planned.",
+        "points": 2,
+        "rubric": "1 point for correctly describing a positive/direct correlation between impervious surface cover and annual flood events. 1 point for a reasonable numeric prediction using the graph, e.g., flood events would be expected to rise from roughly 1-2 events/year at 20% impervious cover to roughly 6-7 events/year at 65% impervious cover (accept any answer consistent with reading the trend from the provided data, approximately 4-6 additional events per year)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the physical mechanism by which increasing impervious surface cover leads to more frequent flood events.",
+        "points": 3,
+        "rubric": "1 point for explaining that impervious surfaces (pavement, rooftops) prevent water infiltration into the soil. 1 point for explaining that this converts a much larger fraction of precipitation into surface runoff compared to natural/vegetated land cover. 1 point for explaining that this runoff reaches streams faster and in greater volume (shorter lag time, higher peak discharge), overwhelming stream channel capacity and causing more frequent flooding."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Recommend TWO specific green stormwater infrastructure practices the developer could incorporate into the new development to reduce its flood impact, and explain how each addresses the mechanism from part (b).",
+        "points": 4,
+        "rubric": "2 points per practice (4 points total). Each practice earns 1 point for being specific and appropriate (e.g., permeable pavement, bioswales/rain gardens, green roofs, retention/detention ponds, rainwater cisterns, preserving/restoring riparian buffers) and 1 point for correctly explaining the mechanism by which it counters increased runoff (e.g., 'permeable pavement allows stormwater to infiltrate through the pavement surface into the soil below, restoring some of the infiltration capacity lost when the area was paved, directly reducing the volume and speed of runoff reaching the stream')."
+      },
+      {
+        "label": "(e)",
+        "prompt": "Identify ONE reason city planners might still choose to approve high-density development in this watershed despite the flood risk, and explain the environmental trade-off involved.",
+        "points": 1,
+        "rubric": "1 point for a valid reason connected to a real trade-off (e.g., concentrating new housing in one already-accessible watershed reduces overall regional sprawl and prevents converting additional undeveloped land elsewhere, or increased housing density near existing infrastructure reduces per-capita transportation emissions) paired with acknowledgment that this concentrates flood risk and infrastructure cost in the chosen watershed rather than distributing it."
+      }
+    ]
+  },
+  {
+    "id": "u6-frq-1",
+    "unit": 6,
+    "title": "Comparing Lifecycle Emissions and Reliability of Electricity Sources",
+    "stimulus": {
+      "type": "table",
+      "title": "Comparison of Electricity Sources for a Regional Grid Planning Decision",
+      "sourceNote": "Hypothetical data based on general ranges reported in energy source comparisons",
+      "headers": [
+        "Source",
+        "Lifecycle Emissions (g CO2-eq/kWh)",
+        "Capacity Factor (%)",
+        "Levelized Cost ($/MWh)"
+      ],
+      "rows": [
+        [
+          "Coal",
+          820,
+          60,
+          65
+        ],
+        [
+          "Natural gas",
+          490,
+          55,
+          45
+        ],
+        [
+          "Nuclear",
+          12,
+          92,
+          95
+        ],
+        [
+          "Wind (onshore)",
+          12,
+          35,
+          40
+        ],
+        [
+          "Solar PV",
+          45,
+          24,
+          35
+        ]
+      ]
+    },
+    "prompt": "A regional utility company is deciding how to replace an aging coal power plant that currently provides reliable baseload electricity for the region. The table above compares lifecycle greenhouse gas emissions, capacity factor (percentage of time a source can generate at maximum output), and levelized cost for five electricity sources under consideration.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, identify which source has the lowest lifecycle emissions AND explain why 'lifecycle' emissions are a more complete measure than emissions released only during electricity generation (operation).",
+        "points": 2,
+        "rubric": "1 point for correctly identifying nuclear or wind (tied at 12 g CO2-eq/kWh) as lowest. 1 point for explaining that lifecycle emissions include emissions from all stages — manufacturing/construction, fuel extraction and processing, transportation, operation, and decommissioning/disposal — not just combustion or operation, so a source with zero operational emissions (like wind or solar) can still have nonzero lifecycle emissions from these other stages."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain why capacity factor is an important consideration for replacing a baseload coal plant, and identify which renewable source in the table would require additional infrastructure (such as storage or backup generation) to reliably replace baseload power.",
+        "points": 3,
+        "rubric": "1 point for explaining that baseload power must be available consistently/continuously to meet minimum demand at all times, so a replacement source needs a high capacity factor to reliably provide power when needed. 1 point for correctly identifying that both wind (35%) and solar (24%) have low, weather/time-dependent capacity factors compared to coal, natural gas, or nuclear (accept identification of either or both). 1 point for explaining that this intermittency means wind or solar alone cannot guarantee power at all times, requiring energy storage (batteries) or backup dispatchable generation to fill gaps and maintain reliability."
+      },
+      {
+        "label": "(c)",
+        "prompt": "A community stakeholder argues the utility should choose based on cost alone and select natural gas, since it has the lowest levelized cost among the fossil and low-emission options with high capacity factor. Evaluate this argument by identifying ONE limitation of using levelized cost alone as the deciding factor.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid limitation (e.g., levelized cost as typically calculated does not include the social or environmental cost of the source's emissions [an externality], so a low-cost, higher-emission source like natural gas may impose hidden long-term costs from climate change impacts or air pollution health effects; OR levelized cost does not capture long-term price volatility risk of a fuel-dependent source like natural gas, unlike wind or solar which have near-zero fuel cost once built). 1 point for connecting that limitation back to the specific comparison in the table (e.g., natural gas has lower direct cost but nearly 40x higher lifecycle emissions than nuclear or wind, a cost not reflected in the $/MWh figure)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose a combination of at least two sources from the table that could replace the coal plant while balancing low emissions and reliability, and justify your choice using specific data from the table.",
+        "points": 3,
+        "rubric": "1 point for proposing a combination of at least two sources that plausibly addresses both emissions and reliability (e.g., wind or solar paired with nuclear or natural gas as a reliability backstop). 1 point for justifying the emissions benefit with specific data (e.g., citing the low g CO2-eq/kWh values of the renewable and/or nuclear components chosen). 1 point for justifying the reliability benefit with specific data (e.g., citing the high capacity factor of nuclear or natural gas as compensating for the low capacity factor of wind/solar in the mix, ensuring baseload needs are met)."
+      }
+    ]
+  },
+  {
+    "id": "u6-frq-2",
+    "unit": 6,
+    "title": "Global Energy Consumption and Development",
+    "stimulus": {
+      "type": "line",
+      "title": "Per Capita Energy Consumption in Three Country Groups, 1990-2020",
+      "sourceNote": "Hypothetical data illustrating general patterns in global per-capita energy consumption",
+      "series": [
+        {
+          "name": "High-Income Countries (GJ/person)",
+          "points": [
+            {
+              "x": 1990,
+              "y": 210
+            },
+            {
+              "x": 2000,
+              "y": 215
+            },
+            {
+              "x": 2010,
+              "y": 205
+            },
+            {
+              "x": 2020,
+              "y": 195
+            }
+          ]
+        },
+        {
+          "name": "Upper-Middle-Income Countries (GJ/person)",
+          "points": [
+            {
+              "x": 1990,
+              "y": 45
+            },
+            {
+              "x": 2000,
+              "y": 60
+            },
+            {
+              "x": 2010,
+              "y": 95
+            },
+            {
+              "x": 2020,
+              "y": 130
+            }
+          ]
+        },
+        {
+          "name": "Low-Income Countries (GJ/person)",
+          "points": [
+            {
+              "x": 1990,
+              "y": 12
+            },
+            {
+              "x": 2000,
+              "y": 13
+            },
+            {
+              "x": 2010,
+              "y": 15
+            },
+            {
+              "x": 2020,
+              "y": 18
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Per Capita Energy Consumption (GJ/person/year)"
+    },
+    "prompt": "The graph above shows per capita energy consumption from 1990 to 2020 for three groups of countries classified by income level. High-income countries have historically consumed the most energy per person, but upper-middle-income countries have shown rapid growth in energy consumption over this period, while low-income countries remain far below both groups.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe ONE notable trend for each of the three country income groups shown in the graph from 1990 to 2020.",
+        "points": 3,
+        "rubric": "1 point each (3 total) for correctly describing: high-income countries showing a slight increase then decline/plateau (relatively stable, slightly declining after 2000); upper-middle-income countries showing a large, steady increase (roughly tripling); low-income countries showing only a small, gradual increase, remaining far below the other two groups throughout."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain ONE plausible driver of the rapid increase in per capita energy consumption in upper-middle-income countries over this period.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid driver (e.g., rapid industrialization and manufacturing growth, urbanization and construction, rising household incomes leading to increased vehicle ownership and appliance use, expansion of electricity access to more of the population). 1 point for a clear explanation of the causal mechanism linking that driver to increased per-capita energy demand (e.g., 'as manufacturing output expands, factories require more energy for production processes, and this industrial energy demand is reflected in the national per capita total')."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain ONE reason the slight decline in high-income country per capita energy consumption after 2000 does NOT necessarily mean those countries' total environmental impact from energy use has decreased.",
+        "points": 2,
+        "rubric": "1 point for a valid reason (e.g., population growth in high-income countries could mean total national energy consumption stayed the same or increased even as the per-capita figure declined; the decline may partly reflect outsourcing of energy-intensive manufacturing to other countries, shifting rather than eliminating the associated energy use and emissions; per capita consumption does not capture the emissions intensity of the energy used, e.g., if the energy mix is still fossil-fuel-heavy, the same or greater environmental harm could occur per unit of energy). 1 point for explaining the mechanism/logic connecting that reason to why total impact is not necessarily reduced."
+      },
+      {
+        "label": "(d)",
+        "prompt": "If low-income countries were to raise their per capita energy consumption to match that of upper-middle-income countries primarily using fossil fuels, describe ONE global environmental consequence, and propose ONE strategy that could allow low-income countries to raise energy consumption while limiting that consequence.",
+        "points": 3,
+        "rubric": "1 point for identifying a valid global consequence (e.g., substantial increase in global greenhouse gas emissions and acceleration of climate change; increased regional air pollution and associated health impacts). 2 points for a specific, plausible strategy that addresses the consequence (e.g., international financing or technology transfer to support leapfrogging directly to renewable energy infrastructure such as distributed solar rather than building new fossil-fuel plants; investment in energy efficiency standards for new infrastructure and appliances to reduce the energy needed per unit of economic activity), with 1 point requiring the mechanism be explained (how the strategy specifically reduces the associated emissions/pollution relative to a fossil-fuel-dominated growth path)."
+      }
+    ]
+  },
+  {
+    "id": "u6-frq-3",
+    "unit": 6,
+    "title": "Energy Efficiency Calculations and Household Conservation",
+    "stimulus": {
+      "type": "table",
+      "title": "Household Energy Audit: Baseline Usage and Proposed Upgrades",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Category",
+        "Baseline Annual Use (kWh)",
+        "% of Total Baseline Use",
+        "Expected Reduction After Upgrade"
+      ],
+      "rows": [
+        [
+          "Space heating/cooling",
+          7200,
+          "48%",
+          "35% (improved insulation + smart thermostat)"
+        ],
+        [
+          "Water heating",
+          2700,
+          "18%",
+          "60% (solar water heater)"
+        ],
+        [
+          "Lighting",
+          1200,
+          "8%",
+          "75% (LED retrofit)"
+        ],
+        [
+          "Appliances/electronics",
+          3900,
+          "26%",
+          "10% (ENERGY STAR replacements)"
+        ],
+        [
+          "Total",
+          15000,
+          "100%",
+          "—"
+        ]
+      ]
+    },
+    "prompt": "The table above shows the results of an energy audit for a household with a total baseline annual electricity consumption of 15,000 kWh, broken down by category, along with the expected percentage reduction in each category if the household adopts the proposed upgrades.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Calculate the annual kWh reduction in space heating/cooling energy use if the household adopts the proposed upgrade, and calculate the household's new annual space heating/cooling energy use after the upgrade. Show your work.",
+        "points": 2,
+        "rubric": "1 point for correct reduction calculation: 7,200 kWh x 0.35 = 2,520 kWh reduction (accept 2,500-2,540 range for rounding). 1 point for correct new usage calculation: 7,200 - 2,520 = 4,680 kWh (accept consistent value based on their part 1 answer, approximately 4,660-4,700 kWh)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Calculate the household's total annual energy use after ALL FOUR proposed upgrades are implemented, and calculate the overall percentage reduction in total household energy use. Show your work.",
+        "points": 3,
+        "rubric": "1 point for correctly calculating reductions in the other three categories (water heating: 2,700 x 0.60 = 1,620 kWh; lighting: 1,200 x 0.75 = 900 kWh; appliances: 3,900 x 0.10 = 390 kWh) — full credit requires at least two of the three calculated correctly in addition to heating/cooling from part (a). 1 point for correctly summing all reductions (2,520 + 1,620 + 900 + 390 = 5,430 kWh) and subtracting from baseline to get new total (15,000 - 5,430 = 9,570 kWh), accepting values consistent with their part (a) answer. 1 point for correctly calculating percentage reduction: (5,430 / 15,000) x 100 ≈ 36% (accept 34-38% range depending on rounding through the problem)."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Distinguish between energy conservation and energy efficiency, and classify TWO of the four upgrades in the table as primarily reflecting one or the other, with justification.",
+        "points": 3,
+        "rubric": "1 point for a correct distinction: energy efficiency means accomplishing the same task/output using less energy through improved technology, while energy conservation means reducing energy use through behavioral change or reduced consumption of a service. 1 point each (2 points total) for correctly classifying and justifying two upgrades — e.g., LED retrofit and ENERGY STAR appliances are efficiency (same lighting/appliance function delivered using less energy per unit of technology); a smart thermostat could be classified as conservation if it primarily works by reducing heating/cooling when the home is unoccupied (a behavioral/usage change) or efficiency if framed as better matching output to need — accept reasonable justification for either classification as long as the reasoning is internally consistent with the definitions given."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Explain why reducing a household's direct electricity consumption, as shown in this audit, may not proportionally reduce that household's greenhouse gas emissions by the same percentage, referencing the source of the region's electricity.",
+        "points": 2,
+        "rubric": "1 point for explaining that the greenhouse gas impact of a kWh of electricity saved depends on the emissions intensity (grams CO2 per kWh) of the electricity generation mix supplying that household's grid, which varies by region and source. 1 point for the implication: if the grid is already low-carbon (e.g., high nuclear or renewable share), the same percentage reduction in kWh use produces a smaller absolute emissions reduction than in a region with a coal-heavy, high-emissions-intensity grid, so kWh reduction alone does not directly translate to a proportional emissions reduction without knowing the grid's emissions intensity."
+      }
+    ]
+  },
+  {
+    "id": "u7-frq-1",
+    "unit": 7,
+    "title": "Photochemical Smog and Thermal Inversion in a Mountain-Valley City",
+    "stimulus": {
+      "type": "table",
+      "title": "Air Quality Data for Valleyview City, Summer Week",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Day",
+        "Morning NOx (ppb)",
+        "Afternoon Ground-Level Ozone (ppb)",
+        "Weather Condition"
+      ],
+      "rows": [
+        [
+          "Monday",
+          "110",
+          "95",
+          "Clear, calm, thermal inversion present"
+        ],
+        [
+          "Tuesday",
+          "105",
+          "90",
+          "Clear, calm, thermal inversion present"
+        ],
+        [
+          "Wednesday",
+          "40",
+          "35",
+          "Windy, no inversion"
+        ],
+        [
+          "Thursday",
+          "108",
+          "92",
+          "Clear, calm, thermal inversion present"
+        ],
+        [
+          "Friday",
+          "38",
+          "30",
+          "Windy, no inversion"
+        ]
+      ]
+    },
+    "prompt": "Valleyview City is located in a mountain valley and experiences heavy vehicle traffic each morning. The table above shows morning nitrogen oxide (NOx) concentrations and afternoon ground-level ozone concentrations on five summer days, along with the day's general weather conditions. City officials want to understand why some days have much worse air quality than others and are considering policy responses.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, describe the relationship between the presence of a thermal inversion and afternoon ground-level ozone concentrations.",
+        "points": 2,
+        "rubric": "1 point for correctly stating that days with a thermal inversion (Monday, Tuesday, Thursday) had much higher ozone concentrations (90-95 ppb) than windy days without an inversion (30-35 ppb). 1 point for a valid comparative statement using specific values or an accurate general trend from the table (e.g., inversion days show roughly triple the ozone of non-inversion days)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the atmospheric mechanism by which a thermal inversion contributes to elevated ground-level ozone and other pollutant concentrations in a valley city.",
+        "points": 3,
+        "rubric": "1 point for identifying that a thermal inversion involves a layer of warm air sitting above cooler surface air (reversing the normal temperature gradient). 1 point for explaining that this warm layer acts as a 'lid' that prevents vertical mixing/convection of surface air. 1 point for connecting this trapping mechanism to the accumulation of pollutants (including NOx and VOC precursors) near the ground, which allows more time for photochemical reactions to concentrate ozone rather than dispersing it."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe the two-step chemical process by which NOx and volatile organic compounds (VOCs) form ground-level ozone in the presence of sunlight.",
+        "points": 2,
+        "rubric": "1 point for identifying that NOx (primarily from vehicle exhaust) reacts with VOCs in the presence of sunlight (UV radiation) as the driving condition for the reaction. 1 point for correctly identifying that this photochemical reaction produces ground-level ozone (O3) as a secondary pollutant, distinct from primary pollutants emitted directly from vehicles."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose one specific policy or technological solution the city could implement to reduce morning NOx emissions, and describe one potential economic or social tradeoff associated with your proposed solution.",
+        "points": 3,
+        "rubric": "1 point for a specific, plausible solution directly targeting vehicle NOx emissions (e.g., mandatory catalytic converter inspections, incentives for electric vehicles, expanded public transit to reduce vehicle miles traveled, staggered work hours to reduce rush-hour traffic congestion). 1 point for a clear explanation of how the proposed solution would mechanistically reduce NOx emissions. 1 point for identifying a specific, realistic tradeoff (e.g., cost burden on low-income vehicle owners for retrofits, public transit infrastructure costs, reduced convenience, economic impact on downtown businesses from staggered hours) rather than a vague or generic downside."
+      }
+    ]
+  },
+  {
+    "id": "u7-frq-2",
+    "unit": 7,
+    "title": "Acid Deposition and Lake Ecosystem Recovery",
+    "stimulus": {
+      "type": "line",
+      "title": "Lake pH and Fish Population Index, 1970-2020",
+      "sourceNote": "Hypothetical data for this exercise, modeled on documented acid rain recovery trends following the 1990 Clean Air Act Amendments",
+      "series": [
+        {
+          "name": "Lake pH",
+          "points": [
+            {
+              "x": 1970,
+              "y": 6.8
+            },
+            {
+              "x": 1980,
+              "y": 5.4
+            },
+            {
+              "x": 1990,
+              "y": 4.9
+            },
+            {
+              "x": 2000,
+              "y": 5.3
+            },
+            {
+              "x": 2010,
+              "y": 5.9
+            },
+            {
+              "x": 2020,
+              "y": 6.3
+            }
+          ]
+        },
+        {
+          "name": "Fish population index (relative to 1970 = 100)",
+          "points": [
+            {
+              "x": 1970,
+              "y": 100
+            },
+            {
+              "x": 1980,
+              "y": 55
+            },
+            {
+              "x": 1990,
+              "y": 20
+            },
+            {
+              "x": 2000,
+              "y": 30
+            },
+            {
+              "x": 2010,
+              "y": 58
+            },
+            {
+              "x": 2020,
+              "y": 78
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "pH / Fish population index"
+    },
+    "prompt": "The graph shows changes in the pH and fish population index of a temperate lake downwind of a coal-burning region from 1970 to 2020. The 1990 Clean Air Act Amendments established a cap-and-trade program that significantly reduced SO2 emissions from power plants beginning in the early 1990s.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Identify the trend in lake pH from 1970 to 1990, and describe the corresponding trend in the fish population index over the same period.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying that lake pH declined (became more acidic) from 1970 (6.8) to 1990 (4.9). 1 point for correctly identifying that the fish population index declined sharply over the same period (from 100 to 20), i.e., pH decline was accompanied by fish population decline."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the chemical process by which SO2 emissions from coal-burning power plants lead to the acidification of a lake located downwind.",
+        "points": 3,
+        "rubric": "1 point for identifying that SO2 is released into the atmosphere from combustion of sulfur-containing coal. 1 point for explaining that SO2 reacts with water vapor and oxygen in the atmosphere to form sulfuric acid (H2SO4). 1 point for explaining that this acid falls to the surface as acid precipitation (wet deposition) or acid particles (dry deposition), lowering the pH of lakes and soil in the affected watershed, particularly in areas without natural buffering capacity (e.g., granite bedrock)."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Using evidence from the graph, explain how the 1990 Clean Air Act Amendments likely contributed to the recovery of lake pH and fish populations after 1990.",
+        "points": 2,
+        "rubric": "1 point for correctly noting that both pH and fish population index began recovering (increasing) after 1990/2000, coinciding with the implementation of SO2 emissions reductions under the cap-and-trade program. 1 point for a valid causal explanation connecting reduced SO2 emissions to reduced acid deposition, allowing lake pH to rise back toward a range fish can tolerate, supporting population recovery."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Describe one direct chemical/physical intervention (other than reducing emissions) that resource managers could use to raise the pH of an acidified lake, and explain one limitation of this approach compared to reducing emissions at the source.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid direct intervention, most commonly liming (adding crushed limestone/calcium carbonate to the lake to neutralize acidity). 1 point for identifying a valid limitation: it treats a symptom rather than the root cause, requires repeated/ongoing application since new acid deposition continues to arrive, is costly to sustain over large areas, or does not address atmospheric emissions or damage to soils and terrestrial vegetation in the broader watershed."
+      }
+    ]
+  },
+  {
+    "id": "u7-frq-3",
+    "unit": 7,
+    "title": "Indoor Air Quality and the Energy Efficiency Tradeoff",
+    "stimulus": {
+      "type": "bar",
+      "title": "Indoor Pollutant Concentrations in Homes with Standard vs. Airtight (Weatherized) Construction",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Radon (pCi/L) - Standard",
+          "value": 1.2
+        },
+        {
+          "label": "Radon (pCi/L) - Airtight",
+          "value": 3.8
+        },
+        {
+          "label": "Formaldehyde (ppb) - Standard",
+          "value": 18
+        },
+        {
+          "label": "Formaldehyde (ppb) - Airtight",
+          "value": 52
+        }
+      ],
+      "xLabel": "Pollutant and construction type",
+      "yLabel": "Concentration"
+    },
+    "prompt": "A city is offering rebates to homeowners who weatherize (seal air leaks and add insulation) their homes to reduce heating and cooling energy consumption. The graph shows measured indoor radon and formaldehyde concentrations in a sample of standard homes compared to airtight, weatherized homes in the same region.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the pattern shown in the graph comparing pollutant concentrations in standard versus airtight homes.",
+        "points": 2,
+        "rubric": "1 point for correctly stating that both radon and formaldehyde concentrations are substantially higher in airtight/weatherized homes than in standard homes. 1 point for citing approximate supporting values (e.g., radon roughly triples from 1.2 to 3.8 pCi/L; formaldehyde roughly triples from 18 to 52 ppb)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain why weatherizing a home to improve energy efficiency tends to increase concentrations of indoor air pollutants such as radon and formaldehyde.",
+        "points": 3,
+        "rubric": "1 point for identifying that weatherization reduces air exchange/infiltration between indoor and outdoor air. 1 point for explaining that radon (which seeps in continuously from soil/bedrock beneath the foundation) and formaldehyde (which off-gasses continuously from building materials, furniture, and carpet) are generated indoors at a fairly constant rate. 1 point for explaining that with less outdoor air exchange to dilute and remove them, these pollutants accumulate to higher concentrations in a sealed home."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe the specific health risk associated with long-term radon exposure, including the biological mechanism of harm.",
+        "points": 2,
+        "rubric": "1 point for identifying that radon is a radioactive gas whose decay products (radon progeny) emit alpha particles. 1 point for explaining that when inhaled, these alpha-emitting particles can damage lung tissue/DNA in cells lining the lungs, and that radon is the second-leading cause of lung cancer after smoking."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose a specific mitigation strategy the city could recommend alongside its weatherization rebate program to prevent the buildup of indoor air pollutants, and explain how it addresses the tradeoff identified in part (b).",
+        "points": 2,
+        "rubric": "1 point for a specific, valid strategy such as installing a mechanical/energy recovery ventilation (ERV or HRV) system, requiring radon mitigation systems (sub-slab depressurization), or using low-VOC/formaldehyde-free building materials. 1 point for explaining how the strategy directly addresses the tradeoff — e.g., an ERV exchanges indoor and outdoor air (removing accumulated pollutants) while recovering heat energy to preserve most of the efficiency gains, avoiding a simple return to energy-wasteful ventilation."
+      }
+    ]
+  },
+  {
+    "id": "u8-frq-1",
+    "unit": 8,
+    "title": "Eutrophication and the Oxygen Sag Curve Downstream of a Wastewater Outfall",
+    "stimulus": {
+      "type": "line",
+      "title": "Dissolved Oxygen and Biological Oxygen Demand Downstream of a Wastewater Treatment Outfall",
+      "sourceNote": "Hypothetical data for this exercise, illustrating a classic oxygen sag curve",
+      "series": [
+        {
+          "name": "Dissolved oxygen (mg/L)",
+          "points": [
+            {
+              "x": 0,
+              "y": 8.5
+            },
+            {
+              "x": 2,
+              "y": 5.0
+            },
+            {
+              "x": 5,
+              "y": 2.2
+            },
+            {
+              "x": 10,
+              "y": 4.5
+            },
+            {
+              "x": 20,
+              "y": 7.8
+            }
+          ]
+        },
+        {
+          "name": "BOD (mg/L)",
+          "points": [
+            {
+              "x": 0,
+              "y": 30
+            },
+            {
+              "x": 2,
+              "y": 20
+            },
+            {
+              "x": 5,
+              "y": 13
+            },
+            {
+              "x": 10,
+              "y": 6
+            },
+            {
+              "x": 20,
+              "y": 2
+            }
+          ]
+        }
+      ],
+      "xLabel": "Distance downstream from outfall (km)",
+      "yLabel": "Concentration (mg/L)"
+    },
+    "prompt": "A wastewater treatment plant discharges partially treated effluent into a river. The graph shows dissolved oxygen (DO) and biological oxygen demand (BOD) at increasing distances downstream from the outfall.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the relationship between BOD and dissolved oxygen concentration shown in the graph as distance downstream increases.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying that BOD is highest near the outfall (30 mg/L at 0 km) and decreases with distance downstream. 1 point for correctly identifying the inverse relationship: dissolved oxygen drops sharply near the outfall (reaching a minimum around 2.2 mg/L at 5 km) then gradually recovers further downstream as BOD declines."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the biological mechanism that causes dissolved oxygen to decline near the outfall despite the river not having a direct source of an oxygen-depleting chemical.",
+        "points": 3,
+        "rubric": "1 point for identifying that the wastewater effluent introduces high levels of organic matter/nutrients. 1 point for explaining that aerobic decomposer bacteria consume dissolved oxygen while breaking down this organic matter (respiration), which is what BOD measures. 1 point for explaining that oxygen consumption during decomposition exceeds the rate of oxygen replenishment (from reaeration/photosynthesis) near the outfall, causing the sag in DO, which then recovers downstream as organic matter is depleted and reaeration continues."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Identify one aquatic organism or group of organisms that would likely experience population decline in the reach of river between 2 and 10 km downstream, and justify your answer using the graph.",
+        "points": 2,
+        "rubric": "1 point for identifying a plausible oxygen-sensitive organism/group (e.g., trout or other cold-water/high-oxygen-demand fish, mayfly larvae, other sensitive macroinvertebrates). 1 point for justification referencing the graph's low DO values (roughly 2.2-4.5 mg/L) in that stretch, which fall below the tolerance range many sensitive aquatic species require to survive."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose one specific upgrade to the wastewater treatment process that would reduce the severity of the oxygen sag shown in the graph, and explain the mechanism by which it would help.",
+        "points": 2,
+        "rubric": "1 point for a specific, valid treatment upgrade (e.g., adding or improving secondary treatment/biological treatment to further break down organic matter before discharge, adding tertiary treatment to remove nutrients like nitrogen and phosphorus, increasing aeration/detention time at the plant). 1 point for explaining the mechanism: this reduces the BOD/organic and nutrient load in the effluent before it reaches the river, so less oxygen is consumed by decomposition downstream, reducing the depth and duration of the DO sag."
+      }
+    ]
+  },
+  {
+    "id": "u8-frq-2",
+    "unit": 8,
+    "title": "Biomagnification of Mercury in an Estuarine Food Web",
+    "stimulus": {
+      "type": "table",
+      "title": "Mercury Concentration at Successive Trophic Levels in an Estuary",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Organism",
+        "Trophic Level",
+        "Mercury Concentration (ppm)"
+      ],
+      "rows": [
+        [
+          "Phytoplankton",
+          "Producer",
+          "0.05"
+        ],
+        [
+          "Zooplankton",
+          "Primary consumer",
+          "0.5"
+        ],
+        [
+          "Small fish (minnows)",
+          "Secondary consumer",
+          "5.0"
+        ],
+        [
+          "Large fish (bass)",
+          "Tertiary consumer",
+          "25.0"
+        ],
+        [
+          "Osprey (top predator)",
+          "Quaternary consumer",
+          "80.0"
+        ]
+      ]
+    },
+    "prompt": "An industrial facility upstream of an estuary historically released mercury-contaminated wastewater. Researchers sampled tissue from organisms at each trophic level of the estuarine food web and recorded the mercury concentrations shown in the table.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, calculate the factor by which mercury concentration increased from small fish (minnows) to the osprey.",
+        "points": 2,
+        "rubric": "1 point for setting up the correct calculation: 80.0 ppm ÷ 5.0 ppm. 1 point for the correct numerical answer with appropriate reasoning shown (16-fold increase / 16 times higher)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the biological process responsible for the pattern of increasing mercury concentration shown in the table, and describe why mercury is particularly prone to this process compared to a water-soluble, easily excreted compound.",
+        "points": 3,
+        "rubric": "1 point for correctly naming and describing biomagnification (concentration increases at each successive trophic level as predators consume many contaminated prey). 1 point for explaining that mercury (as methylmercury) is fat-soluble/lipophilic and binds tightly to tissue, so it is stored rather than excreted. 1 point for explaining that because organisms retain nearly all the mercury from their prey and each predator consumes many prey organisms over its lifetime, concentrations become magnified at higher trophic levels, unlike a water-soluble compound that the body could more readily excrete."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Describe one specific human health risk associated with consuming top-predator fish species like bass from this estuary, and identify one population that is at elevated risk.",
+        "points": 2,
+        "rubric": "1 point for a valid health risk (e.g., neurological/developmental damage from methylmercury, particularly affecting the nervous system). 1 point for identifying a population at elevated risk with justification (e.g., pregnant women/developing fetuses and young children, because methylmercury crosses the placenta and blood-brain barrier and disrupts neurological development at lower doses than needed to affect adults)."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify a possible remediation or management solution to reduce human exposure risk from this contaminated food web, and describe one economic or social tradeoff of your proposed solution.",
+        "points": 2,
+        "rubric": "1 point for a valid, specific solution (e.g., issuing fish consumption advisories limiting how often/which species people eat, dredging and removing contaminated sediment, requiring stricter discharge limits and monitoring at the industrial facility going forward). 1 point for a realistic tradeoff (e.g., consumption advisories reduce food security or cultural fishing practices for local/subsistence or Indigenous communities; sediment dredging is extremely costly and can temporarily re-suspend contaminants; stricter regulations may raise costs for the facility and regional employment)."
+      }
+    ]
+  },
+  {
+    "id": "u8-frq-3",
+    "unit": 8,
+    "title": "Dose-Response Relationships and Pesticide Risk Assessment",
+    "stimulus": {
+      "type": "line",
+      "title": "Dose-Response Curve for Pesticide X in a Laboratory Test Population",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Mortality (%)",
+          "points": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 2,
+              "y": 3
+            },
+            {
+              "x": 5,
+              "y": 15
+            },
+            {
+              "x": 10,
+              "y": 50
+            },
+            {
+              "x": 20,
+              "y": 88
+            },
+            {
+              "x": 30,
+              "y": 98
+            }
+          ]
+        }
+      ],
+      "xLabel": "Dose (mg/kg body weight)",
+      "yLabel": "Mortality (%)"
+    },
+    "prompt": "Toxicologists exposed a test population of laboratory animals to varying doses of Pesticide X and recorded the percent mortality at each dose, shown in the graph. Regulators are using this dose-response data to help set a legal exposure limit for agricultural workers.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the graph, identify the approximate LD50 for Pesticide X and explain what this value represents.",
+        "points": 2,
+        "rubric": "1 point for correctly identifying the LD50 as approximately 10 mg/kg body weight (the dose at which the curve crosses 50% mortality). 1 point for correctly explaining that LD50 is the dose of a substance lethal to 50% of the test population within a specified exposure period."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Describe the general shape of the curve shown in the graph and explain what this shape indicates about the relationship between dose and toxicity for most substances.",
+        "points": 2,
+        "rubric": "1 point for correctly describing the curve as sigmoidal/S-shaped, with mortality increasing slowly at low doses, rising sharply through the middle dose range, then leveling off at high doses. 1 point for explaining that this shape reflects individual variation in sensitivity within a population — some individuals are affected at low doses while others are more resistant, so response accumulates gradually rather than as an abrupt on/off effect."
+      },
+      {
+        "label": "(c)",
+        "prompt": "A farmworker is regularly exposed to low doses of Pesticide X that would each individually cause less than 5% mortality risk in this dataset. Explain why regulators might still be concerned about this worker's long-term health, referencing the concept of chronic toxicity.",
+        "points": 2,
+        "rubric": "1 point for correctly distinguishing this scenario from the acute, single-dose toxicity shown in the graph. 1 point for explaining that chronic toxicity results from repeated, long-term exposure to lower doses, which can cause cumulative damage, bioaccumulation of the substance in tissue, or other sub-lethal health effects (e.g., endocrine disruption, cancer risk, organ damage) that are not captured by a single acute LD50 dose-response curve."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose one specific policy that regulators could implement to protect agricultural workers from long-term Pesticide X exposure, and explain how it directly reduces exposure risk.",
+        "points": 3,
+        "rubric": "1 point for a specific, valid policy (e.g., mandatory personal protective equipment requirements, restricted-entry intervals after application, maximum allowable residue limits, mandatory rotation to reduce exposure frequency, or a required buffer zone between application sites and worker areas). 1 point for a clear mechanistic explanation of how the policy reduces the dose or frequency of exposure the worker receives. 1 point for connecting the reduced exposure back to the dose-response relationship — i.e., lowering the effective dose received moves workers further left on the curve, reducing both acute and cumulative chronic risk."
+      }
+    ]
+  },
+  {
+    "id": "u9-frq-1",
+    "unit": 9,
+    "title": "Stratospheric Ozone Recovery and the Montreal Protocol",
+    "stimulus": {
+      "type": "line",
+      "title": "Antarctic Ozone Hole Maximum Area, 1980-2020",
+      "sourceNote": "Approximate values based on NASA/NOAA satellite ozone monitoring records",
+      "series": [
+        {
+          "name": "Ozone hole area (million km²)",
+          "points": [
+            {
+              "x": 1980,
+              "y": 2
+            },
+            {
+              "x": 1987,
+              "y": 20
+            },
+            {
+              "x": 1995,
+              "y": 24
+            },
+            {
+              "x": 2006,
+              "y": 29
+            },
+            {
+              "x": 2012,
+              "y": 21
+            },
+            {
+              "x": 2020,
+              "y": 20
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Ozone hole maximum area (million km²)"
+    },
+    "prompt": "The graph shows the maximum area of the Antarctic ozone hole from 1980 to 2020. The Montreal Protocol, an international treaty phasing out the production of chlorofluorocarbons (CFCs) and other ozone-depleting substances, was signed in 1987 and has been amended and strengthened several times since.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the overall trend in ozone hole area shown in the graph from 1980 to 2006, and the trend from 2006 to 2020.",
+        "points": 2,
+        "rubric": "1 point for correctly describing the increasing trend from 1980 (2 million km²) to a peak around 2006 (29 million km²). 1 point for correctly describing the leveling off/gradual decline from 2006 to 2020 (from 29 to about 20 million km²)."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the chemical mechanism by which CFCs released at Earth's surface lead to the destruction of stratospheric ozone.",
+        "points": 3,
+        "rubric": "1 point for explaining that CFCs are stable/persistent in the lower atmosphere and are transported to the stratosphere over time. 1 point for explaining that ultraviolet radiation in the stratosphere breaks apart CFC molecules, releasing free chlorine atoms. 1 point for explaining that each chlorine atom acts as a catalyst, breaking apart thousands of ozone (O3) molecules into O2 without being consumed itself, allowing continued ozone destruction from a single chlorine atom over a long period."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Using the graph, explain why the ozone hole did not immediately shrink after the Montreal Protocol was signed in 1987, even though it continued to grow for nearly two more decades.",
+        "points": 2,
+        "rubric": "1 point for noting the long time lag between signing/phase-out and recovery evident in the graph (continued growth through 2006). 1 point for a valid mechanistic explanation: CFCs already released before the phase-out have very long atmospheric lifetimes (50-100+ years) and continued to reach and react in the stratosphere for decades, so existing chlorine reservoirs kept depleting ozone even after new production was reduced/banned."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Describe one specific consequence to human health OR ecosystems that results from increased UV radiation reaching Earth's surface due to ozone depletion, and explain the mechanism of harm.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid consequence (e.g., increased skin cancer incidence, increased cataract rates in humans, or reduced phytoplankton productivity/DNA damage in aquatic organisms). 1 point for a correct mechanism (e.g., UV radiation directly damages DNA in skin cells causing mutations that can lead to cancer; UV damages proteins in the eye lens causing cataracts; UV penetrates surface ocean water and damages phytoplankton DNA, reducing primary productivity at the base of marine food webs)."
+      }
+    ]
+  },
+  {
+    "id": "u9-frq-2",
+    "unit": 9,
+    "title": "Ocean Acidification, Coral Calcification, and Reef Ecosystem Impacts",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Coral Calcification Rate vs. Seawater pH",
+      "sourceNote": "Hypothetical data for this exercise, illustrating a pattern consistent with published ocean acidification research",
+      "points": [
+        {
+          "x": 8.2,
+          "y": 100
+        },
+        {
+          "x": 8.1,
+          "y": 88
+        },
+        {
+          "x": 8.0,
+          "y": 70
+        },
+        {
+          "x": 7.9,
+          "y": 52
+        },
+        {
+          "x": 7.8,
+          "y": 38
+        }
+      ],
+      "trendline": {
+        "x1": 8.2,
+        "y1": 100,
+        "x2": 7.8,
+        "y2": 36
+      },
+      "xLabel": "Seawater pH",
+      "yLabel": "Calcification rate (% of pre-industrial baseline)"
+    },
+    "prompt": "Ocean surface pH has declined from a pre-industrial average of approximately 8.2 as the ocean has absorbed increasing amounts of atmospheric carbon dioxide. Researchers exposed coral samples to seawater at different pH levels and measured their calcification (skeleton-building) rate relative to the pre-industrial baseline, shown in the scatter plot.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Describe the relationship between seawater pH and coral calcification rate shown in the scatter plot.",
+        "points": 2,
+        "rubric": "1 point for correctly describing a positive relationship: as pH decreases (more acidic), calcification rate decreases. 1 point for citing supporting data (e.g., calcification drops from 100% at pH 8.2 to about 38% at pH 7.8) or correctly describing the trend as roughly linear over this range."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the chemical mechanism by which increasing atmospheric CO2 concentrations lower ocean pH.",
+        "points": 2,
+        "rubric": "1 point for explaining that atmospheric CO2 dissolves into seawater. 1 point for explaining that dissolved CO2 reacts with water to form carbonic acid (H2CO3), which dissociates and releases hydrogen ions (H+), lowering the pH of the water."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Explain why lower pH specifically reduces the ability of corals (and other calcifying organisms) to build calcium carbonate skeletons or shells.",
+        "points": 2,
+        "rubric": "1 point for explaining that the excess hydrogen ions react with carbonate ions (CO3²⁻) in seawater, converting them to bicarbonate (HCO3-) and reducing the concentration of carbonate ions available. 1 point for explaining that calcifying organisms require sufficient carbonate ion concentration to combine with calcium and precipitate calcium carbonate (CaCO3) for their skeletons/shells, so reduced carbonate availability directly slows or impairs this process."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Identify one ecosystem service provided by coral reefs that would be lost or degraded if reef-building slows significantly due to ocean acidification, and explain the connection between reduced calcification and the loss of that service.",
+        "points": 2,
+        "rubric": "1 point for identifying a valid ecosystem service (e.g., coastal storm/wave protection, fisheries habitat and biodiversity support, or tourism/recreation revenue). 1 point for a clear explanation linking reduced calcification to the loss of that service — e.g., slower reef growth and increased structural erosion reduce the physical reef structure that dissipates wave energy and protects coastlines, or reduces the complex habitat structure that supports high fish biodiversity and fisheries productivity."
+      },
+      {
+        "label": "(e)",
+        "prompt": "Ocean acidification and ocean warming often occur simultaneously and both stress coral reefs. Explain why addressing only local stressors (such as reducing nutrient runoff or overfishing near a reef) would be insufficient to fully protect coral reefs from these two global stressors.",
+        "points": 2,
+        "rubric": "1 point for correctly noting that ocean acidification and warming are driven by global atmospheric CO2 concentrations, not local conditions, so local management cannot reduce their severity. 1 point for explaining that meaningfully addressing these stressors requires global reductions in greenhouse gas/CO2 emissions, meaning local conservation efforts, while valuable for other stressors (like nutrient pollution or overfishing), cannot on their own prevent acidification- or warming-driven coral decline."
+      }
+    ]
+  },
+  {
+    "id": "u9-frq-3",
+    "unit": 9,
+    "title": "Habitat Fragmentation, Invasive Species, and Biodiversity Loss in a National Park",
+    "stimulus": {
+      "type": "table",
+      "title": "Bird Species Richness and Presence of Invasive Predators in Forest Patches",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Forest Patch",
+        "Patch Size (hectares)",
+        "Connected to Other Patches?",
+        "Invasive Predator Present?",
+        "Bird Species Richness"
+      ],
+      "rows": [
+        [
+          "Patch A",
+          "480",
+          "Yes",
+          "No",
+          "34"
+        ],
+        [
+          "Patch B",
+          "52",
+          "No",
+          "No",
+          "24"
+        ],
+        [
+          "Patch C",
+          "460",
+          "Yes",
+          "Yes",
+          "26"
+        ],
+        [
+          "Patch D",
+          "48",
+          "No",
+          "Yes",
+          "13"
+        ]
+      ]
+    },
+    "prompt": "Ecologists surveyed four forest patches within and around a national park that vary in size, connectivity to other patches via wildlife corridors, and the presence of an invasive predator (a nonnative mammal that preys on ground-nesting birds). Bird species richness was recorded for each patch.",
+    "parts": [
+      {
+        "label": "(a)",
+        "prompt": "Using the data in the table, compare bird species richness between Patch A and Patch B, and propose a hypothesis for why they differ, based only on the variables shown.",
+        "points": 2,
+        "rubric": "1 point for correctly noting that Patch A has higher bird species richness (34) than Patch B (24). 1 point for a hypothesis correctly attributing the difference to patch size and/or connectivity (Patch A is much larger and connected, while Patch B is small and isolated), since neither has the invasive predator, isolating these as the likely explanatory variables."
+      },
+      {
+        "label": "(b)",
+        "prompt": "Explain the ecological mechanism by which habitat fragmentation (small, isolated patches) reduces species richness, independent of the effects of invasive species.",
+        "points": 3,
+        "rubric": "1 point for explaining that smaller patches support smaller populations, which are more vulnerable to local extinction from random events (demographic/environmental stochasticity). 1 point for explaining that isolation limits dispersal and gene flow between patches, increasing inbreeding and reducing genetic diversity, further increasing extinction risk. 1 point for explaining that fragmentation increases the ratio of edge habitat to interior habitat, which favors generalist/edge-adapted species over interior-dependent specialist species, altering community composition and often reducing richness of sensitive species."
+      },
+      {
+        "label": "(c)",
+        "prompt": "Using the data in the table, describe the effect of the invasive predator on bird species richness by comparing patches of similar size and connectivity (Patch A vs. Patch C, and Patch B vs. Patch D).",
+        "points": 2,
+        "rubric": "1 point for correctly noting that among large, connected patches, richness is lower with the invasive predator present (Patch C: 26) than without it (Patch A: 34). 1 point for correctly noting the same pattern among small, isolated patches (Patch D: 13, with predator, versus Patch B: 24, without), supporting the conclusion that the invasive predator independently reduces richness regardless of patch size/connectivity."
+      },
+      {
+        "label": "(d)",
+        "prompt": "Propose one specific conservation strategy to improve bird species richness in Patch D, and explain how it addresses one of the two stressors identified in this study (fragmentation or invasive predation).",
+        "points": 2,
+        "rubric": "1 point for a specific, valid strategy (e.g., establishing a wildlife corridor connecting Patch D to a larger patch, or implementing an invasive predator removal/control program in Patch D). 1 point for a clear explanation connecting the strategy to the relevant mechanism — e.g., a corridor would increase effective patch size and allow gene flow/recolonization, directly addressing the fragmentation stressor; predator removal would directly reduce nest predation pressure on ground-nesting birds, addressing the invasive species stressor."
+      }
+    ]
+  }
+]

@@ -30,14 +30,73 @@
     "correct": "C"
   },
   {
-    "question": "A lake receives 85 percent of its phosphorus from agricultural runoff and 15 percent from wastewater. Over five years algal blooms expand from 2 percent to 18 percent of the surface and bottom-water dissolved oxygen falls from 6 to 1 mg per L. Sediment cores show increasing phosphorus accumulation. Which statement best describes the environmental problem and its relation to phosphorus reservoirs?",
+    "question": "A lake receives 85% of its phosphorus input from agricultural runoff and 15% from wastewater discharge. Over five years, algal bloom coverage expands from 2% to 18% of the lake's surface, and bottom-water dissolved oxygen falls from 6 to 1 mg/L. Sediment cores show increasing phosphorus accumulation in lake-bottom sediments over the same period. Which conclusion is best supported by this evidence?",
     "answers": [
-      "Excess phosphorus causes eutrophication and moves into long-term sediment storage.",
-      "Sedimentation does not permanently remove phosphorus because it can be remobilized.",
-      "Efficient recycling is not indicated by blooms and falling oxygen levels.",
-      "Agricultural runoff is the primary source because it supplies 85 percent of inputs."
+      "Excess phosphorus loading is driving eutrophication in the lake, and much of the added phosphorus is accumulating in bottom sediments as a long-term storage reservoir",
+      "Because phosphorus is accumulating in the sediment, it has been permanently and irreversibly removed from the lake's nutrient cycle",
+      "The falling dissolved oxygen and expanding algal blooms indicate that phosphorus is being recycled through the ecosystem with high efficiency and minimal ecological impact",
+      "Because agricultural runoff supplies 85% of phosphorus inputs, wastewater discharge can be considered a negligible contributor to the lake's eutrophication"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Lake Eutrophication Indicators Over Five Years",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Algal bloom coverage (%)",
+          "points": [
+            {
+              "x": 1,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 5
+            },
+            {
+              "x": 3,
+              "y": 9
+            },
+            {
+              "x": 4,
+              "y": 14
+            },
+            {
+              "x": 5,
+              "y": 18
+            }
+          ]
+        },
+        {
+          "name": "Dissolved oxygen (mg/L)",
+          "points": [
+            {
+              "x": 1,
+              "y": 6
+            },
+            {
+              "x": 2,
+              "y": 5
+            },
+            {
+              "x": 3,
+              "y": 3.5
+            },
+            {
+              "x": 4,
+              "y": 2
+            },
+            {
+              "x": 5,
+              "y": 1
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Coverage (%) / DO (mg/L)"
+    }
   },
   {
     "question": "Soil horizon phosphorus (mg/kg): O 1200, A 680, B 240, C 1850. The C horizon contains unweathered phosphate minerals. Which conclusion about phosphorus cycling is best supported by this vertical pattern?",
@@ -50,14 +109,33 @@
     "correct": "C"
   },
   {
-    "question": "The diagram shows phosphorus cycling through a terrestrial ecosystem with arrows indicating: weathering of rock → phosphate in soil → plant uptake → herbivore consumption → decomposition → return to soil. A second pathway shows phosphate leaching from soil into groundwater and eventually into a river. Which characteristic of phosphorus cycling does this diagram best illustrate?",
+    "question": "A diagram shows phosphorus cycling through a terrestrial ecosystem: weathering of rock releases phosphate into soil, plants take up the phosphate, herbivores consume the plants, and decomposition returns phosphorus to the soil. A second pathway shows phosphate leaching from soil into groundwater and eventually into a river. Which statement most accurately describes a key feature of the phosphorus cycle illustrated here?",
     "answers": [
-      "Phosphorus moves between terrestrial and aquatic systems through water transport, but remains bound to solid phases and does not enter the atmosphere.",
-      "Phosphorus cycles rapidly through the atmosphere via evaporation and precipitation, similar to the water cycle shown in the groundwater pathway.",
-      "Phosphorus enters the atmosphere through volatilization during weathering and is redistributed globally through atmospheric circulation patterns.",
-      "Phosphorus is primarily cycled through decomposition and soil processes, with minimal transport to aquatic ecosystems under natural conditions."
+      "Phosphorus moves between terrestrial and aquatic systems mainly through water transport (leaching and runoff), but unlike carbon, nitrogen, or water, it does not have a significant atmospheric gas phase under normal conditions",
+      "Phosphorus cycles rapidly through the atmosphere via evaporation and precipitation, in a manner directly analogous to the water cycle shown in the groundwater pathway",
+      "Phosphorus enters the atmosphere as a gas during the weathering process shown in the diagram, allowing it to be redistributed globally by wind",
+      "Phosphorus is cycled exclusively through decomposition and soil processes, with the leaching pathway to groundwater and rivers being ecologically insignificant"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Phosphorus Cycle Pathways in a Terrestrial Ecosystem",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Pathway",
+        "Process"
+      ],
+      "rows": [
+        [
+          "Terrestrial",
+          "Rock weathering -> soil phosphate -> plant uptake -> herbivore -> decomposition -> soil"
+        ],
+        [
+          "Aquatic transport",
+          "Soil phosphate leaches to groundwater -> river"
+        ]
+      ]
+    }
   },
   {
     "question": "A three-year lake study measured monthly dissolved phosphate and algal chlorophyll-a. Year 1 averages: phosphate 12 µg/L, chlorophyll-a 3.2 µg/L. Year 2: phosphate 34 µg/L, chlorophyll-a 8.7 µg/L. Year 3: phosphate 51 µg/L, chlorophyll-a 14.2 µg/L. Watershed residential development and fertilizer use increased over this period. Which conclusion about phosphorus cycling is best supported by these data?",
@@ -90,13 +168,36 @@
     "correct": "D"
   },
   {
-    "question": "A wastewater plant removes phosphorus from sewage to prevent eutrophication and applies the phosphorus-rich sludge to fields. What is a disadvantage of this approach?",
+    "question": "A wastewater treatment plant removes phosphorus from sewage to prevent eutrophication downstream, then applies the resulting phosphorus-rich sludge to agricultural fields as fertilizer. What is a disadvantage of this disposal approach?",
     "answers": [
-      "Sludge phosphorus can leach or run off and cause eutrophication elsewhere",
-      "Sludge phosphorus stays locked in rocks so plants cannot absorb it",
-      "Sludge application removes fertilizer need and does not fully solve shortages",
-      "Phosphorus does not volatilize so it cannot escape to the atmosphere"
+      "Phosphorus in the applied sludge can still leach or run off from fields during rain events, potentially causing eutrophication in nearby water bodies even though it was removed from the original wastewater",
+      "Phosphorus in sludge remains chemically locked within rock minerals, so plants growing in fields where it is applied cannot absorb or use it",
+      "Applying sludge to fields eliminates farmers' need for any additional fertilizer inputs, which artificially inflates regional phosphorus demand",
+      "Because phosphorus does not volatilize into the atmosphere, applying sludge to fields poses no risk of any downstream environmental impact"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Wastewater Phosphorus Management Pathway",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Step",
+        "Description"
+      ],
+      "rows": [
+        [
+          "1",
+          "Phosphorus removed from sewage at treatment plant"
+        ],
+        [
+          "2",
+          "Phosphorus-rich sludge applied to agricultural fields as fertilizer"
+        ],
+        [
+          "3",
+          "Risk: rainfall can leach/run off field-applied phosphorus"
+        ]
+      ]
+    }
   }
 ]

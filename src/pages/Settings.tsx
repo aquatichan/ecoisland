@@ -8,8 +8,9 @@ import {
 } from "lucide-react";
 import { User } from "@/entities/User";
 import { UploadFile } from "@/integrations/Core";
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { deleteUser } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { useTheme } from "@/context/ThemeContext";
 
 const TABS = [
@@ -19,8 +20,28 @@ const TABS = [
   { key: "account",     label: "Account",     icon: AlertTriangle },
 ];
 
+const MAX_AVATAR_BYTES = 5 * 1024 * 1024; // "Max 5MB" as advertised in the UI
+
+const USERNAME_PATTERN = /^[A-Za-z0-9._-]+$/;
+
+// Returns an error message string, or null when the (trimmed) username is valid.
+function validateUsernameFormat(raw) {
+  const candidate = (raw || "").trim();
+  if (!candidate) return "Username is required";
+  if (candidate.length < 3) return "Username must be at least 3 characters";
+  if (candidate.length > 20) return "Username must be 20 characters or fewer";
+  if (!USERNAME_PATTERN.test(candidate)) return "Only letters, numbers, underscores, hyphens, and periods are allowed";
+  return null;
+}
+
+// True if another account (different uid) already uses this username.
+async function isUsernameTaken(candidate, ownUid) {
+  const snap = await getDocs(query(collection(db, "users"), where("username", "==", candidate)));
+  return snap.docs.some(d => d.id !== ownUid);
+}
+
 // ─── ProfileTab ───────────────────────────────────────────────────────────────
-function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarChange, handleSave, isSaving, saveSuccess }) {
+function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarChange, handleSave, isSaving, saveSuccess, errors, clearFieldError }) {
   return (
     <div className="space-y-6">
       {/* Avatar */}
@@ -54,6 +75,7 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
               </span>
             </label>
             <p className="text-xs text-slate-400 mt-1.5">JPG, PNG or GIF · Max 5MB</p>
+            {errors?.avatar && <p className="text-xs text-red-500 font-medium mt-1.5">{errors.avatar}</p>}
           </div>
         </div>
       </div>
@@ -70,11 +92,19 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
             <div key={f.key}>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">{f.label}</label>
               <input
-                className="eco-input"
+                className={`eco-input ${f.key === "username" && errors?.username ? "border-red-400" : ""}`}
                 placeholder={f.placeholder}
                 value={formData[f.key]}
-                onChange={e => setFormData(p => ({ ...p, [f.key]: e.target.value }))}
+                onChange={e => {
+                  setFormData(p => ({ ...p, [f.key]: e.target.value }));
+                  if (f.key === "username") clearFieldError("username");
+                }}
               />
+              {f.key === "username" && (
+                errors?.username
+                  ? <p className="text-red-500 text-xs font-medium mt-1.5">{errors.username}</p>
+                  : <p className="text-xs text-slate-400 mt-1.5">3-20 characters. Letters, numbers, underscores, hyphens, and periods.</p>
+              )}
             </div>
           ))}
           <div>
@@ -100,6 +130,19 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
             onChange={e => setFormData(p => ({ ...p, bio: e.target.value }))}
           />
         </div>
+        <AnimatePresence>
+          {errors?.general && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
+            >
+              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span>{errors.general}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="flex items-center gap-3 mt-5">
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -134,19 +177,58 @@ function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarCh
 }
 
 // ─── PreferencesTab ───────────────────────────────────────────────────────────
-function PreferencesTab() {
+function PreferencesTab({ user, onSaved }) {
   const { theme, toggleTheme } = useTheme();
-  const [distanceUnit, setDistanceUnit] = useState(() => localStorage.getItem("ecoisland-distance-unit") || "km");
-  const [weightUnit,   setWeightUnit]   = useState(() => localStorage.getItem("ecoisland-weight-unit")   || "kg");
-  const [tempUnit,     setTempUnit]     = useState(() => localStorage.getItem("ecoisland-temp-unit")     || "celsius");
+  const [distanceUnit, setDistanceUnit] = useState(() => localStorage.getItem("ecoisland-distance-unit") || user?.preferences?.distance_unit || "km");
+  const [weightUnit,   setWeightUnit]   = useState(() => localStorage.getItem("ecoisland-weight-unit")   || user?.preferences?.weight_unit   || "kg");
+  const [tempUnit,     setTempUnit]     = useState(() => localStorage.getItem("ecoisland-temp-unit")     || user?.preferences?.temperature_unit || "celsius");
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSave = () => {
+  // New device: localStorage is empty but the account already has saved
+  // preferences — hydrate localStorage (and local state) from the user doc.
+  useEffect(() => {
+    const prefs = user?.preferences;
+    if (!prefs) return;
+    if (!localStorage.getItem("ecoisland-distance-unit") && prefs.distance_unit) {
+      localStorage.setItem("ecoisland-distance-unit", prefs.distance_unit);
+      setDistanceUnit(prefs.distance_unit);
+    }
+    if (!localStorage.getItem("ecoisland-weight-unit") && prefs.weight_unit) {
+      localStorage.setItem("ecoisland-weight-unit", prefs.weight_unit);
+      setWeightUnit(prefs.weight_unit);
+    }
+    if (!localStorage.getItem("ecoisland-temp-unit") && prefs.temperature_unit) {
+      localStorage.setItem("ecoisland-temp-unit", prefs.temperature_unit);
+      setTempUnit(prefs.temperature_unit);
+    }
+  }, [user]);
+
+  const handleSave = async () => {
+    // Keep localStorage as the synchronous source other pages read from...
     localStorage.setItem("ecoisland-distance-unit", distanceUnit);
     localStorage.setItem("ecoisland-weight-unit",   weightUnit);
     localStorage.setItem("ecoisland-temp-unit",     tempUnit);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    // ...but also persist to the user doc so preferences follow the account.
+    setIsSaving(true);
+    setError(null);
+    try {
+      const preferences = {
+        theme,
+        weight_unit: weightUnit,
+        distance_unit: distanceUnit,
+        temperature_unit: tempUnit,
+      };
+      await User.updateMyUserData({ preferences });
+      onSaved?.({ preferences });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
+      setError("Saved on this device, but couldn't sync to your account. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -201,15 +283,33 @@ function PreferencesTab() {
             </select>
           </div>
         </div>
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
+            >
+              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span>{error}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="flex items-center gap-3 mt-5">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleSave}
+            disabled={isSaving}
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm transition-all"
-            style={{ background: "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: "0 4px 15px rgba(0,200,150,0.3)" }}
+            style={{
+              background: isSaving ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
+              boxShadow: isSaving ? "none" : "0 4px 15px rgba(0,200,150,0.3)"
+            }}
           >
-            <Save className="w-4 h-4" /> Save Changes
+            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {isSaving ? "Saving..." : "Save Changes"}
           </motion.button>
           <AnimatePresence>
             {saved && (
@@ -234,16 +334,18 @@ function PrivacyTab({ user, onSaved }) {
   const [isPublic, setIsPublic] = useState(user?.privacy_public !== false);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSave = async () => {
     setIsSaving(true);
+    setError(null);
     try {
       await User.updateMyUserData({ privacy_public: isPublic });
       setSaved(true);
       onSaved({ privacy_public: isPublic });
       setTimeout(() => setSaved(false), 3000);
     } catch {
-      alert("Failed to save privacy settings.");
+      setError("Failed to save privacy settings. Please check your connection and try again.");
     } finally {
       setIsSaving(false);
     }
@@ -291,6 +393,19 @@ function PrivacyTab({ user, onSaved }) {
           </label>
         </div>
 
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
+            >
+              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span>{error}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="flex items-center gap-3 mt-5">
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -325,7 +440,7 @@ function PrivacyTab({ user, onSaved }) {
 }
 
 // ─── AccountTab ───────────────────────────────────────────────────────────────
-function AccountTab({ user, deleteStep, setDeleteStep, deleteConfirm, setDeleteConfirm, handleDeleteAccount }) {
+function AccountTab({ user, deleteStep, setDeleteStep, deleteConfirm, setDeleteConfirm, handleDeleteAccount, deleteError, setDeleteError, isDeleting }) {
   return (
     <div className="space-y-5">
       {/* Ambassador */}
@@ -394,20 +509,33 @@ function AccountTab({ user, deleteStep, setDeleteStep, deleteConfirm, setDeleteC
               value={deleteConfirm}
               onChange={e => setDeleteConfirm(e.target.value)}
             />
+            <AnimatePresence>
+              {deleteError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-700 font-medium bg-white border-2 border-red-300"
+                >
+                  <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>{deleteError}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
             <div className="flex gap-3">
               <button
                 onClick={handleDeleteAccount}
-                disabled={deleteConfirm !== `DELETE ${user?.username || "USER"}`}
+                disabled={isDeleting || deleteConfirm !== `DELETE ${user?.username || "USER"}`}
                 className="px-5 py-2.5 rounded-xl font-bold text-sm text-white transition-all"
                 style={{
-                  background: deleteConfirm !== `DELETE ${user?.username || "USER"}` ? "#94a3b8" : "#ef4444",
-                  cursor: deleteConfirm !== `DELETE ${user?.username || "USER"}` ? "not-allowed" : "pointer"
+                  background: (isDeleting || deleteConfirm !== `DELETE ${user?.username || "USER"}`) ? "#94a3b8" : "#ef4444",
+                  cursor: isDeleting ? "wait" : deleteConfirm !== `DELETE ${user?.username || "USER"}` ? "not-allowed" : "pointer"
                 }}
               >
-                Proceed with Deletion
+                {isDeleting ? "Deleting..." : "Proceed with Deletion"}
               </button>
               <button
-                onClick={() => { setDeleteStep(0); setDeleteConfirm(""); }}
+                onClick={() => { setDeleteStep(0); setDeleteConfirm(""); setDeleteError(null); }}
                 className="px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
                 style={{ border: "2px solid var(--border-card)", color: "var(--text-muted)", background: "var(--bg-subtle)" }}
               >
@@ -432,6 +560,11 @@ export default function Settings() {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [deleteStep, setDeleteStep] = useState(0);
   const [deleteConfirm, setDeleteConfirm] = useState("");
+  const [errors, setErrors] = useState({});
+  const [deleteError, setDeleteError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const clearFieldError = (field) => setErrors(p => ({ ...p, [field]: null }));
 
   useEffect(() => {
     User.me().then(u => {
@@ -449,36 +582,81 @@ export default function Settings() {
 
   const handleAvatarChange = (e) => {
     const f = e.target.files?.[0]; if (!f) return;
+    if (f.size > MAX_AVATAR_BYTES) {
+      setErrors(p => ({ ...p, avatar: "That image is larger than 5MB. Please choose a smaller file." }));
+      e.target.value = "";
+      return;
+    }
+    setErrors(p => ({ ...p, avatar: null }));
     setAvatarFile(f);
     const r = new FileReader(); r.onload = ev => setAvatarPreview(ev.target.result); r.readAsDataURL(f);
   };
 
   const handleSave = async () => {
+    const candidate = (formData.username || "").trim();
+    const formatError = validateUsernameFormat(candidate);
+    if (formatError) {
+      setErrors(p => ({ ...p, username: formatError, general: null }));
+      return;
+    }
     setIsSaving(true);
+    setErrors(p => ({ ...p, username: null, general: null }));
     try {
+      const taken = await isUsernameTaken(candidate, user?.id || auth.currentUser?.uid);
+      if (taken) {
+        setErrors(p => ({ ...p, username: "That username is already taken. Try another one." }));
+        return;
+      }
       let avatarUrl = user?.avatar_url || "";
       if (avatarFile) {
         const { file_url } = await UploadFile({ file: avatarFile });
         avatarUrl = file_url;
       }
-      await User.updateMyUserData({ ...formData, avatar_url: avatarUrl });
-      setUser(prev => ({ ...prev, ...formData, avatar_url: avatarUrl }));
+      const payload = { ...formData, username: candidate, avatar_url: avatarUrl };
+      await User.updateMyUserData(payload);
+      setFormData(p => ({ ...p, username: candidate }));
+      setUser(prev => ({ ...prev, ...payload }));
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch { alert("Failed to save. Please try again."); }
-    finally { setIsSaving(false); }
+    } catch {
+      setErrors(p => ({ ...p, general: "Failed to save your profile. Please check your connection and try again." }));
+    } finally { setIsSaving(false); }
   };
 
   const handleDeleteAccount = async () => {
     if (deleteConfirm !== `DELETE ${user?.username || "USER"}`) {
-      alert("Please type your username to confirm.");
+      setDeleteError("Please type the confirmation phrase exactly to continue.");
+      return;
+    }
+    setIsDeleting(true);
+    setDeleteError(null);
+    // Scrub personal fields first so a leftover Firestore doc (deletion of the
+    // auth user can fail or be interrupted) never exposes profile data.
+    try {
+      await User.updateMyUserData({
+        deleted: true,
+        username: "Deleted User",
+        bio: "",
+        city: "",
+        zip_code: "",
+        avatar_url: "",
+      });
+    } catch {
+      setDeleteError("Could not mark your account for deletion. Please check your connection and try again.");
+      setIsDeleting(false);
       return;
     }
     try {
-      await User.updateMyUserData({ deleted: true });
       await deleteUser(auth.currentUser);
       window.location.href = "/";
-    } catch { alert("Could not delete account. Please re-login and try again."); }
+    } catch (error) {
+      if (error?.code === "auth/requires-recent-login") {
+        setDeleteError("For security, deleting an account requires a recent sign-in. Please sign out, sign back in, then delete your account again.");
+      } else {
+        setDeleteError(`Your profile data was scrubbed and marked deleted, but the sign-in account could not be removed${error?.message ? ` (${error.message})` : ""}. Please try again.`);
+      }
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -529,9 +707,16 @@ export default function Settings() {
                 handleSave={handleSave}
                 isSaving={isSaving}
                 saveSuccess={saveSuccess}
+                errors={errors}
+                clearFieldError={clearFieldError}
               />
             )}
-            {activeTab === "preferences" && <PreferencesTab />}
+            {activeTab === "preferences" && (
+              <PreferencesTab
+                user={user}
+                onSaved={(updates) => setUser(prev => ({ ...prev, ...updates }))}
+              />
+            )}
             {activeTab === "privacy" && user && (
               <PrivacyTab
                 user={user}
@@ -546,6 +731,9 @@ export default function Settings() {
                 deleteConfirm={deleteConfirm}
                 setDeleteConfirm={setDeleteConfirm}
                 handleDeleteAccount={handleDeleteAccount}
+                deleteError={deleteError}
+                setDeleteError={setDeleteError}
+                isDeleting={isDeleting}
               />
             )}
           </motion.div>

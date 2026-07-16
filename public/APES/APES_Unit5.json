@@ -1,38 +1,731 @@
 [
   {
-    "question": "Which of the following is an example of sustainable forestry?",
+    "question": "The 'tragedy of the commons' refers to a situation in which:",
     "difficulty": "Easy",
-    "A": "Clear-cutting large tracts of land",
-    "B": "Selective cutting of mature trees",
-    "C": "Slash-and-burn logging",
-    "D": "Planting only one tree species after harvest",
+    "A": "Government regulation of a shared resource leads to its overuse",
+    "B": "Individuals acting in their own self-interest deplete a shared, open-access resource, even though this harms the group as a whole",
+    "C": "Private ownership of resources always leads to conservation",
+    "D": "Resources owned collectively by a community are automatically protected from overuse",
     "answer": "B"
   },
   {
-    "question": "Which agricultural practice is most effective at reducing soil erosion on steep slopes?",
+    "question": "The table below shows fish catch data from an open-access fishery over 30 years with no catch limits.",
     "difficulty": "Medium",
-    "A": "Monocropping",
-    "B": "Contour plowing",
-    "C": "Slash-and-burn agriculture",
-    "D": "Intensive tillage",
+    "A": "Total catch and fish population both increased steadily throughout the period, showing no tragedy of the commons occurred.",
+    "B": "Total catch rose while the fish population fell, then both catch and population collapsed as the resource was depleted, illustrating the tragedy of the commons.",
+    "C": "Fish population increased while catch declined, showing effective self-regulation by fishers.",
+    "D": "Catch and population remained constant throughout the 30 years.",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Open-Access Fishery: Catch and Population Over Time",
+      "sourceNote": "Hypothetical data illustrating tragedy-of-the-commons dynamics",
+      "headers": ["Year", "Total Catch (metric tons)", "Estimated Fish Population (millions)"],
+      "rows": [
+        ["0", 12000, 8.5],
+        ["10", 22000, 6.1],
+        ["20", 15000, 2.4],
+        ["30", 4000, 0.6]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following is the best example of a solution to a tragedy-of-the-commons problem based on establishing enforceable, clearly defined property rights or use limits?",
+    "difficulty": "Medium",
+    "A": "Encouraging voluntary reductions in resource use with no monitoring or consequences",
+    "B": "Implementing individual transferable quotas (ITQs) that assign each fisher a specific, enforceable share of the total allowable catch",
+    "C": "Removing all restrictions so that market competition naturally limits resource use",
+    "D": "Increasing public awareness campaigns about the resource without changing access rules",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Fishery Catch Before and After Individual Transferable Quotas (ITQs)",
+      "sourceNote": "Hypothetical data illustrating the general effect reported in ITQ case studies",
+      "headers": ["Metric", "Before ITQs", "10 Years After ITQs"],
+      "rows": [
+        ["Total annual catch (metric tons)", 18000, 11000],
+        ["Fish population index", 40, 78],
+        ["Number of active fishing vessels", 320, 140]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best distinguishes clearcutting from selective cutting as forest harvesting methods?",
+    "difficulty": "Easy",
+    "A": "Clearcutting removes all trees in an area at once, while selective cutting removes only individual, targeted trees, leaving the rest of the stand intact.",
+    "B": "Clearcutting only removes diseased trees, while selective cutting removes only healthy trees.",
+    "C": "Clearcutting is always illegal, while selective cutting is always permitted.",
+    "D": "Clearcutting and selective cutting produce identical impacts on soil erosion and biodiversity.",
+    "answer": "A"
+  },
+  {
+    "question": "The bar graph shows measured soil erosion rates in a watershed one year after three different logging methods were used, compared to an uncut control plot.",
+    "difficulty": "Medium",
+    "A": "Clearcutting produced the highest erosion rate, while selective cutting was closer to the uncut control.",
+    "B": "Selective cutting produced the highest erosion rate among all methods tested.",
+    "C": "All logging methods produced identical erosion rates regardless of harvest intensity.",
+    "D": "The uncut control plot had higher erosion than any of the logging treatments.",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Soil Erosion Rate One Year After Different Harvest Methods",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "Uncut control", "value": 0.4},
+        {"label": "Selective cutting", "value": 1.8},
+        {"label": "Shelterwood cutting", "value": 4.2},
+        {"label": "Clearcutting", "value": 12.5}
+      ],
+      "xLabel": "Harvest Method",
+      "yLabel": "Erosion Rate (metric tons/ha/yr)"
+    }
+  },
+  {
+    "question": "The Green Revolution of the mid-20th century increased global crop yields primarily through which combination of practices?",
+    "difficulty": "Easy",
+    "A": "Organic farming methods and crop diversification",
+    "B": "High-yield crop varieties, synthetic fertilizers, irrigation expansion, and pesticides",
+    "C": "A complete shift away from monoculture to polyculture farming",
+    "D": "Reduced use of machinery and a return to traditional farming techniques",
     "answer": "B"
   },
   {
-    "question": "Overfishing of top predators in a marine ecosystem is most likely to result in:",
+    "question": "The line graph shows global cereal grain yield per hectare and total synthetic nitrogen fertilizer use from 1960 to 2000, the core decades of the Green Revolution.",
+    "difficulty": "Medium",
+    "A": "Cereal yield per hectare and nitrogen fertilizer use both rose substantially over this period, consistent with fertilizer-driven yield gains.",
+    "B": "Cereal yield per hectare declined as fertilizer use rose over this period.",
+    "C": "Fertilizer use declined while cereal yield rose, showing no relationship between the two.",
+    "D": "Both cereal yield and fertilizer use remained flat throughout the period.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Global Cereal Yield and Nitrogen Fertilizer Use, 1960-2000",
+      "sourceNote": "Hypothetical data based on general historical Green Revolution trends",
+      "series": [
+        {"name": "Cereal Yield (tons/ha)", "points": [
+          {"x": 1960, "y": 1.4}, {"x": 1970, "y": 2.0}, {"x": 1980, "y": 2.5},
+          {"x": 1990, "y": 3.0}, {"x": 2000, "y": 3.5}
+        ]},
+        {"name": "N Fertilizer Use (index, 1960=1)", "points": [
+          {"x": 1960, "y": 1}, {"x": 1970, "y": 3.5}, {"x": 1980, "y": 6.2},
+          {"x": 1990, "y": 8.1}, {"x": 2000, "y": 8.9}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Value (see series)"
+    }
+  },
+  {
+    "question": "Which of the following is a documented environmental drawback of Green Revolution agricultural intensification?",
+    "difficulty": "Medium",
+    "A": "Decreased reliance on fossil fuels for farm machinery",
+    "B": "Reduced genetic diversity in crops due to widespread planting of a few high-yield varieties, plus increased fertilizer and pesticide runoff",
+    "C": "A shift away from irrigation toward rain-fed agriculture",
+    "D": "Elimination of soil erosion on all cultivated land",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Global Wheat Production by Variety Type, Post-Green Revolution",
+      "sourceNote": "Hypothetical data illustrating reduced genetic diversity from widespread high-yield variety adoption",
+      "slices": [
+        {"label": "High-yield variety A", "value": 48},
+        {"label": "High-yield variety B", "value": 31},
+        {"label": "All other traditional varieties combined", "value": 21}
+      ]
+    }
+  },
+  {
+    "question": "Monoculture farming, in which a single crop species is grown over a large area, increases agricultural vulnerability primarily because:",
+    "difficulty": "Medium",
+    "A": "It increases the genetic diversity of the crop, making it more resistant to disease",
+    "B": "A lack of genetic and species diversity makes the entire crop susceptible to the same pest, pathogen, or environmental stress simultaneously",
+    "C": "Monocultures always require less water than polycultures",
+    "D": "Monocultures eliminate the need for any pest control methods",
+    "answer": "B"
+  },
+  {
+    "question": "The table compares nitrogen runoff and soil erosion measured on adjacent fields under conventional tillage versus no-till farming over one growing season.",
+    "difficulty": "Medium",
+    "A": "No-till farming was associated with lower nitrogen runoff and lower soil erosion than conventional tillage.",
+    "B": "No-till farming was associated with higher nitrogen runoff and higher soil erosion than conventional tillage.",
+    "C": "Tillage method had no measurable effect on either nitrogen runoff or soil erosion.",
+    "D": "Conventional tillage eliminated soil erosion entirely.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Conventional Tillage vs. No-Till: Runoff and Erosion",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Practice", "Nitrogen Runoff (kg/ha)", "Soil Erosion (t/ha/yr)"],
+      "rows": [
+        ["Conventional tillage", 18.4, 6.2],
+        ["No-till", 7.1, 1.3]
+      ]
+    }
+  },
+  {
+    "question": "Which irrigation method is generally considered the most water-efficient because it delivers water directly to the base of each plant, minimizing evaporation and runoff?",
+    "difficulty": "Easy",
+    "A": "Flood irrigation",
+    "B": "Center-pivot (spray) irrigation",
+    "C": "Drip irrigation",
+    "D": "Furrow irrigation",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Common Irrigation Methods",
+      "sourceNote": "Textbook-standard classification of irrigation methods",
+      "headers": ["Method", "Water Delivery", "Typical Efficiency"],
+      "rows": [
+        ["Flood", "Entire field flooded", "Low"],
+        ["Furrow", "Water flows down channels between rows", "Low-moderate"],
+        ["Sprinkler/center-pivot", "Water sprayed over field", "Moderate"],
+        ["Drip", "Water delivered directly to root zone", "High"]
+      ]
+    }
+  },
+  {
+    "question": "The bar chart shows the water application efficiency (the percentage of applied water actually used by the crop) for four common irrigation methods.",
+    "difficulty": "Medium",
+    "A": "Flood irrigation has the highest efficiency of all methods shown.",
+    "B": "Drip irrigation has the highest efficiency, while flood irrigation has the lowest.",
+    "C": "All four methods have approximately equal efficiency.",
+    "D": "Sprinkler irrigation has the lowest efficiency of all methods shown.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Water Application Efficiency by Irrigation Method",
+      "sourceNote": "Hypothetical data based on general efficiency ranges cited for common irrigation methods",
+      "data": [
+        {"label": "Flood", "value": 45},
+        {"label": "Furrow", "value": 55},
+        {"label": "Sprinkler", "value": 75},
+        {"label": "Drip", "value": 90}
+      ],
+      "xLabel": "Irrigation Method",
+      "yLabel": "Water Application Efficiency (%)"
+    }
+  },
+  {
+    "question": "Prolonged flood irrigation in arid regions with poor drainage often leads to soil salinization. Which of the following best explains this process?",
     "difficulty": "Hard",
-    "A": "An increase in primary productivity",
-    "B": "A trophic cascade affecting lower trophic levels",
-    "C": "A reduction in algal blooms",
-    "D": "Stabilization of prey populations",
+    "A": "Excess irrigation water evaporates from the soil surface, leaving behind dissolved salts that had been carried up with the water, and these salts accumulate in the root zone over time.",
+    "B": "Irrigation water dilutes existing soil salts so thoroughly that salinity decreases over time regardless of drainage.",
+    "C": "Flood irrigation increases soil organic matter, which chemically converts to salt through microbial decomposition.",
+    "D": "Salinization occurs only in soils that have never been irrigated and is unrelated to irrigation practices.",
+    "answer": "A"
+  },
+  {
+    "question": "Which pest control method involves introducing or encouraging natural predators, parasites, or pathogens of a pest species rather than using synthetic chemicals?",
+    "difficulty": "Easy",
+    "A": "Biological control",
+    "B": "Broad-spectrum chemical control",
+    "C": "Genetically modified crop control",
+    "D": "Cultural control",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Common Pest Control Methods",
+      "sourceNote": "Textbook-standard classification of pest control strategies",
+      "headers": ["Method", "Example", "Mechanism"],
+      "rows": [
+        ["Biological control", "Ladybugs released to control aphids", "Uses natural predators/parasites"],
+        ["Chemical control", "Broad-spectrum insecticide spraying", "Kills pests via toxic compounds"],
+        ["Cultural control", "Crop rotation", "Disrupts pest life cycle through practice changes"]
+      ]
+    }
+  },
+  {
+    "question": "Repeated use of the same broad-spectrum insecticide over many pest generations often leads to a decline in the pesticide's effectiveness. Which explanation best accounts for this pattern?",
+    "difficulty": "Medium",
+    "A": "The pesticide chemically degrades over time and can no longer harm any organism.",
+    "B": "Genetic variation in the pest population means a small fraction of individuals survive each application; these resistant individuals reproduce, and resistance genes become more common in the population over successive generations (an example of directional selection).",
+    "C": "Pest populations always decline to zero regardless of resistance, making effectiveness irrelevant.",
+    "D": "Resistance develops only in beneficial insects, not in the target pest species.",
     "answer": "B"
   },
   {
-    "question": "A region uses large-scale irrigation for agriculture. Over decades, the soil becomes white and crusty. What process is occurring?",
-    "difficulty": "Challenge",
-    "A": "Eutrophication",
-    "B": "Salinization",
-    "C": "Leaching",
-    "D": "Deforestation",
+    "question": "The line graph shows the percentage of a corn earworm population resistant to a particular insecticide over ten years of continuous, uniform application.",
+    "difficulty": "Medium",
+    "A": "Resistance increased steadily over the ten years, consistent with selection for resistant individuals under repeated pesticide exposure.",
+    "B": "Resistance decreased steadily over the ten years.",
+    "C": "Resistance remained at 0% throughout the ten years.",
+    "D": "Resistance spiked in year 1 and then dropped to 0% by year 10.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Insecticide Resistance in a Corn Earworm Population Over 10 Years",
+      "sourceNote": "Hypothetical data illustrating a typical pesticide resistance trend",
+      "series": [
+        {"name": "% Resistant", "points": [
+          {"x": 1, "y": 2}, {"x": 2, "y": 4}, {"x": 4, "y": 11},
+          {"x": 6, "y": 24}, {"x": 8, "y": 42}, {"x": 10, "y": 68}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Resistant Individuals (%)"
+    }
+  },
+  {
+    "question": "Which of the following meat production methods is most directly associated with high methane emissions due to enteric fermentation in the animal's digestive tract?",
+    "difficulty": "Easy",
+    "A": "Poultry farming",
+    "B": "Cattle (beef and dairy) production",
+    "C": "Aquaculture of shellfish",
+    "D": "Insect farming",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Methane Emissions per Kilogram of Meat Produced",
+      "sourceNote": "Hypothetical data based on general patterns reported for enteric fermentation emissions by livestock type",
+      "data": [
+        {"label": "Beef cattle", "value": 60},
+        {"label": "Dairy cattle", "value": 30},
+        {"label": "Pigs", "value": 6},
+        {"label": "Poultry", "value": 1.5}
+      ],
+      "xLabel": "Livestock Type",
+      "yLabel": "Methane (g CH₄ per kg meat/product)"
+    }
+  },
+  {
+    "question": "The table compares estimated greenhouse gas emissions and land and water use per kilogram of protein produced for four common protein sources.",
+    "difficulty": "Medium",
+    "A": "Beef requires substantially more land, water, and produces more greenhouse gas emissions per kilogram of protein than the plant-based and poultry sources shown.",
+    "B": "Beef has the lowest resource footprint of all sources shown.",
+    "C": "All four protein sources have approximately equal resource footprints.",
+    "D": "Legumes require more land per kilogram of protein than beef.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Resource Use per Kilogram of Protein by Source",
+      "sourceNote": "Hypothetical data based on general patterns reported in life-cycle assessments of protein sources",
+      "headers": ["Protein Source", "GHG Emissions (kg CO2-eq/kg protein)", "Land Use (m²/kg protein)", "Water Use (L/kg protein)"],
+      "rows": [
+        ["Beef", 50, 165, 15400],
+        ["Pork", 15, 30, 6000],
+        ["Poultry", 10, 15, 4300],
+        ["Legumes (e.g., beans)", 2, 7, 1800]
+      ]
+    }
+  },
+  {
+    "question": "Concentrated Animal Feeding Operations (CAFOs) are associated with which of the following environmental concerns?",
+    "difficulty": "Medium",
+    "A": "Large volumes of concentrated animal waste that can contaminate nearby surface water and groundwater with nutrients and pathogens if not properly managed",
+    "B": "A complete absence of any water pollution risk because waste is contained indoors",
+    "C": "Lower overall land use per animal compared to free-range operations, with no other environmental trade-offs",
+    "D": "Elimination of the need for antibiotic use in livestock",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Water Quality Near a CAFO Lagoon vs. Reference Site",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Site", "Nitrate (mg/L)", "Fecal Coliform (CFU/100mL)"],
+      "rows": [
+        ["Well near CAFO lagoon", 22, 1400],
+        ["Reference well (5 km away)", 2, 15]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes 'bycatch' in the context of commercial fishing?",
+    "difficulty": "Easy",
+    "A": "The intentional harvesting of a secondary target species alongside the primary catch",
+    "B": "The unintentional capture of non-target species, such as sea turtles, dolphins, or juvenile fish, during fishing operations",
+    "C": "Fish that are caught, sold, and later found to be mislabeled",
+    "D": "The portion of a catch that is processed for use as fertilizer rather than food",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Composition of a Shrimp Trawl Catch",
+      "sourceNote": "Hypothetical data illustrating typical bycatch ratios in trawl fisheries",
+      "slices": [
+        {"label": "Target shrimp", "value": 22},
+        {"label": "Bycatch: juvenile fish", "value": 45},
+        {"label": "Bycatch: sea turtles and other non-target species", "value": 8},
+        {"label": "Bycatch: other invertebrates", "value": 25}
+      ]
+    }
+  },
+  {
+    "question": "The bar chart shows estimated global fish stock status (percentage of assessed stocks) in three categories over three time periods.",
+    "difficulty": "Hard",
+    "A": "The percentage of stocks fished within biologically sustainable levels has declined over time, while overfished stocks have increased.",
+    "B": "The percentage of overfished stocks has decreased steadily over time.",
+    "C": "All fish stocks remained within sustainable levels across all three time periods.",
+    "D": "Underfished stocks increased at the same rate as overfished stocks.",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Global Fish Stock Status Over Time",
+      "sourceNote": "Hypothetical data illustrating the general trend reported in global fisheries assessments",
+      "data": [
+        {"label": "1975 - Sustainable", "value": 90},
+        {"label": "1975 - Overfished", "value": 10},
+        {"label": "2000 - Sustainable", "value": 72},
+        {"label": "2000 - Overfished", "value": 28},
+        {"label": "2020 - Sustainable", "value": 65},
+        {"label": "2020 - Overfished", "value": 35}
+      ],
+      "xLabel": "Year and Category",
+      "yLabel": "Percentage of Assessed Stocks (%)"
+    }
+  },
+  {
+    "question": "Mountaintop removal coal mining is associated with which of the following environmental impacts?",
+    "difficulty": "Medium",
+    "A": "Burial of headwater streams under overburden, leading to loss of aquatic habitat and increased downstream sediment and metal contamination",
+    "B": "A net increase in local biodiversity due to newly exposed rock surfaces",
+    "C": "Complete restoration of pre-mining topography and ecosystems within one growing season",
+    "D": "No measurable effect on surface water quality",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Stream Water Quality Above and Below a Mountaintop Removal Mining Site",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Site", "Total Dissolved Solids (mg/L)", "Selenium (μg/L)", "Macroinvertebrate Taxa Richness"],
+      "rows": [
+        ["Upstream (unmined)", 85, 1.2, 24],
+        ["Downstream (below mine)", 640, 18.5, 6]
+      ]
+    }
+  },
+  {
+    "question": "The scatter plot shows ore grade (percent copper by mass) and the volume of waste rock generated per ton of copper extracted, sampled from twelve mines.",
+    "difficulty": "Hard",
+    "A": "As ore grade decreases, waste rock volume per ton of copper extracted increases, consistent with the reasoning that lower-grade ores require processing more rock to obtain the same amount of metal.",
+    "B": "As ore grade decreases, waste rock volume per ton of copper decreases.",
+    "C": "Ore grade and waste rock volume are unrelated in this data set.",
+    "D": "Waste rock volume is constant regardless of ore grade.",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Ore Grade vs. Waste Rock per Ton of Copper Extracted (12 Mines)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 2.5, "y": 40}, {"x": 2.1, "y": 48}, {"x": 1.8, "y": 56},
+        {"x": 1.5, "y": 68}, {"x": 1.2, "y": 84}, {"x": 1.0, "y": 100},
+        {"x": 0.8, "y": 125}, {"x": 0.6, "y": 167}, {"x": 0.5, "y": 200},
+        {"x": 0.4, "y": 250}, {"x": 0.3, "y": 333}, {"x": 0.2, "y": 500}
+      ],
+      "trendline": {"x1": 0.2, "y1": 500, "x2": 2.5, "y2": 40},
+      "xLabel": "Ore Grade (% copper)",
+      "yLabel": "Waste Rock (tons per ton of copper)"
+    }
+  },
+  {
+    "question": "Which of the following is a primary environmental consequence of rapid urbanization on local hydrology?",
+    "difficulty": "Easy",
+    "A": "Increased infiltration and groundwater recharge due to more paved surfaces",
+    "B": "Increased impervious surface area, which raises surface runoff volume and speed while reducing infiltration",
+    "C": "A decrease in the urban heat island effect",
+    "D": "Elimination of the need for stormwater management infrastructure",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Percent of Rainfall Becoming Surface Runoff by Land Cover Type",
+      "sourceNote": "Hypothetical data based on general patterns reported for urban vs. natural land cover runoff",
+      "data": [
+        {"label": "Natural forest", "value": 10},
+        {"label": "Suburban (turf/lawns)", "value": 30},
+        {"label": "Light urban", "value": 55},
+        {"label": "Dense urban (highly impervious)", "value": 85}
+      ],
+      "xLabel": "Land Cover Type",
+      "yLabel": "Rainfall Becoming Runoff (%)"
+    }
+  },
+  {
+    "question": "The line graph compares stream hydrographs (discharge over time following a single storm event) for a forested watershed and a heavily urbanized watershed of similar size.",
+    "difficulty": "Medium",
+    "A": "The urbanized watershed shows a higher, sharper peak discharge occurring sooner after the storm than the forested watershed.",
+    "B": "The forested watershed shows a higher, sharper peak discharge than the urbanized watershed.",
+    "C": "Both watersheds show identical hydrographs regardless of land cover.",
+    "D": "The urbanized watershed shows no runoff response to the storm at all.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Storm Hydrographs: Forested vs. Urbanized Watershed",
+      "sourceNote": "Hypothetical data illustrating the typical effect of urbanization on runoff timing and magnitude",
+      "series": [
+        {"name": "Forested Watershed", "points": [
+          {"x": 0, "y": 2}, {"x": 4, "y": 5}, {"x": 8, "y": 12}, {"x": 12, "y": 8}, {"x": 20, "y": 3}
+        ]},
+        {"name": "Urbanized Watershed", "points": [
+          {"x": 0, "y": 2}, {"x": 2, "y": 20}, {"x": 4, "y": 35}, {"x": 8, "y": 10}, {"x": 20, "y": 2}
+        ]}
+      ],
+      "xLabel": "Hours After Storm Onset",
+      "yLabel": "Discharge (m³/s)"
+    }
+  },
+  {
+    "question": "An ecological footprint is best defined as:",
+    "difficulty": "Easy",
+    "A": "The amount of land a person or population physically occupies with buildings",
+    "B": "A measure of the amount of biologically productive land and water area required to produce the resources a population consumes and to absorb its waste, especially carbon emissions",
+    "C": "The total weight of waste a person produces in a lifetime",
+    "D": "The number of species displaced by a person's consumption habits",
+    "answer": "B"
+  },
+  {
+    "question": "The bar chart shows the average per-capita ecological footprint, in global hectares, for four countries, alongside the estimated biocapacity (available productive land and water) per capita worldwide.",
+    "difficulty": "Medium",
+    "A": "All four countries shown have footprints below global biocapacity per capita, meaning none of them are running an ecological deficit.",
+    "B": "At least one country shown has a footprint well above global biocapacity per capita, indicating that country's consumption pattern would require more than one Earth if adopted globally.",
+    "C": "Ecological footprint is unrelated to global biocapacity and cannot be compared to it.",
+    "D": "All four countries have identical ecological footprints.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Ecological Footprint per Capita by Country vs. Global Biocapacity",
+      "sourceNote": "Hypothetical data based on general patterns reported by ecological footprint accounting organizations",
+      "data": [
+        {"label": "Country A (high income)", "value": 8.4},
+        {"label": "Country B (upper-middle income)", "value": 3.6},
+        {"label": "Country C (lower-middle income)", "value": 1.4},
+        {"label": "Global biocapacity/person", "value": 1.6}
+      ],
+      "xLabel": "Country",
+      "yLabel": "Global Hectares per Person"
+    }
+  },
+  {
+    "question": "Which of the following best defines sustainability in the context of natural resource management?",
+    "difficulty": "Easy",
+    "A": "Using resources as quickly as technologically possible to maximize short-term economic output",
+    "B": "Meeting the needs of the present generation without compromising the ability of future generations to meet their own needs",
+    "C": "Prohibiting all use of natural resources indefinitely",
+    "D": "Replacing all natural resources with synthetic substitutes",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "Renewable Resource Stock Under Sustainable vs. Unsustainable Harvest",
+      "sourceNote": "Hypothetical data illustrating the concept of sustainable yield",
+      "series": [
+        {"name": "Sustainable harvest rate", "points": [
+          {"x": 0, "y": 100}, {"x": 10, "y": 98}, {"x": 20, "y": 100}, {"x": 30, "y": 99}, {"x": 40, "y": 100}
+        ]},
+        {"name": "Unsustainable harvest rate", "points": [
+          {"x": 0, "y": 100}, {"x": 10, "y": 80}, {"x": 20, "y": 52}, {"x": 30, "y": 20}, {"x": 40, "y": 3}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Resource Stock (% of initial)"
+    }
+  },
+  {
+    "question": "A fishery is considered to be managed sustainably when the annual harvest:",
+    "difficulty": "Medium",
+    "A": "Consistently exceeds the population's maximum sustainable yield to maximize short-term profit",
+    "B": "Does not exceed the rate at which the fish population can naturally replenish itself (its maximum sustainable yield)",
+    "C": "Is set at zero regardless of population size",
+    "D": "Depends only on market price rather than on population data",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "Fish Population Growth Rate vs. Population Size",
+      "sourceNote": "Hypothetical data illustrating the logistic growth curve underlying maximum sustainable yield",
+      "series": [
+        {"name": "Population Growth Rate", "points": [
+          {"x": 0, "y": 0}, {"x": 20, "y": 400}, {"x": 50, "y": 900},
+          {"x": 80, "y": 500}, {"x": 100, "y": 0}
+        ]}
+      ],
+      "xLabel": "Population Size (% of carrying capacity)",
+      "yLabel": "Growth Rate (new individuals/year)"
+    }
+  },
+  {
+    "question": "Which stormwater management structure is a shallow, vegetated depression designed to collect and filter runoff from impervious surfaces like parking lots, allowing it to infiltrate rather than flow directly into storm drains?",
+    "difficulty": "Easy",
+    "A": "Rain garden (bioretention cell)",
+    "B": "Concrete-lined drainage canal",
+    "C": "Storm sewer pipe",
+    "D": "Seawall",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Common Urban Runoff Reduction Methods",
+      "sourceNote": "Textbook-standard classification of green stormwater infrastructure",
+      "headers": ["Method", "Function"],
+      "rows": [
+        ["Rain garden / bioswale", "Vegetated depression that captures and infiltrates runoff"],
+        ["Permeable pavement", "Allows water to pass through the surface into soil below"],
+        ["Green roof", "Vegetation layer on a roof that absorbs and slows rainfall"],
+        ["Traditional storm drain", "Conveys runoff directly to a stream or treatment plant with no infiltration"]
+      ]
+    }
+  },
+  {
+    "question": "The table shows pollutant concentrations in runoff before and after passing through a constructed bioswale during a test storm event.",
+    "difficulty": "Medium",
+    "A": "The bioswale substantially reduced concentrations of all three measured pollutants in the runoff.",
+    "B": "The bioswale increased pollutant concentrations in the runoff.",
+    "C": "The bioswale had no measurable effect on any pollutant concentration.",
+    "D": "The bioswale only reduced sediment but increased nitrogen and phosphorus levels.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Runoff Pollutant Concentrations Before and After a Bioswale",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Pollutant", "Before Bioswale (mg/L)", "After Bioswale (mg/L)"],
+      "rows": [
+        ["Total suspended sediment", 210, 55],
+        ["Total nitrogen", 4.8, 1.9],
+        ["Total phosphorus", 1.1, 0.4]
+      ]
+    }
+  },
+  {
+    "question": "Integrated Pest Management (IPM) differs from conventional pesticide-only approaches primarily because IPM:",
+    "difficulty": "Medium",
+    "A": "Relies exclusively on genetically modified crops and excludes all other methods",
+    "B": "Combines multiple strategies (biological control, crop rotation, resistant varieties, monitoring, and targeted chemical use only when populations exceed an economic threshold) to minimize pesticide use while controlling pests",
+    "C": "Prohibits any use of chemical pesticides under all circumstances",
+    "D": "Focuses solely on eliminating a pest species entirely from an ecosystem",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes an 'economic threshold' in the context of Integrated Pest Management?",
+    "difficulty": "Hard",
+    "A": "The pest population density at which the cost of the damage caused exceeds the cost of applying control measures, justifying intervention",
+    "B": "The total dollar amount a farm is legally allowed to spend on pesticides annually",
+    "C": "The maximum yield a farm can achieve regardless of pest pressure",
+    "D": "A fixed pest population size below which pests are considered completely eradicated",
+    "answer": "A"
+  },
+  {
+    "question": "Which practice is a hallmark of sustainable agriculture aimed at maintaining soil fertility without relying solely on synthetic fertilizers?",
+    "difficulty": "Easy",
+    "A": "Continuous monoculture of the same crop every season",
+    "B": "Crop rotation, including nitrogen-fixing legumes, combined with cover cropping and reduced tillage",
+    "C": "Maximizing tillage intensity every planting season",
+    "D": "Eliminating all organic matter inputs to the soil",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "Soil Nitrogen Content Over a 3-Year Legume-Cereal Rotation",
+      "sourceNote": "Hypothetical data illustrating nitrogen cycling in crop rotation",
+      "series": [
+        {"name": "Soil Nitrogen (kg/ha)", "points": [
+          {"x": 0, "y": 40}, {"x": 1, "y": 85}, {"x": 2, "y": 55}, {"x": 3, "y": 30}, {"x": 4, "y": 70}
+        ]}
+      ],
+      "xLabel": "Year (Legume, Cereal, Fallow, Legume...)",
+      "yLabel": "Available Soil Nitrogen (kg/ha)"
+    }
+  },
+  {
+    "question": "The table compares average yields and synthetic input costs for a conventional monoculture farm and a diversified sustainable farm over a five-year period, including one drought year.",
+    "difficulty": "Hard",
+    "A": "The sustainable farm showed more stable yields across the drought year and lower input costs than the conventional farm, though average yield in normal years was similar.",
+    "B": "The conventional farm outperformed the sustainable farm in every single year and metric shown.",
+    "C": "The sustainable farm had dramatically higher input costs than the conventional farm.",
+    "D": "Both farms showed identical yield stability during the drought year.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Conventional vs. Sustainable Farm: 5-Year Comparison",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Metric", "Conventional Farm", "Sustainable Farm"],
+      "rows": [
+        ["Average yield, normal years (t/ha)", 8.2, 7.9],
+        ["Yield in drought year (t/ha)", 3.1, 6.0],
+        ["Average annual input cost ($/ha)", 620, 340]
+      ]
+    }
+  },
+  {
+    "question": "Aquaculture (fish farming) can have which of the following negative environmental impacts if not properly managed?",
+    "difficulty": "Medium",
+    "A": "Nutrient pollution from excess feed and waste, habitat destruction (such as mangrove clearing for shrimp ponds), and the spread of disease or escaped non-native species to wild populations",
+    "B": "A guaranteed net increase in wild fish stocks with no risk of ecosystem harm",
+    "C": "Complete elimination of the need for wild-caught fish, with no other environmental trade-offs",
+    "D": "Reduced water pollution compared to any form of wild-capture fishing",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Mangrove Forest Area Lost to Shrimp Pond Aquaculture Expansion",
+      "sourceNote": "Hypothetical data illustrating a documented pattern of coastal habitat conversion for aquaculture",
+      "data": [
+        {"label": "1980", "value": 0},
+        {"label": "1995", "value": 45000},
+        {"label": "2010", "value": 98000},
+        {"label": "2023", "value": 132000}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Cumulative Mangrove Area Converted (hectares)"
+    }
+  },
+  {
+    "question": "Which of the following aquaculture practices is most effective at reducing nutrient pollution from fish farm effluent?",
+    "difficulty": "Medium",
+    "A": "Increasing stocking density without changing feed or waste management",
+    "B": "Discharging effluent directly into open coastal waters without treatment",
+    "C": "Using integrated multi-trophic aquaculture, in which seaweed or shellfish grown alongside fish absorb excess nutrients from the fish waste",
+    "D": "Feeding fish exclusively with wild-caught forage fish at the highest possible rate",
+    "answer": "C"
+  },
+  {
+    "question": "Sustainable forestry practices, such as selective cutting and maintaining variable rotation lengths, are designed primarily to:",
+    "difficulty": "Easy",
+    "A": "Maximize short-term timber output regardless of long-term forest health",
+    "B": "Balance ongoing timber production with the maintenance of forest structure, biodiversity, and ecosystem services over the long term",
+    "C": "Eliminate all commercial logging permanently",
+    "D": "Convert natural forests into single-species timber plantations as quickly as possible",
+    "answer": "B"
+  },
+  {
+    "question": "The bar chart compares tree species richness in forest plots ten years after three different management approaches: clearcutting and replanting with one species, clearcutting and replanting with several species, and selective cutting.",
+    "difficulty": "Medium",
+    "A": "Selective cutting plots retained the highest species richness, while single-species replanting after clearcutting had the lowest.",
+    "B": "Clearcutting and replanting with a single species produced the highest species richness.",
+    "C": "All three management approaches produced identical species richness after ten years.",
+    "D": "Species richness is unrelated to forest management approach.",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Tree Species Richness 10 Years After Different Management Approaches",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "Selective cutting", "value": 14},
+        {"label": "Clearcut, multi-species replant", "value": 8},
+        {"label": "Clearcut, single-species replant", "value": 2},
+        {"label": "Unmanaged reference forest", "value": 16}
+      ],
+      "xLabel": "Management Approach",
+      "yLabel": "Tree Species Richness (species/plot)"
+    }
+  },
+  {
+    "question": "The National Environmental Policy Act (NEPA), a foundational piece of U.S. environmental legislation, primarily requires:",
+    "difficulty": "Medium",
+    "A": "Federal agencies to prepare an Environmental Impact Statement (EIS) assessing the potential environmental effects of major proposed federal actions before proceeding",
+    "B": "All private landowners to obtain federal approval before making any changes to their property",
+    "C": "The immediate closure of all industries found to pollute air or water",
+    "D": "States to adopt identical environmental standards with no local variation permitted",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Selected Major U.S. Environmental Legislation",
+      "sourceNote": "Textbook-standard summary of key environmental laws",
+      "headers": ["Law", "Year", "Primary Focus"],
+      "rows": [
+        ["National Environmental Policy Act (NEPA)", 1969, "Requires Environmental Impact Statements for major federal actions"],
+        ["Clean Air Act", 1970, "Regulates air pollutant emissions"],
+        ["Clean Water Act", 1972, "Regulates discharge of pollutants into surface waters"],
+        ["Endangered Species Act", 1973, "Protects threatened and endangered species and their habitats"]
+      ]
+    }
+  },
+  {
+    "question": "Which piece of U.S. environmental legislation is primarily responsible for regulating the discharge of pollutants into surface waters, such as rivers, lakes, and wetlands?",
+    "difficulty": "Medium",
+    "A": "The Clean Air Act",
+    "B": "The Clean Water Act",
+    "C": "The Endangered Species Act",
+    "D": "The Resource Conservation and Recovery Act",
     "answer": "B"
   }
 ]

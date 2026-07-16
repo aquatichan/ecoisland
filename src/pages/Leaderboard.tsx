@@ -5,10 +5,10 @@ import { User } from "@/entities/User";
 import { Trophy, Crown, Medal, Award, Leaf, TrendingUp, Globe, TreePine, Loader2, Star, Search } from "lucide-react";
 import UserProfileModal from "@/components/UserProfileModal";
 import { db } from "@/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 
 const TABS = [
-  { key: "treecoins",  label: "Treecoins",  icon: TreePine,   color: "#00c896" },
+  { key: "treecoins",  label: "Treecoins",  icon: TreePine,   color: "#10b981" },
   { key: "level",      label: "Level",      icon: TrendingUp, color: "#8b5cf6" },
   { key: "ambassadors",label: "Ambassadors",icon: Award,      color: "#f59e0b" },
   { key: "discover",   label: "Discover",   icon: Search,     color: "#3b82f6" },
@@ -21,9 +21,17 @@ function RankIcon({ rank }) {
   return <span className="text-sm font-black text-slate-400">#{rank}</span>;
 }
 
-function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor, onViewProfile }) {
+// Medal-tinted backgrounds for the Treecoins podium (gold / silver / bronze).
+const PODIUM_STYLES = {
+  1: { background: "rgba(245,158,11,0.08)", border: "2px solid rgba(245,158,11,0.3)" },
+  2: { background: "rgba(148,163,184,0.10)", border: "2px solid rgba(148,163,184,0.3)" },
+  3: { background: "rgba(180,83,9,0.08)", border: "2px solid rgba(180,83,9,0.25)" },
+};
+
+function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor, onViewProfile, podium = false }) {
   const isMe = user.id === currentUserId;
   const initials = (user.username || user.full_name || "U")[0]?.toUpperCase();
+  const podiumStyle = podium && rank <= 3 && !isMe ? PODIUM_STYLES[rank] : null;
 
   return (
     <motion.div
@@ -31,10 +39,10 @@ function UserRow({ user, rank, currentUserId, valueKey, valueSuffix, valueColor,
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(rank * 0.04, 0.5) }}
-      className="flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer hover:shadow-md"
+      className={`flex items-center gap-4 rounded-2xl transition-all cursor-pointer hover:shadow-md ${podiumStyle ? "p-5" : "p-4"}`}
       style={{
-        background: isMe ? "rgba(0,200,150,0.06)" : rank <= 3 ? "rgba(245,158,11,0.04)" : "var(--bg-page)",
-        border: isMe ? "2px solid rgba(0,200,150,0.3)" : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "0px solid transparent",
+        background: isMe ? "rgba(0,200,150,0.06)" : podiumStyle ? podiumStyle.background : rank <= 3 ? "rgba(245,158,11,0.04)" : "var(--bg-page)",
+        border: isMe ? "2px solid rgba(0,200,150,0.3)" : podiumStyle ? podiumStyle.border : rank <= 3 ? "2px solid rgba(245,158,11,0.15)" : "0px solid transparent",
       }}
       onClick={() => !isMe && onViewProfile(user.id)}
       title={isMe ? "This is you" : `View ${user.username || user.full_name}'s profile`}
@@ -77,12 +85,23 @@ function DiscoverSection({ onViewProfile }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // One-time fetch of the top 50 members — subscribing to the entire users
+    // collection with onSnapshot streams every document to the client and
+    // stays live, which doesn't scale.
+    let cancelled = false;
     setIsLoading(true);
-    const unsub = onSnapshot(collection(db, "users"), snap => {
-      setAllUsers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      setIsLoading(false);
-    }, () => setIsLoading(false));
-    return () => unsub();
+    getDocs(query(collection(db, "users"), orderBy("treecoins", "desc"), limit(50)))
+      .then(snap => {
+        if (cancelled) return;
+        setAllUsers(
+          snap.docs
+            .map(d => ({ id: d.id, ...d.data() }))
+            .filter(u => !u.deleted)
+        );
+        setIsLoading(false);
+      })
+      .catch(() => { if (!cancelled) setIsLoading(false); });
+    return () => { cancelled = true; };
   }, []);
 
   const filtered = searchQuery.trim()
@@ -94,7 +113,7 @@ function DiscoverSection({ onViewProfile }) {
           u.bio?.toLowerCase().includes(lower)
         );
       }).slice(0, 20)
-    : allUsers.slice(0, 10);
+    : allUsers;
 
   return (
     <div className="space-y-5">
@@ -106,15 +125,17 @@ function DiscoverSection({ onViewProfile }) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             className="eco-input pl-10"
-            placeholder="Search by username or bio… (live)"
+            placeholder="Search by username or bio…"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
-        {isLoading && (
+        {isLoading ? (
           <div className="flex items-center gap-2 mt-3 text-sm text-slate-400">
             <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading community members…
           </div>
+        ) : !searchQuery.trim() && (
+          <p className="text-xs text-slate-400 mt-3">Showing the top 50 community members by Treecoins — search to filter.</p>
         )}
       </div>
 
@@ -188,10 +209,13 @@ export default function Leaderboard() {
     load();
   }, []);
 
+  // User.list already filters deleted users, but keep the guard local too so a
+  // stale cache or future data path can't leak them into any tab.
+  const active = users.filter(u => !u.deleted);
   const sorted = {
-    treecoins:   [...users].sort((a, b) => (b.treecoins || 0) - (a.treecoins || 0)),
-    level:       [...users].sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1)),
-    ambassadors: users.filter(u => u.verification_status === "ambassador"),
+    treecoins:   [...active].sort((a, b) => (b.treecoins || 0) - (a.treecoins || 0)),
+    level:       [...active].sort((a, b) => (b.eco_level || 1) - (a.eco_level || 1)),
+    ambassadors: active.filter(u => u.verification_status === "ambassador"),
   };
 
   const myRankTc = sorted.treecoins.findIndex(u => u.id === currentUser?.id) + 1;
@@ -241,7 +265,7 @@ export default function Leaderboard() {
           <AnimatePresence mode="wait">
             <motion.div key={tab} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-2">
               {tab === "treecoins" && sorted.treecoins.map((u, i) => (
-                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#00c896" onViewProfile={setProfileUserId} />
+                <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="treecoins" valueSuffix="Treecoins" valueColor="#10b981" onViewProfile={setProfileUserId} podium />
               ))}
               {tab === "level" && sorted.level.map((u, i) => (
                 <UserRow key={u.id} user={u} rank={i + 1} currentUserId={currentUser?.id} valueKey="eco_level" valueSuffix="Level" valueColor="#8b5cf6" onViewProfile={setProfileUserId} />

@@ -1,38 +1,679 @@
 [
   {
-    "question": "Which of the following is a nonrenewable energy resource?",
+    "question": "Which of the following best distinguishes a renewable energy resource from a nonrenewable energy resource?",
     "difficulty": "Easy",
-    "A": "Wind",
-    "B": "Solar",
-    "C": "Coal",
-    "D": "Hydroelectric",
-    "answer": "C"
+    "A": "Renewable resources are replenished on a human timescale, while nonrenewable resources form over geologic timescales far slower than they are consumed.",
+    "B": "Renewable resources are always cheaper to extract than nonrenewable resources.",
+    "C": "Renewable resources produce no waste of any kind, while nonrenewable resources always produce hazardous waste.",
+    "D": "Renewable resources can only be used to generate electricity, while nonrenewable resources can only be used for transportation.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Renewable vs. Nonrenewable Energy Resources",
+      "sourceNote": "Textbook-standard classification of energy resources",
+      "headers": ["Category", "Examples", "Approximate Replenishment Timescale"],
+      "rows": [
+        ["Renewable", "Solar, wind, hydro, geothermal, biomass", "Days to a few decades"],
+        ["Nonrenewable", "Coal, oil, natural gas, uranium ore", "Millions of years"]
+      ]
+    }
   },
   {
-    "question": "Which energy source has the highest net energy yield for producing electricity in most developed countries?",
+    "question": "The pie chart shows the approximate breakdown of global primary energy consumption by source.",
     "difficulty": "Medium",
-    "A": "Nuclear",
-    "B": "Natural gas",
-    "C": "Solar photovoltaic",
-    "D": "Hydroelectric",
-    "answer": "D"
+    "A": "Renewable sources (solar, wind, hydro, and biomass combined) supply the majority of global primary energy.",
+    "B": "Fossil fuels (oil, coal, and natural gas combined) supply the large majority of global primary energy.",
+    "C": "Nuclear power supplies the largest single share of global primary energy.",
+    "D": "Coal alone supplies more energy than oil and natural gas combined.",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Approximate Global Primary Energy Consumption by Source",
+      "sourceNote": "Hypothetical data based on general patterns reported in global energy statistics",
+      "slices": [
+        {"label": "Oil", "value": 31},
+        {"label": "Coal", "value": 26},
+        {"label": "Natural gas", "value": 23},
+        {"label": "Renewables (hydro, wind, solar, biomass)", "value": 15},
+        {"label": "Nuclear", "value": 5}
+      ]
+    }
   },
   {
-    "question": "The greatest environmental impact associated with coal combustion is due to:",
+    "question": "Which of the following best describes 'net energy' in the context of energy resource evaluation?",
+    "difficulty": "Medium",
+    "A": "The total energy content of a fuel before any processing",
+    "B": "The usable energy obtained from a resource after subtracting the energy required to find, extract, process, and deliver that resource",
+    "C": "The energy released only during the combustion step of a fuel's life cycle",
+    "D": "The market price of a unit of energy",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Gross Energy vs. Net Energy for a Hypothetical Oil Field",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Stage", "Energy (arbitrary units)"],
+      "rows": [
+        ["Gross energy content of extracted oil", 100],
+        ["Energy used for drilling and extraction", 12],
+        ["Energy used for refining and transport", 18],
+        ["Net energy delivered to consumer", 70]
+      ]
+    }
+  },
+  {
+    "question": "The bar chart shows estimated energy return on investment (EROI) — the ratio of energy obtained to energy invested — for several energy sources.",
     "difficulty": "Hard",
-    "A": "Radioactive waste",
-    "B": "Particulate matter and sulfur dioxide emissions",
-    "C": "Methane leaks during transport",
-    "D": "Thermal pollution of rivers",
+    "A": "All energy sources shown have approximately equal EROI, meaning source choice does not affect net energy availability.",
+    "B": "Sources with higher EROI values return substantially more usable energy per unit of energy invested in extraction and processing than sources with low EROI values.",
+    "C": "A lower EROI value always indicates a cleaner, lower-emission energy source.",
+    "D": "EROI is unrelated to how much net energy a source can practically supply to society.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Estimated Energy Return on Investment (EROI) by Source",
+      "sourceNote": "Hypothetical data based on general ranges reported in EROI literature",
+      "data": [
+        {"label": "Hydroelectric", "value": 40},
+        {"label": "Coal", "value": 27},
+        {"label": "Natural gas", "value": 20},
+        {"label": "Wind", "value": 18},
+        {"label": "Solar PV", "value": 9},
+        {"label": "Corn ethanol", "value": 1.5}
+      ],
+      "xLabel": "Energy Source",
+      "yLabel": "EROI (energy out / energy in)"
+    }
+  },
+  {
+    "question": "The line graph shows global energy consumption from 1980 to 2020, broken down by high-income and low/middle-income country groups.",
+    "difficulty": "Medium",
+    "A": "Energy consumption has grown fastest in low- and middle-income countries in recent decades, narrowing but not eliminating the per-capita gap with high-income countries.",
+    "B": "Energy consumption has declined in all country income groups since 1980.",
+    "C": "High-income countries now consume less total energy than low- and middle-income countries did in 1980.",
+    "D": "Energy consumption has remained completely flat in both groups since 1980.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Global Energy Consumption by Country Income Group, 1980-2020",
+      "sourceNote": "Hypothetical data illustrating general trends in global energy consumption",
+      "series": [
+        {"name": "High-Income Countries (EJ)", "points": [
+          {"x": 1980, "y": 180}, {"x": 1990, "y": 200}, {"x": 2000, "y": 220},
+          {"x": 2010, "y": 230}, {"x": 2020, "y": 235}
+        ]},
+        {"name": "Low/Middle-Income Countries (EJ)", "points": [
+          {"x": 1980, "y": 60}, {"x": 1990, "y": 90}, {"x": 2000, "y": 140},
+          {"x": 2010, "y": 210}, {"x": 2020, "y": 290}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Energy Consumption (exajoules)"
+    }
+  },
+  {
+    "question": "Which fossil fuel is most commonly used for electricity generation because of its relatively low cost, high energy density, and historical abundance, despite producing the highest carbon dioxide emissions per unit of energy among fossil fuels?",
+    "difficulty": "Easy",
+    "A": "Natural gas",
+    "B": "Coal",
+    "C": "Petroleum",
+    "D": "Propane",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Global Electricity Generation by Fuel Source (Historical Pattern)",
+      "sourceNote": "Hypothetical data based on general historical patterns in global electricity mix",
+      "slices": [
+        {"label": "Coal", "value": 36},
+        {"label": "Natural gas", "value": 23},
+        {"label": "Hydroelectric", "value": 16},
+        {"label": "Nuclear", "value": 10},
+        {"label": "Other renewables", "value": 12},
+        {"label": "Oil", "value": 3}
+      ]
+    }
+  },
+  {
+    "question": "The table shows carbon dioxide emissions per unit of energy produced for three fossil fuels.",
+    "difficulty": "Medium",
+    "A": "Coal produces the most CO2 per unit of energy among the three fuels shown, while natural gas produces the least.",
+    "B": "Natural gas produces more CO2 per unit of energy than coal.",
+    "C": "All three fuels produce identical CO2 emissions per unit of energy.",
+    "D": "Petroleum produces the least CO2 per unit of energy among the three fuels shown.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "CO2 Emissions per Unit Energy by Fossil Fuel",
+      "sourceNote": "Textbook-standard emissions factors for common fossil fuels",
+      "headers": ["Fuel", "CO2 Emissions (kg CO2 per GJ)"],
+      "rows": [
+        ["Coal", 95],
+        ["Petroleum (oil)", 73],
+        ["Natural gas", 56]
+      ]
+    }
+  },
+  {
+    "question": "Which resource distribution pattern best explains why a small number of countries control a disproportionate share of the world's proven petroleum reserves?",
+    "difficulty": "Medium",
+    "A": "Petroleum reserves are distributed evenly across all countries in proportion to population.",
+    "B": "Petroleum formation depends on specific geologic conditions (ancient marine sediment burial and heat/pressure) that occurred unevenly across Earth's crust, concentrating reserves in particular regions.",
+    "C": "All countries have equal petroleum reserves, but only some choose to extract them.",
+    "D": "Petroleum reserves are determined entirely by a country's land area.",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Petroleum Reserves vs. Land Area and Population for Four Countries",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Country", "Land Area (million km²)", "Population (millions)", "Proven Oil Reserves (billion barrels)"],
+      "rows": [
+        ["Country W", 9.9, 38, 170],
+        ["Country X", 2.1, 34, 267],
+        ["Country Y", 8.5, 214, 13],
+        ["Country Z", 0.5, 9, 98]
+      ]
+    }
+  },
+  {
+    "question": "The bar chart shows proven oil reserves for five countries or regions.",
+    "difficulty": "Medium",
+    "A": "Oil reserves are distributed roughly evenly among the regions shown.",
+    "B": "One region holds substantially more proven reserves than the others, illustrating the uneven global distribution of fossil fuel resources.",
+    "C": "The region with the smallest population always has the largest reserves.",
+    "D": "Proven reserves shown are unrelated to historical global oil production patterns.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Proven Oil Reserves by Region",
+      "sourceNote": "Hypothetical data based on general patterns reported in global energy statistics",
+      "data": [
+        {"label": "Middle East", "value": 830},
+        {"label": "North America", "value": 245},
+        {"label": "South America", "value": 210},
+        {"label": "Africa", "value": 125},
+        {"label": "Europe", "value": 15}
+      ],
+      "xLabel": "Region",
+      "yLabel": "Proven Oil Reserves (billion barrels)"
+    }
+  },
+  {
+    "question": "Hydraulic fracturing ('fracking') is a technique used to extract natural gas and oil from shale formations. Which of the following is a documented environmental concern associated with this method?",
+    "difficulty": "Medium",
+    "A": "Complete absence of water use during the extraction process",
+    "B": "Potential contamination of groundwater by fracturing fluids and methane migration, along with large volumes of wastewater requiring disposal",
+    "C": "A guaranteed net reduction in greenhouse gas emissions compared to all other energy sources",
+    "D": "Elimination of induced seismic activity in nearby areas",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Groundwater Methane Concentrations Near Fracking Wells vs. Control Wells",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Well Location", "Average Dissolved Methane (mg/L)"],
+      "rows": [
+        ["Within 1 km of fracking site", 6.8],
+        ["1-5 km from fracking site", 2.1],
+        ["Control wells (no nearby fracking)", 0.7]
+      ]
+    }
+  },
+  {
+    "question": "The scatter plot shows the number of hydraulic fracturing wastewater injection wells and the number of recorded minor earthquakes (magnitude 2.5+) per year in a region over a 10-year period.",
+    "difficulty": "Hard",
+    "A": "As the number of wastewater injection wells increased, the number of recorded earthquakes also increased, consistent with a link between deep wastewater injection and induced seismicity.",
+    "B": "As the number of injection wells increased, earthquake frequency decreased.",
+    "C": "There is no relationship between injection wells and earthquake frequency in this data set.",
+    "D": "Earthquake frequency was highest when there were zero injection wells.",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Wastewater Injection Wells vs. Recorded Earthquakes (M2.5+) per Year",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 5, "y": 2}, {"x": 12, "y": 4}, {"x": 20, "y": 9},
+        {"x": 35, "y": 15}, {"x": 48, "y": 22}, {"x": 60, "y": 34},
+        {"x": 75, "y": 48}, {"x": 90, "y": 61}
+      ],
+      "trendline": {"x1": 5, "y1": 1, "x2": 90, "y2": 63},
+      "xLabel": "Active Injection Wells",
+      "yLabel": "Recorded Earthquakes (M2.5+/year)"
+    }
+  },
+  {
+    "question": "Nuclear power plants generate electricity primarily through which process?",
+    "difficulty": "Easy",
+    "A": "Nuclear fusion of hydrogen isotopes",
+    "B": "Nuclear fission of uranium or plutonium atoms, which releases heat used to produce steam that turns turbines",
+    "C": "Direct conversion of radioactive decay into electrical current",
+    "D": "Combustion of enriched uranium in a manner similar to coal",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Simplified Nuclear Power Plant Energy Conversion Steps",
+      "sourceNote": "Textbook-standard summary of nuclear power generation",
+      "headers": ["Step", "Process"],
+      "rows": [
+        ["1", "Uranium-235 atoms undergo fission in the reactor core, releasing heat"],
+        ["2", "Heat is used to boil water into high-pressure steam"],
+        ["3", "Steam spins a turbine connected to a generator"],
+        ["4", "Generator converts mechanical energy into electrical energy"]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following is a major disadvantage commonly associated with nuclear power despite its low operational carbon emissions?",
+    "difficulty": "Medium",
+    "A": "High routine carbon dioxide emissions during plant operation comparable to coal plants",
+    "B": "The long-term challenge of safely storing radioactive waste that remains hazardous for thousands of years, plus high construction costs and the risk of rare but severe accidents",
+    "C": "An inability to generate baseload (continuous) electricity",
+    "D": "A requirement for constant direct sunlight to operate efficiently",
     "answer": "B"
   },
   {
-    "question": "A power plant converts chemical energy to electrical energy with an efficiency of 35%. If it burns 1,000 MJ of coal, how much energy becomes electricity?",
-    "difficulty": "Challenge",
-    "A": "150 MJ",
-    "B": "250 MJ",
-    "C": "350 MJ",
-    "D": "650 MJ",
+    "question": "The table compares average lifecycle greenhouse gas emissions per unit of electricity generated for several energy sources.",
+    "difficulty": "Medium",
+    "A": "Nuclear and wind both have much lower lifecycle emissions per unit of electricity than coal.",
+    "B": "Nuclear has higher lifecycle emissions than coal.",
+    "C": "All sources shown have essentially the same lifecycle emissions.",
+    "D": "Wind has higher lifecycle emissions than natural gas.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Lifecycle Greenhouse Gas Emissions by Electricity Source",
+      "sourceNote": "Hypothetical data based on general ranges reported in lifecycle emissions studies",
+      "headers": ["Source", "Lifecycle Emissions (g CO2-eq/kWh)"],
+      "rows": [
+        ["Coal", 820],
+        ["Natural gas", 490],
+        ["Solar PV", 45],
+        ["Wind", 12],
+        ["Nuclear", 12]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes energy derived from biomass?",
+    "difficulty": "Easy",
+    "A": "Energy captured directly from sunlight using photovoltaic cells",
+    "B": "Energy released by burning or converting organic material, such as wood, crop residue, or animal waste",
+    "C": "Energy generated from the heat of Earth's interior",
+    "D": "Energy generated from the kinetic motion of falling or flowing water",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Sources of Biomass Used for Energy in a Hypothetical Region",
+      "sourceNote": "Hypothetical data for this exercise",
+      "slices": [
+        {"label": "Wood and forestry residue", "value": 45},
+        {"label": "Agricultural crop residue", "value": 30},
+        {"label": "Animal waste/manure", "value": 15},
+        {"label": "Municipal organic waste", "value": 10}
+      ]
+    }
+  },
+  {
+    "question": "Proponents describe biomass energy as 'carbon neutral' because the carbon dioxide released during combustion is offset by carbon dioxide absorbed during the growth of the replacement biomass. Which of the following is a valid critique of treating all biomass energy as carbon neutral?",
+    "difficulty": "Hard",
+    "A": "Biomass never releases carbon dioxide when burned, making the carbon-neutral label unnecessary.",
+    "B": "If biomass is harvested faster than it regrows, or if converting land to biomass production releases stored carbon (e.g., from clearing forest), the assumption of a closed carbon cycle breaks down and net emissions can occur.",
+    "C": "Biomass combustion releases only water vapor, not carbon dioxide, so the label is technically inaccurate in the opposite direction.",
+    "D": "Biomass is always sourced from fossil deposits, making the carbon-neutral claim irrelevant.",
+    "answer": "B"
+  },
+  {
+    "question": "Which type of solar energy technology directly converts sunlight into electricity using semiconductor materials?",
+    "difficulty": "Easy",
+    "A": "Passive solar heating",
+    "B": "Concentrated solar power (CSP) using mirrors and a heat engine",
+    "C": "Photovoltaic (PV) cells",
+    "D": "Geothermal heat pumps",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Solar Energy Technology Types",
+      "sourceNote": "Textbook-standard classification of solar technologies",
+      "headers": ["Technology", "Mechanism"],
+      "rows": [
+        ["Photovoltaic (PV)", "Semiconductor cells directly convert light into electric current"],
+        ["Concentrated solar power (CSP)", "Mirrors focus sunlight to heat a fluid that drives a turbine"],
+        ["Passive solar design", "Building orientation and materials capture and store heat without mechanical parts"]
+      ]
+    }
+  },
+  {
+    "question": "The line graph shows the global average cost of solar photovoltaic electricity per kilowatt-hour from 2000 to 2020.",
+    "difficulty": "Medium",
+    "A": "The cost of solar PV electricity has declined substantially over this period, consistent with the historical trend of falling solar costs due to technology improvements and economies of scale.",
+    "B": "The cost of solar PV electricity has risen substantially over this period.",
+    "C": "The cost of solar PV electricity has remained completely flat since 2000.",
+    "D": "Solar PV costs became more expensive than coal-fired electricity throughout the entire period.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Global Average Levelized Cost of Solar PV Electricity, 2000-2020",
+      "sourceNote": "Hypothetical data illustrating the general historical trend of declining solar costs",
+      "series": [
+        {"name": "Cost ($/kWh)", "points": [
+          {"x": 2000, "y": 0.40}, {"x": 2005, "y": 0.32}, {"x": 2010, "y": 0.22},
+          {"x": 2015, "y": 0.10}, {"x": 2020, "y": 0.05}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Cost ($ per kWh)"
+    }
+  },
+  {
+    "question": "Which of the following is a key limitation of solar photovoltaic energy that requires grid-level solutions such as battery storage or a diversified energy mix?",
+    "difficulty": "Medium",
+    "A": "Solar panels cannot generate any electricity even in direct sunlight",
+    "B": "Solar electricity generation is intermittent, dropping to zero at night and fluctuating with cloud cover and season",
+    "C": "Solar panels release large amounts of carbon dioxide during operation",
+    "D": "Solar energy cannot be converted into electricity using any current technology",
+    "answer": "B"
+  },
+  {
+    "question": "Hydroelectric power is generated by which of the following processes?",
+    "difficulty": "Easy",
+    "A": "Burning organic matter to boil water into steam",
+    "B": "Using the kinetic energy of flowing or falling water to turn turbines connected to generators",
+    "C": "Capturing heat released from radioactive decay",
+    "D": "Converting wind-driven blade rotation into electrical energy",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Electricity Output vs. Water Flow Rate at a Hydroelectric Dam",
+      "sourceNote": "Hypothetical data illustrating the relationship between water flow and power output",
+      "data": [
+        {"label": "500 m³/s", "value": 120},
+        {"label": "1000 m³/s", "value": 240},
+        {"label": "1500 m³/s", "value": 360},
+        {"label": "2000 m³/s", "value": 480}
+      ],
+      "xLabel": "Water Flow Rate Through Turbines",
+      "yLabel": "Electricity Output (MW)"
+    }
+  },
+  {
+    "question": "Large dam construction for hydroelectric power is associated with which of the following environmental and social impacts?",
+    "difficulty": "Medium",
+    "A": "Flooding of upstream terrestrial habitat and displacement of communities, altered downstream sediment transport, and disruption of fish migration routes",
+    "B": "A complete absence of any ecological impact because the electricity generated is emissions-free during operation",
+    "C": "Improved fish migration due to calmer upstream water conditions",
+    "D": "A net increase in downstream sediment delivery compared to a free-flowing river",
+    "answer": "A"
+  },
+  {
+    "question": "The table shows fish population indices for a river both upstream and downstream of a major hydroelectric dam, five years before and fifteen years after dam construction.",
+    "difficulty": "Hard",
+    "A": "Migratory fish populations declined substantially after dam construction, consistent with the dam blocking migration routes.",
+    "B": "Migratory fish populations increased after dam construction at both sites.",
+    "C": "Dam construction had no measurable effect on fish populations at either site.",
+    "D": "Fish populations declined only upstream, while downstream populations were unaffected.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Migratory Fish Population Index Before and After Dam Construction",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Location", "5 Years Before Dam", "15 Years After Dam"],
+      "rows": [
+        ["Upstream of dam site", 100, 12],
+        ["Downstream of dam site", 100, 38]
+      ]
+    }
+  },
+  {
+    "question": "Geothermal energy is best described as energy derived from:",
+    "difficulty": "Easy",
+    "A": "The heat stored within Earth's interior, tapped via wells that bring hot water or steam to the surface",
+    "B": "The gravitational pull of the moon on ocean water",
+    "C": "The combustion of underground coal deposits",
+    "D": "Solar radiation absorbed and re-emitted by Earth's surface",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Installed Geothermal Electricity Capacity by Region",
+      "sourceNote": "Hypothetical data illustrating the concentration of geothermal capacity near tectonically active regions",
+      "headers": ["Region", "Tectonic Setting", "Installed Capacity (MW)"],
+      "rows": [
+        ["Region near volcanic arc", "Active plate boundary", 3200],
+        ["Region on stable continental interior", "Far from plate boundary", 15],
+        ["Region near mid-ocean ridge on land", "Active plate boundary", 750]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best explains why geothermal power plants are geographically limited compared to solar or wind installations?",
+    "difficulty": "Medium",
+    "A": "Geothermal energy requires locations with accessible, sufficiently hot subsurface heat, typically near tectonic plate boundaries or volcanic activity, which are not evenly distributed globally.",
+    "B": "Geothermal power plants can only be built in coastal locations regardless of subsurface heat.",
+    "C": "Geothermal energy requires constant direct sunlight, limiting it to equatorial regions.",
+    "D": "Geothermal power plants require the same wind conditions as wind turbines.",
+    "answer": "A"
+  },
+  {
+    "question": "A hydrogen fuel cell generates electricity by combining hydrogen and oxygen, producing water as the only direct byproduct. Which of the following best explains why hydrogen fuel cells are not automatically a zero-emission technology overall?",
+    "difficulty": "Hard",
+    "A": "Fuel cells release large amounts of carbon dioxide directly during operation.",
+    "B": "Most hydrogen today is produced from natural gas through steam methane reforming, a process that releases significant carbon dioxide, so the overall lifecycle emissions depend heavily on how the hydrogen is produced.",
+    "C": "Hydrogen fuel cells cannot produce electricity efficiently under any circumstances.",
+    "D": "Water byproduct from fuel cells is itself a potent greenhouse gas.",
+    "answer": "B"
+  },
+  {
+    "question": "The bar chart compares the lifecycle greenhouse gas emissions of hydrogen fuel produced by three different methods.",
+    "difficulty": "Medium",
+    "A": "Hydrogen produced via electrolysis powered by renewable electricity has the lowest lifecycle emissions of the methods shown.",
+    "B": "Hydrogen produced from natural gas without carbon capture has the lowest lifecycle emissions.",
+    "C": "All three hydrogen production methods have identical lifecycle emissions.",
+    "D": "Electrolysis using renewable electricity has the highest lifecycle emissions of the methods shown.",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Lifecycle Emissions of Hydrogen by Production Method",
+      "sourceNote": "Hypothetical data based on general ranges reported for hydrogen production pathways",
+      "data": [
+        {"label": "Natural gas reforming (no CCS)", "value": 10.5},
+        {"label": "Natural gas reforming (with CCS)", "value": 3.5},
+        {"label": "Electrolysis, grid electricity", "value": 7.0},
+        {"label": "Electrolysis, renewable electricity", "value": 0.5}
+      ],
+      "xLabel": "Production Method",
+      "yLabel": "Emissions (kg CO2-eq per kg H₂)"
+    }
+  },
+  {
+    "question": "Which of the following is a documented environmental concern associated with large-scale wind energy development?",
+    "difficulty": "Medium",
+    "A": "Bird and bat collision mortality, habitat disruption during construction, and noise or visual impacts on nearby communities",
+    "B": "A guaranteed net increase in migratory bird populations near turbines",
+    "C": "Direct greenhouse gas emissions during turbine operation comparable to coal power plants",
+    "D": "An inability to generate power in any wind conditions",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Annual Bird Fatalities per Gigawatt-Hour by Electricity Source",
+      "sourceNote": "Hypothetical data based on general patterns reported in avian mortality comparisons across energy sources",
+      "data": [
+        {"label": "Wind", "value": 0.3},
+        {"label": "Fossil fuels (combined)", "value": 0.4},
+        {"label": "Nuclear", "value": 0.1},
+        {"label": "Buildings/windows (non-energy)", "value": 5.5}
+      ],
+      "xLabel": "Source",
+      "yLabel": "Bird Fatalities per GWh"
+    }
+  },
+  {
+    "question": "A wind turbine's power output is proportional to the cube of wind speed. If wind speed doubles, by approximately what factor does the turbine's power output increase, all else being equal?",
+    "difficulty": "Hard",
+    "A": "2 times",
+    "B": "4 times",
+    "C": "8 times",
+    "D": "16 times",
     "answer": "C"
+  },
+  {
+    "question": "The scatter plot shows wind speed and power output recorded at a wind turbine over a range of conditions.",
+    "difficulty": "Hard",
+    "A": "Power output rises sharply and nonlinearly as wind speed increases, consistent with the cubic relationship between wind speed and turbine power output.",
+    "B": "Power output decreases as wind speed increases.",
+    "C": "Power output is unrelated to wind speed in this data set.",
+    "D": "Power output is constant regardless of wind speed.",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Wind Speed vs. Turbine Power Output",
+      "sourceNote": "Hypothetical data illustrating the cubic relationship between wind speed and turbine power output",
+      "points": [
+        {"x": 3, "y": 15}, {"x": 5, "y": 70}, {"x": 7, "y": 190},
+        {"x": 9, "y": 410}, {"x": 11, "y": 750}, {"x": 13, "y": 1200},
+        {"x": 15, "y": 1650}
+      ],
+      "xLabel": "Wind Speed (m/s)",
+      "yLabel": "Power Output (kW)"
+    }
+  },
+  {
+    "question": "Which of the following is an example of an energy conservation strategy, as distinct from switching to a renewable energy source?",
+    "difficulty": "Easy",
+    "A": "Replacing a coal power plant with a solar farm",
+    "B": "Installing programmable thermostats and improving building insulation to reduce the total amount of energy needed for heating and cooling",
+    "C": "Building a new hydroelectric dam",
+    "D": "Switching a vehicle fleet from gasoline to hydrogen fuel cells",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Energy Conservation vs. Energy Source Switching: Examples",
+      "sourceNote": "Textbook-standard classification distinguishing conservation from source substitution",
+      "headers": ["Category", "Example Action"],
+      "rows": [
+        ["Conservation (reduce demand)", "Improve insulation, use programmable thermostats, carpool"],
+        ["Efficiency (same task, less energy)", "Install LED bulbs, upgrade to high-efficiency HVAC"],
+        ["Source switching", "Replace a coal plant with a solar farm"]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best explains the difference between energy conservation and energy efficiency?",
+    "difficulty": "Medium",
+    "A": "Energy conservation and energy efficiency are identical concepts with no meaningful distinction.",
+    "B": "Energy conservation refers to reducing energy use through behavior changes (such as using less), while energy efficiency refers to using less energy to accomplish the same task through improved technology.",
+    "C": "Energy conservation applies only to nonrenewable resources, while energy efficiency applies only to renewable resources.",
+    "D": "Energy efficiency always requires reducing the amount of a service or task performed, while conservation does not.",
+    "answer": "B"
+  },
+  {
+    "question": "The bar chart shows the annual energy savings, in kWh, achieved by four different household energy conservation and efficiency measures.",
+    "difficulty": "Medium",
+    "A": "All four measures shown produce identical energy savings.",
+    "B": "LED lighting retrofits produce the largest savings among the options shown.",
+    "C": "Different conservation and efficiency measures produce different magnitudes of energy savings, with the specific ranking depending on the measure and the appliance or system it targets.",
+    "D": "None of the measures shown produce any measurable energy savings.",
+    "answer": "C",
+    "stimulus": {
+      "type": "bar",
+      "title": "Annual Household Energy Savings by Conservation/Efficiency Measure",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "LED lighting retrofit", "value": 450},
+        {"label": "Improved attic insulation", "value": 1200},
+        {"label": "Programmable thermostat", "value": 900},
+        {"label": "ENERGY STAR appliances", "value": 700}
+      ],
+      "xLabel": "Measure",
+      "yLabel": "Annual Energy Savings (kWh)"
+    }
+  },
+  {
+    "question": "Cogeneration (combined heat and power) systems improve overall energy efficiency primarily by:",
+    "difficulty": "Medium",
+    "A": "Capturing and using waste heat from electricity generation for space heating, hot water, or industrial processes, rather than releasing it unused into the environment",
+    "B": "Burning two different fuels simultaneously to double electrical output",
+    "C": "Generating electricity exclusively from renewable sources",
+    "D": "Eliminating the need for any fuel combustion during electricity generation",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Overall Energy Efficiency: Conventional Plant vs. Cogeneration Plant",
+      "sourceNote": "Hypothetical data based on general efficiency ranges reported for cogeneration systems",
+      "data": [
+        {"label": "Conventional power plant", "value": 38},
+        {"label": "Cogeneration (combined heat and power)", "value": 72}
+      ],
+      "xLabel": "Plant Type",
+      "yLabel": "Overall Useful Energy Efficiency (%)"
+    }
+  },
+  {
+    "question": "A coal-fired power plant burns fuel with a total energy content of 800 MJ and converts 30% of that energy into usable electricity. How much energy, in MJ, is converted to electricity?",
+    "difficulty": "Medium",
+    "A": "80 MJ",
+    "B": "240 MJ",
+    "C": "560 MJ",
+    "D": "800 MJ",
+    "answer": "B"
+  },
+  {
+    "question": "A household reduces its annual electricity consumption from 11,000 kWh to 8,800 kWh after installing efficient appliances and improving insulation. What percentage reduction in electricity consumption does this represent?",
+    "difficulty": "Hard",
+    "A": "10%",
+    "B": "15%",
+    "C": "20%",
+    "D": "25%",
+    "answer": "C"
+  },
+  {
+    "question": "Which combination of energy sources would most effectively provide reliable baseload electricity (continuous power regardless of weather or time of day) without relying on fossil fuels?",
+    "difficulty": "Hard",
+    "A": "Solar photovoltaic alone, since sunlight is available in most regions",
+    "B": "Wind power alone, since wind blows continuously in all locations",
+    "C": "A mix of hydroelectric, geothermal, and nuclear power, since each can generate electricity continuously regardless of weather conditions",
+    "D": "Biomass combustion alone, since it requires no supporting infrastructure",
+    "answer": "C"
+  },
+  {
+    "question": "The table compares the capacity factor (the percentage of time a power source operates at its maximum possible output) for several electricity sources.",
+    "difficulty": "Hard",
+    "A": "Nuclear and geothermal have among the highest capacity factors shown, meaning they can reliably supply baseload power, while solar and wind have lower, weather-dependent capacity factors.",
+    "B": "Solar has the highest capacity factor of all sources shown.",
+    "C": "All sources shown have approximately the same capacity factor.",
+    "D": "Wind has a higher capacity factor than nuclear.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Average Capacity Factor by Electricity Source",
+      "sourceNote": "Hypothetical data based on general ranges reported for electricity source capacity factors",
+      "headers": ["Source", "Average Capacity Factor (%)"],
+      "rows": [
+        ["Nuclear", 92],
+        ["Geothermal", 75],
+        ["Natural gas (combined cycle)", 55],
+        ["Wind (onshore)", 35],
+        ["Solar PV", 24]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best explains why natural gas is often described as a 'bridge fuel' in the transition away from coal?",
+    "difficulty": "Medium",
+    "A": "Natural gas produces zero greenhouse gas emissions when burned.",
+    "B": "Natural gas combustion produces roughly half the CO2 per unit of energy compared to coal and can be used in flexible power plants that complement intermittent renewables, though it still contributes to emissions and methane leakage.",
+    "C": "Natural gas is classified as a renewable resource because it can be produced synthetically.",
+    "D": "Natural gas requires no extraction infrastructure, unlike coal.",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "U.S. Electricity Sector CO2 Emissions as Coal Is Replaced by Natural Gas and Renewables",
+      "sourceNote": "Hypothetical data illustrating the general trend associated with fuel-switching in the power sector",
+      "series": [
+        {"name": "Coal Share of Generation (%)", "points": [
+          {"x": 2005, "y": 50}, {"x": 2010, "y": 45}, {"x": 2015, "y": 33}, {"x": 2020, "y": 19}
+        ]},
+        {"name": "Sector CO2 Emissions (index, 2005=100)", "points": [
+          {"x": 2005, "y": 100}, {"x": 2010, "y": 92}, {"x": 2015, "y": 78}, {"x": 2020, "y": 62}
+        ]}
+      ],
+      "xLabel": "Year",
+      "yLabel": "Value (see series)"
+    }
   }
 ]

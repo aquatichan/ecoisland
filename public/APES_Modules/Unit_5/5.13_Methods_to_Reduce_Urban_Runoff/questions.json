@@ -90,13 +90,13 @@
     "correct": "C"
   },
   {
-    "question": "A city retrofitted 2 kilometers of streets with bioswales. Tests show 70% infiltration of typical storms, 65% sediment removal, and 50% removal of oil and heavy metals. Which advantage best justifies expanding bioswales to all major streets?",
+    "question": "A city retrofitted 2 kilometers of streets with bioswales (vegetated channels designed to capture and filter stormwater). Testing shows 70% infiltration of typical storm volume, 65% sediment removal, and 50% removal of oil and heavy metals compared to conventional curb-and-gutter streets. Which advantage best justifies expanding bioswales to all major streets in the city?",
     "answers": [
-      "They reduce runoff volume and pollutant loads via infiltration and filtration.",
-      "They provide habitat that increases urban biodiversity and ecological connectivity.",
-      "They prevent all precipitation from reaching streets and fully eliminate flooding.",
-      "They route water away through underground pipes to retention ponds."
+      "Bioswales reduce both the volume of stormwater runoff reaching storm drains and the concentration of pollutants it carries, addressing flooding and water quality simultaneously.",
+      "Bioswales completely eliminate the need for any stormwater infrastructure elsewhere in the city, including storm drains and detention basins.",
+      "Bioswales prevent all precipitation from ever reaching the street surface, eliminating flooding risk entirely regardless of storm size.",
+      "Bioswales function primarily by routing captured water through underground pipes directly to retention ponds without any infiltration."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

@@ -20,14 +20,14 @@
     "correct": "C"
   },
   {
-    "question": "A marine biologist claims rising atmospheric CO2 and ocean acidification will reduce shellfish shell formation. She cites a 0.1 pH decline since preindustrial times and lab results showing 10–40% less calcium carbonate at pH 7.8 versus 8.2. Which choice best identifies a limitation of this evidence?",
+    "question": "A marine biologist claims that rising atmospheric CO2 and resulting ocean acidification will reduce shellfish shell formation. She cites a 0.1 pH decline in seawater since preindustrial times and laboratory results showing 10-40% less calcium carbonate deposition at pH 7.8 compared to pH 8.2. Which choice best identifies a limitation of this evidence for predicting real-world shellfish populations?",
     "answers": [
-      "Laboratory conditions omit interacting seawater factors affecting shell formation.",
-      "Isolating pH shows causation in the lab but not proof it dominates in nature.",
-      "Lab tests capture short-term physiological responses and may miss multi-generation adaptation.",
-      "Lab results cannot prove a 0.1 pH decline alone causes the observed reduction."
+      "The laboratory experiments isolate pH as the only variable, so they may not capture how shellfish respond to acidification when it interacts with other changing ocean conditions, such as temperature and food availability",
+      "The 0.1 pH decline reported is too small to be measured accurately with current instrumentation, making the entire premise of the claim questionable",
+      "Laboratory calcium carbonate measurements cannot be compared across different shellfish species regardless of experimental design",
+      "The evidence assumes ocean pH will continue declining, when in fact pH trends are currently reversing in most ocean basins"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A coal-fired power plant burns fossil fuels to generate electricity, releasing carbon dioxide into the atmosphere. Which of the following best describes how this process relates to the carbon cycle's slow stage?",
@@ -60,14 +60,35 @@
     "correct": "B"
   },
   {
-    "question": "A forest fire rapidly releases carbon stored in trees. If the forest regrows, new trees absorb CO2 and rebuild biomass. Compared with an unburned forest, how does the fire and regrowth cycle affect the carbon cycle?",
+    "question": "A forest fire rapidly releases carbon stored in trees as CO2. If the forest regrows over subsequent decades, new trees absorb CO2 through photosynthesis and rebuild biomass. Compared with an unburned, mature forest of the same area, how does this fire-and-regrowth cycle affect the forest's role in the carbon cycle?",
     "answers": [
-      "Fire releases biomass carbon quickly and regrowth can reabsorb similar amounts",
-      "Fire releases stored biomass carbon but does not create new carbon",
-      "Fire accelerates carbon release and ash retains only a small fraction",
-      "Burning and regrowth exchange carbon with the atmosphere so net effect varies"
+      "The fire causes a rapid pulse of carbon release to the atmosphere, and while regrowth can eventually reabsorb a comparable amount of carbon, the forest acts as a net carbon source for years until regrowth catches up",
+      "The fire releases stored biomass carbon but does not affect the total amount of carbon dioxide already present in the atmosphere",
+      "The fire accelerates carbon release entirely through combustion, since the ash remaining after a fire retains none of the tree's original carbon",
+      "Burning and regrowth are carbon-neutral processes that have no measurable effect on atmospheric CO2 concentrations at any timescale"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Forest Carbon Pool: Unburned vs. Fire-and-Regrowth Cycle",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Unburned forest biomass C",
+          "value": 100
+        },
+        {
+          "label": "Immediately post-fire biomass C",
+          "value": 20
+        },
+        {
+          "label": "Regrowth after 20 yrs biomass C",
+          "value": 65
+        }
+      ],
+      "xLabel": "Stage",
+      "yLabel": "Relative carbon stock (%)"
+    }
   },
   {
     "question": "Researchers grew Spartina in chambers at three CO2 levels (280, 400, 550 ppm) with identical temperature, light, and soil moisture. After 60 days they measured total biomass and carbon fixed per unit tissue. Which of the following is the dependent variable?",

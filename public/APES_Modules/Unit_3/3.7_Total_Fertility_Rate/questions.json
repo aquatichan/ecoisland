@@ -1,13 +1,40 @@
 [
   {
-    "question": "A sub-Saharan country with 65 percent rural population has high maternal mortality, limited prenatal care, and a total fertility rate of 5.1. Which best explains the relationship?",
+    "question": "A sub-Saharan country with a 65% rural population has high maternal mortality, limited access to prenatal care, and a total fertility rate of 5.1. Which explanation best accounts for the relationship between these health indicators and the country's high total fertility rate?",
     "answers": [
-      "High child mortality leads families to have more births as insurance",
-      "Maternal health problems tend to impair biological fertility rather than raise it",
-      "Health complications can lower fertility while high child mortality raises births",
-      "Misattributes high fertility to urban women despite a predominantly rural population"
+      "Where child and maternal mortality risks remain high and healthcare access is limited, families often have more children as a form of insurance against the possibility that some children will not survive to adulthood",
+      "Poor maternal health conditions directly impair women's biological capacity to conceive, which would be expected to lower, not raise, the total fertility rate",
+      "High rates of health complications during pregnancy directly cause total fertility rate to rise, independent of any social or economic factors",
+      "The high fertility rate in this country is driven primarily by its urban population, despite the country being 65% rural overall"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Rural Health Indicators and Total Fertility Rate",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Indicator",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Rural population",
+          "65%"
+        ],
+        [
+          "Maternal mortality",
+          "High"
+        ],
+        [
+          "Prenatal care access",
+          "Limited"
+        ],
+        [
+          "Total fertility rate",
+          5.1
+        ]
+      ]
+    }
   },
   {
     "question": "A demographic analyst argues that access to family planning services is the primary determinant of total fertility rate differences between countries. As evidence, the analyst notes that countries with >80% contraceptive prevalence have average TFRs of 2.3 children per woman, while countries with <20% contraceptive prevalence have average TFRs of 5.1 children per woman. The analyst's reasoning most directly assumes which of the following?",
@@ -62,22 +89,22 @@
   {
     "question": "In many developing nations, girls who remain in school through secondary education tend to have fewer children over their lifetime compared to girls who leave school early. Which of the following best describes the mechanism connecting educational opportunity to lower total fertility rates?",
     "answers": [
-      "Education delays childbearing by increasing economic opportunities and career prospects, allowing women to pursue employment before or instead of early motherhood.",
-      "Education teaches girls that large families are socially undesirable, causing them to reject cultural norms that favor high fertility.",
-      "Educated women have access to better healthcare, which reduces infant mortality rates and therefore eliminates the need for additional pregnancies to ensure child survival.",
-      "Education increases girls' understanding of nutrition, which improves their health and reduces their biological capacity to conceive children."
+      "Continued education delays the age of first childbirth by expanding economic and career opportunities, giving women more reasons and more means to postpone or limit childbearing in favor of employment and personal advancement",
+      "Education teaches girls that having large families is socially undesirable, causing them to reject cultural norms that favor high fertility as their primary motivation",
+      "Educated women gain access to better healthcare, which lowers infant mortality rates so completely that families no longer feel any need for additional pregnancies",
+      "Education increases girls' knowledge of nutrition, which directly reduces their biological capacity to conceive children regardless of behavioral choices"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A developing nation experiences a rapid decline in infant mortality rate due to improved healthcare and nutrition access. Which of the following best describes the relationship between this decline in infant mortality and changes in total fertility rate?",
+    "question": "A developing nation experiences a rapid decline in its infant mortality rate due to improved healthcare and nutrition access. Which of the following best describes the expected relationship between this decline in infant mortality and subsequent changes in total fertility rate?",
     "answers": [
-      "Lower infant mortality reduces the need for women to have additional pregnancies as insurance against child death, eventually leading to lower total fertility rate.",
-      "Improved healthcare increases women's biological fertility, causing total fertility rate to rise immediately as women become capable of bearing more children.",
-      "Improved healthcare and nutrition directly reduce total fertility rate by preventing women from becoming pregnant through better medical interventions.",
-      "Lower infant mortality eliminates the need for family planning services, causing total fertility rate to increase as women have more children without contraceptive use."
+      "Lower infant mortality reduces families' need to have additional children as insurance against child death, and over time this typically contributes to a decline in total fertility rate, though often with a demographic lag",
+      "Improved healthcare directly increases women's underlying biological fertility, causing total fertility rate to rise immediately as a physiological response",
+      "Improved healthcare and nutrition directly reduce total fertility rate by physically preventing women from becoming pregnant through medical intervention",
+      "Lower infant mortality eliminates any need for family planning services, causing total fertility rate to rise as families have more surviving children"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Between 2010 and 2019 in Tanzania, skilled birth attendance rose from 41% to 65%, infant mortality fell from 68 to 43 per 1,000, and total fertility fell from 5.4 to 4.9. A report credits improved maternal healthcare for the fertility decline. Which assumption about how lower infant mortality affects fertility decisions underlies the author's claim?",

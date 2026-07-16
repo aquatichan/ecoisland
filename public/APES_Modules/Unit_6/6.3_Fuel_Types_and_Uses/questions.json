@@ -1,13 +1,13 @@
 [
   {
-    "question": "Biodiesel comes from vegetable oils and animal fats while petroleum diesel comes from crude oil. What explains biodiesel's renewable classification?",
+    "question": "Biodiesel is produced from vegetable oils and animal fats, while petroleum diesel is refined from crude oil. What best explains why biodiesel is classified as a renewable fuel while petroleum diesel is not?",
     "answers": [
-      "Feedstocks regenerate on human timescales via agriculture while crude oil forms geologically",
-      "Biodiesel is renewable because feedstocks can be chemically recycled and reused indefinitely",
-      "Biodiesel is renewable because it produces fewer emissions when burned and pollutes less",
-      "Biodiesel is renewable because plants capture solar energy via photosynthesis unlike fossil diesel"
+      "Biodiesel's feedstocks (crops and fats) can be regrown or regenerated on human timescales through agriculture, while crude oil forms over millions of years through geological processes.",
+      "Biodiesel is renewable because its chemical components can be recycled and reused indefinitely without degrading.",
+      "Biodiesel is renewable because it produces fewer emissions when burned, and lower emissions is the defining criterion for renewability.",
+      "Biodiesel is renewable simply because the plants it comes from use solar energy for photosynthesis, unlike fossil-fuel-derived diesel."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A Polish coal plant burns anthracite and uses combustion waste heat to supply district heating. Why does this increase overall energy efficiency compared to a plant producing only electricity?",
@@ -30,14 +30,14 @@
     "correct": "D"
   },
   {
-    "question": "An energy engineer analyzes cogeneration systems in industrial facilities: 'Traditional power plants generate electricity through steam turbines and release waste heat into the environment or cooling systems, typically achieving 35-40% overall energy efficiency. Cogeneration systems capture this waste heat for space heating, hot water, or industrial processes, increasing total useful energy output to 60-80% efficiency from the same fuel input. A manufacturing facility implementing cogeneration with natural gas can reduce its combined electricity and heating costs by 20-30% while simultaneously decreasing greenhouse gas emissions by 25-35%. Some facility managers hesitate to adopt cogeneration due to higher initial capital costs and perceived operational complexity. However, the payback period typically ranges from 3-5 years, after which the facility benefits from 15-20 years of reduced operating costs and lower emissions.'",
+    "question": "An energy engineer explains: 'Traditional power plants generate electricity through steam turbines and release waste heat into the environment, typically achieving only 35-40% overall energy efficiency. Cogeneration systems capture this waste heat for space heating, hot water, or industrial processes, raising total useful energy output to 60-80% efficiency from the same fuel input. A facility implementing cogeneration can reduce combined electricity and heating costs by 20-30% and emissions by 25-35%, though some managers hesitate due to higher initial capital costs. The payback period is typically 3-5 years, after which the facility benefits from 15-20 years of reduced costs.' Which statement best represents the engineer's overall claim, rather than a specific supporting detail?",
     "answers": [
       "Cogeneration systems offer economic and environmental advantages that justify adoption despite higher initial capital costs.",
       "Some facility managers hesitate to adopt cogeneration due to higher initial capital costs and perceived operational complexity.",
       "Cogeneration systems increase total useful energy output to 60-80% efficiency compared to 35-40% for traditional power plants.",
       "Cogeneration systems capture waste heat for space heating, hot water, or industrial processes."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A facility uses cogeneration to produce electricity while capturing waste heat for heating and hot water. A conventional plant at the same facility produces only electricity and discards its waste heat. Which best explains why cogeneration is more efficient than the conventional plant?",

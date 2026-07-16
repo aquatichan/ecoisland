@@ -1,4 +1,9 @@
-node_modules
+node_modules/
 .env
 .env.local
 .env*.local
+dist/
+scripts/
+.claude/
+.vscode/
+.DS_Store

@@ -60,24 +60,24 @@
     "correct": "D"
   },
   {
-    "question": "The diagram shows a three-year rotation: year 1 legumes, year 2 cereals, year 3 fallow or root crops. Which feature best explains how this rotation maintains soil fertility without synthetic fertilizers?",
+    "question": "A three-year crop rotation cycles: year 1, legumes; year 2, cereals; year 3, fallow or root crops. Which feature of this rotation best explains how it maintains soil fertility without synthetic nitrogen fertilizer?",
     "answers": [
-      "Legumes replenish soil nitrogen, cereals use it, and year three allows recovery.",
-      "Different root depths access multiple soil layers for nutrient extraction.",
-      "Effectiveness is not limited to tropics and rotation works in many climates.",
-      "Rotation reduces pests and disease and increases yields across seasons."
+      "Legumes host nitrogen-fixing bacteria that add usable nitrogen to the soil, cereals draw down that nitrogen for growth, and the fallow or root-crop year allows the soil to rest and partially replenish before the cycle repeats.",
+      "All three crops in the rotation draw nutrients from exactly the same soil depth, which prevents any single nutrient from being depleted.",
+      "This rotation strategy is limited to tropical climates and cannot maintain fertility in temperate agricultural regions.",
+      "The rotation works primarily by increasing pesticide effectiveness rather than by affecting soil nutrient cycling."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A soil scientist writes: 'Adding limestone to agricultural soils increases pH and provides essential minerals like calcium, making it an effective strategy for improving soil fertility. However, limestone application requires careful timing and dosage to avoid over-alkalinization, which can reduce nutrient availability and harm microbial communities. Farmers must balance fertility gains against potential ecosystem disruption.' What assumption about soil management does this statement reveal?",
     "answers": [
-      "Agricultural interventions involve trade-offs and unintended consequences that require careful evaluation",
-      "Industrial agricultural interventions involve trade-offs and unintended consequences, while small-scale organic farming avoids these issues",
-      "Agricultural interventions involve trade-offs and unintended consequences that should lead farmers to avoid chemical amendments",
-      "Agricultural interventions can be optimized through precise application methods that eliminate trade-offs between productivity and ecosystem health"
+      "Agricultural interventions involve trade-offs and unintended consequences that require careful evaluation.",
+      "Industrial agricultural interventions involve trade-offs and unintended consequences, while small-scale organic farming avoids these issues.",
+      "Agricultural interventions involve trade-offs and unintended consequences that should lead farmers to avoid chemical amendments.",
+      "Agricultural interventions can be optimized through precise application methods that eliminate trade-offs between productivity and ecosystem health."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A diagram illustrates windbreak placement around agricultural fields, with measurements showing wind velocity at different distances from the windbreak. Based on the velocity profile shown, which statement best explains the relationship between windbreak structure and soil erosion prevention?",

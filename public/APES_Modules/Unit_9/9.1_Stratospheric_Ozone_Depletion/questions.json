@@ -27,7 +27,7 @@
       "UV radiation causes inflammation in the eye that permanently damages the cornea, leading to both cataracts and skin cancer",
       "UV radiation depletes vitamin D production in skin, weakening the immune system and allowing cancer cells to develop unchecked"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The total atmospheric burden of CFC-12 is 20 million metric tons, and the removal rate is 0.2 million metric tons per year. Which approach calculates the average residence time of CFC-12 in the atmosphere?",
@@ -67,7 +67,7 @@
       "Add 100 DU to 300 DU, then multiply the result by the 3-month duration",
       "Add 100 DU to 300 DU, then divide the result by the 3-month duration"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The ozone layer absorbs approximately 98% of incoming UV-B radiation. If the incoming UV-B intensity is 500 milliwatts per square meter, which method calculates the intensity reaching Earth's surface?",

@@ -20,24 +20,49 @@
     "correct": "D"
   },
   {
-    "question": "Sea turtles exhibit a Type III survivorship curve, characterized by extremely high mortality rates among hatchlings and juveniles, followed by high survivorship once individuals reach adulthood. Conservationists with limited funds want to increase the population of a threatened sea turtle species. Which strategy would best address the specific mortality pattern described by this curve?",
+    "question": "Sea turtles exhibit a Type III survivorship curve, characterized by extremely high mortality among hatchlings and juveniles, followed by high survivorship once individuals reach adulthood. Conservationists with limited funding want to increase the population of a threatened sea turtle species. Which conservation strategy would most directly address the life stage responsible for the greatest population loss?",
     "answers": [
-      "Enclosing nesting beaches to protect hatchlings from predators until they reach the ocean",
-      "Banning the hunting of post-reproductive adults to preserve the population's genetic diversity",
-      "Relocating adult turtles to aquariums to maximize their individual lifespan and health",
-      "Supplementing the diet of adult turtles to increase their body mass and shell thickness"
+      "Enclosing nesting beaches to protect hatchlings from predators from the moment they emerge until they reach the ocean",
+      "Banning the hunting of post-reproductive adult turtles in order to preserve the population's genetic diversity",
+      "Relocating adult turtles to aquariums in order to maximize the lifespan and health of individual adults",
+      "Supplementing the diet of adult turtles in the wild to increase their overall body mass and shell thickness"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A forest ecologist observes that oak trees show low early mortality with increasing mortality in old age (Type I curve), while birch trees show relatively constant mortality across all age classes (Type II curve) in the same temperate forest. Which of the following best explains these different survivorship patterns?",
+    "question": "A forest ecologist observes that oak trees show low early mortality with increasing mortality concentrated in old age (a Type I survivorship curve), while birch trees in the same temperate forest show relatively constant mortality across all age classes (a Type II curve). Which of the following best explains this difference in survivorship pattern?",
     "answers": [
-      "Oak trees are K-selected with high seedling survival; birch trees are r-selected with high early mortality",
-      "Oak trees' thicker bark prevents early mortality; birch trees' thin bark causes constant mortality",
-      "Oak trees receive more rainfall, reducing early mortality; birch trees experience greater drought stress",
-      "Birch trees are pioneer species with higher total mortality; oak trees are climax species"
+      "Oak trees invest heavily in each seedling and are more K-selected, producing high seedling survival, while birch trees are more r-selected pioneer species that experience relatively constant mortality risk throughout life",
+      "Oak trees' thicker bark is the sole reason for their low early mortality, while birch trees' thin bark is the sole cause of their constant mortality rate",
+      "Oak trees simply receive more annual rainfall than birch trees in the same forest, which alone explains the difference in survivorship curve shape",
+      "Birch trees are pioneer species with a higher total lifetime mortality than oaks, but both species otherwise share the identical Type I curve shape"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Oak vs. Birch Mortality Pattern",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Species",
+        "Early Mortality",
+        "Late Mortality",
+        "Curve Type"
+      ],
+      "rows": [
+        [
+          "Oak",
+          "Low",
+          "High (old age)",
+          "Type I"
+        ],
+        [
+          "Birch",
+          "Roughly constant",
+          "Roughly constant",
+          "Type II"
+        ]
+      ]
+    }
   },
   {
     "question": "A population biologist tracks a cohort of sea turtles from hatching through adulthood. The data shows that approximately 99% of hatchlings die before reaching reproductive age, but those that survive to adulthood have high survival rates through old age. Which of the following best explains why this survivorship curve pattern is characteristic of sea turtles as an r-selected species?",
@@ -70,24 +95,24 @@
     "correct": "D"
   },
   {
-    "question": "A wildlife manager observes that an endangered primate species produces one offspring every three to four years with extended maternal care lasting several years. The species reaches sexual maturity around age 12 and can live 40+ years in the wild. Based on these life history characteristics, which statement best describes the expected survivorship curve and its conservation implications?",
+    "question": "A wildlife manager observes that an endangered primate species produces one offspring every three to four years, with extended maternal care lasting several years, reaches sexual maturity around age 12, and can live 40+ years in the wild. Based on these life history characteristics, which survivorship curve type would this species most likely exhibit, and what is the most effective conservation implication?",
     "answers": [
-      "A Type I curve with high survival through reproductive years, indicating that protecting adult survival through habitat preservation is critical for population recovery",
-      "A Type III curve with high early mortality, indicating that increasing juvenile survival through predator control is the most effective conservation strategy",
-      "A Type II curve with constant mortality rates, indicating that management should focus equally on all age classes to maintain stable populations",
-      "A Type I curve, but juvenile survival is more important than adult survival for population recovery because the species produces one offspring every three to four years"
+      "A Type I curve with high survival through most of the reproductive years, indicating that protecting adult survival through habitat preservation is critical, since each adult represents an irreplaceable, slow-to-produce reproductive investment",
+      "A Type III curve with very high early mortality, indicating that increasing juvenile survival through predator control should be the top conservation priority for this species",
+      "A Type II curve with roughly constant mortality across all age classes, indicating that management resources should be spread equally across every age group",
+      "A Type III curve, but with the unusual implication that juvenile survival is more important than adult survival despite the species' low reproductive rate"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "In a forest ecosystem, researchers compare survivorship curves for two tree species: a pioneer species that colonizes disturbed areas and produces millions of seeds with thin seed coats, and a late-successional species that produces fewer seeds with thick protective coats and establishes slowly. Which characteristic of the pioneer species' survivorship curve best reflects its ecological strategy?",
+    "question": "In a forest ecosystem, researchers compare survivorship curves for two tree species: a pioneer species that colonizes disturbed areas and produces millions of seeds with thin seed coats, and a late-successional species that produces far fewer seeds with thick, protective coats and establishes slowly. Which survivorship curve type would the pioneer species most likely exhibit, and why?",
     "answers": [
-      "A Type III curve showing steep initial decline in survival, indicating that most seeds and seedlings die before reaching maturity",
-      "A Type I curve showing high survival through early life stages, indicating that pioneer species invest heavily in seed protection",
-      "A Type II curve showing constant mortality rates across all life stages, indicating that pioneer species experience equal risk regardless of age",
-      "A Type III curve showing high survival rates in early life stages because producing millions of seeds ensures population persistence"
+      "A Type III curve showing a steep initial decline in survival, indicating that the vast majority of the pioneer species' seeds and seedlings die before reaching maturity, with population persistence relying on producing very large numbers of seeds",
+      "A Type I curve showing high survival through early life stages, indicating that the pioneer species invests heavily in protecting each individual seed",
+      "A Type II curve showing constant mortality across all life stages, indicating the pioneer species faces equal mortality risk regardless of age",
+      "A Type III curve, but with high survival rates in early life stages, since producing millions of seeds is what directly causes early survival to be high"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A survivorship curve for a frog population shows a steep initial decline from thousands of eggs to few tadpoles, then flattens as the remaining individuals age. Which statement best explains the mechanism producing this curve shape?",

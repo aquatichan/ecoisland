@@ -20,14 +20,39 @@
     "correct": "D"
   },
   {
-    "question": "A marine food web includes phytoplankton → zooplankton → small fish → large predatory fish. If phytoplankton biomass is 100 kg/km², what is the maximum expected biomass of large predatory fish, and which principle best explains this limit?",
+    "question": "A marine food web follows phytoplankton -> zooplankton -> small fish -> large predatory fish. If phytoplankton biomass is 100 kg/km^2, what is the approximate maximum expected biomass of large predatory fish, and which principle best explains this limit?",
     "answers": [
-      "Approximately 0.1 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so four trophic transfers result in roughly 0.1% of original energy",
-      "Approximately 1 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so three trophic transfers result in roughly 1% of original energy",
-      "Approximately 10 kg/km²; the 10% energy transfer rule means each trophic level retains only about 10% of the energy from the level below, so two trophic transfers from zooplankton result in roughly 10% of zooplankton energy",
-      "Approximately 0.1 kg/km²; the 10% energy transfer rule means large predatory fish retain 10% of the energy from small fish at the third trophic level"
+      "Approximately 0.1 kg/km^2; the 10% energy transfer rule means each trophic level retains only about 10% of the energy (and supportable biomass) of the level below it, and there are three transfers between phytoplankton and large predatory fish",
+      "Approximately 1 kg/km^2; the 10% rule implies only two transfers occur between phytoplankton and large predatory fish in this four-level food web",
+      "Approximately 10 kg/km^2; the 10% rule implies only one transfer occurs between phytoplankton and large predatory fish in this food web",
+      "Approximately 100 kg/km^2; biomass remains constant across trophic levels because energy, not mass, is what is lost during transfer"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Biomass at Each Trophic Level (Marine Food Web)",
+      "sourceNote": "Hypothetical data illustrating the 10% rule",
+      "data": [
+        {
+          "label": "Phytoplankton",
+          "value": 100
+        },
+        {
+          "label": "Zooplankton",
+          "value": 10
+        },
+        {
+          "label": "Small fish",
+          "value": 1
+        },
+        {
+          "label": "Large predatory fish",
+          "value": 0.1
+        }
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Biomass (kg/km^2)"
+    }
   },
   {
     "question": "The diagram below shows energy flow through four trophic levels in a temperate forest ecosystem, with energy values in kilocalories (kcal) labeled at each level.\n[Diagram: Pyramid with base labeled \"Plants (Producers): 10,000 kcal\" → \"Herbivores (Primary Consumers): 1,000 kcal\" → \"Small Carnivores (Secondary Consumers): 100 kcal\" → \"Large Carnivores (Tertiary Consumers): 10 kcal\"]\nWhich of the following best describes why energy available to tertiary consumers is only 1% of the energy available to producers?",
@@ -40,24 +65,70 @@
     "correct": "D"
   },
   {
-    "question": "In a marine ecosystem, phytoplankton capture solar energy through photosynthesis and are consumed by small fish, which are then eaten by larger predatory fish. Which of the following best describes why the total biomass of phytoplankton is typically greater than the total biomass of the predatory fish in the same ecosystem?",
+    "question": "In a marine ecosystem, phytoplankton capture solar energy through photosynthesis and are consumed by small fish, which are then eaten by larger predatory fish. Which of the following best explains why the total biomass of phytoplankton is typically much greater than the total biomass of the predatory fish?",
     "answers": [
-      "Energy is lost as heat and through cellular respiration at each trophic level, so less energy is available to support biomass at higher levels",
-      "Phytoplankton reproduce more rapidly than fish, allowing their populations to remain larger despite consuming the same amount of energy",
-      "Phytoplankton are autotrophs that create energy from sunlight, while fish must obtain energy from consuming other organisms, making phytoplankton inherently more energy-rich",
-      "Predatory fish actively avoid consuming large quantities of smaller fish to prevent ecosystem collapse"
+      "Energy is lost as metabolic heat and through cellular respiration at each trophic transfer, so progressively less energy remains available to support biomass at higher trophic levels",
+      "Phytoplankton reproduce more rapidly than fish, which alone allows their total population biomass to remain larger regardless of any energy loss between levels",
+      "Phytoplankton are autotrophs that create energy directly from sunlight, making their biomass inherently and permanently larger than that of any heterotroph",
+      "Predatory fish actively limit their own consumption of smaller fish in order to prevent overexploiting their prey and causing ecosystem collapse"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Relative Biomass: Phytoplankton vs. Predatory Fish",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Phytoplankton",
+          "value": 1000
+        },
+        {
+          "label": "Small fish",
+          "value": 100
+        },
+        {
+          "label": "Predatory fish",
+          "value": 10
+        }
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Relative biomass"
+    }
   },
   {
-    "question": "A diagram shows a terrestrial food chain: grass → grasshopper → songbird → hawk, with biomass values indicated at each level in kilograms per hectare: grass (5,000 kg/ha), grasshopper (500 kg/ha), songbird (50 kg/ha), and hawk (5 kg/ha). The diagram illustrates the 10% energy transfer rule between successive trophic levels. Which environmental consequence is most directly explained by the biomass pyramid shown?",
+    "question": "A diagram shows a terrestrial food chain -- grass, grasshopper, songbird, hawk -- with biomass values at each level: grass 5,000 kg/ha, grasshopper 500 kg/ha, songbird 50 kg/ha, and hawk 5 kg/ha, illustrating the 10% energy transfer rule between successive levels. Which conclusion about top predator populations is best supported by this pattern?",
     "answers": [
-      "Populations of top predators like hawks are naturally limited to small numbers because the energy available from lower trophic levels can only support a small biomass of apex consumers",
-      "Populations of top predators like hawks maintain stable numbers because the energy available from lower trophic levels provides consistent support for apex consumer biomass over time",
-      "Populations of intermediate consumers like songbirds are naturally limited to small numbers because the energy available from grasshoppers can only support a small biomass at the third trophic level",
-      "Populations of top predators like hawks are naturally limited to small numbers because large territorial requirements restrict the number of individuals that can occupy a given habitat area"
+      "Populations of top predators like hawks are naturally limited to small numbers because the energy (and biomass) available from lower trophic levels can only support a small amount of predator biomass",
+      "Populations of top predators like hawks maintain consistently stable numbers because the energy available from lower trophic levels provides an unlimited support base regardless of transfer losses",
+      "Populations of intermediate consumers like songbirds are limited to small numbers strictly because grasshoppers actively avoid being preyed upon",
+      "Populations of top predators like hawks are limited primarily by large territorial requirements rather than by the amount of energy available from lower trophic levels"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Terrestrial Food Chain Biomass (kg/ha)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Grass",
+          "value": 5000
+        },
+        {
+          "label": "Grasshopper",
+          "value": 500
+        },
+        {
+          "label": "Songbird",
+          "value": 50
+        },
+        {
+          "label": "Hawk",
+          "value": 5
+        }
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "Biomass (kg/ha)"
+    }
   },
   {
     "question": "Agricultural nitrogen causes an algal bloom. Dead algae sink and decompose. Why do bottom waters become oxygen-depleted?",

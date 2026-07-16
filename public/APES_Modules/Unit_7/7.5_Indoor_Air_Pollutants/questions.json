@@ -17,7 +17,7 @@
       "Homeowners will adopt sealing and repairs once they learn radon risks",
       "Radon must be prioritized over other indoor pollutants for mitigation"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers measured formaldehyde in 15 homes with laminate, vinyl, or hardwood flooring. Homes were matched for age, size, and ventilation and measured at the same time with the same calibrated equipment. Why did they control home age, size, and ventilation?",
@@ -47,7 +47,7 @@
       "The mitigation system creates a pressure barrier beneath the foundation that prevents radon gas from entering living spaces, reducing inhalation exposure even though radon is still released to the atmosphere",
       "The mitigation system redirects radon gas away from the home's interior, reducing radon concentration in the soil beneath the foundation even though radon is still released to the atmosphere"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Formaldehyde concentrations (μg/m³) in new homes after occupancy: Day 1 185, Day 7 142, Day 30 89, Day 90 52, Day 180 38. Which statement best describes the pattern?",

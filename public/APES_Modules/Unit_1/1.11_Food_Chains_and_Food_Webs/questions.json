@@ -1,13 +1,40 @@
 [
   {
-    "question": "A marine biologist reports that where sea otters were hunted to near extinction, sea urchins increased 15-fold, kelp coverage dropped 90%, and fish species richness fell from 47 to 12. Which choice best describes a limitation in how this evidence supports the claim that sea otters are critical to kelp forest health?",
+    "question": "A marine biologist reports that where sea otters were hunted to near extinction, sea urchins increased 15-fold, kelp coverage dropped 90%, and fish species richness fell from 47 to 12. Which choice best describes a limitation in how this evidence supports the claim that sea otters are a keystone species controlling kelp forest structure?",
     "answers": [
-      "Shows correlation but lacks direct evidence of the causal trophic mechanism.",
-      "Uses only a few regions so results may not generalize to all ecosystems.",
-      "Reports multiple species responses which could obscure which factor caused change.",
-      "Relies on species counts rather than measuring energy flow through trophic levels."
+      "The data show a correlated sequence of changes across the food web but do not, by themselves, rule out that another factor (such as a disease outbreak or warming water) independently drove both the urchin increase and kelp decline",
+      "The data were collected in only one habitat type, so they cannot be generalized to describe otter population trends worldwide",
+      "The data report multiple species' responses at once, which makes it impossible to know how many sites were sampled",
+      "The data rely on species counts rather than direct otter predation rates, so urchin population size cannot be estimated at all"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Kelp Forest Indicators Before and After Sea Otter Decline",
+      "sourceNote": "Hypothetical data modeled on real observations of otter-urchin-kelp dynamics",
+      "headers": [
+        "Indicator",
+        "Before Otter Decline",
+        "After Otter Decline"
+      ],
+      "rows": [
+        [
+          "Sea urchin density (per m^2)",
+          2,
+          30
+        ],
+        [
+          "Kelp coverage (%)",
+          85,
+          8
+        ],
+        [
+          "Fish species richness",
+          47,
+          12
+        ]
+      ]
+    }
   },
   {
     "question": "A pond food web shows producers, primary consumers, secondary consumers, and tertiary consumers. Which statement best describes how organisms are grouped by trophic level?",
@@ -40,14 +67,46 @@
     "correct": "D"
   },
   {
-    "question": "A lake ecosystem contains algae (producers), zooplankton (primary consumers), small fish (secondary consumers), and largemouth bass (tertiary consumers). When a drought reduces water volume by 40%, zooplankton populations initially decline due to habitat loss. Which of the following best explains the subsequent effect on largemouth bass populations?",
+    "question": "A lake ecosystem contains algae (producers), zooplankton (primary consumers), small fish (secondary consumers), and largemouth bass (tertiary consumers). A drought reduces water volume by 40%, and zooplankton populations initially decline due to habitat loss. Which of the following best explains the resulting effect on largemouth bass, assuming the food chain remains linear (algae -> zooplankton -> small fish -> bass)?",
     "answers": [
-      "Largemouth bass populations will decline because reduced zooplankton availability limits food for small fish, decreasing the energy available at higher trophic levels.",
-      "Small fish populations will decline because reduced zooplankton availability limits their food source, decreasing the energy available at higher trophic levels, but bass populations remain stable by consuming alternative prey.",
-      "Largemouth bass populations will increase because reduced zooplankton availability limits food for small fish, causing small fish populations to weaken and become easier prey for bass.",
-      "Largemouth bass populations will decline because reduced zooplankton availability increases competition among bass for remaining small fish, decreasing survival rates at higher trophic levels."
+      "Largemouth bass populations will decline because reduced zooplankton availability limits food for small fish, which in turn decreases the energy and prey available to bass at the top of the chain",
+      "Largemouth bass populations will increase because small fish, having less zooplankton to eat, will be easier for bass to catch and consume",
+      "Largemouth bass populations will be unaffected because bass primarily rely on dissolved oxygen levels rather than prey availability",
+      "Largemouth bass populations will decline solely because the drought directly reduces the amount of habitat space available to bass"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Lake Food Chain Under Drought Stress",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Trophic Level",
+        "Organism",
+        "Effect of 40% Water Volume Loss"
+      ],
+      "rows": [
+        [
+          "Producer",
+          "Algae",
+          "Reduced habitat"
+        ],
+        [
+          "Primary consumer",
+          "Zooplankton",
+          "Initial decline"
+        ],
+        [
+          "Secondary consumer",
+          "Small fish",
+          "Food-limited"
+        ],
+        [
+          "Tertiary consumer",
+          "Largemouth bass",
+          "Predicted decline"
+        ]
+      ]
+    }
   },
   {
     "question": "An invasive species of herbivorous insect is introduced to a forest ecosystem where native plants have no evolved defenses against this insect. The insect population grows exponentially, consuming large quantities of native plant foliage. Over three years, native plant biomass decreases by 70%, and populations of native herbivorous insects that feed on the same plants decline by 85%. Which of the following best explains the decline in native herbivorous insect populations?",

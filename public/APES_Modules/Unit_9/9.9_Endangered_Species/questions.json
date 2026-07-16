@@ -17,7 +17,7 @@
       "Cluster sampling to reduce logistical travel costs",
       "Systematic sampling to ensure even spatial coverage"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers hypothesized that habitat fragmentation reduces genetic diversity in isolated populations of an endangered butterfly species. They compared genetic diversity (measured as allelic richness) in five large, connected forest patches versus five small, isolated forest patches. The graph shows mean allelic richness with standard error bars for each group.",
@@ -47,7 +47,7 @@
       "Javan rhinos are more intelligent and resist captive breeding programs.",
       "Arabian oryx reproduce faster and recover more quickly from poaching."
     ],
-    "correct": "!"
+    "correct": "B"
   },
   {
     "question": "Researchers estimate the population size of black rhinoceroses in a reserve to evaluate the effectiveness of anti-poaching patrols. They capture 20 rhinos, mark them with ear tags, and release them. One month later, they capture 50 rhinos and count how many have tags. Which method is being used?",
@@ -67,7 +67,7 @@
       "The data refute the hypothesis because native species still produce biomass when growing with invasive species, indicating that outcompetition does not occur.",
       "The data support the hypothesis only if native species biomass in the mixed treatment is lower than in the bare soil control, which is not a valid comparison."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A population of sea turtles has declined dramatically over the past 50 years due to coastal development that has destroyed 80% of their nesting beaches. Even though fishing regulations now protect adult turtles from being caught in nets, the population continues to decline. Which of the following best describes why protecting adult turtles alone is insufficient to prevent this species from becoming endangered?",
@@ -87,7 +87,7 @@
       "The plots where invasive vines are manually removed",
       "The plots where shrub growth is measured after one year"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Scientists tested whether legal protection through the Endangered Species Act (ESA) would increase population sizes of a threatened raptor species. They monitored breeding pairs in protected critical habitat areas and unprotected areas over 15 years. The table shows mean breeding pairs per survey area with standard deviations.",

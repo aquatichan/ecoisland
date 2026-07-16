@@ -10,14 +10,14 @@
     "correct": "B"
   },
   {
-    "question": "A temperate European forest has been managed 150 years by clear-cutting and replanting with single-species spruce. Spruce now covers 60% of the forest and shows reduced biodiversity, increased pest outbreaks, and declining timber quality. Managers want to restore ecological function while maintaining timber production. Which strategy most effectively achieves both goals?",
+    "question": "A temperate European forest has been managed for 150 years by clear-cutting and replanting with a single spruce species. Spruce now covers 60% of the forest, and the area shows reduced biodiversity, increased pest outbreaks, and declining timber quality. Managers want to restore ecological function while maintaining timber production. Which strategy most effectively achieves both goals?",
     "answers": [
-      "Gradually convert spruce monocultures to mixed native-species stands",
-      "Use integrated pest management to control outbreaks while keeping monocultures",
-      "Keep clear-cutting spruce monocultures but extend rotation from 40 to 60 years",
-      "Clear-cut all spruce and replant solely with native hardwoods"
+      "Gradually convert spruce monocultures to mixed stands of native species.",
+      "Use integrated pest management to control outbreaks while keeping monocultures.",
+      "Keep clear-cutting spruce monocultures but extend the rotation length from 40 to 60 years.",
+      "Clear-cut all remaining spruce at once and replant solely with native hardwoods."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A timber company compared forest recovery rates in three regions: Region A used clear-cutting with no reforestation, Region B replanted native tree species after harvesting, and Region C implemented selective logging with natural regeneration. The table shows forest canopy cover (%) at 5-year intervals after harvesting began.\nYear Region A Region B Region C\n0 95 95 95\n5 15 25 78\n10 18 52 88\n15 22 71 91\n20 28 82 94\nWhich statement best describes how reforestation efforts affect the relationship between time and forest recovery?",
@@ -60,34 +60,34 @@
     "correct": "D"
   },
   {
-    "question": "Forest pathologists test whether removing visibly infected trees reduces pine bark beetle spread. They set up 18 lodgepole pine plots: 9 treated (infected trees removed) and 9 controls. Beetle density, percent trees with galleries, and mortality are measured annually for four years. Which hypothesis best fits this experimental design?",
+    "question": "Forest pathologists test whether removing visibly infected trees reduces pine bark beetle spread. They establish 18 lodgepole pine plots: 9 treated (infected trees removed) and 9 untreated controls, and measure beetle density, percent of trees with galleries, and tree mortality annually for four years. Which hypothesis best fits this experimental design?",
     "answers": [
-      "Treated plots will show lower beetle density and fewer newly infested trees.",
-      "Removing infected trees should be implemented as standard management during outbreaks.",
-      "Removing infected trees will lower beetle numbers but not reduce new infestations.",
-      "Beetles will infest both treated and control plots equally over the study."
+      "Plots where infected trees are removed will show lower beetle density and fewer newly infested trees than untreated control plots.",
+      "Removing infected trees should be implemented as standard forest management practice during future outbreaks.",
+      "Removing infected trees will lower total beetle numbers but will not reduce the rate of new tree infestations.",
+      "Bark beetles will infest treated and control plots at statistically equal rates over the four-year study."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A boreal forest in Canada experiences severe outbreaks of spruce budworm every 8-10 years, with infestations killing 30-40% of mature spruce trees across thousands of hectares. Forest managers must decide whether to apply broad-spectrum insecticide, remove infested trees, or allow natural population cycles to continue. Which strategy would best protect forest health while minimizing ecosystem disruption?",
+    "question": "A boreal forest in Canada experiences severe spruce budworm outbreaks every 8-10 years, killing 30-40% of mature spruce trees across thousands of hectares. Forest managers must decide whether to apply broad-spectrum insecticide, remove infested trees, or allow natural population cycles to continue. Which strategy would best protect forest health while minimizing ecosystem disruption?",
     "answers": [
-      "Implement integrated pest management by removing heavily infested trees while preserving unaffected stands to maintain ecosystem structure",
-      "Allow natural budworm population cycles to continue without intervention, accepting the 30-40% tree mortality as part of natural forest dynamics",
-      "Apply broad-spectrum insecticide across the entire forest to eliminate budworm populations and prevent future outbreaks",
-      "Replace infested spruce forests with fast-growing pine plantations that are naturally resistant to budworm damage"
+      "Implement integrated pest management by removing heavily infested trees while preserving unaffected stands to maintain ecosystem structure.",
+      "Allow natural budworm population cycles to continue without intervention, accepting the 30-40% tree mortality as part of natural forest dynamics.",
+      "Apply broad-spectrum insecticide across the entire forest to eliminate budworm populations and prevent future outbreaks.",
+      "Replace infested spruce forests with fast-growing pine plantations that are naturally resistant to budworm damage."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A tropical rainforest loses 8,000 hectares yearly to cattle ranching. Cleared pastures are abandoned after 5–10 years when soils fail, and only 12% are reforested due to high costs and slow growth. Local communities depend on ranching income. Which solution would most effectively reduce deforestation while supporting livelihoods?",
+    "question": "A tropical rainforest loses 8,000 hectares yearly to cattle ranching. Cleared pastures are abandoned after 5-10 years when soils fail, and only 12% are reforested due to high costs and slow growth. Local communities depend on ranching income. Which solution would most effectively reduce deforestation while supporting livelihoods?",
     "answers": [
-      "Pay landowners to reforest with native species and certify sustainable timber sales",
-      "Ban ranching and convert all pastures to no-use protected reserves",
-      "Promote fast-growing exotic trees for quick reforestation despite lower biodiversity",
-      "Subsidize current ranching to prevent expansion without restoring degraded land"
+      "Pay landowners to reforest degraded pastures with native species and certify sustainably harvested timber for sale.",
+      "Ban cattle ranching entirely and convert all existing pastures to no-use protected reserves immediately.",
+      "Promote fast-growing exotic tree species for rapid reforestation despite their lower biodiversity value.",
+      "Subsidize current ranching operations to prevent further expansion, without restoring any already-degraded land."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An environmental justice organization states: 'Reforestation and sustainable forestry initiatives often fail to benefit the communities most impacted by deforestation. Indigenous and low-income populations who depend on forests for subsistence lose access to traditional resources when land is converted to timber plantations or protected reserves. Genuine forest mitigation must center the rights and knowledge of forest-dependent communities, not just environmental restoration metrics.' What does this argument prioritize in forest management?",

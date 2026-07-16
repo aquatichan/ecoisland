@@ -24,7 +24,6 @@
     "definition": "The position an organism occupies in a food chain, based on its source of energy.",
     "unit": "1"
   },
-
   {
     "term": "Biodiversity",
     "definition": "The variety of life in all its forms and levels, including genetic, species, and ecosystem diversity.",
@@ -50,7 +49,6 @@
     "definition": "The gradual process by which ecosystems change and develop over time.",
     "unit": "2"
   },
-
   {
     "term": "Carrying Capacity",
     "definition": "The maximum population size that an environment can sustain indefinitely.",
@@ -76,7 +74,6 @@
     "definition": "A graph showing the number of individuals surviving at each age for a given species or group.",
     "unit": "3"
   },
-
   {
     "term": "Lithosphere",
     "definition": "The rigid outer layer of the Earth composed of the crust and upper mantle.",
@@ -102,7 +99,6 @@
     "definition": "A vertical section of soil that shows all of its layers (horizons).",
     "unit": "4"
   },
-
   {
     "term": "Tragedy of the Commons",
     "definition": "A situation where individuals use shared resources for personal gain, depleting them for the group.",
@@ -128,7 +124,6 @@
     "definition": "The unintentional capture of non-target species during fishing.",
     "unit": "5"
   },
-
   {
     "term": "Renewable Energy",
     "definition": "Energy from sources that can be replenished naturally, such as solar or wind.",
@@ -154,7 +149,6 @@
     "definition": "The point at which global oil production reaches its maximum rate before decline.",
     "unit": "6"
   },
-
   {
     "term": "Primary Pollutant",
     "definition": "A pollutant emitted directly from a source, such as CO or SO2.",
@@ -180,7 +174,6 @@
     "definition": "Tiny solid or liquid particles suspended in air that can harm human health.",
     "unit": "7"
   },
-
   {
     "term": "Eutrophication",
     "definition": "The enrichment of water bodies with nutrients, leading to algal blooms and oxygen depletion.",
@@ -206,7 +199,6 @@
     "definition": "The increasing concentration of toxic substances in organisms at higher trophic levels.",
     "unit": "8"
   },
-
   {
     "term": "Greenhouse Effect",
     "definition": "The process by which certain gases trap heat in Earth's atmosphere, warming the planet.",
@@ -230,6 +222,891 @@
   {
     "term": "Positive Feedback Loop",
     "definition": "A process that amplifies change within a system, often accelerating environmental problems.",
+    "unit": "9"
+  },
+  {
+    "term": "Gross Primary Productivity (GPP)",
+    "definition": "The total rate at which producers convert solar energy into chemical energy (biomass) through photosynthesis, before subtracting the energy producers use for their own respiration.",
+    "unit": "1"
+  },
+  {
+    "term": "Net Primary Productivity (NPP)",
+    "definition": "The rate of energy storage as biomass by producers after subtracting the energy they use for cellular respiration (NPP = GPP - respiration); it represents the energy actually available to consumers.",
+    "unit": "1"
+  },
+  {
+    "term": "10% Rule",
+    "definition": "The ecological principle that, on average, only about 10% of the energy available at one trophic level is transferred to and stored as biomass in the next trophic level, with the rest lost mainly as metabolic heat.",
+    "unit": "1"
+  },
+  {
+    "term": "Biomass Pyramid",
+    "definition": "A diagram representing the total mass of living organisms at each trophic level in an ecosystem, typically showing a decrease in biomass at each successively higher level.",
+    "unit": "1"
+  },
+  {
+    "term": "Food Web",
+    "definition": "A network of interconnected food chains that represents the many feeding relationships among species within an ecosystem, in contrast to a single linear food chain.",
+    "unit": "1"
+  },
+  {
+    "term": "Detritivore",
+    "definition": "An organism, such as an earthworm or millipede, that feeds directly on dead organic matter (detritus) by physically ingesting it, aiding in nutrient cycling.",
+    "unit": "1"
+  },
+  {
+    "term": "Decomposer",
+    "definition": "An organism, such as fungi or bacteria, that breaks down dead organic matter through extracellular digestion and absorbs the released nutrients, returning them to the ecosystem.",
+    "unit": "1"
+  },
+  {
+    "term": "Nitrogen Fixation",
+    "definition": "The conversion of atmospheric nitrogen gas (N2) into ammonia or ammonium, a usable form for plants, carried out primarily by symbiotic and free-living bacteria.",
+    "unit": "1"
+  },
+  {
+    "term": "Nitrification",
+    "definition": "The two-step microbial process that converts ammonium into nitrite and then into nitrate, a form of nitrogen readily taken up by plant roots.",
+    "unit": "1"
+  },
+  {
+    "term": "Denitrification",
+    "definition": "The microbial process, carried out by anaerobic bacteria typically in waterlogged soils, that converts nitrate back into nitrogen gas, returning it to the atmosphere.",
+    "unit": "1"
+  },
+  {
+    "term": "Ammonification",
+    "definition": "The process by which decomposers convert organic nitrogen from dead organisms and waste into ammonia or ammonium, making it available for further nitrogen cycle processes.",
+    "unit": "1"
+  },
+  {
+    "term": "Cultural Eutrophication",
+    "definition": "The human-accelerated enrichment of a body of water with nutrients, primarily nitrogen and phosphorus from sources like fertilizer runoff and wastewater, that speeds up the natural eutrophication process.",
+    "unit": "1"
+  },
+  {
+    "term": "Biogeochemical Cycle",
+    "definition": "The pathway by which a chemical element or compound, such as carbon, nitrogen, phosphorus, or water, moves through both the living (biotic) and nonliving (abiotic, geological) components of Earth's systems.",
+    "unit": "1"
+  },
+  {
+    "term": "Photic Zone",
+    "definition": "The upper layer of a body of water that receives enough sunlight to support photosynthesis by phytoplankton and other aquatic producers.",
+    "unit": "1"
+  },
+  {
+    "term": "Aphotic Zone",
+    "definition": "The deeper layer of a body of water that receives insufficient or no sunlight to support photosynthesis.",
+    "unit": "1"
+  },
+  {
+    "term": "Estuary",
+    "definition": "A highly productive transitional ecosystem where freshwater from rivers mixes with saltwater from the ocean, creating brackish conditions that support diverse and abundant life.",
+    "unit": "1"
+  },
+  {
+    "term": "Trophic Cascade",
+    "definition": "A series of indirect effects that ripple through multiple trophic levels of a food web following the addition or removal of a predator, often a top or keystone predator.",
+    "unit": "1"
+  },
+  {
+    "term": "Assimilation (Nitrogen Cycle)",
+    "definition": "The process by which plant roots take up inorganic nitrogen, primarily as nitrate or ammonium, from the soil and incorporate it into organic compounds such as proteins.",
+    "unit": "1"
+  },
+  {
+    "term": "Bioaccumulation",
+    "definition": "The gradual buildup of a substance, such as a toxin or pesticide, within the tissues of a single organism over the course of its lifetime.",
+    "unit": "1"
+  },
+  {
+    "term": "Chaparral",
+    "definition": "A terrestrial biome characterized by a Mediterranean climate with hot, dry summers and mild, wet winters, dominated by drought- and fire-adapted shrubs.",
+    "unit": "1"
+  },
+  {
+    "term": "Species Evenness",
+    "definition": "A measure of how equally individuals are distributed among the different species present in a community; a community with more even distribution has higher species diversity for a given richness.",
+    "unit": "2"
+  },
+  {
+    "term": "Biodiversity Hotspot",
+    "definition": "A biogeographic region with an exceptionally high concentration of endemic species that has also lost a significant proportion of its original habitat, making it a conservation priority.",
+    "unit": "2"
+  },
+  {
+    "term": "Endemic Species",
+    "definition": "A species that is native to and found only within a specific, often limited, geographic region and nowhere else on Earth.",
+    "unit": "2"
+  },
+  {
+    "term": "Genetic Bottleneck",
+    "definition": "A sharp reduction in population size that results in a significant loss of genetic diversity, leaving the surviving population more vulnerable to disease and environmental change.",
+    "unit": "2"
+  },
+  {
+    "term": "Founder Effect",
+    "definition": "A reduction in genetic diversity that occurs when a new population is established by a small number of individuals from a larger original population.",
+    "unit": "2"
+  },
+  {
+    "term": "Provisioning Service",
+    "definition": "A category of ecosystem service that provides a tangible product directly used by humans, such as food, fresh water, timber, or medicinal resources.",
+    "unit": "2"
+  },
+  {
+    "term": "Regulating Service",
+    "definition": "A category of ecosystem service in which natural processes moderate environmental conditions, such as water purification, flood control, climate regulation, or pollination.",
+    "unit": "2"
+  },
+  {
+    "term": "Cultural Service",
+    "definition": "A category of ecosystem service providing non-material benefits, such as recreational, spiritual, aesthetic, or educational value derived from nature.",
+    "unit": "2"
+  },
+  {
+    "term": "Supporting Service",
+    "definition": "A category of ecosystem service that underlies the production of all other services, such as nutrient cycling, soil formation, and primary production.",
+    "unit": "2"
+  },
+  {
+    "term": "Island Biogeography",
+    "definition": "The ecological theory explaining species richness on islands (or isolated habitats) as an equilibrium determined by the balance between immigration rate and extinction rate, both influenced by island size and distance from a colonization source.",
+    "unit": "2"
+  },
+  {
+    "term": "Habitat Fragmentation",
+    "definition": "The process by which a large, continuous habitat is broken into smaller, isolated patches, often due to human land use, reducing effective habitat area and increasing edge effects.",
+    "unit": "2"
+  },
+  {
+    "term": "Edge Effect",
+    "definition": "The changes in environmental conditions, such as increased light, wind, and temperature, that occur at the boundary between two habitat types, often favoring edge-adapted or invasive species over interior specialists.",
+    "unit": "2"
+  },
+  {
+    "term": "Fundamental Niche",
+    "definition": "The full range of environmental conditions and resources a species could theoretically use or tolerate in the absence of competition or other biotic constraints.",
+    "unit": "2"
+  },
+  {
+    "term": "Realized Niche",
+    "definition": "The actual range of environmental conditions and resources a species uses in practice, which is often narrower than its fundamental niche due to competition or other species interactions.",
+    "unit": "2"
+  },
+  {
+    "term": "Range of Tolerance",
+    "definition": "The range of a given environmental variable, such as temperature or salinity, within which a species can survive and reproduce, bounded by an optimal zone and zones of physiological stress.",
+    "unit": "2"
+  },
+  {
+    "term": "Stenotopic Species",
+    "definition": "A species with a narrow range of ecological tolerance for one or more environmental factors, making it more sensitive to environmental change.",
+    "unit": "2"
+  },
+  {
+    "term": "Eurytopic Species",
+    "definition": "A species with a wide range of ecological tolerance for one or more environmental factors, allowing it to survive across varied environmental conditions.",
+    "unit": "2"
+  },
+  {
+    "term": "Primary Succession",
+    "definition": "The sequential establishment of biotic communities on newly exposed substrate that previously supported no life and contains no soil, such as bare rock after glacial retreat or volcanic activity.",
+    "unit": "2"
+  },
+  {
+    "term": "Secondary Succession",
+    "definition": "The re-establishment of a biotic community in an area where soil and some organisms remain following a disturbance, such as fire or agricultural abandonment.",
+    "unit": "2"
+  },
+  {
+    "term": "Pioneer Species",
+    "definition": "The first species, such as lichens or mosses, to colonize a barren or disturbed environment, often beginning the process of soil formation for later successional species.",
+    "unit": "2"
+  },
+  {
+    "term": "Population Momentum",
+    "definition": "The tendency for a population to continue growing for a period even after fertility rates decline to replacement level, driven by a disproportionately large existing cohort of young people who have not yet passed through reproductive age.",
+    "unit": "3"
+  },
+  {
+    "term": "Total Fertility Rate (TFR)",
+    "definition": "The average number of children a woman would be expected to have during her reproductive lifetime, based on current age-specific birth rates.",
+    "unit": "3"
+  },
+  {
+    "term": "Replacement-Level Fertility",
+    "definition": "The total fertility rate, approximately 2.1 children per woman in developed countries, at which a population would eventually stabilize in size in the absence of migration.",
+    "unit": "3"
+  },
+  {
+    "term": "Age Structure Diagram",
+    "definition": "A graphical representation, often shown as a population pyramid, of the number or percentage of individuals in a population within specific age and sex categories.",
+    "unit": "3"
+  },
+  {
+    "term": "r-Selected Species",
+    "definition": "A species characterized by rapid reproduction, many small offspring, minimal parental care, short lifespan, and populations that fluctuate near or below carrying capacity.",
+    "unit": "3"
+  },
+  {
+    "term": "K-Selected Species",
+    "definition": "A species characterized by slow reproduction, few large offspring, extensive parental care, long lifespan, and populations that tend to stabilize near an environment's carrying capacity.",
+    "unit": "3"
+  },
+  {
+    "term": "Population Overshoot",
+    "definition": "A condition in which a population temporarily exceeds the carrying capacity of its environment, often followed by a rapid population decline (crash) due to resource depletion.",
+    "unit": "3"
+  },
+  {
+    "term": "Population Crash",
+    "definition": "A sharp, rapid decline in population size that typically follows overshoot of carrying capacity, driven by resource depletion, starvation, or disease.",
+    "unit": "3"
+  },
+  {
+    "term": "Logistic Growth Model",
+    "definition": "A population growth model producing an S-shaped (sigmoidal) curve, in which growth rate slows as population size approaches the environment's carrying capacity.",
+    "unit": "3"
+  },
+  {
+    "term": "Exponential Growth Model",
+    "definition": "A population growth model producing a J-shaped curve, describing growth that occurs at a constant per capita rate under unlimited resource conditions.",
+    "unit": "3"
+  },
+  {
+    "term": "Density-Independent Factor",
+    "definition": "A factor, such as a natural disaster or extreme weather event, that limits population size regardless of how crowded (dense) the population currently is.",
+    "unit": "3"
+  },
+  {
+    "term": "Demographic Transition Model",
+    "definition": "A model describing the historical shift in a country's birth and death rates as it undergoes economic development, typically progressing through four (or five) stages from high to low rates.",
+    "unit": "3"
+  },
+  {
+    "term": "Ecological Footprint",
+    "definition": "A measure of the amount of biologically productive land and water area required to produce the resources a population consumes and to absorb the waste it generates.",
+    "unit": "3"
+  },
+  {
+    "term": "IPAT Equation",
+    "definition": "A formula (Impact = Population x Affluence x Technology) used to estimate the overall environmental impact of a human population, accounting for both population size and per-capita consumption and technological factors.",
+    "unit": "3"
+  },
+  {
+    "term": "Doubling Time",
+    "definition": "The number of years required for a population to double in size at its current growth rate, commonly estimated using the rule of 70 (doubling time approximately 70 divided by the percentage growth rate).",
+    "unit": "3"
+  },
+  {
+    "term": "Rate of Natural Increase",
+    "definition": "The rate of population growth calculated from birth and death rates alone, excluding the effects of immigration and emigration.",
+    "unit": "3"
+  },
+  {
+    "term": "Infant Mortality Rate",
+    "definition": "The number of deaths of infants under one year of age per 1,000 live births in a given year, often used as a key indicator of a population's health and development level.",
+    "unit": "3"
+  },
+  {
+    "term": "Life Expectancy",
+    "definition": "The average number of years an individual is expected to live, based on current age-specific mortality rates in a population.",
+    "unit": "3"
+  },
+  {
+    "term": "Zero Population Growth (ZPG)",
+    "definition": "A state in which a population's birth rate equals its death rate, resulting in no net change in population size (excluding migration).",
+    "unit": "3"
+  },
+  {
+    "term": "Asthenosphere",
+    "definition": "The soft, plastic layer of the upper mantle beneath the lithosphere over which tectonic plates move; its partially molten rock allows slow convective flow.",
+    "unit": "4"
+  },
+  {
+    "term": "Subduction Zone",
+    "definition": "A region where one tectonic plate is forced beneath another and sinks into the mantle, often producing deep ocean trenches, earthquakes, and volcanic arcs.",
+    "unit": "4"
+  },
+  {
+    "term": "Divergent Plate Boundary",
+    "definition": "A boundary where two tectonic plates move apart, allowing magma to rise and form new crust, as at mid-ocean ridges and continental rift valleys.",
+    "unit": "4"
+  },
+  {
+    "term": "Transform Plate Boundary",
+    "definition": "A boundary where two tectonic plates slide horizontally past one another, generating frequent shallow earthquakes but typically little volcanic activity or new crust.",
+    "unit": "4"
+  },
+  {
+    "term": "Weathering",
+    "definition": "The physical breakdown or chemical alteration of rock and minerals at or near Earth's surface, which is the first step in soil formation.",
+    "unit": "4"
+  },
+  {
+    "term": "Parent Material",
+    "definition": "The underlying geological material, such as bedrock or transported sediment, from which soil develops through weathering and other soil-forming processes.",
+    "unit": "4"
+  },
+  {
+    "term": "Leaching",
+    "definition": "The process by which water dissolves and carries nutrients, minerals, or contaminants downward through soil, often reducing topsoil fertility.",
+    "unit": "4"
+  },
+  {
+    "term": "Cation Exchange Capacity (CEC)",
+    "definition": "A measure of a soil's ability to hold and exchange positively charged nutrient ions, such as calcium and potassium, making them available for plant uptake.",
+    "unit": "4"
+  },
+  {
+    "term": "Porosity",
+    "definition": "The percentage of a soil's or rock's volume that consists of open pore space, which affects its capacity to hold water and air.",
+    "unit": "4"
+  },
+  {
+    "term": "Permeability",
+    "definition": "A measure of how easily water or air can move through soil or rock, determined largely by the size and connectivity of pore spaces.",
+    "unit": "4"
+  },
+  {
+    "term": "Tropopause",
+    "definition": "The boundary between the troposphere and the stratosphere, marked by a shift from decreasing to increasing temperature with altitude.",
+    "unit": "4"
+  },
+  {
+    "term": "Hadley Cell",
+    "definition": "A large-scale atmospheric circulation pattern in which warm air rises at the equator, moves poleward, and descends around 30° latitude, driving the trade winds.",
+    "unit": "4"
+  },
+  {
+    "term": "Rain Shadow Effect",
+    "definition": "A pattern of reduced precipitation on the leeward (downwind) side of a mountain range, caused by air losing its moisture as it rises and cools on the windward side.",
+    "unit": "4"
+  },
+  {
+    "term": "Orographic Lifting",
+    "definition": "The process by which moist air is forced upward over rising terrain, cooling and condensing to produce precipitation on the windward side of mountains.",
+    "unit": "4"
+  },
+  {
+    "term": "Thermocline",
+    "definition": "A distinct layer in a body of water, such as the ocean, where temperature changes rapidly with depth, separating warmer surface water from colder deep water.",
+    "unit": "4"
+  },
+  {
+    "term": "Upwelling",
+    "definition": "The rise of cold, nutrient-rich water from ocean depths to the surface, often driven by wind patterns, which supports high primary productivity and fisheries.",
+    "unit": "4"
+  },
+  {
+    "term": "Coriolis Effect",
+    "definition": "The apparent deflection of moving air and water caused by Earth's rotation, curving winds and currents to the right in the Northern Hemisphere and to the left in the Southern Hemisphere.",
+    "unit": "4"
+  },
+  {
+    "term": "Solar Insolation",
+    "definition": "The amount of solar radiation energy received per unit area at a given location and time, which varies with latitude, season, and time of day.",
+    "unit": "4"
+  },
+  {
+    "term": "Axial Tilt",
+    "definition": "The approximately 23.5° tilt of Earth's rotational axis relative to its orbital plane, which is the primary cause of Earth's seasons.",
+    "unit": "4"
+  },
+  {
+    "term": "Southern Oscillation",
+    "definition": "The atmospheric pressure component of the El Niño-Southern Oscillation (ENSO), reflecting the reversal of surface air pressure between the eastern and western tropical Pacific.",
+    "unit": "4"
+  },
+  {
+    "term": "Open-Access Resource",
+    "definition": "A resource that no single individual or entity owns or controls access to, making it vulnerable to overexploitation as described by the tragedy of the commons.",
+    "unit": "5"
+  },
+  {
+    "term": "Individual Transferable Quota (ITQ)",
+    "definition": "A management tool that allocates a specific, enforceable, and tradable share of a total allowable catch to individual fishers, intended to reduce overfishing incentives.",
+    "unit": "5"
+  },
+  {
+    "term": "Shelterwood Cutting",
+    "definition": "A forest harvesting method that removes trees in a series of partial cuts over time, leaving some mature trees standing to provide shade and seed for regeneration.",
+    "unit": "5"
+  },
+  {
+    "term": "High-Yield Variety (HYV)",
+    "definition": "A crop cultivar bred or selected to produce greater yields than traditional varieties, often requiring more water, fertilizer, and pesticides, central to the Green Revolution.",
+    "unit": "5"
+  },
+  {
+    "term": "Monoculture",
+    "definition": "The agricultural practice of growing a single crop species over a large area, which increases yield efficiency but raises vulnerability to pests, disease, and environmental stress.",
+    "unit": "5"
+  },
+  {
+    "term": "Salinization",
+    "definition": "The accumulation of salts in soil, often caused by evaporation of irrigation water in poorly drained arid regions, which reduces soil fertility and crop productivity.",
+    "unit": "5"
+  },
+  {
+    "term": "Economic Threshold",
+    "definition": "In integrated pest management, the pest population density at which the cost of crop damage equals or exceeds the cost of control measures, justifying intervention.",
+    "unit": "5"
+  },
+  {
+    "term": "Concentrated Animal Feeding Operation (CAFO)",
+    "definition": "A large-scale industrial facility that raises livestock at high density, often associated with concentrated waste production and water pollution risks.",
+    "unit": "5"
+  },
+  {
+    "term": "Overfishing",
+    "definition": "The harvesting of fish from a body of water at a rate faster than the population can naturally replenish itself, leading to declining stock abundance.",
+    "unit": "5"
+  },
+  {
+    "term": "Maximum Sustainable Yield (MSY)",
+    "definition": "The largest harvest of a renewable resource, such as fish or timber, that can be removed indefinitely without depleting the resource's ability to regenerate.",
+    "unit": "5"
+  },
+  {
+    "term": "Mountaintop Removal Mining",
+    "definition": "A surface coal mining method that removes the top of a mountain to access underlying coal seams, generating large volumes of overburden often deposited in adjacent valleys.",
+    "unit": "5"
+  },
+  {
+    "term": "Overburden",
+    "definition": "Soil and rock material that lies above a mineral or coal deposit and must be removed during surface mining, often disposed of as waste.",
+    "unit": "5"
+  },
+  {
+    "term": "Urban Heat Island",
+    "definition": "A metropolitan area that is significantly warmer than its surrounding rural areas due to human activities and the heat-absorbing properties of pavement and buildings.",
+    "unit": "5"
+  },
+  {
+    "term": "Impervious Surface",
+    "definition": "A hard surface, such as pavement or rooftops, that prevents water infiltration into the ground, increasing surface runoff volume and speed.",
+    "unit": "5"
+  },
+  {
+    "term": "Biocapacity",
+    "definition": "The capacity of a given area of biologically productive land and water to generate resources and absorb waste, used as a benchmark against ecological footprint.",
+    "unit": "5"
+  },
+  {
+    "term": "Bioswale",
+    "definition": "A landscaped, vegetated channel or depression designed to capture, slow, and filter stormwater runoff, allowing pollutants to settle and water to infiltrate.",
+    "unit": "5"
+  },
+  {
+    "term": "Integrated Multi-Trophic Aquaculture (IMTA)",
+    "definition": "An aquaculture approach that cultivates species from different trophic levels together, such as fish alongside seaweed or shellfish, so that byproducts of one species become inputs for another, reducing waste.",
+    "unit": "5"
+  },
+  {
+    "term": "Selective Cutting",
+    "definition": "A forest harvesting method that removes only individual mature or targeted trees, leaving the majority of the forest stand intact to preserve habitat and reduce erosion.",
+    "unit": "5"
+  },
+  {
+    "term": "Environmental Impact Statement (EIS)",
+    "definition": "A document required under the National Environmental Policy Act that assesses the potential environmental effects of a proposed major federal action before it proceeds.",
+    "unit": "5"
+  },
+  {
+    "term": "No-Till Farming",
+    "definition": "An agricultural practice that avoids plowing or turning the soil before planting, reducing soil erosion and preserving soil structure and organic matter.",
+    "unit": "5"
+  },
+  {
+    "term": "Energy Return on Investment (EROI)",
+    "definition": "The ratio of usable energy obtained from a resource to the energy expended to extract, process, and deliver that resource; higher values indicate more efficient net energy gain.",
+    "unit": "6"
+  },
+  {
+    "term": "Net Energy",
+    "definition": "The amount of usable energy remaining after subtracting the energy required to locate, extract, process, and transport an energy resource.",
+    "unit": "6"
+  },
+  {
+    "term": "Proven Reserves",
+    "definition": "The quantity of a natural resource, such as oil or coal, that can be extracted profitably with current technology and prices, based on geological and economic certainty.",
+    "unit": "6"
+  },
+  {
+    "term": "Hydraulic Fracturing",
+    "definition": "A drilling technique that injects high-pressure fluid into rock formations to create fractures that release trapped natural gas or oil, associated with groundwater contamination and induced seismicity risks.",
+    "unit": "6"
+  },
+  {
+    "term": "Nuclear Fission",
+    "definition": "The splitting of a heavy atomic nucleus, such as uranium-235, into smaller nuclei, releasing large amounts of energy used to generate heat in nuclear power plants.",
+    "unit": "6"
+  },
+  {
+    "term": "Radioactive Waste",
+    "definition": "Hazardous byproducts of nuclear fission that remain radioactive for long periods, requiring secure long-term storage to prevent environmental and health hazards.",
+    "unit": "6"
+  },
+  {
+    "term": "Carbon Neutral",
+    "definition": "Describing a process or fuel source whose net carbon dioxide emissions are effectively zero because emissions released are balanced by an equivalent amount absorbed elsewhere, such as through plant regrowth.",
+    "unit": "6"
+  },
+  {
+    "term": "Photovoltaic (PV) Cell",
+    "definition": "A semiconductor-based device that directly converts sunlight into electrical energy through the photovoltaic effect.",
+    "unit": "6"
+  },
+  {
+    "term": "Concentrated Solar Power (CSP)",
+    "definition": "A solar energy technology that uses mirrors or lenses to focus sunlight onto a receiver, generating heat that is used to produce steam and drive a turbine.",
+    "unit": "6"
+  },
+  {
+    "term": "Passive Solar Design",
+    "definition": "Building design strategies, such as south-facing windows and thermal mass, that capture and store solar heat without mechanical or electrical equipment.",
+    "unit": "6"
+  },
+  {
+    "term": "Capacity Factor",
+    "definition": "The ratio of the actual electricity output of a power source over time to the maximum possible output if it operated at full capacity continuously; reflects reliability.",
+    "unit": "6"
+  },
+  {
+    "term": "Baseload Power",
+    "definition": "The minimum continuous level of electricity demand that a grid must supply at all times, typically met by reliable, high-capacity-factor sources such as nuclear, coal, or hydroelectric.",
+    "unit": "6"
+  },
+  {
+    "term": "Intermittency",
+    "definition": "The variable, non-continuous availability of an energy source, such as solar or wind power, due to changing weather or time-of-day conditions.",
+    "unit": "6"
+  },
+  {
+    "term": "Steam Methane Reforming",
+    "definition": "The most common industrial method of producing hydrogen gas, in which natural gas reacts with steam under heat and pressure, releasing carbon dioxide as a byproduct.",
+    "unit": "6"
+  },
+  {
+    "term": "Electrolysis (of Water)",
+    "definition": "A process that uses electrical current to split water into hydrogen and oxygen gas; when powered by renewable electricity, it can produce low-emission hydrogen fuel.",
+    "unit": "6"
+  },
+  {
+    "term": "Enteric Fermentation",
+    "definition": "A digestive process in ruminant animals, such as cattle, in which gut microbes break down plant material and produce methane as a byproduct, a major source of livestock greenhouse gas emissions.",
+    "unit": "6"
+  },
+  {
+    "term": "Levelized Cost of Energy (LCOE)",
+    "definition": "A metric representing the average total cost of building and operating a power-generating asset over its lifetime, divided by total electricity output, used to compare different energy sources.",
+    "unit": "6"
+  },
+  {
+    "term": "Run-of-River Hydroelectric",
+    "definition": "A hydroelectric power design that generates electricity from the natural flow of a river with little or no large-scale water storage, reducing reservoir-related habitat impacts compared to conventional dams.",
+    "unit": "6"
+  },
+  {
+    "term": "Geothermal Gradient",
+    "definition": "The rate at which Earth's temperature increases with depth below the surface, which determines the feasibility of extracting geothermal energy in a given location.",
+    "unit": "6"
+  },
+  {
+    "term": "Cut-In Speed",
+    "definition": "The minimum wind speed at which a wind turbine begins to generate usable electricity; below this speed, the turbine remains idle.",
+    "unit": "6"
+  },
+  {
+    "term": "Criteria Air Pollutant",
+    "definition": "One of six common air pollutants (particulate matter, ground-level ozone, carbon monoxide, sulfur dioxide, nitrogen dioxide, and lead) for which the EPA sets National Ambient Air Quality Standards under the Clean Air Act.",
+    "unit": "7"
+  },
+  {
+    "term": "Volatile Organic Compound (VOC)",
+    "definition": "A carbon-based chemical that evaporates readily at room temperature; VOCs from vehicle exhaust, paints, and solvents react with nitrogen oxides in sunlight to form photochemical smog and ground-level ozone.",
+    "unit": "7"
+  },
+  {
+    "term": "Sick Building Syndrome",
+    "definition": "A condition in which occupants of a tightly sealed, poorly ventilated building experience headaches, respiratory irritation, and fatigue linked to the buildup of indoor air pollutants such as VOCs and mold.",
+    "unit": "7"
+  },
+  {
+    "term": "Radon",
+    "definition": "A colorless, odorless radioactive gas produced by the natural decay of uranium in soil and rock; it can seep into buildings through foundation cracks and is the second-leading cause of lung cancer in the United States.",
+    "unit": "7"
+  },
+  {
+    "term": "Electrostatic Precipitator",
+    "definition": "An air pollution control device that gives particulate matter in exhaust gas an electric charge so the particles are attracted to and collected on oppositely charged plates before release.",
+    "unit": "7"
+  },
+  {
+    "term": "Wet Scrubber",
+    "definition": "A pollution control device that sprays a liquid (often an alkaline slurry) through polluted exhaust gas to dissolve and remove gaseous pollutants such as sulfur dioxide and to capture particulates.",
+    "unit": "7"
+  },
+  {
+    "term": "Catalytic Converter",
+    "definition": "A vehicle emission control device that uses a catalyst to convert carbon monoxide, nitrogen oxides, and unburned hydrocarbons in exhaust into less harmful carbon dioxide, nitrogen gas, and water vapor.",
+    "unit": "7"
+  },
+  {
+    "term": "Acid Deposition",
+    "definition": "The falling of acidic pollutants (from sulfur dioxide and nitrogen oxide emissions) from the atmosphere to Earth's surface as either wet deposition (acid rain, snow, fog) or dry deposition (acidic gases and particles).",
+    "unit": "7"
+  },
+  {
+    "term": "Buffering Capacity",
+    "definition": "The ability of a soil or water body, often due to the presence of alkaline minerals like calcium carbonate, to neutralize acid inputs and resist changes in pH.",
+    "unit": "7"
+  },
+  {
+    "term": "Criteria for Noise Pollution",
+    "definition": "Environmental noise, typically measured in decibels, that reaches levels sufficient to cause hearing damage, stress, or disruption of wildlife communication and behavior.",
+    "unit": "7"
+  },
+  {
+    "term": "Point Source (Air Pollution)",
+    "definition": "A single, identifiable, stationary source of air pollution, such as a smokestack or factory outfall, that can be directly monitored and regulated with a discharge permit.",
+    "unit": "7"
+  },
+  {
+    "term": "Fugitive Emissions",
+    "definition": "Pollutants released into the atmosphere in an unplanned or uncontrolled way, such as leaks from pipelines, storage tanks, or industrial equipment, rather than through a defined stack or vent.",
+    "unit": "7"
+  },
+  {
+    "term": "Global Dimming",
+    "definition": "A gradual reduction in the amount of solar radiation reaching Earth's surface, attributed largely to increased atmospheric aerosols and particulate matter that reflect and scatter incoming sunlight.",
+    "unit": "7"
+  },
+  {
+    "term": "Ozone Precursor",
+    "definition": "A chemical, such as nitrogen oxides or volatile organic compounds, that does not itself deplete air quality directly but reacts photochemically in the atmosphere to form ground-level ozone.",
+    "unit": "7"
+  },
+  {
+    "term": "PM2.5",
+    "definition": "Fine particulate matter with a diameter of 2.5 micrometers or smaller; because of its small size, it can penetrate deep into the lungs and enter the bloodstream, making it especially harmful to human health.",
+    "unit": "7"
+  },
+  {
+    "term": "Vapor Recovery System",
+    "definition": "A technology, commonly used at gas station fuel pumps, that captures gasoline vapors released during refueling and returns them to a storage tank instead of allowing them to escape into the atmosphere.",
+    "unit": "7"
+  },
+  {
+    "term": "Off-Gassing",
+    "definition": "The release of volatile organic compounds or other chemicals from a solid material, such as new carpet, furniture, or paint, into the surrounding air over time.",
+    "unit": "7"
+  },
+  {
+    "term": "Endocrine Disruptor",
+    "definition": "A synthetic or natural chemical that interferes with the body's hormone (endocrine) system by mimicking, blocking, or altering the normal function of hormones, potentially causing developmental, reproductive, or metabolic harm.",
+    "unit": "8"
+  },
+  {
+    "term": "Persistent Organic Pollutant (POP)",
+    "definition": "A synthetic organic chemical, such as DDT or PCBs, that resists environmental degradation, bioaccumulates in fatty tissue, and can travel long distances through air and water.",
+    "unit": "8"
+  },
+  {
+    "term": "Bioaccumulation",
+    "definition": "The gradual buildup of a persistent, often fat-soluble substance within the tissues of an individual organism over its lifetime, occurring faster than the organism can excrete or metabolize the substance.",
+    "unit": "8"
+  },
+  {
+    "term": "Thermal Pollution",
+    "definition": "A harmful increase in water temperature, often caused by the discharge of heated cooling water from power plants or industrial facilities, that reduces dissolved oxygen solubility and stresses aquatic organisms.",
+    "unit": "8"
+  },
+  {
+    "term": "Oxygen Sag Curve",
+    "definition": "A graph showing the drop and gradual recovery of dissolved oxygen concentration in a river downstream of an organic pollution source, caused by aerobic decomposition of the added organic matter.",
+    "unit": "8"
+  },
+  {
+    "term": "LD50",
+    "definition": "The dose of a substance, usually expressed in milligrams per kilogram of body weight, that is lethal to 50% of a test population within a specified exposure period; a standard measure of acute toxicity.",
+    "unit": "8"
+  },
+  {
+    "term": "Dose-Response Curve",
+    "definition": "A graph, typically S-shaped (sigmoidal), showing the relationship between the dose of a substance an organism receives and the magnitude of its biological response, such as percent mortality.",
+    "unit": "8"
+  },
+  {
+    "term": "Threshold Dose",
+    "definition": "The minimum dose of a substance at which a measurable biological effect first begins to occur; doses below this level produce no detectable response.",
+    "unit": "8"
+  },
+  {
+    "term": "Acute Toxicity",
+    "definition": "Harmful health effects resulting from a single exposure or short-term, high-dose exposure to a substance, with effects appearing rapidly.",
+    "unit": "8"
+  },
+  {
+    "term": "Chronic Toxicity",
+    "definition": "Harmful health effects resulting from long-term, repeated exposure to lower doses of a substance, often producing cumulative damage that appears gradually over time.",
+    "unit": "8"
+  },
+  {
+    "term": "Sanitary Landfill",
+    "definition": "An engineered municipal solid waste disposal site that uses an impermeable liner, a leachate collection system, and daily soil cover to reduce groundwater contamination, odor, and pest access compared to an open dump.",
+    "unit": "8"
+  },
+  {
+    "term": "Leachate",
+    "definition": "Liquid that has percolated through solid waste in a landfill, picking up dissolved contaminants and potentially polluting groundwater if not properly collected and treated.",
+    "unit": "8"
+  },
+  {
+    "term": "Waste Management Hierarchy",
+    "definition": "The EPA-endorsed ranking of waste management strategies from most to least preferred: source reduction, reuse, recycling/composting, energy recovery, and disposal (landfilling or incineration).",
+    "unit": "8"
+  },
+  {
+    "term": "Source Reduction",
+    "definition": "A waste management strategy that reduces the amount or toxicity of waste generated in the first place, considered the most effective strategy in the waste management hierarchy.",
+    "unit": "8"
+  },
+  {
+    "term": "Sewage Sludge (Biosolids)",
+    "definition": "The solid, nutrient-rich byproduct remaining after wastewater treatment, which can be treated and applied to land as fertilizer or disposed of in a landfill or incinerator.",
+    "unit": "8"
+  },
+  {
+    "term": "Tertiary Treatment",
+    "definition": "The most advanced stage of wastewater treatment, using chemical or advanced filtration methods to remove dissolved nutrients (like nitrogen and phosphorus) and pathogens that primary and secondary treatment do not remove.",
+    "unit": "8"
+  },
+  {
+    "term": "Vector-Borne Disease",
+    "definition": "An infectious disease transmitted to humans through the bite of an infected organism, such as a mosquito or tick, whose range and abundance are often influenced by environmental and climatic conditions.",
+    "unit": "8"
+  },
+  {
+    "term": "Pathogen",
+    "definition": "A microorganism, such as a bacterium, virus, or parasite, capable of causing disease in a host organism.",
+    "unit": "8"
+  },
+  {
+    "term": "Mangrove Deforestation",
+    "definition": "The clearing of coastal mangrove forests, often for aquaculture ponds or coastal development, which eliminates critical nursery habitat, storm buffering, and carbon storage services.",
+    "unit": "8"
+  },
+  {
+    "term": "Stratospheric Ozone Depletion",
+    "definition": "The thinning of the protective ozone layer in the stratosphere, primarily caused by human-released chlorine- and bromine-containing chemicals such as CFCs, resulting in increased UV radiation reaching Earth's surface.",
+    "unit": "9"
+  },
+  {
+    "term": "Montreal Protocol",
+    "definition": "A 1987 international treaty in which signatory nations agreed to phase out the production of chlorofluorocarbons (CFCs) and other ozone-depleting substances; widely regarded as one of the most successful environmental agreements.",
+    "unit": "9"
+  },
+  {
+    "term": "Chlorofluorocarbon (CFC)",
+    "definition": "A synthetic compound formerly used widely in refrigerants, aerosol propellants, and foam-blowing agents that releases chlorine atoms in the stratosphere, catalytically destroying ozone molecules.",
+    "unit": "9"
+  },
+  {
+    "term": "Hydrofluorocarbon (HFC)",
+    "definition": "A synthetic refrigerant developed to replace ozone-depleting CFCs; HFCs have zero ozone depletion potential but many are extremely potent greenhouse gases, illustrating an environmental trade-off.",
+    "unit": "9"
+  },
+  {
+    "term": "Global Warming Potential (GWP)",
+    "definition": "A measure of how much heat a given mass of greenhouse gas traps in the atmosphere relative to the same mass of carbon dioxide over a specified time period, typically 100 years.",
+    "unit": "9"
+  },
+  {
+    "term": "Radiative Forcing",
+    "definition": "A measure of the change in energy balance in the Earth-atmosphere system caused by a factor such as increased greenhouse gas concentration, expressed in watts per square meter.",
+    "unit": "9"
+  },
+  {
+    "term": "Permafrost",
+    "definition": "Ground that remains permanently frozen for at least two consecutive years, common in Arctic and high-altitude regions; thawing permafrost releases stored organic carbon as methane and carbon dioxide.",
+    "unit": "9"
+  },
+  {
+    "term": "Polar Amplification",
+    "definition": "The phenomenon by which polar regions experience greater temperature increases than the global average in response to climate change, driven largely by reduced albedo from melting ice and snow.",
+    "unit": "9"
+  },
+  {
+    "term": "Thermal Expansion (Sea Level Rise)",
+    "definition": "The increase in ocean volume that occurs as seawater warms and its molecules spread further apart, contributing to global sea level rise alongside melting land ice.",
+    "unit": "9"
+  },
+  {
+    "term": "Coral Bleaching",
+    "definition": "The process by which heat-stressed coral expels the symbiotic algae (zooxanthellae) living in its tissue, causing the coral to turn white and lose its primary energy source, often leading to coral death if stress persists.",
+    "unit": "9"
+  },
+  {
+    "term": "Zooxanthellae",
+    "definition": "Photosynthetic algae that live symbiotically within coral tissue, providing the coral with the majority of its energy through photosynthesis in exchange for shelter and nutrients.",
+    "unit": "9"
+  },
+  {
+    "term": "Carbonate Ion Availability",
+    "definition": "The concentration of carbonate ions (CO3²⁻) dissolved in seawater, which is reduced by ocean acidification and is essential for marine organisms that build calcium carbonate shells and skeletons.",
+    "unit": "9"
+  },
+  {
+    "term": "Calcifying Organism",
+    "definition": "An organism, such as a coral, mollusk, or pteropod, that builds a shell or skeleton from calcium carbonate, making it particularly vulnerable to the reduced carbonate availability caused by ocean acidification.",
+    "unit": "9"
+  },
+  {
+    "term": "Invasive Species",
+    "definition": "A nonnative species introduced to an ecosystem, intentionally or accidentally, that spreads aggressively and causes ecological or economic harm, often due to a lack of natural predators or competitors in its new range.",
+    "unit": "9"
+  },
+  {
+    "term": "r-Selected Species",
+    "definition": "A species characterized by rapid reproduction, short generation times, and many offspring with low individual parental investment; many successful invasive species exhibit r-selected traits.",
+    "unit": "9"
+  },
+  {
+    "term": "K-Selected Species",
+    "definition": "A species characterized by slow reproduction, long generation times, and few offspring with high parental investment, making populations slow to recover from disturbances such as overharvesting.",
+    "unit": "9"
+  },
+  {
+    "term": "IUCN Red List",
+    "definition": "A global inventory maintained by the International Union for Conservation of Nature that classifies species according to their extinction risk, from Least Concern to Extinct.",
+    "unit": "9"
+  },
+  {
+    "term": "Habitat Fragmentation",
+    "definition": "The breaking up of a large, continuous habitat into smaller, isolated patches, typically due to human land use, which reduces gene flow, increases edge effects, and elevates local extinction risk for interior-dependent species.",
+    "unit": "9"
+  },
+  {
+    "term": "Wildlife Corridor",
+    "definition": "A strip of habitat connecting otherwise isolated patches that allows animals to move between them, promoting gene flow, reducing inbreeding, and helping to counteract the effects of habitat fragmentation.",
+    "unit": "9"
+  },
+  {
+    "term": "Edge Effect",
+    "definition": "The ecological changes that occur at the boundary between two habitat types, often favoring generalist and edge-adapted species over interior specialist species and altering microclimate, light, and predation pressure.",
+    "unit": "9"
+  },
+  {
+    "term": "Sixth Mass Extinction",
+    "definition": "The term used to describe the current elevated rate of species extinction, attributed primarily to cumulative human activities including habitat destruction, overharvesting, pollution, invasive species, and climate change.",
+    "unit": "9"
+  },
+  {
+    "term": "Assisted Migration",
+    "definition": "A conservation strategy in which humans intentionally relocate a species to a new area predicted to become climatically suitable in the future, used when natural dispersal cannot keep pace with shifting climate zones.",
     "unit": "9"
   }
 ]

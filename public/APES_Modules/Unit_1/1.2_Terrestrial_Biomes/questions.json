@@ -40,14 +40,39 @@
     "correct": "D"
   },
   {
-    "question": "After a Southeast Asian rainforest is cleared for cattle pasture, monsoon rains cause severe erosion and nutrient loss within five years. Why is the pasture more susceptible than the original forest?",
+    "question": "After a Southeast Asian rainforest is cleared for cattle pasture, monsoon rains cause severe erosion and nutrient loss within five years. Why is the pasture more susceptible to erosion than the original forest?",
     "answers": [
-      "Forest canopy and deep roots intercept rainfall and anchor soil against erosion.",
-      "Pasture plants add some organic matter but lack deep roots and canopy.",
-      "Cattle trampling compacts soil, lowers infiltration, and increases runoff and erosion.",
-      "Tropical soils are nutrient-poor but erosion depends primarily on vegetation cover."
+      "The dense forest canopy intercepted rainfall before it struck bare soil, and the deep, extensive root systems of trees anchored soil in place, while pasture grasses provide neither the canopy interception nor the deep rooting needed to resist heavy monsoon rains",
+      "Pasture plants add slightly less organic matter to soil than forest trees, which alone is sufficient to explain the dramatic increase in erosion observed",
+      "Cattle trampling is the sole cause of increased erosion, since it compacts soil and lowers infiltration independent of any change in vegetation structure",
+      "Tropical soils are inherently nutrient-poor, and this nutrient limitation is the primary driver of the erosion observed, regardless of vegetation cover"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Rainforest vs. Cattle Pasture: Erosion After Clearing",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Land Cover",
+        "Root Depth",
+        "Canopy Cover",
+        "Erosion After 5 Yrs of Monsoon Rain"
+      ],
+      "rows": [
+        [
+          "Original rainforest",
+          "Deep",
+          "Dense",
+          "Minimal"
+        ],
+        [
+          "Cattle pasture",
+          "Shallow",
+          "Sparse",
+          "Severe"
+        ]
+      ]
+    }
   },
   {
     "question": "A soil scientist measured soil organic matter percentage by mass in four biomes at three depths: surface (0-10 cm), subsurface (10-30 cm), and deep (30-60 cm).\nBiome Surface (%) Subsurface (%) Deep (%)\nTropical rainforest 8.2 2.1 0.3\nTemperate deciduous forest 6.5 1.8 0.4\nTemperate grassland 5.1 2.3 1.2\nTundra 4.2 3.1 2.8\nBased on these data, which conclusion about soil development and organic matter distribution in terrestrial biomes is best supported?",
@@ -60,34 +85,105 @@
     "correct": "C"
   },
   {
-    "question": "Ecologists studying plant adaptations in African savannas established 12 plots in 400–600 mm annual rainfall and 12 plots in 800–1000 mm. Soils and elevation were similar. They measured species composition, leaf size, and root depth for two years. Why did they choose plots across two precipitation ranges?",
+    "question": "Ecologists studying plant adaptations in African savannas established 12 plots receiving 400-600 mm annual rainfall and 12 plots receiving 800-1000 mm annual rainfall, keeping soils and elevation similar across all plots. They measured species composition, leaf size, and root depth over two years. Why did the researchers choose to sample plots across two distinct precipitation ranges rather than a single range?",
     "answers": [
-      "To isolate rainfall effects by holding soil and elevation constant.",
-      "To ensure one rainfall range would produce measurable plant differences.",
-      "To increase sample size and thereby improve statistical power for tests.",
-      "To claim savannas occur across all global precipitation levels worldwide."
+      "Sampling across two rainfall ranges while holding soil and elevation constant allows the researchers to isolate the effect of precipitation on plant traits by comparing outcomes under different moisture conditions",
+      "Using two precipitation ranges guarantees that at least one range will show a measurable and statistically significant difference in plant traits",
+      "Including a second precipitation range simply increases the total sample size, which is the only reason it improves the statistical power of the comparison",
+      "Sampling two precipitation ranges lets the researchers claim that savannas occur across the full range of global precipitation levels"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "African Savanna Study Plot Design",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Plot Group",
+        "Annual Rainfall (mm)",
+        "Number of Plots",
+        "Soil/Elevation"
+      ],
+      "rows": [
+        [
+          "Group 1",
+          "400-600",
+          12,
+          "Held constant"
+        ],
+        [
+          "Group 2",
+          "800-1000",
+          12,
+          "Held constant"
+        ]
+      ]
+    }
   },
   {
-    "question": "A conservation organization publishes a report stating: 'The expansion of cattle ranching into the Brazilian cerrado savanna has converted over 50% of this biome to pastureland. While this land use generates significant agricultural revenue, the cerrado's unique plant and animal communities—many found nowhere else on Earth—face extinction. Protecting the remaining cerrado through expanded national parks and indigenous land rights is essential to preserve global biodiversity.' Which value does this statement prioritize?",
+    "question": "A conservation organization publishes a report stating: 'The expansion of cattle ranching into the Brazilian cerrado savanna has converted over 50% of this biome to pastureland. While this land use generates significant agricultural revenue, the cerrado's unique plant and animal communities -- many found nowhere else on Earth -- face extinction. Protecting the remaining cerrado through expanded national parks and indigenous land rights is essential to preserve global biodiversity.' Which value does this statement prioritize?",
     "answers": [
-      "Preserving ecosystem biodiversity over economic returns from land conversion",
-      "Preserving cerrado ecosystem services that support regional agriculture over short-term economic returns",
-      "Preserving cerrado biodiversity primarily for its potential pharmaceutical and genetic resources for human benefit",
-      "Balancing cerrado biodiversity conservation with sustainable cattle ranching practices that minimize further conversion"
+      "Preserving the cerrado's biodiversity, including its endemic species, over the short-term economic returns generated by converting the land to pasture",
+      "Preserving cerrado ecosystem services that directly support regional agricultural productivity over any other consideration",
+      "Preserving cerrado biodiversity primarily for its potential future pharmaceutical and genetic value to humans, rather than for its own sake",
+      "Balancing cerrado biodiversity conservation equally with continued expansion of sustainable cattle ranching practices"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "pie",
+      "title": "Brazilian Cerrado Land Use",
+      "sourceNote": "Hypothetical data for this exercise",
+      "slices": [
+        {
+          "label": "Converted to pastureland",
+          "value": 50
+        },
+        {
+          "label": "Remaining native cerrado",
+          "value": 50
+        }
+      ]
+    }
   },
   {
-    "question": "Researchers grew seedlings of two Mojave Desert shrubs in a greenhouse with identical soil and light. They applied five soil moisture levels (5%, 15%, 25%, 35%, 45% volumetric water content) and measured survival, growth rate, and stomatal conductance for 12 weeks. Which hypothesis best matches this experimental design?",
+    "question": "Researchers grew seedlings of two Mojave Desert shrub species in a greenhouse with identical soil and light conditions. They applied five soil moisture levels (5%, 15%, 25%, 35%, 45% volumetric water content) and measured survival, growth rate, and stomatal conductance over 12 weeks. Which hypothesis best matches the design of this experiment?",
     "answers": [
-      "Higher soil moisture increases growth and stomatal conductance and improves survival.",
-      "Water extraction should be limited to protect desert shrubs and ecosystem function.",
-      "Soil moisture is the most important factor limiting plant growth in deserts.",
-      "Desert plants evolved adaptations that allow survival under very dry conditions."
+      "Increasing soil moisture availability will increase seedling growth rate and stomatal conductance and will improve overall survival for both desert shrub species",
+      "Water extraction from desert aquifers should be limited by policy in order to protect desert shrub populations and preserve broader ecosystem function",
+      "Soil moisture is the single most important factor limiting plant growth across all desert biomes worldwide, more so than temperature or light",
+      "Desert shrub species have evolved morphological and physiological adaptations that allow them to survive under consistently very dry conditions"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Mojave Desert Shrub Seedling Experiment",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Soil Moisture (% VWC)",
+        "Measured Variables"
+      ],
+      "rows": [
+        [
+          5,
+          "Survival, growth rate, stomatal conductance"
+        ],
+        [
+          15,
+          "Survival, growth rate, stomatal conductance"
+        ],
+        [
+          25,
+          "Survival, growth rate, stomatal conductance"
+        ],
+        [
+          35,
+          "Survival, growth rate, stomatal conductance"
+        ],
+        [
+          45,
+          "Survival, growth rate, stomatal conductance"
+        ]
+      ]
+    }
   },
   {
     "question": "Shrubland biomes in Southern California, Australia, and South America have hot dry summers, mild wet winters, and frequent wildfires. How does this climate shape characteristic plant adaptations?",

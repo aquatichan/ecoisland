@@ -30,14 +30,73 @@
     "correct": "D"
   },
   {
-    "question": "A wetland monitoring program recorded water depth and emergent vegetation cover for five years. Year 1 45 cm depth, 62% vegetation. Year 2 38 cm, 71% vegetation. Year 3 28 cm, 84% vegetation. Year 4 18 cm, 91% vegetation. Year 5 8 cm, 96% vegetation. Sediment accumulation averaged 6 to 8 cm per year. Which conclusion about freshwater wetland succession is best supported by these data?",
+    "question": "A wetland monitoring program recorded water depth and emergent vegetation cover for five years: Year 1, 45 cm depth and 62% vegetation cover; Year 2, 38 cm and 71%; Year 3, 28 cm and 84%; Year 4, 18 cm and 91%; Year 5, 8 cm and 96%. Sediment accumulation averaged 6-8 cm per year throughout the study. Which conclusion is best supported by these data?",
     "answers": [
-      "Sediment buildup is filling the wetland, shallowing water and increasing emergent plants.",
-      "Vegetation expansion is a response to sediment-driven shallowing rather than a cause.",
-      "Vegetation transpiration cannot explain the measured sediment-driven loss of water.",
-      "No meaningful relationship exists between water depth and vegetation cover."
+      "Ongoing sediment accumulation is gradually filling the wetland basin, causing water to become shallower over time, which in turn allows emergent vegetation to expand further into the open water",
+      "The expansion of emergent vegetation is the primary cause of sediment accumulation, since plant roots trap sediment faster as vegetation cover increases",
+      "Vegetation transpiration alone accounts for the loss of water depth observed over the five-year study period",
+      "The data show no meaningful relationship between water depth and the extent of emergent vegetation cover in this wetland"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Wetland Water Depth and Vegetation Cover Over Time",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Water depth (cm)",
+          "points": [
+            {
+              "x": 1,
+              "y": 45
+            },
+            {
+              "x": 2,
+              "y": 38
+            },
+            {
+              "x": 3,
+              "y": 28
+            },
+            {
+              "x": 4,
+              "y": 18
+            },
+            {
+              "x": 5,
+              "y": 8
+            }
+          ]
+        },
+        {
+          "name": "Vegetation cover (%)",
+          "points": [
+            {
+              "x": 1,
+              "y": 62
+            },
+            {
+              "x": 2,
+              "y": 71
+            },
+            {
+              "x": 3,
+              "y": 84
+            },
+            {
+              "x": 4,
+              "y": 91
+            },
+            {
+              "x": 5,
+              "y": 96
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Depth (cm) / Cover (%)"
+    }
   },
   {
     "question": "A biologist claims rising ocean temperatures cause global coral bleaching. She cites bleaching rising from once every 25–30 years in the 1980s to annual events in some regions and lab studies showing coral-algae symbiosis breaks down at 1–2°C above seasonal averages. Which limitation best describes how this evidence supports her causal claim?",
@@ -80,14 +139,14 @@
     "correct": "B"
   },
   {
-    "question": "The diagram shows a pond with a shallow littoral zone, a deeper limnetic zone with phytoplankton, and a benthic zone with decomposers. Why are algae the main photosynthetic organisms in the limnetic zone rather than rooted aquatic plants?",
+    "question": "A pond ecosystem has a shallow littoral zone near shore, a deeper open-water limnetic zone with suspended phytoplankton, and a benthic zone with decomposers at the bottom. Why are phytoplankton the dominant photosynthetic organisms in the limnetic zone rather than rooted aquatic plants?",
     "answers": [
-      "Limnetic waters are too deep for rooted plants so phytoplankton remain suspended",
-      "Rooted plants need sediment to anchor which the limnetic zone lacks",
-      "Nutrient levels do not explain this because depth prevents root establishment",
-      "Algae reproduce rapidly but reproduction speed does not allow plants to occupy deep water"
+      "The limnetic zone is too deep for light to reach the bottom for rooted plants to grow, so free-floating phytoplankton that remain suspended near the surface are able to photosynthesize instead",
+      "Rooted aquatic plants require anchoring sediment, and the limnetic zone's water is too turbulent for roots to remain fixed in place",
+      "Nutrient levels in the limnetic zone are too low to support rooted plants, regardless of how much light reaches the bottom",
+      "Phytoplankton reproduce more rapidly than rooted plants, and this faster reproduction rate is what prevents rooted plants from colonizing deep water"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers investigating algal productivity in lakes collected water samples from the littoral zone, limnetic zone, and profundal zone of three lakes classified as oligotrophic, mesotrophic, and eutrophic. At each zone and lake type, they measured chlorophyll-a concentration weekly for one year. Which of the following best describes the independent variables in this study?",

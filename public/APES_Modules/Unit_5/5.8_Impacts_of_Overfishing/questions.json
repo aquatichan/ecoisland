@@ -1,13 +1,13 @@
 [
   {
-    "question": "In many ocean regions, fishing regulations establish catch quotas that limit the total amount of fish that can be harvested annually. However, individual fishing vessels often compete to catch their share of the quota before other vessels deplete it, leading to rapid, intensive fishing. Which of the following best explains how this competitive dynamic contributes to overfishing despite the existence of catch limits?",
+    "question": "In many ocean regions, fishing regulations set annual catch quotas limiting total harvest. However, individual vessels often compete to catch their share before other vessels exhaust the quota, leading to rapid, intensive fishing effort concentrated in short time windows. Which of the following best explains how this competitive dynamic contributes to overfishing even when the total quota is set at a theoretically sustainable level?",
     "answers": [
-      "Vessels racing to catch their quota share before others deplete the total allowance leads to unsustainable harvest rates that exceed fish population reproduction, even though the total quota may theoretically be sustainable.",
-      "Vessels racing to catch their quota share before others deplete the total allowance leads to concentrated fishing during spawning periods that disrupts reproductive behavior, even though the total quota may theoretically be sustainable.",
-      "Vessels racing to catch their quota share before others deplete the total allowance leads to geographically concentrated fishing that depletes localized populations faster than they can reproduce, even though the total quota may theoretically be sustainable.",
-      "Vessels racing to catch their quota share before others deplete the total allowance leads to unsustainable harvest rates that exceed fish population reproduction because the quota itself is set above sustainable levels."
+      "The race to catch fish before others exhaust the shared quota concentrates fishing effort in time and space, which can locally deplete spawning aggregations or damage habitat even though the total catch stays within the overall quota.",
+      "Racing to catch fish before others deplete the quota causes vessels to spend so much time searching that they end up catching less than the sustainable total quota allows.",
+      "The race to catch the quota causes vessels to switch to entirely different, non-quota species, which is the actual cause of any resulting overfishing.",
+      "Vessels racing to catch their share disperse fishing effort evenly across time and space, which prevents any local depletion from occurring."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A Mediterranean region reports a 40 percent decline in European eel populations over 20 years. Eels migrate to the ocean to spawn and glass eels must return to freshwater rivers to mature. Dams built for hydroelectric power and irrigation block juvenile migration, and commercial fishing removes adults during spawning. Which intervention would most effectively address this overfishing-related decline?",

@@ -7,7 +7,7 @@
       "A point-source SO2 problem with uniform concentrations across distances and respiratory harm.",
       "A nonpoint-source SO2 problem with decreasing concentrations and nearby respiratory harm."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A coal plant emits carbon dioxide, sulfur dioxide, mercury, and particulate matter. Nitrogen oxides react in the atmosphere to form nitric acid. Which statement best explains how these pollutants differently affect air quality?",
@@ -80,23 +80,23 @@
     "correct": "B"
   },
   {
-    "question": "An air quality researcher argues that increased nitrogen oxide (NOx) emissions in urban areas cause elevated ground-level ozone concentrations. The researcher presents data showing that NOx emissions have increased 40% over the past decade and ground-level ozone concentrations have increased 35% during the same period in the same cities. Which of the following best identifies an assumption the author's reasoning depends on?",
+    "question": "The Clean Air Act requires the EPA to set National Ambient Air Quality Standards (NAAQS) for six criteria pollutants. Which of the following is one of the six EPA criteria pollutants?",
     "answers": [
-      "Nitrogen oxides participate in photochemical reactions with volatile organic compounds in the presence of sunlight to produce ground-level ozone, and the temporal correlation between increased NOx and increased ozone demonstrates this causal relationship.",
-      "Nitrogen oxides participate in photochemical reactions with volatile organic compounds in the presence of sunlight to produce ground-level ozone in direct proportion to NOx concentrations, and the temporal correlation between increased NOx and increased ozone demonstrates this linear relationship.",
-      "Nitrogen oxides participate in photochemical reactions with volatile organic compounds to produce ground-level ozone regardless of sunlight availability, and the temporal correlation between increased NOx and increased ozone demonstrates this causal relationship.",
-      "Nitrogen oxides participate in photochemical reactions with volatile organic compounds in the presence of sunlight to produce ground-level ozone, and the temporal correlation alone is sufficient to prove causation without considering other factors that may have changed simultaneously."
+      "Carbon monoxide",
+      "Chlorofluorocarbons",
+      "Radon",
+      "Methane"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A researcher reports that children within 500 meters of major highways have higher asthma rates from nitrogen dioxide, particulate matter, and volatile organic compounds and concludes current air quality standards fail to protect vulnerable populations. Which stakeholder perspective does this statement most clearly represent?",
+    "question": "A city's air quality index (AQI) is most directly used to communicate which of the following to the public?",
     "answers": [
-      "Environmental justice advocates focused on protecting children and marginalized communities",
-      "Urban planners focused on reducing traffic congestion in residential areas",
-      "Air quality scientists documenting pollutant concentrations without making policy claims",
-      "Transportation industry representatives minimizing regulatory burdens on vehicle manufacturers"
+      "The long-term trend in a region's contribution to global greenhouse gas emissions",
+      "The current health risk posed by ambient pollutant concentrations relative to standards",
+      "The total mass of pollutants emitted by a specific point source that day",
+      "The economic cost of pollution control technology installed at local facilities"
     ],
-    "correct": "!"
+    "correct": "B"
   }
 ]

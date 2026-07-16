@@ -30,14 +30,14 @@
     "correct": "C"
   },
   {
-    "question": "A semi-arid region depends on groundwater. Annual recharge is 45 million m3/yr and extraction is 78 million m3/yr. Which research question best guides investigation of whether current use is sustainable?",
+    "question": "A semi-arid region depends heavily on groundwater. Annual aquifer recharge is 45 million cubic meters per year, while current extraction is 78 million cubic meters per year. Which research question would best guide an investigation into whether current groundwater use in this region is sustainable?",
     "answers": [
-      "Does annual extraction exceed recharge and cause long-term overdraft?",
-      "Groundwater must be protected and current extraction is unsustainable.",
-      "How have extraction rates changed over 20 years and why?",
-      "Should farmers reduce irrigation to secure municipal water supplies?"
+      "Over what time period will continued extraction at 78 million cubic meters per year, compared to a recharge rate of 45 million cubic meters per year, deplete the aquifer's usable storage?",
+      "Groundwater must be protected, and current extraction rates in the region are clearly unsustainable and should be banned immediately.",
+      "What is the market price of water rights in the region, and how has that price changed over the past decade?",
+      "Should farmers in the region switch to growing different crops regardless of their water requirements?"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A coastal region produces 8 million tons of food per year while using 12 billion gallons of irrigation water. Soil erosion averages 2.5 t/ha/year and soil formation 0.5 t/ha/year. Farmers apply 150,000 tons of synthetic fertilizer yearly to maintain yields. Which modification does the data best support?",

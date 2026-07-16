@@ -1,13 +1,13 @@
 [
   {
-    "question": "Public forests are open to logging firms with minimal harvest limits. Each firm seeks to maximize profit. Why does this often cause forest depletion?",
+    "question": "Public forests are open to logging firms with minimal harvest limits, and each firm seeks to maximize its own profit. Why does this open-access arrangement often lead to forest depletion?",
     "answers": [
-      "Each firm overharvests to maximize profit so collective extraction exceeds regeneration",
-      "Selective cutting removes mature trees while preserving young growth for future harvest",
-      "Intensive logging increases sunlight and thus accelerates forest regeneration",
-      "Restricting access drives firms to illegal harvesting in protected areas and depletes forests"
+      "Because no single firm bears the full cost of overharvesting, each firm has an incentive to extract as much timber as possible before competitors do, so collective extraction exceeds the forest's regeneration rate.",
+      "Selective cutting practices remove only mature trees while carefully preserving young growth for future harvests.",
+      "Intensive logging increases sunlight reaching the forest floor, which accelerates regeneration faster than harvest rates.",
+      "Restricting access to the forest would drive firms toward illegal harvesting in protected areas, so open access actually prevents depletion."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A hydrogeologist finds farmers pump 8 billion gallons annually while the aquifer recharges 5 billion. The hydrogeologist predicts farmers will keep pumping despite awareness of the decline. Which assumption most directly supports this prediction?",
@@ -30,14 +30,14 @@
     "correct": "C"
   },
   {
-    "question": "A diagram illustrates an aquifer system with arrows showing water extraction by individual farmers and natural recharge from precipitation. A table displays water table depth (meters below surface) over 25 years: Year 0 = 5 m, Year 5 = 8 m, Year 10 = 12 m, Year 15 = 18 m, Year 20 = 25 m, Year 25 = 35 m. Which statement best explains the relationship between individual farmer irrigation decisions and the accelerating water table decline shown in the data?",
+    "question": "A diagram illustrates an aquifer system with arrows showing water extraction by individual farmers and natural recharge from precipitation. A table shows water table depth (meters below surface) over 25 years: Year 0 = 5 m, Year 5 = 8 m, Year 10 = 12 m, Year 15 = 18 m, Year 20 = 25 m, Year 25 = 35 m. Which statement best explains the relationship between individual farmer irrigation decisions and the accelerating water table decline shown in the data?",
     "answers": [
-      "Individual farmers pump groundwater to maximize crop yields, but collective extraction exceeds aquifer recharge rate, causing water table decline that eventually makes pumping economically unfeasible for all.",
+      "Individual farmers pump groundwater to maximize crop yields, but collective extraction exceeds the aquifer's recharge rate, causing the water table to decline at an accelerating pace that will eventually make pumping economically unfeasible for all users.",
       "Individual farmers pump groundwater to maximize crop yields, but collective extraction is filtered through soil layers, removing contaminants and improving water quality for all users.",
       "Individual farmers pump groundwater to maximize crop yields, but collective extraction stimulates deeper aquifer recharge from surrounding regions, maintaining stable water availability.",
-      "Municipal water authorities pump groundwater to maximize crop yields, but collective extraction exceeds aquifer recharge rate, causing water table decline that eventually makes pumping economically unfeasible."
+      "Municipal water authorities, not individual farmers, are primarily responsible for the extraction shown, and their pumping is unrelated to the water table decline."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A fisheries economist reports the fishery fell from 500,000 tons in 1990 to 50,000 tons in 2024 while fishing effort rose 300 percent. The economist argues this shows a tragedy of the commons because vessels keep maximizing catch despite collapsing stocks. Which implicit assumption best underlies the author's argument?",
@@ -70,14 +70,14 @@
     "correct": "C"
   },
   {
-    "question": "A city's daily vehicle trips rose from 50,000 to 200,000 over twenty years. Drivers value personal convenience and view their own pollution as negligible. Respiratory disease rates rose citywide, yet no driver cut back. Which best explains why collective air pollution worsened despite individually rational driving choices?",
+    "question": "A city's daily vehicle trips rose from 50,000 to 200,000 over twenty years. Drivers value personal convenience and view their own individual contribution to pollution as negligible. Respiratory disease rates rose citywide over the same period, yet no individual driver reduced their driving. Which explanation best accounts for why collective air pollution worsened despite each driver behaving in a way that seemed individually rational?",
     "answers": [
-      "Each driver perceives negligible harm so no restraint, producing collective pollution.",
-      "Weak enforcement of emission standards allowed more polluting vehicles on roads.",
-      "Changes in weather patterns could reduce pollutant dispersal and worsen air quality.",
-      "Simultaneous industrial emissions could also raise pollution, complicating attribution."
+      "Each driver perceives their own contribution to air pollution as too small to matter, so no individual has an incentive to reduce driving, even though the sum of all these individually rational choices produces significant collective harm.",
+      "Weak enforcement of vehicle emission standards allowed increasingly polluting vehicles onto the road over the twenty-year period.",
+      "Changes in regional weather patterns reduced pollutant dispersal, worsening measured air quality independent of vehicle trip growth.",
+      "Simultaneous growth in industrial emissions over the same period could also explain rising pollution, complicating attribution to vehicle trips alone."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Which research question best tests whether the tragedy of the commons explains aquifer depletion in unregulated versus quota-regulated areas?",

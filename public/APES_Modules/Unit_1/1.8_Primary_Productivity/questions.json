@@ -1,13 +1,13 @@
 [
   {
-    "question": "In a marine food web where phytoplankton are producers and large predatory fish are top consumers, why is total predator biomass much smaller than phytoplankton biomass?",
+    "question": "In a marine food web where phytoplankton are producers and large predatory fish are top consumers, why is total predator biomass much smaller than total phytoplankton biomass?",
     "answers": [
-      "Energy is lost at each trophic transfer so less energy supports predators",
-      "Phytoplankton reproduce rapidly so they can accumulate more biomass than consumers",
-      "Predators convert food to biomass more efficiently than producers do",
-      "Predators have higher metabolic rates so each individual consumes more energy"
+      "Energy is lost as metabolic heat and through respiration at each trophic transfer, so progressively less energy remains available to support biomass at higher trophic levels",
+      "Phytoplankton simply reproduce more rapidly than fish, which alone explains why their standing biomass exceeds that of predators regardless of energy flow",
+      "Predators convert the food they consume into new biomass more efficiently than producers convert sunlight into biomass",
+      "Predatory fish have higher metabolic rates, and this alone -- independent of trophic energy loss -- explains why predator biomass is smaller"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An ecologist claims deep-ocean photosynthesis is limited by light rather than nutrients. Evidence given: blue light penetrates beyond 100 meters, red light is absorbed within the upper meter, and deep phytoplankton have pigments tuned to blue light. Which additional evidence would most directly support light as the primary limiting factor?",
@@ -50,14 +50,36 @@
     "correct": "D"
   },
   {
-    "question": "Researchers comparing gross primary productivity between a temperate deciduous forest and a tropical rainforest used identical measurement chambers and protocols at both sites. However, they measured productivity continuously for 12 months in the tropical forest but only during the growing season (May through October) in the temperate forest. A major limitation of this measurement approach is that it",
+    "question": "Researchers comparing gross primary productivity (GPP) between a temperate deciduous forest and a tropical rainforest used identical measurement chambers and protocols at both sites. However, they measured productivity continuously for 12 months in the tropical forest but only during the growing season (May-September) in the temperate forest, then compared the two totals directly. Why is this comparison method a problem?",
     "answers": [
-      "prevents accurate comparison of annual gross primary productivity between the two forests because the temperate forest data excludes winter months when productivity is minimal",
-      "prevents accurate comparison of annual gross primary productivity between the two forests because the temperate forest data excludes winter months when productivity remains substantial",
-      "prevents accurate comparison of annual gross primary productivity between the two forests because the definition of growing season varies between forest types and cannot be standardized",
-      "allows accurate comparison of annual gross primary productivity between the two forests if the temperate forest data is proportionally scaled to represent a full year"
+      "It prevents an accurate comparison of annual GPP between the two forests, because the temperate forest's total excludes winter months when the tropical forest continues photosynthesizing and accumulating additional productivity",
+      "It does not prevent an accurate comparison, because temperate forests have zero productivity outside the growing season, so excluding winter has no effect on the annual total",
+      "It prevents an accurate comparison solely because the definition of 'growing season' is inconsistent across all forest biome types globally",
+      "It allows an accurate comparison as long as the temperate forest's five-month total is simply multiplied by 12/5 to estimate an annual value"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "GPP Measurement Coverage: Temperate vs. Tropical Forest",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Site",
+        "Months Measured",
+        "Coverage"
+      ],
+      "rows": [
+        [
+          "Tropical rainforest",
+          "12 (Jan-Dec)",
+          "Full year"
+        ],
+        [
+          "Temperate deciduous forest",
+          "5 (May-Sep)",
+          "Growing season only"
+        ]
+      ]
+    }
   },
   {
     "question": "Scientists measured oxygen at 0, 1, 5, 10, and 20 meters during day and night weekly for a year. Why sample multiple depths instead of only the surface?",

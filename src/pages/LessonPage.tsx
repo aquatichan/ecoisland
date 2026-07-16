@@ -3,8 +3,9 @@ import "../styles/content.css";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { units, learningModules } from "../data/units";
-import { ChevronDown, ChevronUp, ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowLeft, ArrowRight, BookOpen, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import StimulusChart from "@/components/StimulusChart";
 
 type ContentBlock =
   | { type: "heading";   text: string }
@@ -23,8 +24,50 @@ export default function LessonPage() {
   const [vocab, setVocab]         = useState({});
   const [openUnits, setOpenUnits] = useState<Record<number, boolean>>({ [unitNum]: true });
 
+  // Inline practice quiz state (no rewards — that's the graded quiz on /apes)
+  const [quizOpen, setQuizOpen]   = useState(false);
+  const [qIndex, setQIndex]       = useState(0);
+  const [qSelected, setQSelected] = useState<number | null>(null);
+  const [qScore, setQScore]       = useState(0);
+  const [qDone, setQDone]         = useState(false);
+
+  // Inline vocab flashcards state
+  const [vocabOpen, setVocabOpen] = useState(false);
+  const [vIndex, setVIndex]       = useState(0);
+  const [vFlipped, setVFlipped]   = useState(false);
+
   const lessons      = units[unitNum];
   const lessonFolder = lessons?.find(l => l === lesson);
+
+  const LETTERS = ["A", "B", "C", "D", "E", "F"];
+  // questions.json stores `correct` as a letter (A–D). Some rows carry a
+  // corrupt placeholder ("!") — return -1 so the quiz simply doesn't mark any
+  // option correct rather than crashing or mislabeling a real answer.
+  const letterToIndex = (c: unknown): number => {
+    if (typeof c !== "string") return -1;
+    const idx = LETTERS.indexOf(c.trim().toUpperCase());
+    return idx;
+  };
+
+  // vocab.json is a flat { term: definition } map — flatten to cards.
+  const vocabCards = Object.entries(vocab || {}).map(([term, definition]) => ({
+    term,
+    definition: String(definition),
+  }));
+
+  const openQuiz = () => { setQIndex(0); setQSelected(null); setQScore(0); setQDone(false); setQuizOpen(true); };
+  const openVocab = () => { setVIndex(0); setVFlipped(false); setVocabOpen(true); };
+
+  const answerQuiz = (idx: number) => {
+    if (qSelected !== null) return;
+    setQSelected(idx);
+    if (idx === letterToIndex(questions[qIndex]?.correct)) setQScore(s => s + 1);
+  };
+
+  const nextQuiz = () => {
+    if (qIndex < questions.length - 1) { setQIndex(i => i + 1); setQSelected(null); }
+    else setQDone(true);
+  };
 
   useEffect(() => {
     if (!lessonFolder) return;
@@ -153,15 +196,15 @@ export default function LessonPage() {
           {(questions.length > 0 || Object.keys(vocab).length > 0) && (
             <div className="flex gap-3 mt-12 pt-8" style={{ borderTop: "2px solid var(--border-card)" }}>
               {questions.length > 0 && (
-                <button className="px-6 py-3 rounded-xl font-bold text-sm text-white"
+                <button onClick={openQuiz} className="px-6 py-3 rounded-xl font-bold text-sm text-white"
                   style={{ background: "linear-gradient(135deg,#00c896,#06b6d4)" }}>
-                  Take Quiz
+                  Take Quiz ({questions.length})
                 </button>
               )}
-              {Object.keys(vocab).length > 0 && (
-                <button className="px-6 py-3 rounded-xl font-bold text-sm"
+              {vocabCards.length > 0 && (
+                <button onClick={openVocab} className="px-6 py-3 rounded-xl font-bold text-sm"
                   style={{ background: "var(--bg-subtle)", color: "var(--text-secondary)", border: "2px solid var(--border-card)" }}>
-                  Study Vocab
+                  Study Vocab ({vocabCards.length})
                 </button>
               )}
             </div>
@@ -190,6 +233,159 @@ export default function LessonPage() {
           </div>
         </div>
       </main>
+
+      {/* ── Practice Quiz overlay ── */}
+      <AnimatePresence>
+        {quizOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
+            onClick={() => setQuizOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              onClick={e => e.stopPropagation()}
+              className="w-full max-w-2xl eco-card p-8 max-h-[90vh] overflow-y-auto"
+            >
+              {!qDone ? (() => {
+                const q = questions[qIndex];
+                const correctIdx = letterToIndex(q?.correct);
+                const pct = Math.round(((qIndex + 1) / questions.length) * 100);
+                return (
+                  <>
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--text-faint)" }}>
+                        Question {qIndex + 1} / {questions.length}
+                      </span>
+                      <button onClick={() => setQuizOpen(false)} className="p-1 rounded-lg transition-colors"
+                        style={{ color: "var(--text-faint)" }}><X className="w-5 h-5" /></button>
+                    </div>
+                    <div className="h-1.5 rounded-full mb-7 overflow-hidden" style={{ background: "var(--bg-muted)" }}>
+                      <motion.div className="h-full rounded-full" style={{ background: "linear-gradient(90deg,#00c896,#06b6d4)" }}
+                        animate={{ width: `${pct}%` }} transition={{ duration: 0.4 }} />
+                    </div>
+
+                    {q?.stimulus && <StimulusChart stimulus={q.stimulus} />}
+
+                    <h2 className="text-xl font-bold mb-7 leading-relaxed" style={{ color: "var(--text-primary)" }}>{q?.question}</h2>
+
+                    <div className="space-y-3">
+                      {(q?.answers || []).map((opt: string, idx: number) => {
+                        const isSelected = qSelected === idx;
+                        const isCorrect  = idx === correctIdx;
+                        let bg = "var(--bg-subtle)", border = "var(--border-input)", textColor = "var(--text-body)";
+                        if (isSelected && isCorrect)  { bg = "rgba(0,200,150,0.12)"; border = "#00c896"; textColor = "#059669"; }
+                        if (isSelected && !isCorrect) { bg = "rgba(239,68,68,0.1)";  border = "#ef4444"; textColor = "#dc2626"; }
+                        if (!isSelected && qSelected !== null && isCorrect) { bg = "rgba(0,200,150,0.08)"; border = "#00c896"; }
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => answerQuiz(idx)}
+                            disabled={qSelected !== null}
+                            className="w-full text-left px-5 py-3.5 rounded-xl font-medium text-sm flex items-center gap-3 transition-all"
+                            style={{ background: bg, border: `2px solid ${border}`, color: textColor, cursor: qSelected !== null ? "default" : "pointer" }}
+                          >
+                            <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0"
+                              style={{ background: "var(--bg-muted)", color: "var(--text-muted)" }}>
+                              {LETTERS[idx]}
+                            </span>
+                            {opt}
+                            {isSelected && isCorrect  && <CheckCircle className="w-4 h-4 ml-auto text-emerald-500" />}
+                            {isSelected && !isCorrect && <XCircle    className="w-4 h-4 ml-auto text-red-500" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {qSelected !== null && (
+                      <motion.button
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                        onClick={nextQuiz}
+                        className="w-full mt-7 py-3 rounded-xl font-bold text-white"
+                        style={{ background: "linear-gradient(135deg,#00c896,#06b6d4)" }}
+                      >
+                        {qIndex < questions.length - 1 ? "Next Question →" : "See Results"}
+                      </motion.button>
+                    )}
+                  </>
+                );
+              })() : (
+                <div className="text-center py-6">
+                  <div className="text-6xl font-black mb-2" style={{
+                    background: qScore / questions.length >= 0.7 ? "linear-gradient(135deg,#00c896,#06b6d4)" : "linear-gradient(135deg,#f97316,#ef4444)",
+                    WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
+                  }}>{Math.round((qScore / questions.length) * 100)}%</div>
+                  <p className="text-sm mb-8" style={{ color: "var(--text-muted)" }}>
+                    {qScore} correct out of {questions.length} questions
+                  </p>
+                  <div className="flex gap-3">
+                    <button onClick={openQuiz} className="flex-1 py-3 rounded-xl font-bold text-sm"
+                      style={{ background: "var(--bg-subtle)", color: "var(--text-secondary)", border: "2px solid var(--border-card)" }}>
+                      Retake
+                    </button>
+                    <button onClick={() => setQuizOpen(false)} className="flex-1 py-3 rounded-xl font-bold text-sm text-white"
+                      style={{ background: "linear-gradient(135deg,#00c896,#06b6d4)" }}>
+                      Back to Lesson
+                    </button>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Vocab flashcards overlay ── */}
+      <AnimatePresence>
+        {vocabOpen && vocabCards.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4"
+            style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
+            onClick={() => setVocabOpen(false)}
+          >
+            <div onClick={e => e.stopPropagation()} className="w-full max-w-lg flex flex-col items-center">
+              <div className="flex items-center justify-between w-full mb-4">
+                <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.85)" }}>
+                  {vIndex + 1} / {vocabCards.length}
+                </p>
+                <button onClick={() => setVocabOpen(false)} className="p-1 rounded-lg"
+                  style={{ color: "rgba(255,255,255,0.7)" }}><X className="w-5 h-5" /></button>
+              </div>
+
+              <motion.div
+                key={`${vIndex}-${vFlipped}`}
+                initial={{ rotateY: 90, opacity: 0 }} animate={{ rotateY: 0, opacity: 1 }} transition={{ duration: 0.25 }}
+                onClick={() => setVFlipped(f => !f)}
+                className="w-full cursor-pointer eco-card p-12 text-center select-none"
+                style={{ minHeight: 240, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+              >
+                <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#00c896" }}>
+                  {vFlipped ? "Definition" : "Term"}
+                </p>
+                <h2 className="text-2xl font-bold leading-relaxed" style={{ color: "var(--text-primary)" }}>
+                  {vFlipped ? vocabCards[vIndex]?.definition : vocabCards[vIndex]?.term}
+                </h2>
+                <p className="text-xs mt-6" style={{ color: "var(--text-faint)" }}>tap to flip</p>
+              </motion.div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => { setVIndex(i => (i > 0 ? i - 1 : vocabCards.length - 1)); setVFlipped(false); }}
+                  className="px-6 py-3 rounded-xl font-bold text-sm"
+                  style={{ background: "var(--bg-subtle)", color: "var(--text-secondary)", border: "2px solid var(--border-card)" }}
+                >← Prev</button>
+                <button
+                  onClick={() => { setVIndex(i => (i + 1) % vocabCards.length); setVFlipped(false); }}
+                  className="px-6 py-3 rounded-xl font-bold text-sm text-white"
+                  style={{ background: "linear-gradient(135deg,#00c896,#06b6d4)" }}
+                >Next →</button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

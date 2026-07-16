@@ -1,38 +1,593 @@
 [
   {
-    "question": "Which of the following is a renewable natural resource?",
+    "question": "Which layer of Earth is composed of the crust and the rigid, uppermost part of the mantle, and is broken into the tectonic plates that move over the underlying asthenosphere?",
     "difficulty": "Easy",
-    "A": "Coal",
-    "B": "Natural gas",
-    "C": "Water",
-    "D": "Uranium",
-    "answer": "C"
-  },
-  {
-    "question": "Soils that develop under tropical rainforests are typically nutrient-poor because:",
-    "difficulty": "Medium",
-    "A": "Most nutrients are stored in living biomass rather than in soil",
-    "B": "High rainfall removes salts and prevents mineral formation",
-    "C": "Decomposition rates are low due to cool temperatures",
-    "D": "The parent material is volcanic ash",
+    "A": "Lithosphere",
+    "B": "Mesosphere",
+    "C": "Outer core",
+    "D": "Inner core",
     "answer": "A"
   },
   {
-    "question": "During an El Niño event, which of the following typically occurs along the western coast of South America?",
+    "question": "The map below shows the boundary between the Pacific Plate and the North American Plate along coastal California, where the plates slide horizontally past one another.",
+    "difficulty": "Easy",
+    "A": "Divergent boundary",
+    "B": "Convergent boundary",
+    "C": "Transform boundary",
+    "D": "Subduction zone",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Major Plate Boundary Types",
+      "sourceNote": "Textbook-standard classification used in AP Environmental Science",
+      "headers": ["Boundary Type", "Plate Motion", "Example"],
+      "rows": [
+        ["Divergent", "Plates move apart", "Mid-Atlantic Ridge"],
+        ["Convergent", "Plates move together", "Andes Mountains"],
+        ["Transform", "Plates slide past each other", "San Andreas Fault"]
+      ]
+    }
+  },
+  {
+    "question": "A soil scientist digs a pit and records the horizons observed, shown below from surface to bedrock. Which horizon is typically the zone of leaching (eluviation), where water carries dissolved minerals and fine particles downward, leaving behind mostly sand and silt?",
+    "difficulty": "Medium",
+    "A": "O horizon",
+    "B": "A horizon",
+    "C": "E horizon",
+    "D": "C horizon",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Soil Profile Description",
+      "sourceNote": "Textbook-standard soil horizon sequence",
+      "headers": ["Horizon", "Depth (cm)", "Description"],
+      "rows": [
+        ["O", "0-5", "Organic litter and humus"],
+        ["A", "5-20", "Topsoil, mixed organic and mineral matter"],
+        ["E", "20-35", "Pale, leached zone, minerals removed by water"],
+        ["B", "35-70", "Zone of mineral accumulation (illuviation)"],
+        ["C", "70-100+", "Weathered parent material"]
+      ]
+    }
+  },
+  {
+    "question": "Researchers measured infiltration rate and soil organic matter content across eight agricultural fields with varying tillage histories.",
+    "difficulty": "Medium",
+    "A": "There is no relationship between organic matter and infiltration rate.",
+    "B": "Higher soil organic matter is associated with higher infiltration rates.",
+    "C": "Higher soil organic matter is associated with lower infiltration rates.",
+    "D": "Infiltration rate depends only on soil texture, not organic matter.",
+    "answer": "B",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Soil Organic Matter vs. Infiltration Rate (8 Agricultural Fields)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 1.2, "y": 4}, {"x": 1.8, "y": 6}, {"x": 2.5, "y": 9},
+        {"x": 3.1, "y": 12}, {"x": 3.6, "y": 15}, {"x": 4.2, "y": 17},
+        {"x": 4.9, "y": 21}, {"x": 5.4, "y": 24}
+      ],
+      "trendline": {"x1": 1.0, "y1": 3, "x2": 5.5, "y2": 25},
+      "xLabel": "Soil Organic Matter (%)",
+      "yLabel": "Infiltration Rate (cm/hr)"
+    }
+  },
+  {
+    "question": "Which soil property refers to the ability of soil to hold and release positively charged nutrient ions, such as calcium, magnesium, and potassium, for uptake by plant roots?",
+    "difficulty": "Medium",
+    "A": "Porosity",
+    "B": "Permeability",
+    "C": "Cation exchange capacity",
+    "D": "Soil texture",
+    "answer": "C",
+    "stimulus": {
+      "type": "bar",
+      "title": "Cation Exchange Capacity by Soil Type",
+      "sourceNote": "Hypothetical data based on typical CEC ranges for different soil textures",
+      "data": [
+        {"label": "Sand", "value": 4},
+        {"label": "Loam", "value": 15},
+        {"label": "Silty Clay", "value": 28},
+        {"label": "Clay (high organic)", "value": 40}
+      ],
+      "xLabel": "Soil Type",
+      "yLabel": "CEC (cmol/kg)"
+    }
+  },
+  {
+    "question": "A farmer compares three soil samples using a texture triangle. Sample X contains 60% sand, 30% silt, and 10% clay. Sample Y contains 20% sand, 40% silt, and 40% clay. Sample Z contains 40% sand, 40% silt, and 20% clay, classifying it as loam. Which sample would most likely have the highest water-holding capacity but the lowest permeability?",
     "difficulty": "Hard",
-    "A": "Increased upwelling and higher fish populations",
-    "B": "Decreased sea surface temperatures and drought",
-    "C": "Suppressed upwelling leading to warmer surface waters",
-    "D": "Higher nutrient availability and stronger trade winds",
+    "A": "Sample X",
+    "B": "Sample Y",
+    "C": "Sample Z",
+    "D": "All three samples would be identical in these properties",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Soil Texture Composition of Three Samples",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Sample", "Sand (%)", "Silt (%)", "Clay (%)"],
+      "rows": [
+        ["X", 60, 30, 10],
+        ["Y", 20, 40, 40],
+        ["Z", 40, 40, 20]
+      ]
+    }
+  },
+  {
+    "question": "Which gas makes up approximately 78% of Earth's atmosphere by volume?",
+    "difficulty": "Easy",
+    "A": "Oxygen",
+    "B": "Nitrogen",
+    "C": "Carbon dioxide",
+    "D": "Argon",
+    "answer": "B"
+  },
+  {
+    "question": "The line graph shows average atmospheric temperature as a function of altitude from the surface to 50 km.",
+    "difficulty": "Medium",
+    "A": "Temperature decreases continuously with altitude throughout all layers shown.",
+    "B": "Temperature decreases through the troposphere, then increases through the stratosphere due to ozone absorbing UV radiation.",
+    "C": "Temperature increases through the troposphere, then decreases through the stratosphere.",
+    "D": "Temperature remains constant throughout the troposphere and stratosphere.",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "Atmospheric Temperature Profile (0-50 km)",
+      "sourceNote": "Textbook-standard atmospheric temperature profile",
+      "series": [
+        {"name": "Temperature", "points": [
+          {"x": 0, "y": 15}, {"x": 5, "y": -18}, {"x": 10, "y": -56},
+          {"x": 15, "y": -57}, {"x": 20, "y": -56}, {"x": 30, "y": -45},
+          {"x": 40, "y": -22}, {"x": 50, "y": -2}
+        ]}
+      ],
+      "xLabel": "Altitude (km)",
+      "yLabel": "Temperature (°C)"
+    }
+  },
+  {
+    "question": "Which atmospheric layer contains the ozone layer, which absorbs most of the sun's harmful ultraviolet radiation?",
+    "difficulty": "Easy",
+    "A": "Troposphere",
+    "B": "Stratosphere",
+    "C": "Mesosphere",
+    "D": "Thermosphere",
+    "answer": "B"
+  },
+  {
+    "question": "In the global atmospheric circulation model, air rises at the equator due to intense solar heating, cools, and releases moisture as it ascends, then descends around 30 degrees latitude. What best describes the surface climate typically found near 30 degrees latitude as a direct result of this circulation pattern?",
+    "difficulty": "Hard",
+    "A": "Consistently wet, supporting tropical rainforest biomes",
+    "B": "Dry, often associated with major desert belts",
+    "C": "Cold and dry due to polar high pressure",
+    "D": "Highly variable with no consistent precipitation pattern",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Average Annual Precipitation by Latitude",
+      "sourceNote": "Hypothetical data illustrating the general pattern associated with Hadley cell circulation",
+      "data": [
+        {"label": "0° (Equator)", "value": 2000},
+        {"label": "15°N", "value": 900},
+        {"label": "30°N", "value": 250},
+        {"label": "45°N", "value": 800},
+        {"label": "60°N", "value": 600}
+      ],
+      "xLabel": "Latitude",
+      "yLabel": "Average Annual Precipitation (mm)"
+    }
+  },
+  {
+    "question": "Which force, resulting from Earth's rotation, deflects moving air and water to the right in the Northern Hemisphere and to the left in the Southern Hemisphere?",
+    "difficulty": "Easy",
+    "A": "Gravitational force",
+    "B": "Centripetal force",
+    "C": "Coriolis effect",
+    "D": "Pressure gradient force",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Deflection Direction by Hemisphere",
+      "sourceNote": "Textbook-standard summary of the Coriolis effect",
+      "headers": ["Hemisphere", "Deflection Direction", "Example Effect"],
+      "rows": [
+        ["Northern", "To the right of motion", "Hurricanes rotate counterclockwise"],
+        ["Southern", "To the left of motion", "Cyclones rotate clockwise"]
+      ]
+    }
+  },
+  {
+    "question": "A hydrologist calculates that a watershed receives 1,100 mm of precipitation annually over an area of 250 km2, and that 40% of this precipitation becomes surface runoff while the rest infiltrates or evaporates. Approximately how much water (in cubic meters) becomes surface runoff annually? (1 km2 = 1,000,000 m2; 1,100 mm = 1.1 m)",
+    "difficulty": "Hard",
+    "A": "1.1 x 10^8 m3",
+    "B": "2.75 x 10^7 m3",
+    "C": "1.1 x 10^5 m3",
+    "D": "2.75 x 10^8 m3",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Watershed Water Budget Inputs",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Parameter", "Value"],
+      "rows": [
+        ["Watershed area", "250 km²"],
+        ["Annual precipitation", "1,100 mm (1.1 m)"],
+        ["Fraction becoming surface runoff", "40%"],
+        ["Fraction infiltrating or evaporating", "60%"]
+      ]
+    }
+  },
+  {
+    "question": "What is a watershed (also called a drainage basin)?",
+    "difficulty": "Easy",
+    "A": "An underground layer of permeable rock that stores groundwater",
+    "B": "An area of land where all surface water drains to a common outlet, such as a river or lake",
+    "C": "A region defined solely by political or administrative boundaries",
+    "D": "The zone where fresh river water mixes with saltwater at a coastline",
+    "answer": "B"
+  },
+  {
+    "question": "Researchers compared impervious surface cover and peak stormwater discharge across six sub-watersheds in a metropolitan area during a standardized 2-inch rainfall event.",
+    "difficulty": "Medium",
+    "A": "Watersheds with more impervious surface show higher peak discharge and faster time-to-peak.",
+    "B": "Impervious surface cover has no measurable relationship with peak discharge.",
+    "C": "Watersheds with more impervious surface show lower peak discharge because of engineered drainage.",
+    "D": "Peak discharge depends only on watershed area, not surface cover.",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Peak Stormwater Discharge by Watershed Impervious Cover",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "10% impervious", "value": 18},
+        {"label": "25% impervious", "value": 34},
+        {"label": "40% impervious", "value": 52},
+        {"label": "55% impervious", "value": 71},
+        {"label": "70% impervious", "value": 95}
+      ],
+      "xLabel": "Watershed Impervious Surface Cover",
+      "yLabel": "Peak Discharge (m³/s)"
+    }
+  },
+  {
+    "question": "Why does the North Pole experience continuous darkness for part of the year while locations near the equator have roughly equal day and night length year-round?",
+    "difficulty": "Medium",
+    "A": "Earth's distance from the sun varies enough throughout the year to change daylight hours at different latitudes.",
+    "B": "Earth's axial tilt of about 23.5 degrees causes polar regions to be angled away from or toward the sun for extended periods, while equatorial regions remain roughly perpendicular to incoming sunlight year-round.",
+    "C": "The sun's own rotation changes which parts of Earth receive light throughout the year.",
+    "D": "Cloud cover is systematically higher at the poles for part of the year, blocking sunlight.",
+    "answer": "B",
+    "stimulus": {
+      "type": "line",
+      "title": "Daylight Hours Across the Year at Two Latitudes",
+      "sourceNote": "Hypothetical data illustrating the general seasonal daylight pattern",
+      "series": [
+        {"name": "Equator (0°)", "points": [
+          {"x": 1, "y": 12.1}, {"x": 3, "y": 12.0}, {"x": 6, "y": 12.1},
+          {"x": 9, "y": 12.0}, {"x": 12, "y": 12.1}
+        ]},
+        {"name": "Arctic (80°N)", "points": [
+          {"x": 1, "y": 0}, {"x": 3, "y": 6}, {"x": 6, "y": 24},
+          {"x": 9, "y": 10}, {"x": 12, "y": 0}
+        ]}
+      ],
+      "xLabel": "Month",
+      "yLabel": "Daylight Hours"
+    }
+  },
+  {
+    "question": "The bar chart shows average daily solar insolation (energy received per unit area) at four latitudes during the June solstice.",
+    "difficulty": "Medium",
+    "A": "Insolation increases steadily from the equator to the North Pole in June.",
+    "B": "Insolation is highest at latitudes experiencing the most direct sun angle and longest day length at that time of year.",
+    "C": "Insolation is identical at all latitudes because total solar output does not change with location.",
+    "D": "Insolation is lowest near the Arctic Circle because it is farthest from the equator.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Average Daily Solar Insolation on the June Solstice",
+      "sourceNote": "Hypothetical data based on general seasonal insolation patterns",
+      "data": [
+        {"label": "0° (Equator)", "value": 380},
+        {"label": "30°N", "value": 430},
+        {"label": "45°N", "value": 470},
+        {"label": "66.5°N (Arctic Circle)", "value": 510}
+      ],
+      "xLabel": "Latitude",
+      "yLabel": "Insolation (W/m², daily average)"
+    }
+  },
+  {
+    "question": "Which term describes the point in Earth's orbit when the sun's most direct rays fall on the Tropic of Cancer (23.5 degrees N), marking the start of summer in the Northern Hemisphere?",
+    "difficulty": "Easy",
+    "A": "Vernal equinox",
+    "B": "Autumnal equinox",
+    "C": "Summer solstice",
+    "D": "Winter solstice",
     "answer": "C"
   },
   {
-    "question": "If a region’s water table declines significantly, which is the most likely cause?",
-    "difficulty": "Challenge",
-    "A": "Decreased surface runoff due to urbanization",
-    "B": "Excessive groundwater withdrawal for irrigation",
-    "C": "Increased infiltration from rainfall",
-    "D": "Expansion of wetland ecosystems",
+    "question": "A mountain range runs north-south along a coastline, with prevailing winds blowing from the ocean toward the mountains. Which of the following best describes the resulting climate pattern known as a rain shadow effect?",
+    "difficulty": "Medium",
+    "A": "Both the windward and leeward sides of the mountains receive equal precipitation.",
+    "B": "The windward side receives high precipitation as moist air rises and cools, while the leeward side is dry because descending air has already lost its moisture.",
+    "C": "The leeward side receives more precipitation than the windward side because it faces away from the ocean.",
+    "D": "Precipitation is unaffected by the mountain range and depends only on latitude.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Elevation and Moisture Content of Air Across a Mountain Range",
+      "sourceNote": "Hypothetical data illustrating the orographic (rain shadow) effect",
+      "data": [
+        {"label": "Coast", "value": 18},
+        {"label": "Windward slope (mid)", "value": 12},
+        {"label": "Peak", "value": 3},
+        {"label": "Leeward slope (mid)", "value": 2},
+        {"label": "Leeward valley", "value": 1.5}
+      ],
+      "xLabel": "Location Along Transect",
+      "yLabel": "Air Moisture Content (g water/kg air)"
+    }
+  },
+  {
+    "question": "The table shows annual precipitation on the windward and leeward sides of a mountain range at four sites along the same transect.",
+    "difficulty": "Medium",
+    "A": "Leeward sites consistently receive far less precipitation than windward sites at similar distances from the coast, consistent with a rain shadow effect.",
+    "B": "Windward and leeward sites receive statistically identical precipitation.",
+    "C": "Leeward sites receive more precipitation than windward sites at every distance measured.",
+    "D": "Precipitation increases with distance from the coast regardless of windward or leeward position.",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Annual Precipitation Across a Mountain Transect",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Site", "Position", "Distance from Coast (km)", "Annual Precipitation (mm)"],
+      "rows": [
+        ["1", "Windward", 20, 2400],
+        ["2", "Windward (near peak)", 45, 3100],
+        ["3", "Leeward", 55, 480],
+        ["4", "Leeward (far)", 90, 320]
+      ]
+    }
+  },
+  {
+    "question": "Which ocean current phenomenon involves a warm current that normally flows westward across the tropical Pacific weakening, allowing warm surface water to shift eastward toward South America?",
+    "difficulty": "Easy",
+    "A": "La Niña",
+    "B": "El Niño",
+    "C": "The Gulf Stream",
+    "D": "Thermohaline circulation",
     "answer": "B"
+  },
+  {
+    "question": "The line graph shows sea surface temperature anomalies off the coast of Peru over a 24-month period spanning one El Niño-Southern Oscillation (ENSO) cycle.",
+    "difficulty": "Hard",
+    "A": "The positive anomaly period represents El Niño conditions, when weakened trade winds allow warm water to accumulate in the eastern Pacific and suppress upwelling.",
+    "B": "The positive anomaly period represents La Niña conditions, when strengthened trade winds cause cold water upwelling.",
+    "C": "Sea surface temperature anomalies are unrelated to ENSO and instead reflect only seasonal solar heating.",
+    "D": "The data show no meaningful pattern because ENSO cycles do not affect eastern Pacific temperatures.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Sea Surface Temperature Anomaly off Peru (24-Month Period)",
+      "sourceNote": "Hypothetical data illustrating a typical ENSO cycle",
+      "series": [
+        {"name": "SST Anomaly", "points": [
+          {"x": 1, "y": 0.2}, {"x": 4, "y": 0.8}, {"x": 7, "y": 1.9},
+          {"x": 10, "y": 2.6}, {"x": 13, "y": 1.5}, {"x": 16, "y": 0.3},
+          {"x": 19, "y": -0.6}, {"x": 22, "y": -1.2}, {"x": 24, "y": -1.4}
+        ]}
+      ],
+      "xLabel": "Month",
+      "yLabel": "SST Anomaly (°C from long-term average)"
+    }
+  },
+  {
+    "question": "During a La Niña event, which condition typically occurs along the western coast of South America?",
+    "difficulty": "Medium",
+    "A": "Weakened trade winds and warmer than normal surface waters",
+    "B": "Strengthened trade winds and stronger than normal upwelling of cold, nutrient-rich water",
+    "C": "Complete cessation of the Peru Current",
+    "D": "Increased rainfall over the eastern Pacific and drought in Southeast Asia",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Typical Conditions off the Peruvian Coast: Normal vs. La Niña vs. El Niño",
+      "sourceNote": "Textbook-standard ENSO comparison",
+      "headers": ["Condition", "Normal Year", "La Niña", "El Niño"],
+      "rows": [
+        ["Trade wind strength", "Moderate", "Strong", "Weak"],
+        ["Upwelling intensity", "Moderate-strong", "Very strong", "Weak or absent"],
+        ["Sea surface temperature", "Cool", "Cooler than normal", "Warmer than normal"],
+        ["Fish/phytoplankton productivity", "High", "Very high", "Low"]
+      ]
+    }
+  },
+  {
+    "question": "Why do El Niño events typically reduce fish catches off the coast of Peru?",
+    "difficulty": "Medium",
+    "A": "Warmer water increases fish reproduction rates, leading fishers to reach quotas too quickly and stop early.",
+    "B": "Suppressed upwelling reduces the supply of cold, nutrient-rich water that supports the phytoplankton at the base of the food web fish depend on.",
+    "C": "El Niño causes fish populations to migrate permanently to the Atlantic Ocean.",
+    "D": "Increased storm frequency during El Niño directly damages fishing vessels, reducing catch effort rather than fish abundance.",
+    "answer": "B",
+    "stimulus": {
+      "type": "bar",
+      "title": "Peruvian Anchoveta Catch During Normal vs. El Niño Years",
+      "sourceNote": "Hypothetical data illustrating the general historical pattern of El Niño impacts on Peruvian fisheries",
+      "data": [
+        {"label": "Normal Year 1", "value": 9.2},
+        {"label": "Normal Year 2", "value": 8.8},
+        {"label": "El Niño Year", "value": 2.1},
+        {"label": "Recovery Year", "value": 6.5}
+      ],
+      "xLabel": "Year Type",
+      "yLabel": "Anchoveta Catch (million metric tons)"
+    }
+  },
+  {
+    "question": "A geologist studying seismic wave patterns determines that a location experiences frequent shallow-focus earthquakes but no volcanic activity, and that two plates on either side of the fault are moving horizontally in opposite directions with no crust being created or destroyed. What type of plate boundary is most likely present?",
+    "difficulty": "Medium",
+    "A": "Divergent boundary",
+    "B": "Convergent (subduction) boundary",
+    "C": "Transform boundary",
+    "D": "Hotspot",
+    "answer": "C",
+    "stimulus": {
+      "type": "table",
+      "title": "Seismic and Volcanic Activity by Plate Boundary Type",
+      "sourceNote": "Textbook-standard summary of plate boundary characteristics",
+      "headers": ["Boundary Type", "Earthquake Depth", "Volcanism", "Crust Change"],
+      "rows": [
+        ["Divergent", "Shallow", "Common", "New crust created"],
+        ["Convergent", "Shallow to deep", "Common", "Crust destroyed (subducted)"],
+        ["Transform", "Shallow", "Rare/none", "No net crust change"]
+      ]
+    }
+  },
+  {
+    "question": "The pie chart shows the approximate composition of Earth's atmosphere by volume (excluding water vapor, which is variable).",
+    "difficulty": "Easy",
+    "A": "Oxygen is the most abundant gas shown.",
+    "B": "Nitrogen is the most abundant gas shown, making up roughly three-quarters of the total.",
+    "C": "Carbon dioxide makes up the largest single share.",
+    "D": "Argon and nitrogen together make up less than 10% of the total.",
+    "answer": "B",
+    "stimulus": {
+      "type": "pie",
+      "title": "Composition of Earth's Atmosphere (Dry Air, by Volume)",
+      "sourceNote": "Textbook-standard atmospheric composition figures",
+      "slices": [
+        {"label": "Nitrogen", "value": 78},
+        {"label": "Oxygen", "value": 21},
+        {"label": "Argon", "value": 0.9},
+        {"label": "Carbon dioxide and other trace gases", "value": 0.1}
+      ]
+    }
+  },
+  {
+    "question": "A soil sample is found to have a bulk density of 1.6 g/cm3 and a particle density of 2.65 g/cm3 (a typical value for mineral soil). Using the formula Porosity (%) = (1 - Bulk Density / Particle Density) x 100, what is the approximate porosity of this soil?",
+    "difficulty": "Hard",
+    "A": "About 40%",
+    "B": "About 60%",
+    "C": "About 16%",
+    "D": "About 84%",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best describes the process of soil formation from bedrock, in general chronological order?",
+    "difficulty": "Medium",
+    "A": "Weathering breaks down parent material, organisms and organic matter accumulate, and horizons develop over time through leaching and deposition.",
+    "B": "Organic matter accumulates first, which then chemically converts bedrock directly into clay particles.",
+    "C": "Horizons form instantly upon bedrock exposure to air and require no biological input.",
+    "D": "Erosion is the primary driver of soil formation and occurs before any weathering takes place.",
+    "answer": "A"
+  },
+  {
+    "question": "Global wind belts such as the trade winds, westerlies, and polar easterlies form primarily because of the interaction between which two factors?",
+    "difficulty": "Medium",
+    "A": "Ocean salinity and tectonic plate motion",
+    "B": "Uneven solar heating of Earth's surface (driving convection cells) and the Coriolis effect (deflecting moving air)",
+    "C": "Volcanic activity and the phases of the moon",
+    "D": "Ozone concentration and magnetic field strength",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Global Surface Wind Belts by Latitude",
+      "sourceNote": "Textbook-standard classification of prevailing surface winds",
+      "headers": ["Latitude Range", "Wind Belt", "General Direction"],
+      "rows": [
+        ["0°-30°", "Trade Winds", "Northeast (NH) / Southeast (SH)"],
+        ["30°-60°", "Westerlies", "Southwest (NH) / Northwest (SH)"],
+        ["60°-90°", "Polar Easterlies", "Northeast (NH) / Southeast (SH)"]
+      ]
+    }
+  },
+  {
+    "question": "A researcher is analyzing the relationship between a watershed's percent forest cover and the concentration of suspended sediment in its main stream channel, measured at ten different watersheds of similar size and rainfall.",
+    "difficulty": "Hard",
+    "A": "Percent forest cover and suspended sediment concentration show a negative correlation, consistent with forests reducing erosion.",
+    "B": "Percent forest cover and suspended sediment concentration show a positive correlation, meaning more forest cover increases sediment.",
+    "C": "The data show no discernible pattern, so forest cover has no effect on sediment.",
+    "D": "Sediment concentration is constant across all watersheds regardless of forest cover.",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Forest Cover vs. Suspended Sediment Concentration (10 Watersheds)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {"x": 10, "y": 210}, {"x": 20, "y": 175}, {"x": 25, "y": 160},
+        {"x": 35, "y": 130}, {"x": 45, "y": 105}, {"x": 55, "y": 88},
+        {"x": 65, "y": 62}, {"x": 75, "y": 45}, {"x": 85, "y": 30},
+        {"x": 92, "y": 18}
+      ],
+      "trendline": {"x1": 5, "y1": 220, "x2": 95, "y2": 10},
+      "xLabel": "Forest Cover (%)",
+      "yLabel": "Suspended Sediment (mg/L)"
+    }
+  },
+  {
+    "question": "Which best explains why coastal cities tend to have milder, less extreme seasonal temperature swings than inland cities at the same latitude?",
+    "difficulty": "Medium",
+    "A": "Water has a much higher specific heat capacity than land, so oceans absorb and release heat more slowly, moderating nearby air temperatures.",
+    "B": "Coastal cities receive more direct sunlight year-round than inland cities.",
+    "C": "Ocean currents block solar radiation from reaching coastal areas in summer.",
+    "D": "Coastal cities are always closer to the equator than inland cities at the same stated latitude.",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Monthly Average Temperature: Coastal vs. Inland City (Same Latitude)",
+      "sourceNote": "Hypothetical data illustrating the moderating effect of a marine climate",
+      "series": [
+        {"name": "Coastal City", "points": [
+          {"x": 1, "y": 8}, {"x": 4, "y": 12}, {"x": 7, "y": 18}, {"x": 10, "y": 14}, {"x": 12, "y": 9}
+        ]},
+        {"name": "Inland City", "points": [
+          {"x": 1, "y": -2}, {"x": 4, "y": 12}, {"x": 7, "y": 27}, {"x": 10, "y": 13}, {"x": 12, "y": -4}
+        ]}
+      ],
+      "xLabel": "Month",
+      "yLabel": "Average Temperature (°C)"
+    }
+  },
+  {
+    "question": "A watershed's stream shows a hydrograph (a plot of discharge over time) with a very sharp, high peak occurring only 2 hours after a rainstorm begins. Which land-use characteristic most likely explains this rapid, flashy response?",
+    "difficulty": "Medium",
+    "A": "Extensive wetlands and dense forest cover throughout the watershed",
+    "B": "A high percentage of impervious surfaces, such as pavement and rooftops, from urban development",
+    "C": "Deep, sandy soils with high infiltration capacity throughout the watershed",
+    "D": "A very large watershed area with a gentle, uniform slope",
+    "answer": "B"
+  },
+  {
+    "question": "During the December solstice, which hemisphere experiences its shortest day length and lowest sun angle?",
+    "difficulty": "Easy",
+    "A": "Northern Hemisphere",
+    "B": "Southern Hemisphere",
+    "C": "Both hemispheres equally",
+    "D": "Neither hemisphere is affected by the solstice",
+    "answer": "A"
+  },
+  {
+    "question": "A region's soil is classified as having a loamy texture. Compared to pure sand or pure clay, which characteristic makes loam generally considered ideal for agriculture?",
+    "difficulty": "Medium",
+    "A": "It has the highest possible cation exchange capacity of any soil type.",
+    "B": "It balances adequate drainage, water retention, and nutrient-holding capacity due to its mix of sand, silt, and clay particles.",
+    "C": "It contains no organic matter, which prevents disease-causing microbes from surviving.",
+    "D": "It is entirely impermeable, which prevents any nutrient leaching.",
+    "answer": "B",
+    "stimulus": {
+      "type": "table",
+      "title": "Comparison of Sand, Clay, and Loam Properties",
+      "sourceNote": "Textbook-standard soil texture comparison",
+      "headers": ["Property", "Sand", "Clay", "Loam"],
+      "rows": [
+        ["Drainage", "Excellent", "Poor", "Good"],
+        ["Water retention", "Low", "High", "Moderate-high"],
+        ["Nutrient-holding capacity", "Low", "High", "Moderate-high"],
+        ["Workability", "Easy", "Difficult when wet", "Easy"]
+      ]
+    }
   }
 ]

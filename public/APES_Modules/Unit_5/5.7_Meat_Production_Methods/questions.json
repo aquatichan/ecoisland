@@ -70,14 +70,14 @@
     "correct": "C"
   },
   {
-    "question": "A scientist measured annual methane and nitrous oxide emissions from five CAFOs and five free-range operations. CAFOs averaged 8.5 metric tons CO2-equivalent per operation and free-range averaged 2.1 metric tons CO2-equivalent. Which hypothesis is most directly testable with these data?",
+    "question": "A scientist measured annual methane and nitrous oxide emissions (as CO2-equivalents) from five CAFOs (concentrated animal feeding operations) and five free-range operations. CAFOs averaged 8.5 metric tons CO2-equivalent per operation annually, while free-range operations averaged 2.1 metric tons. Which hypothesis is most directly testable using these data?",
     "answers": [
       "CAFOs emit more total greenhouse gases per operation annually than free-range farms.",
-      "Methane from livestock is the primary cause of climate change requiring policy bans.",
-      "Reducing meat consumption is a better climate solution than changing production methods.",
-      "Free-range operations are more environmentally responsible due to lower pollution."
+      "Methane from livestock is the primary cause of global climate change and requires an outright policy ban.",
+      "Reducing meat consumption overall is a more effective climate solution than changing livestock production methods.",
+      "Free-range operations are more environmentally responsible in every respect due to their lower greenhouse gas emissions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A soil scientist tests grazing intensity in semi-arid Southwest grasslands. She uses plots stocked at 1 animal per 5 acres, 1 per 2 acres, and 1 per 0.5 acres and measures soil organic matter, infiltration rate, and vegetation cover annually for three years. Which of the following is a testable hypothesis for this field study?",

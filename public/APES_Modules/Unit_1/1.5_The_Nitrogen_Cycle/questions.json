@@ -1,23 +1,55 @@
 [
   {
-    "question": "Scientists studying nitrogen assimilation in a forest ecosystem used stable isotope labeling, adding nitrogen-15 (a non-radioactive isotope) to the soil around tree seedlings. They then tracked the movement of this labeled nitrogen through plant tissues, leaf litter, and soil over a two-year period by measuring nitrogen-15 concentrations. This research method is best described as",
+    "question": "Scientists studying nitrogen assimilation in a forest ecosystem added nitrogen-15 (a non-radioactive, naturally occurring isotope) to soil around tree seedlings, then tracked the labeled nitrogen's movement through plant tissues, leaf litter, and soil over two years, while leaving a nearby untreated plot as a comparison. Which type of study design does this best represent?",
     "answers": [
-      "A manipulative experiment using a tracer to follow nitrogen movement through ecosystem reservoirs",
-      "An observational study measuring natural nitrogen concentrations in different ecosystem compartments",
-      "A correlational study examining the relationship between soil nitrogen levels and plant growth rates",
-      "A long-term monitoring program documenting changes in ecosystem nitrogen composition over decades"
+      "A manipulative experiment that uses an isotopic tracer to directly follow the pathway of nitrogen as it moves through different ecosystem reservoirs",
+      "An observational study that simply measures naturally occurring nitrogen concentrations in different ecosystem compartments without any intervention",
+      "A correlational study that examines the statistical relationship between ambient soil nitrogen levels and plant growth rates across many sites",
+      "A long-term monitoring program that documents gradual changes in total ecosystem nitrogen content over multiple decades without any added tracer"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "In an agricultural region, synthetic nitrogen fertilizer is applied to fields in spring, but heavy rainfall in early summer causes significant runoff into a nearby river. The river subsequently experiences an algal bloom, followed weeks later by a dead zone where dissolved oxygen is depleted and fish populations decline. Which sequence of nitrogen cycle processes best explains these events?",
+    "question": "In an agricultural region, synthetic nitrogen fertilizer is applied to fields in spring, but heavy rainfall in early summer causes significant runoff into a nearby river. The river subsequently experiences an algal bloom, followed weeks later by a dead zone where dissolved oxygen is depleted and fish die. Which sequence of processes best explains this dead zone formation?",
     "answers": [
-      "Nitrogen assimilation by algae increases their biomass; subsequent decomposition by bacteria consumes dissolved oxygen, creating hypoxic conditions.",
-      "Nitrification of excess ammonia produces nitrate, which is directly toxic to fish at high concentrations, causing population decline and creating the dead zone.",
-      "Nitrogen fixation by cyanobacteria in the river increases with fertilizer input, producing excess ammonia that becomes toxic to fish and causes the dead zone.",
-      "Denitrification of excess fertilizer nitrogen converts it to nitrogen gas, which accumulates in the river and displaces dissolved oxygen, creating hypoxic conditions."
+      "Excess nitrogen fuels rapid algal growth (an increase in biomass); when the algae die, bacterial decomposition of that biomass consumes large amounts of dissolved oxygen, creating hypoxic conditions that kill fish",
+      "Nitrification of excess ammonia produces nitrate at concentrations directly toxic to fish, causing population decline independent of any oxygen depletion",
+      "Nitrogen-fixing cyanobacteria convert atmospheric nitrogen into ammonia at toxic concentrations, which alone accounts for the fish kill",
+      "Denitrification converts the excess fertilizer nitrogen into nitrogen gas, which physically displaces dissolved oxygen from the water column"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Agricultural Runoff and River Dead Zone Timeline",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Event",
+        "Timing",
+        "Dissolved Oxygen (mg/L)"
+      ],
+      "rows": [
+        [
+          "Fertilizer applied",
+          "Spring",
+          8.0
+        ],
+        [
+          "Runoff + algal bloom begins",
+          "Early summer",
+          6.5
+        ],
+        [
+          "Algae die, decomposition peaks",
+          "Mid-summer",
+          1.5
+        ],
+        [
+          "Fish kill observed",
+          "Late summer",
+          0.8
+        ]
+      ]
+    }
   },
   {
     "question": "A wastewater plant sends effluent through anoxic tanks where bacteria convert nitrate to N₂ gas before river discharge. Why is denitrification necessary?",
@@ -90,13 +122,36 @@
     "correct": "B"
   },
   {
-    "question": "An environmental consultant argues industrial atmospheric nitrogen deposition causes nitrogen pollution in oligotrophic forests. She cites nitrate deposition averaging 15 kg N per hectare per year and reports increased plant growth and altered species composition compared with pre-industrial conditions. Which assumption about nitrogen cycle processes does the reasoning rely on?",
+    "question": "An environmental consultant argues that industrial atmospheric nitrogen deposition is causing nitrogen pollution in naturally nutrient-poor (oligotrophic) forests. She cites nitrate deposition averaging 15 kg N per hectare per year and reports increased plant growth and altered species composition compared with pre-industrial conditions. Which assumption is this argument most reliant on?",
     "answers": [
-      "That deposited atmospheric nitrogen enters soil and becomes plant-available.",
-      "That increased plant growth necessarily indicates improved forest health.",
-      "That denitrification rates have declined in these forests due to emissions.",
-      "That industrial emissions are the only source of nitrogen for these forests."
+      "That the nitrogen deposited from the atmosphere is chemically converted into a form that enters the soil and becomes available for plant uptake",
+      "That increased plant growth observed in these forests necessarily indicates improved overall forest health and ecosystem function",
+      "That rates of denitrification, which return nitrogen to the atmosphere as gas, have measurably declined in these forests due to industrial emissions",
+      "That industrial atmospheric deposition is the only possible source of nitrogen input available to these forest ecosystems"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Atmospheric Nitrogen Deposition in an Oligotrophic Forest",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Nitrate deposition",
+          "15 kg N/ha/yr"
+        ],
+        [
+          "Plant growth vs. pre-industrial",
+          "Increased"
+        ],
+        [
+          "Species composition",
+          "Altered"
+        ]
+      ]
+    }
   }
 ]

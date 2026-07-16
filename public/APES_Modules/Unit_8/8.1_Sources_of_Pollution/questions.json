@@ -37,7 +37,7 @@
       "Agricultural pesticide runoff is nonpoint source pollution from dispersed farms.",
       "Both require monitoring yet permits suit only identifiable point sources."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A city experiences water quality degradation after heavy rainfall. Stormwater from streets, parking lots, and residential roofs carries oil residue, sediment, and fertilizer into a nearby river. Which of the following best explains why this pollution is classified as nonpoint source?",
@@ -57,7 +57,7 @@
       "Elevated nitrogen shows human impact but does not identify input sources.",
       "Falling concentrations reflect dilution yet do not prove long term minimal impact."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers traced elevated mercury in a harbor to a chlor-alkali plant discharging treated wastewater through a pipe and to atmospheric deposition from regional coal-fired power plants. Why would regulations targeting the plant discharge be more effective than regulations targeting atmospheric deposition?",
@@ -87,7 +87,7 @@
       "Pollutants originate from multiple properties and land uses across the development, making it difficult but not impossible to identify sources for regulatory action",
       "Pollutants originate from multiple properties during intermittent storm events rather than continuous discharge, making it impossible to identify a single source for regulatory action"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A coastal watershed study measured total phosphorus at 20 sites for three years. One site at a municipal wastewater outfall consistently measured 2.5–3.2 mg/L. The other 19 sites measured 0.3–1.8 mg/L with no clear spatial pattern. Which conclusion about phosphorus sources is best supported?",

@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "A research vessel measures atmospheric conditions along a north–south transect from 60° latitude to the equator. At 60° the air is cool and dry, at 30° warm and dry, and at the equator warm and humid. Why does humidity increase toward the equator despite warm air at both 30° and the equator?",
+    "question": "A research vessel records atmospheric moisture along a transect from 60°N to the equator: cool and dry air at 60°N, warm and dry air at 30°N, and warm, humid air at the equator. Why is the air humid at the equator but dry at 30°N even though both locations are warm?",
     "answers": [
-      "Air descending at 30° has lost moisture and equatorial air is rising and moist.",
-      "Higher atmospheric pressure at the equator increases air moisture capacity by compression.",
-      "Greater equatorial solar heating increases evaporation but does not explain dry 30° air.",
-      "Ocean currents move water not atmospheric moisture and do not set humidity patterns."
+      "At the equator, intense heating causes air to rise, cool, and release moisture as precipitation near the surface, then diverges aloft and descends around 30°N as dry air that has already lost its moisture.",
+      "The equator is closer to the ocean than 30°N, so it always has more evaporation regardless of atmospheric circulation patterns.",
+      "Higher air pressure at 30°N chemically binds water vapor to dust particles, removing humidity from the air at that latitude.",
+      "The Coriolis effect concentrates all atmospheric moisture at the equator and prevents it from reaching latitudes as high as 30°N."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A weather station at the equator records consistently warm temperatures and low atmospheric pressure, while a station at 30° latitude north records cooler temperatures and high atmospheric pressure. Which of the following best explains why air pressure differs between these two locations?",
@@ -40,14 +40,14 @@
     "correct": "B"
   },
   {
-    "question": "The diagram shows atmospheric circulation cells and pressure zones with solar radiation strongest at the equator. Based on solar heating, air density, and pressure, why do trade winds blow from 30° toward the equator?",
+    "question": "In the Hadley cell, air rises at the equator due to intense solar heating, then descends around 30° latitude. Based on this circulation pattern, why do trade winds blow from around 30° latitude toward the equator near the surface?",
     "answers": [
-      "Descending air at 30° creates high pressure, so air flows toward equatorial low",
-      "Solar radiation is strongest at the equator, so air at 30° cools and sinks",
-      "Coriolis effect deflects winds but does not create the pressure gradient",
-      "Sinking polar air does not drive trade winds and Hadley cell sinking at 30° does"
+      "Descending air at 30° creates a surface high-pressure zone, and air flows along the pressure gradient from this high pressure toward the equatorial low-pressure zone.",
+      "The Coriolis effect alone generates the pressure difference that drives trade winds, independent of any temperature-driven circulation.",
+      "Cold polar air sinking at the poles pushes surface air continuously toward the equator, creating the trade winds directly.",
+      "Rising air at the equator pulls surface air from 30° through direct suction with no pressure gradient involved."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A graph shows atmospheric pressure (y-axis) plotted against latitude (x-axis) from 0° to 90°. The graph displays high pressure at 30° and 60° latitude, and low pressure at 0°, 60°, and 90° latitude. Based on the pressure pattern shown, which statement best explains the relationship between this pressure distribution and the direction of surface winds in the Hadley cell region (0°-30°)?",

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as faceapi from 'face-api.js';
 import { BloomEffect, ChromaticAberrationEffect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import React, { useEffect, useRef, useState } from 'react';

@@ -17,7 +17,7 @@
       "Respiration consumes CO2 from the atmosphere and converts it into organic molecules, thereby reducing atmospheric CO2 levels",
       "CO2 is released only by heterotrophic organisms like animals and fungi, not by autotrophic organisms like plants"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The diagram illustrates volcanic activity and its relationship to atmospheric composition. Which of the following best describes the natural sources of both CO2 and particulate matter released during a volcanic eruption shown in the diagram?",
@@ -27,7 +27,7 @@
       "CO2 from chemical reactions between volcanic gases and atmospheric water vapor is released, while ash and volcanic debris form particulate matter suspended in the atmosphere",
       "CO2 from combustion of organic matter in magma is released as gas, while ash and volcanic debris form particulate matter suspended in the atmosphere"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A soil scientist measured decomposition rates and soil CO2 in samples from four moisture conditions: saturated, wet, moist, and dry. CO2 rose from dry to moist then declined sharply in saturated soils. Which statement best describes the relationship between soil moisture and CO2 production?",
@@ -87,7 +87,7 @@
       "Volcanic ash would not explain PM linked to wave height and onshore winds.",
       "Inland dust storms cause the observed PM during onshore wind events."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Soil respiration rates were measured by season in a temperate forest: spring 1.2 mg CO2/g/day, summer 2.8 mg CO2/g/day, fall 1.9 mg CO2/g/day, winter 0.4 mg CO2/g/day. Soil moisture and organic matter were constant. Which conclusion about seasonal variation in natural CO2 sources is best supported?",

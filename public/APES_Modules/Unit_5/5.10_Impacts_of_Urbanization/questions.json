@@ -1,13 +1,13 @@
 [
   {
-    "question": "An urban planner writes that awareness campaigns can motivate residents to drive less, carpool, and buy fuel efficient vehicles to lower urban CO2 emissions. What assumption underlies this argument?",
+    "question": "An urban planner argues that public awareness campaigns encouraging residents to drive less, carpool, and buy fuel-efficient vehicles will substantially lower a city's transportation CO2 emissions. Which assumption does this argument depend on?",
     "answers": [
-      "Individual consumer choices can achieve emissions reductions without systemic changes",
-      "Regulatory mandates can achieve emissions reductions without systemic changes",
-      "Individual consumer choices can increase public awareness without systemic changes",
-      "Individual choices can succeed because existing infrastructure already provides alternatives"
+      "That enough individuals will voluntarily change their behavior in response to awareness campaigns to produce a measurable citywide emissions reduction, without requiring new infrastructure or policy mandates.",
+      "That public transit infrastructure is already too extensive for further investment to reduce emissions meaningfully.",
+      "That regulatory fuel-efficiency standards have already failed and only voluntary behavior change remains an option.",
+      "That awareness campaigns are more expensive than building new public transit but produce comparable results."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Scientists studying how impervious surfaces affect urban flooding established 20 study plots in a city: 10 plots in neighborhoods with >70% impervious surface coverage (roads, buildings, parking lots) and 10 plots in neighborhoods with <20% impervious coverage. During a standardized rainfall event, they measured stormwater runoff volume and peak flow rate from each plot using calibrated flow meters. Which of the following best describes why the researchers selected neighborhoods with such different levels of impervious coverage?",
@@ -80,23 +80,23 @@
     "correct": "C"
   },
   {
-    "question": "A scatter plot shows remaining green space percentage versus annual flood events for twelve rapidly urbanizing cities, with a clear negative trend. Which statement best describes how this relationship illustrates urbanization's environmental impact?",
+    "question": "A scatter plot shows remaining green space percentage versus annual flood events for twelve rapidly urbanizing cities, revealing a clear negative trend: cities with less green space experience more flood events. Which statement best describes how this relationship illustrates urbanization's environmental impact?",
     "answers": [
-      "Less green space corresponds to more floods because impervious surfaces reduce infiltration.",
-      "No consistent relationship because flood frequency depends mainly on rainfall intensity.",
-      "Flooding increases with more green space because vegetation causes water to pool.",
-      "Cities with more green space experience more flooding because vegetation slows runoff."
+      "As green space is replaced by impervious surfaces like pavement and rooftops, less rainfall infiltrates the ground, increasing surface runoff and flood frequency.",
+      "The relationship is coincidental, since flood frequency is determined entirely by rainfall intensity and not by land cover.",
+      "Green space causes more flooding because vegetation blocks natural drainage channels and traps water on the surface.",
+      "Cities with more remaining green space experience more floods because dense vegetation slows infiltration and causes water to pool."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A municipal water authority says expanding treatment capacity will address future freshwater scarcity. They cite projections of a 35% urban population increase over 20 years and a current per capita use of 150 gallons daily. Which best describes a limitation in how this evidence supports the authority's claim?",
+    "question": "A municipal water authority claims that expanding water treatment capacity will resolve future freshwater scarcity. They cite a projected 35% urban population increase over 20 years and current per-capita use of 150 gallons per day, but do not mention the region's water source or supply trends. Which of the following best describes a limitation of this evidence in supporting their claim?",
     "answers": [
-      "Shows higher demand but ignores whether supply can meet increased demand",
-      "Argues the 150 gallons per person figure is implausibly high",
-      "Argues 20-year population projections are too unreliable to support the claim",
-      "Focuses on cost and feasibility rather than on actual water availability"
+      "The evidence documents rising demand but provides no data on whether the region's water supply (surface water or groundwater) can sustain that increased demand.",
+      "The evidence is limited because per-capita water use of 150 gallons per day is implausibly high for an urban population.",
+      "The evidence is limited because 20-year population projections are inherently too unreliable to be used in infrastructure planning.",
+      "The evidence focuses too heavily on treatment plant construction costs rather than on public opinion about water rates."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

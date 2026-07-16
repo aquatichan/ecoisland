@@ -1,34 +1,52 @@
 // @ts-nocheck
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@/Layout";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-import Homepage from "@/pages/Homepage";
-import Dashboard from "@/pages/Dashboard";
-import Onboarding from "@/pages/Onboarding";
-import Island from "@/pages/Island";
-import CarbonFootprint from "@/pages/CarbonFootprint";
-import RegionalData from "@/pages/RegionalData";
-import DangerScan from "@/pages/DangerScan";
-import ActionFeed from "@/pages/ActionFeed";
-import Impact from "@/pages/Impact";
-import Settings from "@/pages/Settings";
-import Leaderboard from "@/pages/Leaderboard";
-import APES from "@/pages/APES";
-import LessonPage from "@/pages/LessonPage";
-
-import PrivacyPolicy from "@/pages/misc/PrivacyPolicy";
-import TOS from "@/pages/misc/TOS";
+// Route-level code splitting: each page loads on demand so the initial
+// bundle stays small (the Impact/Island shader pages are especially heavy).
+const Homepage = lazy(() => import("@/pages/Homepage"));
+const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const Onboarding = lazy(() => import("@/pages/Onboarding"));
+const Island = lazy(() => import("@/pages/Island"));
+const CarbonFootprint = lazy(() => import("@/pages/CarbonFootprint"));
+const RegionalData = lazy(() => import("@/pages/RegionalData"));
+const DangerScan = lazy(() => import("@/pages/DangerScan"));
+const ActionFeed = lazy(() => import("@/pages/ActionFeed"));
+const Impact = lazy(() => import("@/pages/Impact"));
+const Settings = lazy(() => import("@/pages/Settings"));
+const Leaderboard = lazy(() => import("@/pages/Leaderboard"));
+const APES = lazy(() => import("@/pages/APES"));
+const LessonPage = lazy(() => import("@/pages/LessonPage"));
+const PrivacyPolicy = lazy(() => import("@/pages/misc/PrivacyPolicy"));
+const TOS = lazy(() => import("@/pages/misc/TOS"));
 
 import "leaflet/dist/leaflet.css";
 import "@/App.css";
+
+function PageLoader() {
+  return (
+    <div
+      className="min-h-screen flex items-center justify-center"
+      style={{ background: "radial-gradient(ellipse at 50% 0%, #062d1e 0%, #020c08 70%)" }}
+    >
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 rounded-full border-2 border-emerald-500/30 animate-ping" />
+        <div className="absolute inset-2 rounded-full border-2 border-t-emerald-400 border-transparent animate-spin" />
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
     <ThemeProvider>
     <Router>
       <div className="App">
+        <ErrorBoundary>
+        <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Homepage />} />
@@ -51,6 +69,8 @@ function App() {
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </Suspense>
+        </ErrorBoundary>
       </div>
     </Router>
     </ThemeProvider>

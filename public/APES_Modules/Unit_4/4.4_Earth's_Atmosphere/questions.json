@@ -40,14 +40,14 @@
     "correct": "D"
   },
   {
-    "question": "Scientists analyze temperature data from a rising weather balloon to identify the tropopause boundary. Which specific trend in the recorded data indicates the instrument has successfully entered the stratosphere?",
+    "question": "A weather balloon carrying a thermometer rises through the atmosphere while continuously recording temperature. Which specific change in the temperature-versus-altitude data would indicate that the balloon has crossed the tropopause and entered the stratosphere?",
     "answers": [
-      "A shift from decreasing temperature with height to increasing temperature",
-      "A shift from constant temperature with height to rapidly decreasing temperature",
-      "A shift from fluctuating temperature with height to constant temperature",
-      "A shift from increasing temperature with height to decreasing temperature"
+      "Temperature stops decreasing with altitude and begins to increase with altitude.",
+      "Temperature decreases at a constant, unchanging rate for the remainder of the ascent.",
+      "Temperature drops sharply and then becomes highly unpredictable and variable.",
+      "Temperature remains completely constant for the rest of the recorded ascent."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A research team uses balloon-borne ozonesondes to measure ozone concentrations from the ground up to 30 km altitude. The primary advantage of this vertical profiling method over ground-based total column measurements is that it allows researchers to",
@@ -80,14 +80,14 @@
     "correct": "D"
   },
   {
-    "question": "A weather balloon recorded temperatures at these altitudes 0 km 15°C, 5 km -18°C, 10 km -56°C, 15 km -57°C, 20 km -56°C, 25 km -35°C, 30 km -5°C. Which conclusion about atmospheric layers is best supported by these data?",
+    "question": "A weather balloon recorded these temperatures at increasing altitude: 0 km, 15°C; 5 km, -18°C; 10 km, -56°C; 15 km, -57°C; 20 km, -56°C; 25 km, -35°C; 30 km, -5°C. Which conclusion about atmospheric layering is best supported by these data?",
     "answers": [
-      "Troposphere cools to 10 km, stratosphere stabilizes then warms above 20 km.",
-      "Temperature decreases uniformly through 0 to 30 km so layers share properties.",
-      "Temperature data too variable to identify layers so gas composition alone defines structure.",
-      "Temperature increases with altitude so upper atmosphere is always hotter."
+      "Temperature falls steadily through the troposphere to about 10-15 km, then levels off, then rises again above roughly 20 km as the stratosphere warms due to ozone absorption of UV radiation.",
+      "Temperature falls at a constant rate throughout all 30 km, showing that the troposphere and stratosphere share the same thermal structure.",
+      "The data are too irregular to identify distinct atmospheric layers, so layer boundaries must be defined only by gas composition.",
+      "Temperature rises continuously with altitude across the entire 30 km, showing the upper atmosphere is uniformly warmer than the surface."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The troposphere contains approximately 80% of the atmosphere's total mass despite being the shallowest layer. Which of the following best explains why most atmospheric mass is concentrated in this lowest layer?",

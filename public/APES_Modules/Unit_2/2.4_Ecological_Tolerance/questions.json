@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "Researchers placed macroinvertebrates from a reference stream into laboratory flumes with velocities from 0.1 to 2.0 m/s and measured attachment time. What is the primary advantage of using controlled flumes instead of comparing organisms across natural streams with different flow rates?",
+    "question": "Researchers placed macroinvertebrates from a reference stream into laboratory flumes with controlled water velocities ranging from 0.1 to 2.0 m/s and measured how long each organism remained attached to the substrate. What is the primary advantage of using controlled flumes rather than comparing organisms sampled from natural streams with different flow rates?",
     "answers": [
-      "They isolate flow rate by holding other environmental factors constant.",
-      "They eliminate the need for replication because conditions are standardized.",
-      "They can process more specimens in less time than field surveys.",
-      "Laboratory flumes provide more realistic conditions than field streams."
+      "Controlled flumes isolate water velocity as the variable of interest by holding other environmental factors, such as temperature and substrate type, constant across trials",
+      "Controlled flumes eliminate the need for any replication because laboratory conditions are inherently standardized and require no repeated trials",
+      "Controlled flumes simply allow researchers to process a larger number of specimens in less time than field surveys would require",
+      "Controlled flumes provide a more ecologically realistic representation of natural stream conditions than field observations would"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A diagram shows an estuarine salinity gradient (0 to 35 ppt) with stenohaline and euryhaline fish marked. Which statement best explains the relationship between salinity tolerance and species distribution?",
@@ -90,13 +90,42 @@
     "correct": "C"
   },
   {
-    "question": "A botanist recorded average plant heights at pH 4.2 (18 cm), 5.8 (31 cm), 6.5 (42 cm), 7.2 (39 cm), and 8.1 (22 cm). Which statement best describes the relationship between soil pH and plant growth?",
+    "question": "A botanist recorded average plant heights across a soil pH gradient: pH 4.2, 18 cm; pH 5.8, 31 cm; pH 6.5, 42 cm; pH 7.2, 39 cm; pH 8.1, 22 cm. Which statement best describes the relationship between soil pH and plant growth shown by these data?",
     "answers": [
-      "Plant height peaks near pH 6.5 then declines at lower and higher pH.",
-      "No consistent relationship exists because plant height varies randomly across pH levels.",
-      "Plant height increases steadily as soil pH rises from acidic to alkaline.",
-      "Plant height decreases as pH increases, indicating inability to tolerate alkaline soils."
+      "Plant height is greatest near pH 6.5 and declines at both more acidic and more alkaline pH levels, consistent with an optimal range of tolerance",
+      "There is no consistent relationship between plant height and soil pH, since plant height appears to vary randomly across the measured pH levels",
+      "Plant height increases steadily and continuously as soil pH rises from the most acidic to the most alkaline conditions tested",
+      "Plant height decreases steadily as pH increases across the entire tested range, indicating the plant cannot tolerate alkaline soils at all"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Plant Height Across a Soil pH Gradient",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {
+          "x": 4.2,
+          "y": 18
+        },
+        {
+          "x": 5.8,
+          "y": 31
+        },
+        {
+          "x": 6.5,
+          "y": 42
+        },
+        {
+          "x": 7.2,
+          "y": 39
+        },
+        {
+          "x": 8.1,
+          "y": 22
+        }
+      ],
+      "xLabel": "Soil pH",
+      "yLabel": "Average plant height (cm)"
+    }
   }
 ]

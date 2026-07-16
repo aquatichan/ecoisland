@@ -20,24 +20,49 @@
     "correct": "B"
   },
   {
-    "question": "A research team studying agricultural impacts on water purification services in a watershed compared stream water quality upstream and downstream of a large corn and soybean farming region. They measured dissolved oxygen, nitrate concentration, and phosphate concentration at five locations upstream of farms and five locations downstream of farms. All measurements were taken monthly for three years. Which of the following aspects of this study design most directly enables researchers to attribute water quality changes to agricultural activity?",
+    "question": "A research team studying agricultural impacts on water purification services in a watershed compared stream water quality upstream and downstream of a large corn and soybean farming region, measuring dissolved oxygen, nitrate, and phosphate concentrations at five locations in each zone. Why is comparing upstream to downstream sites a useful approach for this study, and what limitation should the researchers keep in mind?",
     "answers": [
-      "Sampling upstream locations provides baseline water quality conditions unaffected by agriculture, allowing comparison to downstream locations affected by agricultural runoff",
-      "Sampling upstream locations provides initial water quality conditions before agricultural impacts occur, allowing comparison to downstream locations measured after agricultural runoff exposure",
-      "Sampling upstream locations provides baseline water quality conditions that may also be affected by agriculture, requiring additional control sites outside the watershed to enable valid comparison",
-      "Sampling upstream locations provides baseline water quality conditions unaffected by agriculture, allowing detection of which pollutants are present in downstream locations"
+      "Upstream sites provide a baseline for water quality unaffected by this particular farming region, useful for comparison, but the researchers should confirm upstream sites are not themselves affected by other unrelated pollution sources",
+      "Upstream sites provide a baseline that is guaranteed to be completely free of any agricultural influence, so no further verification of upstream conditions is needed",
+      "Upstream sites are useful only because they increase the total number of sampling locations, which is the sole benefit of this study design",
+      "Upstream sites cannot serve as a meaningful baseline because water quality naturally varies at every point along a stream regardless of land use"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "Coral reefs support food webs and protect coasts by attenuating waves. Ocean acidification lowers seawater pH and reduces carbonate ion availability. How does acidification disrupt reef ecosystem services?",
+    "question": "Coral reefs support fisheries and food webs and also protect coastlines by attenuating wave energy. Ocean acidification lowers seawater pH and reduces the availability of carbonate ions that corals need to build their calcium carbonate skeletons. How does acidification disrupt these reef ecosystem services?",
     "answers": [
-      "Reduced carbonate limits coral calcification, weakening reefs and coastal protection.",
-      "Additional dissolved CO2 does not boost coral calcification or skeletal growth.",
-      "Bleaching results mainly from warming rather than lowered pH and affects tourism.",
-      "Acidification can harm fish larvae but mainly reduces reef structure and services."
+      "Reduced carbonate ion availability limits coral calcification, weakening reef structure over time and thereby diminishing both fish habitat and the reef's capacity to buffer coastal wave energy",
+      "Additional dissolved CO2 in seawater directly boosts coral calcification rates, which strengthens reef structure and improves coastal protection",
+      "Acidification primarily affects reef tourism value and has no measurable effect on coral calcification or the physical structure of the reef",
+      "Acidification harms fish larvae directly but leaves the physical structure of the reef and its coastal protection service completely unaffected"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Ocean Acidification and Reef Ecosystem Services",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Condition",
+        "Seawater pH",
+        "Carbonate Ion Availability",
+        "Coral Calcification"
+      ],
+      "rows": [
+        [
+          "Pre-industrial",
+          8.2,
+          "High",
+          "Normal"
+        ],
+        [
+          "Current",
+          8.1,
+          "Reduced",
+          "Impaired"
+        ]
+      ]
+    }
   },
   {
     "question": "Phosphorus (mg/L): pre 0.015, year 1 0.042, year 3 0.068, year 5 0.089. Aquatic plant biomass (g/m²): pre 180, year 1 220, year 3 310, year 5 480. Bottom dissolved oxygen (mg/L): pre 6.8, year 1 5.2, year 3 2.1, year 5 0.3. Which conclusion about disruption of nutrient cycling services is best supported by these data?",
@@ -60,14 +85,39 @@
     "correct": "B"
   },
   {
-    "question": "Researchers measured bee abundance and crop yield in four regions with increasing pesticide use: Region A low (450 bees/ha, 8,200 kg/ha), Region B moderate (280 bees/ha, 7,900 kg/ha), Region C high (85 bees/ha, 6,400 kg/ha), Region D very high (12 bees/ha, 5,100 kg/ha). Which conclusion about disruption of pollination services is best supported by these data?",
+    "question": "Researchers measured bee abundance and crop yield in four regions with increasing pesticide use: Region A (low use) had 450 bees/ha and 8,200 kg/ha yield; Region B (moderate) had 280 bees/ha and 7,900 kg/ha; Region C (high) had 85 bees/ha and 6,400 kg/ha; Region D (very high) had 12 bees/ha and 5,100 kg/ha. Which conclusion about pollinator ecosystem services is best supported by these data?",
     "answers": [
-      "Higher pesticide use correlates with lower bee abundance and crop yield",
-      "Pesticides have no effect since Region D still produces some crop yield",
-      "Crop yields are solely determined by bee abundance without other influences",
-      "High pesticide use increases bee abundance and raises crop yields"
+      "Higher pesticide use is associated with lower bee abundance and lower crop yield, consistent with pesticides disrupting the pollination service bees provide",
+      "Pesticides have no meaningful effect on crop yield, since Region D still produced a substantial crop yield despite very low bee abundance",
+      "Crop yield in these regions is determined solely by bee abundance, with no other environmental factor playing any role",
+      "High pesticide use is associated with increased bee abundance and higher crop yields across all four regions studied"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Bee Abundance vs. Crop Yield Across Pesticide Use Regions",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [
+        {
+          "x": 450,
+          "y": 8200
+        },
+        {
+          "x": 280,
+          "y": 7900
+        },
+        {
+          "x": 85,
+          "y": 6400
+        },
+        {
+          "x": 12,
+          "y": 5100
+        }
+      ],
+      "xLabel": "Bee abundance (bees/ha)",
+      "yLabel": "Crop yield (kg/ha)"
+    }
   },
   {
     "question": "A city's water treatment costs have increased 40% over five years as upstream wetlands have been drained for agricultural expansion. The city's water intake now experiences seasonal flooding and elevated nutrient levels. Which restoration approach would most directly address the underlying cause of these problems?",
@@ -82,21 +132,55 @@
   {
     "question": "Seagrass meadows provide nursery habitat for juvenile fish, trap sediment, and cycle nutrients. Coastal development and pollution have reduced seagrass cover by 90% in some estuaries over 40 years. Why does seagrass loss disrupt both fishery productivity and water quality in coastal ecosystems?",
     "answers": [
-      "Loss of seagrass removes nursery habitat and stops sediment and nutrient filtration",
-      "Mangroves and marshes replace seagrass services so only cultural value is lost",
-      "Seagrass loss increases water clarity and boosts phytoplankton productivity improving fisheries",
-      "Adult fish can use alternative spawning sites so fisheries remain unchanged"
+      "Losing seagrass eliminates critical nursery habitat for juvenile fish and removes the sediment- and nutrient-trapping function seagrass performs, degrading both fishery productivity and water clarity",
+      "Mangroves and salt marshes fully substitute for all of seagrass's ecological functions, so seagrass loss only affects the cultural or aesthetic value of the estuary",
+      "Seagrass loss increases water clarity and boosts phytoplankton productivity, which directly improves fishery yields in affected estuaries",
+      "Adult fish can easily relocate to alternative spawning sites, so the loss of seagrass nursery habitat has no measurable effect on fish populations"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Estuary Seagrass Cover Over 40 Years",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Seagrass cover (%)",
+          "points": [
+            {
+              "x": 0,
+              "y": 90
+            },
+            {
+              "x": 10,
+              "y": 65
+            },
+            {
+              "x": 20,
+              "y": 40
+            },
+            {
+              "x": 30,
+              "y": 20
+            },
+            {
+              "x": 40,
+              "y": 9
+            }
+          ]
+        }
+      ],
+      "xLabel": "Years",
+      "yLabel": "Seagrass cover (%)"
+    }
   },
   {
-    "question": "A coastal research team compared fish populations in a mangrove forest adjacent to a shrimp aquaculture facility with fish populations in a mangrove forest 15 kilometers away with no aquaculture nearby. Both forests were similar in size, age, and water salinity. Fish were sampled using identical nets at five locations within each forest monthly for two years. Which of the following represents a key limitation of this observational study design for determining whether aquaculture disrupts the mangrove's provisioning services?",
+    "question": "A coastal research team compared fish populations in a mangrove forest adjacent to a shrimp aquaculture facility with fish populations in a similar mangrove forest 15 kilometers away with no aquaculture nearby. Both forests were similar in size, age, and water salinity, and fish were sampled using identical netting methods. Which of the following best describes a limitation of this comparative (non-experimental) study design?",
     "answers": [
-      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to isolate aquaculture as the cause of any differences observed",
-      "The researchers selected forests that may already differ systematically in ways related to aquaculture presence, making it impossible to isolate aquaculture as the cause of any differences observed",
-      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to generalize findings to other mangrove forests with different characteristics",
-      "The forests may differ in pre-existing fish populations, water temperature, or nutrient levels unrelated to aquaculture, making it impossible to detect whether differences in fish populations exist between the forests"
+      "The two forests may differ in pre-existing fish populations, water temperature, or nutrient levels for reasons unrelated to aquaculture, making it difficult to attribute any observed difference solely to the aquaculture facility",
+      "The study design guarantees that any difference observed between the two sites must be caused by the aquaculture facility, since all other conditions were held constant",
+      "Because the forests are 15 kilometers apart, the results cannot be used to say anything about fish populations in either forest individually",
+      "Netting methods are inherently biased toward catching larger fish, which invalidates any comparison between the two sites regardless of aquaculture presence"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

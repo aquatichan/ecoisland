@@ -1,38 +1,574 @@
 [
   {
-    "question": "Which of the following is an example of a provisioning ecosystem service?",
+    "question": "Which of the following best describes the three main components of biodiversity studied in ecology?",
     "difficulty": "Easy",
-    "A": "Pollination by bees",
-    "B": "Water purification",
-    "C": "Food production",
-    "D": "Soil formation",
-    "answer": "C"
+    "A": "Genetic diversity, species diversity, and ecosystem diversity",
+    "B": "Population diversity, biome diversity, and climate diversity",
+    "C": "Producer diversity, consumer diversity, and decomposer diversity",
+    "D": "Habitat diversity, niche diversity, and trophic diversity",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Three Levels of Biodiversity",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Level", "Description"],
+      "rows": [
+        ["Genetic diversity", "Variation in genes within a species"],
+        ["Species diversity", "Variety and abundance of species in a region"],
+        ["Ecosystem diversity", "Variety of habitats, communities, and ecological processes"]
+      ]
+    }
   },
   {
-    "question": "A population’s ability to adapt to new environmental conditions is most directly related to which type of biodiversity?",
-    "difficulty": "Medium",
+    "question": "Species richness and species evenness together determine which measure of a community?",
+    "difficulty": "Easy",
     "A": "Species diversity",
-    "B": "Genetic diversity",
-    "C": "Ecosystem diversity",
-    "D": "Functional diversity",
-    "answer": "B"
+    "B": "Carrying capacity",
+    "C": "Trophic efficiency",
+    "D": "Net primary productivity",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Components of Species Diversity",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Term", "Definition"],
+      "rows": [
+        ["Species richness", "The number of different species present"],
+        ["Species evenness", "How equally individuals are distributed among species"],
+        ["Species diversity", "A combined measure of richness and evenness"]
+      ]
+    }
   },
   {
-    "question": "An island located far from the mainland but large in area will likely have which characteristics according to island biogeography theory?",
+    "question": "Two forest plots each contain 100 trees from 4 species. Plot A has 25 individuals of each species. Plot B has 91, 3, 3, and 3 individuals of each species, respectively. Both plots have the same species richness. Which statement correctly compares their species diversity?",
+    "difficulty": "Medium",
+    "A": "Plot A has higher species diversity because its species are more evenly distributed, even though richness is equal",
+    "B": "Plot B has higher species diversity because one species dominates, which increases the diversity index",
+    "C": "Both plots have identical species diversity because richness alone determines species diversity",
+    "D": "Plot A has lower species diversity because dominance by any single species is not possible in Plot A",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Tree Species Abundance in Two Forest Plots",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Plot", "Species 1", "Species 2", "Species 3", "Species 4"],
+      "rows": [
+        ["Plot A", 25, 25, 25, 25],
+        ["Plot B", 91, 3, 3, 3]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes a 'biodiversity hotspot' as used by conservation biologists?",
+    "difficulty": "Medium",
+    "A": "A region with an exceptionally high concentration of endemic species that has also lost a large proportion of its original habitat",
+    "B": "Any tropical region located within 23.5 degrees of the equator, regardless of species composition",
+    "C": "A protected national park that receives the highest level of legal conservation status available",
+    "D": "A region where invasive species outnumber native species by the greatest margin",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best explains why genetic diversity within a species is important for long-term population survival?",
+    "difficulty": "Medium",
+    "A": "Greater genetic diversity increases the likelihood that some individuals carry traits allowing survival under new environmental stresses, such as disease or climate change",
+    "B": "Genetic diversity has no effect on survival because natural selection acts identically on all genotypes",
+    "C": "Lower genetic diversity always leads to faster population growth because fewer traits need to be maintained",
+    "D": "Genetic diversity only matters for domesticated species and has no relevance to wild populations",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Cheetah Population Genetic Diversity and Disease Outbreak",
+      "sourceNote": "Hypothetical data modeled on real observations of low genetic diversity in cheetahs",
+      "headers": ["Population", "Genetic Diversity", "Mortality After Disease Outbreak"],
+      "rows": [
+        ["Cheetah (historically bottlenecked)", "Very low", "High (60%+ in some outbreaks)"],
+        ["Typical outbred mammal population", "Moderate to high", "Lower, more variable survival"]
+      ]
+    }
+  },
+  {
+    "question": "Provisioning, regulating, supporting, and cultural services are the four categories used to classify which of the following?",
+    "difficulty": "Easy",
+    "A": "Ecosystem services",
+    "B": "Trophic levels",
+    "C": "Biome types",
+    "D": "Survivorship curve types",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Categories of Ecosystem Services",
+      "sourceNote": "Hypothetical examples for this exercise",
+      "headers": ["Category", "Example"],
+      "rows": [
+        ["Provisioning", "Food, timber, fresh water"],
+        ["Regulating", "Water purification, climate regulation"],
+        ["Supporting", "Nutrient cycling, soil formation"],
+        ["Cultural", "Recreation, spiritual/aesthetic value"]
+      ]
+    }
+  },
+  {
+    "question": "Wetlands filter pollutants from water as it passes through vegetation and soil before the water reaches a lake or river. This function is best classified as which type of ecosystem service?",
+    "difficulty": "Easy",
+    "A": "Regulating service",
+    "B": "Provisioning service",
+    "C": "Cultural service",
+    "D": "Supporting service",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Wetland Water Quality: Upstream vs. Downstream of a Wetland",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Location", "Nitrate (mg/L)", "Suspended Sediment (mg/L)"],
+      "rows": [
+        ["Upstream of wetland", 8.2, 120],
+        ["Downstream of wetland", 2.1, 18]
+      ]
+    }
+  },
+  {
+    "question": "A city is deciding whether to invest in restoring a degraded wetland upstream or build a new water treatment plant to handle the same pollutant load. Economists estimate the wetland restoration costs $2 million and provides equivalent filtration capacity to the $8 million treatment plant, while also providing flood control and wildlife habitat. Which concept does this comparison best illustrate?",
+    "difficulty": "Medium",
+    "A": "The economic value of a regulating ecosystem service can be estimated by comparing it to the cost of an equivalent human-engineered substitute",
+    "B": "Ecosystem services have no measurable economic value and cannot be compared to engineered infrastructure",
+    "C": "Wetlands provide only cultural ecosystem services, so this comparison is not economically valid",
+    "D": "Treatment plants always provide more total ecosystem services than natural wetlands regardless of cost",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Cost Comparison: Wetland Restoration vs. Treatment Plant",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "Wetland restoration", "value": 2},
+        {"label": "New treatment plant", "value": 8}
+      ],
+      "xLabel": "Option",
+      "yLabel": "Estimated cost (million USD)"
+    }
+  },
+  {
+    "question": "Pollination of crops by wild bees and other insects is an example of which type of ecosystem service?",
+    "difficulty": "Easy",
+    "A": "Supporting/regulating service that indirectly enables provisioning (food production)",
+    "B": "A purely cultural service with no economic value",
+    "C": "A provisioning service because bees are themselves harvested for food",
+    "D": "Not considered an ecosystem service because it involves an animal rather than a plant or microbe",
+    "answer": "A"
+  },
+  {
+    "question": "According to the theory of island biogeography, which combination of island characteristics is predicted to support the highest species richness at equilibrium?",
+    "difficulty": "Medium",
+    "A": "A large island located close to the mainland source of colonizing species",
+    "B": "A small island located far from the mainland source of colonizing species",
+    "C": "A large island located far from the mainland, since isolation always increases richness",
+    "D": "Island size and distance from the mainland have no effect on equilibrium species richness",
+    "answer": "A",
+    "stimulus": {
+      "type": "scatter",
+      "title": "Island Size and Species Richness",
+      "sourceNote": "Hypothetical data illustrating the species-area relationship",
+      "points": [
+        {"x": 2, "y": 8}, {"x": 5, "y": 15}, {"x": 10, "y": 22}, {"x": 20, "y": 30},
+        {"x": 40, "y": 40}, {"x": 80, "y": 52}, {"x": 150, "y": 63}
+      ],
+      "xLabel": "Island area (km^2)",
+      "yLabel": "Number of species"
+    }
+  },
+  {
+    "question": "In the equilibrium model of island biogeography, the equilibrium number of species on an island is reached when which of the following occurs?",
+    "difficulty": "Medium",
+    "A": "The rate of species immigration to the island equals the rate of species extinction on the island",
+    "B": "All available niches on the island have been filled by a single dominant species",
+    "C": "Immigration drops to zero because all mainland species have already colonized the island",
+    "D": "Extinction drops to zero because island populations become immune to environmental disturbance",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Immigration and Extinction Rates vs. Number of Species Present",
+      "sourceNote": "Hypothetical data illustrating the equilibrium model of island biogeography",
+      "series": [
+        {"name": "Immigration rate", "points": [{"x": 0, "y": 10}, {"x": 10, "y": 7}, {"x": 20, "y": 4}, {"x": 30, "y": 1}]},
+        {"name": "Extinction rate", "points": [{"x": 0, "y": 0}, {"x": 10, "y": 3}, {"x": 20, "y": 6}, {"x": 30, "y": 9}]}
+      ],
+      "xLabel": "Number of species present on island",
+      "yLabel": "Rate (species/year)"
+    }
+  },
+  {
+    "question": "Researchers studying four islands of varying size and distance from the mainland recorded the following immigration and extinction rates at equilibrium. Based on the theory of island biogeography, which island would be predicted to have the lowest equilibrium species richness?",
     "difficulty": "Hard",
-    "A": "Low immigration and high extinction rates",
-    "B": "High immigration and low extinction rates",
-    "C": "Low immigration and low extinction rates",
-    "D": "High immigration and high extinction rates",
-    "answer": "C"
+    "A": "Island D (small, far from mainland)",
+    "B": "Island A (large, close to mainland)",
+    "C": "Island B (large, far from mainland)",
+    "D": "Island C (small, close to mainland)",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Island Characteristics and Predicted Equilibrium Species Richness",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Island", "Size", "Distance from Mainland", "Predicted Richness"],
+      "rows": [
+        ["A", "Large", "Close", "High"],
+        ["B", "Large", "Far", "Moderate-high"],
+        ["C", "Small", "Close", "Moderate"],
+        ["D", "Small", "Far", "Low"]
+      ]
+    }
   },
   {
-    "question": "After a volcanic eruption, ferns and lichens are the first species to colonize the area. This process is best described as:",
-    "difficulty": "Challenge",
-    "A": "Secondary succession",
-    "B": "Primary succession",
-    "C": "Climax community formation",
-    "D": "Edge effect",
-    "answer": "B"
+    "question": "Habitat fragmentation, such as roads or farmland dividing a continuous forest into smaller isolated patches, is often analyzed using island biogeography theory because it creates which condition?",
+    "difficulty": "Medium",
+    "A": "Habitat 'islands' surrounded by an inhospitable matrix, which limits species movement and increases local extinction risk, similar to real oceanic islands",
+    "B": "An increase in total available habitat area, since fragmentation always creates more edge habitat than the original contiguous forest",
+    "C": "A decrease in the distance between habitat patches, which paradoxically increases isolation-driven extinction",
+    "D": "Complete elimination of any immigration or extinction dynamics within the fragmented patches",
+    "answer": "A"
+  },
+  {
+    "question": "The range of environmental conditions (such as temperature or salinity) within which a species can survive and reproduce is best described as its which of the following?",
+    "difficulty": "Easy",
+    "A": "Range of ecological tolerance",
+    "B": "Carrying capacity",
+    "C": "Niche breadth reserve",
+    "D": "Trophic efficiency",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Zones of a Tolerance Curve",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Zone", "Condition"],
+      "rows": [
+        ["Zone of intolerance", "Organism cannot survive"],
+        ["Zone of physiological stress", "Organism survives but with reduced performance"],
+        ["Optimal range", "Organism thrives"]
+      ]
+    }
+  },
+  {
+    "question": "A fish species shows optimal growth at water temperatures between 18-22 degrees C, reduced growth (a zone of physiological stress) at 12-18 and 22-28 degrees C, and cannot survive below 8 or above 32 degrees C. Which of the following best represents this species' range of tolerance for temperature?",
+    "difficulty": "Medium",
+    "A": "8-32 degrees C is the full survivable range, with 18-22 degrees C as the optimal zone",
+    "B": "Only 18-22 degrees C represents the species' entire range of tolerance",
+    "C": "8-32 degrees C represents only the zone of physiological stress, excluding the optimal range",
+    "D": "The species has no defined range of tolerance because growth rate varies continuously with temperature",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Fish Growth Rate Across a Temperature Gradient",
+      "sourceNote": "Hypothetical data illustrating a tolerance curve",
+      "series": [
+        {"name": "Growth rate (relative)", "points": [{"x": 8, "y": 0}, {"x": 12, "y": 20}, {"x": 18, "y": 90}, {"x": 20, "y": 100}, {"x": 22, "y": 90}, {"x": 28, "y": 20}, {"x": 32, "y": 0}]}
+      ],
+      "xLabel": "Water temperature (C)",
+      "yLabel": "Relative growth rate"
+    }
+  },
+  {
+    "question": "A species with a narrow range of ecological tolerance for a given factor (such as pH or temperature) is best described as which of the following, compared to a species with a wide range of tolerance?",
+    "difficulty": "Easy",
+    "A": "More vulnerable to environmental change and typically more restricted in geographic distribution",
+    "B": "Less vulnerable to environmental change because narrow tolerance always implies stronger adaptation",
+    "C": "Equally likely to survive any environmental change as a species with a wide tolerance range",
+    "D": "Guaranteed to have a larger population size than species with wide tolerance ranges",
+    "answer": "A"
+  },
+  {
+    "question": "Coral species that are highly sensitive to small changes in water temperature and pH would best be classified using which ecological term?",
+    "difficulty": "Medium",
+    "A": "Stenotopic (narrow range of tolerance)",
+    "B": "Eurytopic (wide range of tolerance)",
+    "C": "K-selected exclusively, regardless of tolerance range",
+    "D": "r-selected exclusively, regardless of tolerance range",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is an example of a natural (non-anthropogenic) disturbance that can reset ecological succession in a forest ecosystem?",
+    "difficulty": "Easy",
+    "A": "A lightning-caused wildfire",
+    "B": "Urban development for housing",
+    "C": "Clear-cut logging for timber",
+    "D": "Conversion of forest to agricultural cropland",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Natural vs. Anthropogenic Ecosystem Disturbances",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Disturbance", "Origin"],
+      "rows": [
+        ["Lightning-caused wildfire", "Natural"],
+        ["Volcanic eruption", "Natural"],
+        ["Hurricane", "Natural"],
+        ["Urban development", "Anthropogenic"],
+        ["Clear-cut logging", "Anthropogenic"]
+      ]
+    }
+  },
+  {
+    "question": "A volcanic eruption buries a forested hillside under 3 meters of lava, leaving no soil, seeds, or organic matter behind. Which type of ecological succession would be expected to occur on this hillside?",
+    "difficulty": "Medium",
+    "A": "Primary succession, because the disturbance eliminated all soil and pre-existing organisms",
+    "B": "Secondary succession, because the underlying rock is still present beneath the lava",
+    "C": "No succession would be expected because bare lava rock cannot support any biological colonization",
+    "D": "Immediate climax community formation would occur, skipping normal successional stages",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Site Conditions Before and After a Volcanic Eruption",
+      "sourceNote": "Hypothetical scenario for this exercise",
+      "headers": ["Condition", "Before Eruption", "After Eruption"],
+      "rows": [
+        ["Soil present", "Yes", "No (buried under lava)"],
+        ["Seed bank present", "Yes", "No"],
+        ["Vegetation", "Mature forest", "None"]
+      ]
+    }
+  },
+  {
+    "question": "A field abandoned after 30 years of agricultural use is monitored over the next 80 years. Researchers record the dominant vegetation type at intervals. Based on the data, which of the following best describes the successional pattern shown?",
+    "difficulty": "Medium",
+    "A": "Secondary succession, progressing from annual weeds through grasses and shrubs toward a forest community, since soil was already present after agricultural use",
+    "B": "Primary succession, since no soil existed at the site before observations began",
+    "C": "The data show no clear successional pattern and vegetation composition is random over time",
+    "D": "Climax community conditions were reached immediately upon field abandonment",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Vegetation Change After Agricultural Abandonment",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Years Since Abandonment", "Dominant Vegetation"],
+      "rows": [
+        [0, "Bare/plowed soil"],
+        [5, "Annual weeds and grasses"],
+        [20, "Perennial grasses and shrubs"],
+        [50, "Fast-growing pioneer trees"],
+        [80, "Shade-tolerant hardwood forest"]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best explains why pioneer species in primary succession are typically well-adapted to harsh, nutrient-poor conditions?",
+    "difficulty": "Medium",
+    "A": "Pioneer species such as lichens and mosses can tolerate low nutrient availability and help build initial soil through weathering and organic matter accumulation, paving the way for later successional species",
+    "B": "Pioneer species require rich, fertile soil to establish and therefore only appear after later successional species have modified the environment",
+    "C": "Pioneer species are identical in their environmental requirements to climax-community species, differing only in size",
+    "D": "Pioneer species cannot tolerate any environmental stress and are outcompeted immediately upon arrival",
+    "answer": "A"
+  },
+  {
+    "question": "A structural adaptation, such as a cactus's water-storing stem, differs from a behavioral adaptation, such as a bird's seasonal migration, primarily in which way?",
+    "difficulty": "Easy",
+    "A": "A structural adaptation is a physical trait of an organism's body, while a behavioral adaptation is an action or pattern of behavior",
+    "B": "A structural adaptation is always learned during an organism's lifetime, while a behavioral adaptation is always inherited genetically",
+    "C": "A structural adaptation can only occur in plants, while a behavioral adaptation can only occur in animals",
+    "D": "There is no meaningful distinction between structural and behavioral adaptations in evolutionary biology",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Types of Adaptations",
+      "sourceNote": "Hypothetical examples for this exercise",
+      "headers": ["Adaptation Type", "Example"],
+      "rows": [
+        ["Structural", "Cactus water-storing stem, thick fur"],
+        ["Behavioral", "Bird migration, hibernation"],
+        ["Physiological", "Venom production, antifreeze proteins in fish blood"]
+      ]
+    }
+  },
+  {
+    "question": "Over many generations, a population of moths in a heavily polluted, soot-darkened industrial area shifts from being predominantly light-colored to predominantly dark-colored, because dark moths are less visible to bird predators against darkened tree bark. This is a classic illustration of which process?",
+    "difficulty": "Medium",
+    "A": "Natural selection acting on existing heritable variation within the moth population",
+    "B": "Individual moths intentionally changing their own coloration in response to pollution during their lifetime",
+    "C": "Genetic drift causing random, non-adaptive changes in coloration unrelated to predation",
+    "D": "Artificial selection imposed directly by human breeders selecting for dark-colored moths",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Proportion of Dark-Colored Moths Over Time in a Polluted Area",
+      "sourceNote": "Hypothetical data modeled on the classic peppered moth example",
+      "series": [
+        {"name": "Dark-colored moths (%)", "points": [{"x": 0, "y": 5}, {"x": 10, "y": 20}, {"x": 20, "y": 45}, {"x": 30, "y": 70}, {"x": 40, "y": 90}]}
+      ],
+      "xLabel": "Years since industrialization began",
+      "yLabel": "Percent of population"
+    }
+  },
+  {
+    "question": "Which of the following best describes an evolutionary adaptation, as distinguished from a simple physiological response to environmental change?",
+    "difficulty": "Medium",
+    "A": "A heritable trait that increases an organism's fitness and becomes more common in a population over multiple generations through natural selection",
+    "B": "Any change an individual organism makes to survive a stressful condition during its own lifetime",
+    "C": "A trait that appears in a single generation and disappears immediately afterward without being passed on",
+    "D": "A trait that decreases an organism's reproductive success but persists in the population regardless",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Adaptation vs. Acclimation",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Feature", "Evolutionary Adaptation", "Physiological Acclimation"],
+      "rows": [
+        ["Timescale", "Multiple generations", "Single lifetime"],
+        ["Heritable?", "Yes", "No"],
+        ["Mechanism", "Natural selection on genetic variation", "Individual physiological adjustment"]
+      ]
+    }
+  },
+  {
+    "question": "A severe hurricane destroys 70% of the canopy trees in a tropical forest but leaves the soil, root systems, and seed bank largely intact. Which of the following best predicts the recovery trajectory of this forest?",
+    "difficulty": "Hard",
+    "A": "The forest will likely undergo secondary succession, recovering more quickly than if starting from bare rock, because soil, roots, and seeds are already present",
+    "B": "The forest must undergo primary succession because all canopy trees were destroyed, resetting the community to a bare substrate",
+    "C": "The forest will show no recovery over time because hurricane damage permanently eliminates ecosystem resilience",
+    "D": "The forest will immediately return to its pre-hurricane climax state within one growing season",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Forest Conditions After a Hurricane",
+      "sourceNote": "Hypothetical scenario for this exercise",
+      "headers": ["Component", "Status After Hurricane"],
+      "rows": [
+        ["Canopy trees", "70% destroyed"],
+        ["Soil", "Intact"],
+        ["Root systems", "Largely intact"],
+        ["Seed bank", "Largely intact"]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best distinguishes a keystone species from a dominant species in an ecological community?",
+    "difficulty": "Hard",
+    "A": "A keystone species has an ecological effect disproportionately large relative to its abundance, while a dominant species exerts influence primarily through its high abundance or biomass",
+    "B": "A keystone species is always the most abundant organism in a community, while a dominant species is always rare",
+    "C": "A keystone species and a dominant species are functionally identical terms used interchangeably in ecology",
+    "D": "A keystone species only affects plant communities, while a dominant species only affects animal communities",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Keystone Species vs. Dominant Species",
+      "sourceNote": "Hypothetical summary for this exercise",
+      "headers": ["Feature", "Keystone Species", "Dominant Species"],
+      "rows": [
+        ["Relative abundance", "Often low", "High"],
+        ["Ecological impact", "Disproportionately large", "Proportional to biomass/abundance"],
+        ["Example", "Sea otter (low abundance, large effect)", "Dominant canopy tree species"]
+      ]
+    }
+  },
+  {
+    "question": "A prolonged drought reduces surface water availability across a savanna ecosystem. Researchers record the population trends of a habitat generalist herbivore species and a habitat specialist herbivore species over the drought period. Which explanation best accounts for the pattern shown?",
+    "difficulty": "Medium",
+    "A": "The generalist species can exploit a broader range of food and water sources as conditions change, while the specialist's dependence on specific resources makes it more vulnerable to decline during the drought",
+    "B": "Both species show identical population trends because drought affects all herbivores equally regardless of dietary breadth",
+    "C": "The specialist species increases in population because droughts specifically favor species with narrow resource requirements",
+    "D": "The generalist species declines more than the specialist because generalists always have smaller starting populations",
+    "answer": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Herbivore Population Trends During a Multi-Year Drought",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {"name": "Generalist species (relative population)", "points": [{"x": 0, "y": 100}, {"x": 1, "y": 95}, {"x": 2, "y": 88}, {"x": 3, "y": 85}]},
+        {"name": "Specialist species (relative population)", "points": [{"x": 0, "y": 100}, {"x": 1, "y": 70}, {"x": 2, "y": 40}, {"x": 3, "y": 18}]}
+      ],
+      "xLabel": "Years into drought",
+      "yLabel": "Relative population size"
+    }
+  },
+  {
+    "question": "Which of the following is the best example of a supporting ecosystem service, as distinct from a provisioning or regulating service?",
+    "difficulty": "Medium",
+    "A": "Nutrient cycling by decomposers and soil microorganisms that maintains long-term soil fertility",
+    "B": "Timber harvested from a forest for construction materials",
+    "C": "Flood control provided by an intact wetland during heavy rainfall",
+    "D": "Recreational hiking opportunities in a national park",
+    "answer": "A"
+  },
+  {
+    "question": "A wildlife biologist compares recovery time after a moderate disturbance (a windstorm that downs 20% of canopy trees) in two forest stands: Stand A has high tree species diversity, and Stand B is a monoculture timber plantation of a single tree species. Which outcome would be most consistent with the concept of ecosystem resilience?",
+    "difficulty": "Hard",
+    "A": "Stand A recovers its ecological function more quickly, because higher species diversity provides functional redundancy that buffers the ecosystem against disturbance",
+    "B": "Stand B recovers more quickly because a single species is easier for the ecosystem to replace after disturbance",
+    "C": "Both stands recover at identical rates because tree species diversity has no bearing on ecosystem resilience",
+    "D": "Neither stand can recover from a windstorm because any canopy loss permanently alters forest composition",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Forest Stand Comparison After a Windstorm Disturbance",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Stand", "Tree Species Diversity", "Canopy Loss", "Years to Recover Pre-Storm Function"],
+      "rows": [
+        ["Stand A", "High (12 species)", "20%", 8],
+        ["Stand B", "Low (1 species, monoculture)", "20%", 18]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following best describes 'edge effects' as they relate to habitat fragmentation and biodiversity?",
+    "difficulty": "Medium",
+    "A": "Altered environmental conditions (such as increased light, wind, and temperature) near the boundary of a habitat fragment, which can favor edge-adapted or invasive species over interior-dependent species",
+    "B": "The complete elimination of all species within 10 meters of any habitat boundary, regardless of species type",
+    "C": "A phenomenon that only affects aquatic ecosystems and has no relevance to terrestrial habitat fragments",
+    "D": "An increase in interior-forest species abundance near fragment edges due to reduced competition",
+    "answer": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Interior-Dependent Bird Species Richness vs. Distance from Forest Edge",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {"label": "0-20 m from edge", "value": 4},
+        {"label": "20-100 m from edge", "value": 9},
+        {"label": "100-300 m from edge", "value": 15},
+        {"label": "300+ m (interior)", "value": 18}
+      ],
+      "xLabel": "Distance from forest edge",
+      "yLabel": "Number of interior-dependent species"
+    }
+  },
+  {
+    "question": "A newly exposed rocky area after a retreating glacier is colonized first by lichens, which are followed over decades by mosses, then grasses, then shrubs, and eventually coniferous trees. Which of the following best explains the ecological role of the lichens in this sequence?",
+    "difficulty": "Medium",
+    "A": "Lichens act as pioneer species that break down rock and begin soil formation, making conditions more favorable for later-arriving species with greater nutrient and soil requirements",
+    "B": "Lichens actively prevent the establishment of mosses and grasses by releasing toxic compounds into the rock surface",
+    "C": "Lichens are functionally identical to climax-community trees and simply take longer to grow to full size",
+    "D": "Lichens have no ecological function in this sequence and appear only coincidentally alongside soil development",
+    "answer": "A"
+  },
+  {
+    "question": "The maximum range of environmental conditions a species can tolerate is its fundamental niche, while the range it actually occupies due to competition or other biotic interactions is its realized niche. A barnacle species can survive across the entire intertidal zone in the absence of competitors but is restricted to only the upper intertidal zone when a competing barnacle species is present. Which of the following correctly applies these terms?",
+    "difficulty": "Hard",
+    "A": "The entire intertidal zone represents the species' fundamental niche, while the upper intertidal zone alone represents its realized niche under competition",
+    "B": "The entire intertidal zone represents the species' realized niche, while the upper intertidal zone represents its fundamental niche",
+    "C": "Fundamental niche and realized niche are identical for this species regardless of competitor presence",
+    "D": "The presence of a competitor expands the species' fundamental niche to include the entire intertidal zone",
+    "answer": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Barnacle Distribution With and Without a Competitor",
+      "sourceNote": "Hypothetical scenario modeled on classic intertidal competition studies",
+      "headers": ["Condition", "Zone Occupied"],
+      "rows": [
+        ["Competitor absent", "Entire intertidal zone (fundamental niche)"],
+        ["Competitor present", "Upper intertidal zone only (realized niche)"]
+      ]
+    }
+  },
+  {
+    "question": "Which of the following statements about the relationship between species diversity and ecosystem stability is best supported by ecological research?",
+    "difficulty": "Medium",
+    "A": "Ecosystems with higher species diversity tend to be more resistant to and resilient after disturbances, due to functional redundancy among species",
+    "B": "Species diversity has been shown to have no relationship whatsoever with ecosystem stability under any conditions",
+    "C": "Ecosystems with the lowest species diversity are consistently the most stable and resistant to disturbance",
+    "D": "Ecosystem stability depends entirely on abiotic factors and is completely independent of species diversity",
+    "answer": "A"
+  },
+  {
+    "question": "A population of desert pupfish is restricted to a single isolated spring-fed pool with a stable water temperature of about 34 degrees C, near the upper end of the temperature range most fish species can tolerate. Which term best describes this species' relationship to temperature as an environmental factor?",
+    "difficulty": "Medium",
+    "A": "The pupfish is a stenothermal species with a narrow range of thermal tolerance centered on unusually high temperatures",
+    "B": "The pupfish is a eurythermal species capable of surviving across the full range of temperatures found on Earth",
+    "C": "Temperature is not a limiting factor for this species since it occupies only a single pool",
+    "D": "The pupfish's isolation in one pool indicates it has the widest thermal tolerance of any fish species",
+    "answer": "A"
   }
 ]

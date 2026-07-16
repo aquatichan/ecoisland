@@ -7,7 +7,7 @@
       "As ocean temperature rises, the mass of seawater increases because heat energy creates new matter.",
       "As ocean temperature rises, the viscosity of seawater increases, preventing flow into polar regions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Marine ecologists hypothesized that ocean warming would shift fish species distributions poleward, with species moving an average of 50–100 km per decade toward higher latitudes. They compiled 30 years of fish catch data from commercial fisheries across the Atlantic Ocean, tracking the mean latitude where each species was most frequently caught. Results for three species showed: Species A moved 45 km poleward per decade (±15 km SD), Species B moved 78 km poleward per decade (±22 km SD), and Species C moved 12 km poleward per decade (±18 km SD). Which interpretation of these results is most accurate regarding the hypothesis?",
@@ -37,7 +37,7 @@
       "Algae loss weakens immunity, making bleached corals susceptible to disease",
       "White coloration prevents corals from attracting mates and reproducing"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An experiment simulates ocean warming by placing a heat lamp over a tank of seawater. If the researchers modified the procedure to increase the concentration of CO2 in the air gap above the water while keeping the lamp intensity constant, how would the results change?",
@@ -57,7 +57,7 @@
       "The data refute the hypothesis because zooxanthellae density did not drop to zero at exactly 30°C, indicating that temperature is not the primary driver of bleaching.",
       "The data support the hypothesis because zooxanthellae density decreased at temperatures above 26°C, demonstrating that any temperature increase causes bleaching."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Oceanographers hypothesized that warming ocean temperatures would decrease dissolved oxygen concentrations in deep water, reducing habitat availability for oxygen-dependent fish species. They measured dissolved oxygen (mg/L) at 500-meter depth in the same ocean location during summer months across 25 years (1995-2020). Mean ocean temperature at that depth increased from 4.2°C (1995-2000) to 4.8°C (2001-2010) to 5.1°C (2011-2020). Dissolved oxygen concentrations showed: 1995-2000 = 4.8 mg/L (±0.3 SD), 2001-2010 = 4.6 mg/L (±0.4 SD), 2011-2020 = 4.2 mg/L (±0.5 SD). Which conclusion about the hypothesis is best supported by these data?",
@@ -97,6 +97,6 @@
       "The data refute the hypothesis because the 38% increase is greater than the predicted 25% increase, indicating that the hypothesis underestimated the metabolic response.",
       "The data support the hypothesis regarding oxygen consumption increase, but the results cannot determine whether this metabolic change would reduce fish survival in natural ocean environments."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

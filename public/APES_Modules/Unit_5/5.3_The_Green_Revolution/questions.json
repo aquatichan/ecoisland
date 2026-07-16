@@ -1,13 +1,13 @@
 [
   {
-    "question": "A rapidly growing region adopts Green Revolution methods and applies synthetic nitrogen fertilizers beyond crop uptake. Excess nutrients drain into nearby rivers during rains. Which best explains the river ecosystem impact?",
+    "question": "A rapidly growing agricultural region adopts Green Revolution methods and applies synthetic nitrogen fertilizer beyond the level crops can absorb. Excess nutrients drain into nearby rivers during heavy rains. Which explanation best describes the resulting river ecosystem impact?",
     "answers": [
-      "Excess nitrogen fuels algal blooms whose decomposition depletes oxygen causing hypoxia.",
-      "Excess nitrogen accelerates soil organic matter loss and reduces water and nutrient retention.",
-      "Excess nitrogen reduces aquatic plant genetic diversity forcing reliance on fewer species.",
-      "Nitrogen compounds are inert in water and accumulate on the river bottom smothering organisms."
+      "Excess nitrogen fuels algal blooms; when the algae die and decompose, the process consumes dissolved oxygen, causing hypoxia that harms or kills aquatic organisms.",
+      "Excess nitrogen accelerates the loss of soil organic matter, reducing the soil's capacity to retain water and nutrients on land.",
+      "Excess nitrogen reduces the genetic diversity of aquatic plants, forcing river ecosystems to rely on fewer plant species.",
+      "Nitrogen compounds are chemically inert in water and simply accumulate on the river bottom, physically smothering benthic organisms."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A wheat region with declining soil organic matter proposes switching from annual tillage to no-till, where seeds are planted into undisturbed soil. Over eight years no-till gained 0.8 metric tons of organic matter per hectare per year versus 0.1 in tilled fields. Which advantage best justifies adopting no-till despite requiring new specialized equipment?",
@@ -20,14 +20,14 @@
     "correct": "D"
   },
   {
-    "question": "Pesticide use expanded during the Green Revolution to protect high-yielding varieties. Which best describes how broad-spectrum pesticides affect non-target insect populations in agricultural ecosystems?",
+    "question": "Pesticide use expanded during the Green Revolution to protect high-yielding crop varieties. Which explanation best describes how broad-spectrum pesticides affect non-target insect populations in agricultural ecosystems?",
     "answers": [
-      "They kill pests and beneficial insects, reducing natural pest control and pollination.",
-      "They eliminate natural enemies, which can allow pest resurgence but not increased reproduction.",
-      "They select for resistant individuals over generations, reducing biodiversity and future control.",
-      "They sometimes persist in soil but rarely cause permanent toxicity preventing insect colonization."
+      "Broad-spectrum pesticides kill both pest and beneficial insects indiscriminately, reducing natural pest control services and pollinator populations.",
+      "Broad-spectrum pesticides eliminate natural enemies of pests, which can allow pest populations to rebound but does not affect their reproductive rate.",
+      "Broad-spectrum pesticides select for resistant individuals over generations, which reduces biodiversity but has no effect on future pest control efforts.",
+      "Broad-spectrum pesticides sometimes persist in soil, but they rarely cause lasting toxicity that would prevent insect recolonization of treated fields."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Data for a developing nation show agricultural productivity and employment by year: 1960 800 kg/ha with 45 workers per 1,000 ha; 1975 2,100 kg/ha with 28 workers; 1990 3,200 kg/ha with 12 workers. Which conclusion about social and economic changes from Green Revolution mechanization is best supported by these data?",
@@ -70,14 +70,14 @@
     "correct": "C"
   },
   {
-    "question": "Genetically modified wheat of the Green Revolution was engineered for herbicide and insect resistance. How do these traits raise yields per acre?",
+    "question": "Green Revolution wheat varieties were genetically bred or engineered for herbicide and insect resistance. Which explanation best describes how these resistance traits raise yield per acre?",
     "answers": [
-      "They reduce losses from weeds and insects, increasing grain allocation.",
-      "They only cut pesticide use without increasing grain yields.",
-      "They increase yields only where advanced farming infrastructure exists.",
-      "They raise yields mainly by reducing water and fertilizer requirements."
+      "By reducing crop losses to competing weeds and insect pests, more of the plant's photosynthetic energy is allocated toward grain production rather than defense or being lost to competition.",
+      "These traits only reduce the amount of pesticide farmers need to apply and do not, by themselves, increase grain yield.",
+      "These traits raise yields only in regions that already have advanced irrigation and mechanized farming infrastructure.",
+      "These traits raise yields primarily by reducing the plant's overall water and fertilizer requirements."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A agricultural economist writes: 'The adoption of high-yielding crop varieties and synthetic fertilizers has enabled farmers in South Asia to triple grain production since the 1970s, lifting millions out of poverty and stabilizing food prices for consumers. While pesticide use has increased, the alternative—accepting lower yields and widespread malnutrition—would impose far greater human costs.' What assumption underlies this argument?",
@@ -90,13 +90,13 @@
     "correct": "D"
   },
   {
-    "question": "In an agricultural region, measured nitrogen fertilizer and groundwater nitrate were: 1970 30 kg/ha and 2.1 mg/L; 1980 85 kg/ha and 4.8 mg/L; 1990 120 kg/ha and 7.2 mg/L; 2000 115 kg/ha and 8.1 mg/L. Which conclusion about environmental consequences of Green Revolution fertilization is best supported by these data?",
+    "question": "In an agricultural region, measured nitrogen fertilizer application and groundwater nitrate concentration over time were: 1970, 30 kg/ha and 2.1 mg/L; 1980, 85 kg/ha and 4.8 mg/L; 1990, 120 kg/ha and 7.2 mg/L; 2000, 115 kg/ha and 8.1 mg/L. Which conclusion about the environmental consequences of Green Revolution fertilization is best supported by these data?",
     "answers": [
-      "Groundwater nitrate rose and continued rising despite stabilized fertilizer use.",
-      "All nitrogen applied in 1970 was removed from groundwater by 1980.",
-      "Reducing fertilizer after 1990 immediately reversed groundwater nitrate levels.",
-      "No relationship exists between fertilizer use and groundwater nitrate."
+      "Groundwater nitrate concentration continued to rise from 1990 to 2000 even though fertilizer application had leveled off, suggesting a delayed or cumulative effect of nitrogen loading on groundwater.",
+      "All of the nitrogen fertilizer applied in 1970 had been completely removed from the groundwater system by 1980.",
+      "The slight decline in fertilizer application after 1990 immediately reversed the trend of rising groundwater nitrate levels.",
+      "No relationship exists between fertilizer application rates and groundwater nitrate concentration in this data set."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

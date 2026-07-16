@@ -40,34 +40,59 @@
     "correct": "D"
   },
   {
-    "question": "Ecologists investigating how food availability affects population growth in a deer herd established 12 study plots in a forest region. Six plots received supplemental food (grain and hay) during winter months, while six plots received no supplemental food. Researchers counted deer in all plots monthly for three years and recorded body condition scores and fawn survival rates. Which of the following best describes the independent variable in this study?",
+    "question": "Ecologists investigating how food availability affects population growth in a deer herd established 12 study plots in a forest region: six plots received supplemental food (grain and hay) during winter months, while six received no supplemental food. Researchers counted deer and recorded body condition and fawn survival in all plots monthly for three years. In this experiment, what is the independent variable?",
     "answers": [
-      "The presence or absence of supplemental food during winter",
-      "The monthly deer population counts recorded over three years",
-      "The body condition scores and fawn survival rates of deer",
-      "The three-year duration of the study and the 12 total plots used"
+      "The presence or absence of supplemental winter food provided to each plot",
+      "The monthly deer population counts recorded across all plots over the three years",
+      "The body condition scores and fawn survival rates measured in the deer",
+      "The three-year duration of the study and the total of 12 plots used"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Deer Herd Winter Supplemental Feeding Study",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Plot Group",
+        "Treatment",
+        "Number of Plots",
+        "Duration"
+      ],
+      "rows": [
+        [
+          "Group A",
+          "Supplemental food (grain + hay)",
+          6,
+          "3 years"
+        ],
+        [
+          "Group B",
+          "No supplemental food",
+          6,
+          "3 years"
+        ]
+      ]
+    }
   },
   {
-    "question": "Water-limited regions in the Middle East and North Africa experience declining groundwater levels that constrain both agricultural productivity and human population growth. Hydrologists propose large-scale wetland restoration projects that would increase surface water storage and groundwater recharge. Hydrological modeling indicates restored wetlands could increase regional groundwater recharge by 18-22% annually. Which advantage best justifies wetland restoration from a resource availability perspective?",
+    "question": "Water-limited regions in the Middle East and North Africa experience declining groundwater levels that constrain both agricultural productivity and human population growth. Hydrologists propose large-scale wetland restoration projects that would increase surface water storage and groundwater recharge. How would this proposed intervention most directly affect the region's capacity to support population growth?",
     "answers": [
-      "Wetland restoration increases water storage capacity and groundwater recharge, maintaining freshwater resource availability for both agriculture and human consumption that would otherwise decline below carrying capacity levels.",
-      "Wetland restoration increases surface water storage capacity, maintaining freshwater resource availability for both agriculture and human consumption that would otherwise decline below carrying capacity levels.",
-      "Wetland restoration increases water storage capacity and groundwater recharge, providing temporary freshwater resource availability for both agriculture and human consumption during the current growing season.",
-      "Wetland restoration increases water storage capacity and groundwater recharge, maintaining freshwater resource availability primarily for agricultural irrigation that would otherwise decline below carrying capacity levels."
+      "By increasing water storage capacity and groundwater recharge, wetland restoration would help maintain and potentially expand freshwater availability for both agricultural production and human consumption, supporting a higher sustainable population",
+      "Wetland restoration would increase surface water storage capacity alone, with no meaningful effect on groundwater recharge or long-term freshwater availability",
+      "Wetland restoration would provide only a brief, temporary increase in freshwater availability before groundwater levels resume their prior declining trend",
+      "Wetland restoration would primarily benefit agricultural water use, while providing no meaningful increase in water available for human consumption"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "An ecologist studying grassland herbivores documents: 'In this semi-arid grassland, herbivore population dynamics closely track rainfall patterns and forage availability. During years with above-average precipitation, grassland productivity increases 40-60%, providing abundant forage. Herbivore populations respond with rapid growth—birth rates exceed death rates by 15-25% annually, and populations can double within 2-3 years. However, when drought reduces forage availability by 50% or more, herbivore populations cannot sustain this growth rate. Mortality increases sharply as animals compete intensely for limited food, and birth rates decline as malnourished females produce fewer offspring. Population growth rates become negative, and populations decline until they stabilize at a lower carrying capacity determined by available forage.' What claim does the ecologist make about population growth?",
+    "question": "An ecologist studying grassland herbivores documents that in a semi-arid grassland, herbivore population dynamics closely track rainfall patterns and forage availability: during years with above-average precipitation, grassland productivity increases 40-60%, providing abundant forage, and herbivore populations grow accordingly; during drought years, forage declines sharply and herbivore populations fall. Which statement best summarizes this dynamic in terms of carrying capacity?",
     "answers": [
-      "When grassland carrying capacity increases due to favorable rainfall, herbivore populations grow exponentially until drought reduces forage availability, at which point population growth declines as mortality increases and fecundity decreases.",
-      "When grassland carrying capacity increases due to favorable rainfall, herbivore populations grow exponentially until drought reduces forage availability, but herbivore populations maintain growth rates through increased grazing efficiency.",
-      "When grassland carrying capacity increases due to favorable rainfall, herbivore populations grow exponentially until drought reduces forage availability, at which point populations migrate to adjacent grasslands with better conditions.",
-      "When grassland carrying capacity decreases due to unfavorable rainfall, herbivore populations decline exponentially until favorable rainfall increases forage availability, at which point population growth accelerates as mortality decreases and fecundity increases."
+      "When favorable rainfall raises the grassland's carrying capacity, herbivore populations grow toward that higher capacity, but subsequent drought lowers carrying capacity again and herbivore numbers decline correspondingly",
+      "Herbivore populations in this grassland grow independently of rainfall and forage availability, since population size is instead determined mainly by predator abundance",
+      "Carrying capacity in this grassland remains constant year to year regardless of rainfall, so herbivore population changes must be explained by disease alone",
+      "When rainfall decreases and carrying capacity falls, herbivore populations continue growing exponentially until the next drought further reduces forage"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A graph shows per capita food production rising from 300 to 450 kg/year while arable land per person falls from 0.5 to 0.15 hectares between 1960 and 2020. Which conclusion is best supported by comparing these trends?",
@@ -80,14 +105,39 @@
     "correct": "B"
   },
   {
-    "question": "A conservation program reintroduces wolves to a region after 50 years. Elk had grown very dense without predators and then began to decline after wolves returned. How does wolf predation affect the resource that limits elk population growth?",
+    "question": "A conservation program reintroduces wolves to a region 50 years after their extirpation. In the absence of wolves, elk had grown very dense and overgrazed vegetation; after wolves returned, elk numbers began to decline. How does wolf predation affect the resource (vegetation) that limits elk population growth?",
     "answers": [
-      "Wolves lower elk density, so each remaining elk has more vegetation",
-      "Wolves increase plant growth rates, directly expanding the total resource base",
-      "Wolves consume plants and compete directly with elk for vegetation",
-      "Predation has no effect on resources because wolves do not eat plants"
+      "By reducing elk density through predation, wolves decrease competition among elk for vegetation, so each remaining elk has access to more of the limiting food resource",
+      "Wolves directly increase plant growth rates through a physiological mechanism, which expands the total vegetation resource base available to elk",
+      "Wolves compete directly with elk for the same vegetation resources, which is the primary mechanism by which they limit elk population growth",
+      "Wolf predation has no effect on vegetation availability for elk, since wolves and elk do not interact with the same resource base at all"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Elk Population and Vegetation Before/After Wolf Reintroduction",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Period",
+        "Wolves Present?",
+        "Elk Density",
+        "Vegetation Condition"
+      ],
+      "rows": [
+        [
+          "Before reintroduction",
+          "No",
+          "Very high",
+          "Overgrazed"
+        ],
+        [
+          "After reintroduction",
+          "Yes",
+          "Declining",
+          "Recovering"
+        ]
+      ]
+    }
   },
   {
     "question": "A diagram illustrates a predator-prey population cycle over 10 years, showing prey population peaking in year 3, predator population peaking in year 5, prey crashing in year 6, and predator declining in year 8. Which statement best explains the relationship between prey resource availability and predator population growth shown in this cycle?",

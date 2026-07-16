@@ -90,13 +90,13 @@
     "correct": "B"
   },
   {
-    "question": "An orchard in Southeast Asia loses fruit to fruit flies. The farmer sprays broad-spectrum insecticide twice weekly at $150 per hectare per season, reducing native parasitoid wasps and causing rising pest pressure and chemical dependence. Which solution would most effectively break this cycle?",
+    "question": "An orchard in Southeast Asia loses fruit to fruit flies. The farmer currently sprays broad-spectrum insecticide twice weekly at a cost of $150 per hectare per season, which has reduced populations of native parasitoid wasps that once helped control the flies, leading to rising pest pressure and greater chemical dependence over time. Which solution would most effectively break this cycle?",
     "answers": [
-      "Use economic thresholds, monitor with pheromone traps, restore wasp habitat",
-      "Apply insecticide three times weekly to suppress fruit flies",
-      "Switch to systemic insecticides absorbed by fruit to cut surface sprays",
-      "Replace the orchard with a fruit variety resistant to fruit flies"
+      "Adopt integrated pest management: monitor fly populations with pheromone traps, spray insecticide only when populations exceed an economic threshold, and restore habitat that supports parasitoid wasps.",
+      "Increase insecticide application to three times weekly to more aggressively suppress the fruit fly population.",
+      "Switch to a systemic insecticide absorbed directly by the fruit, which would reduce the need for surface spraying but not restore wasp populations.",
+      "Abandon the current orchard and replace it entirely with a fruit variety that is inherently resistant to fruit flies."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

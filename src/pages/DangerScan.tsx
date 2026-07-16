@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Camera, Lightbulb, AlertCircle, Sparkles, Loader2, Plus, BrainCog, ShieldAlert, CheckCircle2 } from "lucide-react";
 import { User } from "@/entities/User";
+import { REWARDS, buildRewardUpdate } from "@/utils/progression";
 import { callGemini, parseAIJson } from "@/config/ai";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -53,8 +54,8 @@ Guidelines:
 
 const severityColors: Record<string, string> = {
   Low: "#10b981",
-  Moderate: "#f59e0b",
-  High: "#f97316",
+  Moderate: "#e9f50b",
+  High: "#f59e0b",
   Critical: "#ef4444",
 };
 
@@ -66,6 +67,9 @@ export default function DangerScan() {
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [posted, setPosted] = useState(false);
+  const [isPosting, setIsPosting] = useState(false);
+  const [postError, setPostError] = useState<string | null>(null);
+  const [leveledUp, setLeveledUp] = useState(false);
 
   // 750 KB limit — base64 inflates ~33% so this stays under Firestore's 1 MB doc limit
   const MAX_IMAGE_BYTES = 750 * 1024;
@@ -85,6 +89,8 @@ export default function DangerScan() {
     setResult(null);
     setError(null);
     setPosted(false);
+    setPostError(null);
+    setLeveledUp(false);
     setImageFile(file);
     const reader = new FileReader();
     reader.onload = (ev) => {
@@ -113,34 +119,45 @@ export default function DangerScan() {
   };
 
   const postToActionFeed = async () => {
-    if (!result) return;
+    // One post per analysis result; ignore clicks while a post is in flight.
+    if (!result || posted || isPosting) return;
+    const u = auth.currentUser;
+    if (!u) {
+      setPostError("Please log in to post to the Action Feed.");
+      return;
+    }
+    setIsPosting(true);
+    setPostError(null);
     try {
-      const u = auth.currentUser;
-      if (u) {
-        // Fetch full profile first so we get avatar_url and the canonical username,
-        // not just the OAuth displayName which may differ and carries no avatar.
-        const userData = await User.me();
-        await addDoc(collection(db, "posts"), {
-          userId: u.uid,
-          username: userData.username || u.displayName || "Anonymous",
-          avatarUrl: userData.avatar_url || "",
-          title: result.title,
-          description: `${result.description}\n\nSuggested Action: ${result.suggestedAction}`,
-          tags: ["DangerScan", result.issueType],
-          mediaUrls: imagePreview ? [imagePreview] : [],
-          mediaType: "images",
-          likesCount: 0,
-          likedBy: [],
-          commentsCount: 0,
-          createdAt: serverTimestamp(),
-          source: "danger_scan",
-        });
-        await User.updateMyUserData({ treecoins: (userData.treecoins || 0) + 15 });
-      }
+      // Fetch full profile first so we get avatar_url and the canonical username,
+      // not just the OAuth displayName which may differ and carries no avatar.
+      const userData = await User.me();
+      await addDoc(collection(db, "posts"), {
+        userId: u.uid,
+        username: userData.username || u.displayName || "Anonymous",
+        avatarUrl: userData.avatar_url || "",
+        title: result.title,
+        description: `${result.description}\n\nSuggested Action: ${result.suggestedAction}`,
+        tags: ["DangerScan", result.issueType],
+        mediaUrls: imagePreview ? [imagePreview] : [],
+        mediaType: "images",
+        likesCount: 0,
+        likedBy: [],
+        commentsCount: 0,
+        createdAt: serverTimestamp(),
+        source: "danger_scan",
+      });
+      // Award Treecoins + XP through the shared progression helper.
+      const { update, result: gain } = buildRewardUpdate(userData, REWARDS.DANGER_SCAN);
+      await User.updateMyUserData(update);
+      setLeveledUp(gain.leveledUp);
       setPosted(true);
     } catch (e) {
       console.error(e);
-      setPosted(true); // Show success even if Firebase fails
+      // Be honest: nothing was posted and no reward was earned.
+      setPostError("Couldn't post to the Action Feed — nothing was saved. Please check your connection and try again.");
+    } finally {
+      setIsPosting(false);
     }
   };
 
@@ -260,16 +277,30 @@ export default function DangerScan() {
 
                   {/* Post to feed */}
                   {!posted ? (
-                    <button
-                      onClick={postToActionFeed}
-                      className="w-full py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2"
-                      style={{ background: "linear-gradient(135deg, #10b981, #00c896)", boxShadow: "0 4px 15px rgba(16,185,129,0.3)" }}
-                    >
-                      <Plus className="w-4 h-4" /> Post to Action Feed (+15 TC)
-                    </button>
+                    <div className="space-y-2">
+                      <button
+                        onClick={postToActionFeed}
+                        disabled={isPosting}
+                        className="w-full py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2"
+                        style={{
+                          background: isPosting ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
+                          boxShadow: isPosting ? "none" : "0 4px 15px rgba(16,185,129,0.3)",
+                          cursor: isPosting ? "not-allowed" : "pointer",
+                        }}
+                      >
+                        {isPosting
+                          ? <><Loader2 className="w-4 h-4 animate-spin" /> Posting…</>
+                          : <><Plus className="w-4 h-4" /> Post to Action Feed (+{REWARDS.DANGER_SCAN.tc} TC · +{REWARDS.DANGER_SCAN.xp} XP)</>}
+                      </button>
+                      {postError && (
+                        <div className="p-3 rounded-xl bg-red-50 border border-red-200">
+                          <p className="text-red-600 text-sm flex items-start gap-2"><AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />{postError}</p>
+                        </div>
+                      )}
+                    </div>
                   ) : (
                     <div className="w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2" style={{ background: "var(--bg-success)", border: "1px solid var(--border-success)", color: "#059669" }}>
-                      <CheckCircle2 className="w-4 h-4" /> Posted! +15 Treecoins earned
+                      <CheckCircle2 className="w-4 h-4" /> Posted! +{REWARDS.DANGER_SCAN.tc} TC · +{REWARDS.DANGER_SCAN.xp} XP earned{leveledUp ? " · Level up! 🎉" : ""}
                     </div>
                   )}
                 </div>

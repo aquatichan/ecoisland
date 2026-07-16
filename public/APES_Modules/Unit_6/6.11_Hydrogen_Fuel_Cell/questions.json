@@ -70,14 +70,14 @@
     "correct": "D"
   },
   {
-    "question": "A natural-gas powered factory would run a hydrogen fuel cell using 500 kg/day H2 made by electrolysis on a grid that is 60% natural gas and 40% wind. Which advantage best justifies the fuel cell on a lifecycle emissions basis?",
+    "question": "A factory is considering running a hydrogen fuel cell using 500 kg/day of hydrogen produced by electrolysis, drawing from a regional grid that is 60% natural gas and 40% wind. Which of the following best evaluates the fuel cell's advantage on a lifecycle greenhouse gas emissions basis compared to burning natural gas directly?",
     "answers": [
-      "Net greenhouse gas reduction because electrolysis uses 40% wind on the grid.",
-      "Produces water vapor but recovery volume is small and impractical for cooling.",
-      "Zero emissions claim is false because electrolysis uses fossil-heavy grid power.",
-      "Lower operating costs may occur but do not address lifecycle emissions."
+      "Because 60% of the electricity used for electrolysis still comes from natural gas, the hydrogen is not truly zero-emission on a lifecycle basis, though the 40% wind share still provides a partial emissions reduction compared to direct combustion.",
+      "The fuel cell provides a full net greenhouse gas reduction because it uses some wind power, regardless of how much natural gas remains in the electricity mix.",
+      "The fuel cell produces water vapor as a byproduct, and this water vapor recovery is the primary factor determining its lifecycle emissions advantage.",
+      "The fuel cell's lower operating costs are the main consideration, and lifecycle emissions are not meaningfully affected by the source of electricity used for electrolysis."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A city planning department is evaluating energy sources to power a new municipal water treatment facility that operates continuously. Engineers propose using hydrogen fuel cells powered by hydrogen produced from electrolysis of water using renewable solar energy. Which of the following best explains why this system would reduce the facility's overall carbon dioxide emissions compared to a natural gas-powered plant?",
@@ -87,7 +87,7 @@
       "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct, which reduces carbon dioxide emissions compared to natural gas combustion, though some emissions occur during the renewable energy infrastructure manufacturing process.",
       "Hydrogen fuel cells combine hydrogen and oxygen to produce only water as a byproduct, but when hydrogen is produced from electrolysis using grid electricity, carbon dioxide emissions are reduced but not eliminated compared to natural gas plants."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A researcher notes electrolysis loses about 20 to 30 percent of input energy and that batteries are more efficient for passenger vehicles, while hydrogen's higher energy density and faster refueling suit long-haul trucking, aviation, and industrial heat. Which claim best expresses the researcher's recommendation?",

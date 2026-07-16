@@ -27,7 +27,7 @@
       "Formation of sulfuric acid occurs after release and describes atmospheric chemistry.",
       "Cooling causes some condensation and settling but is not the main removal."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A city implemented a vehicle emissions reduction program in 2010. The graph below shows the concentration of nitrogen oxides (NOx) measured at a monitoring station near a major highway from 2008 to 2020, with the program launch marked at 2010.\n[Line graph: Y-axis shows NOx concentration (ppb) from 0-120; X-axis shows years 2008-2020. Line starts at 105 ppb in 2008, remains relatively stable at ~105 ppb through 2010, then shows steady decline to 65 ppb by 2015, with slight continued decline to 60 ppb by 2020. A vertical dashed line marks 2010.]\nWhich statement best describes the pattern in NOx concentrations shown in the data?",
@@ -87,7 +87,7 @@
       "NOx concentrations decreased because fewer people drove vehicles after 2015, indicating that reduced driving is the primary method for controlling nitrogen oxide pollution.",
       "NOx concentrations decreased linearly by exactly 8.25 ppb per year, proving that catalytic converters remove a constant amount of pollution regardless of driving patterns."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An environmental justice advocate says technology alone fails if pollution burdens stay concentrated in low-income communities and communities of color, and that true improvement requires equitable siting and community decision-making. Which value does this statement prioritize?",

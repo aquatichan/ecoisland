@@ -30,14 +30,14 @@
     "correct": "D"
   },
   {
-    "question": "An Indian cotton farmer reports boll weevils resistant after 15 years of organophosphate use. Damage rose from 5 percent to 35 percent despite heavier applications. Which approach best reduces resistance while maintaining productivity?",
+    "question": "An Indian cotton farmer reports that boll weevils have become resistant after 15 years of organophosphate insecticide use; crop damage rose from 5% to 35% despite increasingly heavy applications. Which approach would most effectively reduce pest resistance while maintaining crop productivity?",
     "answers": [
-      "Use integrated pest management with crop rotation and biological control",
-      "Increase dose and application frequency of current organophosphates",
-      "Plant Bt cotton and rely solely on its toxin for control",
-      "Switch to another organophosphate within the same pesticide class"
+      "Adopt integrated pest management, combining crop rotation, biological control agents, and targeted pesticide use only when populations exceed an economic threshold.",
+      "Increase the dose and frequency of the same organophosphate insecticides currently being applied.",
+      "Plant Bt cotton and rely exclusively on its built-in toxin for pest control, discontinuing all other methods.",
+      "Switch to a different organophosphate insecticide within the same chemical class as the one currently used."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An integrated pest management advocate writes: 'Relying on chemical pesticides creates a treadmill where resistance forces farmers to apply more chemicals, increasing costs and environmental contamination. Integrated pest management combines multiple strategies—crop rotation, beneficial insect populations, targeted pesticide use, and resistant varieties—to maintain pest populations below economic thresholds while reducing overall chemical inputs. This systems-based approach requires more knowledge and planning but breaks the pesticide escalation cycle.' Which assumption about pest management effectiveness underlies this argument?",
@@ -90,13 +90,13 @@
     "correct": "C"
   },
   {
-    "question": "Why measure predator populations in both treated and control plots when evaluating rodenticide harms?",
+    "question": "Researchers evaluating the non-target effects of a rodenticide measure predator populations (such as owls and hawks) in both treated fields and untreated control fields. Why is this comparison important for assessing the rodenticide's environmental harm?",
     "answers": [
-      "To detect non-target harm comparing predators in treated and control plots",
-      "To increase statistical power for detecting changes in rodent populations",
-      "To test whether rodenticide effectiveness depends on local predator presence levels",
-      "To assess cost effectiveness by linking predator counts to rodent control outcomes"
+      "It allows researchers to detect non-target harm, such as secondary poisoning of predators that eat contaminated rodents, by comparing predator numbers between treated and untreated areas.",
+      "It increases the statistical power available for detecting changes in the rodent population itself, independent of predator effects.",
+      "It tests whether the rodenticide's effectiveness against rodents depends on how many predators are present locally.",
+      "It allows researchers to calculate the cost-effectiveness of the rodenticide by linking predator counts to rodent control outcomes."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

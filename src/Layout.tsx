@@ -5,10 +5,12 @@ import { createPageUrl } from "@/utils";
 import { User } from "@/entities/User";
 import {
   Search, BotMessageSquare, MessageCircleMore, Trophy, Settings, Leaf, Globe, Camera,
-  BarChart3, BookOpen, Recycle, Palmtree, Menu, X,
+  BarChart3, BookOpen, Recycle, Palmtree, Menu, X, LayoutDashboard,
   ChevronRight, TreePine, Sun, Moon, Send, Loader2, ImagePlus,
   ArrowLeft, User as UserIcon
 } from "lucide-react";
+import confetti from "canvas-confetti";
+import { applyXpGain } from "@/utils/progression";
 
 import LevelUpBar from "@/components/LevelUpBar";
 import UserProfileModal from "@/components/UserProfileModal";
@@ -25,13 +27,15 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const navigationItems = [
+  { title: "Dashboard", url: createPageUrl("Dashboard"), icon: LayoutDashboard, description: "Your eco home base", color: "#fff" },
   { title: "Your Island", url: createPageUrl("Island"), icon: Palmtree, description: "Customize your Ecoisland", color: "#00c896" },
-  { title: "Carbon Footprint", url: createPageUrl("CarbonFootprint"), icon: Leaf, description: "Track your carbon footprint", color: "#10b981" },
+  { title: "Carbon Footprint", url: createPageUrl("CarbonFootprint"), icon: Leaf, description: "Track your carbon footprint", color: "#0d845d" },
   { title: "Regional Data", url: createPageUrl("RegionalData"), icon: Globe, description: "Local sustainability insights", color: "#06b6d4" },
   { title: "Danger Scan", url: createPageUrl("DangerScan"), icon: Camera, description: "Report issues via image AI", color: "#f97316" },
   { title: "Action Feed", url: createPageUrl("ActionFeed"), icon: Recycle, description: "See what others are up to", color: "#8b5cf6" },
   { title: "Impact Visualizer", url: createPageUrl("Impact"), icon: BarChart3, description: "See your impact come to life", color: "#ec4899" },
-  { title: "AP Environmental Science", url: createPageUrl("APES"), icon: BookOpen, description: "Get a 5 on the AP Exam", color: "#f59e0b" },
+  { title: "Leaderboard", url: createPageUrl("Leaderboard"), icon: Trophy, description: "See the top Ecoislanders", color: "#ffba00" },
+  { title: "AP Environmental Science", url: createPageUrl("APES"), icon: BookOpen, description: "Get a 5 on the AP Exam", color: "#fff" },
 ];
 
 // ──────────────────────────────────────────────────────
@@ -297,6 +301,25 @@ type SearchResult = {
   avatar?: string;
 };
 
+// Module-level cache: fetch the searchable user list at most once per minute
+// (top 100 by treecoins) instead of pulling the whole collection on every
+// debounced keystroke. Filtering stays client-side.
+const USERS_CACHE_TTL_MS = 60_000;
+let usersSearchCache: { data: any[]; fetchedAt: number } | null = null;
+
+async function getSearchableUsers() {
+  const now = Date.now();
+  if (usersSearchCache && now - usersSearchCache.fetchedAt < USERS_CACHE_TTL_MS) {
+    return usersSearchCache.data;
+  }
+  const snap = await getDocs(query(collection(db, "users"), orderBy("treecoins", "desc"), limit(100)));
+  const data = snap.docs
+    .map(d => ({ id: d.id, ...d.data() } as any))
+    .filter((u: any) => u.deleted !== true);
+  usersSearchCache = { data, fetchedAt: now };
+  return data;
+}
+
 function GlobalSearchBar({ onClose, onSelectUser }: { onClose: () => void; onSelectUser: (uid: string) => void }) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -314,10 +337,9 @@ function GlobalSearchBar({ onClose, onSelectUser }: { onClose: () => void; onSel
     try {
       const lower = val.toLowerCase();
 
-      // Users: fetch all and filter client-side (same approach as Settings)
-      const usersSnap = await getDocs(collection(db, "users"));
-      const userResults: SearchResult[] = usersSnap.docs
-        .map(d => ({ id: d.id, ...d.data() } as any))
+      // Users: cached top-100 list (refetched at most once per minute), filtered client-side
+      const cachedUsers = await getSearchableUsers();
+      const userResults: SearchResult[] = cachedUsers
         .filter((u: any) =>
           u.username?.toLowerCase().includes(lower) ||
           u.full_name?.toLowerCase().includes(lower) ||
@@ -460,6 +482,20 @@ export default function Layout({ children, currentPageName }) {
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
+  // Transient feedback chip shown above the LevelUpBar (buy-XP flow)
+  const [xpToast, setXpToast] = useState<{ id: number; text: string; tone: "error" | "success" | "level" } | null>(null);
+  const xpToastTimerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const showXpToast = (text: string, tone: "error" | "success" | "level" = "success") => {
+    if (xpToastTimerRef.current) clearTimeout(xpToastTimerRef.current);
+    setXpToast({ id: Date.now(), text, tone });
+    xpToastTimerRef.current = setTimeout(() => setXpToast(null), 2500);
+  };
+
+  useEffect(() => () => {
+    if (xpToastTimerRef.current) clearTimeout(xpToastTimerRef.current);
+  }, []);
+
   useEffect(() => {
     let mounted = true;
     User.me()
@@ -483,14 +519,22 @@ export default function Layout({ children, currentPageName }) {
   const handleBuyXp = async () => {
     const cost = 4;
     const xpGain = 5;
-    if ((user.treecoins || 0) < cost) { alert("Not enough Treecoins!"); return; }
-    let xp = (user.xp || 0) + xpGain;
-    let level = user.eco_level || 1;
-    let xpNext = user.xp_to_next_level || 25;
-    if (xp >= xpNext) { level++; xp -= xpNext; xpNext = Math.floor(xpNext * 1.2); alert(`Level ${level} reached!`); }
-    const updated = { treecoins: user.treecoins - cost, xp, eco_level: level, xp_to_next_level: xpNext };
+    if ((user.treecoins || 0) < cost) { showXpToast("Not enough Treecoins", "error"); return; }
+    const result = applyXpGain(user, xpGain);
+    const updated = {
+      treecoins: (user.treecoins || 0) - cost,
+      xp: result.xp,
+      eco_level: result.eco_level,
+      xp_to_next_level: result.xp_to_next_level,
+    };
     await User.updateMyUserData(updated);
     setUser(prev => ({ ...prev, ...updated }));
+    if (result.leveledUp) {
+      confetti({ particleCount: 140, spread: 80, origin: { x: 0.15, y: 0.85 } });
+      showXpToast(`Level ${result.eco_level} reached! 🎉`, "level");
+    } else {
+      showXpToast(`+${xpGain} XP!`, "success");
+    }
   };
 
   const handleSearchToggle = () => {
@@ -558,7 +602,31 @@ export default function Layout({ children, currentPageName }) {
         })}
       </div>
 
-      <div className="mt-4 pt-4 border-t border-white/10">
+      <div className="mt-4 pt-4 border-t border-white/10 relative">
+        {/* Transient buy-XP feedback chip */}
+        <div className="absolute -top-4 inset-x-0 flex justify-center pointer-events-none z-10">
+          <AnimatePresence>
+            {xpToast && (
+              <motion.div
+                key={xpToast.id}
+                initial={{ opacity: 0, y: 10, scale: 0.85 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.9 }}
+                transition={{ type: "spring", damping: 20, stiffness: 320 }}
+                className="px-3 py-1.5 rounded-full text-xs font-bold shadow-lg whitespace-nowrap"
+                style={
+                  xpToast.tone === "error"
+                    ? { background: "rgba(239,68,68,0.18)", border: "1px solid rgba(239,68,68,0.45)", color: "#fca5a5" }
+                    : xpToast.tone === "level"
+                    ? { background: "linear-gradient(135deg,#00c896,#06b6d4)", color: "white" }
+                    : { background: "rgba(0,200,150,0.18)", border: "1px solid rgba(0,200,150,0.45)", color: "#6ee7b7" }
+                }
+              >
+                {xpToast.text}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
         <LevelUpBar
           currentXp={user.xp}
           xpToNextLevel={user.xp_to_next_level}

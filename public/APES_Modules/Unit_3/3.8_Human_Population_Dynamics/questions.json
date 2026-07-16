@@ -50,14 +50,39 @@
     "correct": "D"
   },
   {
-    "question": "Which claim best expresses the author's main point in the passage?",
+    "question": "A public health researcher compares mortality outcomes from two heat waves of similar peak temperature: one in a country with widespread air conditioning, robust emergency response systems, and public cooling centers, and one in a country lacking these resources. The second country experienced substantially higher mortality. Which factor set best explains why extreme weather events can produce very different population impacts despite similar physical intensity?",
     "answers": [
-      "Infrastructure investment and disaster preparedness can reduce population vulnerability.",
-      "Extreme weather impacts depend on event intensity, population density, and adaptive capacity.",
-      "Some argue that climate change impacts are inevitable consequences of warming.",
-      "About 55,000 people died in Russia in the 2010 heat wave, a major mortality event."
+      "Population vulnerability depends not only on the intensity of the weather event itself, but also on population density in affected areas and the adaptive capacity provided by infrastructure such as cooling systems and emergency response",
+      "Mortality from extreme weather events is determined solely by the peak temperature reached, regardless of any social, infrastructural, or economic factors",
+      "Countries with more advanced economies always experience identical extreme weather impacts as less developed countries, since wealth has no bearing on climate vulnerability",
+      "Heat wave mortality is essentially random and cannot be meaningfully explained by infrastructure, adaptive capacity, or population density differences"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Heat Wave Outcomes in Two Countries with Similar Peak Temperatures",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Country",
+        "Peak Temperature (C)",
+        "Cooling Infrastructure",
+        "Heat-Related Deaths per 100,000"
+      ],
+      "rows": [
+        [
+          "Country A",
+          42,
+          "Widespread AC + cooling centers",
+          3
+        ],
+        [
+          "Country B",
+          41,
+          "Limited AC + few cooling centers",
+          47
+        ]
+      ]
+    }
   },
   {
     "question": "A developing nation implements a comprehensive family planning program that provides free contraception, reproductive health education, and economic incentives for delaying marriage. Which of the following represents an unintended consequence of this population control intervention?",

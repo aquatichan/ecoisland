@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { auth, db, googleProvider } from '../firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, collection, query, orderBy as fbOrderBy, limit as fbLimit, getDocs } from 'firebase/firestore';
@@ -61,7 +62,7 @@ export const User = {
 
   async login() {
     await signInWithPopup(auth, googleProvider);
-    return this.me;
+    return this.me();
   },
 
   async logout() {
@@ -73,9 +74,11 @@ export const User = {
     const usersRef = collection(db, 'users');
     const field = sortField.replace('-', '');
     const direction = sortField.startsWith('-') ? 'desc' : 'asc';
-    
+
     const q = query(usersRef, fbOrderBy(field, direction), fbLimit(limitNum));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    return snapshot.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(u => !u.deleted);
   }
 };

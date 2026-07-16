@@ -7,7 +7,7 @@
       "Higher temperatures increase the solubility of nitrogen fertilizers in soil water, allowing them to volatilize more readily and form nitrous oxide in the atmosphere",
       "Increased CO2 in the atmosphere directly reacts with nitrogen fertilizers in soil, producing nitrous oxide through a chemical oxidation reaction"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A research team studying ocean acidification's impact on coral calcification rates collected coral tissue samples from 15 reef sites across the Pacific Ocean. They measured calcium carbonate deposition rates and compared results to historical data from the same sites collected 20 years earlier. Which of the following represents a limitation of this study design?",
@@ -27,7 +27,7 @@
       "Thawing permafrost reduces the reflectivity of Arctic surfaces, allowing more solar energy to reach the ocean and increase water temperature, which then releases dissolved CO2",
       "Thawing permafrost releases water that dilutes atmospheric greenhouse gases, but this effect is outweighed by increased evaporation from exposed water surfaces"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers sampled coastal pH monthly at noon at 2 m depth. If sampling instead included surface, 2 m, 5 m, and 10 m and times 6 AM, noon, and 6 PM, how would their understanding of acidification patterns change?",
@@ -77,7 +77,7 @@
       "Dengue cases increased dramatically, but this trend is unrelated to temperature changes since disease spread depends only on human travel and migration patterns.",
       "Temperature increases directly cause dengue transmission, proving that all tropical diseases will spread uniformly to all polar regions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A biologist tracked a migratory bird's breeding range from 42°N–48°N in 1990 to 40°N–52°N in 2020 while average spring temperatures rose 1.5°C. What does this suggest about climate change effects on population dynamics and species distribution?",
@@ -97,6 +97,6 @@
       "Increased CO2 reduces the solubility of calcium in seawater, causing it to precipitate out of solution before organisms can use it",
       "Dissolved CO2 increases oxygen levels in surface waters, which causes calcium to oxidize and become unusable by shell-building organisms"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

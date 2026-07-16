@@ -1,12 +1,51 @@
 {
   "tips_and_tricks": [
     "Know how to analyze data tables and charts — they are especially handy when looking at stimulus questions, which make up a large portion of the multiple choice and free response portions of the test.",
-    "The correct answer to multiple choice questions is often more general and ties directly to what the key unit, as a whole, is about. Go with your gut once you choose an answer; you're often right the first time!"
+    "The correct answer to multiple choice questions is often more general and ties directly to what the key unit, as a whole, is about. Go with your gut once you choose an answer; you're often right the first time!",
+    "On FRQs, always restate the specific number, trend, or variable from the stimulus in your answer — vague answers that don't reference the given data rarely earn the point even if the reasoning is correct.",
+    "Practice writing FRQ answers in complete, cause-and-effect sentences (\"X causes Y because Z\") — readers award points for the mechanism, not just the right vocabulary word.",
+    "For calculation questions, always show your work and include units — an unlabeled number is a common way to lose an otherwise-earned point.",
+    "When a question says 'identify AND explain,' you need both parts to earn credit; identifying the correct term alone is usually only half the point.",
+    "Environmental legislation FRQs (Unit 5-related) often ask you to name a specific act (e.g. Clean Air Act, Clean Water Act, CERCLA) — memorize what each one actually regulates, not just its name.",
+    "For 'propose a solution' FRQ parts, always pair your solution with one realistic economic, social, or political tradeoff — many rubrics award a separate point specifically for the tradeoff.",
+    "Review energy-pyramid and 10% Rule math every unit — questions from Unit 1 resurface throughout the exam as a supporting concept in later units.",
+    "Don't skip Unit 5 and Unit 9 in your final review — land use and global change consistently produce some of the highest-point-value FRQs on the real exam."
   ],
   "helpful_websites": [
-    "Knowt - AP Environmental Science",
-    "Fiveable - AP Environmental Science",
-    "Mr.Smedes on YouTube (APESvsEverybody)",
-    "https://mrrittnerisapes.weebly.com/",
+    { "name": "Knowt - AP Environmental Science", "note": "Flashcard decks and unit guides aligned to the College Board framework." },
+    { "name": "Fiveable - AP Environmental Science", "note": "Unit study guides, streams, and a community FRQ bank." },
+    { "name": "Mr. Smedes on YouTube (APESvsEverybody)", "note": "Full video walkthroughs of every unit topic." },
+    { "name": "mrrittnerisapes.weebly.com", "note": "Teacher-curated unit resources and practice sets." },
+    { "name": "Nerd Notes — Every APES FRQ Sorted by Unit", "note": "Real, official College Board FRQs organized by unit — the best supplement to Ecoisland's original practice FRQs.", "url": "https://nerd-notes.com/every-ap-environmental-sciences-apes-frq-sorted-by-unit/" }
+  ],
+  "exam_structure": {
+    "multiple_choice": {
+      "questions": 80,
+      "minutes": 90,
+      "weight": "60% of exam score",
+      "note": "Roughly a third of MC questions include a data table, graph, image, or reading passage as a stimulus."
+    },
+    "free_response": {
+      "questions": 3,
+      "minutes": 70,
+      "weight": "40% of exam score",
+      "types": [
+        "Design an investigation (data/experimental design)",
+        "Analyze an environmental problem, do calculations",
+        "Analyze an environmental problem, propose a solution"
+      ],
+      "note": "Each FRQ is typically scored out of 10 points across lettered parts (a)-(e). Every FRQ includes at least one stimulus."
+    }
+  },
+  "unit_weights": [
+    { "unit": 1, "title": "The Living World: Ecosystems", "examWeight": "6-8%" },
+    { "unit": 2, "title": "The Living World: Biodiversity", "examWeight": "6-8%" },
+    { "unit": 3, "title": "Populations", "examWeight": "10-15%" },
+    { "unit": 4, "title": "Earth Systems and Resources", "examWeight": "10-15%" },
+    { "unit": 5, "title": "Land and Water Use", "examWeight": "10-15%" },
+    { "unit": 6, "title": "Energy Resources and Consumption", "examWeight": "10-15%" },
+    { "unit": 7, "title": "Atmospheric Pollution", "examWeight": "7-10%" },
+    { "unit": 8, "title": "Aquatic and Terrestrial Pollution", "examWeight": "7-10%" },
+    { "unit": 9, "title": "Global Change", "examWeight": "15-20%" }
   ]
 }

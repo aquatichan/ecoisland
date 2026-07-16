@@ -10,14 +10,14 @@
     "correct": "B"
   },
   {
-    "question": "An environmental justice advocate writes: 'Geothermal development in the Philippines has concentrated in regions inhabited by indigenous communities, who bear the risks of hydrogen sulfide exposure and groundwater contamination while energy profits flow to foreign corporations and urban centers. This pattern reflects how renewable energy transitions can reproduce colonial extraction if communities lack decision-making power.'",
+    "question": "An environmental justice advocate writes: 'Geothermal development in the Philippines has concentrated in regions inhabited by indigenous communities, who bear the risks of hydrogen sulfide exposure and groundwater contamination while energy profits flow to foreign corporations and urban centers. This pattern reflects how renewable energy transitions can reproduce colonial extraction if communities lack decision-making power.' What is the author's main claim?",
     "answers": [
-      "The author prioritizes equitable distribution of both environmental benefits and burdens in energy development.",
-      "The author believes geothermal energy should not be developed in any region with indigenous populations.",
-      "The author assumes hydrogen sulfide emissions are the primary environmental concern of geothermal development.",
-      "The author opposes renewable energy development as a strategy for addressing climate change."
+      "The distribution of environmental risks and economic benefits from geothermal development can be inequitable unless affected communities have genuine decision-making power over projects sited on their land.",
+      "The author believes geothermal energy should never be developed in any region with indigenous populations, regardless of consultation or benefit-sharing.",
+      "The author assumes hydrogen sulfide emissions are the only environmental concern associated with geothermal development.",
+      "The author opposes all renewable energy development as an inherently inadequate strategy for addressing climate change."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "In a geothermal power plant, hot water extracted from deep underground reservoirs is brought to the surface where pressure decreases dramatically. Which of the following best describes why this pressure change is essential to the electricity generation process?",
@@ -50,24 +50,24 @@
     "correct": "D"
   },
   {
-    "question": "A geothermal project in New Zealand needs 3 kilometers of drilling and well construction, which account for 40–60 percent of total costs. Why is this high upfront expense a major disadvantage in regions with limited capital?",
+    "question": "A geothermal project in New Zealand requires 3 kilometers of drilling and well construction, which accounts for 40-60% of total project costs. Why is this high upfront expense a major disadvantage for developing regions with limited access to capital?",
     "answers": [
-      "High drilling costs block developing regions from accessing geothermal resources",
-      "High drilling costs make geothermal uneconomical where coal plants exist",
-      "High drilling costs increase hydrogen sulfide emissions during construction",
-      "High drilling costs force plants to operate nonstop to recoup investment"
+      "The large initial capital investment required before any electricity is generated makes it difficult for regions with limited financing options to fund geothermal projects, even where the underlying resource is abundant.",
+      "High drilling costs make geothermal power more expensive to operate than coal plants on every single measure, including fuel costs.",
+      "High drilling costs directly increase the volume of hydrogen sulfide released into the atmosphere during well construction.",
+      "High drilling costs require the completed plant to operate continuously at maximum capacity, which is a technical rather than financial constraint."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "During geothermal power plant operation, hydrogen sulfide gas is released when hot geothermal fluids reach the surface and pressure decreases. This H₂S can react with oxygen in the atmosphere to form sulfur dioxide. Which of the following best describes the environmental consequence of this atmospheric reaction?",
+    "question": "During geothermal power plant operation, hydrogen sulfide gas is released when hot geothermal fluids reach the surface and pressure decreases. This H2S can react with oxygen in the atmosphere to form sulfur dioxide. Which of the following best describes the environmental consequence of this atmospheric reaction?",
     "answers": [
-      "Sulfur dioxide dissolves in atmospheric moisture to form sulfuric acid, which falls as acid precipitation that can damage ecosystems and infrastructure",
-      "Sulfur dioxide is rapidly converted to elemental sulfur, which precipitates as yellow dust and accumulates in soil without further environmental impact",
-      "Sulfur dioxide increases atmospheric albedo by forming reflective sulfate particles, which reduces solar radiation reaching Earth's surface and cools the climate",
-      "Sulfur dioxide combines with nitrogen oxides to form ground-level ozone, which reduces visibility and harms respiratory health"
+      "Sulfur dioxide dissolves in atmospheric moisture to form sulfuric acid, which falls as acid precipitation that can damage ecosystems and infrastructure.",
+      "Sulfur dioxide is rapidly converted to elemental sulfur, which precipitates as yellow dust and accumulates in soil without further environmental impact.",
+      "Sulfur dioxide increases atmospheric albedo by forming reflective sulfate particles, which reduces solar radiation reaching Earth's surface and cools the climate.",
+      "Sulfur dioxide combines with nitrogen oxides to form ground-level ozone, which reduces visibility and harms respiratory health."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A renewable energy analyst writes: 'Geothermal power plants maintain consistent electricity output throughout the year because underground heat reservoirs remain at stable temperatures regardless of seasonal weather changes. In contrast, solar installations produce 75% less electricity during winter months, and wind turbines generate power only when wind speeds exceed 10 mph. This fundamental difference in resource consistency means geothermal plants can serve as reliable baseload power sources, whereas solar and wind require battery storage or fossil fuel backup to meet continuous demand.' Which of the following best identifies the analyst's main claim?",
@@ -90,13 +90,13 @@
     "correct": "C"
   },
   {
-    "question": "In a geothermal plant, hot water from deep underground reaches the surface where pressure drops sharply. Why does that pressure drop cause the water to become steam?",
+    "question": "In a geothermal plant, hot water from deep underground reaches the surface, where pressure drops sharply as it exits the well. Why does this pressure drop cause the water to flash into steam?",
     "answers": [
-      "Lower pressure lowers water's boiling point, so it vaporizes at its temperature.",
-      "Dissolved minerals raise the boiling point, so they cannot cause steam.",
-      "Heat loss during ascent does not cause vaporization. Pressure drop causes steam.",
-      "Decompression does not increase molecular speed. The pressure drop lowers the boiling point."
+      "A drop in pressure lowers the boiling point of water, so water that was liquid under high pressure at depth vaporizes into steam once it reaches the lower-pressure surface at the same temperature.",
+      "Dissolved minerals in the geothermal fluid raise its boiling point, which is what actually causes it to flash into steam near the surface.",
+      "Heat loss during the water's ascent through the well is the primary cause of vaporization, not the change in pressure.",
+      "Decompression at the surface decreases the average speed of water molecules, which is what triggers the phase change to steam."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

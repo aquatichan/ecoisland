@@ -1,13 +1,64 @@
 [
   {
-    "question": "A population researcher examining Mexico's demographic changes notes that contraceptive use increased from 12% to 73% of women of reproductive age between 1976 and 2015, while crude birth rates fell from 45 to 18 per 1,000 over the same period. The researcher argues this evidence demonstrates that increased access to contraception and female education causally explains Mexico's transition from Stage 2 to Stage 3. Which of the following best identifies an assumption underlying this reasoning?",
+    "question": "A population researcher examining Mexico's demographic changes notes that contraceptive use increased from 12% to 73% of women of reproductive age between 1976 and 2015, while crude birth rates fell from 45 to 18 per 1,000 over the same period. The researcher argues this evidence demonstrates that increased contraceptive access was the primary driver of Mexico's transition from Stage 3 to Stage 4 of the demographic transition model. Which assumption is this argument most reliant on?",
     "answers": [
-      "The author assumes that contraceptive availability and female education causally drive birth rate decline in Stage 3, rather than treating the decline as merely correlated with development.",
-      "The author assumes that contraceptive availability and female education causally drive death rate decline in Stage 2, rather than treating the decline as merely correlated with development.",
-      "The author assumes that contraceptive availability and female education causally drive birth rate decline in the Stage 3 to Stage 4 transition, rather than treating the decline as merely correlated with development.",
-      "The author assumes that contraceptive availability and female education are effects of development that coincidentally occur alongside birth rate decline in Stage 3, rather than treating them as causal factors."
+      "That the correlation between rising contraceptive use and falling birth rates reflects a causal relationship, rather than both trends being independently driven by a third factor such as rising female education or urbanization",
+      "That death rates in Mexico also declined significantly during this same time period, which is a necessary condition for classifying any stage of the demographic transition",
+      "That contraceptive use has no relationship at all to birth rate, meaning the researcher's argument would actually require rejecting any connection between the two trends",
+      "That Mexico's population size decreased in absolute terms between 1976 and 2015 as a direct result of the falling birth rate"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Mexico: Contraceptive Use and Crude Birth Rate, 1976-2015",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Contraceptive use (%)",
+          "points": [
+            {
+              "x": 1976,
+              "y": 12
+            },
+            {
+              "x": 1990,
+              "y": 35
+            },
+            {
+              "x": 2000,
+              "y": 55
+            },
+            {
+              "x": 2015,
+              "y": 73
+            }
+          ]
+        },
+        {
+          "name": "Crude birth rate (per 1,000)",
+          "points": [
+            {
+              "x": 1976,
+              "y": 45
+            },
+            {
+              "x": 1990,
+              "y": 32
+            },
+            {
+              "x": 2000,
+              "y": 24
+            },
+            {
+              "x": 2015,
+              "y": 18
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Percent / Rate per 1,000"
+    }
   },
   {
     "question": "A scatterplot shows per capita GDP (x) and population growth rate (y) for eight countries: low-GDP 2.5–3.2%, middle-income 1.0–2.0%, and high-GDP 0.2–0.8%. How does this pattern support the demographic transition model?",
@@ -20,14 +71,14 @@
     "correct": "B"
   },
   {
-    "question": "A development organization publishes a report: 'Understanding the demographic transition is essential for anticipating which developing countries will face the most severe resource constraints during their transition from high to low birth and death rates. Countries that experience rapid mortality decline without corresponding birth rate reductions will have large young populations requiring education, healthcare, and eventual employment. By identifying where countries are positioned within the demographic transition model, policymakers can prepare infrastructure investments and social programs to manage population growth during the transition period.' Which of the following best identifies the organization's claim?",
+    "question": "A development organization publishes a report: 'Understanding the demographic transition is essential for anticipating which developing countries will face the most severe resource constraints during their transition from high to low birth and death rates. Countries that experience rapid mortality decline without a corresponding rapid decline in birth rates will see the fastest population growth and the greatest strain on food, water, and infrastructure systems.' What is the organization's main claim in this report?",
     "answers": [
-      "The organization claims that understanding demographic transition is essential for predicting which developing countries will face severe resource constraints during their transition.",
-      "The organization claims that understanding demographic transition is essential for predicting which developed countries will face resource constraints during transition.",
-      "The organization claims that understanding demographic transition is essential for implementing family planning policies that will immediately reduce birth rates in developing countries.",
-      "The organization claims that understanding demographic transition is essential for preventing developing countries from ever reaching low birth and death rates."
+      "Understanding the demographic transition model helps predict which developing countries will face the most severe resource constraints, particularly those with a large gap between falling death rates and still-high birth rates",
+      "Understanding the demographic transition model helps predict which already-developed countries will face resource constraints during economic decline",
+      "Understanding the demographic transition model is essential for implementing family planning policies that will immediately and permanently reduce birth rates",
+      "Understanding the demographic transition model is essential for preventing developing countries from ever completing the transition to low birth and death rates"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Infant mortality rates over 30 years: Region A fell 95 to 12, B fell 45 to 8, C fell 18 to 6, and D remained 4. Regions A and B industrialized rapidly, C modernized gradually, and D was already industrialized. Which conclusion about infant mortality and demographic transition stages is best supported?",
@@ -40,14 +91,65 @@
     "correct": "C"
   },
   {
-    "question": "A graph shows death rates falling from 40 to 10 per 1,000 over 30 years while birth rates stay at 45 per 1,000. Which statement best explains these trends in terms of the demographic transition stage?",
+    "question": "A graph shows a country's crude death rate falling from 40 to 10 per 1,000 over 30 years while its crude birth rate remains steady at about 45 per 1,000 throughout the same period. Which stage of the demographic transition model does this pattern best represent?",
     "answers": [
-      "Stage 2 where mortality falls but birth rates remain high causing rapid growth.",
-      "Stage 1 where both birth and death rates stay high with little change.",
-      "Stage 4 where both birth and death rates are low and population stabilizes.",
-      "Stage 3 where birth rates decline and natural increase begins to slow."
+      "Stage 2, in which mortality falls due to improvements such as better healthcare and sanitation, but birth rates remain high, causing rapid natural population increase",
+      "Stage 1, in which both birth and death rates remain high with little long-term change in either rate",
+      "Stage 4, in which both birth and death rates are low and the population growth rate stabilizes near zero",
+      "Stage 3, in which birth rates decline substantially and the rate of natural increase begins to slow"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Crude Birth and Death Rates Over 30 Years",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Crude birth rate (per 1,000)",
+          "points": [
+            {
+              "x": 0,
+              "y": 45
+            },
+            {
+              "x": 10,
+              "y": 45
+            },
+            {
+              "x": 20,
+              "y": 45
+            },
+            {
+              "x": 30,
+              "y": 45
+            }
+          ]
+        },
+        {
+          "name": "Crude death rate (per 1,000)",
+          "points": [
+            {
+              "x": 0,
+              "y": 40
+            },
+            {
+              "x": 10,
+              "y": 27
+            },
+            {
+              "x": 20,
+              "y": 16
+            },
+            {
+              "x": 30,
+              "y": 10
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Rate per 1,000 people"
+    }
   },
   {
     "question": "A researcher reports Sri Lanka's infant mortality fell from 140 to 8 per 1,000 and crude birth rate fell from 40 to 16. The researcher argues mortality decline typically precedes fertility decline and that the timing depends on family planning access, female education, and women's economic opportunities rather than income alone. Which choice best states the author's main claim?",
@@ -80,14 +182,14 @@
     "correct": "C"
   },
   {
-    "question": "In a rapidly industrializing country, child labor has fallen and school enrollment for ages 6-14 rose from 45% to 78%, while total fertility declined from 5.1 to 3.8. Which best describes how these social changes relate to the country's progression through the demographic transition?",
+    "question": "In a rapidly industrializing country, child labor rates have fallen and school enrollment for ages 6-14 rose from 45% to 78%, while total fertility declined from 5.1 to 3.8 over the same period. Which best describes how these social changes relate to the country's progression through the demographic transition?",
     "answers": [
-      "Increased schooling and reduced child labor support fertility decline toward Stage 3",
-      "Reduced child labor reflects social change, not automatic fertility decline from mortality fall",
-      "Reduced child labor typically accompanies fertility decline rather than increasing fertility",
-      "Rising school enrollment signals an industrializing society beyond Stage 1"
+      "Increased school enrollment and reduced reliance on child labor are associated with fertility decline, consistent with a country moving from Stage 2 toward Stage 3 of the demographic transition",
+      "Reduced child labor reflects a social change that occurs independently of demographic transition and has no established relationship to fertility decline",
+      "Reduced child labor typically accompanies rising, not falling, fertility rates, making this pattern inconsistent with typical demographic transition trends",
+      "Rising school enrollment alone is sufficient evidence that this country remains in Stage 1 of the demographic transition, regardless of its fertility trend"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A demographer studying population changes in Southeast Asia has collected birth rate and death rate data for five countries over the past 50 years. To determine which countries have progressed through the demographic transition and which remain in earlier stages, which analytical approach would be most appropriate?",

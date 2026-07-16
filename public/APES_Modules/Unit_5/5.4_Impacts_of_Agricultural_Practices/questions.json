@@ -12,22 +12,22 @@
   {
     "question": "A conservation biologist writes: 'Tilling practices that expose soil carbon and disrupt microbial communities represent a fundamental misalignment with ecological principles. Regenerative agriculture systems that minimize soil disturbance, maintain living roots year-round, and preserve soil structure not only prevent carbon loss but actively sequester atmospheric carbon, making them superior to conventional tilling in both environmental and long-term productivity outcomes.' Which value does this author prioritize?",
     "answers": [
-      "Alignment of agricultural systems with natural ecological processes and carbon cycling",
-      "Maximizing crop yields to ensure food security for growing populations",
-      "Preventing nutrient runoff through improved management of existing tilling practices",
-      "Reducing the economic costs of agricultural inputs like fertilizers and equipment"
+      "Alignment of agricultural systems with natural ecological processes and carbon cycling.",
+      "Maximizing crop yields to ensure food security for growing populations.",
+      "Preventing nutrient runoff through improved management of existing tilling practices.",
+      "Reducing the economic costs of agricultural inputs like fertilizers and equipment."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A Midwestern grain farmer applies excess nitrogen fertilizer. Heavy spring rains wash it into a tributary of a major river. Weeks later algal blooms appear and fish die downstream. Which process best explains this sequence?",
+    "question": "A Midwestern grain farmer applies excess nitrogen fertilizer, and heavy spring rains wash it into a tributary of a major river. Weeks later, algal blooms appear and fish die downstream. Which explanation best accounts for this sequence of events?",
     "answers": [
-      "Eutrophication causes algal blooms, decomposition depletes oxygen, killing fish.",
-      "Excess nitrogen directly poisons fish by disrupting cellular respiration.",
-      "Fertilizer raises pH to levels that impair fish gill function.",
-      "Algal blooms block light and cause plant decay that secondarily consumes oxygen."
+      "Excess nitrogen triggers eutrophication and rapid algal growth; when the algae die and are decomposed by bacteria, dissolved oxygen is depleted, causing fish kills.",
+      "Excess nitrogen directly poisons fish by interfering with cellular respiration in gill tissue.",
+      "Fertilizer runoff raises river pH to levels that directly impair fish gill function within days.",
+      "Algal blooms block sunlight and cause submerged plants to die and decay, which is the only oxygen-depleting process at work."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A farming cooperative in Southeast Asia adopts no-till agriculture to reduce soil erosion and carbon loss from tilled soils. Farmers leave crop residue on fields and apply herbicides to control weeds instead of plowing. Which of the following represents an unintended consequence of this practice?",

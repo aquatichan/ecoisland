@@ -1,9 +1,0 @@
-{
-  "cohort": "A group of individuals of the same age in a population.",
-  "K-selected species": "Species that tend to be large, produce few offspring, invest significant energy in each offspring, mature slowly with extended parental care, have long lifespans, and reproduce multiple times in their lifetime, typically in stable environments with high resource competition.",
-  "r-selected species": "Species that tend to be small, produce many offspring, invest minimal energy in each offspring, mature early, have short lifespans, and may reproduce only once in their lifetime, typically in environments with low resource competition.",
-  "survivorship curve": "A line graph that displays the relative survival rates of a cohort from birth to the maximum age reached by any member of that cohort.",
-  "Type I curve": "A survivorship curve showing high survival rates throughout most of an organism's lifespan, with most deaths occurring at old age; typical of K-selected species.",
-  "Type II curve": "A survivorship curve showing a relatively constant death rate throughout an organism's lifespan; typical of some K-selected species.",
-  "Type III curve": "A survivorship curve showing high mortality rates early in life, with few individuals surviving to old age; typical of r-selected species."
-}

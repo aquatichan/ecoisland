@@ -1,13 +1,13 @@
 [
   {
-    "question": "The diagram shows a cross-section of a clearcut forest area with labeled zones: (1) exposed mineral soil with minimal organic matter, (2) a steep slope with exposed bedrock, (3) surface runoff flowing downslope, and (4) a stream at the base receiving sediment-laden water. Which sequence of processes represented in the diagram best explains how clearcutting leads to both soil erosion and flooding as described in the learning objective?",
+    "question": "A cross-section of a clearcut hillside shows: (1) exposed mineral soil with minimal organic matter, (2) a steep slope with patches of exposed bedrock, (3) surface runoff flowing downslope, and (4) a stream at the base receiving sediment-laden water. Which sequence of processes best explains how clearcutting leads to both soil erosion and increased flooding risk?",
     "answers": [
-      "Loss of vegetation and root systems eliminates slope stabilization, allowing rapid surface runoff to detach and transport soil particles downslope while simultaneously increasing water volume reaching the stream",
-      "Loss of vegetation and root systems causes soil compaction from heavy equipment, allowing rapid surface runoff to detach and transport soil particles downslope while simultaneously increasing water volume reaching the stream",
-      "Loss of vegetation and root systems reduces water infiltration into soil, allowing subsurface flow through soil layers to transport soil particles downslope while simultaneously increasing groundwater discharge into the stream",
-      "Loss of vegetation and root systems eliminates slope stabilization, allowing rapid surface runoff to detach and transport soil particles downslope but without significantly affecting water volume reaching the stream"
+      "Removing vegetation and root systems eliminates the structures that stabilize the slope and intercept rainfall, so surface runoff increases in both speed and volume, detaching and transporting soil particles downslope while also delivering more water to the stream more quickly.",
+      "Removing vegetation causes soil compaction directly from wind exposure, which alone increases surface runoff and erosion without any change in infiltration.",
+      "Removing vegetation increases infiltration into deeper soil layers, and it is this increased subsurface flow, not surface runoff, that carries sediment to the stream.",
+      "Removing vegetation has no measurable effect on runoff volume; only the sediment transport process is affected by clearcutting."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A carbon accounting study reports that old-growth Amazon forests store about 250 metric tons of carbon per hectare. Clearcutting and burning release 80 to 90 percent of that carbon within two years. Replanted fast-growing forests sequester only 5 to 8 metric tons per hectare annually, so recovery requires decades. What is the author's claim about clearcutting and carbon cycling?",
@@ -87,7 +87,7 @@
       "Erosion rates on steep slopes following clearcutting can exceed 20 metric tons per hectare annually.",
       "Clearcutting removes the forest canopy and organic matter layer protecting soil."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Peak stream discharge during spring snowmelt was measured in four watersheds: uncut 2.3 m3/s, 35% clearcut 5.8 m3/s, 60% clearcut 8.1 m3/s, 80% clearcut 11.4 m3/s. Which conclusion is best supported by these data?",

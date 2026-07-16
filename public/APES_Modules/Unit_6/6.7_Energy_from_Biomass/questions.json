@@ -72,22 +72,22 @@
   {
     "question": "A study examined deforestation rates in regions where biomass harvesting for fuel is the primary land use. Researchers compared satellite imagery from 2010 and 2020 across 50 forest regions in Southeast Asia, calculating the percentage of forest cover lost per year. They also collected data on the number of biomass power plants operating in each region and the volume of wood harvested annually. Which of the following represents the dependent variable in this study?",
     "answers": [
-      "The annual percentage of forest cover lost in each region",
-      "The volume of wood harvested annually in each region",
-      "The satellite imagery collected from 2010 and 2020",
-      "The number of biomass power plants operating in each region"
+      "The annual percentage of forest cover lost in each region.",
+      "The volume of wood harvested annually in each region.",
+      "The satellite imagery collected from 2010 and 2020.",
+      "The number of biomass power plants operating in each region."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A study measured NOx emissions from biomass combustion at 400, 600, 800, 1000, and 1200°C with emissions 85, 120, 185, 310, and 425 ppm. The operator notes higher temperatures improve energy efficiency. Which conclusion about the trade-off between efficiency and air quality is best supported by these data?",
+    "question": "A study measured NOx emissions from biomass combustion at increasing temperatures: 400C produced 85 ppm, 600C produced 120 ppm, 800C produced 185 ppm, 1000C produced 310 ppm, and 1200C produced 425 ppm. The plant operator notes that higher combustion temperatures also improve energy conversion efficiency. Which conclusion about the trade-off between efficiency and air quality is best supported by these data?",
     "answers": [
-      "NOx emissions rise sharply with temperature, so higher efficiency increases pollution.",
-      "NOx emissions decrease with temperature, so biomass burning becomes cleaner.",
-      "Higher temperatures eliminate NOx emissions, making high-efficiency burning superior.",
-      "The relationship is random, so combustion temperature has no effect on air quality."
+      "NOx emissions increase sharply as combustion temperature rises, indicating that gains in energy efficiency from higher temperatures come at the cost of increased air pollution.",
+      "NOx emissions decrease as combustion temperature rises, meaning biomass burning becomes cleaner as efficiency improves.",
+      "Higher combustion temperatures eliminate NOx emissions entirely, making high-efficiency burning environmentally superior in every respect.",
+      "The relationship between temperature and NOx emissions is essentially random, indicating combustion temperature has no real effect on air quality."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A city experiences increased ground-level ozone and photochemical smog on hot, sunny days with high traffic volume. Which of the following best explains how biomass combustion from nearby power plants contributes to this air quality problem?",

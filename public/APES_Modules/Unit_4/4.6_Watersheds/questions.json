@@ -30,54 +30,54 @@
     "correct": "C"
   },
   {
-    "question": "A researcher measured streamflow from three tributaries. Tributary A is steep, 15 km, forested with peak 45 m³/s at 8 hours. Tributary B is gentle, 35 km, agricultural with peak 28 m³/s at 24 hours. Tributary C is moderate slope, 22 km, urban with peak 62 m³/s at 4 hours. Which conclusion about watershed characteristics and runoff timing is best supported by these data?",
+    "question": "A researcher measured streamflow from three tributaries. Tributary A is steep, 15 km long, and forested, with a peak flow of 45 m3/s occurring 8 hours after a storm. Tributary B is gently sloped, 35 km long, and agricultural, with a peak flow of 28 m3/s occurring 24 hours after a storm. Tributary C has moderate slope, is 22 km long, and is 60% urban, with a peak flow of 62 m3/s occurring 4 hours after a storm. Which conclusion about watershed characteristics and runoff timing is best supported by these data?",
     "answers": [
-      "Slope and length affect timing but urban impervious surfaces speed peak discharge",
-      "Longer watersheds do not always produce higher peaks because infiltration and impervious cover vary",
-      "Lower peak in agricultural areas reflects slope and infiltration not farming practices alone",
-      "Slope alone determines peak timing but vegetation and travel distance also matter"
+      "Impervious urban surfaces produce the fastest, highest peak flows, while slope, length, and vegetation cover jointly shape the timing and magnitude of runoff in the other watersheds.",
+      "Watershed length is the single strongest predictor of peak flow magnitude across all three tributaries.",
+      "Forest cover has no measurable effect on runoff timing compared to slope and impervious surface.",
+      "All three tributaries would produce identical peak flows if they received the same total rainfall depth."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A team is testing how slope affects stream erosion in three adjacent mountainous watersheds (5°, 15°, 25°) with similar soils, vegetation, and precipitation. Which research question best guides a testable investigation of slope's effect on erosion?",
+    "question": "A team wants to test how slope affects stream erosion using three adjacent mountainous watersheds with similar soils, vegetation, and precipitation but slopes of 5°, 15°, and 25°. Which research question best guides a testable investigation of slope's effect on erosion?",
     "answers": [
-      "How does watershed slope affect suspended sediment concentration in mg/L during spring runoff?",
-      "Will climate change alter erosion rates differently in steep and gentle slope watersheds?",
-      "Which watershed has the most erosion and why is that environmentally important?",
-      "Do steeper slopes cause more erosion in watersheds with greater vegetation cover?"
+      "How does watershed slope (5°, 15°, or 25°) affect the sediment yield (in metric tons per hectare per year) measured at each watershed's outlet?",
+      "Which of the three watersheds is most scenic, and how does that affect its value for recreation?",
+      "Should local land managers restrict development on the steepest of the three watersheds?",
+      "Is erosion a serious problem in mountainous watersheds in general?"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A watershed receives 85 centimeters of precipitation annually and covers 1,200 hectares. Which calculation determines the total annual water volume entering the watershed in cubic meters?",
+    "question": "A watershed receives 85 centimeters of precipitation annually and covers 1,200 hectares (1 hectare = 10,000 m2). Which sequence of unit conversions correctly calculates the total annual water volume entering the watershed, in cubic meters?",
     "answers": [
-      "Convert hectares and centimeters to meters, then multiply area by depth",
-      "Convert hectares to square kilometers then divide precipitation depth by area",
-      "Multiply precipitation in centimeters by area in hectares without converting units",
-      "Divide precipitation depth by watershed area to calculate total water volume"
+      "Convert 85 cm to 0.85 m and 1,200 hectares to 12,000,000 m2, then multiply depth by area to get volume.",
+      "Convert 1,200 hectares to square kilometers, then divide the precipitation depth in centimeters by that area.",
+      "Multiply 85 (in centimeters) directly by 1,200 (in hectares) without converting either unit to meters.",
+      "Divide the precipitation depth by the watershed area to obtain the total water volume in cubic meters."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "Hydrologists measured peak streamflow times for four similarly sized (~50 km²) watersheds with different characteristics. Watershed A has steep slopes, is 8 km long, and has minimal vegetation — peak flow at 6 hours. Watershed B has gentle slopes, is 18 km long, and has dense forest — peak flow at 28 hours. Watershed C has moderate slopes, is 12 km long, and is 60% impervious urban area — peak flow at 3 hours. Watershed D has steep slopes, is 10 km long, and is agricultural with moderate infiltration — peak flow at 14 hours. Which conclusion about how watershed characteristics affect runoff timing is best supported by these data?",
+    "question": "Hydrologists measured peak streamflow timing for four similarly sized (~50 km2) watersheds: Watershed A (steep, 8 km long, minimal vegetation) peaks at 6 hours; Watershed B (gentle slope, 18 km long, dense forest) peaks at 28 hours; Watershed C (moderate slope, 12 km long, 60% impervious urban) peaks at 3 hours; Watershed D (steep, 10 km long, agricultural with moderate infiltration) peaks at 14 hours. Which conclusion about runoff timing is best supported by these data?",
     "answers": [
-      "High impervious cover and low infiltration speed runoff, vegetation delays it.",
-      "Steep slopes alone do not guarantee the fastest runoff response.",
-      "Equal basin size does not produce identical peaks, land cover controls timing.",
-      "Longer channel length may increase travel time but is not the primary control."
+      "Land cover strongly influences runoff timing: impervious and sparsely vegetated surfaces produce the fastest peaks, while dense forest cover delays peak flow the most, even among watersheds of similar size.",
+      "Watershed length is the only factor that determines peak flow timing among these four watersheds.",
+      "Because all four watersheds are similar in size, their differing peak times must be due to measurement error rather than real differences.",
+      "Slope has no effect on peak flow timing once watershed area is held approximately constant."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "Headwaters 1,200 m, discharge 180 m, horizontal distance 22 km. Which sequence finds the average gradient?",
+    "question": "A stream's headwaters sit at 1,200 m elevation, its discharge point sits at 180 m elevation, and the horizontal distance between them is 22 km. Which sequence of steps correctly calculates the stream's average gradient?",
     "answers": [
-      "Subtract elevations to get 1,020 m then divide by 22 km",
-      "Subtract elevations to get 1,020 m then multiply by 22 km",
-      "Divide the 1,020 m drop by the headwater elevation 1,200 m",
-      "Divide discharge elevation by headwater elevation then multiply by distance"
+      "Subtract the discharge elevation from the headwater elevation to get a 1,020 m drop in elevation, then divide that drop by the 22 km horizontal distance.",
+      "Subtract the discharge elevation from the headwater elevation to get a 1,020 m drop, then multiply that drop by the 22 km horizontal distance.",
+      "Divide the 1,020 m elevation drop by the 1,200 m headwater elevation instead of by the horizontal distance.",
+      "Divide the discharge elevation by the headwater elevation, then multiply the result by the horizontal distance."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Hydrologists studying how watershed slope affects runoff velocity install monitoring stations at three locations along a stream: one in the headwaters (steep terrain, 8% slope), one in the mid-watershed (moderate terrain, 3% slope), and one near the discharge point (flat terrain, 0.5% slope). They measure water velocity and discharge volume at each station during the same rainfall event. Which of the following best describes what this research design allows the scientists to determine?",
@@ -90,13 +90,13 @@
     "correct": "B"
   },
   {
-    "question": "A watershed ecologist examining a map of the region writes: 'Watershed divides are topographic boundaries that separate adjacent watersheds, determining which direction surface runoff flows and which discharge point it reaches. Understanding these divides is essential for predicting how pollution in one watershed might affect neighboring systems.' What is the ecologist's claim about watershed divides?",
+    "question": "A watershed ecologist examining a topographic map explains: 'A watershed divide is a ridge or area of high ground that separates one watershed from an adjacent one. Precipitation falling on one side of the divide flows toward one watershed's outlet, while precipitation falling on the other side flows toward a different outlet entirely.' What claim is the ecologist making about watershed divides?",
     "answers": [
-      "Watershed divides determine which direction surface runoff flows and which discharge point it reaches.",
-      "Watershed divides determine which direction surface runoff flows but not which specific discharge point it ultimately reaches.",
-      "Watershed divides determine which direction groundwater recharge flows and which aquifer system it reaches.",
-      "Watershed divides are vegetation boundaries that determine which direction surface runoff flows and which discharge point it reaches."
+      "Watershed divides are topographic high points that determine which watershed (and ultimately which outlet) surface runoff on either side will flow toward.",
+      "Watershed divides are constructed levees that engineers use to redirect stormwater away from flood-prone areas.",
+      "Watershed divides are zones of dense vegetation that filter pollutants before runoff reaches a stream.",
+      "Watershed divides mark the boundary between groundwater and surface water systems but do not affect surface runoff direction."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

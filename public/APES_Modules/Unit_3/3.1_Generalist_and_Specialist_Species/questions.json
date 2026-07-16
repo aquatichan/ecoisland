@@ -30,14 +30,14 @@
     "correct": "D"
   },
   {
-    "question": "A diagram shows a temperate grassland ecosystem experiencing a severe drought that reduces plant diversity and shifts the remaining vegetation to drought-resistant species. Which statement best explains the relationship between environmental change and population survival for generalist versus specialist herbivores in this ecosystem?",
+    "question": "A temperate grassland ecosystem experiences a severe drought that reduces overall plant diversity and shifts remaining vegetation toward a few drought-resistant species. Which statement best explains the likely difference in population response between generalist and specialist herbivores in this grassland?",
     "answers": [
-      "Generalist herbivores maintain stable populations because their broad dietary tolerance allows them to exploit the drought-resistant plants now available, while specialists cannot switch food sources.",
-      "Generalist herbivores maintain stable populations because they typically have smaller population sizes requiring fewer total resources, while specialist populations decline due to their larger resource demands.",
-      "Both generalist and specialist herbivores decline in population because reduced plant diversity limits food availability, but specialists decline more severely due to their narrow dietary requirements.",
-      "Specialist herbivores maintain stable populations because the drought-resistant plants now dominating represent a constant, predictable food source that favors specialized feeding strategies, while generalists decline due to reduced dietary options."
+      "Both generalist and specialist herbivores are likely to decline due to reduced overall plant diversity, but specialists that depended on now-scarce plant species will likely decline more severely than generalists that can shift to the remaining drought-resistant plants",
+      "Generalist herbivores will maintain stable populations only because they have smaller population sizes and thus require fewer total resources than specialists",
+      "Both generalists and specialists will be equally affected, since drought reduces total plant biomass equally regardless of a herbivore's dietary breadth",
+      "Specialist herbivores will maintain the most stable populations, because the newly dominant drought-resistant plants represent a constant, predictable food source for any herbivore"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A conservation organization proposes restoring a degraded prairie ecosystem where specialist grassland species have declined 70% over two decades due to fragmentation and invasive plant encroachment. The restoration plan includes removing invasive species, reestablishing native prairie vegetation, and maintaining consistent water availability through managed hydrology. Which of the following best justifies this restoration approach from a specialist species recovery perspective?",
@@ -80,23 +80,23 @@
     "correct": "C"
   },
   {
-    "question": "A researcher says reserves protect specialists like poison dart frogs and harpy eagles, while generalists like rats thrive inside and outside reserves. What assumption about conservation effectiveness underlies this claim?",
+    "question": "A researcher argues that nature reserves are effective at protecting specialist species like poison dart frogs and harpy eagles, while generalist species like rats thrive both inside and outside reserve boundaries. What assumption about conservation effectiveness underlies this claim?",
     "answers": [
-      "Reserves protect narrow microhabitats specialists need more than generalists.",
-      "Protected areas should expand to cover all generalist species habitat.",
-      "Poison dart frogs and harpy eagles cannot survive outside reserves.",
-      "Generalist species are more important to ecosystem function than specialists."
+      "Reserves are assumed to protect the narrow, specific microhabitat conditions that specialists require, which generalists do not depend on to the same degree",
+      "Protected area boundaries should be expanded specifically to cover the full habitat range used by generalist species like rats",
+      "Poison dart frogs and harpy eagles are assumed to be biologically incapable of surviving in any habitat outside a protected reserve",
+      "Generalist species are assumed to play a more important functional role in ecosystem processes than specialist species do"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A resource manager claims invasive feral pigs threaten specialist native species in a protected forest because pigs eat acorns, roots, insects, and small vertebrates while specialists rely on specific foods. Which limitation best undermines this claim?",
+    "question": "A resource manager claims that invasive feral pigs threaten specialist native species in a protected forest because pigs eat acorns, roots, insects, and small vertebrates, while the specialist species rely on specific subsets of these same foods. Which limitation best undermines this claim as stated?",
     "answers": [
-      "Shows dietary overlap but offers no evidence that pigs deplete specialists' food.",
-      "Describes diets but shifts focus to why generalists invade successfully.",
-      "Invokes evolutionary history as proof specialists will outcompete pigs here.",
-      "Assumes generalist pigs cannot persist here so they pose no threat."
+      "The claim shows potential dietary overlap between pigs and specialists but does not provide direct evidence that pig foraging actually depletes the food resources specialists rely on",
+      "The claim fully describes the pigs' diet but fails entirely to mention why generalist species are typically successful invaders in new habitats",
+      "The claim relies on the specialists' evolutionary history as sufficient proof that they will ultimately outcompete the invasive pigs in this forest",
+      "The claim assumes that generalist pigs cannot survive in this particular forest habitat, and therefore concludes they pose no real threat"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

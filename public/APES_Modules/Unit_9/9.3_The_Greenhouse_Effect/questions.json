@@ -57,7 +57,7 @@
       "The cleared plot releases more methane from anaerobic decomposition of remaining biomass than the forest plot.",
       "The cleared plot releases more nitrous oxide from soil disturbance and microbial activity than the forest plot."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers measured wetland methane using 30-minute chambers and continuous sensors 2 meters above the surface. Why does combining both methods yield more reliable data than either alone?",
@@ -77,7 +77,7 @@
       "Nitrogen fertilizer application increases soil carbon dioxide emissions.",
       "Nitrogen fertilizer application increases soil ammonia volatilization rates."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers collected gas samples from the top 5 centimeters of agricultural soil using sealed surface chambers weekly for 12 weeks after nitrogen fertilizer application. If they added sampling at 15 and 30 centimeters depth, which change in understanding of nitrous oxide sources would most likely result?",

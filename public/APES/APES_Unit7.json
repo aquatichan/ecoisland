@@ -1,38 +1,559 @@
 [
   {
-    "question": "Which of the following is a primary air pollutant?",
+    "question": "Which of the following is classified as a primary air pollutant?",
     "difficulty": "Easy",
-    "A": "Ozone",
-    "B": "Nitrogen dioxide",
-    "C": "Smog",
-    "D": "Peroxyacetyl nitrate",
+    "A": "Ground-level ozone",
+    "B": "Carbon monoxide",
+    "C": "Peroxyacetyl nitrate (PAN)",
+    "D": "Sulfuric acid aerosol",
     "answer": "B"
   },
   {
-    "question": "The Clean Air Act has been most effective in reducing which of the following pollutants in the United States?",
-    "difficulty": "Medium",
-    "A": "Carbon dioxide",
-    "B": "Lead",
-    "C": "Ozone",
-    "D": "Methane",
-    "answer": "B"
-  },
-  {
-    "question": "Which chemical reaction is primarily responsible for the formation of ground-level ozone?",
-    "difficulty": "Hard",
-    "A": "Nitrogen oxides react with volatile organic compounds in sunlight",
-    "B": "Sulfur dioxide combines with water vapor to form sulfuric acid",
-    "C": "Carbon monoxide oxidizes into carbon dioxide",
-    "D": "Ammonia reacts with nitrates in the troposphere",
+    "stimulus": {
+      "type": "table",
+      "title": "EPA Criteria Air Pollutants",
+      "sourceNote": "Based on EPA National Ambient Air Quality Standards categories",
+      "headers": ["Pollutant", "Primary Health Concern"],
+      "rows": [
+        ["Ground-level ozone", "Respiratory irritation, reduced lung function"],
+        ["Particulate matter (PM2.5/PM10)", "Cardiovascular and respiratory disease"],
+        ["Carbon monoxide", "Reduced oxygen delivery in blood"],
+        ["Lead", "Neurological damage, especially in children"],
+        ["Sulfur dioxide", "Respiratory irritation, contributes to acid rain"],
+        ["Nitrogen dioxide", "Respiratory irritation, contributes to smog"]
+      ]
+    },
+    "question": "The Clean Air Act directs the EPA to set National Ambient Air Quality Standards (NAAQS) for six criteria pollutants shown in the table. Which of the following is one of those six criteria pollutants?",
+    "difficulty": "Easy",
+    "A": "Lead",
+    "B": "Radon",
+    "C": "Methane",
+    "D": "Chlorofluorocarbons",
     "answer": "A"
   },
   {
-    "question": "A city experiences a thermal inversion. Which outcome is most likely?",
-    "difficulty": "Challenge",
-    "A": "Pollutants disperse rapidly due to rising warm air",
-    "B": "Cool air traps pollutants near the surface, worsening smog",
-    "C": "Precipitation removes airborne particulates",
-    "D": "Temperature decreases at the surface due to convection",
+    "stimulus": {
+      "type": "bar",
+      "title": "Average Daily 8-Hour Ozone Concentration by City, Summer Afternoon",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "City A (heavy traffic)", "value": 92 },
+        { "label": "City B (moderate traffic)", "value": 68 },
+        { "label": "City C (light traffic, forested)", "value": 54 },
+        { "label": "City D (rural, minimal traffic)", "value": 35 }
+      ],
+      "xLabel": "City",
+      "yLabel": "Ozone (ppb)"
+    },
+    "question": "Based on the bar graph, which explanation best accounts for the pattern of ozone concentrations across the four cities?",
+    "difficulty": "Medium",
+    "A": "Cities with more vehicle traffic emit more NOx and VOCs, which react photochemically with sunlight to produce more ground-level ozone",
+    "B": "Ozone concentrations are determined entirely by latitude and have no relationship to traffic volume",
+    "C": "Rural areas have higher ozone because agricultural equipment emits more ozone directly than cars",
+    "D": "Forested areas show low ozone because trees chemically neutralize ozone in the atmosphere",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Diurnal Pattern of NOx and Ground-Level Ozone in an Urban Area",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "NOx (ppb)", "points": [ {"x": 6, "y": 40}, {"x": 8, "y": 95}, {"x": 10, "y": 70}, {"x": 12, "y": 50}, {"x": 14, "y": 35}, {"x": 16, "y": 30} ] },
+        { "name": "Ozone (ppb)", "points": [ {"x": 6, "y": 10}, {"x": 8, "y": 15}, {"x": 10, "y": 45}, {"x": 12, "y": 75}, {"x": 14, "y": 95}, {"x": 16, "y": 80} ] }
+      ],
+      "xLabel": "Hour of day",
+      "yLabel": "Concentration (ppb)"
+    },
+    "question": "Based on the graph, NOx peaks during the morning rush hour while ozone peaks in the mid-afternoon. Which of the following correctly explains this pattern in terms of photochemical smog formation?",
+    "difficulty": "Medium",
+    "A": "Sulfur dioxide reacts with atmospheric moisture to form a brown haze",
+    "B": "Nitrogen oxides and volatile organic compounds react in the presence of sunlight over the course of the day to produce ground-level ozone and other secondary pollutants, causing the delayed afternoon peak",
+    "C": "Particulate matter accumulates near the surface due to a temperature inversion",
+    "D": "Carbon monoxide oxidizes in the stratosphere to form tropospheric ozone",
     "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Vertical Temperature Profile During a Thermal Inversion vs. Normal Conditions",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Normal profile", "points": [ {"x": 0, "y": 20}, {"x": 200, "y": 18}, {"x": 400, "y": 16}, {"x": 600, "y": 14}, {"x": 800, "y": 12} ] },
+        { "name": "Inversion profile", "points": [ {"x": 0, "y": 8}, {"x": 200, "y": 12}, {"x": 400, "y": 15}, {"x": 600, "y": 14}, {"x": 800, "y": 12} ] }
+      ],
+      "xLabel": "Altitude (m)",
+      "yLabel": "Temperature (°C)"
+    },
+    "question": "The graph shows temperature versus altitude under normal conditions and during a thermal inversion. Based on this graph, which statement best explains why air pollution worsens during a thermal inversion?",
+    "difficulty": "Medium",
+    "A": "A layer of warm air sits above cooler surface air, preventing the vertical mixing that normally disperses pollutants away from the ground",
+    "B": "Cooler air aloft causes pollutants to rise rapidly and disperse into the stratosphere",
+    "C": "The temperature profile has no effect on pollutant dispersal, only wind speed matters",
+    "D": "Warm surface air rises quickly, carrying pollutants up and out of the breathing zone",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Conditions Favoring Thermal Inversion Formation",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Condition Set", "Wind Speed", "Cloud Cover", "Topography", "Inversion Frequency (winter days)"],
+      "rows": [
+        ["Set 1", "Low (< 5 mph)", "Clear", "Mountain valley", "62%"],
+        ["Set 2", "High (> 15 mph)", "Cloudy", "Open plain", "8%"],
+        ["Set 3", "Moderate", "Partly cloudy", "Coastal flat", "24%"]
+      ]
+    },
+    "question": "Based on the table, thermal inversions that trap pollutants near the ground are most likely to occur under which of the following conditions?",
+    "difficulty": "Easy",
+    "A": "Windy, cloudy days in a flat open plain",
+    "B": "Clear, calm nights in a mountain valley during winter",
+    "C": "Hot, humid afternoons near the equator",
+    "D": "Stormy conditions with high wind shear",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Atmospheric CO2 Concentration at Mauna Loa Observatory (Selected Years)",
+      "sourceNote": "Approximate values based on NOAA Mauna Loa Observatory records",
+      "headers": ["Year", "CO2 Concentration (ppm)"],
+      "rows": [
+        ["1960", "317"],
+        ["1980", "339"],
+        ["2000", "369"],
+        ["2020", "414"],
+        ["2024", "424"]
+      ]
+    },
+    "question": "According to the table, approximately how much did atmospheric CO2 concentration increase from 1960 to 2020?",
+    "difficulty": "Easy",
+    "A": "About 10 ppm",
+    "B": "About 50 ppm",
+    "C": "About 97 ppm",
+    "D": "About 200 ppm",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "PM10 Concentration by Wind Source at a Desert-Adjacent Monitoring Station",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Ocean wind", "value": 15 },
+        { "label": "Desert wind (dust storm)", "value": 68 },
+        { "label": "Calm, no wind", "value": 22 }
+      ],
+      "xLabel": "Wind source",
+      "yLabel": "PM10 (µg/m³)"
+    },
+    "question": "Based on the bar graph, which of the following is the primary natural source of the elevated particulate matter observed during desert wind events?",
+    "difficulty": "Easy",
+    "A": "Wind erosion and dust storms",
+    "B": "Volcanic eruptions",
+    "C": "Sea spray",
+    "D": "Wildfire smoke",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "scatter",
+      "title": "Indoor Formaldehyde Concentration vs. Days Since New Carpet Installation",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [ {"x": 1, "y": 185}, {"x": 7, "y": 142}, {"x": 14, "y": 110}, {"x": 30, "y": 89}, {"x": 60, "y": 65}, {"x": 90, "y": 52}, {"x": 150, "y": 41}, {"x": 180, "y": 38} ],
+      "trendline": { "x1": 1, "y1": 175, "x2": 180, "y2": 40 },
+      "xLabel": "Days since installation",
+      "yLabel": "Formaldehyde (µg/m³)"
+    },
+    "question": "Based on the scatter plot, which statement best describes the relationship between time since carpet installation and indoor formaldehyde concentration?",
+    "difficulty": "Medium",
+    "A": "Formaldehyde concentration is unrelated to time since installation",
+    "B": "Formaldehyde concentration declines rapidly at first and then levels off as off-gassing slows over time",
+    "C": "Formaldehyde concentration increases steadily as the carpet ages",
+    "D": "Formaldehyde concentration oscillates randomly with no discernible pattern",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Leading Causes of Lung Cancer in Nonsmokers, United States",
+      "sourceNote": "Approximate values based on EPA radon exposure estimates",
+      "data": [
+        { "label": "Radon exposure", "value": 21000 },
+        { "label": "Secondhand smoke", "value": 7300 },
+        { "label": "Occupational carcinogens", "value": 4000 },
+        { "label": "Outdoor air pollution", "value": 3000 }
+      ],
+      "xLabel": "Cause",
+      "yLabel": "Estimated annual U.S. deaths"
+    },
+    "question": "Based on the graph, radon exposure is the leading cause of lung cancer among nonsmokers in the United States. Radon gas is a health concern primarily because it",
+    "difficulty": "Medium",
+    "A": "reacts with indoor VOCs to form secondary particulate matter",
+    "B": "is a radioactive decay product of uranium in soil and rock that emits alpha particles capable of damaging lung tissue when inhaled",
+    "C": "displaces oxygen in enclosed spaces, causing asphyxiation",
+    "D": "binds irreversibly to hemoglobin, reducing oxygen transport in the blood",
+    "answer": "B"
+  },
+  {
+    "question": "Sick building syndrome is most directly associated with which of the following building design trends?",
+    "difficulty": "Easy",
+    "A": "Increased use of natural ventilation and open windows",
+    "B": "Tighter building envelopes and reduced air exchange with the outdoors to improve energy efficiency",
+    "C": "Use of untreated wood in construction",
+    "D": "Higher ceilings that trap warm air near the roof",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "pie",
+      "title": "Sources of U.S. Anthropogenic Nitrogen Oxide (NOx) Emissions",
+      "sourceNote": "Approximate values based on EPA National Emissions Inventory data",
+      "slices": [
+        { "label": "Transportation", "value": 55 },
+        { "label": "Electric power generation", "value": 15 },
+        { "label": "Industrial processes", "value": 17 },
+        { "label": "Other (residential, commercial, other fuel combustion)", "value": 13 }
+      ]
+    },
+    "question": "Based on the pie chart, which control strategy would most directly target the largest source category of NOx emissions?",
+    "difficulty": "Medium",
+    "A": "Installing scrubbers exclusively at coal-fired power plants",
+    "B": "Requiring catalytic converters and stricter fuel efficiency standards for vehicles",
+    "C": "Regulating only heavy industrial manufacturing processes",
+    "D": "Banning residential wood-burning stoves",
+    "answer": "B"
+  },
+  {
+    "question": "A catalytic converter reduces vehicle air pollution primarily by",
+    "difficulty": "Medium",
+    "A": "cooling exhaust gases before they exit the tailpipe",
+    "B": "converting CO, NOx, and unburned hydrocarbons into less harmful CO2, N2, and water vapor through catalyzed reactions",
+    "C": "filtering out particulate matter using a fine mesh screen",
+    "D": "diluting exhaust gases with outside air before release",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Particulate Matter Removal Efficiency by Control Technology",
+      "sourceNote": "Approximate values based on EPA air pollution control technology fact sheets",
+      "data": [
+        { "label": "No control", "value": 0 },
+        { "label": "Electrostatic precipitator", "value": 99 },
+        { "label": "Fabric filter (baghouse)", "value": 99.5 },
+        { "label": "Wet scrubber (particulates only)", "value": 90 }
+      ],
+      "xLabel": "Control technology",
+      "yLabel": "Removal efficiency (%)"
+    },
+    "question": "Based on the graph, an electrostatic precipitator reduces particulate emissions from a coal-fired power plant by which mechanism?",
+    "difficulty": "Medium",
+    "A": "Spraying alkaline slurry to neutralize acidic gases",
+    "B": "Cooling exhaust to condense water vapor around particles",
+    "C": "Giving particles an electric charge so they are attracted to and collected on oppositely charged plates",
+    "D": "Passing exhaust through a fine fabric filter that traps particles mechanically",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Nitrogen Oxide Concentration Near a Highway Before and After Catalytic Converter Mandate",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "NOx (ppb)", "points": [ {"x": 2008, "y": 105}, {"x": 2010, "y": 103}, {"x": 2012, "y": 90}, {"x": 2014, "y": 78}, {"x": 2016, "y": 70}, {"x": 2018, "y": 64}, {"x": 2020, "y": 60} ] }
+      ],
+      "xLabel": "Year",
+      "yLabel": "NOx concentration (ppb)"
+    },
+    "question": "A city mandated catalytic converter inspections beginning in 2010. Based on the graph, which conclusion is best supported by the data?",
+    "difficulty": "Medium",
+    "A": "NOx concentrations declined substantially after the mandate took effect, consistent with catalytic converters reducing tailpipe emissions",
+    "B": "NOx concentrations were unaffected by the mandate since levels were already declining before 2010",
+    "C": "The data show no relationship between the policy and air quality because concentrations never reached zero",
+    "D": "The decline after 2010 proves catalytic converters are the only factor influencing regional NOx levels",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best explains why acid rain damages limestone and marble statues but has comparatively little effect on granite statues?",
+    "difficulty": "Medium",
+    "A": "Granite is nonporous, so acid cannot penetrate the surface",
+    "B": "Limestone and marble are primarily calcium carbonate, which reacts with and dissolves in acidic precipitation, while granite's silicate minerals do not readily react with weak acids",
+    "C": "Granite statues are typically coated with protective sealants that limestone lacks",
+    "D": "Limestone absorbs more UV radiation, which accelerates surface degradation",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Precipitation pH at Increasing Distance from a Coal-Fired Power Plant",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Site", "Distance from Plant", "Precipitation pH"],
+      "rows": [
+        ["1", "At plant fenceline", "4.1"],
+        ["2", "10 km downwind", "4.3"],
+        ["3", "25 km downwind", "4.8"],
+        ["4", "50 km downwind", "5.2"],
+        ["5", "50 km upwind (reference)", "5.9"]
+      ]
+    },
+    "question": "Based on the table, which conclusion about acid deposition is best supported?",
+    "difficulty": "Medium",
+    "A": "Precipitation becomes progressively less acidic (higher pH) with increasing downwind distance from the point source, consistent with dilution and dispersion of SO2 and NOx emissions",
+    "B": "Acid deposition is unrelated to distance from the power plant",
+    "C": "The upwind reference site has the most acidic precipitation of all sites measured",
+    "D": "All sites show statistically identical pH values",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "pie",
+      "title": "U.S. Anthropogenic Sulfur Dioxide (SO2) Emissions by Source",
+      "sourceNote": "Approximate values based on EPA National Emissions Inventory data",
+      "slices": [
+        { "label": "Electric power generation (coal)", "value": 62 },
+        { "label": "Industrial processes", "value": 18 },
+        { "label": "Transportation", "value": 5 },
+        { "label": "Other combustion sources", "value": 15 }
+      ]
+    },
+    "question": "Based on the pie chart, sulfur dioxide is a major precursor to acid rain, primarily from coal combustion. Which pair of pollutants is primarily responsible for the formation of acid rain?",
+    "difficulty": "Easy",
+    "A": "Carbon monoxide and ozone",
+    "B": "Sulfur dioxide and nitrogen oxides",
+    "C": "Methane and carbon dioxide",
+    "D": "Chlorofluorocarbons and particulate matter",
+    "answer": "B"
+  },
+  {
+    "question": "A lake situated on limestone bedrock is generally more resistant to acidification from acid rain than a lake situated on granite bedrock because",
+    "difficulty": "Hard",
+    "A": "limestone lakes receive less acid deposition due to their geographic location",
+    "B": "limestone's calcium carbonate acts as a natural buffer, neutralizing incoming acid and stabilizing pH",
+    "C": "granite bedrock actively releases acid into the water",
+    "D": "limestone lakes have naturally higher dissolved oxygen levels that counteract acidity",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Common Sound Levels and Safe Daily Exposure Limits",
+      "sourceNote": "Approximate values based on NIOSH occupational noise exposure guidelines",
+      "headers": ["Sound Source", "Decibel Level (dB)", "Maximum Safe Daily Exposure"],
+      "rows": [
+        ["Normal conversation", "60", "Unlimited"],
+        ["City traffic (inside car)", "85", "8 hours"],
+        ["Motorcycle", "95", "50 minutes"],
+        ["Rock concert", "110", "2 minutes"],
+        ["Jet engine at takeoff", "140", "Immediate risk of damage"]
+      ]
+    },
+    "question": "Based on the table, chronic exposure to noise levels above approximately 85 decibels is most directly associated with which health effect?",
+    "difficulty": "Easy",
+    "A": "Increased risk of skin cancer",
+    "B": "Permanent hearing loss due to damage to cochlear hair cells",
+    "C": "Elevated blood lead levels",
+    "D": "Increased risk of ozone-related asthma",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Ambient Noise Level and Bird Vocalization Success in an Urban Park",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Rush hour (75 dB)", "value": 15 },
+        { "label": "Midday (65 dB)", "value": 45 },
+        { "label": "Night (50 dB)", "value": 80 }
+      ],
+      "xLabel": "Time period (ambient noise level)",
+      "yLabel": "Successful vocalization rate (%)"
+    },
+    "question": "Based on the bar graph, which explanation best accounts for the relationship between ambient noise and bird vocalization success?",
+    "difficulty": "Medium",
+    "A": "Ambient traffic noise masks bird calls at overlapping frequencies, reducing the probability that vocalizations are detected by other birds",
+    "B": "Birds are simply less active during the day and choose not to vocalize",
+    "C": "Higher noise levels have no effect on animal communication",
+    "D": "Bird vocalization success is determined solely by temperature, not noise",
+    "answer": "A"
+  },
+  {
+    "question": "Marine mammals such as whales and dolphins are particularly vulnerable to noise pollution from shipping and naval sonar because these animals rely heavily on which of the following for navigation and communication?",
+    "difficulty": "Medium",
+    "A": "Chemoreception",
+    "B": "Echolocation and other underwater acoustic communication",
+    "C": "Magnetoreception",
+    "D": "Visual cues alone",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Two Emission Sources Discharging into the Same Watershed",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Source", "Discharge Pattern", "Regulatory Status"],
+      "rows": [
+        ["Factory outfall pipe", "Continuous discharge from one fixed location", "Requires a discharge permit"],
+        ["City-wide stormwater runoff", "Diffuse runoff from streets, lawns, and rooftops after rain", "No single identifiable location; harder to permit"]
+      ]
+    },
+    "question": "Based on the table, which of the following best distinguishes a point source of air or water pollution from a nonpoint source?",
+    "difficulty": "Easy",
+    "A": "Point sources are always more toxic than nonpoint sources",
+    "B": "A point source is a single, identifiable location of discharge (e.g., a smokestack or pipe), while a nonpoint source is diffuse and cannot be traced to one location (e.g., urban runoff)",
+    "C": "Nonpoint sources only occur in rural areas",
+    "D": "Point sources are unregulated while nonpoint sources require permits",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Composition of Automobile Exhaust Before and After Emission Control Devices",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Pollutant", "Uncontrolled (g/mile)", "With Catalytic Converter (g/mile)"],
+      "rows": [
+        ["CO", "22.0", "1.0"],
+        ["NOx", "2.5", "0.2"],
+        ["Hydrocarbons", "2.6", "0.15"]
+      ]
+    },
+    "question": "Based on the table, approximately what percent reduction in NOx emissions resulted from installing a catalytic converter?",
+    "difficulty": "Medium",
+    "A": "8%",
+    "B": "50%",
+    "C": "92%",
+    "D": "99.9%",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Measured Surface Solar Radiation at a Northern Hemisphere Observatory",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Solar radiation (W/m²)", "points": [ {"x": 1960, "y": 220}, {"x": 1970, "y": 210}, {"x": 1980, "y": 200}, {"x": 1990, "y": 198}, {"x": 2000, "y": 205}, {"x": 2010, "y": 210} ] }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Surface solar radiation (W/m²)"
+    },
+    "question": "The graph shows a decline in measured surface solar radiation from 1960 to about 1990, followed by a partial recovery — a pattern researchers call 'global dimming' followed by 'brightening.' This trend is primarily attributed to which cause?",
+    "difficulty": "Hard",
+    "A": "A gradual decrease in solar output from the sun",
+    "B": "Changes in atmospheric aerosols and particulate matter that reflect and scatter incoming sunlight, followed by pollution control improvements",
+    "C": "Ozone layer thickening that blocks visible light",
+    "D": "Increased cloud cover unrelated to human activity",
+    "answer": "B"
+  },
+  {
+    "question": "A region experiences both vehicle NOx emissions and coal power plant SO2 and NOx emissions. Compared to a region with only vehicle emissions, why does this dual-source region typically experience more severe acid deposition?",
+    "difficulty": "Hard",
+    "A": "NOx and SO2 both form acids (nitric and sulfuric acid respectively) when they react in the atmosphere, so combining both emission types increases the total acid-forming potential",
+    "B": "Vehicle NOx is chemically inert and does not contribute to acid rain at all",
+    "C": "SO2 only forms acid rain when NOx is completely absent",
+    "D": "Power plants only emit particulate matter, not acid-forming gases",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Indoor VOC Concentration After Installing New Furniture and Paint",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "VOC concentration (ppb)", "points": [ {"x": 1, "y": 480}, {"x": 7, "y": 310}, {"x": 30, "y": 150}, {"x": 90, "y": 60}, {"x": 180, "y": 25} ] }
+      ],
+      "xLabel": "Days since installation",
+      "yLabel": "VOC concentration (ppb)"
+    },
+    "question": "Based on the graph, which of the following best explains why VOCs (volatile organic compounds) emitted from paints, solvents, and new furniture are a concern for indoor air quality?",
+    "difficulty": "Medium",
+    "A": "They are heavier than air and sink to dangerous concentrations at floor level only",
+    "B": "They off-gas over time in enclosed spaces with limited ventilation, and can cause headaches, respiratory irritation, and long-term health effects at elevated concentrations",
+    "C": "They are radioactive and emit ionizing radiation",
+    "D": "They react with sunlight indoors to form stratospheric ozone",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "scatter",
+      "title": "SO2 Concentration vs. Distance from a Diesel Truck Terminal",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [ {"x": 0, "y": 0.18}, {"x": 1, "y": 0.09}, {"x": 2, "y": 0.04}, {"x": 3, "y": 0.03}, {"x": 5, "y": 0.02}, {"x": 8, "y": 0.015} ],
+      "xLabel": "Distance from terminal (km)",
+      "yLabel": "SO2 concentration (ppm)"
+    },
+    "question": "Based on the scatter plot, respiratory hospital admissions within 1 km of the terminal are found to be 40% higher than in areas 10 km away. Which statement best characterizes this pollution scenario?",
+    "difficulty": "Hard",
+    "A": "A point-source SO2 emission with concentrations that decline with distance, correlated with elevated respiratory harm near the source",
+    "B": "A nonpoint-source emission with uniform concentrations regardless of distance",
+    "C": "The data show no relationship between distance and pollutant concentration",
+    "D": "SO2 concentrations increase with distance from the source",
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following refrigerant transitions best illustrates a trade-off in atmospheric pollution reduction efforts, where solving one problem (ozone depletion) introduced a new one (enhanced greenhouse warming)?",
+    "difficulty": "Hard",
+    "A": "The replacement of CFCs with HFCs, which have zero ozone depletion potential but very high global warming potential",
+    "B": "The replacement of lead additives with unleaded gasoline",
+    "C": "The replacement of coal with natural gas in power plants",
+    "D": "The replacement of incandescent bulbs with LED lighting",
+    "answer": "A"
+  },
+  {
+    "question": "Wet scrubbers used in coal-fired power plants reduce SO2 emissions primarily through which process?",
+    "difficulty": "Medium",
+    "A": "Spraying an alkaline slurry (often limestone-based) that reacts chemically with SO2 gas, converting it into a removable solid or liquid byproduct",
+    "B": "Using an electric charge to attract SO2 molecules to charged plates",
+    "C": "Cooling exhaust gases to below freezing to condense SO2 into a solid",
+    "D": "Filtering exhaust through activated carbon that adsorbs SO2 molecules",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Particle Size and Site of Deposition in the Human Respiratory Tract",
+      "sourceNote": "Approximate values based on EPA particulate matter health assessments",
+      "headers": ["Particle Size", "Typical Deposition Site", "Health Association"],
+      "rows": [
+        ["PM10 (2.5-10 µm)", "Nose, throat, upper airways", "Irritation, aggravated asthma"],
+        ["PM2.5 (< 2.5 µm)", "Deep lung (alveoli), bloodstream", "Cardiovascular disease, reduced lung function, premature death"]
+      ]
+    },
+    "question": "Based on the table, which of the following best explains why the health effects of PM2.5 (fine particulate matter) tend to be more severe than those of PM10 (coarse particulate matter)?",
+    "difficulty": "Hard",
+    "A": "PM2.5 particles are large enough to be filtered out by nasal hair, unlike PM10",
+    "B": "PM2.5 particles are small enough to penetrate deep into the lungs and even enter the bloodstream, whereas PM10 is more often trapped in the upper respiratory tract",
+    "C": "PM10 is more chemically reactive than PM2.5",
+    "D": "PM2.5 only affects plant life, not human health",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Benzene Vapor Emissions at Gas Stations With and Without Vapor Recovery Nozzles",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Standard nozzle", "value": 8.2 },
+        { "label": "Vapor recovery nozzle", "value": 0.6 }
+      ],
+      "xLabel": "Nozzle type",
+      "yLabel": "Benzene emitted per fill-up (g)"
+    },
+    "question": "Based on the graph, vapor recovery nozzles at gas station fuel pumps reduce air pollution primarily by",
+    "difficulty": "Medium",
+    "A": "capturing gasoline vapors that would otherwise escape during refueling and returning them to the storage tank",
+    "B": "cooling the fuel to reduce its vapor pressure before it is pumped",
+    "C": "chemically converting gasoline vapors into carbon dioxide at the nozzle",
+    "D": "filtering particulate matter out of the fuel before it enters the tank",
+    "answer": "A"
+  },
+  {
+    "question": "A soil scientist finds that CO2 flux from forest soil increases from spring through summer, peaks, and then declines in fall and winter, tracking closely with soil temperature. Which of the following best explains this seasonal pattern?",
+    "difficulty": "Hard",
+    "A": "Microbial decomposition and root respiration rates increase with warmer temperatures, releasing more CO2 as byproducts of aerobic respiration",
+    "B": "Photosynthesis by soil microbes consumes CO2 more rapidly in summer",
+    "C": "Cold winter soil actively absorbs atmospheric CO2 through mineral weathering",
+    "D": "Soil CO2 flux is unrelated to temperature and instead tracks rainfall exclusively",
+    "answer": "A"
   }
 ]

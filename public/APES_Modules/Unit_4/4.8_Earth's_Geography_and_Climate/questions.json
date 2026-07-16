@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "A climate diagram shows two locations at the same latitude (35°N): Location A in the interior of a large continent receives 400 mm annual precipitation concentrated in summer months, while Location B on the western coast of the same continent receives 800 mm precipitation distributed throughout the year. Both locations have similar average annual temperatures. Which geographic factor most directly explains the precipitation difference shown?",
+    "question": "Two locations sit at the same latitude, 35°N. Location A, in the interior of a large continent, receives 400 mm of annual precipitation concentrated in summer. Location B, on the western coast of the same continent, receives 800 mm distributed evenly across the year. Both have similar average annual temperatures. Which geographic factor best explains this precipitation difference?",
     "answers": [
-      "Prevailing westerly winds carry moisture-laden air masses from the ocean to the coast, while inland areas are distant from moisture sources and receive less precipitation.",
-      "The interior location's continental position creates a high-pressure system that suppresses precipitation year-round, while coastal areas have lower pressure that enhances rainfall.",
-      "Coastal areas have higher ocean temperatures that evaporate more water, but this moisture is carried inland by winds before precipitating over the interior.",
-      "The interior location receives more solar radiation during summer, triggering convective precipitation, while coastal areas have cloud cover that reduces summer precipitation."
+      "Prevailing westerly winds carry moisture from the ocean onto the western coast year-round, while the continental interior is far from this moisture source and receives less, more seasonally concentrated precipitation.",
+      "The continental interior sits at a higher elevation, which by itself explains both the lower total precipitation and its summer concentration.",
+      "The coastal location has a warmer ocean, and this warmth alone increases precipitation regardless of prevailing wind direction.",
+      "The interior location has more urban development, and urban heat islands suppress precipitation compared to coastal areas."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers measured annual precipitation at 500 m on both sides of a coastal mountain. If they instead sampled at sea level, 500 m, 1000 m, and 1500 m on both sides, how would this change most likely affect their understanding of precipitation patterns?",
@@ -70,14 +70,14 @@
     "correct": "D"
   },
   {
-    "question": "Researchers measured wind speed and direction every 30 minutes for two years at 10 windward and 10 leeward sites at the same elevation. What is the independent variable?",
+    "question": "Researchers measured wind speed and direction every 30 minutes for two years at 10 windward and 10 leeward mountain sites, all at the same elevation, to test whether slope aspect relative to prevailing wind affects local wind patterns. What is the independent variable in this study?",
     "answers": [
-      "Site position on mountain slope classified as windward or leeward",
-      "Elevation of sites held constant throughout the study",
-      "Thirty-minute interval specifying how often measurements were taken",
-      "Wind speed and direction measured at each site over time"
+      "Whether a site is classified as windward or leeward.",
+      "The elevation of each monitoring site, which was held constant.",
+      "The 30-minute interval at which measurements were recorded.",
+      "The wind speed and direction values recorded at each site."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A scientist measured mean annual temperature and precipitation at 20 sites from sea level to 3500 m. Temperature declines from 22°C to -8°C with r = -0.89. Precipitation rises to 3200 mm by 2500 m then falls to 1400 mm at 3500 m. Which statement best describes these relationships with elevation?",
@@ -90,13 +90,13 @@
     "correct": "B"
   },
   {
-    "question": "The diagram illustrates ocean currents flowing along a continental coastline at 40° North latitude. A warm current from the equator moves northward along the coast, while a cold current from polar regions moves southward offshore. Which characteristic of the coastal climate is most directly influenced by the presence of the warm ocean current shown in the diagram?",
+    "question": "Along a coastline at 40°N, a warm ocean current flows northward close to shore while a cold current flows southward farther offshore. Which climatic effect on the adjacent coastal land is most directly attributable to the nearby warm current?",
     "answers": [
-      "The warm current increases atmospheric moisture and moderates temperature extremes, resulting in milder winters and cooler summers than inland areas at the same latitude",
-      "The warm current increases atmospheric moisture and heat transfer to the atmosphere, resulting in higher annual precipitation and increased frequency of coastal storms compared to inland areas at the same latitude",
-      "The warm current increases atmospheric moisture and moderates temperature extremes in the offshore marine environment, but has minimal effect on the coastal land climate at this latitude",
-      "The warm current increases atmospheric moisture and coastal precipitation, resulting in persistent fog and cloud cover that blocks solar radiation and cools the coastal region"
+      "The warm current raises air temperature and moisture near the coast, moderating winter cold and producing milder winters than at inland locations of the same latitude.",
+      "The warm current has no measurable effect on land climate because ocean currents only influence marine ecosystems, not adjacent terrestrial areas.",
+      "The warm current cools the coastal atmosphere by increasing evaporative heat loss, producing colder winters than at inland locations.",
+      "The warm current increases atmospheric pressure over the coast, which suppresses all precipitation year-round regardless of season."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

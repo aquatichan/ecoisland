@@ -60,14 +60,14 @@
     "correct": "D"
   },
   {
-    "question": "A building at 45° north with large south-facing windows and high thermal mass heats well in winter but not in summer. Which best explains this seasonal variation?",
+    "question": "A passive solar building at 45N latitude with large south-facing windows and high thermal mass heats effectively in winter but overheats less in summer despite receiving direct sun in both seasons. Which explanation best accounts for this seasonal difference?",
     "answers": [
-      "Lower winter sun angle lets sunlight penetrate and heat interior thermal mass.",
-      "The system is passive and does not use photovoltaic cells for heating.",
-      "Passive systems cannot redirect sunlight because they lack mechanical equipment.",
-      "Thermal mass retains its heat capacity year-round and does not degrade seasonally."
+      "In winter, the sun's lower angle in the sky allows sunlight to penetrate deep into the building through the south-facing windows and strike the thermal mass directly, while in summer the sun's higher angle combined with roof overhangs limits how far sunlight penetrates and how much it heats the interior mass.",
+      "The building's design is entirely passive and contains no photovoltaic cells, which is why it does not overheat in summer.",
+      "Passive solar systems cannot redirect sunlight in any season because they lack mechanical shading equipment of any kind.",
+      "The thermal mass retains a fixed heat capacity year-round that is entirely unaffected by the angle or duration of incoming sunlight."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An active solar thermal system uses a pump to circulate fluid through rooftop solar collectors and then through a heat exchanger connected to a home's water heater. Why does this mechanical circulation improve the system's ability to capture and store solar energy compared to a passive system?",

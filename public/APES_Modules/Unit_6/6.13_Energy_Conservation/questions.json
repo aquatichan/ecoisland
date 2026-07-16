@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "A household uses 24,000 kWh per year. Water heating is 18% of that. A solar water heater supplies 70% of water-heating energy. Which calculation gives the annual kWh reduction?",
+    "question": "A household uses 24,000 kWh of electricity per year, and water heating accounts for 18% of that total. A newly installed solar water heater supplies 70% of the household's water-heating energy needs. Which calculation correctly gives the annual kWh reduction in household electricity use from installing the solar water heater?",
     "answers": [
-      "Multiply 24,000 by 0.18 then multiply the result by 0.70",
-      "Divide 24,000 by 0.18 then multiply by 0.70 which inverts the relationship",
-      "Multiply 24,000 by 0.70 assuming solar covers all household consumption",
-      "Take 0.30 of 24,000 then apply 0.18 which misorders percentages"
+      "Multiply 24,000 by 0.18 to find annual water-heating energy use, then multiply that result by 0.70 to find the portion now supplied by solar.",
+      "Divide 24,000 by 0.18, then multiply the result by 0.70, which incorrectly inverts the share calculation.",
+      "Multiply 24,000 by 0.70 directly, incorrectly assuming solar covers 70% of all household energy use rather than just water heating.",
+      "Take 30% of 24,000 and then apply the 18% figure to that result, which misorders the two percentages."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A household switches from a conventional water heater to a high-efficiency model that reduces hot water energy consumption by 40%. The household's total energy consumption decreases by only 6%. Which of the following best explains why the water heater efficiency improvement produces a smaller total energy reduction?",
@@ -90,13 +90,13 @@
     "correct": "D"
   },
   {
-    "question": "A manufacturing facility currently operates 45 electric motors with a combined power rating of 2,250 kW. The facility manager replaces these motors with high-efficiency models that reduce energy consumption by 12%. If the motors operate continuously for 8,000 hours per year, how many megawatt-hours (MWh) of electrical energy does the facility save annually? (1 MWh = 1,000 kWh)",
+    "question": "A manufacturing facility operates 45 electric motors with a combined power rating of 2,250 kW. The facility manager replaces these motors with high-efficiency models that reduce energy consumption by 12%. If the motors operate continuously for 8,000 hours per year, how many megawatt-hours (MWh) of electrical energy does the facility save annually? (1 MWh = 1,000 kWh)",
     "answers": [
+      "2,160 MWh per year",
       "2.16 MWh per year",
       "0.216 MWh per year",
-      "0.18 MWh per year",
-      "2,160 MWh per year"
+      "0.18 MWh per year"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

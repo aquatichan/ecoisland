@@ -87,7 +87,7 @@
       "The data refute the hypothesis because pteropods showed shell damage even at pH 8.15, indicating that acidification is not the primary cause of shell dissolution.",
       "The data are inconclusive because the study measured shell damage after only 30 days, which is insufficient time to determine whether ocean acidification will cause pteropod extinction in natural ecosystems."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Researchers hypothesized that seagrass productivity would increase in acidified ocean conditions because seagrass photosynthesis benefits from elevated dissolved CO₂ concentrations. They grew seagrass in mesocosms with ambient pH (8.2) and acidified pH (7.8) conditions, maintaining all other variables constant. After 16 weeks, they measured aboveground biomass (g dry weight/m²): ambient pH mean = 185 g/m² (±22 SD), acidified pH mean = 198 g/m² (±28 SD). Which interpretation of these results is most accurate?",
@@ -97,6 +97,6 @@
       "The data strongly support the hypothesis because biomass increased under acidified conditions.",
       "The data refute the hypothesis because high standard deviations indicate no consistent effect."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

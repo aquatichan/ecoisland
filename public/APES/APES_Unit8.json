@@ -1,6 +1,20 @@
 [
   {
-    "question": "Which of the following is a common source of groundwater contamination?",
+    "stimulus": {
+      "type": "bar",
+      "title": "Estimated Contribution to Regional Groundwater Contamination by Source",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Septic tank leachate", "value": 42 },
+        { "label": "Salt spray", "value": 4 },
+        { "label": "Acid rain", "value": 9 },
+        { "label": "Landfill leachate", "value": 30 },
+        { "label": "Other", "value": 15 }
+      ],
+      "xLabel": "Source",
+      "yLabel": "Estimated contribution (%)"
+    },
+    "question": "Based on the graph, which of the following is a common source of groundwater contamination in this region?",
     "difficulty": "Easy",
     "A": "Urban runoff",
     "B": "Septic tanks",
@@ -9,7 +23,40 @@
     "answer": "B"
   },
   {
-    "question": "Eutrophication in lakes is primarily caused by the addition of which nutrients from agricultural runoff?",
+    "stimulus": {
+      "type": "table",
+      "title": "Point vs. Nonpoint Sources of Water Pollution",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Source", "Classification", "Example Pollutant"],
+      "rows": [
+        ["Factory discharge pipe", "Point source", "Heavy metals"],
+        ["Agricultural runoff", "Nonpoint source", "Nitrogen, phosphorus, pesticides"],
+        ["Wastewater treatment outfall", "Point source", "Nutrients, pathogens"],
+        ["Urban stormwater", "Nonpoint source", "Oil, sediment, trash"]
+      ]
+    },
+    "question": "Based on the table, which characteristic distinguishes nonpoint source pollution from point source pollution?",
+    "difficulty": "Easy",
+    "A": "Nonpoint sources are always more toxic",
+    "B": "Nonpoint source pollution is diffuse and enters water bodies from many dispersed locations, making it difficult to regulate with a single permit",
+    "C": "Point sources cannot be regulated under the Clean Water Act",
+    "D": "Nonpoint sources only affect groundwater, not surface water",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Nitrate and Chlorophyll-a Concentrations in Three Streams by Land Use",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Forested stream", "value": 2.1 },
+        { "label": "Agricultural stream", "value": 18.4 },
+        { "label": "Urban stream", "value": 12.6 }
+      ],
+      "xLabel": "Stream (by dominant land use)",
+      "yLabel": "Nitrate concentration (mg/L)"
+    },
+    "question": "Based on the graph, eutrophication in lakes and streams is primarily caused by the addition of which nutrients from agricultural runoff?",
     "difficulty": "Medium",
     "A": "Sulfur and calcium",
     "B": "Nitrogen and phosphorus",
@@ -18,21 +65,562 @@
     "answer": "B"
   },
   {
-    "question": "Which of the following best explains why oil spills cause long-term damage to marine ecosystems?",
+    "question": "Which of the following best explains why oil spills cause long-term damage to marine ecosystems even after visible surface oil has dispersed?",
     "difficulty": "Hard",
-    "A": "Oil is rapidly degraded by UV radiation and oxygen",
-    "B": "Hydrocarbons in oil are persistent and disrupt food webs",
-    "C": "Oil increases dissolved oxygen levels",
-    "D": "Oil immediately sinks to deep ocean sediments",
+    "A": "Oil is rapidly and completely degraded by UV radiation and oxygen within days",
+    "B": "Persistent hydrocarbons can sink, smother benthic habitats, and enter food webs, causing chronic sublethal effects long after the initial spill",
+    "C": "Oil spills increase dissolved oxygen levels, causing excessive algal growth",
+    "D": "Oil immediately sinks to deep ocean sediments and has no further ecological effect",
     "answer": "B"
   },
   {
-    "question": "After wastewater discharge into a river, biological oxygen demand (BOD) increases while dissolved oxygen (DO) decreases. This pattern indicates:",
-    "difficulty": "Challenge",
-    "A": "Reduced bacterial decomposition",
-    "B": "High levels of organic pollution",
-    "C": "Rapid oxygen replenishment from the atmosphere",
-    "D": "High photosynthetic activity",
+    "stimulus": {
+      "type": "line",
+      "title": "Dissolved Oxygen and Biological Oxygen Demand Downstream of a Wastewater Outfall",
+      "sourceNote": "Hypothetical data for this exercise, illustrating a classic oxygen sag curve",
+      "series": [
+        { "name": "Dissolved oxygen (mg/L)", "points": [ {"x": 0, "y": 8.5}, {"x": 2, "y": 5.0}, {"x": 5, "y": 2.5}, {"x": 10, "y": 4.0}, {"x": 20, "y": 7.5} ] },
+        { "name": "BOD (mg/L)", "points": [ {"x": 0, "y": 25}, {"x": 2, "y": 18}, {"x": 5, "y": 12}, {"x": 10, "y": 6}, {"x": 20, "y": 2} ] }
+      ],
+      "xLabel": "Distance downstream (km)",
+      "yLabel": "Concentration (mg/L)"
+    },
+    "question": "After wastewater discharge into a river, biological oxygen demand (BOD) is initially high while dissolved oxygen (DO) drops sharply, then DO gradually recovers downstream. This 'oxygen sag curve' pattern indicates:",
+    "difficulty": "Hard",
+    "A": "Reduced bacterial decomposition near the outfall",
+    "B": "High levels of organic pollution near the outfall are being aerobically decomposed by bacteria, consuming dissolved oxygen until it is replenished downstream through reaeration",
+    "C": "Rapid oxygen replenishment from the atmosphere immediately eliminates any BOD effect",
+    "D": "High photosynthetic activity is driving the oxygen depletion",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Selected Endocrine-Disrupting Chemicals and Their Sources",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Chemical", "Common Source", "Hormone System Affected"],
+      "rows": [
+        ["Bisphenol A (BPA)", "Plastic containers, can linings", "Estrogen signaling"],
+        ["Phthalates", "Vinyl flooring, cosmetics", "Testosterone signaling"],
+        ["Atrazine (herbicide)", "Agricultural runoff", "Reproductive hormone signaling in amphibians"],
+        ["Perchlorate", "Rocket fuel/industrial contamination", "Thyroid hormone production"]
+      ]
+    },
+    "question": "Based on the table, endocrine disruptors interfere with normal physiological function primarily by which mechanism?",
+    "difficulty": "Medium",
+    "A": "Directly damaging DNA through ionizing radiation",
+    "B": "Mimicking or blocking natural hormones, thereby disrupting hormone signaling between glands and target cells",
+    "C": "Reducing blood oxygen carrying capacity",
+    "D": "Causing acute respiratory paralysis",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "scatter",
+      "title": "Feminized Male Fish (%) vs. Agricultural Pesticide Application Rate",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [ {"x": 2, "y": 8}, {"x": 5, "y": 18}, {"x": 8, "y": 31}, {"x": 12, "y": 47} ],
+      "trendline": { "x1": 2, "y1": 6, "x2": 12, "y2": 48 },
+      "xLabel": "Pesticide application rate (kg/hectare)",
+      "yLabel": "Feminized male fish (%)"
+    },
+    "question": "Based on the scatter plot, which statement best characterizes the relationship between pesticide application rate and fish feminization?",
+    "difficulty": "Medium",
+    "A": "Feminization decreases as pesticide application increases",
+    "B": "Feminization increases with pesticide application rate, consistent with a dose-response relationship for an endocrine-disrupting compound",
+    "C": "There is no relationship between the two variables",
+    "D": "Feminization only occurs above 12 kg/hectare",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes why wetlands are considered highly valuable ecosystems in terms of the services they provide?",
+    "difficulty": "Easy",
+    "A": "They have no measurable economic value but are aesthetically pleasing",
+    "B": "They filter pollutants, reduce flood damage by absorbing excess water, recharge groundwater, and provide critical wildlife habitat",
+    "C": "They exclusively serve as carbon sources rather than carbon sinks",
+    "D": "They primarily function to increase local air temperature",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Wetland Area in the Mississippi River Delta, 1950 vs. Present",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "1950", "value": 8500 },
+        { "label": "Present", "value": 3400 }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Wetland area (km²)"
+    },
+    "question": "Based on the graph, by approximately what percentage has the wetland area decreased?",
+    "difficulty": "Medium",
+    "A": "20%",
+    "B": "40%",
+    "C": "60%",
+    "D": "85%",
+    "answer": "C"
+  },
+  {
+    "question": "Mangrove forests are removed at high rates in many tropical coastal areas primarily to make way for which of the following land uses?",
+    "difficulty": "Easy",
+    "A": "Shrimp aquaculture ponds and coastal development",
+    "B": "Wind energy farms",
+    "C": "Old-growth timber harvesting",
+    "D": "Ski resort construction",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Dissolved Oxygen and Algal Biomass Following a Nutrient Pulse Event",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Algal biomass (µg/L chlorophyll-a)", "points": [ {"x": 0, "y": 5}, {"x": 2, "y": 40}, {"x": 4, "y": 95}, {"x": 6, "y": 60}, {"x": 8, "y": 20} ] },
+        { "name": "Dissolved oxygen (mg/L)", "points": [ {"x": 0, "y": 8}, {"x": 2, "y": 9}, {"x": 4, "y": 7}, {"x": 6, "y": 3}, {"x": 8, "y": 1.5} ] }
+      ],
+      "xLabel": "Weeks after nutrient pulse",
+      "yLabel": "Concentration"
+    },
+    "question": "Based on the graph, algal biomass spikes shortly after the nutrient pulse, followed several weeks later by a sharp decline in dissolved oxygen. Which process best explains the delayed drop in dissolved oxygen?",
+    "difficulty": "Hard",
+    "A": "The algae directly consume oxygen at a constant rate throughout their life cycle",
+    "B": "As the algal bloom dies off, decomposer bacteria consume large amounts of dissolved oxygen during aerobic decomposition, creating hypoxic conditions",
+    "C": "Nutrient pulses directly bind to oxygen molecules, removing them from the water",
+    "D": "Dissolved oxygen naturally cycles independent of biological activity",
+    "answer": "B"
+  },
+  {
+    "question": "Thermal pollution in aquatic ecosystems, such as from a power plant's heated discharge water, most directly harms organisms by which mechanism?",
+    "difficulty": "Medium",
+    "A": "Increasing water pH to dangerously alkaline levels",
+    "B": "Reducing the solubility of dissolved oxygen in water while simultaneously increasing organisms' metabolic oxygen demand",
+    "C": "Directly poisoning fish with heavy metals",
+    "D": "Causing immediate evaporation of the entire water body",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Dissolved Oxygen Solubility in Water at Different Temperatures",
+      "sourceNote": "Approximate values based on standard DO solubility tables",
+      "headers": ["Water Temperature (°C)", "Maximum DO Solubility (mg/L)"],
+      "rows": [
+        ["5", "12.8"],
+        ["15", "10.1"],
+        ["25", "8.3"],
+        ["35", "7.0"]
+      ]
+    },
+    "question": "A power plant discharges cooling water that raises a river's temperature from 15°C to 35°C. Based on the table, which outcome is most likely for fish species adapted to cooler water?",
+    "difficulty": "Medium",
+    "A": "No effect, since dissolved oxygen solubility is unrelated to temperature",
+    "B": "Fish would benefit from increased dissolved oxygen availability",
+    "C": "Fish would experience reduced available dissolved oxygen at the same time their metabolic demand for oxygen increases, causing thermal and respiratory stress",
+    "D": "The temperature change would have no ecological consequence because fish can regulate their own body temperature",
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following best describes a persistent organic pollutant (POP), such as DDT or PCBs?",
+    "difficulty": "Easy",
+    "A": "A compound that breaks down within hours of release into the environment",
+    "B": "A synthetic organic compound that resists degradation, bioaccumulates in fatty tissue, and can travel long distances in the environment",
+    "C": "A naturally occurring mineral found only in soil",
+    "D": "A short-lived greenhouse gas",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "PCB Concentration Across a Great Lakes Food Chain",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "Phytoplankton", "value": 0.05 },
+        { "label": "Zooplankton", "value": 0.5 },
+        { "label": "Small fish", "value": 5 },
+        { "label": "Lake trout", "value": 50 }
+      ],
+      "xLabel": "Trophic level",
+      "yLabel": "PCB concentration (ppm)"
+    },
+    "question": "Based on the graph, PCB concentrations increase roughly tenfold at each trophic level. Which term best describes this pattern?",
+    "difficulty": "Easy",
+    "A": "Eutrophication",
+    "B": "Biomagnification",
+    "C": "Denitrification",
+    "D": "Photodegradation",
+    "answer": "B"
+  },
+  {
+    "question": "Bioaccumulation refers to which of the following processes?",
+    "difficulty": "Easy",
+    "A": "The buildup of a persistent, fat-soluble substance within an individual organism's tissues over its lifetime, faster than the organism can excrete it",
+    "B": "The increase in species diversity within a food web over time",
+    "C": "The transfer of energy between trophic levels according to the 10% rule",
+    "D": "The breakdown of pollutants by decomposer organisms",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Mercury Concentration in an Estuarine Food Web",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Organism", "Trophic Level", "Mercury (ppm)"],
+      "rows": [
+        ["Phytoplankton", "Producer", "0.1"],
+        ["Small fish", "Primary consumer", "1.5"],
+        ["Osprey", "Tertiary consumer", "25"]
+      ]
+    },
+    "question": "Based on the table, which process best explains the pattern of increasing mercury concentration at higher trophic levels?",
+    "difficulty": "Medium",
+    "A": "Higher mercury results from greater food intake without any trophic concentration effect",
+    "B": "Biomagnification of fat-soluble, persistent mercury compounds through successive trophic transfers and retention in tissue",
+    "C": "Organisms deliberately accumulate mercury to maintain internal chemical balance",
+    "D": "Osprey convert mercury into a harmless form that dilutes as it moves up the food chain",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "U.S. Municipal Solid Waste Disposal Methods by Tonnage",
+      "sourceNote": "Approximate values based on EPA municipal solid waste data",
+      "data": [
+        { "label": "Sanitary landfill", "value": 146 },
+        { "label": "Combustion with energy recovery", "value": 34 },
+        { "label": "Ocean dumping", "value": 0 },
+        { "label": "Open-air burning", "value": 0 }
+      ],
+      "xLabel": "Disposal method",
+      "yLabel": "Million tons per year"
+    },
+    "question": "Based on the graph, which of the following is the most common method of municipal solid waste disposal in the United States?",
+    "difficulty": "Easy",
+    "A": "Ocean dumping",
+    "B": "Sanitary landfills",
+    "C": "Open-air burning",
+    "D": "Deep-well injection",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "pie",
+      "title": "U.S. Municipal Solid Waste Management Methods",
+      "sourceNote": "Approximate values based on EPA municipal solid waste data",
+      "slices": [
+        { "label": "Landfilled", "value": 50 },
+        { "label": "Recycled", "value": 24 },
+        { "label": "Combusted for energy recovery", "value": 12 },
+        { "label": "Composted", "value": 14 }
+      ]
+    },
+    "question": "Based on the pie chart, which waste management strategy diverts the largest share of waste away from landfills through recovery of materials?",
+    "difficulty": "Medium",
+    "A": "Landfilling",
+    "B": "Recycling",
+    "C": "Open dumping",
+    "D": "Deep-well injection",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes the waste management hierarchy promoted by the EPA, from most to least preferred?",
+    "difficulty": "Medium",
+    "A": "Disposal, recycling, reduction, reuse",
+    "B": "Source reduction, reuse, recycling/composting, energy recovery, treatment, disposal",
+    "C": "Incineration, landfilling, recycling, source reduction",
+    "D": "Recycling, disposal, source reduction, reuse",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Stages of Municipal Wastewater Treatment",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Treatment Stage", "Primary Process", "What Is Removed"],
+      "rows": [
+        ["Primary treatment", "Physical settling and screening", "Large solids, grit"],
+        ["Secondary treatment", "Biological decomposition by microbes", "Dissolved and suspended organic matter"],
+        ["Tertiary treatment", "Chemical/advanced filtration, disinfection", "Nutrients (N, P), pathogens"]
+      ]
+    },
+    "question": "Based on the table, a wastewater treatment plant that only performs primary and secondary treatment before discharge would be least effective at removing which of the following?",
+    "difficulty": "Medium",
+    "A": "Large solids and grit",
+    "B": "Suspended organic matter",
+    "C": "Excess nitrogen and phosphorus that can cause downstream eutrophication",
+    "D": "Settleable sludge",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Percent Mortality of Test Population vs. Dose of Substance X",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Mortality (%)", "points": [ {"x": 0, "y": 0}, {"x": 5, "y": 5}, {"x": 10, "y": 25}, {"x": 15, "y": 50}, {"x": 20, "y": 75}, {"x": 25, "y": 95} ] }
+      ],
+      "xLabel": "Dose (mg/kg)",
+      "yLabel": "Mortality (%)"
+    },
+    "question": "Based on the graph, the dose at which 50% of the test population died is referred to by which term?",
+    "difficulty": "Easy",
+    "A": "the concentration of a substance that causes 50% of a population to develop long-term illness",
+    "B": "the dose of a substance that is lethal to 50% of a test population within a specified time period (LD50)",
+    "C": "the amount of time it takes 50% of a substance to degrade in the environment",
+    "D": "the dose at which a substance becomes detectable by standard laboratory equipment",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "LD50 Values for Selected Substances (Oral, Rat)",
+      "sourceNote": "Approximate values based on standard toxicology references",
+      "headers": ["Substance", "LD50 (mg/kg body weight)"],
+      "rows": [
+        ["Table salt", "3000"],
+        ["Caffeine", "192"],
+        ["A common insecticide", "8"],
+        ["Botulinum toxin", "0.00001"]
+      ]
+    },
+    "question": "Based on the table, which substance is the most acutely toxic?",
+    "difficulty": "Medium",
+    "A": "Table salt, because it has the highest LD50 value",
+    "B": "Caffeine, because it is a stimulant",
+    "C": "The common insecticide, because a smaller dose is needed to be lethal",
+    "D": "Botulinum toxin, because it has the highest LD50 value",
+    "answer": "D"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Generic Dose-Response Curve for a Toxic Substance",
+      "sourceNote": "Hypothetical data illustrating a typical sigmoidal dose-response curve",
+      "series": [
+        { "name": "Mortality (%)", "points": [ {"x": 1, "y": 2}, {"x": 5, "y": 10}, {"x": 10, "y": 50}, {"x": 20, "y": 85}, {"x": 30, "y": 98} ] }
+      ],
+      "xLabel": "Dose (mg/kg)",
+      "yLabel": "Mortality (%)"
+    },
+    "question": "Based on the dose-response curve, approximately what dose corresponds to the LD50 for this substance?",
+    "difficulty": "Medium",
+    "A": "1 mg/kg",
+    "B": "5 mg/kg",
+    "C": "10 mg/kg",
+    "D": "30 mg/kg",
+    "answer": "C"
+  },
+  {
+    "question": "In toxicology, the term 'threshold dose' refers to",
+    "difficulty": "Medium",
+    "A": "the dose at which 100% of a population dies",
+    "B": "the maximum dose a regulatory agency legally allows in food products",
+    "C": "the minimum dose of a substance at which a measurable biological effect first begins to occur",
+    "D": "the average dose consumed by a population over a lifetime",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Global Deaths Attributable to Selected Environmental Health Risk Factors",
+      "sourceNote": "Approximate values based on WHO global environmental health estimates",
+      "data": [
+        { "label": "Unsafe water/sanitation", "value": 1.2 },
+        { "label": "Ambient air pollution", "value": 4.2 },
+        { "label": "Household air pollution", "value": 3.2 },
+        { "label": "Lead exposure", "value": 0.9 }
+      ],
+      "xLabel": "Risk factor",
+      "yLabel": "Estimated annual deaths (millions)"
+    },
+    "question": "Based on the graph, which environmental health risk factor is associated with the greatest estimated number of annual deaths globally?",
+    "difficulty": "Medium",
+    "A": "Unsafe water and sanitation",
+    "B": "Ambient (outdoor) air pollution",
+    "C": "Household (indoor) air pollution",
+    "D": "Lead exposure",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Selected Infectious Diseases by Category",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Disease", "Category"],
+      "rows": [
+        ["Cholera", "Waterborne (fecal-oral transmission)"],
+        ["Malaria", "Vector-borne (mosquito)"],
+        ["Tuberculosis", "Airborne (respiratory droplets)"],
+        ["Influenza", "Airborne (respiratory droplets)"]
+      ]
+    },
+    "question": "Based on the table, which of the following diseases is most directly classified as waterborne and associated with poor sanitation infrastructure?",
+    "difficulty": "Easy",
+    "A": "Malaria",
+    "B": "Cholera",
+    "C": "Tuberculosis",
+    "D": "Influenza",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Transmission Routes of Selected Infectious Diseases",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Disease", "Primary Transmission Route", "Environmental Factor"],
+      "rows": [
+        ["Cholera", "Contaminated water/food", "Poor sanitation infrastructure"],
+        ["Malaria", "Mosquito vector", "Standing water breeding sites, temperature"],
+        ["Schistosomiasis", "Contact with contaminated freshwater", "Snail intermediate host habitat"],
+        ["Lyme disease", "Tick vector", "Forest edge habitat, deer/rodent populations"]
+      ]
+    },
+    "question": "Based on the table, an environmental health officer wants to reduce malaria transmission in a region. Which environmental intervention would most directly target the disease's transmission route?",
+    "difficulty": "Medium",
+    "A": "Chlorinating the municipal water supply",
+    "B": "Eliminating standing water where mosquitoes breed and using insecticide-treated bed nets",
+    "C": "Reducing deer populations near residential areas",
+    "D": "Improving sewage treatment infrastructure",
+    "answer": "B"
+  },
+  {
+    "question": "Climate change is expected to expand the geographic range of many disease vectors, such as mosquitoes carrying malaria and dengue, primarily because",
+    "difficulty": "Hard",
+    "A": "warmer temperatures allow these vectors to survive and reproduce in areas that were previously too cold",
+    "B": "climate change directly weakens the human immune system worldwide",
+    "C": "disease vectors are unaffected by temperature and range expansion is coincidental",
+    "D": "warmer temperatures eliminate the need for vectors altogether",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "scatter",
+      "title": "Annual Dengue Fever Cases vs. Average Annual Temperature in a Coastal City",
+      "sourceNote": "Hypothetical data for this exercise",
+      "points": [ {"x": 22, "y": 12}, {"x": 22.5, "y": 20}, {"x": 23, "y": 40}, {"x": 23.5, "y": 55}, {"x": 24, "y": 90}, {"x": 24.8, "y": 156} ],
+      "trendline": { "x1": 22, "y1": 5, "x2": 24.8, "y2": 160 },
+      "xLabel": "Average annual temperature (°C)",
+      "yLabel": "Dengue cases per year"
+    },
+    "question": "Based on the scatter plot, which conclusion about climate change and disease vector expansion is best supported by the data?",
+    "difficulty": "Hard",
+    "A": "Rising temperatures correlate with increased dengue cases, consistent with poleward and altitudinal expansion of mosquito vector habitat into previously unsuitable regions",
+    "B": "Temperature has no relationship with dengue incidence in this dataset",
+    "C": "Dengue cases decrease as temperature increases",
+    "D": "The data prove that temperature is the sole cause of all dengue cases, ruling out other factors like urbanization",
+    "answer": "A"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Acute vs. Chronic Toxicity: Example Exposure Scenarios",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Scenario", "Exposure Pattern", "Onset of Effects"],
+      "rows": [
+        ["Pesticide spill on skin", "Single, high-dose exposure", "Minutes to hours"],
+        ["Decades of low-level lead exposure from old paint", "Long-term, repeated low-dose exposure", "Years"],
+        ["Carbon monoxide leak in a home", "Single, high-dose exposure", "Minutes to hours"],
+        ["Lifetime low-dose pesticide residue in food", "Long-term, repeated low-dose exposure", "Years to decades"]
+      ]
+    },
+    "question": "Based on the table, which of the following best describes the difference between acute and chronic toxicity?",
+    "difficulty": "Medium",
+    "A": "Acute toxicity results from repeated low-dose exposure over years, while chronic toxicity results from a single high-dose exposure",
+    "B": "Acute toxicity results from a single or short-term high-dose exposure with rapid effects, while chronic toxicity results from long-term, repeated exposure to lower doses",
+    "C": "Acute and chronic toxicity are interchangeable terms with no meaningful distinction",
+    "D": "Acute toxicity only applies to air pollutants, while chronic toxicity only applies to water pollutants",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Common Municipal Solid Waste Reduction Strategies",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Strategy", "Description", "Example"],
+      "rows": [
+        ["Source reduction", "Reducing the amount of waste generated in the first place", "Buying products with less packaging"],
+        ["Reuse", "Using an item again for its original or a new purpose", "Refillable water bottles"],
+        ["Recycling", "Reprocessing materials into new products", "Turning aluminum cans into new cans"],
+        ["Composting", "Biological decomposition of organic waste into usable soil amendment", "Backyard food scrap composting"]
+      ]
+    },
+    "question": "Based on the table, which waste reduction strategy is generally considered the most effective for reducing overall environmental impact, according to the EPA's waste management hierarchy?",
+    "difficulty": "Medium",
+    "A": "Composting",
+    "B": "Recycling",
+    "C": "Source reduction",
+    "D": "Reuse",
+    "answer": "C"
+  },
+  {
+    "stimulus": {
+      "type": "table",
+      "title": "Sanitary Landfill vs. Open Dump: Key Design Features",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": ["Feature", "Open Dump", "Sanitary Landfill"],
+      "rows": [
+        ["Bottom liner", "None", "Impermeable clay/synthetic liner"],
+        ["Leachate collection", "None", "Collection and treatment system"],
+        ["Daily cover", "None", "Soil cover applied daily"],
+        ["Groundwater monitoring", "None", "Required monitoring wells"]
+      ]
+    },
+    "question": "Based on the table, a sanitary landfill differs from an open dump primarily because a sanitary landfill",
+    "difficulty": "Medium",
+    "A": "allows unrestricted public access for waste picking",
+    "B": "uses an impermeable liner, leachate collection system, and daily soil cover to reduce groundwater contamination and pest access",
+    "C": "burns all waste on-site before burial",
+    "D": "is always located within city limits",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "line",
+      "title": "Leachate Contaminant Concentration with Distance from an Unlined Landfill",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        { "name": "Contaminant concentration (mg/L)", "points": [ {"x": 0, "y": 85}, {"x": 100, "y": 60}, {"x": 300, "y": 35}, {"x": 500, "y": 18}, {"x": 1000, "y": 5} ] }
+      ],
+      "xLabel": "Distance from landfill (m)",
+      "yLabel": "Groundwater contaminant concentration (mg/L)"
+    },
+    "question": "Based on the graph, an unlined landfill without a leachate collection system poses the greatest contamination risk to which of the following?",
+    "difficulty": "Medium",
+    "A": "The stratospheric ozone layer",
+    "B": "Nearby groundwater aquifers, as leachate percolates through soil and contaminates drinking water sources",
+    "C": "Upper atmospheric greenhouse gas concentrations exclusively",
+    "D": "Only surface soil directly beneath the landfill, with no risk to water resources",
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best explains why children are generally more vulnerable than adults to the health effects of environmental toxins such as lead?",
+    "difficulty": "Hard",
+    "A": "Children have fully developed detoxification systems that overreact to toxins",
+    "B": "Children have higher metabolic rates, developing nervous systems, and greater relative exposure (e.g., more hand-to-mouth contact, more food/water/air intake per body weight), making them more susceptible to harm from the same dose",
+    "C": "Children are exposed to fewer environmental toxins than adults",
+    "D": "Toxins affect children and adults identically because dose-response relationships do not vary by age",
+    "answer": "B"
+  },
+  {
+    "stimulus": {
+      "type": "bar",
+      "title": "Blood Lead Levels in Children by Distance from a Former Smelter Site",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        { "label": "< 0.5 km", "value": 12.4 },
+        { "label": "0.5-2 km", "value": 7.8 },
+        { "label": "2-5 km", "value": 4.1 },
+        { "label": "> 5 km (reference)", "value": 1.9 }
+      ],
+      "xLabel": "Distance from former smelter site",
+      "yLabel": "Mean blood lead level (µg/dL)"
+    },
+    "question": "Based on the graph, which conclusion is best supported regarding the relationship between the former smelter and childhood lead exposure?",
+    "difficulty": "Medium",
+    "A": "Blood lead levels are unrelated to proximity to the former industrial site",
+    "B": "Blood lead levels decline with increasing distance from the former smelter, consistent with soil and dust contamination from historical industrial emissions",
+    "C": "Blood lead levels are highest far from the smelter site",
+    "D": "The data indicate the smelter had no lasting environmental impact",
     "answer": "B"
   }
 ]

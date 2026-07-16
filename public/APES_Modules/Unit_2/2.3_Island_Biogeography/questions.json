@@ -10,14 +10,14 @@
     "correct": "B"
   },
   {
-    "question": "An island ecology researcher examining Hawaiian bird populations writes: 'The Hawaiian honeycreepers represent a remarkable adaptive radiation from a single colonizing ancestor, with species evolving specialized beak morphologies for different food sources. However, introduced mosquitoes transmit avian malaria, a disease that has caused population declines of 90% or more in some native species. Paradoxically, the same specialization that allowed honeycreepers to exploit diverse ecological niches now makes them vulnerable to this novel pathogen. Unlike introduced generalist bird species that tolerate malaria infection, the endemic specialists lack resistance and cannot survive in lowland areas where mosquitoes thrive. Preventing honeycreeper extinction requires either controlling mosquito populations in critical habitats or maintaining high-elevation refugia where transmission does not occur.' What is the researcher's claim about endemic island species?",
+    "question": "An island ecology researcher examining Hawaiian bird populations writes: 'The Hawaiian honeycreepers represent a remarkable adaptive radiation from a single colonizing ancestor, with species evolving specialized beak morphologies for different food sources. However, introduced mosquitoes transmit avian malaria, to which native honeycreepers have little resistance, causing population declines of 90% or more in some species.' Which statement best captures the overall argument of this passage?",
     "answers": [
-      "Specialized endemic species are vulnerable to invasive pathogens and require active intervention to survive.",
-      "Introduced generalist bird species tolerate malaria infection better than endemic specialist species do.",
-      "Introduced mosquitoes transmit avian malaria, causing population declines of 90% or more in some Hawaiian bird species.",
-      "Hawaiian honeycreepers evolved specialized beak morphologies through adaptive radiation from a single colonizing ancestor."
+      "Endemic species that evolved in isolation, like the honeycreepers, can be highly vulnerable to introduced pathogens against which they never evolved resistance, threatening the outcomes of their adaptive radiation",
+      "Introduced generalist bird species tolerate avian malaria infection better than native honeycreepers do, which is the passage's central claim",
+      "The passage's main point is simply that mosquitoes were introduced to Hawaii and now transmit avian malaria to birds",
+      "The passage's main point is that beak morphology diversity in honeycreepers evolved specifically as a defense mechanism against avian malaria"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A study finds endemic plants on small isolated islands have higher local extinction rates than on larger or nearer islands. Researchers conclude small isolated islands cannot maintain viable endemic populations. Which assumption underlies this conclusion?",
@@ -50,24 +50,85 @@
     "correct": "D"
   },
   {
-    "question": "A research team studying endemic reptile species on isolated islands in Southeast Asia captured, marked with unique paint patterns, and released 80 individuals of a rare endemic lizard species. Two weeks later, they recaptured 120 lizards from the same area, of which 16 bore the original paint marks. Which of the following best describes a critical assumption required for this mark-recapture method to provide an accurate population estimate?",
+    "question": "A research team studying endemic reptile species on isolated islands in Southeast Asia captured, marked, and released 80 individuals of a rare endemic lizard species. Two weeks later, they recaptured 120 lizards from the same area, of which 16 bore the original paint marks. Using the Lincoln-Petersen mark-recapture method to estimate total population size, which assumption is most critical for this estimate to be valid?",
     "answers": [
-      "Marked individuals must mix randomly with unmarked individuals in the population, and marks must not affect survival or recapture probability",
-      "Marked individuals must have been randomly distributed throughout the population before the initial capture, and marks must not affect survival or recapture probability",
-      "Marked individuals must mix randomly with unmarked individuals in the population, and marks must remain visible and identifiable during the recapture period",
-      "Marked individuals must mix randomly with unmarked individuals in the population, and marks must remain permanently attached throughout the study period"
+      "Marked individuals must have mixed randomly back into the population, and the paint marks must not affect an individual's survival or its probability of being recaptured",
+      "Marked individuals must have been distributed evenly across the island's entire geographic range before the recapture sampling took place",
+      "The total number of lizards recaptured must exactly equal the number originally marked and released for the estimate to be mathematically valid",
+      "Paint marks must be visible for the lizard's entire natural lifespan, extending well beyond the two-week interval used in this study"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Mark-Recapture Study of an Endemic Lizard",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Step",
+        "Count"
+      ],
+      "rows": [
+        [
+          "Initial captured & marked",
+          80
+        ],
+        [
+          "Total recaptured",
+          120
+        ],
+        [
+          "Recaptured individuals bearing marks",
+          16
+        ]
+      ]
+    }
   },
   {
-    "question": "Researchers studying species colonization on a newly formed volcanic island conducted surveys every six months for ten years, recording all plant and animal species observed. They used the same survey routes and methods each time to ensure consistency. Which of the following best describes what this long-term monitoring approach reveals about island biogeography that shorter-term studies cannot?",
+    "question": "Researchers studying species colonization on a newly formed volcanic island conducted surveys every six months for ten years, recording all plant and animal species observed, using the same survey routes and methods each time to ensure consistency. Which of the following best describes what this long-term, repeated survey design is best suited to reveal?",
     "answers": [
-      "Temporal patterns of immigration and extinction rates as communities assemble, showing how species richness changes and stabilizes over time",
-      "The specific environmental factors such as soil type and climate that determine which species can survive on the island",
-      "The total number of species that will eventually colonize the island, allowing researchers to predict the island's maximum carrying capacity",
-      "Whether individual species are specialists or generalists by observing which species persist on the island over the entire ten-year period"
+      "Temporal patterns of species immigration and extinction as the island community assembles over time, showing how species richness changes and potentially stabilizes",
+      "The specific environmental factors, such as soil type and climate, that determine which species are physiologically capable of surviving on the island",
+      "The exact total number of species that will eventually colonize the island, allowing precise prediction of its long-term carrying capacity",
+      "Whether individual colonizing species are specialists or generalists, which cannot be determined through repeated presence/absence surveys alone"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Species Richness on a New Volcanic Island Over 10 Years",
+      "sourceNote": "Hypothetical data illustrating a colonization curve",
+      "series": [
+        {
+          "name": "Species richness",
+          "points": [
+            {
+              "x": 0.5,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 8
+            },
+            {
+              "x": 4,
+              "y": 15
+            },
+            {
+              "x": 6,
+              "y": 19
+            },
+            {
+              "x": 8,
+              "y": 21
+            },
+            {
+              "x": 10,
+              "y": 22
+            }
+          ]
+        }
+      ],
+      "xLabel": "Years since survey began",
+      "yLabel": "Number of species observed"
+    }
   },
   {
     "question": "A diagram shows the ecological niches of three bird species: an endemic island specialist (narrow niche), a native island generalist (medium niche), and an invasive generalist (broad niche). The endemic and native generalist coexist on the island before the invasive arrives. Which statement best explains the relationship between niche breadth and species coexistence based on island biogeography?",
@@ -80,14 +141,36 @@
     "correct": "D"
   },
   {
-    "question": "A conservation organization states: 'Endemic species on small islands face extinction because they evolved as specialists adapted to narrow ecological niches. When invasive generalist species arrive, they outcompete specialists for limited resources. Island biogeography demonstrates that protecting these species requires preventing invasive introductions through strict biosecurity measures, not attempting to manage coexistence after invasion occurs.' Which assumption about invasive species management underlies this argument?",
+    "question": "A conservation organization states: 'Endemic species on small islands face extinction because they evolved as specialists adapted to narrow ecological niches. When invasive generalist species arrive, they outcompete specialists for limited resources. Island biogeography demonstrates that protecting island biodiversity requires preventing new species introductions in the first place.' Which claim does this argument make about conservation strategy?",
     "answers": [
-      "Prevention of invasive species introduction is more effective than managing invasives after they establish.",
-      "Prevention of invasive species introduction and management of established invasives are equally effective strategies for protecting endemic specialists.",
-      "Prevention of invasive species introduction is more effective than managing invasives after they establish in all ecosystems, not just islands.",
-      "Eradication of invasive species after establishment is more effective than preventing their introduction through biosecurity measures."
+      "Preventing the introduction of invasive species in the first place is a more effective conservation strategy for protecting island endemics than managing invasive species after they have already established",
+      "Preventing introductions and managing already-established invasive species are presented as equally effective strategies for protecting island endemics",
+      "The argument claims prevention is more effective than management specifically and only on continental (non-island) ecosystems",
+      "The argument claims that eradicating invasive species after they establish is more effective than preventing their introduction through biosecurity"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Specialist vs. Generalist Response to Island Invasion",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Species Type",
+        "Niche Breadth",
+        "Outcome After Invasive Generalist Arrival"
+      ],
+      "rows": [
+        [
+          "Endemic specialist",
+          "Narrow",
+          "Outcompeted, population decline"
+        ],
+        [
+          "Invasive generalist",
+          "Broad",
+          "Establishes successfully"
+        ]
+      ]
+    }
   },
   {
     "question": "The diagram illustrates the colonization sequence on a newly formed volcanic island over 500 years. It shows three stages: Stage 1 (bare rock, zero species), Stage 2 (pioneer species establishing, immigration rate high), and Stage 3 (diverse community, immigration and extinction rates balanced). Which process does the visual representation indicate is occurring between Stage 2 and Stage 3?",

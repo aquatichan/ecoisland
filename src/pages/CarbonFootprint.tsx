@@ -15,6 +15,8 @@ import { collection, query, orderBy, getDocs, doc, addDoc, updateDoc } from "fir
 import { db } from "@/firebase";
 import { User } from "@/entities/User";
 import { getDistanceUnit, getWeightUnit, toStorageDist, toDisplayWt } from "@/utils/units";
+import { REWARDS, buildRewardUpdate, computeDailyStreak } from "@/utils/progression";
+import confetti from "canvas-confetti";
 
 const EMISSION_FACTORS = {
   transport: {
@@ -38,7 +40,6 @@ const TRANSPORT_LABELS = {
 };
 
 const DAILY_LIMIT = 5;
-const COINS_PER_LOG = 10;
 
 // Reference values in kg CO₂
 const GLOBAL_AVG_KG  = 16.4;
@@ -89,7 +90,15 @@ export default function CarbonFootprint() {
       const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       setEntries(data);
       const today = format(new Date(), "yyyy-MM-dd");
-      setTodaysLogs(data.filter(e => e.date === today).length);
+      // Honest daily-log counter: count entries CREATED today. Older docs
+      // without created_at fall back to their date field as the creation day.
+      setTodaysLogs(data.filter(e => {
+        if (e.created_at) {
+          try { return format(new Date(e.created_at), "yyyy-MM-dd") === today; }
+          catch { return e.date === today; }
+        }
+        return e.date === today;
+      }).length);
     } catch (e) { console.error(e); }
   };
 
@@ -116,22 +125,39 @@ export default function CarbonFootprint() {
 
   const handleLogEmissions = async () => {
     if (!user) return;
-    if (todaysLogs >= DAILY_LIMIT) { setMessage({ type: "error", text: `Max ${DAILY_LIMIT} logs per day.` }); return; }
+    const existing = entries.find(e => e.date === selectedDate);
+    // The daily limit only applies to NEW entries — updating an existing date is always allowed.
+    if (!existing && todaysLogs >= DAILY_LIMIT) { setMessage({ type: "error", text: `Max ${DAILY_LIMIT} new logs per day.` }); return; }
     setIsLogging(true);
     try {
       const data = calculateEmissions();
-      const existing = entries.find(e => e.date === selectedDate);
       if (existing) {
         await updateDoc(doc(db, "users", user.id, "carbon_entries", existing.id), data);
+        setMessage({ type: "success", text: "Entry updated!" });
       } else {
-        await addDoc(collection(db, "users", user.id, "carbon_entries"), data);
-        await addDoc(collection(db, "carbon_logs"), { ...data });
-        await User.updateMyUserData({ treecoins: (user.treecoins || 0) + COINS_PER_LOG });
-        setUser(prev => ({ ...prev, treecoins: (prev.treecoins || 0) + COINS_PER_LOG }));
+        const entryDoc = { ...data, created_at: new Date().toISOString() };
+        // Streak computed over existing entry dates + the new one (before reload)
+        const streak = computeDailyStreak([...entries.map(e => e.date), data.date]);
+        const streakBonus = streak >= 2 ? REWARDS.STREAK_BONUS_TC : 0;
+        const { update, result } = buildRewardUpdate(user, {
+          tc: REWARDS.CARBON_LOG.tc + streakBonus,
+          xp: REWARDS.CARBON_LOG.xp,
+        });
+        await addDoc(collection(db, "users", user.id, "carbon_entries"), entryDoc);
+        await addDoc(collection(db, "carbon_logs"), { ...entryDoc });
+        await User.updateMyUserData(update);
+        setUser(prev => ({ ...prev, ...update }));
+
+        let text = `Logged! +${REWARDS.CARBON_LOG.tc} TC · +${REWARDS.CARBON_LOG.xp} XP`;
+        if (streakBonus > 0) text += ` · 🔥 ${streak}-day streak (+${REWARDS.STREAK_BONUS_TC} TC bonus)`;
+        if (result.leveledUp) {
+          text = `🎉 Level ${result.eco_level} reached! ${text}`;
+          confetti({ particleCount: 160, spread: 80, origin: { y: 0.7 } });
+        }
+        setMessage({ type: "success", text });
       }
       await loadEntries(user.id);
-      setMessage({ type: "success", text: existing ? "Entry updated!" : `Logged! +${COINS_PER_LOG} Treecoins 🌱` });
-      setTimeout(() => setMessage(null), 3000);
+      setTimeout(() => setMessage(null), existing ? 3000 : 5000);
       setTransportItems([]);
       setEnergyUsage(20);
     } catch (e) {
@@ -141,6 +167,18 @@ export default function CarbonFootprint() {
   };
 
   const current = calculateEmissions();
+  const existingForDate = entries.find(e => e.date === selectedDate);
+  const atLimit = !existingForDate && todaysLogs >= DAILY_LIMIT;
+
+  // Daily streak over entry dates (yyyy-MM-dd)
+  const currentStreak = computeDailyStreak(entries.map(e => e.date));
+  const loggedToday = entries.some(e => e.date === format(new Date(), "yyyy-MM-dd"));
+  const streakNudge = currentStreak === 0
+    ? "Log today to start a streak!"
+    : loggedToday
+    ? "Log tomorrow to keep it alive!"
+    : "Log today to keep it alive!";
+
   const validEntries = entries.filter(e => e.total_emissions != null);
   // avgEmissions stays in kg for threshold comparisons; convert for display
   const avgEmissions = validEntries.length > 0
@@ -163,8 +201,8 @@ export default function CarbonFootprint() {
   // Eval status thresholds compare against raw kg (avgEmissions is kg)
   const evalStatus = (() => {
     if (!validEntries.length) return { text: "Log your first entry below.", color: "#64748b", emoji: "📊" };
-    if (avgEmissions < 4.8)  return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#10b981", emoji: "🌟" };
-    if (avgEmissions < 7)    return { text: "Good progress! You're below the sustainable threshold.", color: "#06b6d4", emoji: "✅" };
+    if (avgEmissions < 4.8)  return { text: "Excellent! You're meeting Paris Agreement targets.", color: "#06b6d4", emoji: "🌟" };
+    if (avgEmissions < 7)    return { text: "Good progress! You're below the sustainable threshold.", color: "#10b981", emoji: "✅" };
     if (avgEmissions < 12)   return { text: "Room for improvement. Consider more sustainable choices.", color: "#f59e0b", emoji: "⚠️" };
     return { text: "High impact. Focus on reducing transportation and energy use.", color: "#ef4444", emoji: "🚨" };
   })();
@@ -311,17 +349,17 @@ export default function CarbonFootprint() {
 
               <button
                 onClick={handleLogEmissions}
-                disabled={isLogging || todaysLogs >= DAILY_LIMIT}
+                disabled={isLogging || atLimit}
                 className="w-full py-3.5 rounded-2xl font-bold text-white flex items-center justify-center gap-2 transition-all"
                 style={{
-                  background: isLogging || todaysLogs >= DAILY_LIMIT ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
-                  boxShadow: isLogging || todaysLogs >= DAILY_LIMIT ? "none" : "0 4px 15px rgba(0,200,150,0.3)",
-                  cursor: isLogging || todaysLogs >= DAILY_LIMIT ? "not-allowed" : "pointer",
+                  background: isLogging || atLimit ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
+                  boxShadow: isLogging || atLimit ? "none" : "0 4px 15px rgba(0,200,150,0.3)",
+                  cursor: isLogging || atLimit ? "not-allowed" : "pointer",
                 }}
               >
-                {isLogging ? <Loader2 className="w-4 h-4 animate-spin" /> : entries.find(e => e.date === selectedDate) ? "Update Entry" : <><Award className="w-4 h-4" /> Log & Earn {COINS_PER_LOG} Treecoins</>}
+                {isLogging ? <Loader2 className="w-4 h-4 animate-spin" /> : existingForDate ? "Update Entry" : <><Award className="w-4 h-4" /> Log & Earn +{REWARDS.CARBON_LOG.tc} TC · +{REWARDS.CARBON_LOG.xp} XP</>}
               </button>
-              <p className="text-xs text-slate-400 text-center mt-2">{todaysLogs}/{DAILY_LIMIT} logs today</p>
+              <p className="text-xs text-slate-400 text-center mt-2">{todaysLogs}/{DAILY_LIMIT} new logs today</p>
             </div>
           </div>
 
@@ -329,15 +367,28 @@ export default function CarbonFootprint() {
           <div className="lg:col-span-2 space-y-5">
             {/* Eval banner */}
             <div className="eco-card p-5">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <span className="text-2xl">{evalStatus.emoji}</span>
-                <p className="font-semibold text-slate-700 text-sm">{evalStatus.text}</p>
+                <p className="font-semibold text-slate-700 text-sm flex-1 min-w-[180px]">{evalStatus.text}</p>
+                {/* Streak chip */}
+                <div
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl flex-shrink-0"
+                  style={{ background: "rgba(249,115,22,0.08)", border: "1.5px solid rgba(249,115,22,0.25)" }}
+                >
+                  <span className="text-xl">🔥</span>
+                  <div>
+                    <p className="text-sm font-black leading-tight" style={{ color: "#f97316" }}>
+                      {currentStreak}-day streak
+                    </p>
+                    <p className="text-[10px] text-slate-400 leading-tight">{streakNudge}</p>
+                  </div>
+                </div>
               </div>
               <div className="grid grid-cols-3 gap-4 text-center">
                 {[
-                  { label: "Your Average", val: dispWt(avgEmissions), color: "#00c896" },
+                  { label: "Your Average", val: dispWt(avgEmissions), color: "#10b891" },
                   { label: "Global Avg",   val: dispWt(GLOBAL_AVG_KG), color: "#ef4444" },
-                  { label: "Paris Target", val: dispWt(PARIS_TARGET_KG), color: "#10b981" },
+                  { label: "Paris Target", val: dispWt(PARIS_TARGET_KG), color: "#38bdf8" },
                 ].map(s => (
                   <div key={s.label} className="p-3 rounded-xl" style={{ background: `${s.color}08`, border: `1.5px solid ${s.color}20` }}>
                     <div className="text-2xl font-black" style={{ color: s.color }}>{s.val.toFixed(2)}</div>
@@ -367,9 +418,9 @@ export default function CarbonFootprint() {
                     <Tooltip content={<CustomTooltip weightUnit={weightUnit} />} />
                     <ReferenceLine y={dispWt(GLOBAL_AVG_KG)}  stroke="#ef444440" strokeDasharray="4 2" />
                     <ReferenceLine y={dispWt(PARIS_TARGET_KG)} stroke="#10b98140" strokeDasharray="4 2" />
-                    <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#00c896" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={true} />
+                    <Line type="monotone" dataKey="yourEmissions" name="Your Emissions" stroke="#10b981" strokeWidth={2.5} dot={{ r: 4, fill: "#00c896" }} connectNulls={true} />
                     <Line type="monotone" dataKey="globalAvg"    name="Global Average" stroke="#ef4444" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
-                    <Line type="monotone" dataKey="parisTarget"  name="Paris Target"   stroke="#10b981" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
+                    <Line type="monotone" dataKey="parisTarget"  name="Paris Target"   stroke="#38bdf8" strokeWidth={1.5} strokeDasharray="3 2" dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
               )}

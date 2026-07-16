@@ -27,17 +27,17 @@
       "Individual lifestyle modifications are sufficient to address both personal footprints and community-level environmental inequities.",
       "Ecological footprint calculations should exclude industrial facilities and waste sites because these represent corporate impacts, not individual responsibility."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A country with a population of 50 million people has an average ecological footprint of 2.5 global hectares per person, while the global average is 1.7 global hectares per person. Which of the following best explains what this difference in footprint measurements indicates about the country's resource use?",
+    "question": "A country of 50 million people has an average ecological footprint of 2.5 global hectares per person, compared to a global average of 1.7 global hectares per person. Which of the following best explains what this difference indicates about the country's resource use?",
     "answers": [
-      "The country's population consumes resources and produces waste at rates exceeding what the global average suggests is sustainable per capita.",
-      "The country has more total resources available than other countries, allowing each person to consume more without environmental consequences.",
-      "The country's population is larger than the global average, so each person must consume more resources to maintain economic stability.",
-      "The country produces more waste than other countries, but this waste is recycled more efficiently than the global average."
+      "The country's population, on average, consumes resources and generates waste at a rate that would require more than the biologically productive land and water area available per person if applied worldwide.",
+      "The country has more total biocapacity than other nations, so higher per-person consumption produces no environmental consequence.",
+      "The country's population is above the global average in size, which by itself requires each person to consume more resources.",
+      "The country generates more waste overall, but its footprint is offset entirely by more efficient recycling programs."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A dietary study measured the ecological footprint associated with different food consumption patterns. A meat-based diet (consuming 85 kg meat annually) produced a food footprint of 1.2 global hectares per person. A vegetarian diet (consuming 0 kg meat, 120 kg vegetables/grains annually) produced a footprint of 0.35 global hectares per person. A pescatarian diet (consuming 25 kg fish, 95 kg vegetables/grains annually) produced a footprint of 0.58 global hectares per person. What do these data illustrate about the variables measured in food-related ecological footprints?",

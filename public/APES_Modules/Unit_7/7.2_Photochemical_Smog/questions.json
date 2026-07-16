@@ -37,7 +37,7 @@
       "Morning and afternoon measurements throughout the summer season to document how pollutant concentrations vary across time of day and across weeks",
       "Hourly measurements on a single representative day to document how pollutant concentrations vary across time of day"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A five-year study found summer ozone peaks in Los Angeles between 2 PM and 4 PM despite morning rush producing most nitrogen oxides. The author links the afternoon peak to sunlight-driven photochemical reactions among nitrogen oxides and volatile organic compounds and notes winter ozone is about 60% lower even with similar traffic. Which choice best states the author's main claim?",
@@ -67,7 +67,7 @@
       "Cloud cover reduces atmospheric pressure, which causes nitrogen oxides to condense and precipitate out of the air, thereby reducing ozone formation on cloudy days",
       "Clear skies increase wind speeds that disperse nitrogen oxides away from the city, while cloudy conditions trap pollutants near the surface, explaining the inverse relationship between cloud cover and ozone"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An air quality agency measured nitrogen oxide (NOx) concentrations and photochemical smog severity at 6 AM, 12 PM, and 6 PM across three days with different weather conditions. Clear sunny day: 6 AM NOx = 120 ppb and smog = 25 ppb, 12 PM NOx = 95 ppb and smog = 78 ppb, 6 PM NOx = 110 ppb and smog = 42 ppb. Cloudy day: 6 AM NOx = 125 ppb and smog = 28 ppb, 12 PM NOx = 100 ppb and smog = 35 ppb, 6 PM NOx = 115 ppb and smog = 30 ppb. Which statement best explains how weather conditions affect the relationship between NOx and smog formation?",
@@ -87,7 +87,7 @@
       "Ozone concentration increases proportionally with traffic volume across all cities.",
       "Ozone decreases as traffic increases because higher traffic disperses pollutants."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An urban environmental health advocate writes: 'Photochemical smog in Los Angeles peaks on hot, sunny afternoons when vehicle emissions from morning rush hour react with sunlight. Reducing this health threat requires strict emission standards on vehicles, even if implementation costs burden manufacturers. The respiratory damage to children and elderly residents justifies these economic investments.' Which stakeholder perspective does this statement most clearly represent?",
@@ -97,6 +97,6 @@
       "Automotive industry representatives who prioritize immediate health protection over economic costs of emission controls",
       "Urban planners and environmental advocates who prioritize immediate health protection through voluntary manufacturer compliance rather than strict emission standards"
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

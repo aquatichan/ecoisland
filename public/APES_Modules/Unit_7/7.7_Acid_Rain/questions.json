@@ -37,7 +37,7 @@
       "The upwind site has the most acidic precipitation of all locations.",
       "Precipitation becomes less acidic downwind due to ammonia neutralization."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Vehicles emit NOx while coal-fired power plants emit NOx and SO2. Regions with both sources have more severe acid deposition than regions with only vehicles. Why do dual emission sources produce more severe acid deposition?",
@@ -77,7 +77,7 @@
       "Acid deposition threatens granite regions but not limestone, so prioritize limestone conservation.",
       "Limestone lakes will have more aquatic plants and higher biodiversity than granite lakes."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The diagram shows formation of acid deposition from NOx and SO2 via wet and dry pathways. Based on the diagram, which choice best describes the difference between acid precipitation and acid deposition?",
@@ -97,6 +97,6 @@
       "Acid deposition damages plant leaves by causing direct chemical injury that reduces photosynthetic capacity, stunting growth.",
       "Acid deposition damages plant leaves by causing direct chemical injury that temporarily reduces photosynthetic capacity and increases disease susceptibility, but plants recover without long-term growth effects."
     ],
-    "correct": "!"
+    "correct": "A"
   }
 ]

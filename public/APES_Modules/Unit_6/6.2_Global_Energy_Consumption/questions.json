@@ -37,7 +37,7 @@
       "Biomass produces less pollution than commercial energy sources, so rural communities deliberately choose it to protect their local environment.",
       "Rural areas lack the technological infrastructure to use commercial energy sources, so biomass is the only viable option regardless of cost or preference."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Coal consumption in China increased dramatically during the nation's rapid industrialization from 1990 to 2010. Which of the following best explains why coal became the primary fuel source for meeting China's rising energy demand?",
@@ -50,14 +50,14 @@
     "correct": "C"
   },
   {
-    "question": "The US and China consume about 40% of global energy while Africa consumes under 6% despite over one billion people. What best explains this disparity?",
+    "question": "The United States and China together consume about 40% of global energy, while Africa consumes under 6% despite having over one billion people. Which explanation best accounts for this disparity?",
     "answers": [
-      "Higher per capita energy use in industrialized and industrializing economies.",
-      "Larger land area raises energy use because of extended transport networks.",
-      "Africa lacks significant fossil fuel reserves, causing low energy use.",
-      "African countries intentionally limit energy use to protect the environment."
+      "Industrialized and rapidly industrializing economies have much higher per-capita energy use, driven by manufacturing, transportation, and higher standards of living, compared to many African economies.",
+      "Larger national land area, by itself, raises total energy use because of the need for extended transportation networks.",
+      "Africa's low energy use is explained primarily by a lack of significant fossil fuel reserves on the continent.",
+      "African countries have deliberately and collectively limited their energy use as a matter of environmental policy."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A sub-Saharan nation of 50 million has 40% urban electricity access and 8% rural access. It has minimal coal, no oil production, limited hydro potential from seasonal rainfall, and consistently high solar radiation. Government capacity for infrastructure maintenance is limited. Which energy solution would most effectively expand electricity access to underserved rural populations?",
@@ -80,14 +80,14 @@
     "correct": "D"
   },
   {
-    "question": "Two Chinese industrial regions have similar output and population but different energy mixes and consumption growth. Region A is 87% coal with 6.2% annual energy consumption growth. Region B is 42% coal, 35% hydropower, and 23% natural gas with 3.1% growth. Which hypothesis is testable about whether energy-source diversity affects consumption growth?",
+    "question": "Two Chinese industrial regions have similar economic output and population but different energy mixes: Region A is 87% coal with 6.2% annual energy consumption growth, while Region B is 42% coal, 35% hydropower, and 23% natural gas with 3.1% annual growth. Which hypothesis about energy-source diversity and consumption growth is directly testable using these data?",
     "answers": [
-      "Regions with more diverse energy mixes show lower annual energy consumption growth",
-      "Coal-dependent regions cause greater environmental harm and thus should adopt renewables",
-      "Region A uses more coal because it is locally cheaper and available",
-      "Regions with higher energy consumption growth have greater economic development levels"
+      "Regions with more diverse energy mixes show lower annual energy consumption growth than regions dependent on a single energy source.",
+      "Coal-dependent regions cause greater environmental harm and should therefore adopt renewable energy sources.",
+      "Region A uses more coal simply because coal is locally cheaper and more available in that region.",
+      "Regions with higher energy consumption growth necessarily have greater overall levels of economic development."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "India is expanding large hydroelectric dams to meet rising industrial electricity demand. Which choice describes a significant disadvantage of large-scale hydropower in this context?",

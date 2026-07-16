@@ -1,23 +1,50 @@
 [
   {
-    "question": "Arctic foxes in northern Canada have thick white fur that provides insulation and camouflage in snowy environments. As climate change causes earlier spring snowmelt and reduced snow cover duration, some fox populations are experiencing higher predation rates during spring months. Which of the following best explains how this environmental change threatens the survival of individual foxes in these populations?",
+    "question": "Arctic foxes in northern Canada have thick white fur that provides insulation and camouflage in snowy environments. As climate change causes earlier spring snowmelt and reduced snow cover duration, some fox populations are experiencing higher predation rates during spring months. Which of the following best explains this pattern?",
     "answers": [
-      "Earlier snowmelt exposes dark ground before foxes molt their white winter fur, making them visible to predators despite possessing an adaptation that was previously effective",
-      "Earlier snowmelt causes foxes to lose their white fur prematurely, forcing them to develop darker fur that reduces their insulation in remaining snow",
-      "Reduced snow cover allows predators to hunt more effectively year-round, but foxes can adapt by developing darker fur within a single generation to match the exposed ground",
-      "Earlier snowmelt increases the availability of plant food sources, which reduces predator populations and therefore decreases predation pressure on foxes"
+      "Earlier snowmelt exposes dark, snow-free ground before foxes have molted their white winter coats, making the foxes visually conspicuous to predators despite possessing camouflage that is normally adaptive",
+      "Earlier snowmelt causes foxes to lose their white fur prematurely and permanently, forcing an evolutionary shift to darker fur that reduces insulation during remaining snowy periods",
+      "Reduced snow cover allows predators to hunt more effectively year-round, and foxes can adapt by developing darker fur within a single generation to compensate",
+      "Earlier snowmelt increases the availability of plant food sources for foxes, which reduces local predator populations and therefore lowers predation pressure"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A nocturnal predator suddenly appears. Some insects carry a heritable allele for daytime activity while others remain nocturnal. How will the population most likely respond to this predation pressure?",
+    "question": "A nocturnal predator suddenly appears in an insect population's habitat. Some insects carry a heritable allele for daytime (diurnal) activity while others remain nocturnal by default. How will the population most likely respond to this new predation pressure over multiple generations?",
     "answers": [
-      "Day-active allele will increase as diurnal insects survive nocturnal predation",
-      "Population cannot become fully diurnal in one generation because genetic change takes generations",
-      "Individuals may shift activity by learning but learned behavior is not inherited",
-      "Predator will not starve because some nocturnal prey remain and predators can adapt"
+      "The frequency of the day-active allele will likely increase over generations, because diurnal individuals are more likely to survive and reproduce by avoiding nocturnal predation",
+      "The population can become fully diurnal within a single generation, since genetic change occurs immediately in response to new predation pressure",
+      "Individuals may shift their activity timing through learned behavior, and such learned behavioral shifts are passed on genetically to their offspring",
+      "The nocturnal predator will inevitably starve within a few generations, since natural selection guarantees prey populations always outpace predator adaptation"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Insect Population Response to a New Nocturnal Predator",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Generation",
+        "Predation Pressure",
+        "Expected Diurnal Allele Frequency"
+      ],
+      "rows": [
+        [
+          "Gen 1 (predator arrives)",
+          "High on nocturnal individuals",
+          "Baseline"
+        ],
+        [
+          "Gen 5",
+          "High on nocturnal individuals",
+          "Increasing"
+        ],
+        [
+          "Gen 20",
+          "High on nocturnal individuals",
+          "Higher still"
+        ]
+      ]
+    }
   },
   {
     "question": "Prey species such as ground squirrels that exhibit vigilance behaviors—frequently scanning for predators—have higher survival rates than less vigilant individuals in the same population. Over multiple generations, vigilance behaviors become more common in the population. Which of the following best explains this pattern?",
@@ -70,24 +97,49 @@
     "correct": "B"
   },
   {
-    "question": "A disease ecologist reports plague outcomes in two prairie dog colonies with different genetic diversity. Colony A had 200 individuals and genetic diversity index 0.45; Colony B had 180 individuals and index 0.72. After plague spread, Colony A suffered 95% mortality with 10 survivors, all carrying a rare resistance allele originally at 2% frequency. Colony B suffered 60% mortality with survivors showing multiple resistance mechanisms. The author concludes that without sufficient genetic variation for disease resistance, populations cannot persist through sudden outbreaks regardless of initial size. Which claim best matches the author's argument?",
+    "question": "A disease ecologist reports plague outcomes in two prairie dog colonies with different genetic diversity: Colony A had 200 individuals and a genetic diversity index of 0.45; Colony B had 180 individuals and an index of 0.72. After plague spread through both colonies, Colony A suffered 95% mortality (10 survivors, all carrying a rare resistance allele), while Colony B suffered only 40% mortality. Which conclusion is best supported by this comparison?",
     "answers": [
-      "Populations lacking genetic variation for resistance can collapse after plague outbreaks.",
-      "Small population size alone does not explain collapse without low genetic diversity.",
-      "Individual survival does not imply population persistence under sudden outbreaks.",
-      "Lack of genetic variation can cause rapid collapse rather than only reduced reproduction."
+      "Populations with lower genetic diversity, like Colony A, may lack sufficient variation for disease resistance and can suffer catastrophic mortality when a novel pathogen appears, compared to more genetically diverse populations",
+      "Small population size alone, independent of genetic diversity, fully explains the difference in mortality observed between Colony A and Colony B",
+      "The survival of 10 individuals in Colony A demonstrates that the colony's overall population is not at meaningful risk of further decline",
+      "Genetic diversity has no measurable relationship to disease outcomes; the difference between colonies is best explained by chance alone"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Prairie Dog Colony Outcomes After Plague Exposure",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Colony",
+        "Initial Population",
+        "Genetic Diversity Index",
+        "Mortality (%)"
+      ],
+      "rows": [
+        [
+          "Colony A",
+          200,
+          0.45,
+          95
+        ],
+        [
+          "Colony B",
+          180,
+          0.72,
+          40
+        ]
+      ]
+    }
   },
   {
-    "question": "A researcher studying behavioral adaptation to predation in beetles placed beetles from a high-predation forest population and a low-predation forest population into identical experimental chambers. The researcher then introduced a predatory spider into each chamber and recorded whether beetles fled, froze, or attacked the spider within 30 seconds. What is the independent variable in this experiment?",
+    "question": "A researcher studying behavioral adaptation to predation in beetles placed beetles from a high-predation forest population and a low-predation forest population into identical experimental chambers, introduced a predatory spider into each chamber, and recorded whether beetles fled, froze, or were captured. In this experiment, what is the independent variable?",
     "answers": [
-      "The population origin of the beetles (high-predation versus low-predation)",
-      "The body size of the beetles from the two forest populations",
-      "The population origin of the beetles (high-predation versus low-predation) as it affects survival rate",
-      "The species of predatory spider introduced into each chamber"
+      "The population origin of the beetles (high-predation versus low-predation forest)",
+      "The body size of the beetles sampled from the two different forest populations",
+      "Whether individual beetles survived the encounter with the predatory spider",
+      "The species of predatory spider that was introduced into each experimental chamber"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Estuarine fish face fluctuating salinity and evolve genetic variants for flexible osmoregulation. Which best explains how this trait is an adaptation to the estuary environment?",

@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "A seafood industry representative writes That aquaculture in Southeast Asia lifted over 2 million people from poverty by creating jobs and generating $15 billion in annual exports While waste management concerns exist the economic necessity of aquaculture far outweighs restrictive regulations that would eliminate livelihoods Which value does the author prioritize",
+    "question": "A seafood industry representative writes: 'Aquaculture in Southeast Asia has lifted over 2 million people out of poverty by creating jobs and generating $15 billion in annual exports. While waste management concerns exist, the economic necessity of aquaculture far outweighs restrictive regulations that would eliminate livelihoods.' Which value does the author prioritize?",
     "answers": [
-      "Economic development and poverty reduction over strict environmental protections",
-      "Investment in technological innovation to address aquaculture's environmental problems",
-      "Environmental sustainability and strict waste management over economic gains",
-      "Equal weighting of economic growth and environmental protection measures"
+      "Economic development and poverty reduction over strict environmental protections.",
+      "Investment in technological innovation to address aquaculture's environmental problems.",
+      "Environmental sustainability and strict waste management over economic gains.",
+      "Equal weighting of economic growth and environmental protection measures."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "An indigenous rights advocate argues that aquaculture expansion in Southeast Asia displaces coastal communities, erodes traditional ecological knowledge, and cannot be justified by aggregate protein production statistics. Which assumption underlies this argument?",
@@ -30,14 +30,14 @@
     "correct": "B"
   },
   {
-    "question": "A model shows aquaculture wastewater discharge pathways: excess feed and fish metabolic waste → nutrient-rich wastewater → discharge into coastal waters → algal bloom → decomposition → hypoxia. Which statement best explains the relationship between aquaculture waste composition and ecosystem hypoxia shown in the model?",
+    "question": "A model traces aquaculture wastewater pathways: excess feed and fish metabolic waste enter nutrient-rich wastewater, which is discharged into coastal waters, triggering an algal bloom whose decomposition leads to hypoxia. Which statement best explains the relationship between aquaculture waste composition and ecosystem hypoxia shown in the model?",
     "answers": [
       "Aquaculture wastewater contains excess nutrients (nitrogen and phosphorus) that trigger algal blooms; decomposition of dead algae consumes dissolved oxygen, creating hypoxic conditions.",
       "Aquaculture wastewater contains excess organic matter that directly consumes dissolved oxygen through chemical oxidation, creating hypoxic conditions without requiring algal growth.",
       "Aquaculture wastewater creates hypoxia only in freshwater systems where nutrient cycling is slower; marine discharge does not create hypoxia because ocean circulation disperses nutrients uniformly.",
       "Aquaculture wastewater contains excess nutrients that trigger algal blooms, but algal photosynthesis produces sufficient oxygen to prevent hypoxia despite decomposition."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A tilapia aquaculture facility in Southeast Asia produces 500 tons of fish annually using 50 hectares of pond area, while commercial fishing in the same region requires approximately 5,000 hectares of ocean to yield equivalent biomass. Which of the following best explains why aquaculture achieves higher productivity per unit area?",

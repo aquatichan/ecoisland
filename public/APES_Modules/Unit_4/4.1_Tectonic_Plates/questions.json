@@ -50,14 +50,14 @@
     "correct": "B"
   },
   {
-    "question": "The diagram shows the Nazca oceanic plate descending beneath South America's continental plate. Which sequence of geologic outcomes does this convergent boundary indicate?",
+    "question": "Along the Mid-Atlantic Ridge, two oceanic plates are moving apart at approximately 2.5 centimeters per year. Which sequence of geologic events characterizes this divergent boundary?",
     "answers": [
-      "Nazca plate subducts, melts, forms a continental volcanic arc and generates earthquakes.",
-      "Plates separate, forming a rift valley and new oceanic crust by seafloor spreading.",
-      "Plates slide past one another on a transform fault, causing earthquakes but no volcanism.",
-      "Continental plate subducts beneath oceanic plate, producing a trench and island arc."
+      "Magma rises to fill the gap, cools to form new basaltic crust, and shallow earthquakes occur as plates separate.",
+      "One plate bends downward beneath the other, forming a deep trench and generating explosive volcanism.",
+      "Plates grind past each other horizontally, producing frequent earthquakes but no new crust or volcanism.",
+      "Continental crust thickens and folds upward into a mountain range as the two plates collide."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "The East African Rift Valley is widening at a rate of approximately 6 millimeters per year, and geologists observe that the valley floor is dropping relative to the surrounding highlands. Which of the following best describes the tectonic process causing this subsidence and widening?",

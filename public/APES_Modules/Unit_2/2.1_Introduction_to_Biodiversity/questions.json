@@ -10,14 +10,14 @@
     "correct": "C"
   },
   {
-    "question": "A population geneticist writes: 'The Arabian oryx population was reduced to 9 individuals in the 1970s before a captive breeding program increased numbers to over 1,000. However, genetic analysis reveals the entire population descended from those 9 founders, creating a severe population bottleneck. While the species avoided extinction, its reduced genetic diversity leaves it vulnerable to disease outbreaks and environmental changes that the original wild population could have withstood.' What does this argument assume about the relationship between population size and ecosystem resilience?",
+    "question": "A population geneticist writes: 'The Arabian oryx population was reduced to 9 individuals in the 1970s before a captive breeding program increased numbers to over 1,000. However, genetic analysis reveals the entire population descended from those 9 founders, creating a severe genetic bottleneck.' Which conclusion about biodiversity and ecosystem resilience is best supported by this passage?",
     "answers": [
-      "Numerical population recovery does not guarantee ecosystem resilience without genetic diversity restoration",
-      "Small population size inherently reduces resilience regardless of whether the population experienced a bottleneck event",
-      "Numerical population recovery does not guarantee immediate resilience, but genetic diversity will naturally restore over multiple generations through mutation",
-      "Numerical population recovery from 9 to over 1,000 individuals demonstrates sufficient resilience despite the genetic bottleneck"
+      "Numerical population recovery does not guarantee genetic diversity, and low genetic diversity from a bottleneck can leave a population more vulnerable to disease and environmental change even after its numbers rebound",
+      "Small population size alone reduces resilience, regardless of whether the population later recovers numerically or experienced a genetic bottleneck",
+      "Genetic diversity will naturally and fully restore within a few generations through mutation alone, making the bottleneck a temporary, low-consequence event",
+      "Recovering from 9 to over 1,000 individuals demonstrates that the oryx population has fully regained the ecosystem resilience it had before the decline"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A wetland restoration drained an invasive-dominated marsh and replanted native wetland species. Two years later native plant species richness increased, but water retention declined and adjacent fields flooded during heavy rains. Which best explains this unintended consequence?",
@@ -40,14 +40,39 @@
     "correct": "C"
   },
   {
-    "question": "Two coral reef ecosystems are compared following a severe hurricane. Reef A, which had experienced gradual temperature increases and pollution stress over the previous five years, lost 85% of its coral cover and showed no recovery after two years. Reef B, which was relatively undisturbed before the hurricane, lost 80% of its coral cover but recovered to 60% coverage within two years. Which of the following best explains the difference in recovery between the two reefs?",
+    "question": "Two coral reef ecosystems are compared following a severe hurricane. Reef A, which had experienced gradual temperature increases and pollution stress over the previous five years, lost 85% of its coral cover and showed no recovery after two years. Reef B, which was relatively undisturbed before the hurricane and had higher coral species diversity, lost a similar percentage of coral cover initially but recovered to 60% of its original cover within two years. Which explanation best accounts for the difference in recovery?",
     "answers": [
-      "Reef B's higher species diversity and genetic variation provided greater ecosystem resilience, enabling faster recovery despite similar initial damage.",
-      "Reef B's location in warmer water provided better conditions for coral growth, enabling faster recovery independent of biodiversity differences.",
-      "Reef A's prior pollution stress selected for pollution-tolerant coral species that are less capable of rapid growth, while Reef B retained fast-growing species.",
-      "Reef B experienced less severe hurricane damage than Reef A, resulting in faster recovery despite both reefs having similar biodiversity levels."
+      "Reef B's greater species diversity and lack of chronic prior stress gave it higher ecological resilience, allowing faster recovery despite experiencing comparable initial hurricane damage to Reef A",
+      "Reef B is located in warmer water, which alone explains its faster coral growth independent of any difference in biodiversity or prior stress",
+      "Reef A's prior pollution stress had no effect on its recovery capacity; the difference in outcomes is due entirely to random chance",
+      "Reef B actually experienced substantially less hurricane damage than Reef A, which fully explains its faster recovery"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Coral Reef Recovery After a Hurricane",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Reef",
+        "Prior Stress",
+        "Initial Coral Loss (%)",
+        "Coral Cover After 2 Years (% of original)"
+      ],
+      "rows": [
+        [
+          "Reef A",
+          "Chronic warming + pollution",
+          85,
+          15
+        ],
+        [
+          "Reef B",
+          "Relatively undisturbed",
+          82,
+          60
+        ]
+      ]
+    }
   },
   {
     "question": "A diagram shows genetic diversity within three populations of a threatened amphibian species. Population A (100 individuals) has 8 alleles per locus; Population B (50 individuals) has 6 alleles per locus; Population C (25 individuals) has 3 alleles per locus. All three populations face the same environmental stressors: habitat degradation, water pollution, and emerging fungal disease. Which statement best explains the relationship between genetic diversity and population vulnerability to these combined stressors?",

@@ -1,9 +1,21 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock, TreePine, ChevronDown, ChevronUp, BookOpen, Layers, FlipHorizontal, TestTube, BarChart2, Loader2, CheckCircle, XCircle } from "lucide-react";
+import { Clock, TreePine, ChevronDown, ChevronUp, BookOpen, Layers, FlipHorizontal, TestTube, BarChart2, Loader2, CheckCircle, XCircle, Zap, Trophy, AlertCircle, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { learningModules } from "../data/units";
+import { format } from "date-fns";
+import confetti from "canvas-confetti";
+import { collection, addDoc, getDocs, query, where, serverTimestamp } from "firebase/firestore";
+import { db, auth } from "@/firebase";
+import { User } from "@/entities/User";
+import { REWARDS, buildRewardUpdate } from "../utils/progression";
+import StimulusChart from "@/components/StimulusChart";
+import FRQPractice from "@/components/FRQPractice";
+import APESResources from "@/components/APESResources";
+
+const DAILY_REWARD_CAP = 5;
+const MIN_REWARDED_QUESTIONS = 5;
 
 export default function ApesPage() {
   const [openModules, setOpenModules]   = useState({});
@@ -17,44 +29,124 @@ export default function ApesPage() {
   const [flashIndex, setFlashIndex]     = useState(0);
   const [flipped, setFlipped]           = useState(false);
   const [loading, setLoading]           = useState(false);
+  const [loadError, setLoadError]       = useState("");
+  const [quizUnit, setQuizUnit]         = useState("");
+  const [reward, setReward]             = useState(null); // { pending?, tc, xp, leveledUp, capped, eligible, syncFailed }
+  const [sessions, setSessions]         = useState([]);
+  const [frqs, setFrqs]                 = useState([]);
+  const [resources, setResources]       = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     let interval;
     if (view === "quiz") interval = setInterval(() => setTimer(t => t + 1), 1000);
-    else setTimer(0);
+    else if (view === "dashboard") setTimer(0);
     return () => clearInterval(interval);
   }, [view]);
 
+  // Load the user's past quiz sessions once (best-score badges + summary).
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const uid = auth.currentUser?.uid;
+        if (!uid) return;
+        const snap = await getDocs(collection(db, "users", uid, "apes_sessions"));
+        if (!cancelled) setSessions(snap.docs.map(d => d.data()));
+      } catch (e) {
+        console.error(e);
+        // Non-fatal — dashboard just won't show badges.
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   const toggleModule = i => setOpenModules(prev => ({ ...prev, [i]: !prev[i] }));
 
+  // Fisher-Yates — return a fresh shuffled copy.
+  const shuffle = arr => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const startQuiz = (data, unitLabel) => {
+    setQuestions(shuffle(data));
+    setQuizUnit(unitLabel);
+    setCurrent(0); setScore(0); setSelected(null); setReward(null);
+    setView("quiz");
+  };
+
   const loadQuestions = async unitNumber => {
-    setLoading(true);
+    setLoading(true); setLoadError("");
     try {
       const res = await fetch(`/APES/APES_Unit${unitNumber}.json`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setQuestions(data); setCurrent(0); setScore(0); setSelected(null); setView("quiz");
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
+      startQuiz(data, `Unit ${unitNumber}`);
+    } catch (e) {
+      console.error(e);
+      setLoadError(`Couldn't load Unit ${unitNumber} questions. Check your connection and try again.`);
+    } finally { setLoading(false); }
   };
 
   const loadAllQuestions = async () => {
-    setLoading(true);
+    setLoading(true); setLoadError("");
     try {
-      const all = await Promise.all(Array.from({ length: 9 }, (_, i) => fetch(`/APES/APES_Unit${i + 1}.json`).then(r => r.json())));
-      setQuestions(all.flat()); setCurrent(0); setScore(0); setSelected(null); setView("quiz");
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
+      const all = await Promise.all(Array.from({ length: 9 }, async (_, i) => {
+        const r = await fetch(`/APES/APES_Unit${i + 1}.json`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      }));
+      startQuiz(all.flat(), "All Units");
+    } catch (e) {
+      console.error(e);
+      setLoadError("Couldn't load the comprehensive quiz. Check your connection and try again.");
+    } finally { setLoading(false); }
   };
 
   const loadFlashcards = async () => {
-    setLoading(true);
+    setLoading(true); setLoadError("");
     try {
       const res = await fetch("/APES/APES_Vocab.json");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setFlashcards(data); setFlashIndex(0); setFlipped(false); setView("flashcards");
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
+    } catch (e) {
+      console.error(e);
+      setLoadError("Couldn't load flashcards. Check your connection and try again.");
+    } finally { setLoading(false); }
+  };
+
+  const loadFRQs = async () => {
+    setLoading(true); setLoadError("");
+    try {
+      const res = await fetch("/APES/APES_FRQs.json");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setFrqs(data);
+      setView("frq");
+    } catch (e) {
+      console.error(e);
+      setLoadError("Couldn't load FRQs. Check your connection and try again.");
+    } finally { setLoading(false); }
+  };
+
+  const loadResources = async () => {
+    setLoading(true); setLoadError("");
+    try {
+      const res = await fetch("/APES/APES_Resources.json");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setResources(data);
+      setView("resources");
+    } catch (e) {
+      console.error(e);
+      setLoadError("Couldn't load resources. Check your connection and try again.");
+    } finally { setLoading(false); }
   };
 
   const goToLesson = lesson => {
@@ -70,17 +162,84 @@ export default function ApesPage() {
 
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) { setCurrent(c => c + 1); setSelected(null); }
-    else setView("result");
+    else finishQuiz();
+  };
+
+  // Persist the session + award coins/XP, then show the result screen.
+  const finishQuiz = async () => {
+    const total = questions.length;
+    const finalScore = score;
+    const elapsed = timer;
+    const pct = total > 0 ? finalScore / total : 0;
+
+    setView("result");
+    setReward({ pending: true });
+    if (pct >= 0.8) {
+      confetti({ particleCount: 120, spread: 75, origin: { y: 0.6 } });
+    }
+
+    try {
+      const uid = auth.currentUser?.uid;
+      if (!uid) throw new Error("Not signed in");
+      const today = format(new Date(), "yyyy-MM-dd");
+
+      // Count today's rewardable sessions BEFORE saving this one (daily cap).
+      const todaySnap = await getDocs(
+        query(collection(db, "users", uid, "apes_sessions"), where("date", "==", today))
+      );
+      const rewardedToday = todaySnap.docs.filter(d => (d.data().total || 0) >= MIN_REWARDED_QUESTIONS).length;
+
+      const sessionDoc = {
+        unit: quizUnit || "Practice",
+        score: finalScore,
+        total,
+        seconds: elapsed,
+        date: today,
+        createdAt: serverTimestamp(),
+      };
+      // Always save the session (Impact/Dashboard read these), reward or not.
+      await addDoc(collection(db, "users", uid, "apes_sessions"), sessionDoc);
+      setSessions(prev => [...prev, { ...sessionDoc, createdAt: null }]);
+
+      const eligible = total >= MIN_REWARDED_QUESTIONS;
+      const underCap = rewardedToday < DAILY_REWARD_CAP;
+
+      if (eligible && underCap) {
+        const tc = REWARDS.QUIZ_BASE_TC + Math.round(pct * REWARDS.QUIZ_MAX_BONUS_TC);
+        const xp = finalScore * REWARDS.QUIZ_XP_PER_CORRECT;
+        const user = await User.me();
+        const { update, result } = buildRewardUpdate(user, { tc, xp });
+        await User.updateMyUserData(update);
+        setReward({ tc, xp, leveledUp: result.leveledUp, capped: false, eligible: true });
+      } else {
+        setReward({ tc: 0, xp: 0, leveledUp: false, capped: eligible && !underCap, eligible });
+      }
+    } catch (e) {
+      console.error(e);
+      setReward({ syncFailed: true });
+    }
   };
 
   const fmt = s => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
+
+  // ── Derived dashboard stats ──
+  const bestByUnit = {};
+  let totalQuizTc = 0;
+  sessions.forEach(s => {
+    if (!s.total) return;
+    const pct = Math.round((s.score / s.total) * 100);
+    if (bestByUnit[s.unit] == null || pct > bestByUnit[s.unit]) bestByUnit[s.unit] = pct;
+    if (s.total >= MIN_REWARDED_QUESTIONS) {
+      totalQuizTc += REWARDS.QUIZ_BASE_TC + Math.round((s.score / s.total) * REWARDS.QUIZ_MAX_BONUS_TC);
+    }
+  });
 
   /* ── QUIZ VIEW ── */
   if (view === "quiz") {
     const q = questions[currentQuestion];
     const pct = Math.round(((currentQuestion + 1) / questions.length) * 100);
     return (
-      <div className="page-root min-h-screen flex items-center justify-center px-4">
+      <div className="page-root min-h-screen flex items-center justify-center px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,6 +260,8 @@ export default function ApesPage() {
               transition={{ duration: 0.4 }}
             />
           </div>
+
+          {q.stimulus && <StimulusChart stimulus={q.stimulus} />}
 
           <h2 className="text-xl font-bold mb-7 leading-relaxed" style={{ color: "var(--text-primary)" }}>{q.question}</h2>
 
@@ -158,7 +319,8 @@ export default function ApesPage() {
 
   /* ── RESULT VIEW ── */
   if (view === "result") {
-    const pct = Math.round((score / questions.length) * 100);
+    const total = questions.length;
+    const pct = total > 0 ? Math.round((score / total) * 100) : 0;
     return (
       <div className="page-root min-h-screen flex items-center justify-center">
         <motion.div
@@ -173,9 +335,58 @@ export default function ApesPage() {
           <p className="font-bold text-lg mb-1" style={{ color: "var(--text-primary)" }}>
             {pct >= 80 ? "Excellent work! 🌟" : pct >= 60 ? "Good effort! Keep studying 📚" : "Keep practicing! You've got this 💪"}
           </p>
-          <p className="text-sm mb-8" style={{ color: "var(--text-muted)" }}>
-            {score} correct out of {questions.length} questions · {fmt(timer)}
+          <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
+            {score} correct out of {total} questions · {fmt(timer)}
           </p>
+
+          {/* Reward panel */}
+          {reward?.pending && (
+            <div className="flex items-center justify-center gap-2 mb-6 text-sm" style={{ color: "var(--text-muted)" }}>
+              <Loader2 className="w-4 h-4 animate-spin" /> Saving your results…
+            </div>
+          )}
+
+          {reward && !reward.pending && !reward.syncFailed && reward.eligible && !reward.capped && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+              className="rounded-2xl p-4 mb-6"
+              style={{ background: "rgba(0,200,150,0.08)", border: "1.5px solid rgba(0,200,150,0.25)" }}
+            >
+              <div className="flex items-center justify-center gap-5">
+                <span className="flex items-center gap-1.5 font-black" style={{ color: "#00c896" }}>
+                  <TreePine className="w-5 h-5" /> +{reward.tc} TC
+                </span>
+                <span className="flex items-center gap-1.5 font-black" style={{ color: "#06b6d4" }}>
+                  <Zap className="w-5 h-5" /> +{reward.xp} XP
+                </span>
+              </div>
+              {reward.leveledUp && (
+                <div className="flex items-center justify-center gap-1.5 mt-2 text-sm font-bold" style={{ color: "#f59e0b" }}>
+                  <Trophy className="w-4 h-4" /> Level up!
+                </div>
+              )}
+            </motion.div>
+          )}
+
+          {reward && !reward.pending && !reward.syncFailed && reward.capped && (
+            <div className="rounded-2xl p-4 mb-6 flex items-center justify-center gap-2 text-sm font-semibold"
+              style={{ background: "var(--bg-subtle)", border: "1.5px solid var(--border-card)", color: "var(--text-muted)" }}>
+              <AlertCircle className="w-4 h-4" /> Daily reward limit reached
+            </div>
+          )}
+
+          {reward && !reward.pending && !reward.syncFailed && !reward.eligible && !reward.capped && (
+            <div className="text-xs mb-6" style={{ color: "var(--text-faint)" }}>
+              Quizzes with at least {MIN_REWARDED_QUESTIONS} questions earn Treecoins.
+            </div>
+          )}
+
+          {reward?.syncFailed && (
+            <div className="text-xs mb-6 flex items-center justify-center gap-1.5" style={{ color: "var(--text-faint)" }}>
+              <AlertCircle className="w-3.5 h-3.5" /> Couldn't sync your results — rewards weren't saved.
+            </div>
+          )}
+
           <button onClick={() => setView("dashboard")} className="w-full py-3.5 rounded-xl font-bold text-white"
             style={{ background: "linear-gradient(135deg,#00c896,#06b6d4)" }}>
             Back to Dashboard
@@ -235,7 +446,18 @@ export default function ApesPage() {
     );
   }
 
+  /* ── FRQ PRACTICE VIEW ── */
+  if (view === "frq") {
+    return <FRQPractice frqs={frqs} onExit={() => setView("dashboard")} />;
+  }
+
+  /* ── RESOURCES VIEW ── */
+  if (view === "resources") {
+    return <APESResources resources={resources} onExit={() => setView("dashboard")} />;
+  }
+
   /* ── DASHBOARD VIEW ── */
+  const quizzesTaken = sessions.length;
   return (
     <div className="page-root">
       <div className="max-w-7xl mx-auto">
@@ -252,15 +474,37 @@ export default function ApesPage() {
           <p className="text-lg" style={{ color: "var(--text-muted)" }}>
             Earn Treecoins as you review for the AP Environmental Science Exam
           </p>
+
+          {/* Progress summary */}
+          {quizzesTaken > 0 && (
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{ background: "var(--bg-subtle)", border: "1px solid var(--border-card)", color: "var(--text-secondary)" }}>
+                <Sparkles className="w-3.5 h-3.5" style={{ color: "#06b6d4" }} /> {quizzesTaken} {quizzesTaken === 1 ? "quiz" : "quizzes"} taken
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{ background: "rgba(0,200,150,0.1)", border: "1px solid rgba(0,200,150,0.2)", color: "#00c896" }}>
+                <TreePine className="w-3.5 h-3.5" /> ~{totalQuizTc} TC earned
+              </span>
+            </div>
+          )}
         </div>
+
+        {/* Load error */}
+        {loadError && (
+          <div className="flex items-center gap-2 mb-6 px-4 py-3 rounded-xl text-sm font-medium"
+            style={{ background: "rgba(239,68,68,0.08)", border: "1.5px solid rgba(239,68,68,0.25)", color: "#dc2626" }}>
+            <AlertCircle className="w-4 h-4 flex-shrink-0" /> {loadError}
+          </div>
+        )}
 
         {/* Quick actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
-            { icon: Layers,         label: "Comprehensive Quiz",  sub: "v1 | Practice every unit",  action: loadAllQuestions, color: "#00c896" },
+            { icon: Layers,         label: "Comprehensive Quiz",  sub: "Practice every unit",  action: loadAllQuestions, color: "#00c896" },
             { icon: FlipHorizontal, label: "Flashcards",      sub: "Key terms & vocabulary",    action: loadFlashcards,   color: "#06b6d4" },
-            { icon: TestTube,       label: "Practice Tests",  sub: "Full-length exams (coming soon)",    action: () => window.open("https://highschooltestprep.com/ap/environmental-science/", "_blank"), color: "#8b5cf6" },
-            { icon: BarChart2,      label: "Key Diagrams",    sub: "Coming soon",          action: null,             color: "#f59e0b" },
+            { icon: TestTube,       label: "FRQ Practice",  sub: "AI-graded, original FRQs",    action: loadFRQs, color: "#8b5cf6" },
+            { icon: BarChart2,      label: "Resources",    sub: "Tips, exam structure, links",          action: loadResources,             color: "#f59e0b" },
           ].map(item => (
             <motion.button
               key={item.label}
@@ -286,7 +530,9 @@ export default function ApesPage() {
         {/* Unit modules */}
         <h2 className="text-xl font-black mb-4" style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}>Units</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {learningModules.map((module, index) => (
+          {learningModules.map((module, index) => {
+            const best = bestByUnit[`Unit ${index + 1}`];
+            return (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 16 }}
@@ -304,6 +550,12 @@ export default function ApesPage() {
                       {module.title}
                     </h3>
                   </div>
+                  {best != null && (
+                    <span className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-black flex-shrink-0"
+                      style={{ background: "rgba(0,200,150,0.1)", border: "1px solid rgba(0,200,150,0.2)", color: "#00c896" }}>
+                      <Trophy className="w-3 h-3" /> {best}%
+                    </span>
+                  )}
                 </div>
                 <p className="text-sm mb-4 leading-relaxed" style={{ color: "var(--text-muted)" }}>
                   {module.description}
@@ -361,7 +613,7 @@ export default function ApesPage() {
                 </button>
               </div>
             </motion.div>
-          ))}
+          );})}
         </div>
       </div>
     </div>

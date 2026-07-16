@@ -133,8 +133,8 @@ export default function RegionalData() {
 
   const getScoreColor = (score) => {
     if (score >= 80) return "#10b981";
-    if (score >= 60) return "#f59e0b";
-    if (score >= 40) return "#f97316";
+    if (score >= 60) return "#e9f50b";
+    if (score >= 40) return "#f59e0b";
     return "#ef4444";
   };
 
@@ -191,7 +191,7 @@ export default function RegionalData() {
                 onClick={handleSearch}
                 disabled={isLoading}
                 className="w-full py-2.5 rounded-xl font-bold text-white flex items-center justify-center gap-2 transition-all"
-                style={{ background: isLoading ? "#64748b" : "linear-gradient(135deg, #06b6d4, #0ea5e9)", boxShadow: isLoading ? "none" : "0 4px 15px rgba(6,182,212,0.3)" }}
+                style={{ background: isLoading ? "#64748b" : "linear-gradient(135deg, #00c896, #06b6d4)", boxShadow: isLoading ? "none" : "0 4px 15px rgba(6,182,212,0.3)" }}
               >
                 {isLoading ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyzing...</> : <><Search className="w-4 h-4" /> Search</>}
               </button>
@@ -235,6 +235,9 @@ export default function RegionalData() {
                     {regionData.ecoScore.overall}
                   </div>
                   <p className="text-slate-400 text-sm">EcoScore / 100</p>
+                  <span className="inline-flex items-center gap-1 mt-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide text-cyan-300" style={{ background: "rgba(6,182,212,0.12)", border: "1px solid rgba(6,182,212,0.3)" }}>
+                    <Zap className="w-2.5 h-2.5" /> AI Estimate
+                  </span>
                 </div>
                 {regionData.summary && <p className="text-slate-400 text-xs italic text-center border-t border-white/10 pt-3">{regionData.summary}</p>}
               </div>
@@ -258,7 +261,7 @@ export default function RegionalData() {
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-slate-400 mt-3">AI-synthesized from regional environmental agencies.</p>
+                <p className="text-xs text-slate-400 mt-3">Scores are AI-generated estimates informed by public data — verify with the sources above before citing them.</p>
               </div>
             </div>
           </div>

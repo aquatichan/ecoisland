@@ -60,14 +60,14 @@
     "correct": "D"
   },
   {
-    "question": "A terrestrial ecologist observes that in a grassland with limited plant biomass, three herbivore species coexist by feeding on different plant parts: Species A grazes grass leaves, Species B browses shrub leaves, and Species C forages on seeds. The ecologist argues this pattern demonstrates that resource partitioning is evidence of resource limitation constraining coexistence. Which of the following best explains the reasoning connecting this observation to the resource limitation claim?",
+    "question": "A terrestrial ecologist observes that in a grassland with limited plant biomass, three herbivore species coexist by feeding on different plant parts: Species A grazes grass leaves, Species B browses shrub leaves, and Species C forages on seeds. The ecologist argues this pattern demonstrates resource partitioning. Which statement best supports this interpretation?",
     "answers": [
-      "Different herbivore species feeding on different plant parts demonstrates that limited plant resources force species to partition niches, preventing competitive exclusion and allowing coexistence.",
-      "Different herbivore species feeding on different plant parts demonstrates that resource partitioning occurs in grasslands where plant resources are abundant and diverse enough to support multiple feeding strategies.",
-      "Different herbivore species feeding on different plant parts demonstrates that species have evolved distinct feeding preferences that are independent of resource availability constraints.",
-      "Different herbivore species feeding on different plant parts demonstrates that resource partitioning allows one species to monopolize the most nutritious plant parts while others are competitively excluded."
+      "Because plant resources are limited, dividing the available food into distinct niches reduces direct competition and allows all three herbivore species to persist in the same habitat",
+      "Because plant resources are abundant, each herbivore species can specialize on its preferred food type without any risk of resource limitation affecting the community",
+      "The feeding differences reflect random individual preferences that have no relationship to resource availability or interspecific competition",
+      "Resource partitioning allows Species A to monopolize the most nutritious food source while excluding Species B and C from the habitat entirely"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A researcher tracked deer and wolf populations for 12 years. Deer rose from 120 to 340 and wolves from 8 to 28. Two years after the deer peak, deer fell to 180 and wolves to 12. Which conclusion about predator-prey dynamics is best supported?",
@@ -90,13 +90,38 @@
     "correct": "B"
   },
   {
-    "question": "In a coral reef ecosystem, a symbiotic relationship exists between corals and zooxanthellae (photosynthetic algae living in coral tissues). When water temperatures increase by 3°C above normal, corals expel their zooxanthellae in a process called bleaching. Coral survival depends on rapidly reestablishing the symbiosis with zooxanthellae. Which of the following best explains why corals cannot survive long-term without zooxanthellae despite being able to feed on plankton?",
+    "question": "In a coral reef ecosystem, corals maintain a mutualistic symbiosis with zooxanthellae (photosynthetic algae living in their tissues). When water temperatures increase by 3 degrees C above normal, corals expel their zooxanthellae in a process called bleaching. Coral survival depends on rapidly reestablishing this partnership or feeding on plankton. Why does the loss of zooxanthellae threaten coral survival even though corals can also feed on plankton?",
     "answers": [
-      "Zooxanthellae provide the majority of coral energy through photosynthetic products, and plankton feeding alone cannot supply sufficient energy to meet coral metabolic demands.",
-      "Temperature increase directly damages coral tissues, making them unable to process any food source, including plankton.",
-      "Bleached corals lose the ability to capture plankton because zooxanthellae produce enzymes necessary for plankton digestion.",
-      "Zooxanthellae produce chemical compounds that corals require for skeleton formation, and without these compounds, corals cannot build or maintain their calcium carbonate structures."
+      "Zooxanthellae supply the majority of a coral's energy through photosynthetic products, so plankton feeding alone typically cannot meet the coral's full energy needs for sustained survival",
+      "Temperature increases directly damage coral digestive tissue, making corals completely unable to capture or process plankton as a food source",
+      "Bleached corals lose the physical ability to capture plankton because zooxanthellae produce enzymes required for plankton digestion",
+      "Zooxanthellae are the only source of calcium carbonate for coral skeletons, so bleached corals cannot maintain their physical structure regardless of feeding"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Coral Bleaching and Energy Source",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Condition",
+        "Water Temp Change",
+        "Zooxanthellae Present?",
+        "Coral Energy Source"
+      ],
+      "rows": [
+        [
+          "Normal",
+          "baseline",
+          "Yes",
+          "~90% from photosynthesis"
+        ],
+        [
+          "Bleached",
+          "+3 C",
+          "No",
+          "Plankton feeding only"
+        ]
+      ]
+    }
   }
 ]

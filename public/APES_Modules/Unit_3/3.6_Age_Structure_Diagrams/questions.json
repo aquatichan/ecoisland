@@ -1,13 +1,13 @@
 [
   {
-    "question": "A country implements a successful family planning program that reduces the average number of children per woman from 4.2 to 2.1 (replacement level) over 15 years. However, the country's age structure diagram still shows a relatively wide base compared to middle-aged cohorts. Which of the following best explains why the population will continue to grow for several more decades despite reaching replacement-level fertility?",
+    "question": "A country implements a successful family planning program that reduces the average number of children per woman from 4.2 to 2.1 (replacement level) over 15 years. However, the country's age structure diagram still shows a relatively wide base compared to middle-aged cohorts. Which of the following best explains why this population will likely continue growing for some time despite reaching replacement-level fertility?",
     "answers": [
-      "The wide base indicates a large cohort of young people who will enter and move through reproductive years, generating births from a large population base even though each woman has fewer children.",
-      "The wide base indicates that the population has not yet completed the demographic transition, so fertility will continue declining below replacement level, causing eventual population decline.",
-      "Replacement-level fertility (2.1 children per woman) is insufficient to prevent population growth because some children die before reaching reproductive age, so the population must have higher fertility to truly stabilize.",
-      "The family planning program reduced fertility too slowly, so women who had 4.2 children in the past are still alive and will continue having more children, offsetting the replacement-level fertility of younger women."
+      "The wide base reflects a large existing cohort of children and young people who will move into their reproductive years over the coming decades, and this large cohort will generate a large absolute number of births even at replacement-level fertility, a phenomenon known as population momentum",
+      "The wide base indicates the country has not yet completed the demographic transition, meaning fertility is expected to continue declining well below replacement level in the future",
+      "Replacement-level fertility of 2.1 children per woman is mathematically insufficient to prevent population growth, because some children die before reaching reproductive age",
+      "The family planning program reduced fertility too slowly, so women who previously had 4.2 children are still alive and will resume having more children"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A demographer examining age structure diagrams for India (2020) and South Korea (2020) observes that India's diagram has a much broader base while South Korea's is more columnar. To determine which country's population will grow more rapidly over the next 30 years based solely on age structure, which analytical approach is most appropriate?",
@@ -20,24 +20,24 @@
     "correct": "C"
   },
   {
-    "question": "An age-structure diagram for a sub-Saharan African country shows a very wide base, sharp narrowing after age 40, and more females than males in reproductive ages. Why does this predict rapid future growth despite high mortality?",
+    "question": "An age-structure diagram for a sub-Saharan African country shows a very wide base, sharp narrowing after age 40, and slightly more females than males in reproductive age classes. Why does this diagram predict rapid future population growth despite relatively high mortality in the country?",
     "answers": [
-      "A large proportion of young people will soon enter peak childbearing years.",
-      "A female majority in reproductive ages does not guarantee long term growth.",
-      "High mortality among older people does not offset births from large youth cohorts.",
-      "Narrow older cohorts reflect past high mortality and do not slow future growth."
+      "A very large proportion of the population is young and will soon enter or is already in peak childbearing years, so births from this large youth cohort will drive continued growth even with elevated mortality",
+      "The slightly higher number of females than males in reproductive ages, by itself, guarantees long-term population growth regardless of the youth cohort size",
+      "High mortality among older individuals is entirely irrelevant to future population growth, since deaths at older ages never affect total population size",
+      "The narrow older cohorts shown in the diagram indicate that future population growth will necessarily slow down rather than accelerate"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
-    "question": "A demographer compares age structure diagrams from Japan and Nigeria and argues: 'While both nations have experienced significant economic development, their age structures reveal fundamentally different demographic futures. Japan's constrictive pyramid with a narrow base indicates that fertility has dropped below replacement level, guaranteeing population decline unless immigration increases substantially. Nigeria's expansive pyramid with a broad base indicates that even if fertility rates decline, demographic momentum will sustain rapid growth for decades. Age structure shape is therefore a more reliable predictor of long-term population change than current growth statistics alone.'",
+    "question": "A demographer compares age structure diagrams from Japan and Nigeria and argues: 'While both nations have experienced significant economic development, their age structures reveal fundamentally different demographic futures. Japan's constrictive pyramid with a narrow base indicates declining future population, while Nigeria's expansive pyramid with a wide base indicates continued rapid growth.' What claim does this argument make about age structure diagrams as a demographic tool?",
     "answers": [
-      "Age structure shape is a more reliable indicator of future population change than current growth rate statistics alone.",
-      "Current growth rate statistics are a more reliable indicator of future population change than age structure shape.",
-      "Age structure shape is equally reliable as current growth rate statistics for predicting population change.",
-      "Demographers in general agree that age structure shape is a more reliable indicator of future population change than current growth rate statistics."
+      "Age structure shape is presented as a more reliable indicator of a country's future population trajectory than its current annual growth rate statistic alone",
+      "Current annual growth rate statistics are presented as more reliable than age structure shape for predicting a country's future population change",
+      "Age structure shape and current growth rate statistics are presented as equally reliable indicators of future population change",
+      "The argument claims all demographers universally agree on this point, citing consensus rather than the specific pyramid shapes as evidence"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A demographer studying New Zealand's population writes: 'The rectangular age structure diagram shows that couples have access to reproductive education and family planning services, enabling them to choose replacement-level fertility. This voluntary approach to population stabilization demonstrates that developed nations can achieve demographic balance without coercive policies.' What assumption underlies this argument?",
@@ -60,14 +60,36 @@
     "correct": "D"
   },
   {
-    "question": "A policy analyst examining population trends in Japan argues that the nation faces a demographic crisis requiring immediate policy intervention. The analyst presents evidence that Japan's age structure diagram shows only 12% of the population under age 15 and 28% over age 65, compared to 1970 when 24% were under 15 and 7% were over 65. Which of the following best identifies a limitation in how this evidence supports the 'demographic crisis' claim?",
+    "question": "A policy analyst examining population trends in Japan argues that the nation faces a demographic crisis requiring immediate policy intervention, citing that Japan's age structure diagram shows only 12% of the population under age 15 and 28% over age 65, compared to 1970 when the proportions were roughly reversed. Which of the following best identifies a gap in this argument as presented?",
     "answers": [
-      "The evidence demonstrates the shift in age structure but does not explain what specific social or economic consequences result from this demographic change.",
-      "The evidence demonstrates the shift in age structure but does not explain whether proposed policy interventions would effectively address the demographic change.",
-      "The evidence demonstrates the shift in age structure but does not explain what factors caused Japan's fertility rates and life expectancy to change over this period.",
-      "The evidence demonstrates changes in age structure proportions but does not provide population growth rates needed to determine the severity of demographic change."
+      "The evidence documents the shift in age structure proportions over time but does not, by itself, explain what specific social or economic consequences (such as labor shortages or pension strain) result from this demographic shift",
+      "The evidence is invalid because age structure diagrams cannot legitimately be compared across different years for the same country",
+      "The evidence fails to include any information at all about age structure, making the entire demographic comparison impossible to evaluate",
+      "The evidence proves policy intervention is unnecessary, since a shift toward an older population is demographically neutral for any economy"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Japan's Age Structure: 1970 vs. Present",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Age Group",
+        "1970 (%)",
+        "Present (%)"
+      ],
+      "rows": [
+        [
+          "Under 15",
+          24,
+          12
+        ],
+        [
+          "65 and over",
+          7,
+          28
+        ]
+      ]
+    }
   },
   {
     "question": "A country's age structure pyramid in 2000 had a broad base, but by 2020, the pyramid's base had narrowed significantly while the middle section remained wide. What does this change in pyramid shape indicate about the country's demographic future?",

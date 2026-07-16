@@ -40,14 +40,14 @@
     "correct": "D"
   },
   {
-    "question": "A diagram displays the Three Gorges Dam reservoir with labeled zones showing: (1) the original river channel now submerged, (2) newly inundated terrestrial areas, and (3) the dam structure itself. Which environmental consequence of hydroelectric dam construction is most directly illustrated by zones 1 and 2?",
+    "question": "A diagram of the Three Gorges Dam reservoir shows three labeled zones: (1) the original river channel now submerged, (2) newly inundated terrestrial areas, and (3) the dam structure itself. Which environmental consequence of hydroelectric dam construction is most directly illustrated by zones 1 and 2?",
     "answers": [
-      "Loss of or change in habitats as terrestrial and riverine ecosystems are converted to reservoir environments",
-      "Loss of or change in habitats as terrestrial and riverine ecosystems are fragmented by the reservoir boundaries",
-      "Loss of or change in migratory corridors as terrestrial and riverine ecosystems are converted to reservoir environments",
-      "Expansion of aquatic habitats as terrestrial and riverine ecosystems are converted to reservoir environments"
+      "Loss of or change in habitat, as terrestrial and riverine ecosystems that existed before dam construction are converted into a reservoir environment.",
+      "Fragmentation of habitat, as terrestrial and riverine ecosystems are divided into isolated patches by the reservoir's boundaries.",
+      "Loss of migratory corridors, as terrestrial and riverine ecosystems are converted into a reservoir environment that blocks movement.",
+      "Expansion of aquatic habitat, as terrestrial and riverine ecosystems are converted into a larger reservoir environment."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Four regions with different precipitation patterns were compared for hydroelectric power output stability. Region A (rainfall coefficient of variation: 12%) showed ±8% annual power fluctuation; Region B (variation: 28%) showed ±22% fluctuation; Region C (variation: 35%) showed ±31% fluctuation; Region D (variation: 8%) showed ±5% fluctuation. Which conclusion about hydropower reliability is best supported by these data?",
@@ -67,7 +67,7 @@
       "Hydroelectric dams eliminate the need for fossil fuel combustion and restore free-flowing river ecosystems through water management.",
       "Hydroelectric dams are expensive to construct and require extensive land areas, making them impractical for energy generation in most regions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A river currently supports a salmon population that migrates upstream to spawn. A proposed dam would block fish passage completely. To assess the population decline, ecologists need to determine what percentage of the original salmon population will be unable to access spawning habitat. The original population is 12,500 individuals, and models predict 8,750 will remain in accessible downstream areas. Which calculation method would determine the percentage of population affected?",

@@ -30,14 +30,14 @@
     "correct": "C"
   },
   {
-    "question": "Coastal aquifers in low-lying regions often contain freshwater layers floating above denser saltwater layers. As sea levels rise due to climate change and coastal populations increase water extraction from these aquifers, the saltwater-freshwater boundary moves upward into previously freshwater zones. Which of the following best explains why increased groundwater extraction accelerates this saltwater intrusion?",
+    "question": "Coastal aquifers in low-lying regions often contain freshwater layers floating above denser saltwater layers. As sea levels rise due to climate change and coastal populations increase water extraction from these aquifers, the saltwater-freshwater boundary moves upward into previously freshwater zones, a process called saltwater intrusion. Which explanation best accounts for this process?",
     "answers": [
-      "Extracting freshwater reduces the pressure and volume of the freshwater reservoir, allowing denser saltwater to rise and replace the removed freshwater.",
-      "Increased water extraction lowers the water table, exposing more saltwater to evaporation, which concentrates salt and increases saltwater density.",
-      "Extracting freshwater increases the osmotic gradient between freshwater and saltwater, causing saltwater to diffuse upward through soil pores.",
-      "Increased extraction removes freshwater that was previously blocking saltwater from entering the aquifer, allowing ocean tides to push saltwater inland."
+      "Extracting freshwater reduces the pressure and volume of the freshwater layer, allowing the denser underlying saltwater to rise and occupy the space previously held by the extracted freshwater",
+      "Increased water extraction lowers the water table, exposing more of the aquifer to evaporation, which concentrates dissolved salts and increases saltwater density",
+      "Extracting freshwater increases the osmotic gradient between freshwater and saltwater, causing saltwater ions to diffuse upward directly through solid rock",
+      "Increased extraction physically removes the freshwater layer that was blocking ocean tides, allowing tidal saltwater to flow inland over the surface"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "A coastal city diverts 85% of a river's flow for municipal water before the river reaches its delta. Historically the river delivered 8,000 km³/year, but current discharge is 1,200 km³/year. The delta has subsided 2 meters over 40 years, wetlands decreased 70%, and saltwater now intrudes 15 km inland into former freshwater aquifers. Which best describes the environmental problem created by this alteration to the hydrologic cycle?",
@@ -90,13 +90,36 @@
     "correct": "C"
   },
   {
-    "question": "An ice sheet covering 85,000 km² contains an average ice thickness of 2,100 meters. Scientists estimate that if this ice sheet melts completely, sea level would rise by 6.5 meters globally. Which calculation method would determine the volume of water that would be added to the oceans if this ice sheet melted?",
+    "question": "An ice sheet covering 85,000 km^2 has an average ice thickness of 2,100 meters. Which calculation method correctly determines the total volume of ice contained in this ice sheet?",
     "answers": [
-      "Multiply the ice sheet area by its average thickness to calculate total ice volume",
-      "Multiply the ice sheet area by the projected sea level rise (6.5 meters) to calculate total ice volume",
-      "Divide the ice sheet area by its average thickness to calculate total ice volume",
-      "Multiply the ice sheet area by its average thickness to calculate the rate of ice volume loss per year"
+      "Multiply the ice sheet's area by its average thickness to calculate the total ice volume",
+      "Multiply the ice sheet's area by the projected sea level rise in meters to calculate the total ice volume",
+      "Divide the ice sheet's area by its average thickness to calculate the total ice volume",
+      "Multiply the ice sheet's area by its average thickness, then divide by the number of years since the ice sheet formed"
     ],
-    "correct": "!"
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Ice Sheet Volume Calculation Inputs",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Variable",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Area",
+          "85,000 km^2"
+        ],
+        [
+          "Average thickness",
+          "2,100 m (2.1 km)"
+        ],
+        [
+          "Projected sea level rise if fully melted",
+          "6.5 m"
+        ]
+      ]
+    }
   }
 ]

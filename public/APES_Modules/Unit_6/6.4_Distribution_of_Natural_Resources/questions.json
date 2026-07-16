@@ -1,13 +1,13 @@
 [
   {
-    "question": "China's proven coal reserves total 138 billion metric tons, and the country currently produces 3.5 billion metric tons annually. Calculate the reserve-to-production ratio to determine approximately how many years of coal supply remain at current production rates.",
+    "question": "China's proven coal reserves total 138 billion metric tons, and the country currently produces 3.5 billion metric tons annually. Using the reserve-to-production ratio, approximately how many years of coal supply remain at the current production rate?",
     "answers": [
       "39 years",
       "483 years",
       "3.9 years",
       "0.025 years"
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Kazakhstan holds 1.4 million metric tons of proven uranium reserves. At the current global uranium extraction rate of 68,000 metric tons per year, approximately how many years would these reserves sustain worldwide uranium production?",
@@ -72,12 +72,12 @@
   {
     "question": "Solar energy potential varies dramatically across Earth's surface, with regions near the equator and in arid areas receiving significantly more usable solar radiation annually than high-latitude regions or areas with persistent cloud cover. Which of the following best explains this geographic distribution of solar energy resources?",
     "answers": [
-      "Equatorial and arid regions receive maximum solar radiation because the sun's rays strike at steeper angles, and minimal cloud cover and low atmospheric water vapor allow maximum radiation to reach the surface.",
+      "Equatorial and arid regions receive higher solar radiation because the sun's rays strike at steeper angles, and minimal cloud cover and low atmospheric water vapor allow more radiation to reach the surface than at high-latitude regions.",
       "Equatorial and arid regions receive maximum solar radiation because the sun's rays strike at steeper angles, concentrating energy over smaller surface areas.",
-      "Equatorial and arid regions receive maximum solar radiation because the sun's rays strike at steeper angles, and low atmospheric water vapor acts as a greenhouse layer that concentrates incoming radiation before it reaches the surface.",
-      "Equatorial and arid regions receive higher solar radiation because the sun's rays strike at steeper angles, and minimal cloud cover and low atmospheric water vapor allow more radiation to reach the surface than high-latitude regions."
+      "Equatorial and arid regions receive maximum solar radiation because low atmospheric water vapor acts as a greenhouse layer that concentrates incoming radiation before it reaches the surface.",
+      "Equatorial and arid regions receive maximum solar radiation primarily because they are measurably closer to the sun than high-latitude regions."
     ],
-    "correct": "!"
+    "correct": "A"
   },
   {
     "question": "Crude oil and natural gas occur beneath the North Sea, Persian Gulf, and off West Africa but are scarce in continental interiors. Which best explains this distribution?",
