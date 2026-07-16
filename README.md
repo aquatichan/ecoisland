@@ -1,6 +1,6 @@
 # 🌿 Ecoisland 🏝️
 
-<img width="1512" height="982" alt="Screenshot 2026-07-02 at 3 28 18 PM" src="https://github.com/user-attachments/assets/131c1edc-1423-468a-b31d-4f4ccb5cdf1c" />
+<img width="1512" height="982" alt="Screenshot 2026-07-16 at 5 57 35 PM" src="https://github.com/user-attachments/assets/2953a265-ad9b-4202-b775-861e1ecb36a2" />
 
 ## 📄 Description
 
