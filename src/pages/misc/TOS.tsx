@@ -5,7 +5,7 @@ import { ArrowLeft, FileText, Globe2, Mail } from "lucide-react";
 
 import DotField from "@/components/DotField";
 
-const updated = "July 16, 2026";
+const updated = "July 29, 2026";
 
 const summaryCards = [
   {
@@ -86,7 +86,7 @@ const sections = [
   {
     title: "8. Third-Party Services",
     body: [
-      "Ecoisland uses services such as Firebase/Google, Vercel, OpenRouter or model providers, and OpenStreetMap/Nominatim.",
+      "Ecoisland uses services such as Firebase/Google, Cloudflare, Gemini via Google AI Studio, and OpenStreetMap/Nominatim.",
       "Those providers may have their own terms and privacy practices. Ecoisland is not responsible for third-party services outside our control.",
       "Links to outside websites, volunteer opportunities, or resources are provided for convenience and do not mean Ecoisland endorses or controls them.",
     ],

@@ -10,7 +10,7 @@ const units: Record<number, string[]> = {
     "1.7_The_Hydrologic_Cycle",
     "1.8_Primary_Productivity",
     "1.9_Trophic_Levels",
-    "1.10_Energy_Flow_and_the_10%_Rule",
+    "1.10_Energy_Flow_and_the_10_Percent_Rule",
     "1.11_Food_Chains_and_Food_Webs"
   ],
 

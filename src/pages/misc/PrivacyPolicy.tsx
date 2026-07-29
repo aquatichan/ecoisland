@@ -5,7 +5,7 @@ import { ArrowLeft, Globe2, Mail, ShieldCheck } from "lucide-react";
 
 import DotField from "@/components/DotField";
 
-const updated = "July 16, 2026";
+const updated = "July 29, 2026";
 
 const summaryCards = [
   {
@@ -30,7 +30,7 @@ const sections = [
       "Profile information: username, bio, city, country, ZIP or postal code, preferences, avatar, privacy setting, Treecoins, XP, island items, and onboarding status.",
       "Ecoisland activity: carbon entries, action feed posts, comments, likes, images you add to posts, Danger Scan submissions, APES learning activity, and reward or progress data.",
       "AI and regional inputs: prompts, uploaded images, city or location searches, and related responses used for EcoAI, Danger Scan, Impact, and Regional Data features.",
-      "Technical information: basic logs, device/browser data, security signals, and hosting or database records collected through Firebase, Vercel, and similar service providers.",
+      "Technical information: basic logs, device/browser data, security signals, and hosting or database records collected through Firebase, Cloudflare, and similar service providers.",
     ],
   },
   {
@@ -55,7 +55,7 @@ const sections = [
     title: "4. Sharing And Service Providers",
     body: [
       "We do not sell personal information. We share information only as needed to operate Ecoisland, comply with law, protect users, or support features you choose to use.",
-      "Service providers may include Firebase/Google for authentication, database, and storage; Vercel for hosting; OpenRouter or model providers for AI features; and OpenStreetMap/Nominatim for location lookup.",
+      "Service providers may include Firebase/Google for authentication, database, and storage; Cloudflare for hosting; Gemini via Google AI Studio for AI features; and OpenStreetMap/Nominatim for location lookup.",
       "When you use AI features, prompts and uploaded images may be sent to model providers for processing. Avoid submitting highly sensitive information.",
     ],
   },

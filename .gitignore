@@ -7,3 +7,7 @@ scripts/
 .claude/
 .vscode/
 .DS_Store
+.vercel
+.env*
+.dev.vars
+.wrangler/

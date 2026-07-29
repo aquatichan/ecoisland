@@ -21,7 +21,7 @@
 | Authentication | Google + Firebase |
 | Database | Firebase Firestore |
 | AI Features | Gemini 2.5 Flash-Lite |
-| Deployment | Vercel @ https://ecoisland-kappa.vercel.app |
+| Deployment | Cloudflare Workers @ https://ecoisland.xyz |
 
 
 ## ⚠️ Browser Compatibility
