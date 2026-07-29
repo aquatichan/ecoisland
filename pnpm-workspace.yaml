@@ -1,0 +1,13 @@
+# Single-package repo, but this file must define a non-empty `packages` list:
+# without it some pnpm versions abort with "packages field missing or empty",
+# which is what broke the first Cloudflare Workers build.
+packages:
+  - .
+
+# These dependencies ship postinstall scripts. The app builds fine without
+# running them, so they are explicitly declined rather than left unanswered.
+# An unanswered entry makes newer pnpm fail the install.
+allowBuilds:
+  '@firebase/util': false
+  esbuild: false
+  protobufjs: false
