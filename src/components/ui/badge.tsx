@@ -1,36 +1,20 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import type { HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+const TONES = {
+  neutral: "bg-surface-2 text-fg-2",
+  brand: "bg-brand-soft text-brand-ink",
+  ocean: "bg-ocean-soft text-ocean",
+  sun: "bg-sun-soft text-sun-ink",
+  coral: "bg-coral-soft text-coral",
+  outline: "border border-line-strong text-fg-3",
+} as const;
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
-        outline: "text-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
-
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
+export function Badge({ tone = "neutral", className, ...props }: HTMLAttributes<HTMLSpanElement> & { tone?: keyof typeof TONES }) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  )
+    <span
+      className={cn("inline-flex h-[22px] items-center gap-1 rounded-full px-2 text-[12px] font-semibold whitespace-nowrap [&_svg]:size-3", TONES[tone], className)}
+      {...props}
+    />
+  );
 }
-
-export { Badge, badgeVariants }

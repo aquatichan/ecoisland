@@ -1,48 +1,51 @@
-import * as React from "react"
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+const HUES = [152, 200, 28, 340, 262, 96, 12, 182];
 
-const Avatar = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-      className
-    )}
-    {...props}
-  />
-))
-Avatar.displayName = AvatarPrimitive.Root.displayName
+function hueFor(name: string) {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+  return HUES[h % HUES.length];
+}
 
-const AvatarImage = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
-    ref={ref}
-    className={cn("aspect-square h-full w-full", className)}
-    {...props}
-  />
-))
-AvatarImage.displayName = AvatarPrimitive.Image.displayName
-
-const AvatarFallback = React.forwardRef<
-  React.ElementRef<typeof AvatarPrimitive.Fallback>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
-    ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
-      className
-    )}
-    {...props}
-  />
-))
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
-
-export { Avatar, AvatarImage, AvatarFallback }
+export function Avatar({ name, src, size = 32, className }: { name: string; src?: string | null; size?: number; className?: string }) {
+  const [broken, setBroken] = useState(false);
+  const initials = name
+    .replace(/[^A-Za-z0-9 ]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("") || "?";
+  const hue = hueFor(name);
+  if (src && !broken) {
+    return (
+      <img
+        src={src}
+        alt=""
+        width={size}
+        height={size}
+        referrerPolicy="no-referrer"
+        onError={() => setBroken(true)}
+        className={cn("shrink-0 rounded-full bg-surface-2 object-cover ring-1 ring-line", className)}
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  return (
+    <span
+      aria-hidden
+      className={cn("inline-grid shrink-0 place-items-center rounded-full font-semibold ring-1 ring-line", className)}
+      style={{
+        width: size,
+        height: size,
+        fontSize: Math.max(10, size * 0.38),
+        background: `hsl(${hue} 45% 88%)`,
+        color: `hsl(${hue} 45% 26%)`,
+      }}
+    >
+      {initials}
+    </span>
+  );
+}

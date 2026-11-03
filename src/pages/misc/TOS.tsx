@@ -1,220 +1,104 @@
-// @ts-nocheck
-import React from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, FileText, Globe2, Mail } from "lucide-react";
+import { LegalLayout, type Section } from "./LegalLayout";
 
-import DotField from "@/components/DotField";
-
-const updated = "July 29, 2026";
-
-const summaryCards = [
-  {
-    label: "Use Ecoisland responsibly",
-    text: "Ecoisland turns sustainability into a game, but real-world actions should always be lawful, safe, respectful, and appropriate for your location.",
-  },
-  {
-    label: "A global student community",
-    text: "These terms are written for users in many regions. Local consumer, privacy, school, and safety rules may provide additional protections.",
-  },
-  {
-    label: "Your content stays yours",
-    text: "You keep ownership of posts, comments, images, and submissions, while giving Ecoisland permission to host, display, moderate, and operate them.",
-  },
+const summary = [
+  { label: "Study honestly", text: "Treecoins, streaks and leaderboards only mean something if they reflect real work. Don't try to game them." },
+  { label: "Be kind in class", text: "Field notes and usernames are visible to your class. Keep them respectful and about what you learned." },
+  { label: "Your work is yours", text: "You own what you write. You let Ecoisland store and show it to your class so the app can work." },
 ];
 
-const sections = [
+const sections: Section[] = [
   {
     title: "1. Acceptance",
     body: [
-      "By using Ecoisland, you agree to these Terms of Service and our Privacy Policy.",
-      "If you do not agree, do not use Ecoisland.",
-      "If you use Ecoisland for a school, club, organization, or team, you are responsible for making sure your use is allowed by that group and by applicable local rules.",
+      "By using Ecoisland you agree to these Terms of Service and to our Privacy Policy. If you don't agree, don't use Ecoisland.",
+      "If you use Ecoisland through a school or class, make sure your use is allowed by your school and by local rules.",
     ],
   },
   {
-    title: "2. Eligibility And Accounts",
+    title: "2. Accounts",
     body: [
-      "You must provide accurate account and profile information and keep your login secure.",
-      "Ecoisland is not intended for children under 13. If you are under the age required to consent to online services where you live, use Ecoisland only with permission from a parent, guardian, or authorized school contact.",
-      "You are responsible for activity on your account, including posts, comments, uploads, carbon logs, AI prompts, and island customization.",
+      "Sign in with your own Google account, keep it secure, and pick a username that isn't offensive or someone else's name.",
+      "Ecoisland is not intended for children under 13. If you are under the age required to consent to online services where you live, use Ecoisland only with permission from a parent, guardian or your school.",
+      "You are responsible for activity on your account, including answers, field notes and island customization.",
     ],
   },
   {
-    title: "3. Community Rules",
+    title: "3. Teachers and classes",
     body: [
-      "Be respectful. Do not harass, threaten, bully, shame, impersonate, or target people based on identity, background, location, or beliefs.",
-      "Do not post illegal, hateful, sexually explicit, exploitative, graphic, misleading, spammy, or privacy-invasive content.",
-      "Do not upload personal information about other people without permission, including private addresses, school IDs, faces in sensitive contexts, or contact details.",
-      "Do not manipulate points, likes, Treecoins, leaderboards, rewards, AI features, or Firebase data.",
-      "When documenting environmental action, follow local law, avoid trespassing, avoid unsafe cleanup attempts, and contact qualified authorities for hazards.",
+      "Anyone can create a teacher account. If you create a class, use it only for teaching, share its join code only with your students, and use what you see about students only to support their learning.",
+      "Teachers can post assignments, see class progress, remove students from a class and remove field notes.",
+      "Students can leave a class at any time from the class page.",
     ],
   },
   {
-    title: "4. User Content",
+    title: "4. Community rules",
     body: [
-      "You own the content you create or upload to Ecoisland, including posts, comments, images, reports, and profile text.",
-      "You give Ecoisland a worldwide, non-exclusive, royalty-free license to host, store, reproduce, display, adapt for formatting, moderate, and distribute your content within the app and related Ecoisland services.",
-      "You confirm that you have the rights and permissions needed for anything you upload.",
-      "We may remove or restrict content if it violates these terms, creates safety or legal risk, or harms the Ecoisland community.",
+      "Be respectful. Do not harass, bully, threaten or impersonate anyone, or target people for who they are.",
+      "Do not post illegal, hateful, sexual, graphic, misleading or spammy content, or other people's personal information.",
+      "Do not try to manipulate Treecoins, XP, streaks, leaderboards, assignments, grading or the database, or to access data that isn't yours.",
+      "Field quests happen in the real world. Follow local laws, stay safe, don't trespass, and leave wildlife and hazards to the professionals.",
     ],
   },
   {
-    title: "5. Treecoins, Rewards, And Progress",
+    title: "5. Your content",
     body: [
-      "Treecoins, XP, island items, ranks, badges, and similar features are virtual app features, not money, property, cryptocurrency, or guaranteed rewards.",
-      "Ecoisland may adjust, remove, reset, or rebalance virtual items and progress to fix bugs, prevent abuse, or improve the app.",
-      "Any real-world rewards, volunteer perks, credentials, or partner benefits may have separate requirements, availability limits, and verification rules.",
+      "You own what you write in Ecoisland, such as free-response answers and field notes.",
+      "You give Ecoisland a worldwide, non-exclusive, royalty-free license to store, display and process that content to run the app, including showing field notes to your class and sending FRQ answers for grading.",
+      "We may remove content that breaks these terms or puts people at risk.",
     ],
   },
   {
-    title: "6. Educational And Environmental Information",
+    title: "6. Treecoins, XP and islands",
     body: [
-      "Ecoisland provides environmental outreach, carbon estimates, AP Environmental Science study support, regional insights, and civic suggestions for general educational purposes.",
-      "Ecoisland is not a substitute for professional, legal, environmental, emergency, academic, medical, or safety advice.",
-      "Carbon calculations, AI analysis, regional data, volunteer ideas, and study materials may be incomplete or inaccurate. Check important information before relying on it.",
-      "Ecoisland is not affiliated with or endorsed by the College Board unless expressly stated.",
+      "Treecoins, XP, streaks, islands, decorations and landmarks are virtual features of the app. They are not money or property and cannot be exchanged for anything outside Ecoisland.",
+      "We may adjust, rebalance or reset virtual items and progress to fix bugs, prevent abuse or improve the app. When we retired the original island shop, everything students had bought was refunded in Treecoins.",
     ],
   },
   {
-    title: "7. AI Features",
+    title: "7. Learning content and AI grading",
     body: [
-      "EcoAI, Danger Scan, Regional Data, Impact tips, and similar tools may send prompts, images, and context to third-party model providers for processing.",
-      "AI responses may be incorrect, outdated, biased, or unsuitable for your situation. Use judgment and verify important outputs.",
-      "Do not submit highly sensitive information, private information about other people, or content you are not allowed to share.",
+      "Ecoisland's lessons, questions and FRQs are study aids for AP Environmental Science. They may contain mistakes, and they are not official College Board materials. Ecoisland is not affiliated with or endorsed by the College Board.",
+      "FRQ scores are produced by AI against a rubric and can be wrong. Use the feedback to practice, and treat your teacher's grading as the one that counts.",
     ],
   },
   {
-    title: "8. Third-Party Services",
+    title: "8. Third-party services",
     body: [
-      "Ecoisland uses services such as Firebase/Google, Cloudflare, Gemini via Google AI Studio, and OpenStreetMap/Nominatim.",
-      "Those providers may have their own terms and privacy practices. Ecoisland is not responsible for third-party services outside our control.",
-      "Links to outside websites, volunteer opportunities, or resources are provided for convenience and do not mean Ecoisland endorses or controls them.",
+      "Ecoisland runs on Google Firebase, Cloudflare and Google Gemini, which have their own terms and privacy practices.",
+      "Links to outside websites are provided for convenience and don't mean we endorse or control them.",
     ],
   },
   {
-    title: "9. Suspension And Termination",
+    title: "9. Suspension and termination",
     body: [
-      "We may suspend, restrict, or terminate accounts or content that violate these terms, create risk, or interfere with Ecoisland.",
-      "You may stop using Ecoisland at any time and may contact us about account or data deletion.",
-      "Some records may remain as needed for security, legal compliance, dispute resolution, backups, or legitimate operational needs.",
+      "We may suspend or remove accounts or content that break these terms or put Ecoisland or its users at risk.",
+      "You can stop using Ecoisland at any time and delete your account in Settings.",
     ],
   },
   {
-    title: "10. Disclaimers And Liability",
+    title: "10. Disclaimers and liability",
     body: [
-      "Ecoisland is provided as is and as available. We do not promise that it will be uninterrupted, error-free, secure, or suitable for every purpose.",
-      "To the maximum extent allowed by law, Ecoisland and its creators are not liable for indirect, incidental, special, consequential, exemplary, or punitive damages.",
-      "Nothing in these terms limits rights that cannot be waived under laws that apply to you, including mandatory consumer or student protections in your region.",
+      "Ecoisland is provided as is and as available. We don't promise it will always be available, error-free or suitable for every purpose.",
+      "To the fullest extent the law allows, Ecoisland and its creators are not liable for indirect, incidental, special, consequential or punitive damages.",
+      "Nothing in these terms limits rights that the law says can't be waived, including consumer and student protections where you live.",
     ],
   },
   {
-    title: "11. Changes To These Terms",
-    body: [
-      "We may update these terms as Ecoisland changes, as providers change, or as laws and safety expectations evolve.",
-      "When we make material changes, we will update the date above and may provide notice in the app or through other reasonable means.",
-      "Continuing to use Ecoisland after changes means you accept the updated terms.",
-    ],
+    title: "11. Changes to these terms",
+    body: ["We may update these terms as Ecoisland changes. We'll update the date above for material changes. Continuing to use Ecoisland means you accept the updated terms."],
   },
 ];
 
-function TermsSection({ title, body }: { title: string; body: string[] }) {
-  return (
-    <section className="rounded-lg border border-white/10 bg-white/[0.045] p-5 backdrop-blur-md">
-      <h2 className="text-lg font-black text-white">{title}</h2>
-      <div className="mt-3 space-y-3 text-sm leading-7 text-slate-300">
-        {body.map((item) => (
-          <p key={item}>{item}</p>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export default function TOS() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030807] text-white">
-      <div className="absolute inset-0 opacity-80">
-        <DotField
-          dotRadius={1.6}
-          dotSpacing={18}
-          cursorRadius={420}
-          bulgeStrength={52}
-          gradientFrom="rgba(0, 200, 150, 0.42)"
-          gradientTo="rgba(6, 182, 212, 0.26)"
-          glowColor="#00c896"
-          glowRadius={100}
-          sparkle
-        />
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,200,150,0.18),transparent_34%),linear-gradient(180deg,rgba(3,8,7,0.48),#030807_76%)]" />
-
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-8 px-5 py-8 sm:px-8 lg:py-12">
-        <nav className="flex items-center justify-between gap-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-slate-200 backdrop-blur-md transition-colors hover:border-emerald-300/50 hover:text-emerald-200"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Home
-          </Link>
-          <Link
-            to="/privacy-policy"
-            className="text-sm font-semibold text-slate-400 transition-colors hover:text-emerald-200"
-          >
-            Privacy Policy
-          </Link>
-        </nav>
-
-        <header className="max-w-3xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-bold uppercase text-emerald-200">
-            <FileText className="h-3.5 w-3.5" />
-            Terms of Service
-          </div>
-          <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl">
-            Ecoisland Terms of Service
-          </h1>
-          <p className="mt-4 text-base leading-8 text-slate-300 sm:text-lg">
-            These terms explain the rules for using Ecoisland as a student-centered, global sustainability community.
-          </p>
-          <p className="mt-3 text-sm font-semibold text-emerald-200">Last updated: {updated}</p>
-        </header>
-
-        <div className="grid gap-3 md:grid-cols-3">
-          {summaryCards.map((card) => (
-            <article key={card.label} className="rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-md">
-              <h2 className="text-sm font-black text-white">{card.label}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300">{card.text}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="grid gap-4">
-          {sections.map((section) => (
-            <TermsSection key={section.title} {...section} />
-          ))}
-        </div>
-
-        <section className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-5 backdrop-blur-md">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <div className="flex items-center gap-2 text-sm font-black uppercase text-emerald-200">
-                <Globe2 className="h-4 w-4" />
-                Contact
-              </div>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-300">
-                Send questions about these terms, account issues, moderation decisions, or accessibility concerns to the Ecoisland team.
-              </p>
-            </div>
-            <a
-              href="mailto:aaronhanqin@gmail.com"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 transition-colors hover:bg-emerald-300"
-            >
-              <Mail className="h-4 w-4" />
-              Email Us
-            </a>
-          </div>
-        </section>
-      </div>
-    </main>
+    <LegalLayout
+      title="Terms of Service"
+      intro="The rules for using Ecoisland as a student or a teacher."
+      updated="November 2, 2026"
+      summary={summary}
+      sections={sections}
+      other={{ to: "/privacy-policy", label: "Privacy Policy" }}
+      footer="Questions about these terms, your account, moderation or accessibility? Email the Ecoisland team."
+    />
   );
 }

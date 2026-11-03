@@ -1,15 +1,8 @@
 [
   {
-    "origin": ["*"],
-    "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
-    "responseHeader": [
-      "Content-Type",
-      "Content-Length",
-      "Access-Control-Allow-Origin",
-      "Access-Control-Allow-Methods",
-      "Access-Control-Allow-Headers",
-      "Cache-Control"
-    ],
+    "origin": ["https://ecoisland.xyz", "https://www.ecoisland.xyz", "http://localhost:5173"],
+    "method": ["GET", "HEAD"],
+    "responseHeader": ["Content-Type", "Content-Length", "Cache-Control"],
     "maxAgeSeconds": 3600
   }
 ]

@@ -1,744 +1,350 @@
-// @ts-nocheck
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Settings as SettingsIcon, User as UserIcon,
-  Upload, Save, AlertTriangle, CheckCircle, Loader2,
-  Shield, Palette, LogOut, Award
-} from "lucide-react";
-import { User } from "@/entities/User";
-import { UploadFile } from "@/integrations/Core";
-import { auth, db } from "@/firebase";
 import { deleteUser } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { useTheme } from "@/context/ThemeContext";
+import { Check, Copy, GraduationCap, LogOut, Mail, Monitor, Moon, Sprout, Sun, Trash2, Upload, UserRound } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+import { Page } from "@/components/app/Guards";
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Field, Input } from "@/components/ui/field";
+import { Segmented } from "@/components/ui/segmented";
+import { Switch } from "@/components/ui/switch";
+import { api, errorMessage, serverHealth } from "@/lib/api";
+import { auth } from "@/lib/firebase";
+import { useDocumentTitle } from "@/lib/hooks";
+import { setUsername, updateProfile, uploadAvatar, usernameProblem, usernameTaken } from "@/lib/profile";
+import { useProfile, useSession } from "@/lib/session";
+import { useTheme, type ThemePref } from "@/lib/theme";
+import { useToast } from "@/lib/toast";
+import type { Role } from "@/shared/types";
 
-const TABS = [
-  { key: "profile",     label: "Profile",     icon: UserIcon },
-  { key: "preferences", label: "Preferences", icon: Palette },
-  { key: "privacy",     label: "Privacy",     icon: Shield },
-  { key: "account",     label: "Account",     icon: AlertTriangle },
+function Section({ id, title, description, children }: { id: string; title: string; description?: string; children: ReactNode }) {
+  return (
+    <Card id={id} className="scroll-mt-24 p-7">
+      <h2 className="t-h3">{title}</h2>
+      {description && <p className="mt-1 text-[13.5px] text-fg-3">{description}</p>}
+      <div className="mt-5">{children}</div>
+    </Card>
+  );
+}
+
+const NAV = [
+  { id: "profile", label: "Profile" },
+  { id: "appearance", label: "Appearance" },
+  { id: "account-type", label: "Account type" },
+  { id: "grow", label: "Grow Ecoisland" },
+  { id: "account", label: "Account" },
 ];
 
-const MAX_AVATAR_BYTES = 5 * 1024 * 1024; // "Max 5MB" as advertised in the UI
-
-const USERNAME_PATTERN = /^[A-Za-z0-9._-]+$/;
-
-// Returns an error message string, or null when the (trimmed) username is valid.
-function validateUsernameFormat(raw) {
-  const candidate = (raw || "").trim();
-  if (!candidate) return "Username is required";
-  if (candidate.length < 3) return "Username must be at least 3 characters";
-  if (candidate.length > 20) return "Username must be 20 characters or fewer";
-  if (!USERNAME_PATTERN.test(candidate)) return "Only letters, numbers, underscores, hyphens, and periods are allowed";
-  return null;
-}
-
-// True if another account (different uid) already uses this username.
-async function isUsernameTaken(candidate, ownUid) {
-  const snap = await getDocs(query(collection(db, "users"), where("username", "==", candidate)));
-  return snap.docs.some(d => d.id !== ownUid);
-}
-
-// ─── ProfileTab ───────────────────────────────────────────────────────────────
-function ProfileTab({ user, formData, setFormData, avatarPreview, handleAvatarChange, handleSave, isSaving, saveSuccess, errors, clearFieldError }) {
-  return (
-    <div className="space-y-6">
-      {/* Avatar */}
-      <div className="eco-card p-6">
-        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-          <UserIcon className="w-5 h-5 text-emerald-600" /> Profile Picture
-        </h3>
-        <div className="flex items-center gap-5">
-          <div className="relative">
-            <div
-              className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center"
-              style={{ background: "var(--bg-success)", border: "2px solid var(--border-success)" }}
-            >
-              {avatarPreview ? (
-                <img src={avatarPreview} alt="" className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-3xl font-black text-emerald-500">
-                  {(formData.username || user?.full_name || "U")[0]?.toUpperCase()}
-                </span>
-              )}
-            </div>
-          </div>
-          <div>
-            <label className="cursor-pointer">
-              <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-              <span 
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm text-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer" 
-                style={{ background: "rgba(0,200,150,0.1)", border: "2px solid rgba(0,200,150,0.2)" }}
-              > 
-                <Upload className="w-4 h-4" /> Upload Photo
-              </span>
-            </label>
-            <p className="text-xs text-slate-400 mt-1.5">JPG, PNG or GIF · Max 5MB</p>
-            {errors?.avatar && <p className="text-xs text-red-500 font-medium mt-1.5">{errors.avatar}</p>}
-          </div>
-        </div>
-      </div>
-
-      {/* Info fields */}
-      <div className="eco-card p-6">
-        <h3 className="font-bold text-slate-800 mb-5">Personal Info</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {[
-            { label: "Username", key: "username", placeholder: "new user" },
-            { label: "City",     key: "city",     placeholder: "Houston" },
-            { label: "ZIP Code", key: "zip_code", placeholder: "77077" },
-          ].map(f => (
-            <div key={f.key}>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">{f.label}</label>
-              <input
-                className={`eco-input ${f.key === "username" && errors?.username ? "border-red-400" : ""}`}
-                placeholder={f.placeholder}
-                value={formData[f.key]}
-                onChange={e => {
-                  setFormData(p => ({ ...p, [f.key]: e.target.value }));
-                  if (f.key === "username") clearFieldError("username");
-                }}
-              />
-              {f.key === "username" && (
-                errors?.username
-                  ? <p className="text-red-500 text-xs font-medium mt-1.5">{errors.username}</p>
-                  : <p className="text-xs text-slate-400 mt-1.5">3-20 characters. Letters, numbers, underscores, hyphens, and periods.</p>
-              )}
-            </div>
-          ))}
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Country</label>
-            <select
-              className="eco-input"
-              value={formData.country}
-              onChange={e => setFormData(p => ({ ...p, country: e.target.value }))}
-            >
-              {["United States","Canada","United Kingdom","Australia","Germany","France","Japan","India","Brazil","China","Mexico"].map(c => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="mt-5">
-          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Bio</label>
-          <textarea
-            className="eco-input resize-none"
-            placeholder="Tell the community about your sustainability journey..."
-            rows={3}
-            value={formData.bio}
-            onChange={e => setFormData(p => ({ ...p, bio: e.target.value }))}
-          />
-        </div>
-        <AnimatePresence>
-          {errors?.general && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
-            >
-              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <span>{errors.general}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className="flex items-center gap-3 mt-5">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleSave}
-            disabled={isSaving}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm transition-all"
-            style={{
-              background: isSaving ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
-              boxShadow: isSaving ? "none" : "0 4px 15px rgba(0,200,150,0.3)"
-            }}
-          >
-            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            {isSaving ? "Saving..." : "Save Changes"}
-          </motion.button>
-          <AnimatePresence>
-            {saveSuccess && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                className="flex items-center gap-1.5 text-sm text-emerald-600 font-medium"
-              >
-                <CheckCircle className="w-4 h-4" /> Saved!
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── PreferencesTab ───────────────────────────────────────────────────────────
-function PreferencesTab({ user, onSaved }) {
-  const { theme, toggleTheme } = useTheme();
-  const [distanceUnit, setDistanceUnit] = useState(() => localStorage.getItem("ecoisland-distance-unit") || user?.preferences?.distance_unit || "km");
-  const [weightUnit,   setWeightUnit]   = useState(() => localStorage.getItem("ecoisland-weight-unit")   || user?.preferences?.weight_unit   || "kg");
-  const [tempUnit,     setTempUnit]     = useState(() => localStorage.getItem("ecoisland-temp-unit")     || user?.preferences?.temperature_unit || "celsius");
-  const [saved, setSaved] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [error, setError] = useState(null);
-
-  // New device: localStorage is empty but the account already has saved
-  // preferences — hydrate localStorage (and local state) from the user doc.
-  useEffect(() => {
-    const prefs = user?.preferences;
-    if (!prefs) return;
-    if (!localStorage.getItem("ecoisland-distance-unit") && prefs.distance_unit) {
-      localStorage.setItem("ecoisland-distance-unit", prefs.distance_unit);
-      setDistanceUnit(prefs.distance_unit);
-    }
-    if (!localStorage.getItem("ecoisland-weight-unit") && prefs.weight_unit) {
-      localStorage.setItem("ecoisland-weight-unit", prefs.weight_unit);
-      setWeightUnit(prefs.weight_unit);
-    }
-    if (!localStorage.getItem("ecoisland-temp-unit") && prefs.temperature_unit) {
-      localStorage.setItem("ecoisland-temp-unit", prefs.temperature_unit);
-      setTempUnit(prefs.temperature_unit);
-    }
-  }, [user]);
-
-  const handleSave = async () => {
-    // Keep localStorage as the synchronous source other pages read from...
-    localStorage.setItem("ecoisland-distance-unit", distanceUnit);
-    localStorage.setItem("ecoisland-weight-unit",   weightUnit);
-    localStorage.setItem("ecoisland-temp-unit",     tempUnit);
-    // ...but also persist to the user doc so preferences follow the account.
-    setIsSaving(true);
-    setError(null);
-    try {
-      const preferences = {
-        theme,
-        weight_unit: weightUnit,
-        distance_unit: distanceUnit,
-        temperature_unit: tempUnit,
-      };
-      await User.updateMyUserData({ preferences });
-      onSaved?.({ preferences });
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
-    } catch {
-      setError("Saved on this device, but couldn't sync to your account. Please try again.");
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  return (
-    <div className="space-y-5">
-      <div className="eco-card p-6">
-        <h3 className="font-bold text-slate-800 mb-5 flex items-center gap-2">
-          <Palette className="w-5 h-5 text-emerald-600" /> App Preferences
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Theme</label>
-            <select
-              className="eco-input"
-              value={theme}
-              onChange={e => { if (e.target.value !== theme) toggleTheme(); }}
-            >
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Distance Unit</label>
-            <select
-              className="eco-input"
-              value={distanceUnit}
-              onChange={e => setDistanceUnit(e.target.value)}
-            >
-              <option value="km">Kilometers (km)</option>
-              <option value="mi">Miles (mi)</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Weight Unit</label>
-            <select
-              className="eco-input"
-              value={weightUnit}
-              onChange={e => setWeightUnit(e.target.value)}
-            >
-              <option value="kg">Kilograms (kg)</option>
-              <option value="lbs">Pounds (lbs)</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Temperature Unit</label>
-            <select
-              className="eco-input"
-              value={tempUnit}
-              onChange={e => setTempUnit(e.target.value)}
-            >
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
-            </select>
-          </div>
-        </div>
-        <AnimatePresence>
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
-            >
-              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <span>{error}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className="flex items-center gap-3 mt-5">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleSave}
-            disabled={isSaving}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm transition-all"
-            style={{
-              background: isSaving ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
-              boxShadow: isSaving ? "none" : "0 4px 15px rgba(0,200,150,0.3)"
-            }}
-          >
-            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            {isSaving ? "Saving..." : "Save Changes"}
-          </motion.button>
-          <AnimatePresence>
-            {saved && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                className="flex items-center gap-1.5 text-sm text-emerald-600 font-medium"
-              >
-                <CheckCircle className="w-4 h-4" /> Saved!
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── PrivacyTab ───────────────────────────────────────────────────────────────
-function PrivacyTab({ user, onSaved }) {
-  const [isPublic, setIsPublic] = useState(user?.privacy_public !== false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleSave = async () => {
-    setIsSaving(true);
-    setError(null);
-    try {
-      await User.updateMyUserData({ privacy_public: isPublic });
-      setSaved(true);
-      onSaved({ privacy_public: isPublic });
-      setTimeout(() => setSaved(false), 3000);
-    } catch {
-      setError("Failed to save privacy settings. Please check your connection and try again.");
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  return (
-    <div className="space-y-5">
-      <div className="eco-card p-6">
-        <h3 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
-          <Shield className="w-5 h-5 text-blue-500" /> Profile Visibility
-        </h3>
-        <p className="text-sm text-slate-500 mb-5">
-          Control what other Ecoislanders can see when they view your profile.
-        </p>
-
-        <div className="space-y-4">
-          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${isPublic ? "border-emerald-300 bg-emerald-50 dark:bg-emerald-900/12" : "border-slate-200 bg-white"}`}>
-            <input
-              type="radio"
-              className="mt-1 accent-emerald-500"
-              checked={isPublic}
-              onChange={() => setIsPublic(true)}
-            />
-            <div>
-              <p className="font-bold text-slate-800">🌍 Public Profile</p>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Everyone can see your avatar, bio, level, Treecoins, island, inventory, posts, and carbon logs.
-              </p>
-            </div>
-          </label>
-
-          <label className={`flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${!isPublic ? "border-blue-300 bg-blue-50 dark:bg-blue-900/12" : "border-slate-200 bg-white"}`}>
-            <input
-              type="radio"
-              className="mt-1 accent-blue-500"
-              checked={!isPublic}
-              onChange={() => setIsPublic(false)}
-            />
-            <div>
-              <p className="font-bold text-slate-800">🔒 Private Profile</p>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Other users can see your name in the Leaderboard and Discover, but your bio, island, inventory, posts, and carbon logs are hidden.
-              </p>
-            </div>
-          </label>
-        </div>
-
-        <AnimatePresence>
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-600 font-medium mt-5 bg-red-50 border-2 border-red-200 delete-account-panel"
-            >
-              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <span>{error}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className="flex items-center gap-3 mt-5">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleSave}
-            disabled={isSaving}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white text-sm"
-            style={{
-              background: isSaving ? "#94a3b8" : "linear-gradient(135deg, #00c896, #06b6d4)",
-              boxShadow: isSaving ? "none" : "0 4px 15px rgba(0,200,150,0.3)"
-            }}
-          >
-            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            {isSaving ? "Saving..." : "Save Privacy Settings"}
-          </motion.button>
-          <AnimatePresence>
-            {saved && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0 }}
-                className="flex items-center gap-1.5 text-sm text-emerald-600 font-medium"
-              >
-                <CheckCircle className="w-4 h-4" /> Saved!
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── AccountTab ───────────────────────────────────────────────────────────────
-function AccountTab({ user, deleteStep, setDeleteStep, deleteConfirm, setDeleteConfirm, handleDeleteAccount, deleteError, setDeleteError, isDeleting }) {
-  return (
-    <div className="space-y-5">
-      {/* Ambassador */}
-      <div
-        className="p-5 rounded-2xl transition-colors"
-        style={{ border: "2px solid #60a5fa", background: "linear-gradient(to right, #3b82f6, #4f46e5)", color: "white" }}
-      >
-        <h3 className="font-bold mb-4 flex items-center gap-2 text-white">
-          <Award className="w-5 h-5 text-white" /> Ambassador Program
-        </h3>
-        <p className="text-sm text-blue-100 mb-4">
-          Apply to become a verified Ecoisland Ambassador for your area.
-          Ambassadors help moderate content, organize local environmental
-          initiatives, and gain exclusive benefits.
-        </p>
-        <ul className="text-sm text-blue-100 space-y-1 list-disc list-inside mb-4">
-          <li>Earn official volunteer hours</li>
-          <li>Receive personalized letters of recommendation</li>
-          <li>Enhance your resume and college applications</li>
-          <li>Access paid rewards and a professional network</li>
-        </ul>
-        <button
-          onClick={() => window.open("https://forms.gle/fkfvLHnQunb993kP7", "_blank")}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors bg-white text-blue-700 hover:bg-blue-50"
-          style={{ border: "2px solid var(--text-faint)" }}
-        >
-          <Award className="w-4 h-4" /> Apply for Ambassador Status
-        </button>
-      </div>
-
-      {/* Sign out */}
-      <div className="eco-card p-5">
-        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-          <LogOut className="w-5 h-5 text-slate-600" /> Session
-        </h3>
-        <button
-          onClick={() => User.logout().then(() => (window.location.href = "/"))}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors"
-          style={{ border: "2px solid var(--border-card)", color: "var(--text-secondary)", background: "var(--bg-subtle)" }}
-        >
-          <LogOut className="w-4 h-4" /> Sign Out
-        </button>
-      </div>
-
-      {/* Delete account */}
-      <div className="rounded-2xl p-5 border-2 border-red-200 bg-red-50 delete-account-panel">
-        <h3 className="font-bold text-red-700 mb-2 flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5" /> Delete Account
-        </h3>
-        <p className="text-red-600 text-sm mb-4">This is permanent. All your data, island, and progress will be deleted.</p>
-        {deleteStep === 0 ? (
-          <button
-            onClick={() => setDeleteStep(1)}
-            className="px-5 py-2.5 rounded-xl font-bold text-sm text-red-700 border-2 border-red-200 bg-white hover:bg-red-50 transition-colors delete-account-panel"
-          >
-            Delete My Account
-          </button>
-        ) : (
-          <div className="space-y-3">
-            <p className="text-red-700 text-sm font-semibold">
-              Type <strong>DELETE {user?.username || "USER"}</strong> to confirm:
-            </p>
-            <input
-              className="eco-input border-red-300 focus:border-red-500 text-red-700"
-              placeholder={`DELETE ${user?.username || "USER"}`}
-              value={deleteConfirm}
-              onChange={e => setDeleteConfirm(e.target.value)}
-            />
-            <AnimatePresence>
-              {deleteError && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="flex items-start gap-2 px-4 py-3 rounded-xl text-sm text-red-700 font-medium bg-white border-2 border-red-300"
-                >
-                  <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                  <span>{deleteError}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <div className="flex gap-3">
-              <button
-                onClick={handleDeleteAccount}
-                disabled={isDeleting || deleteConfirm !== `DELETE ${user?.username || "USER"}`}
-                className="px-5 py-2.5 rounded-xl font-bold text-sm text-white transition-all"
-                style={{
-                  background: (isDeleting || deleteConfirm !== `DELETE ${user?.username || "USER"}`) ? "#94a3b8" : "#ef4444",
-                  cursor: isDeleting ? "wait" : deleteConfirm !== `DELETE ${user?.username || "USER"}` ? "not-allowed" : "pointer"
-                }}
-              >
-                {isDeleting ? "Deleting..." : "Proceed with Deletion"}
-              </button>
-              <button
-                onClick={() => { setDeleteStep(0); setDeleteConfirm(""); setDeleteError(null); }}
-                className="px-5 py-2.5 rounded-xl font-bold text-sm transition-colors"
-                style={{ border: "2px solid var(--border-card)", color: "var(--text-muted)", background: "var(--bg-subtle)" }}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ─── Settings (main) ──────────────────────────────────────────────────────────
 export default function Settings() {
-  const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState("profile");
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
-  const [formData, setFormData] = useState({ username: "", bio: "", city: "", zip_code: "", country: "" });
-  const [avatarFile, setAvatarFile] = useState(null);
-  const [avatarPreview, setAvatarPreview] = useState(null);
-  const [deleteStep, setDeleteStep] = useState(0);
-  const [deleteConfirm, setDeleteConfirm] = useState("");
-  const [errors, setErrors] = useState({});
-  const [deleteError, setDeleteError] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const profile = useProfile();
+  useDocumentTitle("Settings");
+  return (
+    <Page>
+      <header className="mb-8">
+        <p className="t-eyebrow">Settings</p>
+        <h1 className="t-h1 mt-2.5">Your account</h1>
+      </header>
+      <div className="grid grid-cols-[200px_minmax(0,720px)] gap-10">
+        <nav className="sticky top-24 self-start" aria-label="Settings sections">
+          <ul className="space-y-0.5">
+            {NAV.map((n) => (
+              <li key={n.id}>
+                <a href={`#${n.id}`} className="block rounded-[9px] px-3 py-2 text-[14px] font-medium text-fg-3 hover:bg-surface-2 hover:text-fg">
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="space-y-6">
+          <ProfileSection key={profile.username_lower ?? "p"} />
+          <AppearanceSection />
+          <RoleSection />
+          <RemindersSection />
+          <GrowSection />
+          <AccountSection />
+        </div>
+      </div>
+    </Page>
+  );
+}
 
-  const clearFieldError = (field) => setErrors(p => ({ ...p, [field]: null }));
+function ProfileSection() {
+  const profile = useProfile();
+  const toast = useToast();
+  const [name, setName] = useState(profile.username ?? "");
+  const [checking, setChecking] = useState(false);
+  const [problem, setProblem] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const changed = name.trim() !== (profile.username ?? "");
 
   useEffect(() => {
-    User.me().then(u => {
-      setUser(u);
-      setFormData({
-        username: u.username || "",
-        bio:      u.bio      || "",
-        city:     u.city     || "",
-        zip_code: u.zip_code || "",
-        country:  u.country  || "United States",
-      });
-      setAvatarPreview(u.avatar_url || null);
-    }).catch(() => {});
-  }, []);
-
-  const handleAvatarChange = (e) => {
-    const f = e.target.files?.[0]; if (!f) return;
-    if (f.size > MAX_AVATAR_BYTES) {
-      setErrors(p => ({ ...p, avatar: "That image is larger than 5MB. Please choose a smaller file." }));
-      e.target.value = "";
+    if (!changed) {
+      setProblem(null);
       return;
     }
-    setErrors(p => ({ ...p, avatar: null }));
-    setAvatarFile(f);
-    const r = new FileReader(); r.onload = ev => setAvatarPreview(ev.target.result); r.readAsDataURL(f);
+    const p = usernameProblem(name);
+    if (p) {
+      setProblem(p);
+      return;
+    }
+    setChecking(true);
+    const t = window.setTimeout(async () => {
+      try {
+        setProblem((await usernameTaken(name, profile.id)) ? "That username is taken." : null);
+      } catch {
+        setProblem(null);
+      } finally {
+        setChecking(false);
+      }
+    }, 350);
+    return () => window.clearTimeout(t);
+  }, [name, changed, profile.id]);
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      await setUsername(profile.id, profile, name);
+      toast.show({ tone: "success", title: "Username updated" });
+    } catch (err) {
+      toast.show({ tone: "error", title: "Couldn't save", body: errorMessage(err) });
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const handleSave = async () => {
-    const candidate = (formData.username || "").trim();
-    const formatError = validateUsernameFormat(candidate);
-    if (formatError) {
-      setErrors(p => ({ ...p, username: formatError, general: null }));
-      return;
-    }
-    setIsSaving(true);
-    setErrors(p => ({ ...p, username: null, general: null }));
+  const onFile = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
     try {
-      const taken = await isUsernameTaken(candidate, user?.id || auth.currentUser?.uid);
-      if (taken) {
-        setErrors(p => ({ ...p, username: "That username is already taken. Try another one." }));
-        return;
-      }
-      let avatarUrl = user?.avatar_url || "";
-      if (avatarFile) {
-        const { file_url } = await UploadFile({ file: avatarFile });
-        avatarUrl = file_url;
-      }
-      const payload = { ...formData, username: candidate, avatar_url: avatarUrl };
-      await User.updateMyUserData(payload);
-      setFormData(p => ({ ...p, username: candidate }));
-      setUser(prev => ({ ...prev, ...payload }));
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 3000);
-    } catch {
-      setErrors(p => ({ ...p, general: "Failed to save your profile. Please check your connection and try again." }));
-    } finally { setIsSaving(false); }
-  };
-
-  const handleDeleteAccount = async () => {
-    if (deleteConfirm !== `DELETE ${user?.username || "USER"}`) {
-      setDeleteError("Please type the confirmation phrase exactly to continue.");
-      return;
-    }
-    setIsDeleting(true);
-    setDeleteError(null);
-    // Scrub personal fields first so a leftover Firestore doc (deletion of the
-    // auth user can fail or be interrupted) never exposes profile data.
-    try {
-      await User.updateMyUserData({
-        deleted: true,
-        username: "Deleted User",
-        bio: "",
-        city: "",
-        zip_code: "",
-        avatar_url: "",
-      });
-    } catch {
-      setDeleteError("Could not mark your account for deletion. Please check your connection and try again.");
-      setIsDeleting(false);
-      return;
-    }
-    try {
-      await deleteUser(auth.currentUser);
-      window.location.href = "/";
-    } catch (error) {
-      if (error?.code === "auth/requires-recent-login") {
-        setDeleteError("For security, deleting an account requires a recent sign-in. Please sign out, sign back in, then delete your account again.");
-      } else {
-        setDeleteError(`Your profile data was scrubbed and marked deleted, but the sign-in account could not be removed${error?.message ? ` (${error.message})` : ""}. Please try again.`);
-      }
-      setIsDeleting(false);
+      const url = await uploadAvatar(profile.id, file);
+      await updateProfile(profile.id, { avatar_url: url });
+      toast.show({ tone: "success", title: "Profile picture updated" });
+    } catch (err) {
+      toast.show({ tone: "error", title: "Upload failed", body: errorMessage(err) });
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
     }
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8" style={{ background: "var(--bg-page)" }}>
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <SettingsIcon className="w-7 h-7 text-slate-600" />
-          <div>
-            <h1 className="text-3xl font-black text-slate-900" style={{ letterSpacing: "-0.03em" }}>Settings</h1>
-            <p className="text-slate-500 text-sm">Manage your profile and account</p>
+    <Section id="profile" title="Profile" description="This is how your teacher and classmates see you.">
+      <div className="flex items-center gap-5">
+        <Avatar name={profile.username || profile.full_name || "You"} src={profile.avatar_url} size={64} />
+        <div className="flex gap-2">
+          <input ref={fileRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="hidden" onChange={(e) => void onFile(e.target.files?.[0])} />
+          <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()} loading={uploading}>
+            <Upload /> Upload photo
+          </Button>
+          {profile.avatar_url && (
+            <Button variant="ghost" size="sm" onClick={() => void updateProfile(profile.id, { avatar_url: "" })}>
+              Remove
+            </Button>
+          )}
+        </div>
+      </div>
+      <div className="mt-6 flex items-end gap-3">
+        <Field label="Username" htmlFor="set-username" error={problem} hint={!problem && changed && !checking ? "Available" : "3–20 letters, numbers, periods, dashes or underscores."} className="flex-1">
+          <Input id="set-username" value={name} maxLength={20} onChange={(e) => setName(e.target.value)} aria-invalid={!!problem} autoComplete="off" />
+        </Field>
+        <Button onClick={save} loading={saving} disabled={!changed || !!problem || checking} className="mb-[26px]">
+          Save
+        </Button>
+      </div>
+      <p className="mt-2 text-[13px] text-fg-3">Signed in as {profile.email || auth.currentUser?.email}. Your email is never shown to other students.</p>
+    </Section>
+  );
+}
+
+function AppearanceSection() {
+  const { pref, setPref } = useTheme();
+  return (
+    <Section id="appearance" title="Appearance" description="Ecoisland follows your computer's setting unless you pick one.">
+      <Segmented<ThemePref>
+        label="Theme"
+        value={pref}
+        onChange={setPref}
+        options={[
+          { value: "light", label: <><Sun /> Light</> },
+          { value: "dark", label: <><Moon /> Dark</> },
+          { value: "system", label: <><Monitor /> System</> },
+        ]}
+      />
+    </Section>
+  );
+}
+
+function RoleSection() {
+  const profile = useProfile();
+  const toast = useToast();
+  const role: Role = profile.role ?? "student";
+  const blocked = role === "teacher" && (profile.teaching_ids?.length ?? 0) > 0;
+  const change = async (r: Role) => {
+    if (r === role) return;
+    try {
+      await updateProfile(profile.id, { role: r });
+      toast.show({ tone: "success", title: r === "teacher" ? "Teacher tools are on" : "Switched to a student account" });
+    } catch (err) {
+      toast.show({ tone: "error", title: "Couldn't switch", body: errorMessage(err) });
+    }
+  };
+  return (
+    <Section id="account-type" title="Account type" description="Teachers create classes and assign work. Students join classes and study.">
+      <div className="grid grid-cols-2 gap-3">
+        {(
+          [
+            { r: "student", icon: UserRound, title: "Student", body: "Daily sets, your island, class assignments." },
+            { r: "teacher", icon: GraduationCap, title: "Teacher", body: "Create classes, assign work, see progress." },
+          ] as const
+        ).map((o) => (
+          <button
+            key={o.r}
+            onClick={() => void change(o.r)}
+            disabled={blocked && o.r === "student"}
+            aria-pressed={role === o.r}
+            className={`flex items-start gap-3 rounded-[13px] border p-4 text-left transition-colors disabled:opacity-50 ${role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2"}`}
+          >
+            <o.icon className={`mt-0.5 size-5 ${role === o.r ? "text-brand-ink" : "text-fg-3"}`} />
+            <span>
+              <span className="block text-[14.5px] font-semibold text-fg">{o.title}</span>
+              <span className="block text-[13px] text-fg-3">{o.body}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+      {blocked && <p className="mt-3 text-[13px] text-fg-3">Delete or hand over your classes before switching back to a student account.</p>}
+    </Section>
+  );
+}
+
+function RemindersSection() {
+  const profile = useProfile();
+  const [available, setAvailable] = useState<boolean | null>(null);
+  useEffect(() => {
+    void serverHealth().then((h) => setAvailable(!!h?.reminders));
+  }, []);
+  if (!available) return null;
+  return (
+    <Section id="reminders" title="Reminders" description="An optional email when your streak is about to end. At most one a day.">
+      <label className="flex items-center justify-between gap-6">
+        <span>
+          <span className="block text-[14.5px] font-medium text-fg">Email me if my island is about to wilt</span>
+          <span className="block text-[13px] text-fg-3">Sent to {profile.email || "your Google email"}. Turn it off any time.</span>
+        </span>
+        <Switch checked={!!profile.email_reminders} onChange={(v) => void updateProfile(profile.id, { email_reminders: v })} label="Email reminders" />
+      </label>
+    </Section>
+  );
+}
+
+function GrowSection() {
+  const profile = useProfile();
+  const [copied, setCopied] = useState<"link" | "note" | null>(null);
+  const link = window.location.origin;
+  const teacherNote = `Hi! I've been using Ecoisland (${link}) to study for APES. It's free: you create a class, students join with a code, and you can assign lessons, quizzes and FRQs with due dates and see who's done them. Would you try it with our class?`;
+  const copy = async (what: "link" | "note") => {
+    try {
+      await navigator.clipboard.writeText(what === "link" ? link : teacherNote);
+      setCopied(what);
+      setTimeout(() => setCopied(null), 1800);
+    } catch {
+      /* ignore */
+    }
+  };
+  const teacher = profile.role === "teacher";
+  return (
+    <Section
+      id="grow"
+      title="Grow Ecoisland"
+      description={teacher ? "Know another APES teacher? Ecoisland is free for every class." : "Ecoisland works best when your whole class is on it. Bring your teacher and classmates."}
+    >
+      <div className="flex items-start gap-4 rounded-[13px] bg-brand-soft/60 p-5">
+        <Sprout className="mt-0.5 size-5 shrink-0 text-brand-ink" />
+        <div className="min-w-0 flex-1">
+          <p className="text-[14.5px] font-semibold text-fg">{teacher ? "Share with a colleague" : "Invite your APES teacher"}</p>
+          <p className="mt-1 text-[13.5px] text-fg-2">
+            {teacher ? "Send them the link. They can set up a class in under a minute." : "Teachers can create a class in under a minute. Send yours a note."}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {!teacher && (
+              <Button size="sm" asChild>
+                <a href={`mailto:?subject=${encodeURIComponent("Ecoisland for our APES class?")}&body=${encodeURIComponent(teacherNote)}`}>
+                  <Mail /> Email your teacher
+                </a>
+              </Button>
+            )}
+            <Button size="sm" variant="secondary" onClick={() => void copy(teacher ? "link" : "note")}>
+              {copied ? <Check /> : <Copy />} {copied ? "Copied" : teacher ? "Copy link" : "Copy the note"}
+            </Button>
           </div>
         </div>
-
-        {/* Tabs */}
-        <div className="flex items-center gap-1 mb-6 p-1 rounded-xl w-fit" style={{ background: "var(--bg-card)", border: "2px solid var(--border-card)" }}>
-          {TABS.map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold transition-all"
-              style={activeTab === tab.key
-                ? { background: "linear-gradient(135deg, #00c896, #06b6d4)", color: "white" }
-                : { color: "#64748b" }}
-            >
-              <tab.icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{tab.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.18 }}
-          >
-            {activeTab === "profile" && (
-              <ProfileTab
-                user={user}
-                formData={formData}
-                setFormData={setFormData}
-                avatarPreview={avatarPreview}
-                handleAvatarChange={handleAvatarChange}
-                handleSave={handleSave}
-                isSaving={isSaving}
-                saveSuccess={saveSuccess}
-                errors={errors}
-                clearFieldError={clearFieldError}
-              />
-            )}
-            {activeTab === "preferences" && (
-              <PreferencesTab
-                user={user}
-                onSaved={(updates) => setUser(prev => ({ ...prev, ...updates }))}
-              />
-            )}
-            {activeTab === "privacy" && user && (
-              <PrivacyTab
-                user={user}
-                onSaved={(updates) => setUser(prev => ({ ...prev, ...updates }))}
-              />
-            )}
-            {activeTab === "account" && (
-              <AccountTab
-                user={user}
-                deleteStep={deleteStep}
-                setDeleteStep={setDeleteStep}
-                deleteConfirm={deleteConfirm}
-                setDeleteConfirm={setDeleteConfirm}
-                handleDeleteAccount={handleDeleteAccount}
-                deleteError={deleteError}
-                setDeleteError={setDeleteError}
-                isDeleting={isDeleting}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
       </div>
-    </div>
+    </Section>
+  );
+}
+
+function AccountSection() {
+  const profile = useProfile();
+  const { signOut } = useSession();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const [confirm, setConfirm] = useState("");
+  const [busy, setBusy] = useState(false);
+  const phrase = `delete ${profile.username || "my account"}`;
+
+  const remove = async () => {
+    setBusy(true);
+    try {
+      await api("account/delete");
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          await deleteUser(user);
+        } catch {
+          // The Google sign-in itself needs a recent login to delete; the data is already gone.
+          await signOut();
+        }
+      }
+      navigate("/");
+    } catch (err) {
+      toast.show({ tone: "error", title: "Couldn't delete your account", body: errorMessage(err) });
+      setBusy(false);
+    }
+  };
+
+  return (
+    <Section id="account" title="Account">
+      <div className="flex items-center justify-between gap-6">
+        <div>
+          <p className="text-[14.5px] font-medium text-fg">Sign out</p>
+          <p className="text-[13px] text-fg-3">Your progress is saved to your account.</p>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={async () => {
+            await signOut();
+            navigate("/");
+          }}
+        >
+          <LogOut /> Sign out
+        </Button>
+      </div>
+      <div className="mt-6 rounded-[13px] border border-coral/30 p-5">
+        <p className="text-[14.5px] font-semibold text-coral">Delete account</p>
+        <p className="mt-1 text-[13.5px] text-fg-3">
+          Permanently deletes your profile, island, study history, class memberships, assignment records and field notes{profile.role === "teacher" ? ", and every class you teach" : ""}. This can't be undone.
+        </p>
+        <Field label={`Type "${phrase}" to confirm`} htmlFor="del-confirm" className="mt-4">
+          <Input id="del-confirm" value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="off" />
+        </Field>
+        <Button variant="danger" className="mt-4" disabled={confirm.trim().toLowerCase() !== phrase.toLowerCase()} loading={busy} onClick={remove}>
+          <Trash2 /> Delete my account
+        </Button>
+      </div>
+    </Section>
   );
 }

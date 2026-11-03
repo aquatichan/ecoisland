@@ -11,6 +11,24 @@
     // Static assets are served before the Worker runs, so /api/* has to opt out.
     "run_worker_first": ["/api/*"]
   },
+  "vars": {
+    "FIREBASE_PROJECT_ID": "ecoisland-b9e34",
+    "GEMINI_MODEL": "gemini-2.5-flash-lite"
+  },
+  // Secrets, set once with `npx wrangler secret put <NAME>`:
+  //   FIREBASE_SERVICE_ACCOUNT  service account JSON (Firebase console > Project settings > Service accounts)
+  //   GEMINI_API_KEY            used only for FRQ grading
+  //   RESEND_API_KEY            optional, for streak reminder emails (with REMINDER_FROM below)
+  // Optional var: REMINDER_FROM, e.g. "Ecoisland <reminders@ecoisland.xyz>"
+  "ratelimits": [
+    { "name": "API_LIMITER", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } },
+    { "name": "AI_LIMITER", "namespace_id": "1002", "simple": { "limit": 4, "period": 60 } }
+  ],
+  // Streak reminder emails (no-op until RESEND_API_KEY and REMINDER_FROM are set).
+  // 21:00 UTC is mid-afternoon across US time zones.
+  "triggers": {
+    "crons": ["0 21 * * *"]
+  },
   "observability": {
     "enabled": true
   }

@@ -1,80 +1,94 @@
-// @ts-nocheck
-import React, { Suspense, lazy } from "react";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Layout from "@/Layout";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import { MotionConfig } from "framer-motion";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
+import { DesktopGate } from "@/components/app/DesktopGate";
+import { ErrorBoundary } from "@/components/app/ErrorBoundary";
+import { FullPageLoader, RequireProfile } from "@/components/app/Guards";
+import { SessionProvider } from "@/lib/session";
+import { ThemeProvider } from "@/lib/theme";
+import { ToastProvider } from "@/lib/toast";
 
-// Route-level code splitting: each page loads on demand so the initial
-// bundle stays small (the Impact/Island shader pages are especially heavy).
-const Homepage = lazy(() => import("@/pages/Homepage"));
-const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const Landing = lazy(() => import("@/pages/Landing"));
 const Onboarding = lazy(() => import("@/pages/Onboarding"));
-const Island = lazy(() => import("@/pages/Island"));
-const CarbonFootprint = lazy(() => import("@/pages/CarbonFootprint"));
-const RegionalData = lazy(() => import("@/pages/RegionalData"));
-const DangerScan = lazy(() => import("@/pages/DangerScan"));
-const ActionFeed = lazy(() => import("@/pages/ActionFeed"));
-const Impact = lazy(() => import("@/pages/Impact"));
+const Today = lazy(() => import("@/pages/Today"));
+const Practice = lazy(() => import("@/pages/Practice"));
+const Study = lazy(() => import("@/pages/Study"));
+const UnitPage = lazy(() => import("@/pages/UnitPage"));
+const Lesson = lazy(() => import("@/pages/Lesson"));
+const FrqList = lazy(() => import("@/pages/FrqList"));
+const FrqAttempt = lazy(() => import("@/pages/FrqAttempt"));
+const Flashcards = lazy(() => import("@/pages/Flashcards"));
+const Guide = lazy(() => import("@/pages/Guide"));
+const IslandPage = lazy(() => import("@/pages/IslandPage"));
+const Classes = lazy(() => import("@/pages/Classes"));
+const ClassDetail = lazy(() => import("@/pages/ClassDetail"));
 const Settings = lazy(() => import("@/pages/Settings"));
-const Leaderboard = lazy(() => import("@/pages/Leaderboard"));
-const APES = lazy(() => import("@/pages/APES"));
-const LessonPage = lazy(() => import("@/pages/LessonPage"));
 const PrivacyPolicy = lazy(() => import("@/pages/misc/PrivacyPolicy"));
 const TOS = lazy(() => import("@/pages/misc/TOS"));
+const IslandLab = import.meta.env.DEV ? lazy(() => import("@/pages/dev/IslandLab")) : null;
 
-import "leaflet/dist/leaflet.css";
-import "@/App.css";
+function OldLessonRedirect() {
+  const { unit, lesson } = useParams();
+  return <Navigate to={`/study/unit/${unit}/${encodeURIComponent(lesson ?? "")}`} replace />;
+}
 
-function PageLoader() {
+function Gated() {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ background: "radial-gradient(ellipse at 50% 0%, #062d1e 0%, #020c08 70%)" }}
-    >
-      <div className="relative w-16 h-16">
-        <div className="absolute inset-0 rounded-full border-2 border-emerald-500/30 animate-ping" />
-        <div className="absolute inset-2 rounded-full border-2 border-t-emerald-400 border-transparent animate-spin" />
-      </div>
-    </div>
+    <DesktopGate>
+      <Outlet />
+    </DesktopGate>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider>
-    <Router>
-      <div className="App">
-        <ErrorBoundary>
-        <Suspense fallback={<PageLoader />}>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Homepage />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/tos" element={<TOS />} />
-
-          {/* App routes use Layout */}
-          <Route path="/dashboard" element={<Layout currentPageName="Dashboard"><Dashboard /></Layout>} />
-          <Route path="/island" element={<Layout currentPageName="Island"><Island /></Layout>} />
-          <Route path="/carbon-footprint" element={<Layout currentPageName="CarbonFootprint"><CarbonFootprint /></Layout>} />
-          <Route path="/regional-data" element={<Layout currentPageName="RegionalData"><RegionalData /></Layout>} />
-          <Route path="/danger-scan" element={<Layout currentPageName="DangerScan"><DangerScan /></Layout>} />
-          <Route path="/action-feed" element={<Layout currentPageName="ActionFeed"><ActionFeed /></Layout>} />
-          <Route path="/impact" element={<Layout currentPageName="Impact"><Impact /></Layout>} />
-          <Route path="/settings" element={<Layout currentPageName="Settings"><Settings /></Layout>} />
-          <Route path="/leaderboard" element={<Layout currentPageName="Leaderboard"><Leaderboard /></Layout>} />
-          <Route path="/apes" element={<Layout currentPageName="APES"><APES /></Layout>} />
-          <Route path="/apes/unit/:unit/:lesson" element={<Layout currentPageName="Lesson"><LessonPage /></Layout>} />
-
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        </Suspense>
-        </ErrorBoundary>
-      </div>
-    </Router>
+      <MotionConfig reducedMotion="user">
+        <ToastProvider>
+          <SessionProvider>
+            <BrowserRouter>
+              <ErrorBoundary>
+                <Suspense fallback={<FullPageLoader />}>
+                  <Routes>
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/tos" element={<TOS />} />
+                    <Route element={<Gated />}>
+                      <Route path="/" element={<Landing />} />
+                      <Route path="/start" element={<Onboarding />} />
+                      <Route element={<RequireProfile />}>
+                        <Route path="/today" element={<Today />} />
+                        <Route path="/practice" element={<Practice />} />
+                        <Route path="/study" element={<Study />} />
+                        <Route path="/study/unit/:unit" element={<UnitPage />} />
+                        <Route path="/study/unit/:unit/:lesson" element={<Lesson />} />
+                        <Route path="/study/frq" element={<FrqList />} />
+                        <Route path="/study/frq/:frqId" element={<FrqAttempt />} />
+                        <Route path="/study/flashcards" element={<Flashcards />} />
+                        <Route path="/study/guide" element={<Guide />} />
+                        <Route path="/island" element={<IslandPage />} />
+                        <Route path="/class" element={<Classes />} />
+                        <Route path="/class/:classId" element={<ClassDetail />} />
+                        <Route path="/settings" element={<Settings />} />
+                      </Route>
+                      {IslandLab && <Route path="/dev/island" element={<IslandLab />} />}
+                      {/* Older links keep working. */}
+                      <Route path="/onboarding" element={<Navigate to="/start" replace />} />
+                      <Route path="/dashboard" element={<Navigate to="/today" replace />} />
+                      <Route path="/apes" element={<Navigate to="/study" replace />} />
+                      <Route path="/apes/unit/:unit/:lesson" element={<OldLessonRedirect />} />
+                      <Route path="/leaderboard" element={<Navigate to="/class" replace />} />
+                      {["/action-feed", "/impact", "/regional-data", "/danger-scan", "/carbon-footprint"].map((p) => (
+                        <Route key={p} path={p} element={<Navigate to="/today" replace />} />
+                      ))}
+                      <Route path="*" element={<Navigate to="/" replace />} />
+                    </Route>
+                  </Routes>
+                </Suspense>
+              </ErrorBoundary>
+            </BrowserRouter>
+          </SessionProvider>
+        </ToastProvider>
+      </MotionConfig>
     </ThemeProvider>
   );
 }
-
-export default App;

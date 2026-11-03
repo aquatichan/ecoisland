@@ -1,204 +1,89 @@
-// @ts-nocheck
-import React from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Globe2, Mail, ShieldCheck } from "lucide-react";
+import { LegalLayout, type Section } from "./LegalLayout";
 
-import DotField from "@/components/DotField";
-
-const updated = "July 29, 2026";
-
-const summaryCards = [
-  {
-    label: "Built for students globally",
-    text: "Ecoisland welcomes users from many places, so this policy describes broad privacy rights while preserving local protections that may apply where you live.",
-  },
-  {
-    label: "Minimal data, practical use",
-    text: "We use account, profile, carbon, community, and AI-submitted data to run the app, personalize learning, and keep the community useful and safe.",
-  },
-  {
-    label: "Your controls matter",
-    text: "You can update profile details, make your profile less public, delete posts you created, and contact us for access, correction, deletion, or export requests.",
-  },
+const summary = [
+  { label: "What we collect", text: "Your Google sign-in details, your profile, and what you do while studying: answers, scores, streaks, field notes and class membership." },
+  { label: "Who sees it", text: "You. Your teacher sees your progress in their class, and classmates see your username, island and leaderboard stats. Nobody sees your email." },
+  { label: "Your control", text: "Edit your profile, leave a class, or delete your account and its data from Settings at any time." },
 ];
 
-const sections = [
+const sections: Section[] = [
   {
-    title: "1. Information We Collect",
+    title: "1. Information we collect",
     body: [
-      "Account information: your Google/Firebase sign-in details, such as name, email address, profile photo, and user ID.",
-      "Profile information: username, bio, city, country, ZIP or postal code, preferences, avatar, privacy setting, Treecoins, XP, island items, and onboarding status.",
-      "Ecoisland activity: carbon entries, action feed posts, comments, likes, images you add to posts, Danger Scan submissions, APES learning activity, and reward or progress data.",
-      "AI and regional inputs: prompts, uploaded images, city or location searches, and related responses used for EcoAI, Danger Scan, Impact, and Regional Data features.",
-      "Technical information: basic logs, device/browser data, security signals, and hosting or database records collected through Firebase, Cloudflare, and similar service providers.",
+      "Account information: the name, email address, profile photo and user ID that come with your Google sign-in.",
+      "Profile information: your username, profile picture, whether you're a student or a teacher, your island's name and decorations, and preferences such as light or dark mode.",
+      "Study activity: daily sets, quiz scores, lessons you mark as read, free-response answers and their scores, field notes you write, streaks, XP, Treecoins and shop purchases.",
+      "Class information: the classes you join or teach, assignments, due dates and whether each assignment is complete.",
+      "Technical information: basic logs, browser and device details, security signals, and product analytics events (for example, that a daily set was completed) collected through Firebase, Google Analytics for Firebase and Cloudflare.",
     ],
   },
   {
-    title: "2. How We Use Information",
+    title: "2. How we use information",
     body: [
-      "Provide authentication, profiles, carbon tracking, islands, leaderboards, action feeds, learning tools, AI features, and other app functionality.",
-      "Personalize your experience, including regional sustainability suggestions, city-based tips, progress views, and unit preferences.",
-      "Moderate public spaces, prevent abuse, investigate security issues, and enforce our Terms of Service.",
-      "Improve Ecoisland, measure usage, debug errors, and understand which features help users take real environmental action.",
-      "Respond to support, legal, safety, or rights requests.",
+      "To run Ecoisland: save your progress, grow your island, score quizzes, build your daily sets and keep your streak.",
+      "To let teachers support you: your teacher sees how you're doing in their class so they can assign work and help.",
+      "To grade free-response answers with AI against each question's rubric.",
+      "To keep things fair and safe: prevent cheating, abuse and spam, and investigate security problems.",
+      "To improve Ecoisland: we look at overall usage, such as how many students finish a daily set, to decide what to build next.",
     ],
   },
   {
-    title: "3. Public Content And Visibility",
+    title: "3. Who can see what",
     body: [
-      "Action Feed posts, comments, usernames, avatars, tags, and public profile details may be visible to other users.",
-      "Your profile privacy setting can limit profile visibility, but content you post in shared spaces may still be visible to others until deleted or moderated.",
-      "Do not post sensitive personal details, private addresses, school IDs, other people's personal information, or images you do not have permission to share.",
+      "Teachers of a class you join can see your username, profile picture, streak, last active day, weekly XP and daily sets, unit quiz bests, number of lessons read, assignment completion and scores, your island, and the field notes you write.",
+      "Classmates can see your username, profile picture, your island, your class leaderboard stats and your field notes.",
+      "Your email address is never shown to teachers or classmates. People who are not in your class cannot see your progress.",
+      "Leaving a class, or being removed by the teacher, deletes your assignment records and field notes from that class.",
     ],
   },
   {
-    title: "4. Sharing And Service Providers",
+    title: "4. Sharing and service providers",
     body: [
-      "We do not sell personal information. We share information only as needed to operate Ecoisland, comply with law, protect users, or support features you choose to use.",
-      "Service providers may include Firebase/Google for authentication, database, and storage; Cloudflare for hosting; Gemini via Google AI Studio for AI features; and OpenStreetMap/Nominatim for location lookup.",
-      "When you use AI features, prompts and uploaded images may be sent to model providers for processing. Avoid submitting highly sensitive information.",
+      "We do not sell personal information. We share information only to run Ecoisland, to comply with the law, or to protect users.",
+      "Our providers are Google Firebase (sign-in, database, file storage and analytics), Cloudflare (hosting) and Google Gemini (FRQ grading). When you submit an FRQ, your answers and the question's rubric are sent to Gemini to be scored.",
+      "Ecoisland is used in many places, so your information may be processed in the United States and other countries where these providers operate.",
     ],
   },
   {
-    title: "5. International Use",
+    title: "5. Your privacy rights",
     body: [
-      "Ecoisland is designed for a global audience. Your information may be processed in the United States and other countries where our providers operate.",
-      "Privacy rights vary by region. We aim to honor applicable rights for users in the EEA, UK, Switzerland, California, and other jurisdictions with similar privacy laws.",
-      "If local law gives you stronger rights than this policy describes, those rights still apply.",
+      "Depending on where you live, you may have the right to access, correct, delete or export your information, or to object to or restrict how it is used.",
+      "California residents may have rights to know, access, delete and correct personal information, and to not be discriminated against for using these rights. EEA, UK and Swiss users may also complain to their data protection authority.",
+      "To make a request, email us. We may need to confirm your identity first. If local law gives you stronger rights than this policy describes, those rights still apply.",
     ],
   },
   {
-    title: "6. Your Privacy Rights",
+    title: "6. Children and students",
     body: [
-      "Depending on where you live, you may request access, correction, deletion, portability, restriction, objection, or withdrawal of consent.",
-      "California residents may have rights to know, access, delete, correct, opt out of sale or sharing, limit certain sensitive information uses, and be free from discrimination for exercising privacy rights.",
-      "EEA, UK, and Swiss users may also have rights to object to processing, restrict processing, and complain to a data protection authority.",
-      "To make a request, contact us using the email below. We may need to verify your identity before acting on the request.",
+      "Ecoisland is built for high school students and their teachers. It is not intended for children under 13.",
+      "If you are under the age required to consent to online services where you live, use Ecoisland only with permission from a parent, guardian or your school.",
+      "If you believe a child gave us personal information without the right permission, contact us and we will review and delete it where required.",
     ],
   },
   {
-    title: "7. Children And Students",
+    title: "7. Retention, deletion and security",
     body: [
-      "Ecoisland is built with students in mind, but it is not intended for children under 13.",
-      "If you are under the age required to consent to online services in your region, use Ecoisland only with permission from a parent, guardian, or authorized school contact.",
-      "If you believe a child provided personal information without proper permission, contact us so we can review and delete it where required.",
+      "We keep information for as long as it's needed to run Ecoisland and meet legal obligations.",
+      "Deleting your account in Settings removes your profile, study history, class memberships, assignment records and field notes. If you teach, your classes are deleted too.",
+      "We use reasonable safeguards: every change to Treecoins, XP and progress is checked by our server, and database rules stop anyone from reading another student's private information. No online service can promise perfect security.",
     ],
   },
   {
-    title: "8. Retention And Security",
-    body: [
-      "We keep information while needed to provide Ecoisland, maintain records, resolve disputes, enforce rules, and comply with legal obligations.",
-      "Posts and account data may remain until you delete them, request deletion, or they are removed through moderation or maintenance.",
-      "We use reasonable technical and organizational safeguards, but no internet service can guarantee perfect security.",
-    ],
-  },
-  {
-    title: "9. Updates",
-    body: [
-      "We may update this policy as Ecoisland, our providers, or privacy laws change.",
-      "When we make material changes, we will update the date above and may provide additional notice in the app or through reasonable means.",
-    ],
+    title: "8. Updates",
+    body: ["We may update this policy as Ecoisland or the law changes. When we make material changes, we will update the date above and may also tell you in the app."],
   },
 ];
-
-function PolicySection({ title, body }: { title: string; body: string[] }) {
-  return (
-    <section className="rounded-lg border border-white/10 bg-white/[0.045] p-5 backdrop-blur-md">
-      <h2 className="text-lg font-black text-white">{title}</h2>
-      <div className="mt-3 space-y-3 text-sm leading-7 text-slate-300">
-        {body.map((item) => (
-          <p key={item}>{item}</p>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 export default function PrivacyPolicy() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030807] text-white">
-      <div className="absolute inset-0 opacity-80">
-        <DotField
-          dotRadius={1.6}
-          dotSpacing={18}
-          cursorRadius={420}
-          bulgeStrength={52}
-          gradientFrom="rgba(0, 200, 150, 0.42)"
-          gradientTo="rgba(117, 205, 221, 0.26)"
-          glowColor="#00c896"
-          glowRadius={100}
-          sparkle
-        />
-      </div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,200,150,0.18),transparent_34%),linear-gradient(180deg,rgba(3,8,7,0.48),#030807_76%)]" />
-
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-8 px-5 py-8 sm:px-8 lg:py-12">
-        <nav className="flex items-center justify-between gap-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-slate-200 backdrop-blur-md transition-colors hover:border-emerald-300/50 hover:text-emerald-200"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Home
-          </Link>
-          <Link
-            to="/tos"
-            className="text-sm font-semibold text-slate-400 transition-colors hover:text-emerald-200"
-          >
-            Terms of Service
-          </Link>
-        </nav>
-
-        <header className="max-w-3xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-bold uppercase text-emerald-200">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            Privacy Policy
-          </div>
-          <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl">
-            Ecoisland Privacy Policy
-          </h1>
-          <p className="mt-4 text-base leading-8 text-slate-300 sm:text-lg">
-            This policy explains how Ecoisland collects, uses, shares, and protects information for a student-centered, global sustainability community.
-          </p>
-          <p className="mt-3 text-sm font-semibold text-emerald-200">Last updated: {updated}</p>
-        </header>
-
-        <div className="grid gap-3 md:grid-cols-3">
-          {summaryCards.map((card) => (
-            <article key={card.label} className="rounded-lg border border-white/10 bg-white/[0.045] p-4 backdrop-blur-md">
-              <h2 className="text-sm font-black text-white">{card.label}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300">{card.text}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="grid gap-4">
-          {sections.map((section) => (
-            <PolicySection key={section.title} {...section} />
-          ))}
-        </div>
-
-        <section className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-5 backdrop-blur-md">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <div className="flex items-center gap-2 text-sm font-black uppercase text-emerald-200">
-                <Globe2 className="h-4 w-4" />
-                Contact
-              </div>
-              <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-300">
-                Send privacy questions, deletion requests, accessibility concerns, or regional-rights requests to the Ecoisland team.
-              </p>
-            </div>
-            <a
-              href="mailto:aaronhanqin@gmail.com"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 transition-colors hover:bg-emerald-300"
-            >
-              <Mail className="h-4 w-4" />
-              Email Us
-            </a>
-          </div>
-        </section>
-      </div>
-    </main>
+    <LegalLayout
+      title="Privacy Policy"
+      intro="How Ecoisland collects, uses, shares and protects information for students and teachers."
+      updated="November 2, 2026"
+      summary={summary}
+      sections={sections}
+      other={{ to: "/tos", label: "Terms of Service" }}
+      footer="Questions, deletion requests, accessibility concerns or regional rights requests? Email the Ecoisland team."
+    />
   );
 }

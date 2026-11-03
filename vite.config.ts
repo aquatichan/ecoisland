@@ -1,54 +1,84 @@
-import path from "path";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import { defineConfig, loadEnv } from "vite";
-import type { Plugin } from "vite";
+import { defineConfig, loadEnv, type Plugin } from "vite";
 
-function geminiDevProxy(): Plugin {
-  let apiKey = "";
+/**
+ * Runs the Cloudflare Worker (worker/index.ts) inside the Vite dev server, so
+ * `pnpm dev` serves the app and its /api/* routes together. Secrets come
+ * from .env.local (GEMINI_API_KEY, FIREBASE_SERVICE_ACCOUNT, or the emulator
+ * settings: DEV_EMULATORS=true, FIRESTORE_EMULATOR_HOST, FIREBASE_PROJECT_ID).
+ */
+function workerApi(): Plugin {
+  let env: Record<string, string> = {};
+  let root = process.cwd();
   return {
-    name: "gemini-dev-proxy",
+    name: "ecoisland-worker-api",
     configResolved(config) {
-      const env = loadEnv(config.mode, config.root, "");
-      apiKey = env.GEMINI_API_KEY ?? "";
+      root = config.root;
+      env = loadEnv(config.mode, config.root, "");
     },
     configureServer(server) {
-      server.middlewares.use("/api/ai", async (req, res) => {
-        if (!apiKey) {
-          res.writeHead(500, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "GEMINI_API_KEY not set in .env.local" }));
-          return;
-        }
-
-        const chunks: Buffer[] = [];
-        req.on("data", (chunk) => chunks.push(chunk));
-        req.on("end", async () => {
-          const { model, ...body } = JSON.parse(Buffer.concat(chunks).toString());
-          const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-
-          const geminiRes = await fetch(geminiUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-            body: JSON.stringify(body),
+      server.middlewares.use(async (req, res, next) => {
+        if (!req.url?.startsWith("/api/")) return next();
+        try {
+          const chunks: Buffer[] = [];
+          for await (const chunk of req) chunks.push(chunk as Buffer);
+          const headers = new Headers();
+          for (const [k, v] of Object.entries(req.headers)) {
+            if (typeof v === "string") headers.set(k, v);
+            else if (Array.isArray(v)) headers.set(k, v.join(", "));
+          }
+          const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
+          const request = new Request(url, {
+            method: req.method,
+            headers,
+            body: req.method === "GET" || req.method === "HEAD" ? undefined : Buffer.concat(chunks),
           });
-
-          const data = await geminiRes.json();
-          res.writeHead(geminiRes.status, { "Content-Type": "application/json" });
-          res.end(JSON.stringify(data));
-        });
+          const assets = {
+            async fetch(r: Request) {
+              const file = path.join(root, "public", decodeURIComponent(new URL(r.url).pathname));
+              try {
+                return new Response(await readFile(file));
+              } catch {
+                return new Response("Not found", { status: 404 });
+              }
+            },
+          };
+          const mod = await server.ssrLoadModule("/worker/index.ts");
+          const response: Response = await mod.handleApi(request, { ...env, ASSETS: assets });
+          res.statusCode = response.status;
+          response.headers.forEach((value, key) => res.setHeader(key, value));
+          res.end(Buffer.from(await response.arrayBuffer()));
+        } catch (err) {
+          next(err);
+        }
       });
     },
   };
 }
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), geminiDevProxy()],
+  plugins: [react(), tailwindcss(), workerApi()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  css: {
-    postcss: './postcss.config.cjs',
+  build: {
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (/[\\/](react|react-dom|scheduler|react-router|react-router-dom)[\\/]/.test(id)) return "react";
+          if (/[\\/](firebase|@firebase|idb|tslib)[\\/]/.test(id) && !id.includes("analytics") && !id.includes("storage")) return "firebase";
+          if (/[\\/](framer-motion|motion-dom|motion-utils)[\\/]/.test(id)) return "motion";
+          if (id.includes("@radix-ui")) return "radix";
+          return undefined;
+        },
+      },
+    },
   },
 });
