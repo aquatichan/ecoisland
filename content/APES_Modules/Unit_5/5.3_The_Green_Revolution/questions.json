@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A rapidly growing agricultural region adopts Green Revolution methods and applies synthetic nitrogen fertilizer beyond the level crops can absorb. Excess nutrients drain into nearby rivers during heavy rains. Which explanation best describes the resulting river ecosystem impact?",
+    "answers": [
+      "Excess nitrogen fuels algal blooms; when the algae die and decompose, the process consumes dissolved oxygen, causing hypoxia that harms or kills aquatic organisms.",
+      "Excess nitrogen accelerates the loss of soil organic matter, reducing the soil's capacity to retain water and nutrients on land.",
+      "Excess nitrogen reduces the genetic diversity of aquatic plants, forcing river ecosystems to rely on fewer plant species.",
+      "Nitrogen compounds are chemically inert in water and simply accumulate on the river bottom, physically smothering benthic organisms."
+    ],
+    "correct": "A"
+  },
+  {
+    "question": "A wheat region with declining soil organic matter proposes switching from annual tillage to no-till, where seeds are planted into undisturbed soil. Over eight years no-till gained 0.8 metric tons of organic matter per hectare per year versus 0.1 in tilled fields. Which advantage best justifies adopting no-till despite requiring new specialized equipment?",
+    "answers": [
+      "No-till increases wheat yields by 50 percent across growing seasons.",
+      "It requires less mechanization and lowers fuel and equipment costs.",
+      "It eliminates all soil erosion by preventing wind and water movement across fields.",
+      "No-till builds organic matter, improves water retention, and reduces fertilizer need."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "Pesticide use expanded during the Green Revolution to protect high-yielding crop varieties. Which explanation best describes how broad-spectrum pesticides affect non-target insect populations in agricultural ecosystems?",
+    "answers": [
+      "Broad-spectrum pesticides kill both pest and beneficial insects indiscriminately, reducing natural pest control services and pollinator populations.",
+      "Broad-spectrum pesticides eliminate natural enemies of pests, which can allow pest populations to rebound but does not affect their reproductive rate.",
+      "Broad-spectrum pesticides select for resistant individuals over generations, which reduces biodiversity but has no effect on future pest control efforts.",
+      "Broad-spectrum pesticides sometimes persist in soil, but they rarely cause lasting toxicity that would prevent insect recolonization of treated fields."
+    ],
+    "correct": "A"
+  },
+  {
+    "question": "Data for a developing nation show agricultural productivity and employment by year: 1960 800 kg/ha with 45 workers per 1,000 ha; 1975 2,100 kg/ha with 28 workers; 1990 3,200 kg/ha with 12 workers. Which conclusion about social and economic changes from Green Revolution mechanization is best supported by these data?",
+    "answers": [
+      "Agricultural employment rose alongside productivity, implying mechanization created more jobs.",
+      "Productivity and employment stayed essentially unchanged, implying minimal Green Revolution impact.",
+      "Mechanization raised output per hectare and reduced agricultural employment.",
+      "Mechanization always benefits all agricultural workers by making their jobs easier."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "In a region transitioning to mechanized agriculture, farmers replace manual labor with diesel-powered tractors, combines, and irrigation pumps. Which of the following best explains why this mechanization increases the farm's overall fossil fuel consumption?",
+    "answers": [
+      "Mechanized equipment operates on petroleum-based fuels, and the energy required to manufacture and maintain machinery for plowing, planting, and harvesting exceeds the energy saved by eliminating manual labor.",
+      "Mechanized equipment requires electricity from fossil fuel-powered grids, and the energy required to power machinery for plowing, planting, and harvesting exceeds the energy saved by eliminating manual labor.",
+      "Mechanized equipment operates on petroleum-based fuels, but the energy required to power machinery for plowing, planting, and harvesting is approximately equal to the energy saved by eliminating manual labor.",
+      "Mechanized equipment operates on petroleum-based fuels, and the energy required to power machinery for plowing, planting, and harvesting exceeds the energy saved by eliminating manual labor."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A government promotes mechanized equipment and synthetic inputs to raise productivity in a region of small family farms. What is a social disadvantage of this Green Revolution strategy?",
+    "answers": [
+      "Synthetic inputs increase cash dependency and reduce accessibility for poor smallholders",
+      "Mechanization often increases employment opportunities and income for rural workers",
+      "Mechanization and chemicals change required skills but do not eliminate training needs",
+      "Small farmers cannot afford machines and inputs, prompting consolidation and displacement"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A soil structure diagram compares two agricultural fields: Field A (mechanized farming, 20 years) shows compacted soil layers with reduced pore space (pores <0.1 mm diameter), while Field B (minimal mechanization, 20 years) shows well-developed soil structure with varied pore sizes (0.1-5 mm diameter). A second graph shows water infiltration rates (cm/hour) for both fields: Field A (2 cm/hour) and Field B (8 cm/hour). Based on these visuals, which environmental consequence results from soil compaction in mechanized agriculture?",
+    "answers": [
+      "Mechanized equipment compacts soil, reducing pore space and water infiltration, which decreases groundwater recharge while decreasing water availability to plant roots",
+      "Mechanized equipment compacts soil, breaking down soil aggregates and reducing water infiltration, which increases surface runoff and soil erosion while decreasing water availability to plant roots",
+      "Mechanized equipment compacts soil, reducing pore space and water infiltration, which increases surface runoff and soil erosion while decreasing water availability to plant roots",
+      "Mechanized equipment compacts soil, reducing pore space and water infiltration, which increases surface runoff and soil erosion while decreasing root penetration depth"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Green Revolution wheat varieties were genetically bred or engineered for herbicide and insect resistance. Which explanation best describes how these resistance traits raise yield per acre?",
+    "answers": [
+      "By reducing crop losses to competing weeds and insect pests, more of the plant's photosynthetic energy is allocated toward grain production rather than defense or being lost to competition.",
+      "These traits only reduce the amount of pesticide farmers need to apply and do not, by themselves, increase grain yield.",
+      "These traits raise yields only in regions that already have advanced irrigation and mechanized farming infrastructure.",
+      "These traits raise yields primarily by reducing the plant's overall water and fertilizer requirements."
+    ],
+    "correct": "A"
+  },
+  {
+    "question": "A agricultural economist writes: 'The adoption of high-yielding crop varieties and synthetic fertilizers has enabled farmers in South Asia to triple grain production since the 1970s, lifting millions out of poverty and stabilizing food prices for consumers. While pesticide use has increased, the alternative—accepting lower yields and widespread malnutrition—would impose far greater human costs.' What assumption underlies this argument?",
+    "answers": [
+      "Traditional farming methods cannot produce sufficient yields to feed growing populations",
+      "Synthetic fertilizers are more environmentally damaging than traditional farming methods",
+      "Consumers prefer affordable food prices over environmentally sustainable production methods",
+      "Preventing human hunger justifies accepting increased pesticide use as a necessary trade-off"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "In an agricultural region, measured nitrogen fertilizer application and groundwater nitrate concentration over time were: 1970, 30 kg/ha and 2.1 mg/L; 1980, 85 kg/ha and 4.8 mg/L; 1990, 120 kg/ha and 7.2 mg/L; 2000, 115 kg/ha and 8.1 mg/L. Which conclusion about the environmental consequences of Green Revolution fertilization is best supported by these data?",
+    "answers": [
+      "Groundwater nitrate concentration continued to rise from 1990 to 2000 even though fertilizer application had leveled off, suggesting a delayed or cumulative effect of nitrogen loading on groundwater.",
+      "All of the nitrogen fertilizer applied in 1970 had been completely removed from the groundwater system by 1980.",
+      "The slight decline in fertilizer application after 1990 immediately reversed the trend of rising groundwater nitrate levels.",
+      "No relationship exists between fertilizer application rates and groundwater nitrate concentration in this data set."
+    ],
+    "correct": "A"
+  }
+]

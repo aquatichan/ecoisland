@@ -1,45 +1,46 @@
 [
   {
+    "id": "L3_5_0",
     "question": "A graph shows lake fish carrying capacity falling from 50,000 in 1990 to 8,000 in 2020 while the population now exceeds that capacity. Which environmental process explains why the population cannot be sustained?",
     "answers": [
       "Rapid evolution would reduce resource needs fast enough to sustain population",
       "Declining resources and degraded habitat increase mortality and reduce reproduction",
       "Population is in a stable equilibrium and will remain unchanged",
       "Pollution boosted nutrients temporarily but long-term degradation lowered capacity"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L3_5_1",
     "question": "A fishery manager monitors a salmon population in a river system and collects the following data:\nYear Population Available Spawning Habitat (m²)\n2018 8,400 125,000\n2019 9,100 125,000\n2020 9,700 125,000\n2021 10,200 125,000\n2022 10,500 62,500\n2023 10,200 62,500\nThe manager hypothesizes that habitat loss in 2022 reduced the population's carrying capacity. Which calculation approach would determine whether the population growth rate changed after habitat loss?",
     "answers": [
       "Calculate the percent change in population between 2022 and 2023 to determine whether the growth rate decreased following habitat loss",
       "Calculate the absolute change in population for each year before 2022 and after 2022, then compare whether the absolute change decreased following habitat loss",
       "Calculate the percent change in population for each year before 2022 and after 2022, then compare whether the percent change decreased following habitat loss",
       "Calculate the percent change in population for each year before 2022 and after 2022, then compare whether the percent change remained constant following habitat loss"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L3_5_2",
     "question": "Scientists investigated how water availability affects population growth in desert plants by establishing study plots in a region receiving 15 centimeters of annual rainfall. They measured plant density and reproductive output annually for five years in plots that received no supplemental water. If researchers modified the procedure to include replicate plots receiving supplemental irrigation (adding 10 centimeters of water annually) in the same region, how would this modification affect their conclusions about resource limitation?",
     "answers": [
       "The modification would make results less reliable because irrigated plots would have different soil conditions than control plots, confounding the water availability effect.",
       "Plant growth rates would increase in both the control and irrigated plots because the research activity itself would stimulate plant productivity.",
       "The study would show that plant population growth depends only on water availability and is unaffected by other environmental factors like temperature or soil nutrients.",
       "The study could demonstrate whether increased water availability accelerates plant population growth, directly testing whether water is a limiting resource in this environment."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L3_5_3",
     "question": "The graph shows population growth of a fish species in a lake over 20 years, with dissolved oxygen concentration measured at the same site. Which statement best explains the relationship between dissolved oxygen levels and population growth rate shown in the graph?",
     "answers": [
       "Dissolved oxygen and population size are inversely correlated, but this correlation proves that oxygen depletion caused the population decline rather than other factors like disease or predation.",
       "As dissolved oxygen declined, population growth rate increased because fish adapted to low-oxygen conditions by increasing reproductive output.",
       "Dissolved oxygen levels remained constant throughout the study period, so population growth was limited only by space and competition, not by oxygen availability.",
       "As dissolved oxygen declined from 8 mg/L to 4 mg/L between years 5 and 15, population growth rate decreased because oxygen availability limited aerobic respiration and survival."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L3_5_4",
     "question": "Ecologists investigating how food availability affects population growth in a deer herd established 12 study plots in a forest region: six plots received supplemental food (grain and hay) during winter months, while six received no supplemental food. Researchers counted deer and recorded body condition and fawn survival in all plots monthly for three years. In this experiment, what is the independent variable?",
     "answers": [
       "The presence or absence of supplemental winter food provided to each plot",
@@ -47,7 +48,6 @@
       "The body condition scores and fawn survival rates measured in the deer",
       "The three-year duration of the study and the total of 12 plots used"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Deer Herd Winter Supplemental Feeding Study",
@@ -75,36 +75,37 @@
     }
   },
   {
+    "id": "L3_5_5",
     "question": "Water-limited regions in the Middle East and North Africa experience declining groundwater levels that constrain both agricultural productivity and human population growth. Hydrologists propose large-scale wetland restoration projects that would increase surface water storage and groundwater recharge. How would this proposed intervention most directly affect the region's capacity to support population growth?",
     "answers": [
       "By increasing water storage capacity and groundwater recharge, wetland restoration would help maintain and potentially expand freshwater availability for both agricultural production and human consumption, supporting a higher sustainable population",
       "Wetland restoration would increase surface water storage capacity alone, with no meaningful effect on groundwater recharge or long-term freshwater availability",
       "Wetland restoration would provide only a brief, temporary increase in freshwater availability before groundwater levels resume their prior declining trend",
       "Wetland restoration would primarily benefit agricultural water use, while providing no meaningful increase in water available for human consumption"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L3_5_6",
     "question": "An ecologist studying grassland herbivores documents that in a semi-arid grassland, herbivore population dynamics closely track rainfall patterns and forage availability: during years with above-average precipitation, grassland productivity increases 40-60%, providing abundant forage, and herbivore populations grow accordingly; during drought years, forage declines sharply and herbivore populations fall. Which statement best summarizes this dynamic in terms of carrying capacity?",
     "answers": [
       "When favorable rainfall raises the grassland's carrying capacity, herbivore populations grow toward that higher capacity, but subsequent drought lowers carrying capacity again and herbivore numbers decline correspondingly",
       "Herbivore populations in this grassland grow independently of rainfall and forage availability, since population size is instead determined mainly by predator abundance",
       "Carrying capacity in this grassland remains constant year to year regardless of rainfall, so herbivore population changes must be explained by disease alone",
       "When rainfall decreases and carrying capacity falls, herbivore populations continue growing exponentially until the next drought further reduces forage"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L3_5_7",
     "question": "A graph shows per capita food production rising from 300 to 450 kg/year while arable land per person falls from 0.5 to 0.15 hectares between 1960 and 2020. Which conclusion is best supported by comparing these trends?",
     "answers": [
       "Diverging trends show food production and land availability are unrelated to population growth.",
       "Technological gains raised yields per hectare, masking land scarcity that limits capacity.",
       "Declining arable land per person proves population decline has already begun.",
       "Rising food per person proves resources are unlimited and will support indefinite growth."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L3_5_8",
     "question": "A conservation program reintroduces wolves to a region 50 years after their extirpation. In the absence of wolves, elk had grown very dense and overgrazed vegetation; after wolves returned, elk numbers began to decline. How does wolf predation affect the resource (vegetation) that limits elk population growth?",
     "answers": [
       "By reducing elk density through predation, wolves decrease competition among elk for vegetation, so each remaining elk has access to more of the limiting food resource",
@@ -112,7 +113,6 @@
       "Wolves compete directly with elk for the same vegetation resources, which is the primary mechanism by which they limit elk population growth",
       "Wolf predation has no effect on vegetation availability for elk, since wolves and elk do not interact with the same resource base at all"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Elk Population and Vegetation Before/After Wolf Reintroduction",
@@ -140,13 +140,13 @@
     }
   },
   {
+    "id": "L3_5_9",
     "question": "A diagram illustrates a predator-prey population cycle over 10 years, showing prey population peaking in year 3, predator population peaking in year 5, prey crashing in year 6, and predator declining in year 8. Which statement best explains the relationship between prey resource availability and predator population growth shown in this cycle?",
     "answers": [
       "Abundant prey resources in years 1-3 allow predator population to grow, but prey population crash in year 6 causes predator decline, which then reduces predation pressure and allows prey to recover.",
       "Abundant prey resources in years 1-3 allow predator population to grow, and predator growth reduces prey availability causing prey crash in year 6, but predator population stabilizes at a new equilibrium rather than declining.",
       "Abundant prey resources in years 5-6 allow predator population to grow, and predator growth reduces prey availability, causing prey population to crash in year 8 and subsequently limiting predator growth.",
       "Abundant prey resources in years 1-3 allow predator population to grow, but predator growth eventually reduces prey availability, causing prey population to crash and subsequently limiting predator growth."
-    ],
-    "correct": "D"
+    ]
   }
 ]

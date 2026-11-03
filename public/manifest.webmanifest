@@ -1,0 +1,13 @@
+{
+  "name": "Ecoisland",
+  "short_name": "Ecoisland",
+  "description": "AP Environmental Science practice that grows your island.",
+  "start_url": "/today",
+  "display": "standalone",
+  "background_color": "#f5f3ec",
+  "theme_color": "#1c7c50",
+  "icons": [
+    { "src": "/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

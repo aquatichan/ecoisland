@@ -1,15 +1,16 @@
 [
   {
+    "id": "L1_5_0",
     "question": "Scientists studying nitrogen assimilation in a forest ecosystem added nitrogen-15 (a non-radioactive, naturally occurring isotope) to soil around tree seedlings, then tracked the labeled nitrogen's movement through plant tissues, leaf litter, and soil over two years, while leaving a nearby untreated plot as a comparison. Which type of study design does this best represent?",
     "answers": [
       "A manipulative experiment that uses an isotopic tracer to directly follow the pathway of nitrogen as it moves through different ecosystem reservoirs",
       "An observational study that simply measures naturally occurring nitrogen concentrations in different ecosystem compartments without any intervention",
       "A correlational study that examines the statistical relationship between ambient soil nitrogen levels and plant growth rates across many sites",
       "A long-term monitoring program that documents gradual changes in total ecosystem nitrogen content over multiple decades without any added tracer"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L1_5_1",
     "question": "In an agricultural region, synthetic nitrogen fertilizer is applied to fields in spring, but heavy rainfall in early summer causes significant runoff into a nearby river. The river subsequently experiences an algal bloom, followed weeks later by a dead zone where dissolved oxygen is depleted and fish die. Which sequence of processes best explains this dead zone formation?",
     "answers": [
       "Excess nitrogen fuels rapid algal growth (an increase in biomass); when the algae die, bacterial decomposition of that biomass consumes large amounts of dissolved oxygen, creating hypoxic conditions that kill fish",
@@ -17,7 +18,6 @@
       "Nitrogen-fixing cyanobacteria convert atmospheric nitrogen into ammonia at toxic concentrations, which alone accounts for the fish kill",
       "Denitrification converts the excess fertilizer nitrogen into nitrogen gas, which physically displaces dissolved oxygen from the water column"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Agricultural Runoff and River Dead Zone Timeline",
@@ -31,7 +31,7 @@
         [
           "Fertilizer applied",
           "Spring",
-          8.0
+          8
         ],
         [
           "Runoff + algal bloom begins",
@@ -52,76 +52,77 @@
     }
   },
   {
+    "id": "L1_5_2",
     "question": "A wastewater plant sends effluent through anoxic tanks where bacteria convert nitrate to N₂ gas before river discharge. Why is denitrification necessary?",
     "answers": [
       "Denitrification produces N₂ gas not ammonia which comes from other processes.",
       "Regulations require nitrogen limits because of environmental harm not arbitrary rules.",
       "Denitrification yields N₂ gas but the main issue is nutrient enrichment not toxicity.",
       "It removes bioavailable nitrogen that would fuel algal blooms and cause hypoxia."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L1_5_3",
     "question": "A coastal estuary receives 850 kg/day of nitrate runoff while denitrifying bacteria remove 120 kg/day. Which calculation sequence determines net nitrogen accumulation over 30 days?",
     "answers": [
       "Multiply inflow by 30 then divide the result by denitrification rate",
       "Compute daily net as inflow minus denitrification and multiply by 30",
       "Divide inflow by denitrification then multiply the quotient by 30",
       "Add inflow and denitrification to compute daily total then multiply by 30"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_5_4",
     "question": "A marine biogeochemist analyzing ocean nitrogen dynamics states: 'The open ocean receives nitrogen primarily through atmospheric deposition and riverine input, yet nitrogen remains the limiting nutrient for phytoplankton productivity in most marine regions. Recent studies show that nitrogen fixation by cyanobacteria contributes only 10-20% of the nitrogen entering marine systems, while the remaining 80-90% comes from terrestrial sources. However, this terrestrial nitrogen is increasingly unavailable to phytoplankton because it accumulates in coastal sediments or is denitrified in oxygen-minimum zones before reaching productive open ocean waters. Consequently, expanding oxygen-minimum zones represent a critical threat to marine productivity because they remove bioavailable nitrogen from the ocean nitrogen cycle.'",
     "answers": [
       "Terrestrial nitrogen accumulates in coastal sediments or is denitrified in oxygen-minimum zones before reaching open ocean waters.",
       "Expanding oxygen-minimum zones threaten marine productivity by removing bioavailable nitrogen from the ocean nitrogen cycle.",
       "Nitrogen fixation by cyanobacteria contributes 10-20% of nitrogen entering marine systems, while terrestrial sources provide 80-90%.",
       "Nitrogen is the limiting nutrient for phytoplankton productivity in most marine regions."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_5_5",
     "question": "Researchers measured N₂O production in sediment cores from five lakes, taking three replicate cores at the same location in each lake. The primary advantage of using three replicate cores instead of one is that replication allows researchers to",
     "answers": [
       "Measure N₂O production at different sediment depths rather than replicate samples",
       "Assess whether measured N₂O reflects consistent denitrification or random variation",
       "Increase geographic scope so findings generalize across freshwater ecosystems",
       "Ensure the three cores capture different temporal stages of denitrification"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_5_6",
     "question": "A soil scientist explains that spring mineralization releases ammonium as soils warm, while tree nitrogen uptake peaks in early summer so much ammonium is nitrified and lost. Which choice best expresses the author's main claim?",
     "answers": [
       "Plant nitrogen uptake peaks in early summer when trees leaf out and demand N",
       "Ammonium from spring mineralization is nitrified to nitrate before plants assimilate it",
       "Mineralization peaks in spring as soil warms above 10°C and microbes accelerate",
       "A spring-summer timing mismatch causes mineralized N loss via leaching and denitrification"
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L1_5_7",
     "question": "A watershed study measured nitrogen runoff (kg N/ha/yr) from forest, agricultural, and urban land uses over 10 years. Forest fell from 3.2 to about 2.0–2.3 by year 10. Agriculture rose from 28 to about 38–45 after year 5. Urban stayed near 11–14. Which statement best describes these patterns?",
     "answers": [
       "Agriculture shows the highest runoff, urban intermediate, and forest the lowest throughout.",
       "Forest declines then stabilizes low, agriculture rises high, urban stays intermediate.",
       "Agriculture remains constant at 28 kg/ha/yr while forest and urban increase.",
       "All three land uses follow an identical increase then decline pattern."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_5_8",
     "question": "Microbiologists test whether inoculating agricultural soil with nitrogen-fixing bacteria increases plant-available nitrogen. Identical plots receive inoculant or serve as controls. After eight weeks they measure soil ammonium and nitrate, plant biomass, and plant nitrogen content. Which hypothesis best fits this experimental design?",
     "answers": [
       "Nitrogen-fixing bacteria will improve soil quality and long-term sustainability.",
       "Inoculated plots will show higher soil ammonium and plant nitrogen levels.",
       "Bacteria will directly convert atmospheric nitrogen to nitrate, increasing productivity.",
       "Inoculation will increase plant growth by improving general nutrient uptake."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_5_9",
     "question": "An environmental consultant argues that industrial atmospheric nitrogen deposition is causing nitrogen pollution in naturally nutrient-poor (oligotrophic) forests. She cites nitrate deposition averaging 15 kg N per hectare per year and reports increased plant growth and altered species composition compared with pre-industrial conditions. Which assumption is this argument most reliant on?",
     "answers": [
       "That the nitrogen deposited from the atmosphere is chemically converted into a form that enters the soil and becomes available for plant uptake",
@@ -129,7 +130,6 @@
       "That rates of denitrification, which return nitrogen to the atmosphere as gas, have measurably declined in these forests due to industrial emissions",
       "That industrial atmospheric deposition is the only possible source of nitrogen input available to these forest ecosystems"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Atmospheric Nitrogen Deposition in an Oligotrophic Forest",

@@ -1,32 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/ecoisland_logo_new.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecoisland — Environmental Action, Gamified</title>
-    <meta name="description" content="Grow your own Ecoisland, track your carbon footprint, earn Treecoins, and join a community of students taking real environmental action every day." />
-    <meta name="theme-color" content="#00c896" />
+    <title>Ecoisland: AP Environmental Science, five minutes a day</title>
+    <meta
+      name="description"
+      content="Ecoisland turns AP Environmental Science review into a daily habit. Answer a short set each day, finish your teacher's assignments, and grow an island that thrives when you show up."
+    />
+    <link rel="icon" type="image/png" href="/logo-64.png" />
+    <link rel="apple-touch-icon" href="/logo-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#f5f3ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b100e" media="(prefers-color-scheme: dark)" />
 
-    <!-- Open Graph -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=Inter:opsz,wght@14..32,400..700&display=swap"
+    />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Ecoisland" />
-    <meta property="og:title" content="Ecoisland — Environmental Action, Gamified" />
-    <meta property="og:description" content="Grow your own Ecoisland, track your carbon footprint, earn Treecoins, and join a community of students taking real environmental action every day." />
-    <meta property="og:image" content="https://ecoisland.xyz/ecoisland_logo_new.png" />
+    <meta property="og:title" content="Ecoisland: AP Environmental Science, five minutes a day" />
+    <meta property="og:description" content="Daily APES practice, teacher assignments, and an island that grows when you study." />
+    <meta property="og:image" content="https://ecoisland.xyz/og.png" />
     <meta property="og:url" content="https://ecoisland.xyz" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ecoisland — Environmental Action, Gamified" />
-    <meta name="twitter:description" content="Grow your own Ecoisland, track your carbon footprint, earn Treecoins, and join a community of students taking real environmental action every day." />
-    <meta name="twitter:image" content="https://ecoisland.xyz/ecoisland_logo_new.png" />
+
+    <!-- Apply the saved theme before first paint so there is no flash. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("ecoisland-theme");
+          var dark = saved === "dark" || ((!saved || saved === "system") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Ecoisland needs JavaScript to run.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,0 +1,102 @@
+[
+  {
+    "question": "An energy policy report claims that transitioning to renewable energy sources will reduce long-term energy costs for developing nations. The report presents evidence that solar panel installation costs have decreased 89% since 2010 and that wind turbine capacity factors have improved from 25% to 35% over the same period. Which of the following best identifies a limitation in how this evidence supports the cost reduction claim?",
+    "answers": [
+      "The evidence demonstrates declining technology costs but does not address whether renewable energy systems require higher ongoing operational and maintenance expenses that offset the per-unit equipment cost reductions",
+      "The evidence demonstrates declining technology costs but does not address whether these cost reductions are measured against a consistent baseline or account for inflation adjustments over the 2010 comparison period",
+      "The evidence demonstrates declining technology costs but does not address whether renewable energy infrastructure requires higher upfront capital investment or grid modernization expenses that offset per-unit cost reductions",
+      "The evidence demonstrates declining solar and wind technology costs but does not address whether these specific renewable sources require different infrastructure investments than other renewable options like hydroelectric or geothermal power"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A developing nation with abundant coal must meet rising electricity demand. Scientists warn coal will be depleted in 150 years and emits large greenhouse gases. Why is coal classified as nonrenewable despite apparent abundance?",
+    "answers": [
+      "Emissions make coal polluting but do not determine renewability",
+      "Extraction rate affects availability but does not change renewability",
+      "Coal forms over millions of years so natural replacement cannot match consumption",
+      "Coal forms over geological time far slower than human consumption"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A hydroelectric dam captures the gravitational potential energy of water flowing downhill, converting it into electrical energy. The water cycle continuously replenishes the reservoir through precipitation and upstream flow. Which of the following best explains the process that makes hydroelectric energy renewable?",
+    "answers": [
+      "The water cycle continuously replenishes water in the reservoir through precipitation and upstream flow at rates that always exceed consumption, ensuring unlimited electricity generation capacity",
+      "The gravitational potential energy of water flowing downhill is continuously renewed as water descends through the dam, converting potential energy to kinetic energy without depleting the energy resource",
+      "The water cycle continuously replenishes water in the reservoir through precipitation and upstream flow at rates that sustain ongoing electricity generation without depleting the water resource",
+      "The water cycle continuously replenishes water in the reservoir through precipitation and upstream flow, but at rates that vary seasonally and may not always sustain electricity generation during drought periods"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Geothermal energy taps Earth's internal heat conducted to the surface. A geothermal field in Iceland has produced electricity for decades without significant heat depletion. Why can geothermal energy be classified as renewable in some locations?",
+    "answers": [
+      "Because lack of greenhouse gas emissions does not determine renewability.",
+      "Extraction rate is lower than natural replenishment by Earth's internal heat.",
+      "Because Earth's heat will last billions of years but site replenishment varies.",
+      "Because durable wells do not make the heat source renewable by themselves."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers measured CO2 emissions in metric tons CO2 per MWh for five electricity sources: coal 1.0, natural gas 0.5, nuclear 0.01, wind 0.01, and solar 0.04. What do these data illustrate about differences between nonrenewable and renewable energy sources?",
+    "answers": [
+      "All energy sources produce identical CO2 emissions regardless of renewable status.",
+      "Solar emits more CO2 per MWh than coal implying renewables are worse.",
+      "Nuclear energy produces the highest CO2 emissions because it is nonrenewable.",
+      "Fossil fuel sources emit far more CO2 per MWh than renewable sources."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "An environmental economist compares energy transition costs. Renewables require higher upfront capital but run 25 to 40 years with minimal fuel costs. Fossil plants need lower initial capital but incur ongoing fuel extraction and transport costs. Over a 30-year lifecycle the economist concludes renewables are more economical in most regions. Which claim does the author make?",
+    "answers": [
+      "Renewable installations typically last 25 to 40 years in practice.",
+      "Fossil fuel plants require lower initial capital than renewables.",
+      "Renewables cost less over 30 years because they avoid fuel costs.",
+      "The author denies renewables are merely an environmental preference."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Engineers propose underwater turbines to harvest kinetic energy from tidal flows that repeat every 12 hours and 25 minutes, driven by Earth, moon, and sun. Why is tidal energy considered renewable despite extraction?",
+    "answers": [
+      "Water abundance concerns the medium, not whether tidal motion is replenished.",
+      "Extracting energy can slightly slow local tides but gravitational forces replenish them.",
+      "Turbine upgrades affect equipment longevity but not the tidal resource's renewability.",
+      "Tidal cycles are continuously driven by gravity and are predictably replenished."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A diagram illustrates the energy reserve depletion curves for three nonrenewable sources (coal, oil, natural gas) and the energy availability curves for three renewable sources (solar, wind, hydroelectric). The nonrenewable curves show declining reserves over time, with steeper declines as extraction accelerates. The renewable curves show stable or fluctuating availability that does not systematically decline over the same timeframe. What characteristic of energy sources does this visual representation most directly demonstrate?",
+    "answers": [
+      "All six energy sources are nonrenewable because all show some variation in availability or extraction rates over the timeframe shown.",
+      "Renewable sources are superior to nonrenewable sources because their availability curves remain stable while nonrenewable curves decline.",
+      "Nonrenewable sources have finite reserves that deplete with consumption, while renewable sources maintain availability independent of extraction rates.",
+      "The diagram shows that extraction technology determines whether a source is renewable or nonrenewable, as improved technology could stabilize the declining reserve curves."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "From 2000 to 2020 coal fell from 45% to 28%, natural gas rose from 18% to 32%, oil stayed at 35%, and renewables rose from 2% to 5%. Which conclusion is best supported?",
+    "answers": [
+      "Coal and natural gas remain nonrenewable despite their changing shares.",
+      "Most fossil fuel use has not been replaced by renewable energy.",
+      "Energy shifted mainly among fossil fuels while renewables stayed a small share.",
+      "Renewable adoption is impossible because nonrenewables rose in absolute terms."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Biomass energy comes from burning organic material that can regrow over years or decades. Some sources are harvested faster than they regenerate. Which factor best determines whether a biomass source is renewable or nonrenewable?",
+    "answers": [
+      "Whether burning produces carbon dioxide and other greenhouse gases",
+      "Whether the biomass comes from plants rather than animals",
+      "Whether harvest rates allow regeneration to match or exceed consumption",
+      "Whether it is grown on cropland versus harvested from natural forests"
+    ],
+    "correct": "C"
+  }
+]

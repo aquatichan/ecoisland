@@ -1,0 +1,258 @@
+rules_version = '2';
+
+// Ecoisland Firestore rules.
+//
+// The browser may only edit a student's own profile and cosmetic choices,
+// their spaced-repetition state, and (for teachers) their own classes and
+// assignments. Everything that is worth something (Treecoins, XP, streaks,
+// progress, class membership, submissions) is written by the server
+// (worker/), which uses a service account and bypasses these rules.
+//
+// Deploy with:  npx firebase-tools deploy --only firestore:rules,storage
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isDay(v) {
+      return v is string && v.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+    }
+
+    // ── Users ──────────────────────────────────────────────────────────────
+
+    // Fields a student may change on their own profile.
+    function profileFields() {
+      return [
+        'username', 'username_lower', 'full_name', 'avatar_url', 'role',
+        'onboarding_complete', 'preferences', 'email_reminders', 'focus_unit',
+        'last_lesson', 'island_name', 'island_skybox', 'island_decor', 'updated_date'
+      ];
+    }
+
+    function validProfileChange(after, keys) {
+      return (!('full_name' in keys) || (after.full_name is string && after.full_name.size() <= 80))
+        && (!('avatar_url' in keys) || (after.avatar_url is string && after.avatar_url.size() <= 2048))
+        && (!('role' in keys) || after.role in ['student', 'teacher'])
+        && (!('onboarding_complete' in keys) || after.onboarding_complete is bool)
+        && (!('preferences' in keys) || after.preferences is map)
+        && (!('email_reminders' in keys) || after.email_reminders is bool)
+        && (!('focus_unit' in keys) || after.focus_unit == null
+            || (after.focus_unit is int && after.focus_unit >= 1 && after.focus_unit <= 9))
+        && (!('last_lesson' in keys) || after.last_lesson == null || after.last_lesson is map)
+        && (!('island_name' in keys) || (after.island_name is string && after.island_name.size() <= 32))
+        && (!('island_decor' in keys) || (after.island_decor is list && after.island_decor.size() <= 24))
+        && (!('island_skybox' in keys) || after.island_skybox == 'day'
+            || after.island_skybox in after.get('owned_items', []))
+        && (!('updated_date' in keys) || (after.updated_date is string && after.updated_date.size() <= 40));
+    }
+
+    // Changing a username requires holding its claim in /usernames.
+    function usernameChangeOk(after, keys) {
+      return !('username' in keys || 'username_lower' in keys) || (
+        after.username is string
+        && after.username.matches('^[A-Za-z0-9._-]{3,20}$')
+        && after.username_lower == after.username.lower()
+        && getAfter(/databases/$(database)/documents/usernames/$(after.username_lower)).data.uid == request.auth.uid
+      );
+    }
+
+    match /users/{uid} {
+      allow read: if isSelf(uid);
+      allow create, delete: if false; // the server creates and deletes profiles
+      allow update: if isSelf(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(profileFields())
+        && validProfileChange(request.resource.data, request.resource.data.diff(resource.data).affectedKeys())
+        && usernameChangeOk(request.resource.data, request.resource.data.diff(resource.data).affectedKeys());
+
+      // Study history, quests, usage counters: written by the server.
+      match /{collection}/{docId} {
+        allow read: if isSelf(uid);
+        allow write: if false;
+      }
+
+      // Spaced-repetition state for the daily set. Study data only.
+      match /srs/{docId} {
+        allow read: if isSelf(uid);
+        allow create, update: if isSelf(uid) && docId == 'state'
+          && request.resource.data.keys().hasOnly(['cards', 'updated_at'])
+          && request.resource.data.cards is map
+          && request.resource.data.cards.size() <= 3000;
+      }
+    }
+
+    // One document per lower-cased username, so names are unique.
+    match /usernames/{name} {
+      allow get: if signedIn();
+      allow list, update: if false;
+      allow create: if signedIn()
+        && name.matches('^[a-z0-9._-]{3,20}$')
+        && request.resource.data.keys().hasOnly(['uid'])
+        && request.resource.data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('username_lower', '') == name;
+      allow delete: if signedIn()
+        && resource.data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('username_lower', '') != name;
+    }
+
+    // ── Classes ────────────────────────────────────────────────────────────
+
+    function isMember(cid) {
+      return signedIn() && exists(/databases/$(database)/documents/classes/$(cid)/members/$(request.auth.uid));
+    }
+
+    function isTeacher(cid) {
+      return signedIn() && get(/databases/$(database)/documents/classes/$(cid)).data.teacher_id == request.auth.uid;
+    }
+
+    function validClassUpdate(after) {
+      return after.name is string && after.name.size() >= 2 && after.name.size() <= 60
+        && (after.get('current_unit', null) == null
+            || (after.current_unit is int && after.current_unit >= 1 && after.current_unit <= 9))
+        && (after.get('test_day', null) == null || isDay(after.test_day))
+        && (after.get('test_label', null) == null
+            || (after.test_label is string && after.test_label.size() <= 60));
+    }
+
+    function validAssignment(d) {
+      return d.keys().hasOnly(['type', 'ref', 'title', 'unit', 'count', 'min_pct', 'notes',
+                               'created_day', 'due_day', 'created_by', 'created_at', 'updated_at'])
+        && d.keys().hasAll(['type', 'ref', 'title', 'unit', 'created_day', 'due_day', 'created_by'])
+        && d.type in ['lesson', 'lesson_quiz', 'unit_quiz', 'frq', 'daily_sets', 'field_quest']
+        && d.ref is string && d.ref.size() <= 120
+        && d.title is string && d.title.size() >= 1 && d.title.size() <= 120
+        && d.unit is int && d.unit >= 1 && d.unit <= 9
+        && (!('count' in d) || (d.count is int && d.count >= 1 && d.count <= 30))
+        && (!('min_pct' in d) || (d.min_pct is int && d.min_pct >= 0 && d.min_pct <= 100))
+        && (!('notes' in d) || (d.notes is string && d.notes.size() <= 500))
+        && isDay(d.created_day) && isDay(d.due_day) && d.due_day >= d.created_day
+        && d.created_by == request.auth.uid;
+    }
+
+    match /classes/{cid} {
+      allow get: if signedIn() && (resource.data.teacher_id == request.auth.uid || isMember(cid));
+      allow list: if signedIn() && resource.data.teacher_id == request.auth.uid;
+      allow create, delete: if false; // the server creates classes and their join codes
+      allow update: if signedIn() && resource.data.teacher_id == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['name', 'current_unit', 'test_day', 'test_label', 'updated_at'])
+        && validClassUpdate(request.resource.data);
+
+      // Roster and leaderboard stats, mirrored by the server.
+      match /members/{memberId} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow write: if false;
+      }
+
+      match /assignments/{aid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow create: if isTeacher(cid) && validAssignment(request.resource.data);
+        allow update: if isTeacher(cid) && validAssignment(request.resource.data)
+          && request.resource.data.created_day == resource.data.created_day;
+        allow delete: if isTeacher(cid);
+
+        // Completion status, computed by the server from the student's work.
+        match /submissions/{sid} {
+          allow read: if isTeacher(cid) || (isSelf(sid) && isMember(cid));
+          allow delete: if isTeacher(cid);
+          allow create, update: if false;
+        }
+      }
+
+      // Class events and eco actions, posted by the teacher through the
+      // server. RSVPs are visible to the teacher and to the student who made them.
+      match /events/{eid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow write: if false;
+
+        match /rsvps/{rid} {
+          allow read: if isTeacher(cid) || (isSelf(rid) && isMember(cid));
+          allow write: if false;
+        }
+      }
+
+      // Class chat. Written by the server (worker/chat.ts), which checks
+      // membership, mutes, the language filter and flood limits.
+      match /messages/{mid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow write: if false;
+      }
+
+      // Chat moderation log (deletes with the original text, reports and who
+      // made them, mutes, chat on/off, blocked harassment, wellbeing flags),
+      // plus mutes and removals that outlast membership. Teacher and admins only.
+      match /moderation/{rid} {
+        allow read: if isTeacher(cid) || isAdmin();
+        allow write: if false;
+      }
+      match /mutes/{uid} {
+        allow read: if isTeacher(cid);
+        allow write: if false;
+      }
+      match /removed/{uid} {
+        allow read: if isTeacher(cid);
+        allow write: if false;
+      }
+
+            // Field notes from quests. The teacher can remove any; authors their own.
+      match /notes/{nid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow delete: if isTeacher(cid) || (signedIn() && resource.data.uid == request.auth.uid);
+        allow create, update: if false;
+      }
+    }
+
+    // Join codes are resolved by the server only.
+    match /class_codes/{code} {
+      allow read, write: if false;
+    }
+
+    // ── Act: community events, volunteer hours, ambassadors ───────────────
+    // All written by the server (worker/act.ts).
+
+    // Admins are added by hand in the Firebase console: admins/{uid}.
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{uid} {
+      allow get: if isSelf(uid);
+      allow list, write: if false;
+    }
+
+    // Community listings: published and cancelled ones are public to signed-in
+    // users; a pending suggestion only to its author and admins.
+    match /events/{eid} {
+      allow read: if signedIn() && (resource.data.status in ['published', 'cancelled']
+        || resource.data.created_by == request.auth.uid
+        || isAdmin());
+      allow write: if false;
+
+      match /rsvps/{rid} {
+        allow get: if isSelf(rid) || isAdmin();
+        allow list: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    // Volunteer hours: the student, the teacher asked to verify, and admins.
+    match /hours/{hid} {
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid
+        || resource.data.teacher_uid == request.auth.uid
+        || isAdmin());
+      allow write: if false;
+    }
+
+    match /ambassador_applications/{uid} {
+      allow get: if isSelf(uid) || isAdmin();
+      allow list: if isAdmin();
+      allow write: if false;
+    }
+  }
+}

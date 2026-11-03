@@ -1,0 +1,21 @@
+rules_version = '2';
+
+// Ecoisland Storage rules. Students can upload a profile picture into their
+// own folder; nothing else is writable from the browser.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /avatars/{uid}/{fileName} {
+      allow read: if true;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/(png|jpeg|webp|gif)');
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Files uploaded by older versions of the app stay readable.
+    match /uploads/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

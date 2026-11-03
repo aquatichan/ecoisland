@@ -1,0 +1,102 @@
+[
+  {
+    "question": "A wetland in the Mississippi River delta originally covered 8,500 square kilometers. Due to dam construction upstream and commercial development, the wetland has been reduced to 3,400 square kilometers. By what percent has the wetland area decreased?",
+    "answers": [
+      "40%",
+      "60%",
+      "5,100%",
+      "150%"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A wetland restoration project monitors fish populations to assess recovery from overfishing. The population was 2,400 individuals in 2015 and 3,840 individuals in 2023. Which method would determine the average annual percent change in fish population during this recovery period?",
+    "answers": [
+      "Divide the final population by the initial population, multiply by 100%, then divide by 8 years",
+      "Calculate the absolute population increase of 1,440 individuals, then divide by the final population of 3,840 to determine the annual recovery rate",
+      "Subtract the initial population from the final population, divide by 8 years, then divide by the initial population to get percent change per year",
+      "Calculate [(3,840 − 2,400) ÷ 2,400] × 100% to get total percent change, then divide by 8 years to get average annual percent change"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "The diagram below shows the water flow pathway through a coastal wetland system before and after dam construction upstream. The top illustration depicts natural water movement through the wetland; the bottom shows the altered system with a dam in place. Which characteristic of the wetland's ecosystem services is most directly compromised by the change shown in the diagram?",
+    "answers": [
+      "Flood protection capacity, because reduced water flow limits the residence time available for plants and sediments to absorb excess water during storm events",
+      "Water purification capacity, because reduced water flow limits the residence time available for plants and sediments to filter agricultural runoff and contaminants",
+      "Water purification capacity, because reduced water flow decreases the volume of water passing through the wetland, limiting contact with filtering vegetation",
+      "Water purification capacity, because reduced water flow limits the residence time available for aerobic bacteria to decompose agricultural runoff and contaminants"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A chemical manufacturing facility located upstream of a freshwater wetland implements new wastewater treatment technology that removes 95% of industrial pollutants before discharge into the river. Which of the following represents a limitation of this pollution control solution?",
+    "answers": [
+      "The remaining 5% of pollutants that pass through treatment can still cause direct toxic effects on wetland organisms through acute exposure, potentially causing long-term ecosystem damage.",
+      "The remaining 5% of pollutants that pass through treatment can still accumulate in wetland sediments through bioaccumulation, but this primarily affects sediment quality rather than causing ecosystem-wide damage.",
+      "The remaining 5% of pollutants that pass through treatment can still accumulate in wetland sediments and organisms through bioaccumulation, potentially causing long-term ecosystem damage.",
+      "Pollutants from agricultural runoff and urban stormwater can still accumulate in wetland sediments and organisms through bioaccumulation, potentially causing long-term ecosystem damage."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Engineers evaluate whether restored wetlands reduce downstream flooding by installing water level gauges at five locations: upstream of the restored wetland, within the wetland at three positions, and downstream. During a heavy rainfall event, water levels are recorded every 15 minutes for 48 hours. Peak water levels and time to peak are compared between the restored wetland site and an adjacent unrestored reference site that experienced similar rainfall. Which of the following best describes this research design?",
+    "answers": [
+      "Randomized controlled experiment using continuous water level monitoring to assess whether wetland restoration reduces flood peak magnitude and duration",
+      "Before-after comparison study using continuous water level monitoring to assess whether wetland restoration reduces flood peak magnitude and duration",
+      "Before-after comparison study using continuous water level monitoring to assess whether wetland restoration increases water storage capacity and groundwater recharge",
+      "Before-after comparison study using peak water level measurements at five locations to assess whether wetland restoration reduces flood peak magnitude and duration"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Fertilizer runoff from rice paddies flows through a coastal mangrove forest. Within three months, algal and phytoplankton populations spike, followed by fish kills and reduced mangrove seedling recruitment. Which process best explains these effects?",
+    "answers": [
+      "Runoff increases salinity and creates conditions too saline for fish and seedlings",
+      "Nutrient runoff triggers algal blooms whose decomposition causes hypoxia and light loss",
+      "Higher nutrients cause mangroves to invest in leaves lowering reproductive output",
+      "Nutrients directly bind fish gills and cause acute respiratory failure"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A government bans commercial and subsistence fishing in a mangrove estuary for five years to allow fish to recover. What is a likely disadvantage of this policy?",
+    "answers": [
+      "Asserting permanent livelihood loss misstates the temporary five-year ban",
+      "Local fishing households lose food and income during the five-year ban",
+      "Tourism businesses lose revenue from fewer recreational fishing visits",
+      "Fishers shift effort to other grounds and stress unprotected fish stocks"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A wetland historically supported many muskrats that eat aquatic plants and burrow. Overhunting reduced muskrat numbers by 90% over a decade. After the decline, vegetation became dense and matted, water quality worsened, and waterfowl numbers fell by 70%. Which best explains this cascade of ecological changes?",
+    "answers": [
+      "Muskrat decline reduced nutrient recycling and caused food scarcity for waterfowl.",
+      "Muskrat decline increased aquatic insects which outcompeted waterfowl for food.",
+      "Muskrats act as keystone species maintaining vegetation structure and water circulation.",
+      "Loss of muskrat burrows reduced nesting sites causing waterfowl reproductive failure."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "An advocate notes Great Lakes inland wetlands fell from about 3.5 million hectares to under 400,000. Critics argue restoration reduces developable land and farm productivity. The advocate cites $1.2 billion yearly for water filtration, $800 million for flood protection, and $2.3 billion for recreation. Which choice best states the author's main claim?",
+    "answers": [
+      "Opponents say restoration is inefficient because it reduces developable and farm land.",
+      "Great Lakes inland wetlands declined from 3.5 million to under 400,000 hectares.",
+      "Valuing ecosystem services makes wetland preservation the better economic choice.",
+      "Wetland water filtration would cost $1.2 billion per year to replace."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A conservation group claims mangrove restoration will reduce storm surge damage. They cite a 66% wave height reduction during the 2004 tsunami and note mangrove roots dissipate incoming water energy. Which limitation best describes how this evidence supports future storm protection claims?",
+    "answers": [
+      "Tsunami and storm surge have different causes but share incoming water energy.",
+      "The evidence relies on one historical event and may not generalize.",
+      "A single percentage point does not guarantee similar protection across sites.",
+      "Claiming roots are irrelevant is wrong because roots dissipate wave energy."
+    ],
+    "correct": "B"
+  }
+]

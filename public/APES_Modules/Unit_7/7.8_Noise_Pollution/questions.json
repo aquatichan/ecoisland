@@ -1,26 +1,16 @@
 [
   {
+    "id": "L7_8_0",
     "question": "Which of the following is the most significant source of chronic noise pollution in urban environments, according to EPA assessments?",
     "answers": [
       "Motor vehicle traffic",
       "Residential lawn equipment",
       "Overhead aircraft at low-traffic regional airports",
       "Construction activity occurring only during daytime hours"
-    ],
-    "correct": "A"
+    ]
   },
   {
-    "stimulus": {
-      "type": "line",
-      "title": "Ambient Noise and Successful Bird Vocalizations in an Urban Park (24-hour cycle)",
-      "sourceNote": "Hypothetical data for this exercise",
-      "series": [
-        { "name": "Ambient noise (dB)", "points": [ {"x": 0, "y": 50}, {"x": 8, "y": 75}, {"x": 12, "y": 65}, {"x": 18, "y": 75}, {"x": 22, "y": 50} ] },
-        { "name": "Successful vocalizations (%)", "points": [ {"x": 0, "y": 80}, {"x": 8, "y": 15}, {"x": 12, "y": 45}, {"x": 18, "y": 15}, {"x": 22, "y": 80} ] }
-      ],
-      "xLabel": "Hour of day",
-      "yLabel": "dB / % success"
-    },
+    "id": "L7_8_1",
     "question": "Based on the graph, which statement best explains the relationship between ambient noise and bird vocalization success?",
     "answers": [
       "Ambient noise masks bird calls at the frequencies birds use, reducing signal detectability and lowering communication success during loud periods.",
@@ -28,86 +18,144 @@
       "Higher noise increases vocalization success because birds call louder to compensate.",
       "The two variables are unrelated and vary independently by coincidence."
     ],
-    "correct": "A"
+    "stimulus": {
+      "type": "line",
+      "title": "Ambient Noise and Successful Bird Vocalizations in an Urban Park (24-hour cycle)",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Ambient noise (dB)",
+          "points": [
+            {
+              "x": 0,
+              "y": 50
+            },
+            {
+              "x": 8,
+              "y": 75
+            },
+            {
+              "x": 12,
+              "y": 65
+            },
+            {
+              "x": 18,
+              "y": 75
+            },
+            {
+              "x": 22,
+              "y": 50
+            }
+          ]
+        },
+        {
+          "name": "Successful vocalizations (%)",
+          "points": [
+            {
+              "x": 0,
+              "y": 80
+            },
+            {
+              "x": 8,
+              "y": 15
+            },
+            {
+              "x": 12,
+              "y": 45
+            },
+            {
+              "x": 18,
+              "y": 15
+            },
+            {
+              "x": 22,
+              "y": 80
+            }
+          ]
+        }
+      ],
+      "xLabel": "Hour of day",
+      "yLabel": "dB / % success"
+    }
   },
   {
+    "id": "L7_8_2",
     "question": "Researchers measured weekly noise and stress hormones in urban rats in a downtown district for eight weeks. If they instead sampled rats in three urban zones during the same eight weeks, which understanding would most improve?",
     "answers": [
       "No change in temporal replication because sampling spans eight weeks",
       "Need for more blood samples complicates statistical analysis",
       "Correlation of stress hormones with noise across urban zones",
       "Lower stress hormone levels in park rats due to quieter environment"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L7_8_3",
     "question": "In urban areas, noise from traffic, construction, and industrial facilities often exceeds 85 decibels. Which of the following best explains why prolonged exposure to noise at this level causes hearing loss in humans?",
     "answers": [
       "Sound waves at high decibel levels cause excessive vibration of the cochlear structures in the inner ear, temporarily fatiguing hair cells that convert sound vibrations into nerve signals, resulting in reversible hearing threshold shifts",
       "Sound waves at high decibel levels cause chemical stress in the cochlear structures of the inner ear, damaging hair cells that convert sound vibrations into nerve signals, resulting in permanent hearing impairment",
       "Sound waves at high decibel levels cause excessive vibration of the cochlear structures in the inner ear, damaging hair cells that convert sound vibrations into nerve signals, resulting in permanent hearing impairment",
       "Sound waves at high decibel levels cause excessive vibration of the tectorial membrane in the inner ear, damaging hair cells where they attach to this membrane, resulting in permanent hearing impairment"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L7_8_4",
     "question": "A wildlife refuge near a city reports migratory songbird numbers fell 35% over a decade. Urban noise averaged 70 dB and increased 15 dB in that time. Ornithologists propose a 2 km vegetated buffer of trees and shrubs that would cut refuge noise by 8–12 dB. Which best justifies the buffer?",
     "answers": [
       "Buffer increases carbon sequestration, providing climate benefits while reducing some noise.",
       "Buffer prevents hearing loss in songbirds by ensuring they never hear loud sounds.",
       "Buffer reduces noise masking of bird vocalizations, restoring conditions for breeding success.",
       "Buffer creates a complete sound barrier eliminating urban noise in the refuge."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L7_8_5",
     "question": "Which of the following is a well-documented effect of chronic traffic noise on wildlife in fragmented urban and suburban habitats?",
     "answers": [
       "Some songbird species shift the pitch or timing of their calls to reduce overlap with traffic noise frequencies.",
       "Traffic noise has been shown to have no measurable effect on any vertebrate behavior.",
       "Noise exposure improves predator detection by masking irrelevant background sounds.",
       "Noise pollution primarily affects plant species rather than animal species."
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L7_8_6",
     "question": "Researchers studying noise pollution effects on insect communication recorded sounds produced by crickets and cicadas at five urban park locations and five rural forest locations. They measured the dominant frequency and call rate of insects at each site. Which of the following best explains why the researchers collected data from multiple locations within each environment type?",
     "answers": [
       "To account for natural variation in insect populations and compare differences between individual urban park sites and individual rural forest sites",
       "To account for natural variation in insect populations and ensure results represent typical urban and rural conditions",
       "To increase the total sample size of measurements and improve the statistical power of the comparison between urban and rural environments",
       "To account for natural variation between cricket and cicada species and ensure results represent both insect types in urban and rural conditions"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L7_8_7",
     "question": "Naval sonar and shipping noise are of particular concern for cetaceans (whales and dolphins) because these animals primarily rely on which sense for navigation, communication, and locating prey?",
     "answers": [
       "Echolocation (biological sonar using sound waves)",
       "Vision, since most cetacean habitats are shallow and well-lit",
       "Chemoreception, similar to olfaction in terrestrial mammals",
       "Magnetoreception using Earth's magnetic field"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L7_8_8",
     "question": "Marine mammals such as dolphins and whales are altering migration routes to avoid shipping lanes. Which mechanism best explains how shipping noise causes these behavioral changes?",
     "answers": [
       "Noise physically damages inner ear, producing hearing loss that impairs navigation.",
       "Ship activity raises local water temperature enough to cause thermal stress.",
       "Noise masks echolocation and communication, forcing animals to move to quieter areas.",
       "Ship noise reduces dissolved oxygen causing hypoxia and forcing migration."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L7_8_9",
     "question": "An urban airport operates 24-hour flight operations with aircraft takeoffs and landings every 3-5 minutes, producing noise levels of 85-100 decibels in surrounding neighborhoods. Researchers compare health outcomes in residents living within 2 kilometers of the airport to residents living 10 kilometers away. The near-airport population shows higher rates of hypertension, sleep disorders, and cardiovascular disease. Which of the following best explains why chronic airport noise exposure produces these health outcomes?",
     "answers": [
       "Aircraft engines emit toxic exhaust fumes that accumulate in near-airport neighborhoods, causing respiratory inflammation that manifests as hypertension and sleep disorders.",
       "Aircraft noise masks environmental sounds that residents normally use for relaxation and stress reduction, such as bird songs and wind sounds, removing protective acoustic factors.",
       "The 85-100 decibel noise directly damages the inner ear structures of near-airport residents, causing hearing loss that impairs communication and increases social isolation leading to cardiovascular disease.",
       "Repeated noise exposure above 85 decibels triggers sustained physiological stress responses, elevating blood pressure and stress hormones that increase cardiovascular disease risk and disrupt sleep architecture."
-    ],
-    "correct": "D"
+    ]
   }
 ]

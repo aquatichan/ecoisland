@@ -1,0 +1,203 @@
+[
+  {
+    "question": "In a tropical forest ecosystem, decomposers break down dead plant material and animal remains, releasing phosphate into the soil. Plant roots absorb this phosphate and incorporate it into leaves, stems, and seeds. Herbivores consume the plants, and carnivores consume the herbivores. When organisms die, decomposers again break down their tissues and release phosphate. Which of the following best explains why phosphate concentration in the soil can decrease over time despite this continuous cycling?",
+    "answers": [
+      "Phosphate is removed from soil through erosion of topsoil and is transported away from the ecosystem faster than weathering of parent rock can replenish it.",
+      "Phosphate leaches from soil into groundwater and is transported away from the ecosystem faster than decomposers can release it from organic matter.",
+      "Phosphate leaches from soil into groundwater and is transported away from the ecosystem faster than weathering of parent rock can replenish it.",
+      "Phosphate leaches from soil into groundwater during heavy rainfall but is replenished by weathering of parent rock during dry periods, maintaining long-term equilibrium."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A diagram shows phosphorus movement in a freshwater lake: algal uptake, zooplankton consumption, decomposition, and sedimentation. Which process most directly forms a long-term phosphorus reservoir?",
+    "answers": [
+      "Algal phosphate uptake moves dissolved phosphorus into organic biomass for growth.",
+      "Zooplankton consumption transfers phosphorus into animal tissues but not long-term storage.",
+      "Sedimentation of organic phosphorus to the lake bottom forming sedimentary reservoirs.",
+      "Decomposition releasing phosphorus back into the water column for recycling."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A farmer applies synthetic phosphorus fertilizer to cropland in spring. Heavy rainfall in early summer causes runoff carrying dissolved phosphate into a downstream lake. Within weeks, algae populations in the lake increase dramatically, and fish kills occur in deeper water layers. Which of the following best explains why this sequence of events demonstrates the phosphorus cycle's role in limiting aquatic productivity?",
+    "answers": [
+      "Phosphorus, lacking an atmospheric pathway, accumulates in aquatic systems where it triggers algal blooms; high phosphorus concentrations become directly toxic to fish in deeper water layers, causing mortality through chemical poisoning.",
+      "Phosphorus cycles through atmospheric pathways similar to nitrogen, allowing excess phosphorus to volatilize from the lake surface; however, decomposition of dead algae still consumes dissolved oxygen, creating hypoxic conditions that kill fish.",
+      "Phosphorus, lacking an atmospheric pathway, accumulates in aquatic systems where it triggers algal blooms; subsequent decomposition of dead algae consumes dissolved oxygen, creating hypoxic conditions that kill fish.",
+      "Phosphorus, lacking an atmospheric pathway, accumulates in aquatic systems where it triggers algal blooms; rapid sedimentation of phosphorus-bound particles removes nutrients before decomposition occurs, preventing oxygen depletion."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A lake receives 85% of its phosphorus input from agricultural runoff and 15% from wastewater discharge. Over five years, algal bloom coverage expands from 2% to 18% of the lake's surface, and bottom-water dissolved oxygen falls from 6 to 1 mg/L. Sediment cores show increasing phosphorus accumulation in lake-bottom sediments over the same period. Which conclusion is best supported by this evidence?",
+    "answers": [
+      "Excess phosphorus loading is driving eutrophication in the lake, and much of the added phosphorus is accumulating in bottom sediments as a long-term storage reservoir",
+      "Because phosphorus is accumulating in the sediment, it has been permanently and irreversibly removed from the lake's nutrient cycle",
+      "The falling dissolved oxygen and expanding algal blooms indicate that phosphorus is being recycled through the ecosystem with high efficiency and minimal ecological impact",
+      "Because agricultural runoff supplies 85% of phosphorus inputs, wastewater discharge can be considered a negligible contributor to the lake's eutrophication"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "line",
+      "title": "Lake Eutrophication Indicators Over Five Years",
+      "sourceNote": "Hypothetical data for this exercise",
+      "series": [
+        {
+          "name": "Algal bloom coverage (%)",
+          "points": [
+            {
+              "x": 1,
+              "y": 2
+            },
+            {
+              "x": 2,
+              "y": 5
+            },
+            {
+              "x": 3,
+              "y": 9
+            },
+            {
+              "x": 4,
+              "y": 14
+            },
+            {
+              "x": 5,
+              "y": 18
+            }
+          ]
+        },
+        {
+          "name": "Dissolved oxygen (mg/L)",
+          "points": [
+            {
+              "x": 1,
+              "y": 6
+            },
+            {
+              "x": 2,
+              "y": 5
+            },
+            {
+              "x": 3,
+              "y": 3.5
+            },
+            {
+              "x": 4,
+              "y": 2
+            },
+            {
+              "x": 5,
+              "y": 1
+            }
+          ]
+        }
+      ],
+      "xLabel": "Year",
+      "yLabel": "Coverage (%) / DO (mg/L)"
+    }
+  },
+  {
+    "question": "Soil horizon phosphorus (mg/kg): O 1200, A 680, B 240, C 1850. The C horizon contains unweathered phosphate minerals. Which conclusion about phosphorus cycling is best supported by this vertical pattern?",
+    "answers": [
+      "Vertical phosphorus gradients reflect different horizon processes not simple temporal depletion.",
+      "Phosphorus distribution reflects horizon processes but that explanation is too general.",
+      "Weathering releases rock phosphorus and biological cycling concentrates it near the surface.",
+      "Mineral phosphorus in the C horizon can be weathered and supply surface P."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A diagram shows phosphorus cycling through a terrestrial ecosystem: weathering of rock releases phosphate into soil, plants take up the phosphate, herbivores consume the plants, and decomposition returns phosphorus to the soil. A second pathway shows phosphate leaching from soil into groundwater and eventually into a river. Which statement most accurately describes a key feature of the phosphorus cycle illustrated here?",
+    "answers": [
+      "Phosphorus moves between terrestrial and aquatic systems mainly through water transport (leaching and runoff), but unlike carbon, nitrogen, or water, it does not have a significant atmospheric gas phase under normal conditions",
+      "Phosphorus cycles rapidly through the atmosphere via evaporation and precipitation, in a manner directly analogous to the water cycle shown in the groundwater pathway",
+      "Phosphorus enters the atmosphere as a gas during the weathering process shown in the diagram, allowing it to be redistributed globally by wind",
+      "Phosphorus is cycled exclusively through decomposition and soil processes, with the leaching pathway to groundwater and rivers being ecologically insignificant"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Phosphorus Cycle Pathways in a Terrestrial Ecosystem",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Pathway",
+        "Process"
+      ],
+      "rows": [
+        [
+          "Terrestrial",
+          "Rock weathering -> soil phosphate -> plant uptake -> herbivore -> decomposition -> soil"
+        ],
+        [
+          "Aquatic transport",
+          "Soil phosphate leaches to groundwater -> river"
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A three-year lake study measured monthly dissolved phosphate and algal chlorophyll-a. Year 1 averages: phosphate 12 µg/L, chlorophyll-a 3.2 µg/L. Year 2: phosphate 34 µg/L, chlorophyll-a 8.7 µg/L. Year 3: phosphate 51 µg/L, chlorophyll-a 14.2 µg/L. Watershed residential development and fertilizer use increased over this period. Which conclusion about phosphorus cycling is best supported by these data?",
+    "answers": [
+      "Chlorophyll-a increased with phosphate, showing a consistent positive relationship.",
+      "Data do not justify eliminating all phosphorus since only excess causes eutrophication.",
+      "Increased anthropogenic phosphorus raises dissolved phosphate and stimulates algal growth.",
+      "Both variables rose from seasonal temperature variation rather than phosphorus increases."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A freshwater lake ecosystem experiences phosphate limitation that restricts algae and plant growth, reducing food availability for fish populations. Managers propose adding phosphate-rich sediment from a nearby river to increase productivity. Which of the following best describes an unintended consequence of this intervention?",
+    "answers": [
+      "Adding sediment will increase fish populations indefinitely because phosphate is the only limiting nutrient in aquatic ecosystems",
+      "Increased phosphate availability may trigger excessive algal blooms that, upon decomposition, create hypoxic dead zones",
+      "Phosphate-rich sediment will immediately dissolve and enter the atmosphere, causing acid rain",
+      "Phosphate-rich sediment will undergo geologic uplift and be removed from the lake ecosystem within years"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A forest ecosystem shows phosphorus cycling through plants, herbivores, and decomposers. Plant tissue contains 0.15% phosphorus by mass, and annual plant biomass production is 12,000 kg per hectare. Which calculation method would determine the annual phosphorus uptake by plants?",
+    "answers": [
+      "Calculate the phosphorus concentration in soil and multiply by rainfall amount",
+      "Divide the phosphorus percentage by the annual plant biomass",
+      "Measure only the phosphorus in decomposed plant material from the previous year",
+      "Multiply annual plant biomass by the phosphorus percentage in plant tissue"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A wastewater treatment plant removes phosphorus from sewage to prevent eutrophication downstream, then applies the resulting phosphorus-rich sludge to agricultural fields as fertilizer. What is a disadvantage of this disposal approach?",
+    "answers": [
+      "Phosphorus in the applied sludge can still leach or run off from fields during rain events, potentially causing eutrophication in nearby water bodies even though it was removed from the original wastewater",
+      "Phosphorus in sludge remains chemically locked within rock minerals, so plants growing in fields where it is applied cannot absorb or use it",
+      "Applying sludge to fields eliminates farmers' need for any additional fertilizer inputs, which artificially inflates regional phosphorus demand",
+      "Because phosphorus does not volatilize into the atmosphere, applying sludge to fields poses no risk of any downstream environmental impact"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Wastewater Phosphorus Management Pathway",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Step",
+        "Description"
+      ],
+      "rows": [
+        [
+          "1",
+          "Phosphorus removed from sewage at treatment plant"
+        ],
+        [
+          "2",
+          "Phosphorus-rich sludge applied to agricultural fields as fertilizer"
+        ],
+        [
+          "3",
+          "Risk: rainfall can leach/run off field-applied phosphorus"
+        ]
+      ]
+    }
+  }
+]

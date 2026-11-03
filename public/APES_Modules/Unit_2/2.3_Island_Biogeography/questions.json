@@ -1,55 +1,56 @@
 [
   {
+    "id": "L2_3_0",
     "question": "The Galápagos Islands are located approximately 1,000 kilometers from the South American mainland. Darwin's finches colonized these islands from mainland Ecuador and subsequently diversified into multiple species with different beak sizes and feeding strategies. Which of the following best explains how geographic isolation contributed to this evolutionary divergence?",
     "answers": [
       "Geographic isolation increased mutation rates in island finch populations compared to mainland populations, generating more genetic variation and accelerating evolutionary change.",
       "Geographic isolation prevented gene flow from mainland finch populations, allowing island populations to accumulate different genetic mutations and adapt to island-specific food sources and habitats.",
       "Island finches evolved different beak sizes because the smaller island area provided less food overall, forcing finches to specialize on whatever food sources were available regardless of genetic variation.",
       "The long ocean distance prevented any finches from returning to the mainland, causing them to forget their ancestral behaviors and evolve entirely new feeding strategies suited to island plants."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L2_3_1",
     "question": "An island ecology researcher examining Hawaiian bird populations writes: 'The Hawaiian honeycreepers represent a remarkable adaptive radiation from a single colonizing ancestor, with species evolving specialized beak morphologies for different food sources. However, introduced mosquitoes transmit avian malaria, to which native honeycreepers have little resistance, causing population declines of 90% or more in some species.' Which statement best captures the overall argument of this passage?",
     "answers": [
       "Endemic species that evolved in isolation, like the honeycreepers, can be highly vulnerable to introduced pathogens against which they never evolved resistance, threatening the outcomes of their adaptive radiation",
       "Introduced generalist bird species tolerate avian malaria infection better than native honeycreepers do, which is the passage's central claim",
       "The passage's main point is simply that mosquitoes were introduced to Hawaii and now transmit avian malaria to birds",
       "The passage's main point is that beak morphology diversity in honeycreepers evolved specifically as a defense mechanism against avian malaria"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L2_3_2",
     "question": "A study finds endemic plants on small isolated islands have higher local extinction rates than on larger or nearer islands. Researchers conclude small isolated islands cannot maintain viable endemic populations. Which assumption underlies this conclusion?",
     "answers": [
       "Endemic species are not inherently less tolerant of environmental stress.",
       "Immigration on small isolated islands is insufficient to replace extinctions.",
       "Short-term extinction rates do not automatically predict long-term population viability.",
       "Insufficient habitat on small islands is not the conclusion's key assumption."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L2_3_3",
     "question": "Researchers measured endemic plant counts and invasive grass coverage on four Galápagos islands at years 0 and 20. What do the data suggest about the relationship between invasive establishment and endemic species persistence on these islands?",
     "answers": [
       "Endemic declines reflect natural extinction cycles unrelated to invasive spread.",
       "Endemic species counts remain largely stable despite invasive grass establishment.",
       "Islands with lower initial invasive coverage suffered greater endemic loss.",
       "Larger increases in invasive coverage correlate with greater endemic species loss."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L2_3_4",
     "question": "A biologist studied endemic island plants across habitats with different disturbances. Species with the narrowest niches (specific soil pH, specialized pollinators, limited elevation) disappeared first while broad-niche species persisted. Which conclusion is best supported by these data?",
     "answers": [
       "Specialists disappeared only when invasive predators arrived and not from disturbance.",
       "Specialists persisted because their specialized traits protected them from disturbance.",
       "Narrow niches reflect evolutionary failure and poor adaptation to island conditions.",
       "Endemic specialists with narrow niches are most vulnerable to habitat disturbance."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L2_3_5",
     "question": "A research team studying endemic reptile species on isolated islands in Southeast Asia captured, marked, and released 80 individuals of a rare endemic lizard species. Two weeks later, they recaptured 120 lizards from the same area, of which 16 bore the original paint marks. Using the Lincoln-Petersen mark-recapture method to estimate total population size, which assumption is most critical for this estimate to be valid?",
     "answers": [
       "Marked individuals must have mixed randomly back into the population, and the paint marks must not affect an individual's survival or its probability of being recaptured",
@@ -57,7 +58,6 @@
       "The total number of lizards recaptured must exactly equal the number originally marked and released for the estimate to be mathematically valid",
       "Paint marks must be visible for the lizard's entire natural lifespan, extending well beyond the two-week interval used in this study"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Mark-Recapture Study of an Endemic Lizard",
@@ -83,6 +83,7 @@
     }
   },
   {
+    "id": "L2_3_6",
     "question": "Researchers studying species colonization on a newly formed volcanic island conducted surveys every six months for ten years, recording all plant and animal species observed, using the same survey routes and methods each time to ensure consistency. Which of the following best describes what this long-term, repeated survey design is best suited to reveal?",
     "answers": [
       "Temporal patterns of species immigration and extinction as the island community assembles over time, showing how species richness changes and potentially stabilizes",
@@ -90,7 +91,6 @@
       "The exact total number of species that will eventually colonize the island, allowing precise prediction of its long-term carrying capacity",
       "Whether individual colonizing species are specialists or generalists, which cannot be determined through repeated presence/absence surveys alone"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "line",
       "title": "Species Richness on a New Volcanic Island Over 10 Years",
@@ -131,16 +131,17 @@
     }
   },
   {
+    "id": "L2_3_7",
     "question": "A diagram shows the ecological niches of three bird species: an endemic island specialist (narrow niche), a native island generalist (medium niche), and an invasive generalist (broad niche). The endemic and native generalist coexist on the island before the invasive arrives. Which statement best explains the relationship between niche breadth and species coexistence based on island biogeography?",
     "answers": [
       "The endemic specialist and native generalist coexist because their niches have minimal overlap, allowing resource partitioning; the invasive generalist's broad niche overlaps with both, causing competitive exclusion of the native generalist.",
       "The endemic specialist and native generalist coexist because their niches have significant overlap, creating stable competitive interactions; the invasive generalist's broad niche excludes the specialist because it eliminates this stabilizing overlap.",
       "The endemic specialist and native generalist coexist because the generalist's medium niche does not threaten the specialist; the invasive generalist's broad niche causes competitive exclusion of the specialist because narrow niches are inherently less competitive than broad niches.",
       "The endemic specialist and native generalist coexist because their niches have minimal overlap, allowing resource partitioning; the invasive generalist's broad niche overlaps with both, causing competitive exclusion of the specialist."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L2_3_8",
     "question": "A conservation organization states: 'Endemic species on small islands face extinction because they evolved as specialists adapted to narrow ecological niches. When invasive generalist species arrive, they outcompete specialists for limited resources. Island biogeography demonstrates that protecting island biodiversity requires preventing new species introductions in the first place.' Which claim does this argument make about conservation strategy?",
     "answers": [
       "Preventing the introduction of invasive species in the first place is a more effective conservation strategy for protecting island endemics than managing invasive species after they have already established",
@@ -148,7 +149,6 @@
       "The argument claims prevention is more effective than management specifically and only on continental (non-island) ecosystems",
       "The argument claims that eradicating invasive species after they establish is more effective than preventing their introduction through biosecurity"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "table",
       "title": "Specialist vs. Generalist Response to Island Invasion",
@@ -173,13 +173,13 @@
     }
   },
   {
+    "id": "L2_3_9",
     "question": "The diagram illustrates the colonization sequence on a newly formed volcanic island over 500 years. It shows three stages: Stage 1 (bare rock, zero species), Stage 2 (pioneer species establishing, immigration rate high), and Stage 3 (diverse community, immigration and extinction rates balanced). Which process does the visual representation indicate is occurring between Stage 2 and Stage 3?",
     "answers": [
       "Extinction rate increases as species accumulate and compete for limited resources, with immigration and extinction already balanced at equilibrium in Stage 2.",
       "Extinction rate increases as species accumulate and modify habitat conditions through pioneer establishment, eventually balancing immigration to reach equilibrium.",
       "Immigration rate decreases as species accumulate and compete for limited resources, eventually balancing extinction to reach equilibrium.",
       "Extinction rate increases as species accumulate and compete for limited resources, eventually balancing immigration to reach equilibrium."
-    ],
-    "correct": "D"
+    ]
   }
 ]
