@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { handleApi } from "../../worker/index";
+import { ANSWERS } from "../../worker/generated/content";
 import { Firestore } from "../../worker/firestore";
 import type { Env } from "../../worker/env";
 
@@ -81,8 +82,31 @@ async function user(uid: string) {
   return (await admin.get(`users/${uid}`))?.data as any;
 }
 
-const answers = (correct: number, total = 10) =>
-  Array.from({ length: total }, (_, i) => ({ qid: `L1_1_${i}`, correct: i < correct }));
+/** The first `n` question ids matching `re`. */
+const qids = (re: RegExp, n: number) => Object.keys(ANSWERS).filter((k) => re.test(k)).slice(0, n);
+const wrong = (qid: string) => (ANSWERS[qid] + 1) % 4;
+
+/** Runs a whole practice session: start, answer (first `correct` right), finish. */
+async function practice(
+  uid: string,
+  mode: "daily" | "unit" | "lesson" | "mixed",
+  opts: { qids: string[]; unit?: number; lesson?: string },
+  correct: number,
+  finishDay = day(),
+) {
+  const start = await call(uid, "attempt/start", { mode, unit: opts.unit, lesson: opts.lesson, qids: opts.qids });
+  expect(start.status).toBe(200);
+  const attemptId = start.body.attemptId as string;
+  for (const [i, qid] of opts.qids.entries()) {
+    const res = await call(uid, "attempt/answer", { attemptId, qid, choice: i < correct ? ANSWERS[qid] : wrong(qid) });
+    expect(res.status).toBe(200);
+  }
+  const finish = await call(uid, "attempt/finish", { attemptId, day: finishDay });
+  return { ...finish, attemptId };
+}
+
+const DAILY = qids(/^L1_1_/, 10);
+const daily = (uid: string, correct: number, total = 10, d = day()) => practice(uid, "daily", { qids: DAILY.slice(0, total) }, correct, d);
 
 beforeEach(async () => {
   await fetch(`http://${HOST}/emulator/v1/projects/${PROJECT}/databases/(default)/documents`, { method: "DELETE" });
@@ -154,24 +178,24 @@ describe("sync", () => {
 describe("daily set", () => {
   it("rewards once per day and builds a streak", async () => {
     await call("alice", "sync");
-    const first = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(7) });
+    const first = await daily("alice", 7);
     expect(first.body).toMatchObject({ already: false, streak: 1, reward: { tc: 17, xp: 34 } });
     expect((await user("alice")).treecoins).toBe(67);
 
-    const again = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(10) });
+    const again = await daily("alice", 10);
     expect(again.body).toMatchObject({ already: true, reward: { tc: 0 } });
     expect((await user("alice")).treecoins).toBe(67);
 
     now = new Date(now.getTime() + 86_400_000);
-    const d2 = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(10) });
+    const d2 = await daily("alice", 10);
     expect(d2.body.streak).toBe(2);
     now = new Date(now.getTime() + 86_400_000);
-    const d3 = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(10) });
+    const d3 = await daily("alice", 10);
     expect(d3.body).toMatchObject({ streak: 3, reward: { tc: 25 } }); // streak bonus
 
     // Skipping a day resets the streak.
     now = new Date(now.getTime() + 2 * 86_400_000);
-    const d5 = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(5) });
+    const d5 = await daily("alice", 5, 5);
     expect(d5.body.streak).toBe(1);
     const u = await user("alice");
     expect(u.streak_best).toBe(3);
@@ -180,11 +204,68 @@ describe("daily set", () => {
 
   it("rejects implausible dates and backdating", async () => {
     await call("alice", "sync");
-    expect((await call("alice", "reward", { kind: "daily_set", day: "2026-10-01", answers: answers(5) })).status).toBe(400);
-    await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(5) });
-    const back = await call("alice", "reward", { kind: "daily_set", day: day(-1), answers: answers(5) });
+    expect((await daily("alice", 5, 5, "2026-10-01")).status).toBe(400);
+    await daily("alice", 5, 5);
+    const back = await daily("alice", 5, 5, day(-1));
     expect(back.body.already).toBe(true);
-    expect((await call("alice", "reward", { kind: "daily_set", day: day(), answers: [{ qid: "x", correct: true }] })).status).toBe(400);
+  });
+});
+
+describe("server-side scoring", () => {
+  it("ignores scores claimed by the browser", async () => {
+    await call("alice", "sync");
+    // The old endpoints that trusted a client-reported score are gone.
+    const claimed = await call("alice", "reward", { kind: "daily_set", day: day(), answers: DAILY.map((qid) => ({ qid, correct: true })) });
+    expect(claimed.status).toBe(400);
+    const quiz = await call("alice", "reward", { kind: "quiz", day: day(), source: "unit", unit: 4, correct: 40, total: 40 });
+    expect(quiz.status).toBe(400);
+    // Extra fields on finish are ignored: the score comes from stored answers.
+    const start = await call("alice", "attempt/start", { mode: "unit", unit: 4, qids: qids(/^[LU]4_/, 10) });
+    const fin = await call("alice", "attempt/finish", { attemptId: start.body.attemptId, day: day(), correct: 10, total: 10 });
+    expect(fin.body).toMatchObject({ correct: 0, total: 10, score: 0, newLandmark: null });
+    expect((await user("alice")).unit_best).toEqual({ u4: 0 });
+  });
+
+  it("keeps the first answer and never re-grades it", async () => {
+    await call("alice", "sync");
+    const start = await call("alice", "attempt/start", { mode: "daily", qids: DAILY });
+    const attemptId = start.body.attemptId;
+    const q = DAILY[0];
+    const first = await call("alice", "attempt/answer", { attemptId, qid: q, choice: wrong(q) });
+    expect(first.body).toEqual({ correct: false, answer: ANSWERS[q], choice: wrong(q) });
+    const retry = await call("alice", "attempt/answer", { attemptId, qid: q, choice: ANSWERS[q] });
+    expect(retry.body).toEqual({ correct: false, answer: ANSWERS[q], choice: wrong(q) });
+    for (const qid of DAILY.slice(1)) await call("alice", "attempt/answer", { attemptId, qid, choice: ANSWERS[qid] });
+    const fin = await call("alice", "attempt/finish", { attemptId, day: day() });
+    expect(fin.body).toMatchObject({ correct: 9, total: 10, reward: { tc: 19, xp: 38 } });
+
+    // Saving twice returns the same result and pays once.
+    const replay = await call("alice", "attempt/finish", { attemptId, day: day() });
+    expect(replay.body).toMatchObject({ replay: true, correct: 9, reward: { tc: 19 } });
+    expect((await user("alice")).treecoins).toBe(69);
+    // A finished attempt takes no more answers.
+    expect((await call("alice", "attempt/answer", { attemptId, qid: DAILY[1], choice: 0 })).status).toBe(409);
+  });
+
+  it("validates which questions an attempt may contain", async () => {
+    await call("alice", "sync");
+    const bad = (body: Record<string, unknown>) => call("alice", "attempt/start", body).then((r) => r.status);
+    expect(await bad({ mode: "daily", qids: DAILY.slice(0, 4) })).toBe(400); // too few
+    expect(await bad({ mode: "daily", qids: [...DAILY.slice(0, 9), DAILY[0]] })).toBe(400); // duplicate
+    expect(await bad({ mode: "daily", qids: [...DAILY.slice(0, 9), "U9_9999"] })).toBe(400); // unknown
+    expect(await bad({ mode: "unit", unit: 4, qids: DAILY })).toBe(400); // wrong unit
+    expect(await bad({ mode: "lesson", lesson: "1.4_The_Carbon_Cycle", qids: DAILY })).toBe(400); // wrong lesson
+    expect(await bad({ mode: "lesson", lesson: "1.0_The_Living_World_Ecosystems", qids: DAILY })).toBe(400); // no quiz
+    expect(await bad({ mode: "boss", qids: DAILY })).toBe(400);
+
+    // Someone else's attempt is invisible.
+    const mine = await call("alice", "attempt/start", { mode: "daily", qids: DAILY });
+    await call("bob", "sync");
+    const theirs = await call("bob", "attempt/answer", { attemptId: mine.body.attemptId, qid: DAILY[0], choice: 0 });
+    expect(theirs.status).toBe(404);
+    // A question outside the attempt is refused.
+    const outside = await call("alice", "attempt/answer", { attemptId: mine.body.attemptId, qid: "U1_0", choice: 0 });
+    expect(outside.status).toBe(400);
   });
 });
 
@@ -192,8 +273,9 @@ describe("quizzes and lessons", () => {
   it("caps quiz rewards per day but always records scores and mastery", async () => {
     await call("alice", "sync");
     const rewards: number[] = [];
+    const unit4 = qids(/^[LU]4_/, 20);
     for (let i = 0; i < 6; i++) {
-      const r = await call("alice", "reward", { kind: "quiz", day: day(), source: "unit", unit: 4, correct: i === 5 ? 30 : 5, total: 40 });
+      const r = await practice("alice", "unit", { unit: 4, qids: unit4 }, i === 5 ? 15 : 5);
       rewards.push(r.body.reward.tc);
       if (i === 5) expect(r.body).toMatchObject({ capped: true, newLandmark: 4, score: 75 });
     }
@@ -202,11 +284,9 @@ describe("quizzes and lessons", () => {
     expect((await user("alice")).unit_best).toEqual({ u4: 75 });
   });
 
-  it("validates quiz input", async () => {
+  it("records lesson quiz scores", async () => {
     await call("alice", "sync");
-    expect((await call("alice", "reward", { kind: "quiz", day: day(), source: "unit", unit: 4, correct: 11, total: 10 })).status).toBe(400);
-    expect((await call("alice", "reward", { kind: "quiz", day: day(), source: "lesson", lesson: "1.0_The_Living_World_Ecosystems", correct: 1, total: 10 })).status).toBe(400);
-    const ok = await call("alice", "reward", { kind: "quiz", day: day(), source: "lesson", lesson: "1.4_The_Carbon_Cycle", correct: 8, total: 10 });
+    const ok = await practice("alice", "lesson", { lesson: "1.4_The_Carbon_Cycle", qids: qids(/^L1_4_/, 10) }, 8);
     expect(ok.status).toBe(200);
     expect((await user("alice")).quiz_best).toEqual({ L1_4: 80 });
   });
@@ -288,11 +368,11 @@ describe("classes and assignments", () => {
     const sub = (await admin.get(`classes/${classId}/assignments/a1/submissions/alice`))?.data;
     expect(sub).toMatchObject({ done: true, late: false, username: "ALICE" });
 
-    await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(6) });
+    await daily("alice", 6);
     let sets = (await admin.get(`classes/${classId}/assignments/a2/submissions/alice`))?.data;
     expect(sets).toMatchObject({ done: false, progress: 1, target: 2 });
     now = new Date(now.getTime() + 86_400_000);
-    const second = await call("alice", "reward", { kind: "daily_set", day: day(), answers: answers(6) });
+    const second = await daily("alice", 6);
     expect(second.body.completed.map((c: any) => c.assignmentId)).toEqual(["a2"]);
     sets = (await admin.get(`classes/${classId}/assignments/a2/submissions/alice`))?.data;
     expect(sets).toMatchObject({ done: true, progress: 2 });
@@ -393,7 +473,7 @@ describe("account deletion", () => {
     await admin.commit([admin.set("users/alice", { id: "alice", username: "alice", economy_version: 2, treecoins: 50 })]);
     await call("alice", "sync"); // reserves the username
     await call("alice", "class/join", { code });
-    await call("alice", "reward", { kind: "quiz", day: day(), source: "unit", unit: 1, correct: 9, total: 10 });
+    await practice("alice", "unit", { unit: 1, qids: qids(/^[LU]1_/, 10) }, 9);
     await admin.commit([admin.set("posts/p1", { userId: "alice", title: "old" }), admin.set("posts/p1/comments/c1", { text: "hi" })]);
 
     expect((await call("alice", "account/delete")).status).toBe(200);
@@ -401,8 +481,270 @@ describe("account deletion", () => {
     expect(await admin.get("usernames/alice")).toBeNull();
     expect(await admin.get(`classes/${classId}/members/alice`)).toBeNull();
     expect(await admin.list("users/alice/apes_sessions")).toEqual([]);
+    expect(await admin.list("users/alice/attempts")).toEqual([]);
+    expect(await admin.list("users/alice/answers")).toEqual([]);
     expect(await admin.get("posts/p1")).toBeNull();
     expect(await admin.get("posts/p1/comments/c1")).toBeNull();
+  });
+});
+
+describe("class chat", () => {
+  async function setup() {
+    await call("teach", "sync");
+    await admin.commit([admin.patch("users/teach", { role: "teacher", username: "ms.rivera" }, true)]);
+    const { classId, code } = (await call("teach", "class/create", { name: "APES P3" })).body;
+    for (const uid of ["alice", "bob"]) {
+      await call(uid, "sync");
+      await admin.commit([admin.patch(`users/${uid}`, { username: uid }, true)]);
+      await call(uid, "class/join", { code });
+    }
+    await call("carol", "sync");
+    return classId as string;
+  }
+  const tick = (ms = 2000) => {
+    now = new Date(now.getTime() + ms);
+  };
+  const messages = async (classId: string) => (await admin.list(`classes/${classId}/messages`)).map((d) => ({ id: d.id, ...d.data })) as any[];
+
+  it("is off until the teacher turns it on, and only members can post", async () => {
+    const classId = await setup();
+    expect((await call("alice", "chat/send", { classId, text: "hi" })).body.error.code).toBe("chat_off");
+    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    const sent = await call("alice", "chat/send", { classId, text: "  Is the test on Friday?  " });
+    expect(sent.status).toBe(200);
+    expect(sent.body.message).toMatchObject({ uid: "alice", name: "alice", role: "student", text: "Is the test on Friday?", deleted: false });
+    tick();
+    const t = await call("teach", "chat/send", { classId, text: "Yes, Unit 4." });
+    expect(t.body.message.role).toBe("teacher");
+    expect((await call("carol", "chat/send", { classId, text: "let me in" })).status).toBe(403);
+    expect((await call("alice", "chat/send", { classId, text: "   " })).status).toBe(400);
+    expect((await call("alice", "chat/send", { classId, text: "x".repeat(501) })).status).toBe(400);
+    expect(await messages(classId)).toHaveLength(2);
+  });
+
+  it("blocks bad language but not course vocabulary, and slows down floods", async () => {
+    const classId = await setup();
+    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    expect((await call("alice", "chat/send", { classId, text: "this is sh1t" })).body.error.code).toBe("blocked_language");
+    expect((await call("alice", "chat/send", { classId, text: "Fukushima and the sex ratio are on the assessment" })).status).toBe(200);
+    expect((await call("alice", "chat/send", { classId, text: "again" })).status).toBe(429); // same instant
+    // Ten a minute: nine more fit in this minute, the eleventh waits.
+    for (let i = 0; i < 9; i++) {
+      tick(1500);
+      expect((await call("alice", "chat/send", { classId, text: `msg ${i}` })).status).toBe(200);
+    }
+    tick(1500);
+    expect((await call("alice", "chat/send", { classId, text: "one too many" })).status).toBe(429);
+    tick(60_000);
+    expect((await call("alice", "chat/send", { classId, text: "next minute" })).status).toBe(200);
+  });
+
+  it("lets the teacher mute, review reports and delete; students delete only their own", async () => {
+    const classId = await setup();
+    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    const a = (await call("alice", "chat/send", { classId, text: "first" })).body.id;
+    tick();
+    const b = (await call("bob", "chat/send", { classId, text: "rude thing" })).body.id;
+
+    expect((await call("alice", "chat/delete", { classId, messageId: b })).status).toBe(403);
+    expect((await call("bob", "chat/report", { classId, messageId: b })).status).toBe(400); // own message
+    await call("alice", "chat/report", { classId, messageId: b });
+    let msg = (await messages(classId)).find((m) => m.id === b);
+    expect(msg).toMatchObject({ reported: true, reports: ["alice"] });
+    expect((await call("alice", "chat/dismiss", { classId, messageId: b })).status).toBe(403);
+    await call("teach", "chat/dismiss", { classId, messageId: b });
+    msg = (await messages(classId)).find((m) => m.id === b);
+    expect(msg).toMatchObject({ reported: false, reports: [] });
+
+    expect((await call("alice", "chat/mute", { classId, uid: "bob", muted: true })).status).toBe(403);
+    await call("teach", "chat/mute", { classId, uid: "bob", muted: true });
+    tick();
+    expect((await call("bob", "chat/send", { classId, text: "still here?" })).body.error.code).toBe("muted");
+    // Stats syncs keep the mute.
+    await practice("bob", "daily", { qids: DAILY }, 5);
+    expect((await admin.get(`classes/${classId}/members/bob`))?.data.muted).toBe(true);
+
+    await call("teach", "chat/delete", { classId, messageId: b });
+    await call("alice", "chat/delete", { classId, messageId: a });
+    const all = await messages(classId);
+    expect(all.find((m) => m.id === b)).toMatchObject({ deleted: true, deleted_by: "teacher", text: "" });
+    expect(all.find((m) => m.id === a)).toMatchObject({ deleted: true, deleted_by: "author", text: "" });
+  });
+
+  it("removes a student's messages when they leave, and all of them when the class is deleted", async () => {
+    const classId = await setup();
+    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    await call("alice", "chat/send", { classId, text: "bye" });
+    await call("bob", "chat/send", { classId, text: "hello" });
+    await call("alice", "class/leave", { classId });
+    expect((await messages(classId)).map((m) => m.uid)).toEqual(["bob"]);
+    await call("teach", "class/delete", { classId });
+    expect(await messages(classId)).toEqual([]);
+  });
+});
+
+describe("act", () => {
+  async function setup() {
+    await call("teach", "sync");
+    await admin.commit([admin.patch("users/teach", { role: "teacher", username: "ms.rivera" }, true)]);
+    const { classId, code } = (await call("teach", "class/create", { name: "APES P3" })).body;
+    for (const uid of ["alice", "bob"]) {
+      await call(uid, "sync");
+      await admin.commit([admin.patch(`users/${uid}`, { username: uid }, true)]);
+      await call(uid, "class/join", { code });
+    }
+    return classId as string;
+  }
+  const at = (days: number, hour: number) => `${day(days)}T${String(hour).padStart(2, "0")}:00:00.000Z`;
+  const event = (extra: Record<string, unknown> = {}) => ({
+    kind: "event",
+    title: "Creek cleanup",
+    summary: "Pull trash and invasive ivy along Thornton Creek.",
+    details: "Bring gloves and water.",
+    category: "cleanup",
+    startsAt: at(1, 16),
+    endsAt: at(1, 19),
+    location: "Thornton Creek trailhead",
+    orgName: "Thornton Creek Alliance",
+    orgEmail: "help@creek.example.org",
+    hours: 3,
+    ...extra,
+  });
+  const action = (extra: Record<string, unknown> = {}) => ({
+    kind: "action",
+    actionId: "trash-audit",
+    title: "Trash audit",
+    summary: "Sort three days of your household's trash.",
+    details: "Steps...",
+    category: "waste",
+    unit: 8,
+    startDay: day(),
+    endDay: day(6),
+    ...extra,
+  });
+  const reflection = "We sorted three days of trash. Food scraps were the biggest share by far, so we started a compost bin.";
+
+  it("publishes class events from the teacher, reviews community suggestions, and trusts ambassadors", async () => {
+    const classId = await setup();
+    const posted = await call("teach", "event/save", { scope: "class", classId, ...event() });
+    expect(posted.body).toMatchObject({ status: "published" });
+    expect((await admin.get(`classes/${classId}/events/${posted.body.id}`))?.data).toMatchObject({ class_name: "APES P3", going_count: 0, created_by: "teach" });
+    expect((await call("alice", "event/save", { scope: "class", classId, ...event() })).status).toBe(403);
+
+    // Community posts need a way to reach the organizer.
+    expect((await call("alice", "event/save", { scope: "community", ...event({ orgEmail: "" }) })).status).toBe(400);
+    expect((await call("alice", "event/save", { scope: "community", ...event({ orgUrl: "javascript:alert(1)" }) })).status).toBe(400);
+    const suggestion = await call("alice", "event/save", { scope: "community", ...event() });
+    expect(suggestion.body.status).toBe("pending");
+    for (let i = 0; i < 2; i++) expect((await call("alice", "event/save", { scope: "community", ...event() })).status).toBe(200);
+    expect((await call("alice", "event/save", { scope: "community", ...event() })).status).toBe(429);
+
+    expect((await call("alice", "event/review", { id: suggestion.body.id, approve: true })).status).toBe(403);
+    await admin.commit([admin.set("admins/boss", { note: "staff" })]);
+    await call("boss", "sync");
+    expect((await call("boss", "event/review", { id: suggestion.body.id, approve: true })).status).toBe(200);
+    expect((await admin.get(`events/${suggestion.body.id}`))?.data.status).toBe("published");
+
+    await admin.commit([admin.patch("users/bob", { ambassador: true }, true)]);
+    expect((await call("bob", "event/save", { scope: "community", ...event() })).body.status).toBe("published");
+    expect((await call("bob", "event/save", { scope: "community", ...event({ title: "Sh1t cleanup" }) })).body.error.code).toBe("blocked_language");
+  });
+
+  it("counts RSVPs once, honors capacity, and drops class RSVPs when a student leaves", async () => {
+    const classId = await setup();
+    const { id } = (await call("teach", "event/save", { scope: "class", classId, ...event({ capacity: 1 }) })).body;
+    const ref = { scope: "class", classId, id };
+    expect((await call("alice", "event/rsvp", { ...ref, going: true })).body).toEqual({ going: true, going_count: 1 });
+    expect((await call("alice", "event/rsvp", { ...ref, going: true })).body).toEqual({ going: true, going_count: 1 });
+    expect((await call("bob", "event/rsvp", { ...ref, going: true })).body.error.code).toBe("full");
+    expect((await user("alice")).rsvp_events).toEqual([`c_${classId}_${id}`]);
+    expect((await call("carol", "event/rsvp", { ...ref, going: true })).status).toBe(404); // not in the class
+
+    await call("alice", "class/leave", { classId });
+    expect((await admin.get(`classes/${classId}/events/${id}/rsvps/alice`))).toBeNull();
+    expect((await admin.get(`classes/${classId}/events/${id}`))?.data.going_count).toBe(0);
+    expect((await user("alice")).rsvp_events).toEqual([]);
+  });
+
+  it("rewards an eco action once, inside its window, and shares the write-up", async () => {
+    const classId = await setup();
+    const { id } = (await call("teach", "event/save", { scope: "class", classId, ...action() })).body;
+    const ref = { scope: "class", classId, id };
+    expect((await call("alice", "action/complete", { ...ref, text: "too short" })).status).toBe(400);
+    const done = await call("alice", "action/complete", { ...ref, text: reflection });
+    expect(done.body.reward).toEqual({ tc: 20, xp: 25 });
+    expect((await call("alice", "action/complete", { ...ref, text: reflection })).status).toBe(409);
+    expect((await call("teach", "action/complete", { ...ref, text: reflection })).status).toBe(400);
+    const note = (await admin.get(`classes/${classId}/notes/alice_c_${classId}_${id}`))?.data;
+    expect(note).toMatchObject({ kind: "action", title: "Trash audit", unit: 8, text: reflection });
+    expect((await admin.get(`classes/${classId}/events/${id}`))?.data.done_count).toBe(1);
+
+    const later = (await call("teach", "event/save", { scope: "class", classId, ...action({ startDay: day(3), endDay: day(9) }) })).body.id;
+    expect((await call("bob", "action/complete", { scope: "class", classId, id: later, text: reflection })).body.error.code).toBe("not_open");
+  });
+
+  it("verifies volunteer hours through the chosen teacher, once", async () => {
+    const classId = await setup();
+    const log = await call("alice", "hours/log", { title: "Food bank garden", orgName: "Northgate Food Bank", date: day(-3), hours: 2, text: "Weeded and mulched the vegetable beds for the food bank.", classId });
+    expect(log.body.status).toBe("pending");
+    expect((await call("bob", "hours/review", { id: log.body.id, approve: true })).status).toBe(404);
+    const before = await user("alice");
+    const ok = await call("teach", "hours/review", { id: log.body.id, approve: true });
+    expect(ok.body).toMatchObject({ status: "verified", reward: { tc: 10, xp: 20 } });
+    const after = await user("alice");
+    expect(after.treecoins - before.treecoins).toBe(10);
+    expect(after.hours_verified).toBe(2);
+    expect((await admin.get(`classes/${classId}/members/alice`))?.data.hours_verified).toBe(2);
+    expect((await call("teach", "hours/review", { id: log.body.id, approve: true })).status).toBe(409);
+    expect((await call("alice", "hours/delete", { id: log.body.id })).status).toBe(409);
+
+    const bad = (extra: Record<string, unknown>) => call("alice", "hours/log", { title: "Park day", orgName: "Parks Dept", date: day(-1), hours: 1, text: "Picked up litter around the playground area.", ...extra }).then((r) => r.status);
+    expect(await bad({ hours: 0.3 })).toBe(400);
+    expect(await bad({ hours: 13 })).toBe(400);
+    expect(await bad({ date: day(5) })).toBe(400);
+    expect(await bad({ classId: "notmyclass" })).toBe(400);
+    const self = await call("alice", "hours/log", { title: "Park day", orgName: "Parks Dept", date: day(-1), hours: 1, text: "Picked up litter around the playground area." });
+    expect(self.body.status).toBe("self");
+    expect((await call("alice", "hours/delete", { id: self.body.id })).status).toBe(200);
+
+    // Hours for an event open once it starts, once per event.
+    const { id } = (await call("teach", "event/save", { scope: "class", classId, ...event() })).body;
+    const forEvent = { event: { scope: "class", classId, id }, date: day(1), hours: 3, text: "Cleared ivy and bagged trash along the creek trail.", classId };
+    expect((await call("alice", "hours/log", forEvent)).body.error.code).toBe("not_started");
+    now = new Date(now.getTime() + 2 * 86_400_000);
+    expect((await call("alice", "hours/log", forEvent)).status).toBe(200);
+    expect((await call("alice", "hours/log", forEvent)).body.error.code).toBe("already_logged");
+  });
+
+  it("handles ambassador applications one at a time, approved by an admin", async () => {
+    await call("alice", "sync");
+    await call("bob", "sync");
+    const form = { fullName: "Alice Chen", school: "Roosevelt High", grade: "11", region: "Seattle, WA", why: "I lead our environmental club and want to run monthly creek cleanups with other schools in the area.", agree: true };
+    expect((await call("alice", "ambassador/apply", { ...form, agree: false })).status).toBe(400);
+    expect((await call("alice", "ambassador/apply", { ...form, why: "short" })).status).toBe(400);
+    expect((await call("alice", "ambassador/apply", form)).body.status).toBe("pending");
+    expect((await call("alice", "ambassador/apply", form)).status).toBe(409);
+    expect((await admin.get("ambassador_applications/alice"))?.data).toMatchObject({ email: "alice@school.org", status: "pending", full_name: "Alice Chen" });
+
+    expect((await call("alice", "ambassador/review", { uid: "alice", approve: true })).status).toBe(403);
+    await admin.commit([admin.set("admins/boss", {})]);
+    await call("boss", "sync");
+    const coins = (await user("alice")).treecoins;
+    await call("boss", "ambassador/review", { uid: "alice", approve: true });
+    const a = await user("alice");
+    expect(a).toMatchObject({ ambassador: true, ambassador_region: "Seattle, WA", treecoins: coins + 100 });
+    expect((await call("alice", "event/save", { scope: "community", ...event() })).body.status).toBe("published");
+
+    await call("bob", "ambassador/apply", { ...form, fullName: "Bob" });
+    await call("boss", "ambassador/review", { uid: "bob", approve: false, note: "Tell us more about your plan." });
+    expect((await admin.get("ambassador_applications/bob"))?.data).toMatchObject({ status: "declined", review_note: "Tell us more about your plan." });
+    expect((await call("bob", "ambassador/apply", { ...form, fullName: "Bob" })).status).toBe(200);
+
+    // Deleting the account removes the application and hours.
+    await call("alice", "hours/log", { title: "Park day", orgName: "Parks Dept", date: day(-1), hours: 1, text: "Picked up litter around the playground area." });
+    await call("alice", "account/delete");
+    expect(await admin.get("ambassador_applications/alice")).toBeNull();
+    expect(await admin.query("", "hours", [["uid", "alice"]])).toEqual([]);
   });
 });
 

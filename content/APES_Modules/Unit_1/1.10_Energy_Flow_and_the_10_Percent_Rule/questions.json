@@ -1,0 +1,174 @@
+[
+  {
+    "question": "A rocky-shore food chain has kelp (producers) with 200,000 kcal, herbivorous snails with 20,000 kcal, sea stars (predators of snails) with 2,000 kcal, and otters (top predators) with 200 kcal. Using the 10% rule, which statement correctly compares the energy available to support otters versus sea stars?",
+    "answers": [
+      "Otters have access to about 10 times less energy than sea stars because otters occupy one trophic level higher",
+      "Otters have access to about the same energy as sea stars because both are consumers",
+      "Otters have access to about 10 times more energy than sea stars because they are apex predators",
+      "Energy availability cannot be compared without knowing the otters' hunting efficiency"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Energy Content of a Rocky-Shore Food Chain",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Trophic Level",
+        "Organism",
+        "Energy (kcal)"
+      ],
+      "rows": [
+        [
+          "Producer",
+          "Kelp",
+          200000
+        ],
+        [
+          "Primary consumer",
+          "Herbivorous snails",
+          20000
+        ],
+        [
+          "Secondary consumer",
+          "Sea stars",
+          2000
+        ],
+        [
+          "Tertiary consumer",
+          "Otters",
+          200
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A forest ecosystem stores 200,000 joules of chemical energy in plant biomass annually through photosynthesis. Herbivorous deer consume the plants, and wolves consume the deer. If the energy transfer efficiency between trophic levels is 10%, which of the following best explains why wolves require a much larger territory than the deer population they hunt?",
+    "answers": [
+      "Deer populations are limited by plant availability, so wolves must defend larger territories to ensure adequate deer populations for hunting",
+      "Wolves are carnivores that cannot digest plant material, so they must travel farther to find suitable food sources",
+      "The 10% rule applies only to herbivores consuming plants, not to carnivores consuming herbivores, so wolves can obtain more energy per prey item than deer obtain per plant",
+      "Wolves receive only approximately 2,000 joules of energy from the original 200,000 joules stored by plants, requiring them to hunt across larger areas to obtain sufficient prey"
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A marine ecologist creates a diagram showing energy flow in a kelp forest ecosystem, with arrows indicating the direction and relative thickness of energy transfer between trophic levels.\n[Diagram shows: Kelp (producers) with thick arrow → Sea urchins (primary consumers) with medium arrow → Sea otters (secondary consumers) with thin arrow]\nWhich characteristic of the arrows in this diagram best illustrates why higher trophic levels support fewer organisms than lower trophic levels?",
+    "answers": [
+      "The progressively thinner arrows demonstrate that energy is recycled more efficiently at higher trophic levels through decomposition.",
+      "The progressively thinner arrows represent the decreasing amount of energy available to support biomass at each successive trophic level.",
+      "The progressively thinner arrows indicate that sea otters are more efficient hunters than sea urchins, capturing less energy per predation event.",
+      "The progressively thinner arrows show that sea otters have longer lifespans than sea urchins, requiring less frequent energy intake."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A researcher measured energy stored per m² in a grassland over one year: Producers 50,000 kcal, Primary consumers 5,200 kcal, Secondary consumers 520 kcal, Tertiary consumers 52 kcal. What do these data illustrate about energy transfer in ecosystems?",
+    "answers": [
+      "Energy stays constant across trophic levels and differences are measurement error.",
+      "About 10 percent passes to the next trophic level, most lost as heat.",
+      "Producers capture all solar energy and distribute it equally to consumers.",
+      "Energy increases at higher trophic levels because predators are more efficient."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A diagram compares two systems starting with 100,000 kcal of corn: System A feeds corn directly to humans, while System B feeds corn to cattle then to humans. Which environmental consequence is most directly indicated by this energy transfer principle?",
+    "answers": [
+      "System A will produce more cattle biomass because humans are less efficient",
+      "Direct corn consumption supplies far more human calories than feeding corn to cattle",
+      "Cattle convert corn to meat more efficiently than humans convert it",
+      "System B requires less land because cattle concentrate corn energy into biomass"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Researchers estimated energy flow in a forest by measuring annual tree biomass (producers) and deer biomass (primary consumers) at year end. If they instead measured both tree and deer biomass at the start and end of the year and calculated net change for each trophic level, how would this affect their ability to determine whether the ecosystem follows the 10% rule?",
+    "answers": [
+      "The modification only helps if secondary consumers are measured too.",
+      "Measurements would be more difficult but would not improve accuracy.",
+      "End-of-year snapshots alone represent total energy available at each trophic level.",
+      "They could compute actual energy transfer efficiency using net biomass changes."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A forest ecologist measures 500,000 kg of plant biomass in a 10-hectare plot. Which hypothesis is most testable with this data?",
+    "answers": [
+      "Herbivore populations are limited more by predation than plant energy.",
+      "Protect herbivores to maintain ecosystem balance and preserve biodiversity.",
+      "Abundant plant biomass indicates a healthy forest with diverse consumers.",
+      "Apply the 10 percent rule so herbivores can total 50,000 kg."
+    ],
+    "correct": "D"
+  },
+  {
+    "question": "A prairie ecosystem receives 1,000,000 joules of solar energy annually. Approximately 10,000 joules become chemical energy in grass through photosynthesis. Why is the energy available to herbivores only about 1,000 joules?",
+    "answers": [
+      "Herbivores can only assimilate roughly 10% of the chemical energy stored in the grass they consume, since the rest is used for the grass's own respiration, is undigested, or is lost as heat before assimilation",
+      "Grass retains most of its stored energy in roots and seeds that herbivores are physically unable to access",
+      "Herbivores can only digest 10% of the grass biomass they consume, with the other 90% passing through undigested",
+      "Most of the grass's stored energy is diverted to decomposers in the soil before herbivores have a chance to graze"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "table",
+      "title": "Energy Flow in a Prairie Ecosystem",
+      "sourceNote": "Hypothetical data for this exercise",
+      "headers": [
+        "Trophic Level",
+        "Energy (J/yr)"
+      ],
+      "rows": [
+        [
+          "Solar energy received",
+          1000000
+        ],
+        [
+          "Chemical energy in grass (producers)",
+          10000
+        ],
+        [
+          "Energy available to herbivores",
+          1000
+        ]
+      ]
+    }
+  },
+  {
+    "question": "A diagram shows energy flow in a temperate forest (kcal/m^2/yr). A fire reduces producer energy from 50,000 to 30,000 kcal/m^2/yr, a 40% decrease. Assuming the 10% energy transfer rule holds at every subsequent trophic level, which statement best explains how this change affects energy available to top carnivores?",
+    "answers": [
+      "Top carnivore energy also falls by roughly 40%, because the same fixed proportional loss occurring at each transfer scales linearly with the producer-level change",
+      "Top carnivore numbers would rise, because reduced plant competition boosts herbivore reproduction enough to offset the loss of producer energy",
+      "Top carnivores would be largely unaffected, because they can switch to alternative prey sources unrelated to this food chain",
+      "Top carnivore energy still falls by about 40%, since the 10% rule multiplies through each level and preserves the same proportional decrease from the base"
+    ],
+    "correct": "A",
+    "stimulus": {
+      "type": "bar",
+      "title": "Producer Energy Before and After Forest Fire",
+      "sourceNote": "Hypothetical data for this exercise",
+      "data": [
+        {
+          "label": "Before fire",
+          "value": 50000
+        },
+        {
+          "label": "After fire",
+          "value": 30000
+        }
+      ],
+      "xLabel": "Condition",
+      "yLabel": "Producer energy (kcal/m^2/yr)"
+    }
+  },
+  {
+    "question": "A wildlife manager proposes introducing wolves to a region where deer populations have exceeded carrying capacity, causing overgrazing and vegetation loss. The manager expects wolves to reduce deer numbers and restore plant communities. Which of the following best describes an unintended consequence related to energy flow through the ecosystem?",
+    "answers": [
+      "Wolves will require substantial prey biomass to sustain their population; the energy lost in converting plant biomass to deer biomass means fewer plants can support the deer population, intensifying overgrazing pressure on vegetation.",
+      "Wolves will require substantial prey biomass to sustain their population; the energy lost in converting deer biomass to wolf biomass means the ecosystem must support a larger total herbivore population than before to feed both deer and wolves.",
+      "Wolves will require substantial prey biomass to sustain their population; competition between wolves and deer for limited space and resources means the ecosystem must support fewer total animals than before to prevent resource depletion.",
+      "Wolves will require substantial prey biomass to sustain their population; the energy lost in converting deer biomass to wolf biomass means the ecosystem will support a smaller total herbivore population as wolves reduce deer numbers through predation."
+    ],
+    "correct": "B"
+  }
+]

@@ -27,9 +27,9 @@ describe("curriculum", () => {
     expect(findLesson("4.9_El_Nino_and_La_Nina")?.lesson.title).toBe("El Niño and La Niña");
   });
 
-  it("ships well-formed lesson quizzes", () => {
+  it("keeps well-formed lesson quizzes in content/ (with answers)", () => {
     for (const l of ALL_LESSONS.filter((x) => x.hasQuiz)) {
-      const file = join(root, `Unit_${unitOfLesson(l.id)}`, l.id, "questions.json");
+      const file = join(__dirname, "../../content/APES_Modules", `Unit_${unitOfLesson(l.id)}`, l.id, "questions.json");
       const qs = JSON.parse(readFileSync(file, "utf8"));
       expect(Array.isArray(qs)).toBe(true);
       for (const q of qs) {

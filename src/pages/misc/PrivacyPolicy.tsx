@@ -1,8 +1,8 @@
 import { LegalLayout, type Section } from "./LegalLayout";
 
 const summary = [
-  { label: "What we collect", text: "Your Google sign-in details, your profile, and what you do while studying: answers, scores, streaks, field notes and class membership." },
-  { label: "Who sees it", text: "You. Your teacher sees your progress in their class, and classmates see your username, island and leaderboard stats. Nobody sees your email." },
+  { label: "What we collect", text: "Your Google sign-in details, your profile, what you do while studying, and what you post: class chat messages, field notes, event RSVPs and volunteer hours." },
+  { label: "Who sees it", text: "You. Your teacher sees your progress and your class's chat, and classmates see your username, island, stats and messages. Nobody sees your email." },
   { label: "Your control", text: "Edit your profile, leave a class, or delete your account and its data from Settings at any time." },
 ];
 
@@ -14,6 +14,9 @@ const sections: Section[] = [
       "Profile information: your username, profile picture, whether you're a student or a teacher, your island's name and decorations, and preferences such as light or dark mode.",
       "Study activity: daily sets, quiz scores, lessons you mark as read, free-response answers and their scores, field notes you write, streaks, XP, Treecoins and shop purchases.",
       "Class information: the classes you join or teach, assignments, due dates and whether each assignment is complete.",
+      "Class chat: messages you post in a class chat, when you posted them, and any reports, deletions or mutes by the teacher.",
+      "Act: events and eco actions you post or suggest (including the organizer contact details you enter), events you RSVP to, eco action write-ups, and volunteer hours you log (the activity, organization, date, hours, your description, and the teacher you ask to verify them).",
+      "Ambassador applications: if you apply, your full name, school, grade, city or region, your answers, an optional sponsor name and your account email.",
       "Technical information: basic logs, browser and device details, security signals, and product analytics events (for example, that a daily set was completed) collected through Firebase, Google Analytics for Firebase and Cloudflare.",
     ],
   },
@@ -22,6 +25,7 @@ const sections: Section[] = [
     body: [
       "To run Ecoisland: save your progress, grow your island, score quizzes, build your daily sets and keep your streak.",
       "To let teachers support you: your teacher sees how you're doing in their class so they can assign work and help.",
+      "To run class chat and Act: show messages to your class, show listings and RSVP counts, let your teacher verify your volunteer hours, and let our team review community listings and ambassador applications.",
       "To grade free-response answers with AI against each question's rubric.",
       "To keep things fair and safe: prevent cheating, abuse and spam, and investigate security problems.",
       "To improve Ecoisland: we look at overall usage, such as how many students finish a daily set, to decide what to build next.",
@@ -31,9 +35,12 @@ const sections: Section[] = [
     title: "3. Who can see what",
     body: [
       "Teachers of a class you join can see your username, profile picture, streak, last active day, weekly XP and daily sets, unit quiz bests, number of lessons read, assignment completion and scores, your island, and the field notes you write.",
-      "Classmates can see your username, profile picture, your island, your class leaderboard stats and your field notes.",
+      "Teachers also see your class chat messages, who RSVP'd to their class events, and the volunteer hours you ask them to verify.",
+      "Classmates can see your username, profile picture, your island, your class leaderboard stats, your field notes and your chat messages.",
+      "Listings you post for everyone on Ecoisland show your username as the poster, along with the organizer contact details you entered. Your RSVPs to community events are visible to you and to Ecoisland admins, not to other users.",
+      "Ambassador applications are visible only to you and to the Ecoisland team.",
       "Your email address is never shown to teachers or classmates. People who are not in your class cannot see your progress.",
-      "Leaving a class, or being removed by the teacher, deletes your assignment records and field notes from that class.",
+      "Leaving a class, or being removed by the teacher, deletes your assignment records, field notes, chat messages and event RSVPs from that class.",
     ],
   },
   {
@@ -64,8 +71,9 @@ const sections: Section[] = [
     title: "7. Retention, deletion and security",
     body: [
       "We keep information for as long as it's needed to run Ecoisland and meet legal obligations.",
-      "Deleting your account in Settings removes your profile, study history, class memberships, assignment records and field notes. If you teach, your classes are deleted too.",
-      "We use reasonable safeguards: every change to Treecoins, XP and progress is checked by our server, and database rules stop anyone from reading another student's private information. No online service can promise perfect security.",
+      "Deleting your account in Settings removes your profile, study history, class memberships, assignment records, field notes, chat messages, RSVPs, volunteer hours and any ambassador application. If you teach, your classes are deleted too. Community listings you published stay up for the organizations running them, with your name removed.",
+      "Teachers can delete any message in their class chat. Messages in a deleted class are deleted with it.",
+      "We use reasonable safeguards: every answer is checked and every change to Treecoins, XP and progress is made by our server, chat messages pass a language filter, and database rules stop anyone from reading another student's private information. No online service can promise perfect security.",
     ],
   },
   {
@@ -79,7 +87,7 @@ export default function PrivacyPolicy() {
     <LegalLayout
       title="Privacy Policy"
       intro="How Ecoisland collects, uses, shares and protects information for students and teachers."
-      updated="November 2, 2026"
+      updated="November 3, 2026"
       summary={summary}
       sections={sections}
       other={{ to: "/tos", label: "Terms of Service" }}

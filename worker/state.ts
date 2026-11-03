@@ -30,6 +30,10 @@ export function readRecord(data: Data) {
     week_xp: num(data.week_xp),
     last_week_xp: num(data.last_week_xp),
     week_sets: num(data.week_sets),
+    hours_verified: Math.max(0, num(data.hours_verified)),
+    rsvp_events: asStringArray(data.rsvp_events),
+    actions_done: asStringArray(data.actions_done),
+    ambassador: data.ambassador === true,
   };
 }
 
@@ -62,6 +66,9 @@ export function memberPayload(uid: string, data: Data, lastActiveDay: DayKey | n
       ? data.island_decor.filter((d) => d && typeof d === "object" && r.owned_items.includes(String((d as { id?: unknown }).id))).slice(0, 24)
       : [],
     island_name: typeof data.island_name === "string" ? data.island_name.slice(0, 32) : "",
+    hours_verified: r.hours_verified,
+    actions_count: r.actions_done.length,
+    ambassador: r.ambassador,
   };
 }
 
@@ -72,6 +79,12 @@ export type Activity = {
   sets?: number;
   /** Extra user fields to write alongside the economy fields. */
   patch?: Data;
+  /**
+   * Whether the student did something themselves (default). False for
+   * rewards someone else grants, like a teacher verifying hours: those don't
+   * change when the student was last active.
+   */
+  touch?: boolean;
 };
 
 /**
@@ -87,18 +100,20 @@ export function activityWrites(
 ): { writes: Write[]; data: Data } {
   const r = readRecord(user.data);
   const week = rollWeek(r, activity.day, { xp: activity.xp, sets: activity.sets ?? 0 });
+  const touch = activity.touch !== false;
   const economy: Data = {
     treecoins: r.treecoins + activity.tc,
     lifetime_tc: r.lifetime_tc + activity.tc,
     xp_total: r.xp_total + activity.xp,
     ...week,
-    last_active_day: activity.day,
+    ...(touch ? { last_active_day: activity.day } : {}),
   };
   const patch: Data = { ...economy, ...(activity.patch ?? {}) };
   const data: Data = { ...user.data, ...patch };
+  const lastActive = touch ? activity.day : isDayKey(user.data.last_active_day) ? (user.data.last_active_day as DayKey) : (r.last_set_day ?? null);
   const writes: Write[] = [fs.patch(user.path, patch, true)];
   for (const [path, doc] of memberDocs) {
-    if (doc) writes.push(fs.patch(path, memberPayload(user.id, data, activity.day), true));
+    if (doc) writes.push(fs.patch(path, memberPayload(user.id, data, lastActive), true));
   }
   return { writes, data };
 }

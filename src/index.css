@@ -507,3 +507,16 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Printing (the volunteer hours record): plain black on white. */
+@media print {
+  :root {
+    color-scheme: light;
+  }
+  body {
+    background: #fff !important;
+  }
+  .animate-rise {
+    animation: none !important;
+  }
+}

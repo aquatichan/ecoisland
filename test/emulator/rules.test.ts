@@ -3,7 +3,7 @@
 
 import { readFileSync } from "node:fs";
 import { assertFails, assertSucceeds, initializeTestEnvironment, type RulesTestEnvironment } from "@firebase/rules-unit-testing";
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, writeBatch } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where, writeBatch } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { afterAll, beforeAll, beforeEach, describe, it } from "vitest";
 
@@ -52,8 +52,17 @@ async function seed() {
     await setDoc(doc(db, "classes/c1/assignments/a1/submissions/alice"), { uid: "alice", done: true });
     await setDoc(doc(db, "classes/c1/assignments/a1/submissions/carol"), { uid: "carol", done: false });
     await setDoc(doc(db, "classes/c1/notes/n1"), { uid: "alice", text: "Found 12 species" });
+    await setDoc(doc(db, "classes/c1/messages/m1"), { uid: "alice", name: "alice", role: "student", text: "hi", created_at: "2026-11-02T18:00:00Z" });
     await setDoc(doc(db, "class_codes/K7Q2MX"), { class_id: "c1" });
     await setDoc(doc(db, "posts/p1"), { userId: "bob", title: "old post" });
+    await setDoc(doc(db, "events/live"), { status: "published", created_by: "teach", title: "Cleanup" });
+    await setDoc(doc(db, "events/idea"), { status: "pending", created_by: "alice", title: "My idea" });
+    await setDoc(doc(db, "events/live/rsvps/alice"), { uid: "alice" });
+    await setDoc(doc(db, "classes/c1/events/ce1"), { status: "published", title: "Class cleanup" });
+    await setDoc(doc(db, "classes/c1/events/ce1/rsvps/alice"), { uid: "alice" });
+    await setDoc(doc(db, "hours/h1"), { uid: "alice", teacher_uid: "teach", status: "pending", hours: 2 });
+    await setDoc(doc(db, "ambassador_applications/alice"), { uid: "alice", status: "pending", email: "alice@school.org" });
+    await setDoc(doc(db, "admins/boss"), {});
   });
 }
 
@@ -202,9 +211,67 @@ describe("classes", () => {
     await assertSucceeds(deleteDoc(doc(student("alice"), "classes/c1/notes/n1")));
   });
 
+  it("lets only the class read chat, and nobody write it directly", async () => {
+    await assertSucceeds(getDocs(collection(student("alice"), "classes/c1/messages")));
+    await assertSucceeds(getDocs(collection(student("teach"), "classes/c1/messages")));
+    await assertFails(getDocs(collection(student("bob"), "classes/c1/messages")));
+    await assertFails(setDoc(doc(student("alice"), "classes/c1/messages/m2"), { uid: "alice", text: "sneaky", role: "teacher" }));
+    await assertFails(updateDoc(doc(student("alice"), "classes/c1/messages/m1"), { text: "edited" }));
+    await assertFails(deleteDoc(doc(student("teach"), "classes/c1/messages/m1")));
+  });
+
+  it("lets the teacher switch chat on and off, with a real boolean", async () => {
+    await assertSucceeds(updateDoc(doc(student("teach"), "classes/c1"), { chat_enabled: true }));
+    await assertFails(updateDoc(doc(student("teach"), "classes/c1"), { chat_enabled: "yes" }));
+    await assertFails(updateDoc(doc(student("alice"), "classes/c1"), { chat_enabled: false }));
+  });
+
   it("hides join codes and retired collections", async () => {
     await assertFails(getDoc(doc(student("bob"), "class_codes/K7Q2MX")));
     await assertFails(getDoc(doc(student("bob"), "posts/p1")));
+  });
+});
+
+describe("act", () => {
+  it("shows published community listings to everyone, suggestions to their author and admins", async () => {
+    await assertSucceeds(getDoc(doc(student("bob"), "events/live")));
+    await assertFails(getDoc(doc(student("bob"), "events/idea")));
+    await assertSucceeds(getDoc(doc(student("alice"), "events/idea")));
+    await assertSucceeds(getDoc(doc(student("boss"), "events/idea")));
+    await assertSucceeds(getDocs(query(collection(student("bob"), "events"), where("status", "in", ["published", "cancelled"]))));
+    await assertFails(getDocs(collection(student("bob"), "events")));
+    await assertFails(setDoc(doc(student("alice"), "events/mine"), { status: "published", created_by: "alice" }));
+    await assertFails(updateDoc(doc(student("teach"), "events/live"), { going_count: 99 }));
+  });
+
+  it("keeps RSVPs, class listings, hours and applications private", async () => {
+    await assertSucceeds(getDoc(doc(student("alice"), "events/live/rsvps/alice")));
+    await assertFails(getDocs(collection(student("teach"), "events/live/rsvps")));
+    await assertSucceeds(getDoc(doc(student("alice"), "classes/c1/events/ce1")));
+    await assertFails(getDoc(doc(student("bob"), "classes/c1/events/ce1")));
+    await assertSucceeds(getDocs(collection(student("teach"), "classes/c1/events/ce1/rsvps")));
+    await assertFails(setDoc(doc(student("alice"), "classes/c1/events/ce1/rsvps/alice"), { uid: "alice" }));
+
+    await assertSucceeds(getDoc(doc(student("alice"), "hours/h1")));
+    await assertSucceeds(getDoc(doc(student("teach"), "hours/h1")));
+    await assertFails(getDoc(doc(student("bob"), "hours/h1")));
+    await assertFails(updateDoc(doc(student("teach"), "hours/h1"), { status: "verified" }));
+
+    await assertSucceeds(getDoc(doc(student("alice"), "ambassador_applications/alice")));
+    await assertFails(getDoc(doc(student("bob"), "ambassador_applications/alice")));
+    await assertFails(getDocs(collection(student("bob"), "ambassador_applications")));
+    await assertSucceeds(getDocs(collection(student("boss"), "ambassador_applications")));
+    await assertFails(setDoc(doc(student("alice"), "ambassador_applications/alice"), { status: "approved" }));
+
+    await assertSucceeds(getDoc(doc(student("boss"), "admins/boss")));
+    await assertFails(getDoc(doc(student("alice"), "admins/boss")));
+    await assertFails(setDoc(doc(student("alice"), "admins/alice"), {}));
+  });
+
+  it("never lets the browser grant itself ambassador status or hours", async () => {
+    await assertFails(updateDoc(doc(student("alice"), "users/alice"), { ambassador: true }));
+    await assertFails(updateDoc(doc(student("alice"), "users/alice"), { hours_verified: 100 }));
+    await assertFails(updateDoc(doc(student("alice"), "users/alice"), { rsvp_events: [] }));
   });
 });
 

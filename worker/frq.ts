@@ -1,7 +1,8 @@
-// Server-side FRQ grading with Gemini. The student's answers are graded
-// against the rubric stored in /public/APES/APES_FRQs.json, so the rubric
-// and the score never pass through the browser.
+// Server-side FRQ grading with Gemini. Rubrics live only in the Worker
+// (worker/generated/content.ts, built from content/APES/APES_FRQs.json), so
+// neither the rubric nor the score passes through the browser.
 
+import { FRQS } from "./generated/content";
 import { HttpError } from "./http";
 import type { Env } from "./env";
 
@@ -14,15 +15,8 @@ export type FrqGrade = { parts: PartGrade[]; totalEarned: number; totalPossible:
 const ALLOWED_MODELS = new Set(["gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash"]);
 const DEFAULT_MODEL = "gemini-2.5-flash-lite";
 
-let frqCache: Frq[] | null = null;
-
-export async function loadFrqs(env: Env, origin: string): Promise<Frq[]> {
-  if (frqCache) return frqCache;
-  const res = await env.ASSETS.fetch(new Request(`${origin}/APES/APES_FRQs.json`));
-  if (!res.ok) throw new HttpError(503, "content_unavailable", "FRQ content is unavailable");
-  const list = (await res.json()) as Frq[];
-  frqCache = Array.isArray(list) ? list : [];
-  return frqCache;
+export function findFrq(id: string): Frq | undefined {
+  return FRQS.find((f) => f.id === id);
 }
 
 const SYSTEM_PROMPT = `You are an experienced AP Environmental Science exam reader scoring a student's free-response answer with College Board-style rubric scoring.

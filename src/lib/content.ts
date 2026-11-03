@@ -11,7 +11,6 @@ export type Question = {
   lessonId?: string;
   prompt: string;
   choices: string[];
-  answer: number;
   stimulus?: Stimulus;
 };
 
@@ -30,42 +29,26 @@ function getJson<T>(url: string): Promise<T> {
   return p;
 }
 
-const LETTERS = ["A", "B", "C", "D"];
-const letter = (v: unknown) => LETTERS.indexOf(String(v ?? "").trim().toUpperCase());
-
-type RawLessonQuestion = { question: string; answers: string[]; correct: string; stimulus?: Stimulus };
-type RawBankQuestion = { question: string; A: string; B: string; C: string; D: string; answer: string; stimulus?: Stimulus };
+// Question files carry no answers: the server checks every answer
+// (worker/attempts.ts). They are generated from content/ by
+// tools/build-content.mjs.
+type RawLessonQuestion = { id: string; question: string; answers: string[]; stimulus?: Stimulus };
+type RawBankQuestion = { id: string; question: string; A: string; B: string; C: string; D: string; stimulus?: Stimulus };
 
 export async function lessonQuestions(lessonId: string): Promise<Question[]> {
   const found = findLesson(lessonId);
   if (!found?.lesson.hasQuiz) return [];
   const raw = await getJson<RawLessonQuestion[]>(`${lessonAssetBase(lessonId)}/questions.json`);
-  const key = lessonKey(lessonId);
   return raw
-    .map((q, i) => ({
-      id: `${key}_${i}`,
-      unit: found.unit.n,
-      lessonId,
-      prompt: q.question,
-      choices: (q.answers ?? []).slice(0, 4),
-      answer: letter(q.correct),
-      stimulus: q.stimulus,
-    }))
-    .filter((q) => q.answer >= 0 && q.choices.length === 4);
+    .filter((q) => typeof q.id === "string" && Array.isArray(q.answers) && q.answers.length === 4)
+    .map((q) => ({ id: q.id, unit: found.unit.n, lessonId, prompt: q.question, choices: q.answers, stimulus: q.stimulus }));
 }
 
 export async function unitBank(unit: number): Promise<Question[]> {
   const raw = await getJson<RawBankQuestion[]>(`/APES/APES_Unit${unit}.json`);
   return raw
-    .map((q, i) => ({
-      id: `U${unit}_${i}`,
-      unit,
-      prompt: q.question,
-      choices: [q.A, q.B, q.C, q.D],
-      answer: letter(q.answer),
-      stimulus: q.stimulus,
-    }))
-    .filter((q) => q.answer >= 0 && q.choices.every((c) => typeof c === "string"));
+    .filter((q) => typeof q.id === "string")
+    .map((q) => ({ id: q.id, unit, prompt: q.question, choices: [q.A, q.B, q.C, q.D], stimulus: q.stimulus }));
 }
 
 /** Every practice question for a unit: its unit bank plus all lesson quizzes. */
@@ -154,9 +137,8 @@ export type FrqPart = { label: string; prompt: string; points: number };
 export type Frq = { id: string; unit: number; title: string; prompt: string; stimulus?: Stimulus; parts: FrqPart[] };
 
 export async function frqs(): Promise<Frq[]> {
-  const raw = await getJson<Array<Frq & { parts: Array<FrqPart & { rubric?: string }> }>>("/APES/APES_FRQs.json");
-  // Rubrics stay on the server, which grades the answers.
-  return raw.map((f) => ({ ...f, parts: f.parts.map(({ label, prompt, points }) => ({ label, prompt, points })) }));
+  // Rubrics are not in this file; the server grades against them.
+  return getJson<Frq[]>("/APES/APES_FRQs.json");
 }
 
 export type Resources = {

@@ -1,6 +1,6 @@
 // ⌘K: jump to any lesson, unit or page from the keyboard.
 import * as D from "@radix-ui/react-dialog";
-import { BookOpen, CalendarCheck, CornerDownLeft, FileText, Layers, Palmtree, PenLine, Search, Settings, Sparkles, Users } from "lucide-react";
+import { Award, BookOpen, CalendarCheck, CornerDownLeft, FileText, HandHeart, Layers, Palmtree, PenLine, Search, Settings, Sparkles, Users } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type ComponentType } from "react";
 import { useNavigate } from "react-router-dom";
 import { ALL_LESSONS, UNITS, unitOfLesson } from "@/shared/curriculum";
@@ -22,6 +22,9 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
       { id: "p-frq", label: "FRQ practice", hint: "Practice", to: "/study/frq", icon: PenLine, keywords: "free response" },
       { id: "p-cards", label: "Flashcards", hint: "Practice", to: "/study/flashcards", icon: Layers, keywords: "vocab vocabulary terms" },
       { id: "p-guide", label: "Exam guide", hint: "Page", to: "/study/guide", icon: FileText, keywords: "resources tips exam structure" },
+      { id: "p-act", label: "Act", hint: "Page", to: "/act", icon: HandHeart, keywords: "volunteer events eco actions cleanup community" },
+      { id: "p-hours", label: "Volunteer hours", hint: "Act", to: "/act/hours", icon: HandHeart, keywords: "service hours record log print" },
+      { id: "p-amb", label: "Ecoisland Ambassadors", hint: "Act", to: "/ambassador", icon: Award, keywords: "ambassador apply program" },
       { id: "p-island", label: "Your island", hint: "Page", to: "/island", icon: Palmtree, keywords: "shop decorations sky" },
       { id: "p-class", label: teacher ? "Classes" : "Class", hint: "Page", to: "/class", icon: Users, keywords: "leaderboard assignments roster" },
       { id: "p-settings", label: "Settings", hint: "Page", to: "/settings", icon: Settings, keywords: "profile account theme" },

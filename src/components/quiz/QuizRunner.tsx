@@ -1,16 +1,19 @@
 // One question at a time, built for a keyboard: A–D or 1–4 to answer,
-// Enter to continue, Esc to leave. Feedback is instant and the correct answer
-// is always shown, so every question teaches something.
+// Enter to continue, Esc to leave. Each answer is checked by the server (the
+// browser has no answer key), and the correct answer is always shown, so
+// every question teaches something. The first answer is final.
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, Loader2, RotateCcw, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ClickSpark, { type ClickSparkHandle } from "@/components/bits/ClickSpark";
 import StimulusChart from "@/components/StimulusChart";
 import { Button } from "@/components/ui/button";
+import { errorMessage } from "@/lib/api";
 import type { Question } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-export type Answer = { question: Question; choice: number; correct: boolean };
+export type Checked = { correct: boolean; answer: number; choice: number };
+export type Answer = { question: Question; choice: number; correct: boolean; answer: number };
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -18,6 +21,7 @@ export function QuizRunner({
   questions,
   eyebrow,
   title,
+  check,
   onAnswer,
   onFinish,
   onExit,
@@ -25,45 +29,82 @@ export function QuizRunner({
   questions: Question[];
   eyebrow: string;
   title: string;
+  /** Asks the server whether `choice` is right. */
+  check: (q: Question, choice: number) => Promise<Checked>;
   onAnswer?: (a: Answer) => void;
   onFinish: (answers: Answer[]) => void;
   onExit: () => void;
 }) {
   const [index, setIndex] = useState(0);
   const [choice, setChoice] = useState<number | null>(null);
+  const [result, setResult] = useState<Checked | null>(null);
+  const [checkError, setCheckError] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const sparks = useRef<Array<ClickSparkHandle | null>>([]);
   const buttons = useRef<Array<HTMLButtonElement | null>>([]);
   const continueRef = useRef<HTMLButtonElement>(null);
+  // The source of truth for moving on. A card that is animating out still
+  // has its old click handlers, so a quick second Enter or click must not
+  // advance twice or let a late reply land on the wrong question.
+  const live = useRef({ index: 0, pending: false, result: null as Checked | null, answers: [] as Answer[] });
   const q = questions[index];
-  const answered = choice !== null;
+  const answered = result !== null;
+  const checking = choice !== null && !answered;
   const last = index === questions.length - 1;
 
   const pick = useCallback(
-    (i: number, fromKeyboard = false) => {
-      if (answered || !q || i < 0 || i >= q.choices.length) return;
-      const correct = i === q.answer;
+    (i: number) => {
+      const state = live.current;
+      if (state.pending || state.result || state.index !== index || !q || i < 0 || i >= q.choices.length) return;
+      state.pending = true;
+      const at = index;
       setChoice(i);
-      const a = { question: q, choice: i, correct };
-      setAnswers((list) => [...list, a]);
-      onAnswer?.(a);
-      if (correct && fromKeyboard) {
-        const el = buttons.current[i];
-        if (el) sparks.current[i]?.spark(el.offsetWidth - 40, el.offsetHeight / 2);
-      }
+      setCheckError(null);
+      check(q, i).then(
+        (r) => {
+          if (live.current.index !== at) return;
+          live.current.pending = false;
+          live.current.result = r;
+          const a: Answer = { question: q, choice: r.choice, correct: r.correct, answer: r.answer };
+          live.current.answers = [...live.current.answers, a];
+          setChoice(r.choice);
+          setResult(r);
+          setAnswers(live.current.answers);
+          onAnswer?.(a);
+        },
+        (err) => {
+          if (live.current.index !== at) return;
+          live.current.pending = false;
+          setChoice(null);
+          setCheckError(errorMessage(err));
+        },
+      );
     },
-    [answered, q, onAnswer],
+    [q, index, check, onAnswer],
   );
 
+  // Celebrate a correct answer once the server confirms it.
+  const sparkAt = result?.correct ? result.answer : null;
+  useEffect(() => {
+    if (sparkAt === null) return;
+    const el = buttons.current[sparkAt];
+    if (el) sparks.current[sparkAt]?.spark(el.offsetWidth - 40, el.offsetHeight / 2);
+  }, [sparkAt]);
+
   const next = useCallback(() => {
-    if (!answered) return;
-    if (last) {
-      onFinish(answers);
+    const state = live.current;
+    if (!state.result) return;
+    state.result = null;
+    if (state.index >= questions.length - 1) {
+      onFinish(state.answers);
       return;
     }
-    setIndex((n) => n + 1);
+    state.index += 1;
+    setIndex(state.index);
     setChoice(null);
-  }, [answered, last, answers, onFinish]);
+    setResult(null);
+    setCheckError(null);
+  }, [questions.length, onFinish]);
 
   useEffect(() => {
     if (answered) continueRef.current?.focus({ preventScroll: true });
@@ -77,7 +118,7 @@ export function QuizRunner({
       const digit = ["1", "2", "3", "4"].indexOf(k);
       if (!answered && (letter >= 0 || digit >= 0)) {
         e.preventDefault();
-        pick(letter >= 0 ? letter : digit, true);
+        pick(letter >= 0 ? letter : digit);
       } else if (answered && (e.key === "Enter" || e.key === " ")) {
         if (document.activeElement !== continueRef.current) {
           e.preventDefault();
@@ -138,15 +179,15 @@ export function QuizRunner({
           <div className="mt-6 space-y-2.5" role="radiogroup" aria-label="Answer choices">
             {q.choices.map((text, i) => {
               const isPicked = choice === i;
-              const isAnswer = q.answer === i;
-              const state = !answered ? "idle" : isAnswer ? "right" : isPicked ? "wrong" : "dim";
+              const isAnswer = result?.answer === i;
+              const state = checking ? (isPicked ? "pending" : "dim") : !answered ? "idle" : isAnswer ? "right" : isPicked ? "wrong" : "dim";
               return (
                 <ClickSpark
                   key={i}
                   ref={(h) => {
                     sparks.current[i] = h;
                   }}
-                  disabled={answered || !isAnswer}
+                  disabled={sparkAt !== i}
                   sparkColor={["#46c48a", "#f6c453", "#63ade6"]}
                   sparkCount={10}
                   sparkRadius={26}
@@ -159,11 +200,12 @@ export function QuizRunner({
                     }}
                     role="radio"
                     aria-checked={isPicked}
-                    disabled={answered}
+                    disabled={choice !== null}
                     onClick={() => pick(i)}
                     className={cn(
                       "group flex w-full items-start gap-3.5 rounded-[13px] border px-4 py-3.5 text-left text-[15px] leading-[1.5] transition-[background-color,border-color,opacity] duration-200",
                       state === "idle" && "border-line-strong bg-surface hover:border-[color-mix(in_srgb,var(--brand)_55%,transparent)] hover:bg-brand-soft/40",
+                      state === "pending" && "border-brand bg-brand-soft/50 text-fg",
                       state === "right" && "border-brand bg-brand-soft text-fg",
                       state === "wrong" && "border-coral bg-coral-soft text-fg",
                       state === "dim" && "border-line bg-surface opacity-55",
@@ -175,7 +217,15 @@ export function QuizRunner({
                         state === "right" ? "border-brand bg-brand text-brand-fg" : state === "wrong" ? "border-coral bg-coral text-white" : "border-line-strong text-fg-3 group-hover:border-brand group-hover:text-brand-ink",
                       )}
                     >
-                      {state === "right" ? <Check className="size-3.5" strokeWidth={3} /> : state === "wrong" ? <X className="size-3.5" strokeWidth={3} /> : LETTERS[i]}
+                      {state === "pending" ? (
+                        <Loader2 className="size-3.5 animate-spin text-brand-ink" aria-label="Checking" />
+                      ) : state === "right" ? (
+                        <Check className="size-3.5" strokeWidth={3} />
+                      ) : state === "wrong" ? (
+                        <X className="size-3.5" strokeWidth={3} />
+                      ) : (
+                        LETTERS[i]
+                      )}
                     </span>
                     <span className="flex-1 text-fg-2 group-disabled:text-inherit">{text}</span>
                   </button>
@@ -186,18 +236,23 @@ export function QuizRunner({
 
           <div className="mt-6 flex min-h-11 items-center justify-between gap-4">
             <AnimatePresence>
-              {answered && (
+              {result && (
                 <motion.p
                   initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className={cn("text-[14.5px] font-semibold", choice === q.answer ? "text-brand-ink" : "text-coral")}
+                  className={cn("text-[14.5px] font-semibold", result.correct ? "text-brand-ink" : "text-coral")}
                   role="status"
                 >
-                  {choice === q.answer ? "Correct." : `Not quite. The answer is ${LETTERS[q.answer]}.`}
+                  {result.correct ? "Correct." : `Not quite. The answer is ${LETTERS[result.answer]}.`}
                 </motion.p>
               )}
             </AnimatePresence>
-            {!answered && <p className="text-[13px] text-fg-4">Press A–D or 1–4 to answer</p>}
+            {checkError && (
+              <p className="flex items-center gap-2 text-[13.5px] font-medium text-coral" role="alert">
+                <RotateCcw className="size-3.5" aria-hidden /> {checkError} Pick your answer again.
+              </p>
+            )}
+            {!answered && !checkError && <p className="text-[13px] text-fg-4">{checking ? "Checking…" : "Press A–D or 1–4 to answer"}</p>}
             <Button ref={continueRef} onClick={next} disabled={!answered} className="ml-auto">
               {last ? "See results" : "Continue"} <ArrowRight />
             </Button>

@@ -1,102 +1,102 @@
 [
   {
+    "id": "L3_1_0",
     "question": "Snowshoe hare numbers fell 40%. A biologist recorded four predators: lynx ate 95% hares and declined 67%. Coyote diet was 40% hares, 35% rodents, 15% berries, 10% insects and declined 8%. Puma diet was 78% deer and 22% other mammals and remained stable. Raccoon used 12 or more food sources including garbage and increased 12%. Which conclusion about dietary specialization and population stability is best supported by these data?",
     "answers": [
       "Raccoon increase does not prove generalists always benefit from change.",
       "Specialist predators declined while generalists persisted or increased.",
       "Puma stability does not show that specialists persist during prey crashes.",
       "All species responded similarly to the hare decline regardless of diet."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L3_1_1",
     "question": "A climate scientist argues that warming will let generalist plants expand while specialists contract, and recommends assisted migration to climate refugia. What perspective on climate adaptation does this reflect?",
     "answers": [
       "Climate change will eliminate all specialist species worldwide within the next century inevitably.",
       "Ecosystems should transition naturally without human management even if generalists replace specialists.",
       "Generalist species provide greater ecosystem services and stability than specialist species globally.",
       "Technological intervention and active management can mitigate climate impacts on vulnerable species."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L3_1_2",
     "question": "A volcanic eruption strips a forest and leaves ash-covered bare soil. Within months lichens and hardy grasses colonize the site while nearby forests remain unchanged. Why do pioneer species establish there while forest species do not?",
     "answers": [
       "Forest species cannot tolerate extreme abiotic conditions and fail to establish.",
       "Pioneer traits are generalist adaptations for many disturbances including volcanic ash.",
       "They reproduce faster and reach bare ground to colonize quickly.",
       "Pioneer species are generalists tolerant of harsh, exposed, nutrient-poor conditions."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L3_1_3",
     "question": "A temperate grassland ecosystem experiences a severe drought that reduces overall plant diversity and shifts remaining vegetation toward a few drought-resistant species. Which statement best explains the likely difference in population response between generalist and specialist herbivores in this grassland?",
     "answers": [
       "Both generalist and specialist herbivores are likely to decline due to reduced overall plant diversity, but specialists that depended on now-scarce plant species will likely decline more severely than generalists that can shift to the remaining drought-resistant plants",
       "Generalist herbivores will maintain stable populations only because they have smaller population sizes and thus require fewer total resources than specialists",
       "Both generalists and specialists will be equally affected, since drought reduces total plant biomass equally regardless of a herbivore's dietary breadth",
       "Specialist herbivores will maintain the most stable populations, because the newly dominant drought-resistant plants represent a constant, predictable food source for any herbivore"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L3_1_4",
     "question": "A conservation organization proposes restoring a degraded prairie ecosystem where specialist grassland species have declined 70% over two decades due to fragmentation and invasive plant encroachment. The restoration plan includes removing invasive species, reestablishing native prairie vegetation, and maintaining consistent water availability through managed hydrology. Which of the following best justifies this restoration approach from a specialist species recovery perspective?",
     "answers": [
       "Restoring the prairie will allow natural environmental fluctuations to occur, which will enable specialist species to adapt and evolve new tolerance ranges.",
       "Restoring native vegetation will cause generalist species populations to increase, which will outcompete invasive species and restore ecosystem balance.",
       "Restoring stable, predictable environmental conditions favors specialist species that require consistent habitat characteristics to survive and reproduce.",
       "Restoring diverse habitat types with varied vegetation heights and moisture levels increases overall biodiversity, benefiting all species equally."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L3_1_5",
     "question": "A graph shows brown rat populations rising 300% and native wood mice falling 85% over 15 years as urban settlement expands. Which statement best explains the divergent population responses to habitat modification?",
     "answers": [
       "Brown rats show flexible foraging and nesting, wood mice lack that flexibility.",
       "Both species decline but specialists decline more severely due to narrow habitat needs.",
       "Brown rats tolerate urban pollutants better than wood mice, aiding their growth.",
       "Brown rats exploit human food and shelter resources while wood mice cannot."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L3_1_6",
     "question": "An agricultural consultant says adaptable monocultures like corn and soy dominate globally while specialty crops such as vanilla and saffron remain confined and risky. Which value does this argument prioritize?",
     "answers": [
       "Maximizing global crop diversity by conserving locally adapted specialist varieties.",
       "Elimination of specialty crops from commercial markets to reduce farmer financial losses.",
       "Economic efficiency and risk reduction through cultivation of adaptable crop species.",
       "Preservation of traditional agricultural practices tied to specialty crop local adaptation."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L3_1_7",
     "question": "Scientists tested whether a generalist rodent outcompetes a specialist under seasonal habitat changes. Both species were kept in enclosures while temperature, food, and shelter changed monthly. Which variable must be controlled to ensure a valid comparison between species?",
     "answers": [
       "Keep temperature and food constant throughout the experiment removing seasonal variation.",
       "Expose each species to different seasonal changes matching its natural habitat.",
       "Subject all enclosures to identical monthly changes and vary only species.",
       "Subject the generalist to seasonal changes but keep the specialist unchanged."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L3_1_8",
     "question": "A researcher argues that nature reserves are effective at protecting specialist species like poison dart frogs and harpy eagles, while generalist species like rats thrive both inside and outside reserve boundaries. What assumption about conservation effectiveness underlies this claim?",
     "answers": [
       "Reserves are assumed to protect the narrow, specific microhabitat conditions that specialists require, which generalists do not depend on to the same degree",
       "Protected area boundaries should be expanded specifically to cover the full habitat range used by generalist species like rats",
       "Poison dart frogs and harpy eagles are assumed to be biologically incapable of surviving in any habitat outside a protected reserve",
       "Generalist species are assumed to play a more important functional role in ecosystem processes than specialist species do"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L3_1_9",
     "question": "A resource manager claims that invasive feral pigs threaten specialist native species in a protected forest because pigs eat acorns, roots, insects, and small vertebrates, while the specialist species rely on specific subsets of these same foods. Which limitation best undermines this claim as stated?",
     "answers": [
       "The claim shows potential dietary overlap between pigs and specialists but does not provide direct evidence that pig foraging actually depletes the food resources specialists rely on",
       "The claim fully describes the pigs' diet but fails entirely to mention why generalist species are typically successful invaders in new habitats",
       "The claim relies on the specialists' evolutionary history as sufficient proof that they will ultimately outcompete the invasive pigs in this forest",
       "The claim assumes that generalist pigs cannot survive in this particular forest habitat, and therefore concludes they pose no real threat"
-    ],
-    "correct": "A"
+    ]
   }
 ]

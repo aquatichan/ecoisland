@@ -1,6 +1,6 @@
 # Ecoisland
 
-**AP Environmental Science, five minutes a day.** Students answer a short daily set built on spaced repetition, finish the work their teacher assigns, and grow an island that thrives when they show up and wilts when they don't.
+**Learn it, then go do it.** Ecoisland is AP Environmental Science five minutes a day, plus real environmental action. Students answer a short daily set built on spaced repetition, finish the work their teacher assigns, take what they learned outside with eco actions and volunteer events, and grow an island that thrives when they show up and wilts when they don't.
 
 <img width="1200" alt="Ecoisland" src="public/og.png" />
 
@@ -9,7 +9,10 @@
 - **Daily set.** Ten questions from the class's current unit, mixed with reviews of anything the student missed before (a Leitner spaced-repetition schedule). It keeps the streak alive and waters the island.
 - **The island.** Drawn in SVG from the student's real progress. XP grows plants through six stages, every unit mastered at 70% adds a landmark from that unit, and missed days dry the island out until the next daily set. Treecoins buy skies and decorations.
 - **Teachers.** Create a class, share a six-character code, and assign lessons, lesson or unit quizzes, FRQs, daily sets or field quests with due dates. Completion fills in automatically as students do the work. Set the current unit and test date to focus every student's practice.
-- **Study.** 9 units, 108 lessons, 1,221 practice questions, 27 FRQs graded part by part against a rubric, flashcards and an exam guide.
+- **Study.** 9 units, 108 lessons, 1,221 practice questions, 27 FRQs graded part by part against a rubric, flashcards and an exam guide. Every answer is checked on the server, so scores can't be faked from the browser.
+- **Act.** Volunteer events and eco actions as upcoming, happening now and past. Students RSVP, add events to their calendar, contact the organizer, and log volunteer hours that their teacher verifies onto a printable service record. Teachers schedule any of 12 eco actions (each tied to an APES unit) in one click; write-ups land in the class's field notes.
+- **Class chat.** One room per class, off until the teacher turns it on. The teacher can delete any message, mute students and review reports. Every message passes a language filter (tuned so course words like "assessment" and "Fukushima" get through) and flood limits.
+- **Ambassadors.** Students and educators apply in the app. Approved ambassadors post community events for their area directly; anyone else's community post is a suggestion an admin reviews first.
 
 Ecoisland is built for laptops, Chromebooks and desktops. Windows narrower than 1024px see a short "needs a bigger screen" page.
 
@@ -26,9 +29,10 @@ Ecoisland is built for laptops, Chromebooks and desktops. Windows narrower than 
 
 ### Where things live
 
-- `src/shared/` is shared by the app and the Worker: curriculum, reward economy, island growth, shop catalog, assignment rules.
-- `worker/` is the API: rewards, purchases, classes, FRQ grading, account deletion and reminders.
-- `firestore.rules` and `storage.rules`: the browser can only change a student's own profile, cosmetic choices and spaced-repetition state. Treecoins, XP, streaks, progress, class membership and submissions are written only by the Worker.
+- `src/shared/` is shared by the app and the Worker: curriculum, reward economy, island growth, shop catalog, assignment rules, Act limits and the eco action catalog.
+- `worker/` is the API: scored practice attempts, rewards, purchases, classes, chat, Act (events, RSVPs, hours, ambassadors), FRQ grading, account deletion and reminders.
+- `content/` holds the full question banks and FRQs, **with answers and rubrics**. `pnpm content` builds the answer-free copies in `public/` and the server-only key in `worker/generated/content.ts`. Run it after editing anything in `content/`; a unit test fails if they drift. Note that anyone who can read this repository can read `content/`, so keep the repository private if the answer key matters to you.
+- `firestore.rules` and `storage.rules`: the browser can only change a student's own profile, cosmetic choices and spaced-repetition state (and a teacher's own class settings and assignments). Treecoins, XP, streaks, progress, class membership, submissions, chat messages, listings, RSVPs and hours are written only by the Worker.
 - `src/components/island/` is the island illustration: plants, decorations, landmarks and skies.
 
 ## Local development
@@ -47,7 +51,7 @@ pnpm dev             # terminal 2: app + API on http://localhost:5173
 ```bash
 pnpm typecheck
 pnpm lint
-pnpm test            # unit tests: economy, dates, assignments, curriculum, tokens
+pnpm test            # unit tests: economy, dates, assignments, curriculum, content, Act, tokens
 pnpm test:emulator   # Firestore/Storage rules + Worker API against the emulators
 ```
 
@@ -83,6 +87,10 @@ The new app needs the Worker to reach Firestore with a service account. **Do ste
    ```
 
 `GET /api/health` reports whether the server is configured (`configured`, `grading`, `reminders`).
+
+### Admins
+
+Ecoisland admins review suggested community events and ambassador applications at `/admin`. To make someone an admin, open Firestore in the Firebase console and create a document `admins/{their uid}` (any fields, or none). Their uid is on their `users/` document. Remove the document to revoke it.
 
 ### Existing accounts
 

@@ -1,65 +1,66 @@
 [
   {
+    "id": "L1_4_0",
     "question": "Researchers measured biomass and soil organic carbon in three ecosystems. Tropical rainforest total 275 Mg C/ha (180 biomass, 95 soil). Temperate forest total 260 Mg C/ha (120 biomass, 140 soil). Grassland total 93 Mg C/ha (8 biomass, 85 soil). Which conclusion about carbon storage is best supported by these data?",
     "answers": [
       "Tropical and temperate forests store identical carbon so ecosystem type has no effect.",
       "Grasslands are superior carbon sinks because soil carbon is more stable.",
       "Biomass is always the dominant carbon pool in all terrestrial ecosystems.",
       "Forests hold more total carbon than grasslands, with tropical biomass and temperate soil."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L1_4_1",
     "question": "A coal plant emits 2,700 tons of CO2 per year while a nearby forest's net uptake is 5 tons per year. Why can't the forest offset the plant's emissions?",
     "answers": [
       "Mature forests respire so growth roughly equals decay, producing little net storage.",
       "Burning fossil carbon releases ancient carbon faster than forests can cycle annually.",
       "Plant respiration and decomposition return most absorbed CO2, leaving tiny net uptake.",
       "Nutrient limitations reduce growth but do not explain the low net uptake."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L1_4_2",
     "question": "A marine biologist claims that rising atmospheric CO2 and resulting ocean acidification will reduce shellfish shell formation. She cites a 0.1 pH decline in seawater since preindustrial times and laboratory results showing 10-40% less calcium carbonate deposition at pH 7.8 compared to pH 8.2. Which choice best identifies a limitation of this evidence for predicting real-world shellfish populations?",
     "answers": [
       "The laboratory experiments isolate pH as the only variable, so they may not capture how shellfish respond to acidification when it interacts with other changing ocean conditions, such as temperature and food availability",
       "The 0.1 pH decline reported is too small to be measured accurately with current instrumentation, making the entire premise of the claim questionable",
       "Laboratory calcium carbonate measurements cannot be compared across different shellfish species regardless of experimental design",
       "The evidence assumes ocean pH will continue declining, when in fact pH trends are currently reversing in most ocean basins"
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L1_4_3",
     "question": "A coal-fired power plant burns fossil fuels to generate electricity, releasing carbon dioxide into the atmosphere. Which of the following best describes how this process relates to the carbon cycle's slow stage?",
     "answers": [
       "Burning fossil fuels creates new carbon dioxide molecules that would not exist in nature without human activity",
       "Burning fossil fuels accelerates photosynthesis in nearby plants, which absorb the released carbon dioxide and convert it back to oxygen",
       "Burning fossil fuels rapidly moves carbon that was stored underground for millions of years into the atmospheric reservoir",
       "Fossil fuel combustion removes carbon from the atmosphere by converting it into solid carbon compounds stored in power plant ash"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L1_4_4",
     "question": "Scientists investigating the effect of forest harvesting on soil carbon loss established 16 forest plots: eight in recently harvested areas and eight in adjacent unharvested forest. All plots were located on similar slopes with comparable soil types and pre-harvest vegetation. Soil carbon content was measured in each plot before harvest and again one year, three years, and five years after harvest. Which of the following best describes the primary purpose of measuring soil carbon at multiple time points rather than only before and after harvest?",
     "answers": [
       "To track the temporal pattern of carbon accumulation and determine whether carbon fixation rates by regrowing vegetation change over time as harvested soil conditions stabilize",
       "To track the temporal pattern of carbon loss and determine the specific year when decomposition rates are highest before harvested soil conditions stabilize",
       "To track the temporal pattern of carbon loss and determine whether decomposition rates change over time as harvested soil conditions stabilize",
       "To track the temporal pattern of carbon loss and determine whether decomposition rates change over time due to natural year-to-year variation in both harvested and unharvested forests"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L1_4_5",
     "question": "Researchers investigating carbon storage in forest soils collected soil samples from depths of 0-10 cm, 10-30 cm, and 30-60 cm at 20 randomly selected locations within a 100-hectare old-growth forest. They measured organic carbon content at each depth and repeated this sampling at the same locations after five years. Which of the following best describes the research design used in this study?",
     "answers": [
       "Cross-sectional survey comparing carbon content between old-growth and recently harvested forests",
       "Longitudinal observational study with stratified spatial sampling and temporal replication",
       "Controlled laboratory experiment testing the effect of depth on carbon decomposition rates",
       "Single-location case study measuring total forest biomass to estimate atmospheric carbon uptake"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_4_6",
     "question": "A forest fire rapidly releases carbon stored in trees as CO2. If the forest regrows over subsequent decades, new trees absorb CO2 through photosynthesis and rebuild biomass. Compared with an unburned, mature forest of the same area, how does this fire-and-regrowth cycle affect the forest's role in the carbon cycle?",
     "answers": [
       "The fire causes a rapid pulse of carbon release to the atmosphere, and while regrowth can eventually reabsorb a comparable amount of carbon, the forest acts as a net carbon source for years until regrowth catches up",
@@ -67,7 +68,6 @@
       "The fire accelerates carbon release entirely through combustion, since the ash remaining after a fire retains none of the tree's original carbon",
       "Burning and regrowth are carbon-neutral processes that have no measurable effect on atmospheric CO2 concentrations at any timescale"
     ],
-    "correct": "A",
     "stimulus": {
       "type": "bar",
       "title": "Forest Carbon Pool: Unburned vs. Fire-and-Regrowth Cycle",
@@ -91,33 +91,33 @@
     }
   },
   {
+    "id": "L1_4_7",
     "question": "Researchers grew Spartina in chambers at three CO2 levels (280, 400, 550 ppm) with identical temperature, light, and soil moisture. After 60 days they measured total biomass and carbon fixed per unit tissue. Which of the following is the dependent variable?",
     "answers": [
       "Temperature, light, and soil moisture held constant across chambers",
       "Carbon fixed per unit of plant tissue measured after 60 days",
       "Atmospheric CO2 concentration maintained at 280, 400, or 550 ppm",
       "Experimental duration and chamber count used in the procedure"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_4_8",
     "question": "Researchers compare soil carbon and CO2 flux in forested versus recently cleared areas. Which sampling strategy best ensures differences reflect deforestation rather than other factors?",
     "answers": [
       "Match sites on soil, climate, and topography to increase the number of locations sampled",
       "Choose forested and cleared sites with matching soil, climate, and topography",
       "Measure the same forested sites before and after clearing to control site confounds",
       "Randomly select forested and cleared sites across the region for representativeness"
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L1_4_9",
     "question": "The diagram shows the ocean carbon cycle with CO2 exchange and calcium carbonate sedimentation. Which reservoir stores carbon the longest?",
     "answers": [
       "Dissolved CO2 in surface water available for rapid photosynthesis and respiration",
       "Atmospheric CO2 above the ocean that exchanges rapidly with surface water",
       "Ocean sediments on the seafloor that store carbon for millions of years",
       "Calcium carbonate shells in living organisms that recycle quickly through predation and decay"
-    ],
-    "correct": "C"
+    ]
   }
 ]

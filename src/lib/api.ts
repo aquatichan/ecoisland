@@ -71,6 +71,22 @@ export type QuizResult = {
   state: PublicState;
 };
 
+/** /api/attempt/finish: a daily set or a quiz, scored by the server. */
+export type AttemptResult = {
+  reward?: Reward;
+  correct?: number;
+  total?: number;
+  already?: boolean;
+  streak?: number;
+  capped?: boolean;
+  score?: number;
+  newLandmark?: number | null;
+  completed?: CompletedAssignment[];
+  state?: PublicState;
+  /** True when this attempt had already been saved (a retried request). */
+  replay?: boolean;
+};
+
 export type LessonResult = { already: boolean; reward: Reward; completed: CompletedAssignment[]; state: PublicState };
 
 export type FrqGradeResult = {

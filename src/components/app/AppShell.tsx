@@ -1,7 +1,7 @@
-// The signed-in app frame: a frosted-glass header with the four places a
-// student goes (Today, Study, Island, Class) and their live coins and streak.
+// The signed-in app frame: a frosted-glass header with the five places a
+// student goes (Today, Study, Act, Island, Class) and their live coins and streak.
 import { motion } from "framer-motion";
-import { BookOpen, CalendarCheck, Flame, LogOut, Moon, Palmtree, Search, Settings as SettingsIcon, Sun, TriangleAlert, Users } from "lucide-react";
+import { BookOpen, CalendarCheck, Flame, HandHeart, LogOut, Moon, Palmtree, Search, Settings as SettingsIcon, Sun, TriangleAlert, Users } from "lucide-react";
 import { useCallback, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Counter from "@/components/bits/Counter";
@@ -19,13 +19,15 @@ import { Logo, Treecoin } from "./Logo";
 const NAV = [
   { to: "/today", label: "Today", icon: CalendarCheck },
   { to: "/study", label: "Study", icon: BookOpen },
+  { to: "/act", label: "Act", icon: HandHeart },
   { to: "/island", label: "Island", icon: Palmtree },
   { to: "/class", label: "Class", icon: Users },
 ];
 
 function NavTabs({ teacher }: { teacher: boolean }) {
   const { pathname } = useLocation();
-  const active = NAV.find((n) => pathname === n.to || pathname.startsWith(`${n.to}/`))?.to ?? (pathname.startsWith("/practice") ? "/study" : "");
+  const active =
+    NAV.find((n) => pathname === n.to || pathname.startsWith(`${n.to}/`))?.to ?? (pathname.startsWith("/practice") ? "/study" : pathname.startsWith("/ambassador") ? "/act" : "");
   return (
     <nav aria-label="Main" className="flex items-center gap-1 rounded-[14px] bg-surface-2/80 p-1">
       {NAV.map((n) => {
@@ -86,7 +88,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-bg">
-      <header className="glass sticky top-0 z-40 border-b">
+      <header className="glass sticky top-0 z-40 border-b print:hidden">
         <div className="mx-auto grid h-16 max-w-[1240px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-8">
           <Link to="/today" className="justify-self-start rounded-md" aria-label="Ecoisland home">
             <Logo />
@@ -156,7 +158,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         )}
       </header>
-      <main className="mx-auto max-w-[1240px] px-8 pt-8 pb-24">{children}</main>
+      <main className="mx-auto max-w-[1240px] px-8 pt-8 pb-24 print:max-w-none print:p-0">{children}</main>
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} teacher={teacher} />
     </div>
   );

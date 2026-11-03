@@ -143,7 +143,7 @@ export async function deleteAssignment(classId: string, aid: string): Promise<vo
 
 export async function updateClass(
   classId: string,
-  patch: Partial<Pick<ClassDoc, "name" | "current_unit" | "test_day" | "test_label">>,
+  patch: Partial<Pick<ClassDoc, "name" | "current_unit" | "test_day" | "test_label" | "chat_enabled">>,
 ): Promise<void> {
   await updateDoc(doc(db, "classes", classId), { ...patch, updated_at: new Date().toISOString() });
 }

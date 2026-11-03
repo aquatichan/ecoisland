@@ -1,5 +1,25 @@
 // The public home page: what Ecoisland is, shown with the real island.
-import { ArrowRight, BookOpen, CalendarCheck, Check, Flame, GraduationCap, ListChecks, Moon, PenLine, Sparkles, Sun, Users } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  CalendarCheck,
+  Check,
+  Clock,
+  Flame,
+  GraduationCap,
+  HandHeart,
+  ListChecks,
+  MapPin,
+  MessageCircle,
+  Moon,
+  PenLine,
+  Recycle,
+  Sparkles,
+  Sun,
+  BrushCleaning,
+  Users,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BlurText from "@/components/bits/BlurText";
@@ -265,6 +285,7 @@ function Teachers() {
             { icon: ListChecks, t: "Assign lessons, lesson or unit quizzes, FRQs, daily sets or field quests, each with a due date." },
             { icon: Users, t: "Watch completion fill in live. See who's late, who's on a streak, and who hasn't started." },
             { icon: CalendarCheck, t: "Set the current unit and the test date. Every student's daily set focuses on that unit." },
+            { icon: MessageCircle, t: "Turn on a class chat you moderate, schedule eco actions, and verify students' volunteer hours." },
           ].map((x) => (
             <li key={x.t} className="flex gap-3.5 text-[15px] text-fg-2">
               <span className="grid size-8 shrink-0 place-items-center rounded-[10px] bg-brand-soft text-brand-ink">
@@ -348,6 +369,73 @@ function Landmarks() {
   );
 }
 
+function ActSection() {
+  const cards = [
+    { icon: BrushCleaning, tone: "bg-ocean-soft text-ocean", month: "NOV", day: "14", kind: "Volunteer event", title: "Creek cleanup", meta: "9:00 AM · Thornton Creek trailhead", going: "18 going" },
+    { icon: Recycle, tone: "bg-brand-soft text-brand-ink", month: "NOV", day: "17", kind: "Eco action", title: "Trash audit", meta: "Unit 8 · one week", going: "APES · Period 3" },
+  ];
+  return (
+    <section id="act" className="mx-auto grid max-w-[1200px] scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
+      <div>
+        <p className="t-eyebrow">Act</p>
+        <h2 className="t-h1 mt-3">Then take it outside.</h2>
+        <p className="mt-4 text-[16px] text-fg-3">Every unit ends somewhere real. Find volunteer events near you, do eco actions that use what you just learned, and build a service record your teacher has verified.</p>
+        <ul className="mt-8 space-y-4">
+          {[
+            { icon: Recycle, t: "Twelve eco actions, each tied to an APES unit: a trash audit, a home energy hunt, a pollinator count." },
+            { icon: HandHeart, t: "RSVP to cleanups and plantings, contact the organizer, and log your hours afterwards." },
+            { icon: Award, t: "Ambassadors organize events in their own area and post them for everyone." },
+          ].map((x) => (
+            <li key={x.t} className="flex gap-3.5 text-[15px] text-fg-2">
+              <span className="grid size-8 shrink-0 place-items-center rounded-[10px] bg-brand-soft text-brand-ink">
+                <x.icon className="size-4" />
+              </span>
+              {x.t}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="relative" aria-label="Example listings in Act">
+        <div className="space-y-4">
+          {cards.map((c, i) => (
+            <div key={c.title} className={cn("card flex gap-4 p-5 shadow-md", i === 1 && "ml-10")}>
+              <div className="flex w-14 shrink-0 flex-col items-center">
+                <div className="w-full overflow-hidden rounded-[12px] border border-line text-center">
+                  <p className={cn("py-0.5 text-[10.5px] font-bold tracking-[0.08em]", c.tone)}>{c.month}</p>
+                  <p className="font-display py-1 text-[22px] leading-none font-[600] text-fg">{c.day}</p>
+                </div>
+                <span className={cn("mt-2.5 grid size-8 place-items-center rounded-full", c.tone)}>
+                  <c.icon className="size-4" />
+                </span>
+              </div>
+              <div className="min-w-0">
+                <Badge tone={c.kind === "Eco action" ? "sun" : "ocean"}>{c.kind}</Badge>
+                <p className="mt-2.5 text-[16px] font-semibold text-fg">{c.title}</p>
+                <p className="mt-2 flex items-center gap-4 text-[12.5px] text-fg-3">
+                  <span className="inline-flex items-center gap-1.5">
+                    {c.kind === "Eco action" ? <Clock className="size-3.5" /> : <MapPin className="size-3.5" />} {c.meta}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Users className="size-3.5" /> {c.going}
+                  </span>
+                </p>
+              </div>
+            </div>
+          ))}
+          <div className="card ml-20 flex items-center gap-4 p-5 shadow-md">
+            <HandHeart className="size-5 text-brand" />
+            <div>
+              <p className="font-display t-num text-[30px] leading-none font-[600] text-fg">
+                24.5 <span className="font-sans text-[13.5px] font-normal text-fg-3">volunteer hours, verified</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCta() {
   return (
     <section className="mx-auto max-w-[1200px] px-8 py-28 text-center">
@@ -376,6 +464,7 @@ export default function Landing() {
       <Course />
       <Teachers />
       <Landmarks />
+      <ActSection />
       <FinalCta />
       <footer className="border-t border-line">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-8 py-8 text-[13.5px] text-fg-3">

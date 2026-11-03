@@ -47,6 +47,13 @@ export type UserDoc = {
   week_sets?: number;
   economy_version?: number;
   created_date?: string;
+
+  // (server) Act
+  hours_verified?: number;
+  rsvp_events?: string[];
+  actions_done?: string[];
+  ambassador?: boolean;
+  ambassador_region?: string;
 };
 
 /** classes/{classId}. */
@@ -60,6 +67,8 @@ export type ClassDoc = {
   test_day?: DayKey | null;
   test_label?: string | null;
   member_count?: number;
+  /** Class chat is off until the teacher turns it on. */
+  chat_enabled?: boolean;
   created_at?: string;
 };
 
@@ -83,6 +92,11 @@ export type MemberDoc = {
   island_name?: string;
   last_set_day?: DayKey | null;
   masteries?: number[];
+  /** (server) Set by the teacher: can read chat but not post. */
+  muted?: boolean;
+  hours_verified?: number;
+  actions_count?: number;
+  ambassador?: boolean;
 };
 
 /** classes/{classId}/assignments/{aid}/submissions/{uid}. Written by the server only. */
@@ -99,14 +113,32 @@ export type SubmissionDoc = {
   updated_at?: string;
 };
 
-/** classes/{classId}/notes/{id}. Field notes from quests. */
+/** classes/{classId}/notes/{id}. Field notes from quests and eco actions. */
 export type NoteDoc = {
   id: string;
   uid: string;
   username: string;
   avatar_url?: string;
-  unit: number;
+  unit: number | null;
+  /** "action" for eco action write-ups; quests leave it unset. */
+  kind?: "action";
+  event_key?: string;
   title: string;
   text: string;
   created_at: string;
+};
+
+/** classes/{classId}/messages/{id}. Class chat, written by the server only. */
+export type MessageDoc = {
+  id: string;
+  uid: string;
+  name: string;
+  avatar_url?: string;
+  role: Role;
+  text: string;
+  created_at: string;
+  deleted?: boolean;
+  deleted_by?: "author" | "teacher";
+  reported?: boolean;
+  reports?: string[];
 };

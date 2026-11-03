@@ -1,19 +1,20 @@
 // Practice sessions: the daily set (spaced repetition), unit quizzes, lesson
-// quizzes and mixed review. Rewards are recorded by the server.
+// quizzes and mixed review. The server checks every answer and computes the
+// score and rewards (worker/attempts.ts).
 import { ArrowRight, BookOpenCheck, CheckCircle2, Flame, RotateCcw, Sparkles, TriangleAlert } from "lucide-react";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import CountUp from "@/components/bits/CountUp";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
 import { IslandScene } from "@/components/island/IslandScene";
-import { QuizRunner, type Answer } from "@/components/quiz/QuizRunner";
+import { QuizRunner, type Answer, type Checked } from "@/components/quiz/QuizRunner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState, Spinner } from "@/components/ui/empty";
 import { ProgressRing } from "@/components/ui/progress";
 import { track } from "@/lib/analytics";
-import { api, errorMessage, type DailySetResult, type QuizResult } from "@/lib/api";
+import { api, errorMessage, type AttemptResult } from "@/lib/api";
 import { lessonQuestions, unitBank, unitOfQuestion, unitPool, type Question } from "@/lib/content";
 import { useDocumentTitle, useToday } from "@/lib/hooks";
 import { useProfile } from "@/lib/session";
@@ -28,7 +29,7 @@ import { LANDMARK_INFO } from "@/components/island/Landmarks";
 
 type Mode = "daily" | "unit" | "lesson" | "mixed";
 
-type Setup = { questions: Question[]; eyebrow: string; title: string; unit: number | null; lessonId: string | null };
+type Setup = { questions: Question[]; eyebrow: string; title: string; unit: number | null; lessonId: string | null; attemptId: string };
 
 type Outcome = {
   answers: Answer[];
@@ -41,6 +42,8 @@ type Outcome = {
   error?: string;
   xpBefore: number;
 };
+
+type SetupDraft = Omit<Setup, "attemptId">;
 
 const UNIT_QUIZ_SIZE = 20;
 const MIXED_SIZE = 25;
@@ -77,7 +80,7 @@ export default function Practice() {
       try {
         const state = await loadSrs(profile.id);
         srs.current = state;
-        let s: Setup;
+        let s: SetupDraft;
         if (mode === "daily") {
           const focusPool = await unitPool(focusUnit);
           // Reviews can come from any unit the student has seen before.
@@ -106,7 +109,14 @@ export default function Practice() {
         }
         if (cancelled) return;
         if (s.questions.length < REWARD.QUIZ_MIN_QUESTIONS) throw new Error("There aren't enough questions here yet.");
-        setSetup(s);
+        const { attemptId } = await api<{ attemptId: string }>("attempt/start", {
+          mode,
+          unit: s.unit ?? undefined,
+          lesson: s.lessonId ?? undefined,
+          qids: s.questions.map((q) => q.id),
+        });
+        if (cancelled) return;
+        setSetup({ ...s, attemptId });
         setPhase(mode === "daily" ? "intro" : "running");
         if (mode !== "daily") track("quiz_start", { mode, unit: s.unit ?? 0 });
       } catch (err) {
@@ -125,33 +135,42 @@ export default function Practice() {
     srsUpdates.current[a.question.id] = card;
   };
 
+  const check = useCallback(
+    (q: Question, choice: number) => api<Checked>("attempt/answer", { attemptId: setup?.attemptId, qid: q.id, choice }),
+    [setup?.attemptId],
+  );
+
   const onFinish = async (answers: Answer[]) => {
     if (!setup) return;
     setPhase("saving");
-    const xpBefore = profile.xp_total ?? 0;
     void saveSrs(profile.id, srsUpdates.current).catch(() => undefined);
-    const correct = answers.filter((a) => a.correct).length;
+    await save(answers, profile.xp_total ?? 0);
+    setPhase("done");
+  };
+
+  /** Asks the server to score the attempt. Safe to repeat: it is saved once. */
+  const save = async (answers: Answer[], xpBefore: number) => {
+    if (!setup) return;
     try {
+      const res = await api<AttemptResult>("attempt/finish", { attemptId: setup.attemptId });
+      setOutcome({
+        answers,
+        reward: res.reward ?? null,
+        already: res.already,
+        streak: res.streak,
+        capped: res.capped,
+        newLandmark: res.newLandmark,
+        completed: res.completed ?? [],
+        xpBefore,
+      });
       if (mode === "daily") {
-        const res = await api<DailySetResult>("reward", { kind: "daily_set", answers: answers.map((a) => ({ qid: a.question.id, correct: a.correct })) });
-        setOutcome({ answers, reward: res.reward, already: res.already, streak: res.streak, completed: res.completed, xpBefore });
-        if (!res.already) track("daily_set_complete", { correct, streak: res.streak });
-      } else {
-        const res = await api<QuizResult>("reward", {
-          kind: "quiz",
-          source: mode === "mixed" ? "mixed" : mode,
-          unit: setup.unit ?? undefined,
-          lesson: setup.lessonId ?? undefined,
-          correct,
-          total: answers.length,
-        });
-        setOutcome({ answers, reward: res.reward, capped: res.capped, newLandmark: res.newLandmark, completed: res.completed, xpBefore });
-        track("quiz_complete", { mode, correct, total: answers.length });
+        if (!res.already && !res.replay) track("daily_set_complete", { correct: res.correct ?? 0, streak: res.streak ?? 0 });
+      } else if (!res.replay) {
+        track("quiz_complete", { mode, correct: res.correct ?? 0, total: res.total ?? answers.length });
       }
     } catch (err) {
       setOutcome({ answers, reward: null, completed: [], error: errorMessage(err), xpBefore });
     }
-    setPhase("done");
   };
 
   if (loadError) {
@@ -197,7 +216,15 @@ export default function Practice() {
   if (phase === "running") {
     return (
       <Page>
-        <QuizRunner questions={setup.questions} eyebrow={setup.eyebrow} title={setup.title} onAnswer={onAnswer} onFinish={onFinish} onExit={() => navigate(-1)} />
+        <QuizRunner
+          questions={setup.questions}
+          eyebrow={setup.eyebrow}
+          title={setup.title}
+          check={check}
+          onAnswer={onAnswer}
+          onFinish={onFinish}
+          onExit={() => navigate(-1)}
+        />
       </Page>
     );
   }
@@ -210,7 +237,15 @@ export default function Practice() {
     );
   }
 
-  return <Results mode={mode} setup={setup} outcome={outcome} onAgain={() => setAttempt((a) => a + 1)} />;
+  return (
+    <Results
+      mode={mode}
+      setup={setup}
+      outcome={outcome}
+      onAgain={() => setAttempt((a) => a + 1)}
+      onRetrySave={() => save(outcome.answers, outcome.xpBefore)}
+    />
+  );
 }
 
 function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: boolean; onStart: () => void }) {
@@ -271,10 +306,23 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
   );
 }
 
-function Results({ mode, setup, outcome, onAgain }: { mode: Mode; setup: Setup; outcome: Outcome; onAgain: () => void }) {
+function Results({
+  mode,
+  setup,
+  outcome,
+  onAgain,
+  onRetrySave,
+}: {
+  mode: Mode;
+  setup: Setup;
+  outcome: Outcome;
+  onAgain: () => void;
+  onRetrySave: () => Promise<void>;
+}) {
   const profile = useProfile();
   const today = useToday();
   const [showReview, setShowReview] = useState(false);
+  const [retrying, setRetrying] = useState(false);
   const total = outcome.answers.length;
   const correct = outcome.answers.filter((a) => a.correct).length;
   const pct = total ? Math.round((correct / total) * 100) : 0;
@@ -317,9 +365,22 @@ function Results({ mode, setup, outcome, onAgain }: { mode: Mode; setup: Setup; 
           {outcome.error ? (
             <div className="mt-7 flex items-start gap-3 rounded-lg bg-coral-soft p-4 text-[14px] text-coral">
               <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
-              <span>
-                Your answers were checked, but the results couldn't be saved: {outcome.error}
-              </span>
+              <div className="min-w-0 flex-1">
+                <p>Your answers were checked, but the results couldn't be saved: {outcome.error}</p>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="mt-3"
+                  disabled={retrying}
+                  onClick={async () => {
+                    setRetrying(true);
+                    await onRetrySave();
+                    setRetrying(false);
+                  }}
+                >
+                  {retrying ? <Spinner className="size-4" /> : <RotateCcw />} Try saving again
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="mt-7 flex flex-wrap gap-3">
@@ -407,14 +468,14 @@ function Results({ mode, setup, outcome, onAgain }: { mode: Mode; setup: Setup; 
 
       {showReview && (
         <div className="mt-6 space-y-3">
-          {mistakes.map(({ question: q, choice }) => (
+          {mistakes.map(({ question: q, choice, answer }) => (
             <div key={q.id} className="card p-6">
               <p className="text-[15px] leading-relaxed font-semibold text-fg">{q.prompt}</p>
               <p className="mt-3 flex gap-2 text-[14px] text-coral">
                 <span className="font-semibold">You:</span> {q.choices[choice]}
               </p>
               <p className="mt-1.5 flex gap-2 text-[14px] text-brand-ink">
-                <span className="font-semibold">Answer:</span> {q.choices[q.answer]}
+                <span className="font-semibold">Answer:</span> {q.choices[answer]}
               </p>
               {q.lessonId && (
                 <Link to={`/study/unit/${q.unit}/${encodeURIComponent(q.lessonId)}`} className="mt-3 inline-flex items-center gap-1 text-[13px] font-semibold text-brand-ink hover:underline">

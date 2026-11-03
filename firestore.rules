@@ -117,7 +117,8 @@ service cloud.firestore {
             || (after.current_unit is int && after.current_unit >= 1 && after.current_unit <= 9))
         && (after.get('test_day', null) == null || isDay(after.test_day))
         && (after.get('test_label', null) == null
-            || (after.test_label is string && after.test_label.size() <= 60));
+            || (after.test_label is string && after.test_label.size() <= 60))
+        && (after.get('chat_enabled', false) is bool);
     }
 
     function validAssignment(d) {
@@ -141,7 +142,7 @@ service cloud.firestore {
       allow create, delete: if false; // the server creates classes and their join codes
       allow update: if signedIn() && resource.data.teacher_id == request.auth.uid
         && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly(['name', 'current_unit', 'test_day', 'test_label', 'updated_at'])
+             .hasOnly(['name', 'current_unit', 'test_day', 'test_label', 'chat_enabled', 'updated_at'])
         && validClassUpdate(request.resource.data);
 
       // Roster and leaderboard stats, mirrored by the server.
@@ -165,6 +166,25 @@ service cloud.firestore {
         }
       }
 
+      // Class events and eco actions, posted by the teacher through the
+      // server. RSVPs are visible to the teacher and to the student who made them.
+      match /events/{eid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow write: if false;
+
+        match /rsvps/{rid} {
+          allow read: if isTeacher(cid) || (isSelf(rid) && isMember(cid));
+          allow write: if false;
+        }
+      }
+
+      // Class chat. Written by the server (worker/chat.ts), which checks
+      // membership, mutes, the language filter and flood limits.
+      match /messages/{mid} {
+        allow read: if isTeacher(cid) || isMember(cid);
+        allow write: if false;
+      }
+
       // Field notes from quests. The teacher can remove any; authors their own.
       match /notes/{nid} {
         allow read: if isTeacher(cid) || isMember(cid);
@@ -176,6 +196,48 @@ service cloud.firestore {
     // Join codes are resolved by the server only.
     match /class_codes/{code} {
       allow read, write: if false;
+    }
+
+    // ── Act: community events, volunteer hours, ambassadors ───────────────
+    // All written by the server (worker/act.ts).
+
+    // Admins are added by hand in the Firebase console: admins/{uid}.
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{uid} {
+      allow get: if isSelf(uid);
+      allow list, write: if false;
+    }
+
+    // Community listings: published and cancelled ones are public to signed-in
+    // users; a pending suggestion only to its author and admins.
+    match /events/{eid} {
+      allow read: if signedIn() && (resource.data.status in ['published', 'cancelled']
+        || resource.data.created_by == request.auth.uid
+        || isAdmin());
+      allow write: if false;
+
+      match /rsvps/{rid} {
+        allow get: if isSelf(rid) || isAdmin();
+        allow list: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    // Volunteer hours: the student, the teacher asked to verify, and admins.
+    match /hours/{hid} {
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid
+        || resource.data.teacher_uid == request.auth.uid
+        || isAdmin());
+      allow write: if false;
+    }
+
+    match /ambassador_applications/{uid} {
+      allow get: if isSelf(uid) || isAdmin();
+      allow list: if isAdmin();
+      allow write: if false;
     }
   }
 }

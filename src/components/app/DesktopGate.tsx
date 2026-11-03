@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { LogoMark } from "./Logo";
 
 const MIN_WIDTH = 1024;
-const QUERY = `(min-width: ${MIN_WIDTH}px)`;
+// Printing (the volunteer hours record) lays out at paper width, which is
+// narrower than MIN_WIDTH, so print always counts as wide enough.
+const QUERY = `print, (min-width: ${MIN_WIDTH}px)`;
 
 function useWideEnough() {
   const [wide, setWide] = useState(() => window.matchMedia(QUERY).matches);

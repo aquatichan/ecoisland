@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Researchers characterized soil development in a forest by collecting soil samples at depths of 0-10 cm, 10-30 cm, 30-60 cm, and 60-100 cm and analyzing organic matter content, mineral composition, and particle size at each depth. If the procedure was modified to collect samples at these same depths but from five different forest locations representing different ages since disturbance (1 year, 5 years, 20 years, 50 years, and 100 years post-fire), how would this modification affect understanding of soil formation timescales?",
+    "answers": [
+      "The modification would reveal how soil horizons develop and deepen over time following disturbance, showing the progression from sediment deposition to horizon differentiation and organic matter accumulation.",
+      "The modification would reveal the current state of soil horizon development at five different forest locations, showing how parent material weathering and organic matter accumulation vary at each specific site.",
+      "The modification would reveal how soil horizons develop and deepen over time following disturbance, showing the progression from parent material weathering to horizon differentiation and organic matter accumulation.",
+      "The modification would reveal how soil horizons vary spatially across different forest locations, showing differences in parent material weathering and organic matter accumulation between sites."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A watershed experiences significant erosion, and sediment samples show that soil particles are being transported by water at a rate of 1,200 kg per hectare per year. If the watershed covers 850 hectares, which calculation method would determine the total annual soil loss from the entire watershed?",
+    "answers": [
+      "Divide the erosion rate per hectare by the total watershed area",
+      "Add the erosion rate per hectare to the total watershed area in hectares",
+      "Multiply the erosion rate per hectare by the total watershed area in hectares",
+      "Subtract the watershed area from the erosion rate, then multiply by 100 to express as a percentage"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A soil scientist studying a temperate forest measures the depth of the O horizon (organic layer) at two sites with identical climate and vegetation but different slope. The site with a 2% slope has an O horizon 8 cm deep, while the site with a 25% slope has an O horizon only 2 cm deep. Which process best explains this difference?",
+    "answers": [
+      "Steeper slopes promote faster chemical weathering of parent material, converting organic matter into mineral soil more quickly.",
+      "Steeper slopes increase surface runoff velocity, which physically removes leaf litter and organic matter before it can accumulate and decompose in place.",
+      "Steeper slopes receive less precipitation on average, slowing the decomposition of leaf litter into organic soil.",
+      "Steeper slopes have cooler soil temperatures, which slow the rate of organic matter input from vegetation."
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "Suspended sediment concentrations were measured at five sites: undisturbed forest 8 mg/L, grazed grassland 24 mg/L, recently logged forest 67 mg/L, agricultural field 89 mg/L, and urban parking lot 156 mg/L. Which conclusion about vegetation cover and soil erosion is best supported by these data?",
+    "answers": [
+      "No clear relationship because every site contains some suspended sediment",
+      "Suspended sediment concentrations increase as vegetation cover decreases",
+      "Forests have high sediment because leaf litter and debris enter streams",
+      "Urban areas show high sediment but not from concrete or asphalt breakdown"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "\"The Dust Bowl showed that converting native prairie to wheat caused catastrophic erosion. Without roots to bind soil, wind moved topsoil across states and reduced depth by up to 1.5 meters. Modern methods like cover cropping and reduced tillage keep roots that stabilize soil. These practices are essential to prevent similar erosion and preserve long-term productivity.\" Which claim best expresses the author's recommendation?",
+    "answers": [
+      "Farmers replaced native prairie with wheat on the Great Plains in the 1930s.",
+      "Wind carried topsoil across states and reduced soil depth up to 1.5 meters.",
+      "Use conservation practices that keep vegetation and roots to prevent erosion.",
+      "Plant roots bind soil particles and stabilize soil structure."
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "Soil scientists investigating how parent material type affects soil formation collected samples from three geologically distinct regions: granite bedrock, limestone bedrock, and sandstone bedrock. At each location, they extracted soil cores at depths of 0-10 cm, 10-30 cm, and 30-60 cm from five randomly selected sites and analyzed particle size distribution, mineral composition, and pH at each depth. Which of the following best describes the research method used in this study?",
+    "answers": [
+      "Experimental manipulation of bedrock composition to observe soil formation over five years",
+      "Observational field study with stratified sampling by depth and geology",
+      "Controlled laboratory experiment comparing soil samples from different regions",
+      "Comparative study measuring only surface horizons to determine weathering rates"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A soil scientist studied the relationship between soil depth and the concentration of iron oxide (a mineral that accumulates in the B horizon) at five locations in a tropical region. The data are shown in the table below.\nLocation Soil Depth to Bedrock (cm) Iron Oxide Concentration in B Horizon (%)\n1 45 8.2\n2 78 14.1\n3 112 18.9\n4 156 22.3\n5 189 24.7\nWhich statement best describes the relationship between soil depth and iron oxide concentration in the B horizon?",
+    "answers": [
+      "Iron oxide concentration decreases with soil depth because iron oxides are leached downward and eventually removed from the soil profile",
+      "Iron oxide concentration increases with soil depth, reflecting longer weathering and leaching processes that concentrate minerals in the B horizon",
+      "Iron oxide concentration and soil depth show no consistent relationship because mineral accumulation depends on parent material composition, not soil development time",
+      "Iron oxide concentration increases linearly with soil depth at a constant rate of approximately 0.1% per centimeter of soil depth"
+    ],
+    "correct": "B"
+  },
+  {
+    "question": "A hillside is logged, removing nearly all tree cover, and within two years soil loss during storms increases roughly tenfold compared to nearby unlogged hillsides. Which explanation best accounts for this increase?",
+    "answers": [
+      "Without root systems to bind particles and canopy to intercept rainfall, raindrop impact directly detaches soil particles and runoff carries them away faster.",
+      "Logging increases soil pH, which weakens the chemical bonds holding clay particles together and accelerates erosion.",
+      "Removing trees increases the moisture content of the soil, causing it to become more fluid and prone to landslides regardless of rainfall.",
+      "Logging equipment compacts the soil surface, which increases infiltration and reduces surface runoff, paradoxically accelerating erosion."
+    ],
+    "correct": "A"
+  },
+  {
+    "question": "A side-by-side comparison shows two soil profiles from the same region: Profile A (undisturbed forest) displays thick O and A horizons with abundant organic matter and a well-developed B horizon; Profile B (agricultural field after 50 years of tilling) shows a thin, compacted A horizon with minimal organic matter and an absent E horizon. Both profiles rest on the same C horizon parent material. What environmental consequence is most directly indicated by the differences between these two soil profiles?",
+    "answers": [
+      "The minimal organic matter in Profile B indicates that decomposition rates have increased, accelerating nutrient availability for crops",
+      "Profile B's compacted A horizon demonstrates that agricultural soil becomes denser and therefore more resistant to erosion than undisturbed soil",
+      "Agricultural tilling has removed upper soil horizons and degraded soil structure, reducing water infiltration and increasing erosion vulnerability",
+      "Profile B's absent E horizon proves that leaching has stopped, indicating the soil is now more fertile than Profile A"
+    ],
+    "correct": "C"
+  },
+  {
+    "question": "A soil scientist collected samples from a hillside at three depths and analyzed organic matter content and particle size distribution. The O horizon contained 12% organic matter with mostly undecomposed leaves; the A horizon contained 6% organic matter with a mix of sand, silt, and clay; the B horizon contained 1% organic matter with predominantly clay and iron oxides. Which conclusion about soil formation is best supported by these data?",
+    "answers": [
+      "The organic matter content is unrelated to soil horizon development since all horizons contain some organic material.",
+      "Organic matter increases with depth because deeper soil layers receive more nutrients from weathered parent material.",
+      "Organic matter percentages prove that the B horizon is the oldest soil layer and will eventually contain more organic material than the A horizon.",
+      "Organic matter concentration decreases with depth as biological activity and plant material input are concentrated near the surface."
+    ],
+    "correct": "D"
+  }
+]

@@ -17,10 +17,11 @@ import {
   quizReward,
 } from "../src/shared/economy";
 import { QUEST_MAX_CHARS, QUEST_MIN_CHARS, questForUnit } from "../src/shared/quests";
+import { deleteActData, dropRsvps } from "./act";
 import { syncAssignments, type CompletedAssignment } from "./assignments";
 import type { Ctx } from "./env";
 import type { Data, Doc, Write } from "./firestore";
-import { loadFrqs, gradeWithGemini, type FrqGrade } from "./frq";
+import { findFrq, gradeWithGemini, type FrqGrade } from "./frq";
 import { HttpError, asStringArray, int, num, str } from "./http";
 import { activityWrites, displayName, memberPayload, memberPaths, randomId, readRecord } from "./state";
 
@@ -35,24 +36,24 @@ const MAX_CLASSES_TAUGHT = 12;
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
-function clientDay(body: Body, now: Date): DayKey {
+export function clientDay(body: Body, now: Date): DayKey {
   if (!isPlausibleClientDay(body.day, now)) {
     throw new HttpError(400, "bad_day", "Your computer's date looks off. Check the clock, then try again.");
   }
   return body.day as DayKey;
 }
 
-function optionalDay(body: Body, now: Date): DayKey {
+export function optionalDay(body: Body, now: Date): DayKey {
   return isPlausibleClientDay(body.day, now) ? (body.day as DayKey) : utcDayKey(now);
 }
 
-async function requireUser(tx: Tx, uid: string): Promise<Doc> {
+export async function requireUser(tx: Tx, uid: string): Promise<Doc> {
   const doc = await tx.get(`users/${uid}`);
   if (!doc) throw new HttpError(404, "no_profile", "Your profile is still being set up. Refresh the page and try again.");
   return doc;
 }
 
-function publicState(data: Data) {
+export function publicState(data: Data) {
   const r = readRecord(data);
   return {
     treecoins: r.treecoins,
@@ -164,39 +165,35 @@ async function backfillUsername(ctx: Ctx, data: Data): Promise<void> {
 
 // ─── /api/reward ────────────────────────────────────────────────────────────
 
+// Daily sets and quizzes are scored by the server from checked answers (see
+// worker/attempts.ts); the browser never reports a score. Reading a lesson is
+// the only activity rewarded directly.
 export async function handleReward(ctx: Ctx, body: Body): Promise<unknown> {
   const day = clientDay(body, ctx.now);
-  switch (body.kind) {
-    case "daily_set":
-      return dailySet(ctx, body, day);
-    case "quiz":
-      return quiz(ctx, body, day);
-    case "lesson_read":
-      return lessonRead(ctx, body, day);
-    default:
-      throw new HttpError(400, "unknown_kind", "Unknown activity");
-  }
+  if (body.kind === "lesson_read") return lessonRead(ctx, body, day);
+  throw new HttpError(400, "unknown_kind", "Unknown activity");
 }
 
-async function dailySet(ctx: Ctx, body: Body, day: DayKey) {
+/** Fails the transaction unless the attempt exists and is still open. */
+async function claimAttempt(tx: Tx, attemptPath: string): Promise<void> {
+  const attempt = await tx.get(attemptPath);
+  if (!attempt) throw new HttpError(404, "no_attempt", "That practice session has expired. Start a new one.");
+  if (attempt.data.finished === true) throw new HttpError(409, "already_finished", "These results were already saved.");
+}
+
+export type Score = { correct: number; total: number };
+
+export async function rewardDailySet(ctx: Ctx, { correct, total }: Score, day: DayKey, attemptPath: string) {
   const { fs, uid } = ctx;
-  const answers = body.answers;
-  if (!Array.isArray(answers) || answers.length < 5 || answers.length > 15) {
-    throw new HttpError(400, "invalid_input", "A daily set has between 5 and 15 answers");
-  }
-  let correct = 0;
-  for (const a of answers) {
-    const ok = a && typeof a === "object" && typeof (a as Body).qid === "string" && ((a as Body).qid as string).length <= 40 && typeof (a as Body).correct === "boolean";
-    if (!ok) throw new HttpError(400, "invalid_input", "Malformed answer");
-    if ((a as Body).correct === true) correct++;
-  }
-  const total = answers.length;
 
   const out = await fs.runTransaction(async (tx) => {
+    await claimAttempt(tx, attemptPath);
     const user = await requireUser(tx, uid);
     const r = readRecord(user.data);
+    const close = (result: Data) => fs.patch(attemptPath, { finished: true, finished_at: ctx.now.toISOString(), correct, total, result }, true);
     if (r.last_set_day && daysBetween(r.last_set_day, day) <= 0) {
-      return { writes: [] as Write[], result: { already: true, data: user.data, reward: { tc: 0, xp: 0 }, streak: r.streak } };
+      const reward = { tc: 0, xp: 0 };
+      return { writes: [close({ already: true, reward, streak: r.streak })], result: { already: true, data: user.data, reward, streak: r.streak } };
     }
     const streak = r.last_set_day && daysBetween(r.last_set_day, day) === 1 ? r.streak + 1 : 1;
     const reward = dailySetReward(correct, total, streak);
@@ -218,6 +215,7 @@ async function dailySet(ctx: Ctx, body: Body, day: DayKey) {
       },
       members,
     );
+    writes.push(close({ already: false, reward, streak }));
     return { writes, result: { already: false, data, reward, streak } };
   });
 
@@ -225,30 +223,17 @@ async function dailySet(ctx: Ctx, body: Body, day: DayKey) {
   return { already: out.already, reward: out.reward, streak: out.streak, correct, total, completed, state: publicState(out.data) };
 }
 
-async function quiz(ctx: Ctx, body: Body, day: DayKey) {
+export type QuizSource = { source: "unit" | "lesson" | "mixed"; unit: number | null; lessonId: string | null };
+
+export async function rewardQuiz(ctx: Ctx, { source, unit, lessonId }: QuizSource, { correct, total }: Score, day: DayKey, attemptPath: string) {
   const { fs, uid } = ctx;
-  const source = body.source;
-  if (source !== "unit" && source !== "lesson" && source !== "mixed") throw new HttpError(400, "invalid_input", "Unknown quiz type");
-  const total = int(body, "total", REWARD.QUIZ_MIN_QUESTIONS, REWARD.QUIZ_MAX_QUESTIONS);
-  const correct = int(body, "correct", 0, total);
-  let unit: number | null = null;
-  let lessonId: string | null = null;
-  let label = "All units";
-  if (source === "unit") {
-    unit = int(body, "unit", 1, 9);
-    label = `Unit ${unit}`;
-  } else if (source === "lesson") {
-    lessonId = str(body, "lesson", { max: 120 });
-    const found = findLesson(lessonId);
-    if (!found || !found.lesson.hasQuiz) throw new HttpError(400, "invalid_input", "Unknown lesson quiz");
-    unit = found.unit.n;
-    label = `Lesson ${found.lesson.code}`;
-  }
+  const label = source === "unit" ? `Unit ${unit}` : source === "lesson" ? `Lesson ${lessonId ? findLesson(lessonId)?.lesson.code : ""}` : "All units";
   const score = pct(correct, total);
   const usagePath = `users/${uid}/usage/${day}`;
   const sessionPath = `users/${uid}/apes_sessions/${randomId()}`;
 
   const out = await fs.runTransaction(async (tx) => {
+    await claimAttempt(tx, attemptPath);
     const user = await requireUser(tx, uid);
     const r = readRecord(user.data);
     const usage = await tx.get(usagePath);
@@ -283,6 +268,7 @@ async function quiz(ctx: Ctx, body: Body, day: DayKey) {
         createdAt: ctx.now.toISOString(),
       }),
     );
+    writes.push(fs.patch(attemptPath, { finished: true, finished_at: ctx.now.toISOString(), correct, total, result: { reward, capped, score, newLandmark } }, true));
     return { writes, result: { data, reward, capped, newLandmark } };
   });
 
@@ -315,8 +301,7 @@ export async function handleFrq(ctx: Ctx, body: Body): Promise<unknown> {
   const { fs, uid, env } = ctx;
   const day = clientDay(body, ctx.now);
   const frqId = str(body, "frq", { max: 40 });
-  const frqs = await loadFrqs(env, new URL(ctx.request.url).origin);
-  const frq = frqs.find((f) => f.id === frqId);
+  const frq = findFrq(frqId);
   if (!frq) throw new HttpError(404, "unknown_frq", "That FRQ doesn't exist");
 
   const raw = body.responses;
@@ -549,25 +534,34 @@ export async function handleClassJoin(ctx: Ctx, body: Body): Promise<unknown> {
 /** Removes `targetUid` from a class. Used for leaving and for teacher removal. */
 async function removeMember(ctx: Ctx, classId: string, targetUid: string, asTeacher: boolean): Promise<void> {
   const { fs } = ctx;
-  await fs.runTransaction(async (tx) => {
+  const classRsvps = await fs.runTransaction(async (tx) => {
     const cls = await tx.get(`classes/${classId}`);
     if (asTeacher && (!cls || cls.data.teacher_id !== ctx.uid)) throw new HttpError(403, "not_teacher", "Only this class's teacher can do that.");
     const member = await tx.get(`classes/${classId}/members/${targetUid}`);
     const target = await tx.get(`users/${targetUid}`);
     const writes: Write[] = [];
     if (member) writes.push(fs.delete(member.path));
+    let dropped: string[] = [];
     if (target) {
       const r = readRecord(target.data);
-      if (r.class_ids.includes(classId)) writes.push(fs.patch(target.path, { class_ids: r.class_ids.filter((c) => c !== classId) }, true));
+      dropped = r.rsvp_events.filter((k) => k.startsWith(`c_${classId}_`));
+      if (r.class_ids.includes(classId) || dropped.length) {
+        writes.push(
+          fs.patch(target.path, { class_ids: r.class_ids.filter((c) => c !== classId), rsvp_events: r.rsvp_events.filter((k) => !dropped.includes(k)) }, true),
+        );
+      }
     }
     if (cls && member) writes.push(fs.patch(cls.path, { member_count: Math.max(0, num(cls.data.member_count) - 1) }, true));
-    return { writes, result: null };
+    return { writes, result: dropped };
   });
-  // Their submissions and field notes leave with them.
+  await dropRsvps(ctx, targetUid, classRsvps);
+  // Their submissions, field notes and chat messages leave with them.
   const assignments = await fs.list(`classes/${classId}/assignments`, { max: 300 });
   const cleanup: Write[] = assignments.map((a) => fs.delete(`${a.path}/submissions/${targetUid}`));
   const notes = await fs.query(`classes/${classId}`, "notes", [["uid", targetUid]], 50);
   for (const n of notes) cleanup.push(fs.delete(n.path));
+  const messages = await fs.query(`classes/${classId}`, "messages", [["uid", targetUid]], 2000);
+  for (const m of messages) cleanup.push(fs.delete(m.path));
   await fs.commit(cleanup);
 }
 
@@ -603,6 +597,11 @@ async function deleteClassData(ctx: Ctx, classId: string, code: string): Promise
     writes.push(fs.delete(a.path));
   }
   for (const n of await fs.list(`classes/${classId}/notes`)) writes.push(fs.delete(n.path));
+  for (const m of await fs.list(`classes/${classId}/messages`, { max: 20000 })) writes.push(fs.delete(m.path));
+  for (const e of await fs.list(`classes/${classId}/events`, { max: 1000 })) {
+    for (const r of await fs.list(`${e.path}/rsvps`)) writes.push(fs.delete(r.path));
+    writes.push(fs.delete(e.path));
+  }
   for (const m of members) writes.push(fs.delete(m.path));
   if (code) writes.push(fs.delete(`class_codes/${code}`));
   writes.push(fs.delete(`classes/${classId}`));
@@ -652,6 +651,7 @@ export async function handleAccountDelete(ctx: Ctx): Promise<unknown> {
       if (claim && claim.data.uid === uid) await fs.commit([fs.delete(claim.path)]);
     }
   }
+  await deleteActData(ctx, uid, user?.data ?? null);
   // Posts from the retired community feed, with their comment threads.
   const posts = await fs.query("", "posts", [["userId", uid]], 500).catch(() => [] as Doc[]);
   const writes: Write[] = [];
@@ -660,8 +660,9 @@ export async function handleAccountDelete(ctx: Ctx): Promise<unknown> {
     writes.push(fs.delete(p.path));
   }
   // Everything under users/{uid}.
+  // (attempts and answers grow by about ten documents per daily set.)
   for (const collectionId of await fs.listCollectionIds(`users/${uid}`).catch(() => [] as string[])) {
-    for (const d of await fs.list(`users/${uid}/${collectionId}`)) writes.push(fs.delete(d.path));
+    for (const d of await fs.list(`users/${uid}/${collectionId}`, { max: 100_000 })) writes.push(fs.delete(d.path));
   }
   writes.push(fs.delete(`users/${uid}`));
   await fs.commit(writes);

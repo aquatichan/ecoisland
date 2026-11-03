@@ -5,16 +5,21 @@ import {
   Check,
   CheckCircle2,
   ChevronDown,
+  ClipboardCheck,
   Compass,
   Copy,
+  Flag,
   Flame,
+  HandHeart,
   ListChecks,
   PenLine,
   Plus,
   Sparkles,
   Users,
 } from "lucide-react";
+import { collection, limit, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
+import { ReviewHoursDialog } from "@/components/act/Dialogs";
 import { Link, useNavigate } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
 import { IslandScene } from "@/components/island/IslandScene";
@@ -28,7 +33,9 @@ import { ProgressRing } from "@/components/ui/progress";
 import { track } from "@/lib/analytics";
 import { api, errorMessage } from "@/lib/api";
 import { unitPool } from "@/lib/content";
+import { listingHref, useHoursToReview, useListings, whenLabel } from "@/lib/act";
 import { useClasses, useCollection, type WithId } from "@/lib/data";
+import { db } from "@/lib/firebase";
 import { useDocumentTitle, useToday } from "@/lib/hooks";
 import { useProfile } from "@/lib/session";
 import { loadSrs, readiness } from "@/lib/srs";
@@ -42,7 +49,8 @@ import { addDays, daysBetween, dueLabel, effectiveStreak, formatDay, weekStart, 
 import { islandHealth, masteredUnits, stageForXp } from "@/shared/economy";
 import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
-import type { ClassDoc, MemberDoc } from "@/shared/types";
+import { actionOpen, eventPhase } from "@/shared/act";
+import type { ClassDoc, MemberDoc, UserDoc } from "@/shared/types";
 
 function greeting() {
   const h = new Date().getHours();
@@ -118,6 +126,7 @@ function StudentToday() {
         <div className="space-y-6">
           <StreakCard streak={streak} best={profile.streak_best ?? 0} days={profile.set_days ?? []} today={today} />
           {test && <TestCard test={test} today={today} />}
+          <ActCard profile={profile} today={today} />
           <QuestCard unit={focusUnit} done={(profile.quests_done ?? []).includes(focusUnit)} />
         </div>
       </div>
@@ -481,7 +490,110 @@ function QuestCard({ unit, done }: { unit: number; done: boolean }) {
   );
 }
 
+/** The next thing to do in Act: an event they're going to, or an open eco action. */
+function ActCard({ profile, today }: { profile: UserDoc; today: DayKey }) {
+  const { listings, loading } = useListings(profile);
+  const going = new Set(profile.rsvp_events ?? []);
+  const done = new Set(profile.actions_done ?? []);
+  const live = listings.filter((l) => l.status === "published" && eventPhase(l, today) !== "past");
+  const next =
+    live.find((l) => l.kind === "event" && going.has(l.key)) ??
+    live.find((l) => l.kind === "action" && !done.has(l.key) && actionOpen(l, today) && l.scope === "class") ??
+    live.find((l) => l.kind === "action" && !done.has(l.key) && actionOpen(l, today)) ??
+    live.find((l) => l.kind === "event");
+  if (loading) return null;
+  return (
+    <Card className="p-6">
+      <p className="t-eyebrow flex items-center gap-1.5">
+        <HandHeart className="size-3.5" aria-hidden /> Act
+        {next ? (next.kind === "event" ? (going.has(next.key) ? " · You're going" : " · Volunteer event") : " · Eco action") : ""}
+      </p>
+      {next ? (
+        <>
+          <p className="mt-3 text-[15.5px] font-semibold text-fg">{next.title}</p>
+          <p className="mt-1 text-[13px] text-fg-3">{whenLabel(next)}</p>
+          <Button variant="soft" className="mt-4 w-full" asChild>
+            <Link to={listingHref(next)}>{next.kind === "action" ? "Do it · +20 TC" : going.has(next.key) ? "See details" : "Take a look"}</Link>
+          </Button>
+        </>
+      ) : (
+        <>
+          <p className="mt-3 text-[15.5px] font-semibold text-fg">Take it outside</p>
+          <p className="mt-1.5 text-[13.5px] text-fg-3">Find a volunteer event or an eco action, and log your service hours.</p>
+          <Button variant="soft" className="mt-4 w-full" asChild>
+            <Link to="/act">Open Act</Link>
+          </Button>
+        </>
+      )}
+    </Card>
+  );
+}
+
 // ─── Teacher ────────────────────────────────────────────────────────────────
+
+/** Reported chat messages across a teacher's classes: classId → count. */
+function useReports(classIds: string[]): Record<string, number> {
+  const key = classIds.join(",");
+  const [map, setMap] = useState<Record<string, number>>({});
+  useEffect(() => {
+    const ids = key ? key.split(",") : [];
+    setMap({});
+    const unsubs = ids.map((cid) =>
+      onSnapshot(
+        query(collection(db, "classes", cid, "messages"), where("reported", "==", true), limit(50)),
+        (snap) => setMap((m) => ({ ...m, [cid]: snap.docs.filter((d) => d.data().deleted !== true).length })),
+        () => setMap((m) => ({ ...m, [cid]: 0 })),
+      ),
+    );
+    return () => unsubs.forEach((u) => u());
+  }, [key]);
+  return map;
+}
+
+function Attention({ classes, uid }: { classes: WithId<ClassDoc>[]; uid: string }) {
+  const hours = useHoursToReview(uid, true);
+  const reports = useReports(classes.map((c) => c.id));
+  const [reviewing, setReviewing] = useState(false);
+  const flagged = classes.filter((c) => (reports[c.id] ?? 0) > 0);
+  if (hours.items.length === 0 && flagged.length === 0) return null;
+  return (
+    <div className="mb-6 grid grid-cols-2 gap-4">
+      {hours.items.length > 0 && (
+        <Card className="flex items-center gap-4 p-5">
+          <span className="grid size-10 place-items-center rounded-[12px] bg-sun-soft text-sun-ink" aria-hidden>
+            <ClipboardCheck className="size-5" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[14.5px] font-semibold text-fg">
+              {hours.items.length} volunteer {hours.items.length === 1 ? "entry" : "entries"} to verify
+            </p>
+            <p className="text-[13px] text-fg-3">Verified hours go on each student's service record.</p>
+          </div>
+          <Button size="sm" onClick={() => setReviewing(true)}>
+            Review
+          </Button>
+        </Card>
+      )}
+      {flagged.map((c) => (
+        <Card key={c.id} className="flex items-center gap-4 p-5">
+          <span className="grid size-10 place-items-center rounded-[12px] bg-coral-soft text-coral" aria-hidden>
+            <Flag className="size-5" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[14.5px] font-semibold text-fg">
+              {reports[c.id]} reported {reports[c.id] === 1 ? "message" : "messages"}
+            </p>
+            <p className="truncate text-[13px] text-fg-3">In {c.name}'s chat</p>
+          </div>
+          <Button size="sm" variant="secondary" asChild>
+            <Link to={`/class/${c.id}?tab=chat`}>Open chat</Link>
+          </Button>
+        </Card>
+      ))}
+      {reviewing && <ReviewHoursDialog open onOpenChange={setReviewing} logs={hours.items} />}
+    </div>
+  );
+}
 
 function TeacherToday() {
   const profile = useProfile();
@@ -518,11 +630,14 @@ function TeacherToday() {
       ) : classes.length === 0 ? (
         <CreateFirstClass />
       ) : (
-        <div className="grid grid-cols-2 gap-6">
-          {classes.map((c) => (
-            <ClassSummary key={c.id} cls={c} today={today} />
-          ))}
-        </div>
+        <>
+          <Attention classes={classes} uid={profile.id} />
+          <div className="grid grid-cols-2 gap-6">
+            {classes.map((c) => (
+              <ClassSummary key={c.id} cls={c} today={today} />
+            ))}
+          </div>
+        </>
       )}
     </Page>
   );

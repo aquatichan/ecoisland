@@ -1,7 +1,7 @@
 import { deleteUser } from "firebase/auth";
-import { Check, Copy, GraduationCap, LogOut, Mail, Monitor, Moon, Sprout, Sun, Trash2, Upload, UserRound } from "lucide-react";
+import { Award, Check, Copy, GraduationCap, LogOut, Mail, Monitor, Moon, Sprout, Sun, Trash2, Upload, UserRound } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -281,6 +281,18 @@ function GrowSection() {
               {copied ? <Check /> : <Copy />} {copied ? "Copied" : teacher ? "Copy link" : "Copy the note"}
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="mt-3 flex items-start gap-4 rounded-[13px] border border-line p-5">
+        <Award className="mt-0.5 size-5 shrink-0 text-sun" />
+        <div className="min-w-0 flex-1">
+          <p className="text-[14.5px] font-semibold text-fg">{profile.ambassador ? "You're an Ecoisland Ambassador" : "Become an Ecoisland Ambassador"}</p>
+          <p className="mt-1 text-[13.5px] text-fg-2">
+            {profile.ambassador ? "Post community events for your area from Act." : "Organize real events in your area, post them for everyone, and earn volunteer hours."}
+          </p>
+          <Button size="sm" variant="secondary" className="mt-4" asChild>
+            <Link to="/ambassador">{profile.ambassador ? "Ambassador hub" : "Learn more and apply"}</Link>
+          </Button>
         </div>
       </div>
     </Section>

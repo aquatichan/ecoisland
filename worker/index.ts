@@ -8,6 +8,20 @@
 // write Treecoins, XP, progress or class membership itself: Firestore rules
 // (firestore.rules) forbid it.
 
+import {
+  handleActionComplete,
+  handleAmbassadorApply,
+  handleAmbassadorReview,
+  handleEventCancel,
+  handleEventReview,
+  handleEventRsvp,
+  handleEventSave,
+  handleHoursDelete,
+  handleHoursLog,
+  handleHoursReview,
+} from "./act";
+import { handleAttemptAnswer, handleAttemptFinish, handleAttemptStart } from "./attempts";
+import { handleChatDelete, handleChatDismiss, handleChatMute, handleChatReport, handleChatSend } from "./chat";
 import type { Ctx, Env } from "./env";
 import { Firestore, FirestoreError } from "./firestore";
 import {
@@ -33,6 +47,9 @@ type Handler = (ctx: Ctx, body: Record<string, unknown>) => Promise<unknown>;
 const ROUTES: Record<string, Handler> = {
   sync: handleSync,
   reward: handleReward,
+  "attempt/start": handleAttemptStart,
+  "attempt/answer": handleAttemptAnswer,
+  "attempt/finish": handleAttemptFinish,
   "frq/grade": handleFrq,
   "quest/submit": handleQuest,
   purchase: handlePurchase,
@@ -42,6 +59,21 @@ const ROUTES: Record<string, Handler> = {
   "class/remove": handleClassRemove,
   "class/delete": handleClassDelete,
   "assignments/sync": handleAssignmentsSync,
+  "chat/send": handleChatSend,
+  "chat/delete": handleChatDelete,
+  "chat/report": handleChatReport,
+  "chat/dismiss": handleChatDismiss,
+  "chat/mute": handleChatMute,
+  "event/save": handleEventSave,
+  "event/cancel": handleEventCancel,
+  "event/review": handleEventReview,
+  "event/rsvp": handleEventRsvp,
+  "action/complete": handleActionComplete,
+  "hours/log": handleHoursLog,
+  "hours/delete": handleHoursDelete,
+  "hours/review": handleHoursReview,
+  "ambassador/apply": handleAmbassadorApply,
+  "ambassador/review": handleAmbassadorReview,
   "account/delete": handleAccountDelete,
 };
 

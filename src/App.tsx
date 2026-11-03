@@ -20,6 +20,11 @@ const FrqAttempt = lazy(() => import("@/pages/FrqAttempt"));
 const Flashcards = lazy(() => import("@/pages/Flashcards"));
 const Guide = lazy(() => import("@/pages/Guide"));
 const IslandPage = lazy(() => import("@/pages/IslandPage"));
+const Act = lazy(() => import("@/pages/Act"));
+const EventDetail = lazy(() => import("@/pages/EventDetail"));
+const Hours = lazy(() => import("@/pages/Hours"));
+const Ambassador = lazy(() => import("@/pages/Ambassador"));
+const Admin = lazy(() => import("@/pages/Admin"));
 const Classes = lazy(() => import("@/pages/Classes"));
 const ClassDetail = lazy(() => import("@/pages/ClassDetail"));
 const Settings = lazy(() => import("@/pages/Settings"));
@@ -65,6 +70,12 @@ export default function App() {
                         <Route path="/study/frq/:frqId" element={<FrqAttempt />} />
                         <Route path="/study/flashcards" element={<Flashcards />} />
                         <Route path="/study/guide" element={<Guide />} />
+                        <Route path="/act" element={<Act />} />
+                        <Route path="/act/hours" element={<Hours />} />
+                        <Route path="/act/e/:id" element={<EventDetail />} />
+                        <Route path="/act/class/:classId/:id" element={<EventDetail />} />
+                        <Route path="/ambassador" element={<Ambassador />} />
+                        <Route path="/admin" element={<Admin />} />
                         <Route path="/island" element={<IslandPage />} />
                         <Route path="/class" element={<Classes />} />
                         <Route path="/class/:classId" element={<ClassDetail />} />

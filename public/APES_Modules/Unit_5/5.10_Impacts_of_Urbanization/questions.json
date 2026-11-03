@@ -1,102 +1,102 @@
 [
   {
+    "id": "L5_10_0",
     "question": "An urban planner argues that public awareness campaigns encouraging residents to drive less, carpool, and buy fuel-efficient vehicles will substantially lower a city's transportation CO2 emissions. Which assumption does this argument depend on?",
     "answers": [
       "That enough individuals will voluntarily change their behavior in response to awareness campaigns to produce a measurable citywide emissions reduction, without requiring new infrastructure or policy mandates.",
       "That public transit infrastructure is already too extensive for further investment to reduce emissions meaningfully.",
       "That regulatory fuel-efficiency standards have already failed and only voluntary behavior change remains an option.",
       "That awareness campaigns are more expensive than building new public transit but produce comparable results."
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L5_10_1",
     "question": "Scientists studying how impervious surfaces affect urban flooding established 20 study plots in a city: 10 plots in neighborhoods with >70% impervious surface coverage (roads, buildings, parking lots) and 10 plots in neighborhoods with <20% impervious coverage. During a standardized rainfall event, they measured stormwater runoff volume and peak flow rate from each plot using calibrated flow meters. Which of the following best describes why the researchers selected neighborhoods with such different levels of impervious coverage?",
     "answers": [
       "To standardize the independent variable (impervious surface coverage) across neighborhoods so that other environmental factors could be controlled.",
       "To maximize the difference in the independent variable (impervious surface coverage) so that the 10 plots in each neighborhood type would serve as true replicates.",
       "To maximize the difference in the independent variable (impervious surface coverage) so that effects on runoff would be clearly detectable.",
       "To maximize the difference in the independent variable (impervious surface coverage) so that statistical significance could be achieved with the sample size used."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L5_10_2",
     "question": "The diagram shows a cross-section of an urban area with land use patterns transitioning from high-density downtown (tall buildings, extensive pavement) to low-density suburban sprawl (single-family homes, larger lots) to rural farmland. Which characteristic of this spatial pattern best illustrates the environmental consequence of urban sprawl described in the diagram?",
     "answers": [
       "Suburban sprawl reduces overall impervious surface coverage by distributing development across larger areas with more green space per capita than dense urban centers",
       "Suburban sprawl creates a buffer zone between urban and rural areas that protects farmland from pollution while maintaining agricultural productivity",
       "Suburban sprawl extends impervious surfaces and habitat fragmentation into previously rural areas, increasing stormwater runoff and reducing contiguous natural habitat",
       "Suburban sprawl concentrates population in peripheral areas, reducing pressure on downtown ecosystems and allowing rural farmland to recover naturally"
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L5_10_3",
     "question": "A watershed study compared a forested reference site and an urbanized site 5 km downstream. During a 25 mm rainfall, the forested site had peak discharge 0.8 m³/s at 18 hours after rainfall; the urbanized site had peak discharge 3.2 m³/s at 2 hours after rainfall. Nitrate rose from 0.5 mg/L at the forested site to 8.2 mg/L at the urbanized site.",
     "answers": [
       "Faster runoff reflects better stormwater management and quicker water removal.",
       "Impervious surfaces speed runoff, causing higher, faster peaks and elevated nitrates.",
       "Forests naturally produce more nitrate through decomposition increasing runoff nitrate.",
       "A 2-hour peak indicates urbanization has no effect on watershed hydrology."
-    ],
-    "correct": "B"
+    ]
   },
   {
+    "id": "L5_10_4",
     "question": "Researchers compared water consumption and groundwater depletion rates in three regions with different urbanization levels. Region A (rural): 150 million liters/day consumption, 2 million liters/day net depletion. Region B (suburban): 420 million liters/day consumption, 18 million liters/day net depletion. Region C (urban): 680 million liters/day consumption, 8 million liters/day net depletion. Region C has extensive water recycling infrastructure; Regions A and B do not.",
     "answers": [
       "Urban water consumption is highest, and depletion rates primarily reflect consumption volume; Region C's high consumption of 680 million liters/day creates greater aquifer stress than Region B's 420 million liters/day consumption, indicating urban areas deplete groundwater fastest.",
       "Urban water consumption is highest, but depletion rates depend on infrastructure efficiency; Region A's lack of recycling infrastructure results in unsustainable aquifer stress despite low consumption, while Region C's advanced recycling reduces depletion.",
       "Urban water consumption is highest, but depletion rates depend on population density; Region C's high density concentrates water demand efficiently despite high consumption, while Region B's rapid depletion indicates dispersed suburban population patterns.",
       "Urban water consumption is highest, but depletion rates depend on infrastructure efficiency; Region C's advanced recycling reduces aquifer stress despite high consumption, while Region B's rapid depletion indicates unsustainable suburban sprawl water demands."
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L5_10_5",
     "question": "The diagram compares a natural watershed with vegetation and permeable soil to an urbanized watershed with impervious surfaces. How does the shift from infiltration dominated pathways to runoff dominated pathways affect streamflow timing and magnitude?",
     "answers": [
       "Urbanization keeps streamflow timing and magnitude similar while increasing pollutant loads",
       "Urbanization reduces peak streamflow by increasing infiltration and groundwater storage",
       "Urbanization increases groundwater discharge to streams by forcing deeper percolation",
       "Urbanization raises peak streamflow and shortens lag time by increasing surface runoff"
-    ],
-    "correct": "D"
+    ]
   },
   {
+    "id": "L5_10_6",
     "question": "A city tracked stormwater runoff and impervious surface cover for 15 years. Impervious area rose from 18% to 42% and peak runoff rose from 2.3 million to 8.7 million gallons. Which conclusion about urbanization's effect on the hydrologic cycle is best supported by these data?",
     "answers": [
       "Eliminating impervious surfaces would not completely eliminate urban flooding.",
       "Different growth rates do not mean impervious surfaces have no effect.",
       "More impervious surface reduces soil infiltration and increases stormwater runoff.",
       "Runoff rose because rainfall frequency increased during the 15-year period."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L5_10_7",
     "question": "Urban forest canopy coverage and atmospheric temperature data from a city show: 1990 (canopy 28%, average summer temperature 29.2°C), 2000 (canopy 18%, temperature 31.1°C), 2010 (canopy 12%, temperature 32.8°C), 2020 (canopy 8%, temperature 34.5°C). Simultaneously, impervious surface coverage increased from 15% to 62%. Which conclusion about urbanization's environmental effects is best supported by these data?",
     "answers": [
       "Canopy coverage decreased by 20 percentage points per decade, so temperature should have increased by 20 percentage points per decade, but it increased by only 1.3°C per decade, so urbanization cannot explain the warming.",
       "The data show temperature increased, but this proves urbanization has no effect on urban climate since temperature changes are caused only by global climate change.",
       "Loss of urban tree canopy through development replaced vegetation with impervious surfaces, reducing evapotranspiration and increasing the urban heat island effect.",
       "Temperature increased because the city's population grew, which directly generates heat through human metabolism and activity."
-    ],
-    "correct": "C"
+    ]
   },
   {
+    "id": "L5_10_8",
     "question": "A scatter plot shows remaining green space percentage versus annual flood events for twelve rapidly urbanizing cities, revealing a clear negative trend: cities with less green space experience more flood events. Which statement best describes how this relationship illustrates urbanization's environmental impact?",
     "answers": [
       "As green space is replaced by impervious surfaces like pavement and rooftops, less rainfall infiltrates the ground, increasing surface runoff and flood frequency.",
       "The relationship is coincidental, since flood frequency is determined entirely by rainfall intensity and not by land cover.",
       "Green space causes more flooding because vegetation blocks natural drainage channels and traps water on the surface.",
       "Cities with more remaining green space experience more floods because dense vegetation slows infiltration and causes water to pool."
-    ],
-    "correct": "A"
+    ]
   },
   {
+    "id": "L5_10_9",
     "question": "A municipal water authority claims that expanding water treatment capacity will resolve future freshwater scarcity. They cite a projected 35% urban population increase over 20 years and current per-capita use of 150 gallons per day, but do not mention the region's water source or supply trends. Which of the following best describes a limitation of this evidence in supporting their claim?",
     "answers": [
       "The evidence documents rising demand but provides no data on whether the region's water supply (surface water or groundwater) can sustain that increased demand.",
       "The evidence is limited because per-capita water use of 150 gallons per day is implausibly high for an urban population.",
       "The evidence is limited because 20-year population projections are inherently too unreliable to be used in infrastructure planning.",
       "The evidence focuses too heavily on treatment plant construction costs rather than on public opinion about water rates."
-    ],
-    "correct": "A"
+    ]
   }
 ]

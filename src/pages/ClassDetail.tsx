@@ -4,6 +4,7 @@ import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import {
   ArrowLeft,
   ArrowUpDown,
+  Award,
   BookOpen,
   Check,
   ChevronDown,
@@ -24,6 +25,7 @@ import {
 import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
+import { ClassChat, useChatUnread } from "@/components/class/ClassChat";
 import { IslandScene } from "@/components/island/IslandScene";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -53,8 +55,8 @@ import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import type { ClassDoc, MemberDoc, NoteDoc, SubmissionDoc } from "@/shared/types";
 
-type TeacherTab = "students" | "assignments" | "leaderboard" | "notes" | "settings";
-type StudentTab = "assignments" | "leaderboard" | "notes";
+type TeacherTab = "students" | "assignments" | "chat" | "leaderboard" | "notes" | "settings";
+type StudentTab = "assignments" | "chat" | "leaderboard" | "notes";
 
 const TYPE_ICON: Record<AssignmentType, ComponentType<{ className?: string }>> = {
   lesson: BookOpen,
@@ -100,6 +102,7 @@ export default function ClassDetail() {
   useDocumentTitle(cls?.name ?? "Class");
 
   const tab = (params.get("tab") ?? (teacher ? "students" : "assignments")) as TeacherTab | StudentTab;
+  const unread = useChatUnread(classId, !!cls && cls.chat_enabled === true, tab === "chat");
   const setTab = (t: string) => {
     const next = new URLSearchParams(params);
     next.set("tab", t);
@@ -125,16 +128,24 @@ export default function ClassDetail() {
     );
   }
 
+  const chatLabel = (
+    <>
+      Chat
+      {unread && <span className="size-1.5 rounded-full bg-coral" aria-label="New messages" />}
+    </>
+  );
   const tabs = teacher
     ? [
         { value: "students", label: "Students" },
         { value: "assignments", label: "Assignments" },
+        { value: "chat", label: chatLabel },
         { value: "leaderboard", label: "Leaderboard" },
         { value: "notes", label: "Field notes" },
         { value: "settings", label: "Settings" },
       ]
     : [
         { value: "assignments", label: "Assignments" },
+        { value: "chat", label: chatLabel },
         { value: "leaderboard", label: "Leaderboard" },
         { value: "notes", label: "Field notes" },
       ];
@@ -159,7 +170,7 @@ export default function ClassDetail() {
         </div>
       </header>
 
-      <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs as { value: string; label: string }[]} className="mb-6" />
+      <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs} className="mb-6" />
 
       {teacher && tab === "students" && <Roster cls={cls} members={members} loading={membersLoading} assignments={sortedAssignments} submissions={submissions} today={today} />}
       {tab === "assignments" &&
@@ -168,6 +179,7 @@ export default function ClassDetail() {
         ) : (
           <StudentAssignments assignments={sortedAssignments} loading={assignmentsLoading} today={today} />
         ))}
+      {tab === "chat" && <ClassChat cls={cls} teacher={teacher} meId={profile.id} members={members} />}
       {tab === "leaderboard" && <Leaderboard members={members} loading={membersLoading} today={today} meId={profile.id} />}
       {tab === "notes" && <Notes classId={classId} teacher={teacher} meId={profile.id} />}
       {teacher && tab === "settings" && <ClassSettings cls={cls} />}
@@ -424,6 +436,8 @@ function StudentDialog({
               ["This week", `${s.weekSets} sets · ${s.weekXp} XP`],
               ["Last week", `${s.lastWeekXp} XP`],
               ["Total XP", (member.xp_total ?? 0).toLocaleString()],
+              ["Volunteer hours", `${member.hours_verified ?? 0} verified`],
+              ["Eco actions", `${member.actions_count ?? 0} done`],
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between rounded-[10px] bg-surface-2/70 px-3 py-2">
                 <span className="text-fg-3">{k}</span>
@@ -909,6 +923,11 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-2 truncate text-[14.5px] font-semibold text-fg">
                         {m.username} {me && <Badge tone="brand">You</Badge>}
+                        {m.ambassador && (
+                          <Badge tone="sun" title="Ecoisland Ambassador">
+                            <Award /> Ambassador
+                          </Badge>
+                        )}
                       </span>
                     </span>
                     <span className="hidden w-[160px] lg:block">
@@ -970,7 +989,16 @@ function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; 
   if (items.length === 0) {
     return (
       <Card>
-        <EmptyState icon={Compass} title="No field notes yet" body="When classmates finish a unit's field quest, what they found shows up here." action={<Button variant="secondary" asChild><Link to="/study">Find a quest</Link></Button>} />
+        <EmptyState
+          icon={Compass}
+          title="No field notes yet"
+          body="When classmates finish a field quest or an eco action, what they found shows up here."
+          action={
+            <Button variant="secondary" asChild>
+              <Link to="/act">Find an eco action</Link>
+            </Button>
+          }
+        />
       </Card>
     );
   }
@@ -983,7 +1011,7 @@ function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; 
             <div className="min-w-0 flex-1">
               <p className="text-[14px] font-semibold text-fg">{n.username}</p>
               <p className="text-[12.5px] text-fg-3">
-                Unit {n.unit} · {n.title} · {new Date(n.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                {n.kind === "action" ? "Eco action" : `Unit ${n.unit}`} · {n.title} · {new Date(n.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
               </p>
             </div>
             {(teacher || n.uid === meId) && (
