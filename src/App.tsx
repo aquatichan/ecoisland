@@ -88,7 +88,8 @@ export default function App() {
                       <Route path="/apes" element={<Navigate to="/study" replace />} />
                       <Route path="/apes/unit/:unit/:lesson" element={<OldLessonRedirect />} />
                       <Route path="/leaderboard" element={<Navigate to="/class" replace />} />
-                      {["/action-feed", "/impact", "/regional-data", "/danger-scan", "/carbon-footprint"].map((p) => (
+                      <Route path="/action-feed" element={<Navigate to="/act" replace />} />
+                      {["/impact", "/regional-data", "/danger-scan", "/carbon-footprint"].map((p) => (
                         <Route key={p} path={p} element={<Navigate to="/today" replace />} />
                       ))}
                       <Route path="*" element={<Navigate to="/" replace />} />

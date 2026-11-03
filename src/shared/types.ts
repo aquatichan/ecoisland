@@ -140,5 +140,20 @@ export type MessageDoc = {
   deleted?: boolean;
   deleted_by?: "author" | "teacher";
   reported?: boolean;
-  reports?: string[];
+  report_count?: number;
+  report_reasons?: string[];
+};
+
+/** classes/{classId}/moderation/{id}. Teacher-only chat moderation log, written by the server. */
+export type ModerationDoc = {
+  id: string;
+  action: "deleted" | "reported" | "dismissed" | "muted" | "unmuted" | "blocked" | "flagged" | "chat_on" | "chat_off";
+  actor_uid: string;
+  actor_role: "teacher" | "student" | "system";
+  message_id?: string;
+  author_uid?: string;
+  author_name?: string;
+  text?: string;
+  reason?: string;
+  at: string;
 };

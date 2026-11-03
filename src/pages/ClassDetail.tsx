@@ -478,7 +478,7 @@ function StudentDialog({
         <div className="mt-6 flex justify-end">
           {confirm ? (
             <div className="flex items-center gap-2">
-              <span className="text-[13.5px] text-fg-3">Remove {member.username} from {cls.name}?</span>
+              <span className="text-[13.5px] text-fg-3">Remove {member.username}? They can't rejoin until you allow it in Settings.</span>
               <Button variant="secondary" size="sm" onClick={() => setConfirm(false)}>
                 Cancel
               </Button>
@@ -1107,7 +1107,9 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
           </Button>
         </div>
       </Card>
-      <Card className="self-start p-7">
+      <div className="space-y-6 self-start">
+      <JoinCodeCard cls={cls} />
+      <Card className="p-7">
         <h2 className="t-h3 text-coral">Delete class</h2>
         <p className="mt-2 text-[13.5px] text-fg-3">Removes the roster, assignments, submissions and field notes. Students keep their own progress.</p>
         <Field label={`Type "${cls.name}" to confirm`} htmlFor="cls-del" className="mt-4">
@@ -1133,7 +1135,52 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
           <Trash2 /> Delete class
         </Button>
       </Card>
+      </div>
     </div>
+  );
+}
+
+/** Reset the join code, and let removed students back in. */
+function JoinCodeCard({ cls }: { cls: WithId<ClassDoc> }) {
+  const toast = useToast();
+  const { items: removed } = useCollection<{ uid: string; username: string; at: string }>(`classes/${cls.id}/removed`);
+  const [busy, setBusy] = useState<string | null>(null);
+  const run = async (key: string, route: string, body: Record<string, unknown>, done: (res: { code?: string }) => string) => {
+    setBusy(key);
+    try {
+      const res = await api<{ code?: string }>(route, { classId: cls.id, ...body });
+      toast.show({ tone: "success", title: done(res) });
+    } catch (err) {
+      toast.show({ tone: "error", title: "That didn't work", body: errorMessage(err) });
+    } finally {
+      setBusy(null);
+    }
+  };
+  return (
+    <Card className="p-7">
+      <h2 className="t-h3">Join code</h2>
+      <p className="mt-2 text-[13.5px] text-fg-3">
+        Current code <span className="font-mono font-semibold tracking-[0.12em] text-fg">{cls.code}</span>. Reset it if it was shared outside your class. Students already in the class stay.
+      </p>
+      <Button variant="secondary" className="mt-4 w-full" loading={busy === "reset"} onClick={() => run("reset", "class/reset-code", {}, (r) => `New code: ${r.code}`)}>
+        Reset join code
+      </Button>
+      {removed.length > 0 && (
+        <div className="mt-5 border-t border-line pt-4">
+          <p className="text-[12.5px] font-semibold text-fg-3">Removed students can't rejoin</p>
+          <ul className="mt-2 space-y-1.5">
+            {removed.map((r) => (
+              <li key={r.id} className="flex items-center justify-between gap-2 text-[13.5px] text-fg-2">
+                <span className="truncate">{r.username || "Student"}</span>
+                <Button size="sm" variant="ghost" loading={busy === r.id} onClick={() => run(r.id, "class/unblock", { uid: r.id }, () => `${r.username || "They"} can join again`)}>
+                  Allow back
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Card>
   );
 }
 

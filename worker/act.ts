@@ -24,6 +24,8 @@ import {
   eventDays,
   eventKey,
   eventPath,
+  hoursFlags,
+  hoursOnDay,
   hoursReward,
   isValidHours,
   parseEventKey,
@@ -432,6 +434,7 @@ export async function handleHoursLog(ctx: Ctx, body: Body): Promise<unknown> {
   let title: string;
   let org: string;
   let key: string | null = null;
+  let eventHours: number | null = null;
   if (body.event && typeof body.event === "object") {
     const access = await loadEvent(ctx, body.event as Body);
     const e = access.event.data;
@@ -442,6 +445,7 @@ export async function handleHoursLog(ctx: Ctx, body: Body): Promise<unknown> {
     title = String(e.title);
     org = String(e.org_name || e.created_by_name || "");
     key = eventKey({ scope: access.scope, class_id: access.classId, id: access.event.id });
+    eventHours = Math.max(0, (Date.parse(String(e.ends_at)) - Date.parse(String(e.starts_at))) / 3_600_000);
   } else {
     title = line(body, "title", 3, LIMITS.TITLE);
     org = line(body, "orgName", 2, LIMITS.ORG);
@@ -457,6 +461,20 @@ export async function handleHoursLog(ctx: Ctx, body: Body): Promise<unknown> {
     if (!cls) throw new HttpError(404, "not_found", "That class no longer exists.");
     verifier = { class_id: cid, class_name: String(cls.data.name ?? ""), teacher_uid: String(cls.data.teacher_id), teacher_name: String(cls.data.teacher_name ?? "") };
   }
+
+  // Plausibility: a day can't hold more than 12 hours of volunteering, and
+  // anything unusual is flagged for the teacher.
+  const others = (await fs.query("", "hours", [["uid", uid]], 2000)).map((d) => ({
+    date: String(d.data.date),
+    hours: num(d.data.hours),
+    title: String(d.data.title ?? ""),
+    org_name: String(d.data.org_name ?? ""),
+    status: String(d.data.status) as "pending" | "verified" | "rejected" | "self",
+  }));
+  if (hoursOnDay(date, others) + hours > LIMITS.MAX_HOURS_PER_DAY) {
+    throw new HttpError(400, "too_many_hours", `That would make more than ${LIMITS.MAX_HOURS_PER_DAY} hours on one day. Check your other entries for that date.`);
+  }
+  const flags = hoursFlags({ date, hours, title, org_name: org, event_hours: eventHours }, others, today);
 
   await bumpUsage(ctx, "hours_logs", LIMITS.HOURS_LOGS_PER_DAY, `You can log hours up to ${LIMITS.HOURS_LOGS_PER_DAY} times a day.`);
   const logId = key ? `${uid}_${key}` : randomId();
@@ -474,8 +492,11 @@ export async function handleHoursLog(ctx: Ctx, body: Body): Promise<unknown> {
     teacher_uid: verifier?.teacher_uid ?? null,
     teacher_name: verifier?.teacher_name ?? null,
     status: verifier ? "pending" : "self",
+    flags,
     review_note: null,
     reviewed_at: null,
+    reviewed_by: null,
+    history: [{ at: now.toISOString(), action: "submitted", by: uid }],
     created_at: now.toISOString(),
   };
   try {
@@ -486,7 +507,7 @@ export async function handleHoursLog(ctx: Ctx, body: Body): Promise<unknown> {
     }
     throw err;
   }
-  return { id: logId, status: log.status };
+  return { id: logId, status: log.status, flags };
 }
 
 export async function handleHoursDelete(ctx: Ctx, body: Body): Promise<unknown> {
@@ -515,13 +536,34 @@ export async function handleHoursReview(ctx: Ctx, body: Body): Promise<unknown> 
     const log = await tx.get(`hours/${logId}`);
     if (!log || log.data.teacher_uid !== uid) throw new HttpError(404, "not_found", "That entry isn't waiting for you.");
     if (log.data.status !== "pending") throw new HttpError(409, "reviewed", "That entry was already reviewed.");
-    const review: Data = { status: approve ? "verified" : "rejected", review_note: note || null, reviewed_at: now.toISOString(), teacher_name: reviewerName };
+    const studentUid = String(log.data.uid);
+    if (studentUid === uid) throw new HttpError(403, "own_hours", "You can't verify your own hours.");
+    // Only the current teacher of a class the student is still in can verify.
+    const classId = String(log.data.class_id ?? "");
+    const cls = classId ? await tx.get(`classes/${classId}`) : null;
+    if (!cls || cls.data.teacher_id !== uid) throw new HttpError(403, "not_teacher", "Only the student's current teacher for this class can verify these hours.");
+    if (!(await tx.get(`classes/${classId}/members/${studentUid}`))) {
+      throw new HttpError(409, "not_in_class", "This student is no longer in your class, so you can't verify these hours.");
+    }
+    const history = Array.isArray(log.data.history) ? log.data.history : [];
+    const review: Data = {
+      status: approve ? "verified" : "rejected",
+      review_note: note || null,
+      reviewed_at: now.toISOString(),
+      reviewed_by: uid,
+      teacher_name: reviewerName,
+      history: [...history, { at: now.toISOString(), action: approve ? "verified" : "declined", by: uid }].slice(-20),
+    };
     if (!approve) return { writes: [fs.patch(log.path, review, true)], result: { status: "rejected" } };
-    const student = await tx.get(`users/${log.data.uid}`);
+    const student = await tx.get(`users/${studentUid}`);
     if (!student) return { writes: [fs.patch(log.path, review, true)], result: { status: "verified" } };
     const hours = num(log.data.hours);
-    const reward = hoursReward(hours);
     const r = readRecord(student.data);
+    // A flat bonus for a verified entry, at most a couple a day.
+    const usagePath = `users/${studentUid}/usage/${day}`;
+    const usage = await tx.get(usagePath);
+    const rewarded = num(usage?.data.hours_rewards);
+    const reward = rewarded < ACT_REWARD.HOURS_ENTRY_DAILY_CAP ? hoursReward() : { tc: 0, xp: 0 };
     const members = await tx.getAll(memberPaths(student.id, student.data));
     const { writes } = activityWrites(
       fs,
@@ -529,6 +571,7 @@ export async function handleHoursReview(ctx: Ctx, body: Body): Promise<unknown> 
       { day, tc: reward.tc, xp: reward.xp, touch: false, patch: { hours_verified: Math.round((r.hours_verified + hours) * 100) / 100 } },
       members,
     );
+    if (reward.tc > 0) writes.push(fs.patch(usagePath, { day, hours_rewards: rewarded + 1 }));
     writes.push(fs.patch(log.path, review, true));
     return { writes, result: { status: "verified", reward } };
   });

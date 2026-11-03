@@ -511,6 +511,10 @@ export async function handleClassJoin(ctx: Ctx, body: Body): Promise<unknown> {
     if (!cls) throw new HttpError(404, "bad_code", "That class no longer exists.");
     const user = await requireUser(tx, uid);
     if (cls.data.teacher_id === uid) throw new HttpError(400, "own_class", "You teach this class, so you can't join it as a student.");
+    if (await tx.get(`classes/${classId}/removed/${uid}`)) {
+      throw new HttpError(403, "removed", "Your teacher removed you from this class. Ask them if you think that's a mistake.");
+    }
+    const muted = !!(await tx.get(`classes/${classId}/mutes/${uid}`));
     const r = readRecord(user.data);
     if (r.class_ids.includes(classId)) {
       return { writes: [] as Write[], result: { classId, already: true, name: String(cls.data.name ?? ""), data: user.data } };
@@ -520,7 +524,7 @@ export async function handleClassJoin(ctx: Ctx, body: Body): Promise<unknown> {
     const data = { ...user.data, class_ids };
     return {
       writes: [
-        fs.set(`classes/${classId}/members/${uid}`, { ...memberPayload(uid, data, lastActive(user.data)), joined_at: ctx.now.toISOString() }),
+        fs.set(`classes/${classId}/members/${uid}`, { ...memberPayload(uid, data, lastActive(user.data)), muted, joined_at: ctx.now.toISOString() }),
         fs.patch(user.path, { class_ids }, true),
         fs.patch(cls.path, { member_count: num(cls.data.member_count) + 1 }, true),
       ],
@@ -562,6 +566,10 @@ async function removeMember(ctx: Ctx, classId: string, targetUid: string, asTeac
   for (const n of notes) cleanup.push(fs.delete(n.path));
   const messages = await fs.query(`classes/${classId}`, "messages", [["uid", targetUid]], 2000);
   for (const m of messages) cleanup.push(fs.delete(m.path));
+  // Hours waiting for this class's teacher can't be verified any more.
+  for (const h of await fs.query("", "hours", [["uid", targetUid], ["class_id", classId]], 500).catch(() => [] as Doc[])) {
+    if (h.data.status === "pending") cleanup.push(fs.patch(h.path, { status: "self", review_note: "You left the class before your teacher verified this." }, true));
+  }
   await fs.commit(cleanup);
 }
 
@@ -574,8 +582,56 @@ export async function handleClassLeave(ctx: Ctx, body: Body): Promise<unknown> {
 export async function handleClassRemove(ctx: Ctx, body: Body): Promise<unknown> {
   const classId = str(body, "classId", { max: 40 });
   const target = str(body, "uid", { max: 128 });
+  const member = await ctx.fs.get(`classes/${classId}/members/${target}`);
   await removeMember(ctx, classId, target, true);
+  // A removed student can't rejoin with the code until the teacher allows it.
+  const targetUser = await ctx.fs.get(`users/${target}`);
+  const removedFrom = Array.isArray(targetUser?.data.removed_from) ? (targetUser?.data.removed_from as string[]) : [];
+  const writes: Write[] = [
+    ctx.fs.set(`classes/${classId}/removed/${target}`, { uid: target, username: String(member?.data.username ?? ""), at: ctx.now.toISOString(), by: ctx.uid }),
+  ];
+  // Remembered on the student so deleting their account can clean this up.
+  if (targetUser) writes.push(ctx.fs.patch(targetUser.path, { removed_from: [...new Set([...removedFrom, classId])].slice(-50) }, true));
+  await ctx.fs.commit(writes);
   return { ok: true };
+}
+
+async function requireTeacher(ctx: Ctx, classId: string): Promise<Doc> {
+  if (!/^[A-Za-z0-9]{1,40}$/.test(classId)) throw new HttpError(400, "invalid_input", "Unknown class");
+  const cls = await ctx.fs.get(`classes/${classId}`);
+  if (!cls) throw new HttpError(404, "not_found", "Class not found");
+  if (cls.data.teacher_id !== ctx.uid) throw new HttpError(403, "not_teacher", "Only this class's teacher can do that.");
+  return cls;
+}
+
+/** Lets a removed student join again. */
+export async function handleClassUnblock(ctx: Ctx, body: Body): Promise<unknown> {
+  const classId = str(body, "classId", { max: 40 });
+  const target = str(body, "uid", { max: 128 });
+  await requireTeacher(ctx, classId);
+  await ctx.fs.commit([ctx.fs.delete(`classes/${classId}/removed/${target}`)]);
+  return { ok: true };
+}
+
+/** Replaces the join code, so an old or leaked code stops working. Current students stay. */
+export async function handleClassResetCode(ctx: Ctx, body: Body): Promise<unknown> {
+  const { fs } = ctx;
+  const classId = str(body, "classId", { max: 40 });
+  await requireTeacher(ctx, classId);
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const code = newCode();
+    const done = await fs.runTransaction(async (tx) => {
+      const cls = await tx.get(`classes/${classId}`);
+      if (!cls || cls.data.teacher_id !== ctx.uid) throw new HttpError(403, "not_teacher", "Only this class's teacher can do that.");
+      if (await tx.get(`class_codes/${code}`)) return { writes: [] as Write[], result: false };
+      const old = String(cls.data.code ?? "");
+      const writes: Write[] = [fs.create(`class_codes/${code}`, { class_id: classId }), fs.patch(cls.path, { code, updated_at: ctx.now.toISOString() }, true)];
+      if (old) writes.push(fs.delete(`class_codes/${old}`));
+      return { writes, result: true };
+    });
+    if (done) return { code };
+  }
+  throw new HttpError(500, "code_failed", "Couldn't generate a new code. Try again.");
 }
 
 async function deleteClassData(ctx: Ctx, classId: string, code: string): Promise<void> {
@@ -598,6 +654,12 @@ async function deleteClassData(ctx: Ctx, classId: string, code: string): Promise
   }
   for (const n of await fs.list(`classes/${classId}/notes`)) writes.push(fs.delete(n.path));
   for (const m of await fs.list(`classes/${classId}/messages`, { max: 20000 })) writes.push(fs.delete(m.path));
+  for (const h of await fs.query("", "hours", [["class_id", classId]], 2000).catch(() => [] as Doc[])) {
+    if (h.data.status === "pending") writes.push(fs.patch(h.path, { status: "self", review_note: "The class was deleted before your teacher verified this." }, true));
+  }
+  for (const sub of ["moderation", "mutes", "removed"]) {
+    for (const d of await fs.list(`classes/${classId}/${sub}`, { max: 20000 })) writes.push(fs.delete(d.path));
+  }
   for (const e of await fs.list(`classes/${classId}/events`, { max: 1000 })) {
     for (const r of await fs.list(`${e.path}/rsvps`)) writes.push(fs.delete(r.path));
     writes.push(fs.delete(e.path));
@@ -638,6 +700,10 @@ export async function handleAccountDelete(ctx: Ctx): Promise<unknown> {
   const user = await fs.get(`users/${uid}`);
   if (user) {
     const r = readRecord(user.data);
+    const removedFrom = Array.isArray(user.data.removed_from) ? (user.data.removed_from as string[]) : [];
+    await fs
+      .commit([...new Set([...r.class_ids, ...removedFrom])].flatMap((cid) => [fs.delete(`classes/${cid}/mutes/${uid}`), fs.delete(`classes/${cid}/removed/${uid}`)]))
+      .catch((err) => console.error("mute cleanup failed", err));
     for (const classId of r.class_ids) {
       await removeMember(ctx, classId, uid, false).catch((err) => console.error("leave on delete failed", err));
     }

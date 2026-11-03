@@ -93,9 +93,24 @@ export type HoursLog = {
   teacher_uid?: string | null;
   teacher_name?: string | null;
   status: HoursStatus;
+  /** Checks the server ran when the entry was logged, for the teacher to look at. */
+  flags?: HoursFlag[];
   review_note?: string | null;
   reviewed_at?: string | null;
+  reviewed_by?: string | null;
+  /** Append-only trail: submitted, then verified or declined. */
+  history?: Array<{ at: string; action: "submitted" | "verified" | "declined"; by: string }>;
   created_at: string;
+};
+
+export type HoursFlag = "possible_duplicate" | "long_day" | "high_weekly_total" | "longer_than_event" | "logged_late";
+
+export const HOURS_FLAG_LABEL: Record<HoursFlag, string> = {
+  possible_duplicate: "Looks like another entry on the same day",
+  long_day: "More than 8 hours logged for one day",
+  high_weekly_total: "More than 30 hours logged in a week",
+  longer_than_event: "More hours than the event lasted",
+  logged_late: "Logged more than 60 days afterwards",
 };
 
 export type AmbassadorStatus = "pending" | "approved" | "declined";
@@ -137,6 +152,11 @@ export const LIMITS = {
   HOURS_TEXT_MIN: 30,
   HOURS_TEXT_MAX: 1000,
   MAX_HOURS_PER_LOG: 12,
+  /** All entries for one day together can't exceed this. */
+  MAX_HOURS_PER_DAY: 12,
+  FLAG_DAY_HOURS: 8,
+  FLAG_WEEK_HOURS: 30,
+  FLAG_LATE_DAYS: 60,
   /** Days after an action ends that it can still be marked done. */
   ACTION_GRACE_DAYS: 3,
   /** How far back volunteer hours can be logged. */
@@ -151,14 +171,47 @@ export const LIMITS = {
 export const ACT_REWARD = {
   ACTION_TC: 20,
   ACTION_XP: 25,
-  HOUR_TC: 5,
-  HOUR_XP: 10,
+  // Verified volunteer entries earn the same small bonus however many hours
+  // they cover, so there's nothing to gain from rounding hours up.
+  HOURS_ENTRY_TC: 10,
+  HOURS_ENTRY_XP: 15,
+  /** Rewarded verifications per student per day; more still count as hours. */
+  HOURS_ENTRY_DAILY_CAP: 2,
   AMBASSADOR_TC: 100,
 } as const;
 
-export function hoursReward(hours: number): { tc: number; xp: number } {
-  const h = Math.max(0, Math.min(LIMITS.MAX_HOURS_PER_LOG, hours));
-  return { tc: Math.round(h * ACT_REWARD.HOUR_TC), xp: Math.round(h * ACT_REWARD.HOUR_XP) };
+/** The bonus for a verified volunteer entry. Deliberately not tied to the number of hours. */
+export function hoursReward(): { tc: number; xp: number } {
+  return { tc: ACT_REWARD.HOURS_ENTRY_TC, xp: ACT_REWARD.HOURS_ENTRY_XP };
+}
+
+/**
+ * Flags for a new hours entry, given the student's other entries. The server
+ * runs this when an entry is logged; teachers see the flags before verifying.
+ */
+export function hoursFlags(
+  entry: { date: DayKey; hours: number; title: string; org_name: string; event_hours?: number | null },
+  others: Array<{ date: DayKey; hours: number; title: string; org_name: string; status: HoursStatus }>,
+  today: DayKey,
+): HoursFlag[] {
+  const live = others.filter((o) => o.status !== "rejected");
+  const norm = (v: string) => v.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const flags: HoursFlag[] = [];
+  const sameDay = live.filter((o) => o.date === entry.date);
+  if (sameDay.some((o) => norm(o.title) === norm(entry.title) || norm(o.org_name) === norm(entry.org_name))) flags.push("possible_duplicate");
+  if (sameDay.reduce((s, o) => s + o.hours, entry.hours) > LIMITS.FLAG_DAY_HOURS) flags.push("long_day");
+  const weekStart = addDays(entry.date, -6);
+  const weekEnd = addDays(entry.date, 6);
+  const nearby = live.filter((o) => o.date >= weekStart && o.date <= weekEnd);
+  if (nearby.reduce((s, o) => s + o.hours, entry.hours) > LIMITS.FLAG_WEEK_HOURS) flags.push("high_weekly_total");
+  if (entry.event_hours && entry.hours > entry.event_hours + 0.5) flags.push("longer_than_event");
+  if (entry.date < addDays(today, -LIMITS.FLAG_LATE_DAYS)) flags.push("logged_late");
+  return flags;
+}
+
+/** Total hours already logged (and not declined) for one day. */
+export function hoursOnDay(date: DayKey, others: Array<{ date: DayKey; hours: number; status: HoursStatus }>): number {
+  return others.filter((o) => o.date === date && o.status !== "rejected").reduce((s, o) => s + o.hours, 0);
 }
 
 /** Valid hours: a positive multiple of a quarter hour, up to the cap. */

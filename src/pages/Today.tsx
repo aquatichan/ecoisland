@@ -581,7 +581,7 @@ function Attention({ classes, uid }: { classes: WithId<ClassDoc>[]; uid: string 
           </span>
           <div className="min-w-0 flex-1">
             <p className="text-[14.5px] font-semibold text-fg">
-              {reports[c.id]} reported {reports[c.id] === 1 ? "message" : "messages"}
+              {reports[c.id]} chat {reports[c.id] === 1 ? "message" : "messages"} to review
             </p>
             <p className="truncate text-[13px] text-fg-3">In {c.name}'s chat</p>
           </div>

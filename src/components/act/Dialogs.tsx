@@ -1,6 +1,6 @@
 // Dialogs for logging volunteer hours, finishing an eco action, and (for
 // teachers) verifying hours.
-import { Check, X } from "lucide-react";
+import { Check, TriangleAlert, X } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import { track } from "@/lib/analytics";
 import { formatHours, type Listing } from "@/lib/act";
 import { api, errorMessage } from "@/lib/api";
 import { useToast } from "@/lib/toast";
-import { ACT_REWARD, LIMITS, eventDays, hoursReward, type HoursLog } from "@/shared/act";
+import { ACT_REWARD, HOURS_FLAG_LABEL, LIMITS, eventDays, hoursReward, type HoursLog } from "@/shared/act";
 import { findAction } from "@/shared/actions";
 import { formatDay, localDayKey } from "@/shared/dates";
 
@@ -69,7 +69,7 @@ export function LogHoursDialog({
       toast.show({
         tone: "success",
         title: `${formatHours(Number(hours))} logged`,
-        body: res.status === "pending" ? "Your teacher will verify them. Verified hours earn Treecoins and XP." : "Saved as self-reported. Pick a class next time to get them verified.",
+        body: res.status === "pending" ? "Your teacher will check and verify them." : "Saved as self-reported. Pick a class next time to get them verified.",
       });
     } catch (err) {
       setError(errorMessage(err));
@@ -78,8 +78,7 @@ export function LogHoursDialog({
     }
   };
 
-  const n = Number(hours);
-  const reward = Number.isFinite(n) && n > 0 ? hoursReward(n) : null;
+  const reward = hoursReward();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -104,7 +103,7 @@ export function LogHoursDialog({
           <Field label="What did you do?" htmlFor="lh-text" className="col-span-2" hint={text.trim().length < LIMITS.HOURS_TEXT_MIN ? `${LIMITS.HOURS_TEXT_MIN - text.trim().length} more characters` : undefined}>
             <Textarea id="lh-text" value={text} maxLength={LIMITS.HOURS_TEXT_MAX} rows={4} placeholder="Pulled invasive blackberry along 200 feet of the creek and planted 15 native shrubs." onChange={(e) => setText(e.target.value)} />
           </Field>
-          <Field label="Who verifies it" htmlFor="lh-verifier" className="col-span-2" hint={reward && verifier ? `Verified hours earn ${reward.tc} Treecoins and ${reward.xp} XP.` : undefined}>
+          <Field label="Who verifies it" htmlFor="lh-verifier" className="col-span-2" hint={verifier ? `A verified entry earns ${reward.tc} Treecoins and ${reward.xp} XP, however many hours it covers. Only log the time you really spent.` : "Self-reported hours stay on your list but don't go on your verified record."}>
             <Select id="lh-verifier" value={verifier} onChange={(e) => setVerifier(e.target.value)}>
               {verifiers.map((v) => (
                 <option key={v.classId} value={v.classId}>
@@ -213,6 +212,16 @@ export function HoursReviewList({ logs }: { logs: HoursLog[] }) {
                 {log.class_name ? ` · ${log.class_name}` : ""}
               </p>
               <p className="mt-2 text-[13.5px] leading-relaxed whitespace-pre-wrap text-fg-2">{log.text}</p>
+              {(log.flags ?? []).length > 0 && (
+                <ul className="mt-2.5 space-y-1">
+                  {(log.flags ?? []).map((f) => (
+                    <li key={f} className="flex items-center gap-1.5 text-[12.5px] font-medium text-sun-ink">
+                      <TriangleAlert className="size-3.5 shrink-0" aria-hidden /> {HOURS_FLAG_LABEL[f] ?? f}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="mt-2 text-[11.5px] text-fg-4">Submitted {new Date(log.created_at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</p>
             </div>
           </div>
           {declining === log.id ? (
@@ -244,7 +253,7 @@ export function HoursReviewList({ logs }: { logs: HoursLog[] }) {
 export function ReviewHoursDialog({ open, onOpenChange, logs }: { open: boolean; onOpenChange: (open: boolean) => void; logs: HoursLog[] }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent wide title="Verify volunteer hours" description="Check each entry looks right. Verified hours go on the student's service record and earn Treecoins and XP.">
+      <DialogContent wide title="Verify volunteer hours" description="Only verify hours you have reason to believe. Verified entries go on the student's service record and can't be edited or deleted afterwards. Flags point out entries worth a second look.">
         <HoursReviewList logs={logs} />
       </DialogContent>
     </Dialog>

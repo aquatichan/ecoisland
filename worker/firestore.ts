@@ -270,6 +270,21 @@ export class Firestore {
     return rows.filter((r) => r.document).map((r) => this.toDoc(r.document as RawDoc));
   }
 
+  /**
+   * Documents in every collection named `collectionId` (a collection group)
+   * whose `field` is less than `before`. Used for retention cleanup.
+   */
+  async groupBefore(collectionId: string, field: string, before: string, limit = 500): Promise<Doc[]> {
+    const rows = await this.call<Array<{ document?: RawDoc }>>("POST", `${this.root}:runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId, allDescendants: true }],
+        where: { fieldFilter: { field: { fieldPath: field }, op: "LESS_THAN", value: { stringValue: before } } },
+        limit,
+      },
+    });
+    return rows.filter((r) => r.document).map((r) => this.toDoc(r.document as RawDoc));
+  }
+
   async listCollectionIds(docPath: string): Promise<string[]> {
     const res = await this.call<{ collectionIds?: string[] }>("POST", `${this.name(docPath)}:listCollectionIds`, { pageSize: 100 });
     return res.collectionIds ?? [];

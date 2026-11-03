@@ -21,7 +21,7 @@ import {
   handleHoursReview,
 } from "./act";
 import { handleAttemptAnswer, handleAttemptFinish, handleAttemptStart } from "./attempts";
-import { handleChatDelete, handleChatDismiss, handleChatMute, handleChatReport, handleChatSend } from "./chat";
+import { handleChatDelete, handleChatDismiss, handleChatMute, handleChatReport, handleChatSend, handleChatToggle } from "./chat";
 import type { Ctx, Env } from "./env";
 import { Firestore, FirestoreError } from "./firestore";
 import {
@@ -32,6 +32,8 @@ import {
   handleClassJoin,
   handleClassLeave,
   handleClassRemove,
+  handleClassResetCode,
+  handleClassUnblock,
   handleFrq,
   handlePurchase,
   handleQuest,
@@ -41,6 +43,7 @@ import {
 import { HttpError, errorResponse, json, readJson } from "./http";
 import { AuthError, fetchGoogleJwks, verifyFirebaseIdToken, type Jwk } from "./jwt";
 import { remindersConfigured, sendReminders, verifyUnsubscribe } from "./reminders";
+import { runRetention } from "./retention";
 
 type Handler = (ctx: Ctx, body: Record<string, unknown>) => Promise<unknown>;
 
@@ -58,12 +61,15 @@ const ROUTES: Record<string, Handler> = {
   "class/leave": handleClassLeave,
   "class/remove": handleClassRemove,
   "class/delete": handleClassDelete,
+  "class/reset-code": handleClassResetCode,
+  "class/unblock": handleClassUnblock,
   "assignments/sync": handleAssignmentsSync,
   "chat/send": handleChatSend,
   "chat/delete": handleChatDelete,
   "chat/report": handleChatReport,
   "chat/dismiss": handleChatDismiss,
   "chat/mute": handleChatMute,
+  "chat/toggle": handleChatToggle,
   "event/save": handleEventSave,
   "event/cancel": handleEventCancel,
   "event/review": handleEventReview,
@@ -207,11 +213,18 @@ export default {
     return env.ASSETS.fetch(request);
   },
 
-  /** Daily Cron Trigger (see wrangler.jsonc): streak reminder emails. */
+  /** Daily Cron Trigger (see wrangler.jsonc): chat retention, then streak reminder emails. */
   async scheduled(_event: unknown, env: Env): Promise<void> {
     const sa = serviceAccount(env);
-    if (!sa || !remindersConfigured(env)) return;
+    if (!sa) return;
     const fs = new Firestore({ projectId: env.FIREBASE_PROJECT_ID || sa.project_id || DEFAULT_PROJECT_ID, serviceAccount: sa });
+    try {
+      const removed = await runRetention(fs);
+      console.log(`retention: ${removed.messages} messages, ${removed.moderation} moderation records deleted`);
+    } catch (err) {
+      console.error("retention failed", err);
+    }
+    if (!remindersConfigured(env)) return;
     const sent = await sendReminders(env, fs, (input, init) => fetch(input, init));
     console.log(`reminders sent: ${sent}`);
   },

@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { handleApi } from "../../worker/index";
 import { ANSWERS } from "../../worker/generated/content";
+import { runRetention } from "../../worker/retention";
 import { Firestore } from "../../worker/firestore";
 import type { Env } from "../../worker/env";
 
@@ -509,7 +510,7 @@ describe("class chat", () => {
   it("is off until the teacher turns it on, and only members can post", async () => {
     const classId = await setup();
     expect((await call("alice", "chat/send", { classId, text: "hi" })).body.error.code).toBe("chat_off");
-    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    await call("teach", "chat/toggle", { classId, enabled: true });
     const sent = await call("alice", "chat/send", { classId, text: "  Is the test on Friday?  " });
     expect(sent.status).toBe(200);
     expect(sent.body.message).toMatchObject({ uid: "alice", name: "alice", role: "student", text: "Is the test on Friday?", deleted: false });
@@ -524,7 +525,7 @@ describe("class chat", () => {
 
   it("blocks bad language but not course vocabulary, and slows down floods", async () => {
     const classId = await setup();
-    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    await call("teach", "chat/toggle", { classId, enabled: true });
     expect((await call("alice", "chat/send", { classId, text: "this is sh1t" })).body.error.code).toBe("blocked_language");
     expect((await call("alice", "chat/send", { classId, text: "Fukushima and the sex ratio are on the assessment" })).status).toBe(200);
     expect((await call("alice", "chat/send", { classId, text: "again" })).status).toBe(429); // same instant
@@ -541,20 +542,22 @@ describe("class chat", () => {
 
   it("lets the teacher mute, review reports and delete; students delete only their own", async () => {
     const classId = await setup();
-    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    await call("teach", "chat/toggle", { classId, enabled: true });
     const a = (await call("alice", "chat/send", { classId, text: "first" })).body.id;
     tick();
     const b = (await call("bob", "chat/send", { classId, text: "rude thing" })).body.id;
 
     expect((await call("alice", "chat/delete", { classId, messageId: b })).status).toBe(403);
     expect((await call("bob", "chat/report", { classId, messageId: b })).status).toBe(400); // own message
-    await call("alice", "chat/report", { classId, messageId: b });
+    await call("alice", "chat/report", { classId, messageId: b, reason: "harassment" });
+    await call("alice", "chat/report", { classId, messageId: b, reason: "harassment" }); // counted once
     let msg = (await messages(classId)).find((m) => m.id === b);
-    expect(msg).toMatchObject({ reported: true, reports: ["alice"] });
+    expect(msg).toMatchObject({ reported: true, report_count: 1, report_reasons: ["harassment"] });
+    expect(JSON.stringify(msg)).not.toContain("alice"); // classmates can't see who reported
     expect((await call("alice", "chat/dismiss", { classId, messageId: b })).status).toBe(403);
     await call("teach", "chat/dismiss", { classId, messageId: b });
     msg = (await messages(classId)).find((m) => m.id === b);
-    expect(msg).toMatchObject({ reported: false, reports: [] });
+    expect(msg).toMatchObject({ reported: false });
 
     expect((await call("alice", "chat/mute", { classId, uid: "bob", muted: true })).status).toBe(403);
     await call("teach", "chat/mute", { classId, uid: "bob", muted: true });
@@ -569,17 +572,92 @@ describe("class chat", () => {
     const all = await messages(classId);
     expect(all.find((m) => m.id === b)).toMatchObject({ deleted: true, deleted_by: "teacher", text: "" });
     expect(all.find((m) => m.id === a)).toMatchObject({ deleted: true, deleted_by: "author", text: "" });
+
+    // The moderation log keeps the original text and who did what.
+    const log = (await admin.list(`classes/${classId}/moderation`)).map((d) => d.data as any);
+    expect(log.find((r) => r.action === "reported")).toMatchObject({ actor_uid: "alice", author_uid: "bob", text: "rude thing", reason: "harassment" });
+    expect(log.find((r) => r.action === "deleted" && r.message_id === b)).toMatchObject({ actor_uid: "teach", text: "rude thing" });
+    expect(log.find((r) => r.action === "deleted" && r.message_id === a)).toMatchObject({ actor_role: "student", text: "first" });
+    expect(log.filter((r) => r.action === "muted")).toHaveLength(1);
+    expect(log.filter((r) => r.action === "dismissed")).toHaveLength(1);
+
+    // Leaving and rejoining doesn't lift a mute.
+    const { code } = (await admin.get(`classes/${classId}`))!.data as any;
+    await call("bob", "class/leave", { classId });
+    await call("bob", "class/join", { code });
+    tick();
+    expect((await call("bob", "chat/send", { classId, text: "back again" })).body.error.code).toBe("muted");
+    expect((await admin.get(`classes/${classId}/members/bob`))?.data.muted).toBe(true);
+  });
+
+  it("keeps contact details and harassment out, and flags students who may be struggling", async () => {
+    const classId = await setup();
+    await call("teach", "chat/toggle", { classId, enabled: true });
+    expect((await call("alice", "chat/send", { classId, text: "add me on snap" })).body.error.code).toBe("contact_info");
+    tick();
+    expect((await call("alice", "chat/send", { classId, text: "join discord.gg/xyz" })).body.error.code).toBe("contact_info");
+    tick();
+    expect((await call("alice", "chat/send", { classId, text: "nobody likes you bob" })).body.error.code).toBe("harassment");
+    tick();
+    const sad = await call("bob", "chat/send", { classId, text: "honestly i want to die, this unit is too much" });
+    expect(sad.body).toMatchObject({ support: true, message: { reported: true, report_reasons: ["wellbeing"] } });
+    tick();
+    expect((await call("teach", "chat/send", { classId, text: "Slides: docs.google.com/presentation/x, email me at rivera@school.org" })).status).toBe(200);
+    const log = (await admin.list(`classes/${classId}/moderation`)).map((d) => d.data as any);
+    expect(log.find((r) => r.action === "blocked")).toMatchObject({ author_uid: "alice", reason: "harassment", text: "nobody likes you bob" });
+    expect(log.find((r) => r.action === "flagged")).toMatchObject({ author_uid: "bob", reason: "wellbeing" });
+    expect(log.find((r) => r.action === "chat_on")).toMatchObject({ actor_uid: "teach" });
+    expect((await call("alice", "chat/toggle", { classId, enabled: false })).status).toBe(403);
+    await call("teach", "chat/toggle", { classId, enabled: false });
+    tick();
+    expect((await call("alice", "chat/send", { classId, text: "hello?" })).body.error.code).toBe("chat_off");
+  });
+
+  it("keeps removed students out until the teacher allows them back, and can reset the code", async () => {
+    const classId = await setup();
+    const { code } = (await admin.get(`classes/${classId}`))!.data as any;
+    await call("teach", "class/remove", { classId, uid: "bob" });
+    expect((await call("bob", "class/join", { code })).body.error.code).toBe("removed");
+    expect((await call("alice", "class/unblock", { classId, uid: "bob" })).status).toBe(403);
+    await call("teach", "class/unblock", { classId, uid: "bob" });
+    expect((await call("bob", "class/join", { code })).status).toBe(200);
+    const reset = await call("teach", "class/reset-code", { classId });
+    expect(reset.body.code).toMatch(/^[A-Z0-9]{6}$/);
+    expect(reset.body.code).not.toBe(code);
+    expect(await admin.get(`class_codes/${code}`)).toBeNull();
+    await call("carol", "sync");
+    expect((await call("carol", "class/join", { code })).status).toBe(404);
+    expect((await call("carol", "class/join", { code: reset.body.code })).status).toBe(200);
+    expect((await call("alice", "class/reset-code", { classId })).status).toBe(403);
   });
 
   it("removes a student's messages when they leave, and all of them when the class is deleted", async () => {
     const classId = await setup();
-    await admin.commit([admin.patch(`classes/${classId}`, { chat_enabled: true }, true)]);
+    await call("teach", "chat/toggle", { classId, enabled: true });
     await call("alice", "chat/send", { classId, text: "bye" });
     await call("bob", "chat/send", { classId, text: "hello" });
     await call("alice", "class/leave", { classId });
     expect((await messages(classId)).map((m) => m.uid)).toEqual(["bob"]);
     await call("teach", "class/delete", { classId });
     expect(await messages(classId)).toEqual([]);
+  });
+});
+
+describe("retention", () => {
+  it("deletes chat messages after 90 days and moderation records after a year", async () => {
+    const at = (days: number) => new Date(now.getTime() - days * 86_400_000).toISOString();
+    await admin.commit([
+      admin.set("classes/c1/messages/old", { uid: "a", text: "old", created_at: at(91) }),
+      admin.set("classes/c1/messages/new", { uid: "a", text: "new", created_at: at(89) }),
+      admin.set("classes/c1/moderation/old", { action: "deleted", at: at(366) }),
+      admin.set("classes/c1/moderation/kept", { action: "deleted", at: at(200) }),
+      admin.set("users/u1/messages/notchat", { created_at: at(500) }), // not class chat: left alone
+    ]);
+    const removed = await runRetention(admin, now);
+    expect(removed).toEqual({ messages: 1, moderation: 1 });
+    expect((await admin.list("classes/c1/messages")).map((d) => d.id)).toEqual(["new"]);
+    expect((await admin.list("classes/c1/moderation")).map((d) => d.id)).toEqual(["kept"]);
+    expect(await admin.get("users/u1/messages/notchat")).not.toBeNull();
   });
 });
 
@@ -690,13 +768,21 @@ describe("act", () => {
     expect((await call("bob", "hours/review", { id: log.body.id, approve: true })).status).toBe(404);
     const before = await user("alice");
     const ok = await call("teach", "hours/review", { id: log.body.id, approve: true });
-    expect(ok.body).toMatchObject({ status: "verified", reward: { tc: 10, xp: 20 } });
+    expect(ok.body).toMatchObject({ status: "verified", reward: { tc: 10, xp: 15 } }); // flat, not per hour
     const after = await user("alice");
     expect(after.treecoins - before.treecoins).toBe(10);
     expect(after.hours_verified).toBe(2);
     expect((await admin.get(`classes/${classId}/members/alice`))?.data.hours_verified).toBe(2);
     expect((await call("teach", "hours/review", { id: log.body.id, approve: true })).status).toBe(409);
     expect((await call("alice", "hours/delete", { id: log.body.id })).status).toBe(409);
+    const stored = (await admin.get(`hours/${log.body.id}`))?.data as any;
+    expect(stored).toMatchObject({ reviewed_by: "teach", flags: [] });
+    expect(stored.history.map((h: any) => h.action)).toEqual(["submitted", "verified"]);
+
+    // Duplicates and long days are flagged; more than 12 hours in a day is refused.
+    const dup = await call("alice", "hours/log", { title: "Food bank garden", orgName: "Northgate Food Bank", date: day(-3), hours: 7, text: "Weeded and mulched the vegetable beds again later that day.", classId });
+    expect(dup.body.flags).toEqual(expect.arrayContaining(["possible_duplicate", "long_day"]));
+    expect((await call("alice", "hours/log", { title: "Beach", orgName: "Parks", date: day(-3), hours: 4, text: "Picked up litter along the shoreline all afternoon." })).body.error.code).toBe("too_many_hours");
 
     const bad = (extra: Record<string, unknown>) => call("alice", "hours/log", { title: "Park day", orgName: "Parks Dept", date: day(-1), hours: 1, text: "Picked up litter around the playground area.", ...extra }).then((r) => r.status);
     expect(await bad({ hours: 0.3 })).toBe(400);
@@ -714,6 +800,10 @@ describe("act", () => {
     now = new Date(now.getTime() + 2 * 86_400_000);
     expect((await call("alice", "hours/log", forEvent)).status).toBe(200);
     expect((await call("alice", "hours/log", forEvent)).body.error.code).toBe("already_logged");
+
+    // Pending hours stop waiting once the student leaves the class.
+    await call("alice", "class/leave", { classId });
+    expect((await admin.get(`hours/${dup.body.id}`))?.data).toMatchObject({ status: "self" });
   });
 
   it("handles ambassador applications one at a time, approved by an admin", async () => {

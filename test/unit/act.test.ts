@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { actionOpen, eventKey, eventPhase, hoursReward, isValidHours, parseEventKey, safeUrl } from "../../src/shared/act";
+import { actionOpen, eventKey, eventPhase, hoursFlags, hoursOnDay, hoursReward, isValidHours, parseEventKey, safeUrl } from "../../src/shared/act";
 import { ECO_ACTIONS, actionDetails, findAction } from "../../src/shared/actions";
 import { CATEGORY_IDS } from "../../src/shared/act";
 
@@ -20,11 +20,29 @@ describe("act helpers", () => {
     expect(actionOpen(a, "2026-11-13")).toBe(false);
   });
 
-  it("accepts hours in quarter steps up to the cap and pays per hour", () => {
+  it("accepts hours in quarter steps up to the cap, with a flat bonus per entry", () => {
     expect([0.25, 1, 2.5, 12].every(isValidHours)).toBe(true);
     expect([0, -1, 0.3, 12.25, Number.NaN, "2"].some(isValidHours)).toBe(false);
-    expect(hoursReward(2)).toEqual({ tc: 10, xp: 20 });
-    expect(hoursReward(40)).toEqual({ tc: 60, xp: 120 }); // capped at 12 hours
+    // A verified entry earns the same however many hours it covers.
+    expect(hoursReward()).toEqual({ tc: 10, xp: 15 });
+  });
+
+  it("flags duplicates, long days, heavy weeks, late entries and overlong event hours", () => {
+    const others = [
+      { date: "2026-11-01", hours: 3, title: "Creek cleanup", org_name: "Creek Alliance", status: "verified" as const },
+      { date: "2026-11-02", hours: 9, title: "Garden", org_name: "Food Bank", status: "rejected" as const },
+      { date: "2026-10-30", hours: 10, title: "Trail work", org_name: "Parks", status: "pending" as const },
+      { date: "2026-10-31", hours: 10, title: "Trail work", org_name: "Parks", status: "pending" as const },
+    ];
+    const today = "2026-11-03";
+    expect(hoursFlags({ date: "2026-11-01", hours: 2, title: "creek  CLEANUP", org_name: "Other" }, others, today)).toContain("possible_duplicate");
+    expect(hoursFlags({ date: "2026-11-01", hours: 6, title: "Beach", org_name: "Other" }, others, today)).toContain("long_day");
+    expect(hoursFlags({ date: "2026-11-02", hours: 8, title: "Garden", org_name: "Food Bank" }, others, today)).not.toContain("possible_duplicate"); // declined entries don't count
+    expect(hoursFlags({ date: "2026-11-02", hours: 8, title: "Beach", org_name: "X" }, others, today)).toContain("high_weekly_total");
+    expect(hoursFlags({ date: "2026-08-01", hours: 1, title: "Beach", org_name: "X" }, [], today)).toEqual(["logged_late"]);
+    expect(hoursFlags({ date: "2026-11-03", hours: 5, title: "Beach", org_name: "X", event_hours: 3 }, [], today)).toEqual(["longer_than_event"]);
+    expect(hoursOnDay("2026-11-02", others)).toBe(0);
+    expect(hoursOnDay("2026-11-01", others)).toBe(3);
   });
 
   it("round-trips event keys", () => {

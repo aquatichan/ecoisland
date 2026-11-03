@@ -1,7 +1,7 @@
 // Act: put the science to work. Volunteer events and eco actions from your
 // class and your community, as upcoming, happening now and past, plus your
 // volunteer hours record.
-import { Award, CalendarPlus, ClipboardCheck, HandHeart, Hourglass, Leaf, Plus, Printer, Shield, Sparkles } from "lucide-react";
+import { Award, CalendarPlus, ClipboardCheck, HandHeart, Hourglass, Leaf, Plus, Printer, RotateCcw, Search, Shield, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import CountUp from "@/components/bits/CountUp";
@@ -14,14 +14,20 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState, Skeleton } from "@/components/ui/empty";
+import { Input, Select } from "@/components/ui/field";
 import { Segmented } from "@/components/ui/segmented";
-import { formatHours, useHoursToReview, useIsAdmin, useListings, useMyHours, useMySuggestions } from "@/lib/act";
+import { formatHours, startsAt, useHoursToReview, useIsAdmin, useListings, useMyHours, useMySuggestions, type Listing } from "@/lib/act";
 import { useClasses } from "@/lib/data";
 import { useDocumentTitle, useToday } from "@/lib/hooks";
 import { useProfile } from "@/lib/session";
-import { eventPhase, type Phase } from "@/shared/act";
+import { CATEGORIES, CATEGORY_IDS, eventDays, eventPhase, type Category, type Phase } from "@/shared/act";
+import { addDays } from "@/shared/dates";
 
 type Kind = "all" | "event" | "action";
+type Sort = "soonest" | "newest" | "popular" | "least";
+type Within = "any" | "today" | "week" | "month";
+
+const popularity = (l: Listing) => (l.kind === "event" ? (l.going_count ?? 0) : (l.done_count ?? 0));
 
 export default function Act() {
   const profile = useProfile();
@@ -33,9 +39,24 @@ export default function Act() {
   const [params, setParams] = useSearchParams();
   const phase = (["upcoming", "now", "past"].includes(params.get("when") ?? "") ? params.get("when") : "upcoming") as Phase;
   const kind = (["all", "event", "action"].includes(params.get("kind") ?? "") ? params.get("kind") : "all") as Kind;
+  // "all", "class", "community", or a specific class id
+  const scope = params.get("scope") ?? "all";
+  const region = params.get("where") ?? "";
+  const within = (["any", "today", "week", "month"].includes(params.get("within") ?? "") ? params.get("within") : "any") as Within;
+  const category = (CATEGORY_IDS as string[]).includes(params.get("cat") ?? "") ? (params.get("cat") as Category) : "";
+  const sort = (["soonest", "newest", "popular", "least"].includes(params.get("sort") ?? "") ? params.get("sort") : "soonest") as Sort;
+  const q = params.get("q") ?? "";
   const setParam = (k: string, v: string) => {
     const next = new URLSearchParams(params);
-    next.set(k, v);
+    if (v) next.set(k, v);
+    else next.delete(k);
+    setParams(next, { replace: true });
+  };
+  const filtered = !!(region || category || q || within !== "any" || scope !== "all" || sort !== "soonest");
+  const clearFilters = () => {
+    const next = new URLSearchParams();
+    if (params.get("when")) next.set("when", phase);
+    if (params.get("kind")) next.set("kind", kind);
     setParams(next, { replace: true });
   };
 
@@ -54,14 +75,51 @@ export default function Act() {
   const going = useMemo(() => new Set(profile.rsvp_events ?? []), [profile.rsvp_events]);
   const done = useMemo(() => new Set(profile.actions_done ?? []), [profile.actions_done]);
   const visible = listings.filter((l) => l.status === "published" || l.status === "cancelled");
-  const counts = useMemo(() => {
-    const c = { upcoming: 0, now: 0, past: 0 };
-    for (const l of visible) if (l.status !== "cancelled") c[eventPhase(l, today)]++;
-    return c;
-  }, [visible, today]);
-  const shown = visible
-    .filter((l) => eventPhase(l, today) === phase && (kind === "all" || l.kind === kind))
-    .sort((a, b) => (phase === "past" ? -1 : 1) * (a.start_day ?? a.starts_at ?? "").localeCompare(b.start_day ?? b.starts_at ?? ""));
+  const regions = useMemo(
+    () => [...new Set(visible.filter((l) => l.scope === "community" && l.region).map((l) => (l.region ?? "").trim()))].sort((a, b) => a.localeCompare(b)),
+    [visible],
+  );
+  const classNames = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const l of visible) if (l.scope === "class" && l.class_id) m.set(l.class_id, l.class_name || "Class");
+    return [...m.entries()];
+  }, [visible]);
+
+  // Everything except the When tabs, so the tab counts match what's shown.
+  const matches = (l: Listing) => {
+    if (kind !== "all" && l.kind !== kind) return false;
+    if (scope === "class" && l.scope !== "class") return false;
+    if (scope === "community" && l.scope !== "community") return false;
+    if (scope !== "all" && scope !== "class" && scope !== "community" && l.class_id !== scope) return false;
+    if (region && (l.scope !== "community" || (l.region ?? "").trim() !== region)) return false;
+    if (category && l.category !== category) return false;
+    if (q) {
+      const hay = `${l.title} ${l.summary} ${l.org_name ?? ""} ${l.location ?? ""} ${l.region ?? ""}`.toLowerCase();
+      if (!q.toLowerCase().split(/\s+/).every((w) => hay.includes(w))) return false;
+    }
+    if (within !== "any") {
+      const days = eventDays(l);
+      if (!days) return false;
+      const span = within === "today" ? 0 : within === "week" ? 7 : 30;
+      // Upcoming and now: starting within the window. Past: ended within it.
+      if (phase === "past") {
+        if (days.end < addDays(today, -span)) return false;
+      } else if (days.start > addDays(today, span)) return false;
+    }
+    return true;
+  };
+  const narrowed = visible.filter(matches);
+  const counts = { upcoming: 0, now: 0, past: 0 };
+  for (const l of narrowed) if (l.status !== "cancelled") counts[eventPhase(l, today)]++;
+  const shown = narrowed
+    .filter((l) => eventPhase(l, today) === phase)
+    .sort((a, b) => {
+      if (sort === "newest") return b.created_at.localeCompare(a.created_at);
+      if (sort === "popular") return popularity(b) - popularity(a) || startsAt(a).localeCompare(startsAt(b));
+      if (sort === "least") return popularity(a) - popularity(b) || startsAt(a).localeCompare(startsAt(b));
+      // Soonest: next up first; for past listings, the most recent first.
+      return (phase === "past" ? -1 : 1) * startsAt(a).localeCompare(startsAt(b));
+    });
 
   const classOptions: ClassOption[] = taught.map((c) => ({ id: c.id, name: c.name }));
   const verifiers: VerifierOption[] = joined.map((c) => ({ classId: c.id, label: `${c.teacher_name} (${c.name})` }));
@@ -123,6 +181,69 @@ export default function Act() {
             />
           </div>
 
+          <div className="mb-5 flex flex-wrap items-center gap-2.5">
+            <div className="relative min-w-[200px] flex-1">
+              <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-4" aria-hidden />
+              <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-[13.5px]" />
+            </div>
+            <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-auto text-[13.5px]">
+              <option value="all">Classes and community</option>
+              <option value="class">{classNames.length > 1 ? "All my classes" : "My class"}</option>
+              {classNames.length > 1 && classNames.map(([id, name]) => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))}
+              <option value="community">Community</option>
+            </Select>
+            <Select
+              value={region}
+              onChange={(e) => {
+                const next = new URLSearchParams(params);
+                if (e.target.value) {
+                  next.set("where", e.target.value);
+                  if (scope === "class" || (scope !== "all" && scope !== "community")) next.delete("scope");
+                } else next.delete("where");
+                setParams(next, { replace: true });
+              }}
+              aria-label="Location"
+              className="h-9 w-auto text-[13.5px]"
+              disabled={regions.length === 0}
+            >
+              <option value="">{regions.length ? "Any location" : "No locations yet"}</option>
+              {regions.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </Select>
+            <Select value={within} onChange={(e) => setParam("within", e.target.value === "any" ? "" : e.target.value)} aria-label="Time" className="h-9 w-auto text-[13.5px]">
+              <option value="any">Any time</option>
+              <option value="today">{phase === "past" ? "Ended today" : "Today"}</option>
+              <option value="week">{phase === "past" ? "Past week" : "Next 7 days"}</option>
+              <option value="month">{phase === "past" ? "Past 30 days" : "Next 30 days"}</option>
+            </Select>
+            <Select value={category} onChange={(e) => setParam("cat", e.target.value)} aria-label="Category" className="h-9 w-auto text-[13.5px]">
+              <option value="">All categories</option>
+              {CATEGORY_IDS.map((c) => (
+                <option key={c} value={c}>
+                  {CATEGORIES[c]}
+                </option>
+              ))}
+            </Select>
+            <Select value={sort} onChange={(e) => setParam("sort", e.target.value === "soonest" ? "" : e.target.value)} aria-label="Sort" className="h-9 w-auto text-[13.5px]">
+              <option value="soonest">{phase === "past" ? "Most recent" : "Coming up soonest"}</option>
+              <option value="newest">Newest posted</option>
+              <option value="popular">Most popular</option>
+              <option value="least">Least popular</option>
+            </Select>
+            {filtered && (
+              <Button variant="ghost" size="sm" onClick={clearFilters}>
+                <RotateCcw /> Clear
+              </Button>
+            )}
+          </div>
+
           {loading ? (
             <div className="grid grid-cols-2 gap-4">
               <Skeleton className="h-40 rounded-xl" />
@@ -133,7 +254,7 @@ export default function Act() {
             <Card>
               <EmptyState
                 icon={phase === "past" ? Hourglass : HandHeart}
-                title={phase === "upcoming" ? "Nothing scheduled yet" : phase === "now" ? "Nothing happening today" : "Nothing here yet"}
+                title={filtered && visible.length > 0 ? "Nothing matches these filters" : phase === "upcoming" ? "Nothing scheduled yet" : phase === "now" ? "Nothing happening today" : "Nothing here yet"}
                 body={
                   teacher
                     ? "Schedule an eco action for your class. There are twelve ready to go, each tied to an APES unit."

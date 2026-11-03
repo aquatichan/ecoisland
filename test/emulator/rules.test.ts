@@ -220,10 +220,18 @@ describe("classes", () => {
     await assertFails(deleteDoc(doc(student("teach"), "classes/c1/messages/m1")));
   });
 
-  it("lets the teacher switch chat on and off, with a real boolean", async () => {
-    await assertSucceeds(updateDoc(doc(student("teach"), "classes/c1"), { chat_enabled: true }));
-    await assertFails(updateDoc(doc(student("teach"), "classes/c1"), { chat_enabled: "yes" }));
+  it("switches chat only through the server, so every change is logged", async () => {
+    await assertFails(updateDoc(doc(student("teach"), "classes/c1"), { chat_enabled: true }));
     await assertFails(updateDoc(doc(student("alice"), "classes/c1"), { chat_enabled: false }));
+  });
+
+  it("shows the moderation log, mutes and removals to the teacher only", async () => {
+    for (const path of ["classes/c1/moderation", "classes/c1/mutes", "classes/c1/removed"]) {
+      await assertSucceeds(getDocs(collection(student("teach"), path)));
+      await assertFails(getDocs(collection(student("alice"), path)));
+      await assertFails(setDoc(doc(student("teach"), `${path}/x`), { any: 1 }));
+    }
+    await assertSucceeds(getDocs(collection(student("boss"), "classes/c1/moderation")));
   });
 
   it("hides join codes and retired collections", async () => {

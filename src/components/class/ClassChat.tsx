@@ -1,24 +1,37 @@
-// Class chat: one live room per class. The server writes every message
-// (worker/chat.ts) after checking membership, mutes, the language filter and
-// flood limits. The teacher turns chat on, and can delete anything, mute a
-// student, and review what classmates report.
-import { Flag, MessageCircle, MessageCircleOff, MoreHorizontal, SendHorizontal, ShieldCheck, Trash2, Volume2, VolumeX } from "lucide-react";
+// Class chat: one live room per class, with no private messages. The server
+// writes every message (worker/chat.ts) after checking membership, mutes,
+// language, harassment, links, contact details and flood limits. The teacher
+// turns chat on, and can delete anything, mute a student, review reports and
+// read the moderation log.
+import { Clock, Flag, HeartHandshake, History, MessageCircle, MessageCircleOff, MoreHorizontal, SendHorizontal, ShieldCheck, Trash2, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EmptyState, Skeleton } from "@/components/ui/empty";
 import { Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from "@/components/ui/menu";
 import { Switch } from "@/components/ui/switch";
 import { track } from "@/lib/analytics";
 import { api, errorMessage } from "@/lib/api";
-import { updateClass, useCollection, type WithId } from "@/lib/data";
+import { useCollection, type WithId } from "@/lib/data";
 import { useToast } from "@/lib/toast";
 import { cn, storageGet, storageSet } from "@/lib/utils";
-import type { ClassDoc, MemberDoc, MessageDoc } from "@/shared/types";
+import type { ClassDoc, MemberDoc, MessageDoc, ModerationDoc } from "@/shared/types";
 
 export const CHAT_MAX_CHARS = 500;
+const RETENTION_DAYS = 90;
+
+const REASONS: { value: string; label: string }[] = [
+  { value: "harassment", label: "Bullying or harassment" },
+  { value: "inappropriate", label: "Inappropriate or offensive" },
+  { value: "personal_info", label: "Shares someone's personal information" },
+  { value: "wellbeing", label: "I'm worried about this person" },
+  { value: "spam", label: "Spam" },
+  { value: "other", label: "Something else" },
+];
+const REASON_LABEL: Record<string, string> = Object.fromEntries(REASONS.map((r) => [r.value, r.label]));
 const GROUP_MS = 5 * 60_000;
 
 const readKey = (classId: string) => `eco.chat.read.${classId}`;
@@ -57,11 +70,13 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
   const meMuted = !teacher && muted.has(meId);
   const reported = messages.filter((m) => m.reported && !m.deleted);
   const [toggling, setToggling] = useState(false);
+  const [reporting, setReporting] = useState<WithId<Omit<MessageDoc, "id">> | null>(null);
+  const [showLog, setShowLog] = useState(false);
 
   const setChat = async (on: boolean) => {
     setToggling(true);
     try {
-      await updateClass(cls.id, { chat_enabled: on });
+      await api("chat/toggle", { classId: cls.id, enabled: on });
       track("class_chat_toggled", { on });
     } catch (err) {
       toast.show({ tone: "error", title: "Couldn't change chat", body: errorMessage(err) });
@@ -113,7 +128,7 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
               teacher={teacher}
               muted={muted}
               onDelete={(m) => act("chat/delete", { messageId: m.id })}
-              onReport={(m) => act("chat/report", { messageId: m.id }, "Reported. Your teacher will take a look.")}
+              onReport={(m) => setReporting(m)}
               onDismiss={(m) => act("chat/dismiss", { messageId: m.id }, "Kept the message")}
               onMute={(uid, on) => act("chat/mute", { uid, muted: on }, on ? "Muted in this chat" : "Unmuted")}
             />
@@ -143,9 +158,15 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
                 <VolumeX className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Mute a student to stop them posting.
               </li>
               <li className="flex gap-2.5">
-                <Flag className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Reported messages are flagged for you.
+                <Flag className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Reported messages, and ones suggesting a student may be struggling, are flagged for you.
+              </li>
+              <li className="flex gap-2.5">
+                <Clock className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Messages are deleted after {RETENTION_DAYS} days. The moderation log keeps a copy for a year.
               </li>
             </ul>
+            <Button variant="secondary" size="sm" className="mt-5 w-full" onClick={() => setShowLog(true)}>
+              <History /> Moderation log
+            </Button>
             {reported.length > 0 && (
               <p className="mt-5 rounded-lg bg-coral-soft px-3.5 py-2.5 text-[13px] font-semibold text-coral">
                 {reported.length} reported {reported.length === 1 ? "message needs" : "messages need"} review
@@ -174,14 +195,121 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
             <h2 className="text-[15px] font-semibold text-fg">Chat guidelines</h2>
             <ul className="mt-3 space-y-2 text-[13px] leading-relaxed text-fg-3">
               <li>Be kind and keep it about class.</li>
-              <li>{cls.teacher_name} can read and remove anything posted here.</li>
-              <li>Don't share phone numbers, addresses or passwords.</li>
-              <li>See something wrong? Use the message menu to report it.</li>
+              <li>Everything here is visible to the whole class and to {cls.teacher_name}. There are no private messages.</li>
+              <li>Phone numbers, emails, social media, addresses and outside links aren't allowed. Links to course sites like College Board, Khan Academy and .gov pages are fine.</li>
+              <li>See something wrong, or worried about someone? Use the message menu to report it. Only your teacher sees who reported.</li>
+              <li>Messages are deleted after {RETENTION_DAYS} days.</li>
             </ul>
+            <div className="mt-4 flex gap-2.5 rounded-lg bg-surface-2/70 p-3 text-[12.5px] leading-relaxed text-fg-3">
+              <HeartHandshake className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+              <span>
+                Going through something hard? Talk to a trusted adult, or call or text <span className="font-semibold text-fg-2">988</span> (US) any time.
+              </span>
+            </div>
           </Card>
         )}
       </div>
+      {reporting && (
+        <ReportDialog
+          message={reporting}
+          onClose={() => setReporting(null)}
+          onReport={async (reason) => {
+            await act("chat/report", { messageId: reporting.id, reason }, "Reported. Only your teacher sees who reported it.");
+            setReporting(null);
+          }}
+        />
+      )}
+      {showLog && <ModerationLog classId={cls.id} members={members} onClose={() => setShowLog(false)} />}
     </div>
+  );
+}
+
+function ReportDialog({ message, onClose, onReport }: { message: WithId<Omit<MessageDoc, "id">>; onClose: () => void; onReport: (reason: string) => Promise<void> }) {
+  const [reason, setReason] = useState("harassment");
+  const [busy, setBusy] = useState(false);
+  return (
+    <Dialog open onOpenChange={(o) => !o && onClose()}>
+      <DialogContent title="Report this message" description="Your teacher will see the message and why you reported it. Classmates won't know it was you.">
+        <blockquote className="rounded-lg border-l-2 border-line-strong bg-surface-2/60 px-4 py-3 text-[14px] text-fg-2">
+          <span className="font-semibold text-fg">{message.name}:</span> {message.text}
+        </blockquote>
+        <fieldset className="mt-4 space-y-1.5">
+          <legend className="mb-2 text-[13px] font-semibold text-fg-2">What's wrong?</legend>
+          {REASONS.map((r) => (
+            <label key={r.value} className="flex cursor-pointer items-center gap-3 rounded-[10px] px-3 py-2 text-[14px] text-fg-2 hover:bg-surface-2">
+              <input type="radio" name="reason" value={r.value} checked={reason === r.value} onChange={() => setReason(r.value)} className="size-4 accent-[var(--brand)]" />
+              {r.label}
+            </label>
+          ))}
+        </fieldset>
+        {reason === "wellbeing" && (
+          <p className="mt-3 rounded-lg bg-brand-soft/60 p-3 text-[13px] text-fg-2">
+            Thank you for looking out for them. If someone is in danger right now, tell a trusted adult. In the US you can call or text 988 any time.
+          </p>
+        )}
+        <div className="mt-6 flex justify-end gap-2">
+          <Button variant="ghost" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button
+            loading={busy}
+            onClick={async () => {
+              setBusy(true);
+              await onReport(reason);
+              setBusy(false);
+            }}
+          >
+            <Flag /> Report
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+const ACTION_LABEL: Record<ModerationDoc["action"], string> = {
+  deleted: "Deleted",
+  reported: "Reported",
+  dismissed: "Kept after review",
+  muted: "Muted",
+  unmuted: "Unmuted",
+  blocked: "Blocked before posting",
+  flagged: "Flagged automatically",
+  chat_on: "Chat turned on",
+  chat_off: "Chat turned off",
+};
+
+/** The teacher-only record of every moderation event, newest first. */
+function ModerationLog({ classId, members, onClose }: { classId: string; members: WithId<MemberDoc>[]; onClose: () => void }) {
+  const nameOf = (uid: string) => members.find((m) => m.uid === uid)?.username ?? "a former member";
+  const { items, loading } = useCollection<Omit<ModerationDoc, "id">>(`classes/${classId}/moderation`, { orderBy: ["at", "desc"], limit: 100 });
+  return (
+    <Dialog open onOpenChange={(o) => !o && onClose()}>
+      <DialogContent wide title="Moderation log" description="Every delete, report, mute and blocked message in this chat, with a copy of the text. Only you can see this. Records are kept for one year.">
+        {loading ? (
+          <Skeleton className="h-40" />
+        ) : items.length === 0 ? (
+          <p className="py-8 text-center text-[14px] text-fg-3">Nothing yet.</p>
+        ) : (
+          <ul className="divide-y divide-line rounded-lg border border-line">
+            {items.map((r) => (
+              <li key={r.id} className="px-4 py-3 text-[13.5px]">
+                <div className="flex items-center gap-2">
+                  <Badge tone={r.action === "blocked" || r.action === "flagged" || r.action === "reported" ? "coral" : r.action === "deleted" || r.action === "muted" ? "sun" : "neutral"}>{ACTION_LABEL[r.action] ?? r.action}</Badge>
+                  {r.author_name && <span className="font-semibold text-fg">{r.author_name}</span>}
+                  {r.reason && <span className="text-fg-3">· {REASON_LABEL[r.reason] ?? r.reason}</span>}
+                  <time className="ml-auto text-[12px] text-fg-4" dateTime={r.at}>
+                    {new Date(r.at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
+                  </time>
+                </div>
+                {r.text && <p className="mt-1.5 whitespace-pre-wrap text-fg-2">{r.text}</p>}
+                {r.action === "reported" && <p className="mt-1 text-[12px] text-fg-4">Reported by {nameOf(r.actor_uid)}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -307,8 +435,13 @@ function MessageList({
                 {flagged && (
                   <div className="mt-2 flex items-center gap-2">
                     <Badge tone="coral">
-                      <Flag /> Reported{(m.reports?.length ?? 0) > 1 ? ` by ${m.reports?.length}` : ""}
+                      <Flag /> {(m.report_reasons ?? []).includes("wellbeing") ? "Check in with this student" : `Reported${(m.report_count ?? 0) > 1 ? ` ${m.report_count} times` : ""}`}
                     </Badge>
+                    {(m.report_reasons ?? []).filter((r) => r !== "wellbeing").map((r) => (
+                      <span key={r} className="text-[12px] text-coral">
+                        {REASON_LABEL[r] ?? r}
+                      </span>
+                    ))}
                     <Button size="sm" variant="secondary" onClick={() => onDismiss(m)}>
                       Keep
                     </Button>
@@ -319,7 +452,7 @@ function MessageList({
                 )}
               </div>
               {(canDelete || canReport || canMute) && (
-                <div className="absolute top-1 right-1.5 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
+                <div className="absolute top-1 right-1.5 opacity-40 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
                   <Menu>
                     <MenuTrigger asChild>
                       <Button variant="ghost" size="icon-sm" aria-label={`Options for ${m.name}'s message`}>
@@ -371,12 +504,15 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
     el.style.height = `${Math.min(el.scrollHeight, 132)}px`;
   }, [text]);
 
+  const [support, setSupport] = useState(false);
+
   const send = async () => {
     if (!trimmed || over || sending || disabled) return;
     setSending(true);
     try {
-      await api("chat/send", { classId, text });
+      const res = await api<{ support?: boolean }>("chat/send", { classId, text });
       setText("");
+      if (res.support) setSupport(true);
       track("chat_message_sent");
     } catch (err) {
       toast.show({ tone: "error", title: "Message not sent", body: errorMessage(err) });
@@ -403,6 +539,17 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
 
   return (
     <div className="border-t border-line p-3">
+      {support && (
+        <div className="mb-3 flex items-start gap-3 rounded-[12px] bg-brand-soft/70 p-3.5 text-[13.5px] text-fg-2" role="status">
+          <HeartHandshake className="mt-0.5 size-4 shrink-0 text-brand-ink" aria-hidden />
+          <p className="flex-1">
+            It sounds like things might be hard right now. Your teacher can see your message and can help. You can also call or text <span className="font-semibold">988</span> (Suicide &amp; Crisis Lifeline, US) any time, day or night.
+          </p>
+          <button className="text-[12.5px] font-semibold text-fg-3 hover:text-fg" onClick={() => setSupport(false)}>
+            Dismiss
+          </button>
+        </div>
+      )}
       <div className="flex items-end gap-2 rounded-[14px] border border-line-strong bg-surface px-3 py-2 focus-within:border-brand focus-within:shadow-[var(--ring)]">
         <textarea
           ref={area}
