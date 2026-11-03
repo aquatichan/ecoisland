@@ -57,7 +57,10 @@ export function memberPayload(uid: string, data: Data, lastActiveDay: DayKey | n
     lessons_count: r.lessons_done.length,
     masteries: masteredUnits(r.unit_best),
     island_skybox: typeof data.island_skybox === "string" ? data.island_skybox : "day",
-    island_decor: Array.isArray(data.island_decor) ? data.island_decor.slice(0, 24) : [],
+    // Only decorations the student actually bought are shown to classmates.
+    island_decor: Array.isArray(data.island_decor)
+      ? data.island_decor.filter((d) => d && typeof d === "object" && r.owned_items.includes(String((d as { id?: unknown }).id))).slice(0, 24)
+      : [],
     island_name: typeof data.island_name === "string" ? data.island_name.slice(0, 32) : "",
   };
 }

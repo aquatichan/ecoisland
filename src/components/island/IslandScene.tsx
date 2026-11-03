@@ -55,6 +55,46 @@ const GRASS =
 const CLIFF =
   "M287 520 C296 560 420 598 600 600 C770 600 892 568 910 532 L906 578 C880 626 760 650 600 652 C440 652 316 628 292 580 Z";
 
+/** A soft, irregular closed shape: used for the first grass patches. */
+function blobPath(cx: number, cy: number, rx: number, ry: number, seed: number, lobes = 7): string {
+  const pts: Array<[number, number]> = [];
+  const n = 18;
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2;
+    const wobble = 1 + 0.13 * Math.sin(a * lobes + seed) + 0.07 * Math.sin(a * (lobes + 3) + seed * 2.3);
+    pts.push([cx + Math.cos(a) * rx * wobble, cy + Math.sin(a) * ry * wobble]);
+  }
+  const mid = (i: number) => {
+    const [x1, y1] = pts[i];
+    const [x2, y2] = pts[(i + 1) % n];
+    return [(x1 + x2) / 2, (y1 + y2) / 2];
+  };
+  let d = `M${mid(n - 1)[0].toFixed(1)} ${mid(n - 1)[1].toFixed(1)}`;
+  for (let i = 0; i < n; i++) {
+    const [x, y] = pts[i];
+    const [mx, my] = mid(i);
+    d += ` Q${x.toFixed(1)} ${y.toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)}`;
+  }
+  return `${d} Z`;
+}
+
+const SPROUT_PATCHES: Array<{ cx: number; cy: number; rx: number; ry: number; seed: number }> = [
+  { cx: 548, cy: 510, rx: 104, ry: 30, seed: 1.2 },
+  { cx: 712, cy: 494, rx: 70, ry: 20, seed: 3.4 },
+  { cx: 424, cy: 498, rx: 52, ry: 16, seed: 5.1 },
+  { cx: 640, cy: 538, rx: 44, ry: 12, seed: 0.4 },
+];
+const SPROUT_TUFTS: Array<[number, number, number]> = [
+  [506, 505, 1],
+  [578, 518, 0.9],
+  [545, 496, 0.8],
+  [700, 490, 0.9],
+  [736, 498, 0.75],
+  [418, 495, 0.85],
+  [646, 535, 0.7],
+  [610, 520, 0.6],
+];
+
 const ROCKS: Array<[number, number, number]> = [
   [468, 522, 11],
   [702, 506, 8],
@@ -400,14 +440,31 @@ export function IslandScene({
 
         {/* ground */}
         {stage === 0 && (
-          <path d={GRASS} fill={p.dirt} opacity={0.75} transform="translate(600 500) scale(0.82 0.8) translate(-600 -500)" />
+          <g>
+            <path d={GRASS} fill={p.dirt} opacity={0.75} transform="translate(600 500) scale(0.82 0.8) translate(-600 -500)" />
+            <path d="M470 492 l18 6 l10 -4 l16 8 M640 512 l14 -5 l12 6 l20 -3 M560 528 l-12 6 l-8 -2" stroke="#8c6c46" strokeWidth={1.6} strokeLinecap="round" fill="none" opacity={0.55} />
+          </g>
         )}
         {stage === 1 && (
           <g>
-            <path d={GRASS} fill={p.dirt} opacity={0.55} transform="translate(600 500) scale(0.86) translate(-600 -500)" />
-            <path d={GRASS} fill={`url(#${id("grass")})`} transform="translate(560 505) scale(0.46 0.52) translate(-600 -500)" />
-            <path d={GRASS} fill={`url(#${id("grass")})`} transform="translate(720 492) scale(0.3 0.36) translate(-600 -500)" />
-            <path d={GRASS} fill={`url(#${id("grass")})`} transform="translate(430 500) scale(0.22 0.3) translate(-600 -500)" />
+            <path d={GRASS} fill={p.dirt} opacity={0.6} transform="translate(600 500) scale(0.86) translate(-600 -500)" />
+            {SPROUT_PATCHES.map((b, i) => (
+              <g key={i}>
+                <path d={blobPath(b.cx, b.cy + 3, b.rx, b.ry, b.seed)} fill={p.grassDark} opacity={0.75} />
+                <path d={blobPath(b.cx, b.cy, b.rx, b.ry, b.seed)} fill={`url(#${id("grass")})`} />
+                <path d={blobPath(b.cx - b.rx * 0.18, b.cy - b.ry * 0.25, b.rx * 0.5, b.ry * 0.42, b.seed + 1)} fill={p.grassLight} opacity={0.45} />
+              </g>
+            ))}
+            {SPROUT_TUFTS.map(([x, y, k], i) => (
+              <path
+                key={i}
+                d={`M${x - 5 * k} ${y} q-1 -7 -4 -10 M${x - 1.5 * k} ${y} q0 -9 -1 -13 M${x + 2 * k} ${y} q1 -8 4 -11 M${x + 5 * k} ${y} q2 -5 5 -7`}
+                stroke={p.grassDark}
+                strokeWidth={1.8}
+                strokeLinecap="round"
+                fill="none"
+              />
+            ))}
           </g>
         )}
         {stage >= 2 && <path d={GRASS} fill={`url(#${id("grass")})`} />}

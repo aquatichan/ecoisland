@@ -97,9 +97,9 @@ function Hero() {
     <section className="relative overflow-hidden border-b border-line">
       <div className="absolute inset-0" aria-hidden>
         <GLGuard key={resolved}>
-          <Topography color={resolved === "dark" ? "#46c48a" : "#1c7c50"} lightMode={resolved !== "dark"} opacity={resolved === "dark" ? 0.32 : 0.22} lineCount={22} speed={0.25} mouseInteraction />
+          <Topography color={resolved === "dark" ? "#46c48a" : "#1c7c50"} lightMode={resolved !== "dark"} opacity={resolved === "dark" ? 0.55 : 0.4} lineCount={22} speed={0.25} mouseInteraction />
         </GLGuard>
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,var(--bg)_20%,transparent_72%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
       </div>
       <div className="relative mx-auto grid min-h-[calc(100dvh-64px)] max-w-[1200px] grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-14 px-8 py-16">
         <div>
@@ -234,7 +234,10 @@ function Course() {
           <div key={s.label}>
             <s.icon className="size-5 text-brand" aria-hidden />
             <p className="font-display t-num mt-4 text-[48px] leading-none font-[600] text-fg">
-              <CountUp to={s.n} duration={1.4} separator="," />
+              <span className="sr-only">{s.n.toLocaleString()}</span>
+              <span aria-hidden>
+                <CountUp to={s.n} duration={1.4} separator="," />
+              </span>
             </p>
             <p className="mt-2 text-[14.5px] text-fg-3">{s.label}</p>
           </div>

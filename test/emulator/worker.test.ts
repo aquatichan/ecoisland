@@ -405,3 +405,47 @@ describe("account deletion", () => {
     expect(await admin.get("posts/p1/comments/c1")).toBeNull();
   });
 });
+
+describe("streak reminders", () => {
+  it("emails only students whose streak ends tonight, once, with a working unsubscribe link", async () => {
+    const { sendReminders, unsubscribeToken } = await import("../../worker/reminders");
+    const today = day();
+    const yesterday = day(-1);
+    await admin.commit([
+      admin.set("users/r1", { id: "r1", email: "r1@school.org", username: "rae", email_reminders: true, last_set_day: yesterday, streak: 4 }),
+      admin.set("users/r2", { id: "r2", email: "r2@school.org", email_reminders: true, last_set_day: today, streak: 5 }),
+      admin.set("users/r3", { id: "r3", email: "r3@school.org", email_reminders: false, last_set_day: yesterday, streak: 2 }),
+      admin.set("users/r4", { id: "r4", email: "r4@school.org", email_reminders: true, last_set_day: yesterday, streak: 2, last_reminder_day: today }),
+    ]);
+    const sentTo: string[] = [];
+    let unsubscribeUrl = "";
+    const mailFetch: typeof fetch = async (input, init) => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+      if (url === "https://api.resend.com/emails") {
+        const body = JSON.parse(String(init?.body));
+        sentTo.push(...body.to);
+        unsubscribeUrl = /(https?:\/\/\S+\/api\/unsubscribe\S+)/.exec(body.text)?.[1] ?? "";
+        expect(body.subject).toBe("Your 4-day streak ends tonight");
+        return new Response("{}", { status: 200 });
+      }
+      return fetch(input, init);
+    };
+    const mailEnv: Env = { ...env, RESEND_API_KEY: "re_test", REMINDER_FROM: "Ecoisland <reminders@ecoisland.xyz>" };
+    expect(await sendReminders(mailEnv, admin, mailFetch, now, "http://localhost")).toBe(1);
+    expect(sentTo).toEqual(["r1@school.org"]);
+    expect((await user("r1")).last_reminder_day).toBe(today);
+    expect(await sendReminders(mailEnv, admin, mailFetch, now, "http://localhost")).toBe(0);
+
+    // Without a provider configured nothing is sent at all.
+    expect(await sendReminders(env, admin, mailFetch, now, "http://localhost")).toBe(0);
+
+    // The link in the email turns reminders off; a forged one does not.
+    expect(unsubscribeUrl).toContain(`u=r1`);
+    const forged = await handleApi(new Request(`http://localhost/api/unsubscribe?u=r3&t=${await unsubscribeToken("wrong", "r3")}`), mailEnv);
+    expect(forged.status).toBe(400);
+    const res = await handleApi(new Request(unsubscribeUrl), mailEnv);
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain("unsubscribed");
+    expect((await user("r1")).email_reminders).toBe(false);
+  });
+});

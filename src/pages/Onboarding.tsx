@@ -414,7 +414,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
             ) : (
               <>
                 <h1 className="t-h2">Meet your island</h1>
-                <p className="mt-1.5 text-[14.5px] text-fg-3">It starts as bare rock. Every daily set grows it, and missing days dries it out. Your first set takes about five minutes.</p>
+                <p className="mt-1.5 text-[14.5px] text-fg-3">It starts as bare rock. Every daily set grows it, and missed days dry it out. Your first set takes about five minutes.</p>
                 <div className="mt-5 overflow-hidden rounded-[16px] border border-line">
                   <IslandScene xp={p.xp_total ?? 0} health={1} sky="day" seed={p.id} className="aspect-[5/2.4] [&>svg]:h-full" />
                 </div>

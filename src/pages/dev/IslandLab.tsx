@@ -11,7 +11,8 @@ export default function IslandLab() {
   const health = Number(params.get("health") ?? 1);
   const all = params.get("all") === "1";
   const single = params.get("xp");
-  const decor = all ? DECOR.map((d) => ({ id: d.id, x: d.x, y: d.y })) : [];
+  const only = params.get("decor")?.split(",");
+  const decor = all || only ? DECOR.filter((d) => !only || only.includes(d.id)).map((d) => ({ id: d.id, x: d.x, y: d.y })) : [];
   const landmarks = all ? [1, 2, 3, 4, 5, 6, 7, 8, 9] : [];
   if (single) {
     return (

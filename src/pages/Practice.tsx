@@ -227,7 +227,7 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
     return () => window.removeEventListener("keydown", onKey);
   }, [onStart]);
   return (
-    <Page className="mx-auto grid max-w-[980px] grid-cols-[1fr_400px] items-center gap-10">
+    <Page className="mx-auto grid min-h-[calc(100dvh-220px)] max-w-[980px] grid-cols-[1fr_400px] items-center gap-10">
       <div>
         <p className="t-eyebrow">{setup.eyebrow}</p>
         <h1 className="t-h1 mt-3">{doneToday ? "Extra practice" : "Today's daily set"}</h1>

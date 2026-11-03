@@ -35,19 +35,22 @@ export default function IslandPage() {
   const [buying, setBuying] = useState<string | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [name, setName] = useState(profile.island_name ?? "");
-  const [decor, setDecor] = useState<PlacedDecor[]>(profile.island_decor ?? []);
+  // Only decorations the student owns are ever placed (a single, consistently indexed list).
+  const ownedDecor = (list: PlacedDecor[] | undefined) => (list ?? []).filter((d) => (profile.owned_items ?? []).includes(d.id));
+  const [decor, setDecor] = useState<PlacedDecor[]>(() => ownedDecor(profile.island_decor));
   const pendingSave = useRef<number | null>(null);
   useDocumentTitle("Island");
 
   // Keep local decor in sync with the live profile when not mid-edit.
   useEffect(() => {
-    if (pendingSave.current === null) setDecor(profile.island_decor ?? []);
-  }, [profile.island_decor]);
+    if (pendingSave.current === null) setDecor(ownedDecor(profile.island_decor));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile.island_decor, profile.owned_items]);
 
   const xp = profile.xp_total ?? 0;
   const health = islandHealth(profile.last_set_day, today);
   const progress = stageProgress(xp);
-  const owned = new Set(profile.owned_items ?? []);
+  const owned = useMemo(() => new Set(profile.owned_items ?? []), [profile.owned_items]);
   const sky = findSky(profile.island_skybox)?.id ?? "day";
   const mastered = masteredUnits(profile.unit_best);
   const coins = profile.treecoins ?? 0;
@@ -127,8 +130,8 @@ export default function IslandPage() {
                 label={`${islandName}: ${progress.stage.name}, ${health.label.toLowerCase()}`}
               />
               {tab === "arrange" && (
-                <div className="glass absolute top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-medium text-fg-2 shadow-md">
-                  <Move className="size-4" /> Drag decorations, or select one and use the arrow keys
+                <div className="glass pointer-events-none absolute top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-medium whitespace-nowrap text-fg-2 shadow-md">
+                  <Move className="size-4 shrink-0" /> Drag to move, or select one and use the arrow keys
                 </div>
               )}
             </div>
