@@ -6,8 +6,9 @@ import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { OnboardingStepper, Step } from "@/components/fx/OnboardingStepper";
 import { FullPageLoader } from "@/components/app/Guards";
 import { Logo } from "@/components/app/Logo";
-import { demoGrowth } from "@/components/island/demo";
 import { IslandScene } from "@/components/island/IslandScene";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
@@ -22,9 +23,22 @@ import { UNITS } from "@/shared/curriculum";
 import { visibleGrowth } from "@/shared/island";
 import type { Role } from "@/shared/types";
 
+// The coastal trail behind the sign-in hero (existing art, from the landing plates). The headline, the paragraph and the
+// Google button are held to the left half of the hero, so that is where the scrim is, inside the hero's own box. It is the
+// same scrim as every other banner (the tests hold them equal).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
+
+// A tile inside a step (a role to pick, the class code to copy): the same shape as a tile inside a Settings section.
+const TILE = "rounded-md border p-5";
+
+// A disabled button keeps its words at AA: a flat surface tint with a darker word, not a fade.
+const FLAT_DISABLED = "disabled:bg-surface-2 disabled:text-fg-3 disabled:opacity-100";
+
+// The Google logo keeps Google's own four colours, as the sign-in branding guidelines require; it is the only place on the
+// page that names a colour.
 function GoogleIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
+    <svg viewBox="0 0 24 24" className="size-4.5" aria-hidden>
       <path fill="#4285F4" d="M23.5 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.45a5.52 5.52 0 0 1-2.4 3.62v3h3.88c2.27-2.09 3.57-5.17 3.57-8.8Z" />
       <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.94-2.91l-3.88-3.01c-1.08.72-2.45 1.15-4.06 1.15-3.12 0-5.77-2.11-6.71-4.95H1.3v3.11A12 12 0 0 0 12 24Z" />
       <path fill="#FBBC05" d="M5.29 14.28A7.2 7.2 0 0 1 4.91 12c0-.79.14-1.56.38-2.28V6.61H1.3A12 12 0 0 0 0 12c0 1.94.46 3.77 1.3 5.39l3.99-3.11Z" />
@@ -61,50 +75,52 @@ export default function Onboarding() {
 
   if (status === "signed_out" || !authUser) {
     return (
-      <div className="grid min-h-dvh grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] bg-bg">
-        <div className="flex flex-col justify-between px-16 py-12">
-          <Link to="/" aria-label="Ecoisland home">
+      <div className="flex min-h-dvh flex-col bg-bg px-8 py-10">
+        <div className="mx-auto w-full max-w-page">
+          <Link to="/" aria-label="Ecoisland home" className="inline-block">
             <Logo />
           </Link>
-          <div className="max-w-[440px]">
-            <p className="t-eyebrow">Welcome</p>
-            <h1 className="t-display mt-4 text-5xl">Study a little every day. Watch your island grow.</h1>
-            <p className="mt-4 text-lg text-fg-3">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
-            <Button
-              size="lg"
-              variant="secondary"
-              className="mt-8"
-              loading={signingIn}
-              onClick={async () => {
-                setSigningIn(true);
-                try {
-                  await signIn();
-                } catch (err) {
-                  toast.show({ tone: "error", title: "Sign-in didn't finish", body: errorMessage(err) });
-                } finally {
-                  setSigningIn(false);
-                }
-              }}
-            >
-              {!signingIn && <GoogleIcon />} Continue with Google
-            </Button>
-            <p className="mt-5 text-sm text-fg-4">
-              By continuing you agree to the{" "}
-              <Link to="/tos" className="underline underline-offset-2 hover:text-fg-2">
-                Terms
-              </Link>{" "}
-              and{" "}
-              <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-fg-2">
-                Privacy Policy
-              </Link>
-              .
-            </p>
-          </div>
-          <p className="text-sm text-fg-4">Made for AP Environmental Science students and teachers.</p>
         </div>
-        <div className="relative m-4 overflow-hidden rounded-2xl border border-line">
-          <IslandScene growth={demoGrowth(900)} health={1} sky="sunset" landmarks={[1, 4, 6]} decor={[{ id: "lighthouse", x: 0.74, y: 0.68 }, { id: "sailboat", x: 0.22, y: 0.85 }]} className="absolute inset-0" />
+        <div className="mx-auto flex w-full max-w-page flex-1 items-center py-8">
+          <header className="relative isolate w-full overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+            <ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 40%" />
+            <div className="max-w-1/2 py-8">
+              <p className="t-eyebrow text-fg-2">Welcome</p>
+              <h1 className="t-display mt-4 text-5xl">Study a little every day. Watch your island grow.</h1>
+              <p className="mt-4 text-lg text-fg-2">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
+              <Button
+                size="lg"
+                variant="secondary"
+                className="mt-8"
+                loading={signingIn}
+                onClick={async () => {
+                  setSigningIn(true);
+                  try {
+                    await signIn();
+                  } catch (err) {
+                    toast.show({ tone: "error", title: "Sign-in didn't finish", body: errorMessage(err) });
+                  } finally {
+                    setSigningIn(false);
+                  }
+                }}
+              >
+                {!signingIn && <GoogleIcon />} Continue with Google
+              </Button>
+              <p className="mt-5 text-sm text-fg-2">
+                By continuing you agree to the{" "}
+                <Link to="/tos" className="underline underline-offset-2 hover:text-fg">
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-fg">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
+          </header>
         </div>
+        <p className="mx-auto w-full max-w-page text-sm text-fg-3">Made for AP Environmental Science students and teachers.</p>
       </div>
     );
   }
@@ -226,6 +242,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
         backButtonText="Back"
         nextButtonProps={{
           disabled: !canContinue || busy,
+          className: "disabled:bg-surface-2! disabled:text-fg-3! disabled:opacity-100!",
           onClick: (e) => {
             e.preventDefault();
             void advance();
@@ -247,7 +264,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                   key={o.r}
                   onClick={() => setRole(o.r)}
                   aria-pressed={role === o.r}
-                  className={cn("rounded-lg border p-5 text-left transition-[border-color,background-color]", role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2")}
+                  className={cn(TILE, "text-left transition-[border-color,background-color]", role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2")}
                 >
                   <o.icon className={cn("size-6", role === o.r ? "text-brand-ink" : "text-fg-3")} />
                   <p className="mt-4 text-lg font-semibold text-fg">{o.title}</p>
@@ -299,7 +316,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                         /* ignore */
                       }
                     }}
-                    className="mt-6 flex w-full items-center justify-between rounded-lg border border-line-strong px-6 py-5 hover:bg-surface-2"
+                    className={cn(TILE, "mt-6 flex w-full items-center justify-between border-line-strong hover:bg-surface-2")}
                   >
                     <span className="font-mono text-4xl font-bold tracking-[0.25em] text-fg">{created.code}</span>
                     <span className="flex items-center gap-1.5 text-base font-semibold text-fg-3">{copied ? <Check className="size-4 text-brand" /> : <Copy className="size-4" />} {copied ? "Copied" : "Copy"}</span>
@@ -316,8 +333,8 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                       if (className.trim().length >= 2) void create();
                     }}
                   >
-                    <Input value={className} maxLength={60} onChange={(e) => setClassName(e.target.value)} placeholder="APES · Period 3" aria-label="Class name" autoFocus />
-                    <Button type="submit" variant="secondary" loading={busy} disabled={className.trim().length < 2}>
+                    <Input value={className} maxLength={60} onChange={(e) => setClassName(e.target.value)} placeholder="APES · Period 3" aria-label="Class name" className="placeholder:text-fg-3" autoFocus />
+                    <Button type="submit" variant="secondary" className={FLAT_DISABLED} loading={busy} disabled={className.trim().length < 2}>
                       Create
                     </Button>
                   </form>
@@ -346,12 +363,12 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                     onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))}
                     placeholder="K7Q2MX"
                     aria-label="Class code"
-                    className="w-[200px] font-mono text-xl tracking-[0.22em]"
+                    className="w-50 font-mono text-xl tracking-[0.22em] placeholder:text-fg-3"
                     autoComplete="off"
                     spellCheck={false}
                     autoFocus
                   />
-                  <Button type="submit" variant="secondary" loading={busy} disabled={code.length !== 6}>
+                  <Button type="submit" variant="secondary" className={FLAT_DISABLED} loading={busy} disabled={code.length !== 6}>
                     Join
                   </Button>
                 </form>
