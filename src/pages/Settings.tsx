@@ -2,7 +2,9 @@ import { deleteUser } from "firebase/auth";
 import { Award, Check, Copy, GraduationCap, LogOut, Mail, Sprout, Trash2, Upload, UserRound } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -14,11 +16,20 @@ import { useDocumentTitle } from "@/lib/hooks";
 import { setUsername, updateProfile, uploadAvatar, usernameProblem, usernameTaken } from "@/lib/profile";
 import { useProfile, useSession } from "@/lib/session";
 import { useToast } from "@/lib/toast";
+import { cn } from "@/lib/utils";
 import type { Role } from "@/shared/types";
+
+// The faint sky behind the page's header (existing art, from the landing plates), the same as the Class banner. The
+// text is held to the left half of the banner, so that is where the scrim is. It is the same scrim as the Today,
+// Island, Act, Ambassador and Class banners (the tests hold them equal).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
+
+// The tile inside a section (an account type, an invitation, the delete zone): one shape, tinted or bordered per use.
+const INNER = "rounded-md border p-5";
 
 function Section({ id, title, description, children }: { id: string; title: string; description?: string; children: ReactNode }) {
   return (
-    <Card id={id} className="scroll-mt-24 p-7">
+    <Card id={id} className="scroll-mt-24 p-6">
       <h2 className="t-h3">{title}</h2>
       {description && <p className="mt-1 text-base text-fg-3">{description}</p>}
       <div className="mt-5">{children}</div>
@@ -38,11 +49,14 @@ export default function Settings() {
   useDocumentTitle("Settings");
   return (
     <Page>
-      <header className="mb-8">
-        <p className="t-eyebrow">Settings</p>
-        <h1 className="t-h1 mt-2.5">Your account</h1>
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+        <ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />
+        <div className="max-w-1/2">
+          <p className="t-eyebrow text-fg-2">Settings</p>
+          <h1 className="t-h1 mt-2.5">Your account</h1>
+        </div>
       </header>
-      <div className="grid grid-cols-[200px_minmax(0,720px)] gap-10">
+      <div className="mt-6 grid grid-cols-[12.5rem_minmax(0,45rem)] gap-10">
         <nav className="sticky top-24 self-start" aria-label="Settings sections">
           <ul className="space-y-0.5">
             {NAV.map((n) => (
@@ -147,7 +161,7 @@ function ProfileSection() {
         <Field label="Username" htmlFor="set-username" error={problem} hint={!problem && changed && !checking ? "Available" : "3–20 letters, numbers, periods, dashes or underscores."} className="flex-1">
           <Input id="set-username" value={name} maxLength={20} onChange={(e) => setName(e.target.value)} aria-invalid={!!problem} autoComplete="off" />
         </Field>
-        <Button onClick={save} loading={saving} disabled={!changed || !!problem || checking} className="mb-[26px]">
+        <Button onClick={save} loading={saving} disabled={!changed || !!problem || checking} className="mb-6.5 disabled:bg-surface-2 disabled:text-fg-3 disabled:opacity-100">
           Save
         </Button>
       </div>
@@ -184,7 +198,7 @@ function RoleSection() {
             onClick={() => void change(o.r)}
             disabled={blocked && o.r === "student"}
             aria-pressed={role === o.r}
-            className={`flex items-start gap-3 rounded-md border p-4 text-left transition-colors disabled:opacity-50 ${role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2"}`}
+            className={cn(INNER, "flex items-start gap-3 text-left transition-colors disabled:bg-surface-2", role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2")}
           >
             <o.icon className={`mt-0.5 size-5 ${role === o.r ? "text-brand-ink" : "text-fg-3"}`} />
             <span>
@@ -240,7 +254,7 @@ function GrowSection() {
       title="Grow Ecoisland"
       description={teacher ? "Know another APES teacher? Ecoisland is free for every class." : "Ecoisland works best when your whole class is on it. Bring your teacher and classmates."}
     >
-      <div className="flex items-start gap-4 rounded-md bg-brand-soft/60 p-5">
+      <div className={cn(INNER, "flex items-start gap-4 border-line bg-brand-soft/60")}>
         <Sprout className="mt-0.5 size-5 shrink-0 text-brand-ink" />
         <div className="min-w-0 flex-1">
           <p className="text-md font-semibold text-fg">{teacher ? "Share with a colleague" : "Invite your APES teacher"}</p>
@@ -261,7 +275,7 @@ function GrowSection() {
           </div>
         </div>
       </div>
-      <div className="mt-3 flex items-start gap-4 rounded-md border border-line p-5">
+      <div className={cn(INNER, "mt-3 flex items-start gap-4 border-line")}>
         <Award className="mt-0.5 size-5 shrink-0 text-sun" />
         <div className="min-w-0 flex-1">
           <p className="text-md font-semibold text-fg">{profile.ambassador ? "You're an Ecoisland Ambassador" : "Become an Ecoisland Ambassador"}</p>
@@ -323,7 +337,7 @@ function AccountSection() {
           <LogOut /> Sign out
         </Button>
       </div>
-      <div className="mt-6 rounded-md border border-coral/30 p-5">
+      <div className={cn(INNER, "mt-6 border-coral/30")}>
         <p className="text-md font-semibold text-coral">Delete account</p>
         <p className="mt-1 text-base text-fg-3">
           Permanently deletes your profile, island, study history, class memberships, assignment records and field notes{profile.role === "teacher" ? ", and every class you teach" : ""}. This can't be undone.
@@ -331,7 +345,7 @@ function AccountSection() {
         <Field label={`Type "${phrase}" to confirm`} htmlFor="del-confirm" className="mt-4">
           <Input id="del-confirm" value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="off" />
         </Field>
-        <Button variant="danger" className="mt-4" disabled={confirm.trim().toLowerCase() !== phrase.toLowerCase()} loading={busy} onClick={remove}>
+        <Button variant="danger" className="mt-4 disabled:bg-surface-2 disabled:text-fg-3 disabled:opacity-100" disabled={confirm.trim().toLowerCase() !== phrase.toLowerCase()} loading={busy} onClick={remove}>
           <Trash2 /> Delete my account
         </Button>
       </div>
