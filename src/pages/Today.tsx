@@ -46,7 +46,8 @@ import { assignmentHref, type AssignmentType } from "@/shared/assignments";
 import { findSky } from "@/shared/catalog";
 import { findLesson, getUnit, neighbours } from "@/shared/curriculum";
 import { addDays, daysBetween, dueLabel, effectiveStreak, formatDay, weekStart, type DayKey } from "@/shared/dates";
-import { islandHealth, masteredUnits, stageForXp } from "@/shared/economy";
+import { masteredUnits, stageForXp, type Health } from "@/shared/economy";
+import { useIslandHealth } from "@/lib/island";
 import { visibleDecor, visibleGrowth } from "@/shared/island";
 import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
@@ -94,7 +95,7 @@ function StudentToday() {
     void api("assignments/sync").catch(() => undefined);
   }, [profile.class_ids?.length, today]);
 
-  const health = islandHealth(profile.last_set_day, today);
+  const health = useIslandHealth();
   const streak = effectiveStreak(profile.streak, profile.last_set_day, today);
   const doneToday = profile.last_set_day === today;
   const open = assignments.filter((a) => !a.status.done);
@@ -145,7 +146,7 @@ function DailySetCard({
   doneToday: boolean;
   unitTitle: string;
   focusUnit: number;
-  health: ReturnType<typeof islandHealth>;
+  health: Health;
   streak: number;
 }) {
   const profile = useProfile();

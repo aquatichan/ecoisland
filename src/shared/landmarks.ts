@@ -20,17 +20,18 @@ export function landmarkArt(unit: number): string {
 }
 
 /**
- * Where each landmark stands on the island: the bottom-center of its sprite at
- * (x, y) in scene units (0..1 across, 0..1 down), w wide as a fraction of the scene.
+ * Where each landmark stands on the island: its sprite is held at (x, y) in scene units
+ * (0..1 across, 0..1 down) by its bottom-center, or by `ay` down the sprite for ones that
+ * float (the seabirds). w is its width as a fraction of the scene.
  */
-export const LANDMARK_LAYOUT: Record<number, { x: number; y: number; w: number }> = {
-  1: { x: 0.3581, y: 0.775, w: 0.0761 },
-  2: { x: 0.6367, y: 0.775, w: 0.0622 },
-  3: { x: 0.2147, y: 0.3861, w: 0.0783 },
-  4: { x: 0.5094, y: 0.8861, w: 0.1133 },
-  5: { x: 0.3275, y: 0.6861, w: 0.085 },
-  6: { x: 0.6739, y: 0.6444, w: 0.0667 },
-  7: { x: 0.5858, y: 0.6528, w: 0.0217 },
-  8: { x: 0.8197, y: 0.8898, w: 0.1028 },
-  9: { x: 0.2139, y: 0.9407, w: 0.1978 },
+export const LANDMARK_LAYOUT: Record<number, { x: number; y: number; w: number; ay?: number }> = {
+  1: { x: 0.36, y: 0.775, w: 0.0933 },
+  2: { x: 0.64, y: 0.775, w: 0.0833 },
+  3: { x: 0.22, y: 0.4, w: 0.1417, ay: 0.5 },
+  4: { x: 0.51, y: 0.86, w: 0.0671 },
+  5: { x: 0.33, y: 0.69, w: 0.1292 },
+  6: { x: 0.68, y: 0.65, w: 0.0819 },
+  7: { x: 0.585, y: 0.655, w: 0.0432 },
+  8: { x: 0.8, y: 0.89, w: 0.125 },
+  9: { x: 0.21, y: 0.94, w: 0.1542 },
 };

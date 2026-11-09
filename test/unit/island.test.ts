@@ -1,9 +1,12 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { BASE, H, PLACE, VIEW, W, clamp, depthScale, pctW, pctX, pctY, sceneFromView } from "../../src/components/island/geometry";
+import { BASE, H, HORIZON, PLACE, VIEW, W, clamp, depthScale, pctW, pctX, pctY, sceneFromView } from "../../src/components/island/geometry";
 import { healthFilter } from "../../src/components/island/health";
-import { DECOR, GROWTH } from "../../src/shared/catalog";
+import { SKY_LOOKS } from "../../src/components/island/skies";
+import { DECOR, GROWTH, SKIES } from "../../src/shared/catalog";
 import { islandHealth } from "../../src/shared/economy";
-import { visibleDecor, visibleGrowth } from "../../src/shared/island";
+import { marketState, visibleDecor, visibleGrowth } from "../../src/shared/island";
 
 describe("what an island shows", () => {
   it("draws only the growth the student owns, in market order, ignoring anything else", () => {
@@ -90,5 +93,61 @@ describe("island geometry", () => {
     expect(depthScale(0.7)).toBeGreaterThan(depthScale(0.6));
     expect(clamp(5, 0, 1)).toBe(1);
     expect(clamp(-5, 0, 1)).toBe(0);
+  });
+});
+
+describe("market states", () => {
+  it("never offers a price for something the student owns", () => {
+    const all = [...GROWTH.map((g) => g.id), ...DECOR.map((d) => d.id), ...SKIES.map((s) => s.id)] as string[];
+    for (const xp of [0, 10, 620, 100000]) {
+      for (const id of all) {
+        // Owning it, as an array or a Set, is always "owned": no "buy" and no "free", at any XP.
+        expect(marketState(id, [id], xp), `${id} @ ${xp} XP`).toBe("owned");
+        expect(marketState(id, new Set([id]), xp), `${id} @ ${xp} XP`).toBe("owned");
+      }
+    }
+  });
+
+  it("walks an item from locked to free or buyable as XP grows", () => {
+    expect(marketState("bench", [], 9)).toBe("locked");
+    expect(marketState("bench", [], 10)).toBe("free"); // costs nothing, but behind 10 XP
+    expect(marketState("campfire", [], 19)).toBe("locked");
+    expect(marketState("campfire", [], 20)).toBe("buy");
+    expect(marketState("heart-tree", [], 1499)).toBe("locked");
+    expect(marketState("heart-tree", [], 1500)).toBe("buy");
+    expect(marketState("aurora", [], 800)).toBe("buy");
+  });
+
+  it("treats the default sky as always owned, and unknown items as locked", () => {
+    expect(marketState("day", [], 0)).toBe("owned");
+    expect(marketState("nope", [], 100000)).toBe("locked");
+  });
+});
+
+describe("island health has one source", () => {
+  const page = (name: string) => readFileSync(join(__dirname, "../../src/pages", name), "utf8");
+
+  it("is read through useIslandHealth on Today, the Island page and the practice results", () => {
+    for (const name of ["Today.tsx", "IslandPage.tsx", "Practice.tsx"]) {
+      const text = page(name);
+      expect(text, name).toContain("useIslandHealth(");
+      // No page works it out for itself from the profile.
+      expect(text, name).not.toMatch(/islandHealth\(\s*profile\./);
+    }
+  });
+});
+
+describe("sky discs", () => {
+  it("keep the sun and moon inside the picture, above the sea", () => {
+    const horizonY = VIEW.y + HORIZON * VIEW.h;
+    for (const [id, look] of Object.entries(SKY_LOOKS)) {
+      for (const disc of [look.sun, look.moon]) {
+        if (!disc) continue;
+        expect(disc.x - disc.r, `${id} left`).toBeGreaterThanOrEqual(VIEW.x);
+        expect(disc.x + disc.r, `${id} right`).toBeLessThanOrEqual(VIEW.x + VIEW.w);
+        expect(disc.y - disc.r, `${id} top edge (it was cut off before)`).toBeGreaterThanOrEqual(VIEW.y);
+        expect(disc.y, `${id} centre above the sea`).toBeLessThanOrEqual(horizonY);
+      }
+    }
   });
 });

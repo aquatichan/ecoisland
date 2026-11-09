@@ -8,8 +8,8 @@ export const VIEW = { x: 150, y: 215, w: 900, h: 540 };
 export const PLACE = { x0: 0.15, x1: 0.85, y0: 0.3, y1: 0.95 };
 /** The painted base island: bottom-center of the sprite at (x, y) in scene px, w px wide. Its top face is centered at (600, 500). */
 export const BASE = { x: 600, y: 741, w: 540, ax: 0.5, ay: 1 };
-/** Where the sky meets the sea, as a fraction of the view's height. */
-export const HORIZON = 0.39;
+/** Where the sky meets the sea in the fallback gradient, as a fraction of the view's height. The generated skies keep their own horizons (about 0.49 to 0.55). */
+export const HORIZON = 0.5;
 
 /** Scene px -> percent of the visible view. */
 export const pctX = (sceneX: number) => ((sceneX - VIEW.x) / VIEW.w) * 100;

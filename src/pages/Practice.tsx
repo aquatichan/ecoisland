@@ -23,7 +23,8 @@ import { useStudentContext } from "@/lib/student";
 import { shuffle } from "@/lib/utils";
 import type { CompletedAssignment } from "@/lib/types";
 import { findLesson, getUnit } from "@/shared/curriculum";
-import { DAILY_SET_SIZE, REWARD, islandHealth, masteredUnits, stageForXp, unlockedBetween } from "@/shared/economy";
+import { DAILY_SET_SIZE, REWARD, masteredUnits, stageForXp, unlockedBetween } from "@/shared/economy";
+import { useIslandHealth } from "@/lib/island";
 import { visibleDecor, visibleGrowth } from "@/shared/island";
 import { findSky } from "@/shared/catalog";
 import { LANDMARK_INFO } from "@/shared/landmarks";
@@ -251,8 +252,7 @@ export default function Practice() {
 
 function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: boolean; onStart: () => void }) {
   const profile = useProfile();
-  const today = useToday();
-  const health = islandHealth(profile.last_set_day, today);
+  const health = useIslandHealth();
   const count = setup.questions.length;
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -328,6 +328,8 @@ function Results({
   const pct = total ? Math.round((correct / total) * 100) : 0;
   const xpAfter = outcome.xpBefore + (outcome.reward?.xp ?? 0);
   const opened = unlockedBetween(outcome.xpBefore, xpAfter);
+  // Right after a daily set the profile may not have caught up, so count today as watered.
+  const health = useIslandHealth(mode === "daily" && !outcome.error ? today : undefined);
   const stageUp = stageForXp(xpAfter).n > stageForXp(outcome.xpBefore).n;
   const mistakes = outcome.answers.filter((a) => !a.correct);
   useDocumentTitle(`${pct}% · Results`);
@@ -428,7 +430,7 @@ function Results({
 
         <div className="card overflow-hidden">
           <IslandScene
-            health={islandHealth(mode === "daily" && !outcome.error ? today : profile.last_set_day, today).value}
+            health={health.value}
             sky={findSky(profile.island_skybox)?.id ?? "day"}
             growth={visibleGrowth(profile.owned_items)}
             decor={visibleDecor(profile.owned_items, profile.island_decor)}

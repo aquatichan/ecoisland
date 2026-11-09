@@ -124,6 +124,8 @@ export function IslandScene({
   const reduced = useReducedMotion();
   const motion = animate && !reduced;
   const look = SKY_LOOKS[sky] ?? SKY_LOOKS.day;
+  // The sky is a generated picture; its gradient (SKY_LOOKS) fills in around it and stands in if a sky has none.
+  const skyArt = ART[`sky-${sky}`];
   const stageRef = useRef<HTMLDivElement>(null);
   const [drag, setDrag] = useState<{ index: number; x: number; y: number; ox: number; oy: number } | null>(null);
   const dragging = editable ? drag : null;
@@ -170,7 +172,7 @@ export function IslandScene({
   for (const unit of landmarks) {
     const lm = LANDMARK_LAYOUT[unit];
     if (!lm) continue;
-    stand.push({ y: lm.y * H, make: (z) => <Placed key={`l${unit}`} art={`landmark-${unit}`} sx={lm.x * W} sy={lm.y * H} sw={lm.w * W} anchor={{ x: 0.5, y: 1 }} z={z} /> });
+    stand.push({ y: lm.y * H, make: (z) => <Placed key={`l${unit}`} art={`landmark-${unit}`} sx={lm.x * W} sy={lm.y * H} sw={lm.w * W} anchor={{ x: 0.5, y: lm.ay ?? 1 }} z={z} /> });
   }
   for (const g of GROWTH) {
     if (!growth.includes(g.id)) continue;
@@ -216,9 +218,15 @@ export function IslandScene({
         onPointerCancel={editable ? onUp : undefined}
       >
         <div aria-hidden className="absolute inset-x-0" style={{ top: "-100%", height: "300%", background: gradient }} />
-        {look.stars && <Stars />}
-        {look.sun && <Disc {...look.sun} />}
-        {look.moon && <Disc x={look.moon.x} y={look.moon.y} r={look.moon.r} color="#f3f1de" glow="#f3f1de55" />}
+        {skyArt ? (
+          <img src={skyArt.src} width={skyArt.w} height={skyArt.h} alt="" draggable={false} decoding="async" className="absolute inset-0 size-full object-cover" />
+        ) : (
+          <>
+            {look.stars && <Stars />}
+            {look.sun && <Disc {...look.sun} />}
+            {look.moon && <Disc x={look.moon.x} y={look.moon.y} r={look.moon.r} color="#f3f1de" glow="#f3f1de55" />}
+          </>
+        )}
         {motion && look.animated === "aurora" && <AuroraSky key={sky} />}
         {motion && look.animated === "cosmos" && <GalaxySky key={sky} />}
         <div

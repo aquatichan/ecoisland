@@ -48,8 +48,8 @@ const ACCOUNTS = [
     // Owns the free bench, a campfire and the night sky, plus four growth items.
     owned: ["bench", "campfire", "night", "sprouts", "wildflowers", "meadow", "saplings"],
     decor: [
-      { id: "bench", x: 0.6, y: 0.62 },
-      { id: "campfire", x: 0.45, y: 0.66 },
+      { id: "bench", x: 0.57, y: 0.8 },
+      { id: "campfire", x: 0.47, y: 0.8 },
     ],
     unit_best: { u1: 80, u3: 72 },
     streak: 3,
@@ -61,10 +61,10 @@ const ACCOUNTS = [
     treecoins: 5000,
     owned: [...GROWTH, "bench", "kite", "campfire", "hammock", "dock", "lanterns", "tidepool", "hut", "sailboat", "lighthouse", "night", "sunset", "aurora"],
     decor: [
-      { id: "bench", x: 0.6, y: 0.62 },
-      { id: "dock", x: 0.73, y: 0.84 },
-      { id: "lighthouse", x: 0.74, y: 0.68 },
-      { id: "sailboat", x: 0.2, y: 0.85 },
+      { id: "bench", x: 0.57, y: 0.8 },
+      { id: "dock", x: 0.8, y: 0.87 },
+      { id: "lighthouse", x: 0.745, y: 0.68 },
+      { id: "sailboat", x: 0.18, y: 0.82 },
     ],
     unit_best: { u1: 90, u2: 85, u3: 80, u4: 78, u5: 74, u6: 92, u7: 71, u8: 88, u9: 76 },
     streak: 21,

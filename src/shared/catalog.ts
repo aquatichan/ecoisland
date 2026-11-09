@@ -101,20 +101,20 @@ export const SKIES: Sky[] = [
 ];
 
 export const DECOR: Decor[] = [
-  { id: "bench", name: "Driftwood bench", price: 0, description: "A good spot to review flashcards.", art: "decor-bench", anchor: { x: 0.5, y: 0.754 }, w: 0.0433, x: 0.6, y: 0.62 },
-  { id: "kite", name: "Kite", price: 0, description: "Rides the onshore wind.", art: "decor-kite", anchor: { x: 0.5, y: 0.306 }, w: 0.03, x: 0.7, y: 0.36 },
-  { id: "campfire", name: "Campfire", price: 50, description: "Crackles softly at night.", art: "decor-campfire", anchor: { x: 0.5, y: 0.872 }, w: 0.03, x: 0.45, y: 0.66 },
-  { id: "hammock", name: "Hammock", price: 60, description: "Strung between two palms.", art: "decor-hammock", anchor: { x: 0.5, y: 0.846 }, w: 0.0667, x: 0.33, y: 0.6 },
-  { id: "dock", name: "Wooden dock", price: 70, description: "Reaches out over the lagoon.", art: "decor-dock", anchor: { x: 0.407, y: 0.438 }, w: 0.09, x: 0.73, y: 0.84 },
-  { id: "lanterns", name: "String lights", price: 75, description: "Glow warmly after sunset.", art: "decor-lanterns", anchor: { x: 0.5, y: 0.973 }, w: 0.0692, x: 0.5, y: 0.5 },
-  { id: "tidepool", name: "Tide pool", price: 80, description: "Anemones, snails and a hermit crab.", art: "decor-tidepool", anchor: { x: 0.504, y: 0.722 }, w: 0.0504, x: 0.3, y: 0.8 },
-  { id: "hut", name: "Beach hut", price: 95, description: "Thatched roof, sandy floor.", art: "decor-hut", anchor: { x: 0.5, y: 0.859 }, w: 0.0567, x: 0.66, y: 0.58 },
-  { id: "telescope", name: "Telescope", price: 110, description: "For counting seabirds, or stars.", art: "decor-telescope", anchor: { x: 0.513, y: 0.882 }, w: 0.0325, x: 0.38, y: 0.56 },
-  { id: "sailboat", name: "Sailboat", price: 120, description: "Moored just offshore.", art: "decor-sailboat", anchor: { x: 0.5, y: 0.88 }, w: 0.0667, x: 0.2, y: 0.85 },
-  { id: "stones", name: "Stone circle", price: 140, description: "Nobody remembers who built it.", art: "decor-stones", anchor: { x: 0.478, y: 0.681 }, w: 0.0767, x: 0.55, y: 0.6 },
-  { id: "lighthouse", name: "Lighthouse", price: 180, description: "Keeps ships off the reef.", art: "decor-lighthouse", anchor: { x: 0.5, y: 0.943 }, w: 0.05, x: 0.74, y: 0.68 },
-  { id: "treehouse", name: "Treehouse", price: 250, description: "A study nook high in the canopy.", art: "decor-treehouse", anchor: { x: 0.502, y: 0.94 }, w: 0.0971, x: 0.42, y: 0.46 },
-  { id: "balloon", name: "Hot-air balloon", price: 320, description: "Drifts lazily over the island.", art: "decor-balloon", anchor: { x: 0.504, y: 0.946 }, w: 0.0571, x: 0.27, y: 0.44 },
+  { id: "bench", name: "Driftwood bench", price: 0, description: "A good spot to review flashcards.", art: "decor-bench", anchor: { x: 0.5, y: 0.94 }, w: 0.065, x: 0.57, y: 0.8 },
+  { id: "kite", name: "Kite", price: 0, description: "Rides the onshore wind.", art: "decor-kite", anchor: { x: 0.5, y: 0.5 }, w: 0.0547, x: 0.62, y: 0.4 },
+  { id: "campfire", name: "Campfire", price: 50, description: "Crackles softly at night.", art: "decor-campfire", anchor: { x: 0.5, y: 0.94 }, w: 0.0517, x: 0.47, y: 0.8 },
+  { id: "hammock", name: "Hammock", price: 60, description: "Strung between two palms.", art: "decor-hammock", anchor: { x: 0.5, y: 0.95 }, w: 0.1042, x: 0.36, y: 0.79 },
+  { id: "dock", name: "Wooden dock", price: 70, description: "Reaches out over the lagoon.", art: "decor-dock", anchor: { x: 0.5, y: 0.9 }, w: 0.125, x: 0.8, y: 0.87 },
+  { id: "lanterns", name: "String lights", price: 75, description: "Glow warmly after sunset.", art: "decor-lanterns", anchor: { x: 0.5, y: 0.95 }, w: 0.1167, x: 0.5, y: 0.665 },
+  { id: "tidepool", name: "Tide pool", price: 80, description: "Anemones, snails and a hermit crab.", art: "decor-tidepool", anchor: { x: 0.5, y: 0.94 }, w: 0.1042, x: 0.29, y: 0.84 },
+  { id: "hut", name: "Beach hut", price: 95, description: "Thatched roof, sandy floor.", art: "decor-hut", anchor: { x: 0.5, y: 0.94 }, w: 0.0817, x: 0.66, y: 0.72 },
+  { id: "telescope", name: "Telescope", price: 110, description: "For counting seabirds, or stars.", art: "decor-telescope", anchor: { x: 0.5, y: 0.94 }, w: 0.0373, x: 0.64, y: 0.79 },
+  { id: "sailboat", name: "Sailboat", price: 120, description: "Moored just offshore.", art: "decor-sailboat", anchor: { x: 0.5, y: 0.93 }, w: 0.0663, x: 0.18, y: 0.82 },
+  { id: "stones", name: "Stone circle", price: 140, description: "Nobody remembers who built it.", art: "decor-stones", anchor: { x: 0.5, y: 0.94 }, w: 0.1, x: 0.52, y: 0.73 },
+  { id: "lighthouse", name: "Lighthouse", price: 180, description: "Keeps ships off the reef.", art: "decor-lighthouse", anchor: { x: 0.5, y: 0.94 }, w: 0.0702, x: 0.745, y: 0.68 },
+  { id: "treehouse", name: "Treehouse", price: 250, description: "A study nook high in the canopy.", art: "decor-treehouse", anchor: { x: 0.5, y: 0.94 }, w: 0.1349, x: 0.34, y: 0.71 },
+  { id: "balloon", name: "Hot-air balloon", price: 320, description: "Drifts lazily over the island.", art: "decor-balloon", anchor: { x: 0.5, y: 0.5 }, w: 0.0749, x: 0.82, y: 0.44 },
 ];
 
 export const FREE_SKY: SkyId = "day";
