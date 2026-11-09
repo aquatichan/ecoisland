@@ -29,3 +29,15 @@ export const COLORS = {
 } as const;
 
 export type ColorToken = keyof typeof COLORS;
+
+/**
+ * Colors for WebGL effects and sparks. JavaScript-only (shaders can't read CSS
+ * variables), so unlike COLORS they have no :root counterpart to stay in step
+ * with; they live here so every effect color is in one file.
+ */
+export const FX = {
+  /** The northern-lights sky: green, blue, violet. */
+  aurora: ["#3ce6a5", "#5aa9ff", "#b06cff"],
+  /** Sparks when an answer is picked: brand, sun, ocean. */
+  sparks: [COLORS.brand, COLORS.sun, COLORS.ocean],
+} as const;

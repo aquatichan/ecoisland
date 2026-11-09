@@ -164,7 +164,7 @@ function DailySetCard({
               <p className="mt-2 text-md text-fg-3">
                 {streak > 1 ? `${streak}-day streak. ` : ""}Your island is watered until tomorrow night. Want more practice?
               </p>
-              <div className="mt-auto flex gap-2.5 pt-6">
+              <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
                 <Button variant="secondary" asChild>
                   <Link to={`/practice?mode=unit&unit=${focusUnit}`}>Unit {focusUnit} quiz</Link>
                 </Button>

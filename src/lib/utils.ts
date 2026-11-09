@@ -39,3 +39,8 @@ export function storageSet(key: string, value: string): void {
     /* private mode or blocked storage: the preference just isn't remembered */
   }
 }
+
+/** The modifier key's label for shortcut hints: "⌘" on a Mac, "Ctrl+" elsewhere. */
+export function modKey(): string {
+  return typeof navigator !== "undefined" && /Mac/.test(navigator.userAgent) ? "⌘" : "Ctrl+";
+}

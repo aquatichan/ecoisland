@@ -5,7 +5,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, Loader2, RotateCcw, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ClickSpark, { type ClickSparkHandle } from "@/components/bits/ClickSpark";
+import { SparkLayer, type ClickSparkHandle } from "@/components/fx/SparkLayer";
 import StimulusChart from "@/components/StimulusChart";
 import { Button } from "@/components/ui/button";
 import { errorMessage } from "@/lib/api";
@@ -182,13 +182,12 @@ export function QuizRunner({
               const isAnswer = result?.answer === i;
               const state = checking ? (isPicked ? "pending" : "dim") : !answered ? "idle" : isAnswer ? "right" : isPicked ? "wrong" : "dim";
               return (
-                <ClickSpark
+                <SparkLayer
                   key={i}
                   ref={(h) => {
                     sparks.current[i] = h;
                   }}
                   disabled={sparkAt !== i}
-                  sparkColor={["#46c48a", "#f6c453", "#63ade6"]}
                   sparkCount={10}
                   sparkRadius={26}
                   sparkSize={9}
@@ -229,7 +228,7 @@ export function QuizRunner({
                     </span>
                     <span className="flex-1 text-fg-2 group-disabled:text-inherit">{text}</span>
                   </button>
-                </ClickSpark>
+                </SparkLayer>
               );
             })}
           </div>

@@ -1,9 +1,9 @@
 // Sign in, then four short steps: who you are, your username, your class,
 // and you're in. Built on the React Bits Stepper.
 import { ArrowRight, Check, Copy, GraduationCap, UserRound } from "lucide-react";
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import Stepper, { Step } from "@/components/bits/Stepper";
+import { OnboardingStepper, Step } from "@/components/fx/OnboardingStepper";
 import { FullPageLoader } from "@/components/app/Guards";
 import { Logo } from "@/components/app/Logo";
 import { IslandScene } from "@/components/island/IslandScene";
@@ -210,41 +210,15 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
     }
   };
 
-  const stepperStyle = useMemo(
-    () =>
-      ({
-        "--stepper-frame": "var(--surface)",
-        "--stepper-frame-edge": "var(--line)",
-        "--stepper-frame-highlight": "transparent",
-        "--stepper-frame-shadow": "var(--shadow-lg)",
-        "--stepper-tile": "var(--surface)",
-        "--stepper-tile-edge": "var(--line-strong)",
-        "--stepper-tile-highlight": "transparent",
-        "--stepper-tile-shadow": "var(--shadow-sm)",
-        "--stepper-well": "var(--surface-2)",
-        "--stepper-track": "var(--surface-3)",
-        "--stepper-ink": "var(--fg)",
-        "--stepper-muted": "var(--fg-3)",
-        "--stepper-faint": "var(--line-strong)",
-        "--stepper-solid": "var(--brand)",
-        "--stepper-solid-ink": "var(--brand-fg)",
-      }) as CSSProperties,
-    [],
-  );
-
   const completeText = role === "teacher" ? (created ? "Go to my class" : "Go to Ecoisland") : "Start my first daily set";
 
   return (
     <div className="flex min-h-dvh flex-col items-center bg-bg px-6 py-10">
       <Logo className="mb-10" />
-      <Stepper
+      <OnboardingStepper
         step={step}
         onStepChange={setStep}
         disableStepIndicators
-        theme="light"
-        width={620}
-        radius={26}
-        style={stepperStyle}
         nextButtonText={busy ? "Saving…" : "Continue"}
         completeButtonText={busy ? "Saving…" : completeText}
         backButtonText="Back"
@@ -420,7 +394,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
             )}
           </div>
         </Step>
-      </Stepper>
+      </OnboardingStepper>
     </div>
   );
 }

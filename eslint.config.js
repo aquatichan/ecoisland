@@ -5,6 +5,9 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 
+// Effects that must go through a wrapper (see the rule below).
+const RESTRICTED_BITS = ["Topography", "Aurora", "Galaxy", "ClickSpark", "Stepper", "SquishSwitch"];
+
 export default [
   {
     ignores: ["dist", "node_modules", ".wrangler", "*.config.js", "*.config.ts"],
@@ -46,6 +49,37 @@ export default [
     settings: {
       react: { version: "detect" },
     },
+  },
+  {
+    // The visual React Bits effects are only used through the wrappers in
+    // src/components/fx/ (and ui/switch), which dress them in the design
+    // tokens. Direct imports would bring back hard-coded colors.
+    files: ["src/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: RESTRICTED_BITS.flatMap((name) => [`**/bits/${name}`, `**/bits/${name}.tsx`]),
+              message: "Import this effect through its wrapper in src/components/fx/ (or ui/switch for the switch) so it uses the design tokens.",
+            },
+          ],
+        },
+      ],
+      // no-restricted-imports does not look at dynamic import(), so cover that too.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: `ImportExpression[source.value=/bits.(${RESTRICTED_BITS.join("|")})$/]`,
+          message: "Import this effect through its wrapper in src/components/fx/ (or ui/switch for the switch) so it uses the design tokens.",
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/components/fx/**/*.{ts,tsx}", "src/components/ui/switch.tsx", "src/components/bits/**/*.tsx"],
+    rules: { "no-restricted-imports": "off", "no-restricted-syntax": "off" },
   },
   {
     // Vendored React Bits components keep their upstream style.

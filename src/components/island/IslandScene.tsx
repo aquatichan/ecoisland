@@ -2,8 +2,6 @@
 // progress. XP grows plants, mastered units add landmarks, missed days dry
 // the foliage out, and Treecoins buy skies and decorations.
 import {
-  Suspense,
-  lazy,
   useEffect,
   useId,
   useMemo,
@@ -14,7 +12,8 @@ import {
   type ReactElement,
 } from "react";
 import { useReducedMotion } from "framer-motion";
-import { GLGuard } from "@/components/bits/GLGuard";
+import { AuroraSky } from "@/components/fx/AuroraSky";
+import { GalaxySky } from "@/components/fx/GalaxySky";
 import { findDecor, type SkyId } from "@/shared/catalog";
 import { floraCount, stageForXp } from "@/shared/economy";
 import type { PlacedDecor } from "@/shared/types";
@@ -25,8 +24,6 @@ import { Landmark } from "./Landmarks";
 import { H, PLACE, VIEW, W, floraSlots, rng } from "./layout";
 import { SKY_PALETTES, islandPalette, type SkyPalette } from "./palette";
 
-const Aurora = lazy(() => import("@/components/bits/Aurora"));
-const Galaxy = lazy(() => import("@/components/bits/Galaxy"));
 
 export type IslandSceneProps = {
   xp: number;
@@ -275,17 +272,7 @@ export function IslandScene({
       {sp.transparentSky && (
         <div className="absolute inset-0" aria-hidden>
           <div className="absolute inset-0" style={{ background: `linear-gradient(${sp.top}, ${sp.mid} 55%, ${sp.bottom})` }} />
-          {motion && (
-            <Suspense fallback={null}>
-              <GLGuard key={sky} className="absolute inset-x-0 top-0 h-[62%]">
-                {sky === "aurora" ? (
-                  <Aurora colorStops={["#3ce6a5", "#5aa9ff", "#b06cff"]} amplitude={1.1} blend={0.6} speed={0.6} />
-                ) : (
-                  <Galaxy transparent density={1.1} glowIntensity={0.35} saturation={0.6} hueShift={210} mouseInteraction={false} twinkleIntensity={0.4} />
-                )}
-              </GLGuard>
-            </Suspense>
-          )}
+          {motion && (sky === "aurora" ? <AuroraSky key={sky} /> : <GalaxySky key={sky} />)}
         </div>
       )}
       <svg

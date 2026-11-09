@@ -23,8 +23,7 @@ import { Link } from "react-router-dom";
 import BlurText from "@/components/bits/BlurText";
 import CountUp from "@/components/bits/CountUp";
 import Magnet from "@/components/bits/Magnet";
-import { GLGuard } from "@/components/bits/GLGuard";
-import Topography from "@/components/bits/Topography";
+import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
 import { IslandScene } from "@/components/island/IslandScene";
 import { LANDMARK_INFO } from "@/components/island/Landmarks";
@@ -34,7 +33,6 @@ import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress";
 import { useDocumentTitle } from "@/lib/hooks";
 import { isOnboarded, useSession } from "@/lib/session";
-import { COLORS } from "@/lib/tokens";
 import { cn } from "@/lib/utils";
 import { UNITS } from "@/shared/curriculum";
 import { STAGES, stageForXp } from "@/shared/economy";
@@ -109,9 +107,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
       <div className="absolute inset-0" aria-hidden>
-        <GLGuard>
-          <Topography color={COLORS.brand} lightMode opacity={0.4} lineCount={22} speed={0.25} mouseInteraction />
-        </GLGuard>
+        <TopographyBackdrop />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
       </div>
       <div className="relative mx-auto grid min-h-[calc(100dvh-64px)] max-w-[1200px] grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-14 px-8 py-16">
