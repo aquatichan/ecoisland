@@ -4,8 +4,11 @@ import { ArrowLeft, Award, BadgeCheck, CalendarPlus, Clock, FileText, HandHeart,
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { EventForm } from "@/components/act/EventForm";
+import { AMBASSADOR_MEDAL } from "@/components/ambassador/medal";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,7 +20,13 @@ import { api, errorMessage } from "@/lib/api";
 import { useDocumentTitle } from "@/lib/hooks";
 import { useProfile } from "@/lib/session";
 import { useToast } from "@/lib/toast";
+import { cn } from "@/lib/utils";
 import { ACT_REWARD, GRADES, LIMITS } from "@/shared/act";
+
+// The canopy behind the page's header (existing art, from the landing plates), lit from the upper left like the
+// island's sprites. The text is held to the left half of the banner, so that is where the scrim is; the trees show
+// on the right. It is the same scrim as the Today, Island and Act banners (the tests hold them equal).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 const BENEFITS = [
   { icon: HandHeart, title: "Earn volunteer hours", body: "Organizing and running events counts toward your service hours." },
@@ -36,40 +45,48 @@ export default function Ambassador() {
   const [reapply, setReapply] = useState(false);
 
   return (
-    <Page className="mx-auto max-w-[1040px]">
+    <Page className="mx-auto max-w-260">
       {/* Blue and purple accent for this page only (see [data-accent] in index.css). */}
       <div data-accent="ambassador">
-        <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
-          <ArrowLeft className="size-4" /> Act
-        </Link>
-        <div className="grid grid-cols-[minmax(0,1fr)_420px] gap-8">
-          <div>
+        <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+          <ArtBackdrop art="bg-teachers" scrim={BANNER_SCRIM} position="center 30%" />
+          {/* The medal hangs from the banner's top edge, inside it, on the right where the picture shows (never under the text). */}
+          <img src={AMBASSADOR_MEDAL.src} width={AMBASSADOR_MEDAL.w} height={AMBASSADOR_MEDAL.h} alt="" aria-hidden draggable={false} decoding="async" className="pointer-events-none absolute top-0 right-12 w-28 select-none drop-shadow-md" />
+          <div className="min-w-0 max-w-1/2">
+            <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg">
+              <ArrowLeft className="size-4" /> Act
+            </Link>
             <p className="t-eyebrow text-accent-2">Ecoisland Ambassadors</p>
-            <h1 className="t-display mt-3 max-w-[16ch]">Lead the work in your community</h1>
-            <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-fg-3">
+            <h1 className="t-display mt-3">Lead the work in your community</h1>
+            <p className="mt-4 text-lg leading-relaxed text-fg-2">
               Ambassadors organize cleanups, plantings and other real projects where they live, and bring their schools along. Ecoisland gives you the tools to post events, find volunteers and track their hours.
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-4">
+          </div>
+        </header>
+
+        <div className="mt-6 grid grid-cols-[minmax(0,1fr)_26.25rem] gap-6">
+          <div>
+            <div className="grid grid-cols-2 gap-6">
               {BENEFITS.map((b) => (
-                <div key={b.title} className="rounded-lg border border-line bg-surface p-5">
+                <Card key={b.title} className="p-6">
                   <span className="grid size-9 place-items-center rounded-md bg-brand-soft text-brand-ink" aria-hidden>
-                    <b.icon className="size-[18px]" />
+                    <b.icon className="size-4.5" />
                   </span>
                   <p className="mt-3 text-md font-semibold text-fg">{b.title}</p>
                   <p className="mt-1 text-sm leading-relaxed text-fg-3">{b.body}</p>
-                </div>
+                </Card>
               ))}
             </div>
-            <p className="mt-6 flex items-center gap-2 text-base text-fg-3">
+            <p className="mt-6 flex items-center gap-2 text-base text-fg-2">
               <Treecoin size={16} /> Approved ambassadors also get {ACT_REWARD.AMBASSADOR_TC} Treecoins for their island.
             </p>
           </div>
 
           <div className="self-start">
             {loading ? (
-              <Skeleton className="h-96 rounded-xl" />
+              <Skeleton className="h-96 rounded-lg" />
             ) : profile.ambassador ? (
-              <Card className="p-7">
+              <Card className="p-6">
                 <Badge tone="brand">
                   <BadgeCheck /> Ambassador
                 </Badge>
@@ -85,7 +102,7 @@ export default function Ambassador() {
                 </Button>
               </Card>
             ) : application && !reapply ? (
-              <Card className="p-7">
+              <Card className="p-6">
                 {application.status === "pending" ? (
                   <>
                     <Badge tone="sun">
@@ -151,7 +168,7 @@ function ApplicationForm({ onDone, defaultName, teacher }: { onDone: () => void;
   };
 
   return (
-    <Card className="p-7">
+    <Card className="p-6">
       <h2 className="t-h2">Apply</h2>
       <p className="mt-1.5 text-base text-fg-3">Takes about five minutes. Tell us what you'd like to organize.</p>
       <div className="mt-5 space-y-4">
@@ -176,19 +193,19 @@ function ApplicationForm({ onDone, defaultName, teacher }: { onDone: () => void;
           </Field>
         </div>
         <Field label="City or region" htmlFor="am-region" hint="Where you'd organize events.">
-          <Input id="am-region" value={region} maxLength={LIMITS.REGION} placeholder="Austin, TX" onChange={(e) => setRegion(e.target.value)} />
+          <Input id="am-region" value={region} maxLength={LIMITS.REGION} placeholder="Austin, TX" className="placeholder:text-fg-3" onChange={(e) => setRegion(e.target.value)} />
         </Field>
         <Field label="Why do you want to be an ambassador?" htmlFor="am-why" hint={why.trim().length < LIMITS.AMBASSADOR_WHY_MIN ? `${LIMITS.AMBASSADOR_WHY_MIN - why.trim().length} more characters` : undefined}>
           <Textarea id="am-why" value={why} maxLength={LIMITS.AMBASSADOR_WHY_MAX} rows={4} onChange={(e) => setWhy(e.target.value)} />
         </Field>
         <Field label="An event you'd organize" htmlFor="am-idea" hint="Optional">
-          <Textarea id="am-idea" value={idea} maxLength={LIMITS.AMBASSADOR_IDEA_MAX} rows={3} placeholder="A monthly litter sweep along our creek with the Environmental Club." onChange={(e) => setIdea(e.target.value)} />
+          <Textarea id="am-idea" value={idea} maxLength={LIMITS.AMBASSADOR_IDEA_MAX} rows={3} placeholder="A monthly litter sweep along our creek with the Environmental Club." className="placeholder:text-fg-3" onChange={(e) => setIdea(e.target.value)} />
         </Field>
         <Field label="Teacher or adult sponsor" htmlFor="am-sponsor" hint="Optional, but it helps.">
-          <Input id="am-sponsor" value={sponsor} maxLength={80} placeholder="Ms. Rivera, APES" onChange={(e) => setSponsor(e.target.value)} />
+          <Input id="am-sponsor" value={sponsor} maxLength={80} placeholder="Ms. Rivera, APES" className="placeholder:text-fg-3" onChange={(e) => setSponsor(e.target.value)} />
         </Field>
         <label className="flex items-start gap-3 text-base text-fg-2">
-          <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-0.5 size-4 accent-[var(--brand)]" />
+          <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-0.5 size-4 accent-brand" />
           <span>I'll keep listings accurate and safe, follow the <a href="/tos" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-ink underline-offset-2 hover:underline">Terms</a>, and get a parent or guardian's OK for events if I'm under 18.</span>
         </label>
       </div>
@@ -197,7 +214,7 @@ function ApplicationForm({ onDone, defaultName, teacher }: { onDone: () => void;
           {error}
         </p>
       )}
-      <Button className="mt-6 w-full" size="lg" onClick={submit} loading={busy} disabled={!ready}>
+      <Button className={cn("mt-6 w-full", !ready && "disabled:bg-surface-2 disabled:text-fg-3 disabled:opacity-100")} size="lg" onClick={submit} loading={busy} disabled={!ready}>
         <Sparkles /> Send application
       </Button>
     </Card>
