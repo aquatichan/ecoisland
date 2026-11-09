@@ -103,8 +103,8 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
   }
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_300px] gap-6">
-      <Card className="flex h-[min(680px,calc(100dvh-330px))] min-h-[460px] flex-col overflow-hidden">
+    <div className="grid grid-cols-[minmax(0,1fr)_18.75rem] gap-6">
+      <Card className="flex h-[min(42.5rem,calc(100dvh-20.625rem))] min-h-115 flex-col overflow-hidden">
         {!enabled ? (
           <div className="flex flex-1 items-center justify-center">
             <EmptyState
@@ -152,16 +152,16 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden /> Only you and this class can read it.
               </li>
               <li className="flex gap-2.5">
-                <Trash2 className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Delete any message from its menu.
+                <Trash2 className="mt-0.5 size-4 shrink-0 text-fg-3" aria-hidden /> Delete any message from its menu.
               </li>
               <li className="flex gap-2.5">
-                <VolumeX className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Mute a student to stop them posting.
+                <VolumeX className="mt-0.5 size-4 shrink-0 text-fg-3" aria-hidden /> Mute a student to stop them posting.
               </li>
               <li className="flex gap-2.5">
-                <Flag className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Reported messages, and ones suggesting a student may be struggling, are flagged for you.
+                <Flag className="mt-0.5 size-4 shrink-0 text-fg-3" aria-hidden /> Reported messages, and ones suggesting a student may be struggling, are flagged for you.
               </li>
               <li className="flex gap-2.5">
-                <Clock className="mt-0.5 size-4 shrink-0 text-fg-4" aria-hidden /> Messages are deleted after {RETENTION_DAYS} days. The moderation log keeps a copy for a year.
+                <Clock className="mt-0.5 size-4 shrink-0 text-fg-3" aria-hidden /> Messages are deleted after {RETENTION_DAYS} days. The moderation log keeps a copy for a year.
               </li>
             </ul>
             <Button variant="secondary" size="sm" className="mt-5 w-full" onClick={() => setShowLog(true)}>
@@ -237,7 +237,7 @@ function ReportDialog({ message, onClose, onReport }: { message: WithId<Omit<Mes
           <legend className="mb-2 text-sm font-semibold text-fg-2">What's wrong?</legend>
           {REASONS.map((r) => (
             <label key={r.value} className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-base text-fg-2 hover:bg-surface-2">
-              <input type="radio" name="reason" value={r.value} checked={reason === r.value} onChange={() => setReason(r.value)} className="size-4 accent-[var(--brand)]" />
+              <input type="radio" name="reason" value={r.value} checked={reason === r.value} onChange={() => setReason(r.value)} className="size-4 accent-brand" />
               {r.label}
             </label>
           ))}
@@ -298,12 +298,12 @@ function ModerationLog({ classId, members, onClose }: { classId: string; members
                   <Badge tone={r.action === "blocked" || r.action === "flagged" || r.action === "reported" ? "coral" : r.action === "deleted" || r.action === "muted" ? "sun" : "neutral"}>{ACTION_LABEL[r.action] ?? r.action}</Badge>
                   {r.author_name && <span className="font-semibold text-fg">{r.author_name}</span>}
                   {r.reason && <span className="text-fg-3">· {REASON_LABEL[r.reason] ?? r.reason}</span>}
-                  <time className="ml-auto text-xs text-fg-4" dateTime={r.at}>
+                  <time className="ml-auto text-xs text-fg-3" dateTime={r.at}>
                     {new Date(r.at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
                   </time>
                 </div>
                 {r.text && <p className="mt-1.5 whitespace-pre-wrap text-fg-2">{r.text}</p>}
-                {r.action === "reported" && <p className="mt-1 text-xs text-fg-4">Reported by {nameOf(r.actor_uid)}</p>}
+                {r.action === "reported" && <p className="mt-1 text-xs text-fg-3">Reported by {nameOf(r.actor_uid)}</p>}
               </li>
             ))}
           </ul>
@@ -397,7 +397,7 @@ function MessageList({
             {newDay && (
               <div className="my-4 flex items-center gap-3 first:mt-0" role="separator">
                 <span className="h-px flex-1 bg-line" />
-                <span className="text-xs font-semibold text-fg-4">{dayLabel(m.created_at)}</span>
+                <span className="text-xs font-semibold text-fg-3">{dayLabel(m.created_at)}</span>
                 <span className="h-px flex-1 bg-line" />
               </div>
             )}
@@ -416,19 +416,19 @@ function MessageList({
                   <p className="flex items-center gap-2 text-base">
                     <span className="font-semibold text-fg">{m.name}</span>
                     {m.role === "teacher" && <Badge tone="brand">Teacher</Badge>}
-                    {own && m.role !== "teacher" && <span className="text-xs text-fg-4">You</span>}
+                    {own && m.role !== "teacher" && <span className="text-xs text-fg-3">You</span>}
                     {canMute && muted.has(m.uid) && (
                       <Badge tone="neutral">
                         <VolumeX /> Muted
                       </Badge>
                     )}
-                    <time className="text-xs text-fg-4" dateTime={m.created_at}>
+                    <time className="text-xs text-fg-3" dateTime={m.created_at}>
                       {timeLabel(m.created_at)}
                     </time>
                   </p>
                 )}
                 {m.deleted ? (
-                  <p className="text-base text-fg-4 italic">{m.deleted_by === "teacher" ? "Removed by the teacher" : "Message deleted"}</p>
+                  <p className="text-base text-fg-3 italic">{m.deleted_by === "teacher" ? "Removed by the teacher" : "Message deleted"}</p>
                 ) : (
                   <p className="text-md leading-[1.55] break-words whitespace-pre-wrap text-fg-2">{m.text}</p>
                 )}
@@ -559,16 +559,16 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
           rows={1}
           placeholder="Message your class"
           aria-label="Message your class"
-          className="max-h-[132px] min-h-[24px] flex-1 resize-none bg-transparent py-1 text-md leading-[1.55] text-fg outline-none placeholder:text-fg-4 focus-visible:shadow-none focus-visible:outline-none"
+          className="max-h-33 min-h-6 flex-1 resize-none bg-transparent py-1 text-md leading-[1.55] text-fg outline-none placeholder:text-fg-3 focus-visible:shadow-none focus-visible:outline-none"
         />
         {text.length > CHAT_MAX_CHARS - 80 && (
-          <span className={cn("t-num pb-1.5 text-xs", over ? "font-semibold text-coral" : "text-fg-4")}>{CHAT_MAX_CHARS - text.length}</span>
+          <span className={cn("t-num pb-1.5 text-xs", over ? "font-semibold text-coral" : "text-fg-3")}>{CHAT_MAX_CHARS - text.length}</span>
         )}
         <Button size="icon-sm" onClick={send} disabled={!trimmed || over} loading={sending} aria-label="Send message">
           <SendHorizontal />
         </Button>
       </div>
-      <p className="mt-1.5 px-1 text-xs text-fg-4">
+      <p className="mt-1.5 px-1 text-xs text-fg-3">
         <span className="kbd">Enter</span> to send · <span className="kbd">Shift</span> + <span className="kbd">Enter</span> for a new line
       </p>
     </div>

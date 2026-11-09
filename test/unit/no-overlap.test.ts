@@ -31,6 +31,7 @@ const ALLOWED: { file: string; token: string; near: string; why: string }[] = [
   { file: "src/pages/UnitPage.tsx", token: "-mx-2", near: "flex items-center gap-3", why: "a link row widens its hover fill into the card's padding" },
   { file: "src/components/act/EventCard.tsx", token: "hover:-translate-y-px", near: "card group", why: "a 1px lift of one card on hover, the same as an interactive Card; the grid gap is larger" },
   { file: "src/components/ui/card.tsx", token: "hover:-translate-y-px", near: "interactive &&", why: "a 1px lift of one card on hover; the grid gap is larger" },
+  { file: "src/pages/Classes.tsx", token: "hover:-translate-y-px", near: "card group", why: "a 1px lift of one class card on hover, the same as an event card; the grid gap is larger" },
 ];
 
 describe("no overlapping containers", () => {

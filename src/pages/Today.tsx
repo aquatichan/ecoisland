@@ -348,7 +348,7 @@ export function JoinClassInline({ compact }: { compact?: boolean }) {
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))}
           placeholder="K7Q2MX"
           aria-label="Class code"
-          className="w-40 font-mono text-md tracking-[0.18em] uppercase"
+          className="w-40 font-mono text-md tracking-[0.18em] uppercase placeholder:text-fg-3"
           autoComplete="off"
           spellCheck={false}
         />
@@ -690,7 +690,7 @@ export function CreateFirstClass() {
           if (name.trim().length >= 2) void create();
         }}
       >
-        <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="APES · Period 3" aria-label="Class name" maxLength={60} />
+        <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="APES · Period 3" aria-label="Class name" maxLength={60} className="placeholder:text-fg-3" />
         <Button type="submit" loading={busy} disabled={name.trim().length < 2}>
           Create
         </Button>

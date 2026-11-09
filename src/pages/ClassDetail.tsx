@@ -24,9 +24,11 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { ClassChat, useChatUnread } from "@/components/class/ClassChat";
 import { IslandScene } from "@/components/island/IslandScene";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,6 +56,11 @@ import { islandHealth, stageForXp } from "@/shared/economy";
 import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import type { ClassDoc, MemberDoc, NoteDoc, SubmissionDoc } from "@/shared/types";
+
+// The faint sky behind the class's header (existing art, from the landing plates). The text is held to the left half
+// of the banner, so that is where the scrim is. It is the same scrim as the Today, Island, Act and Ambassador banners
+// (the tests hold them equal).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 type TeacherTab = "students" | "assignments" | "chat" | "leaderboard" | "notes" | "settings";
 type StudentTab = "assignments" | "chat" | "leaderboard" | "notes";
@@ -114,14 +121,14 @@ export default function ClassDetail() {
     return (
       <div className="space-y-4">
         <Skeleton className="h-10 w-80" />
-        <Skeleton className="h-64 rounded-xl" />
+        <Skeleton className="h-64 rounded-lg" />
       </div>
     );
   }
   if (!cls || error) {
     return (
       <Page>
-        <Card className="mx-auto max-w-[520px]">
+        <Card className="mx-auto max-w-130">
           <EmptyState icon={Users} title="This class isn't available" body="It may have been deleted, or you're no longer a member." action={<Button asChild><Link to="/class">Back to classes</Link></Button>} />
         </Card>
       </Page>
@@ -152,25 +159,28 @@ export default function ClassDetail() {
 
   return (
     <Page>
-      <Link to={teacher ? "/class" : "/today"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
-        <ArrowLeft className="size-4" /> {teacher ? "Classes" : "Today"}
-      </Link>
-      <header className="mb-7 flex items-end justify-between gap-6">
-        <div className="min-w-0">
-          <p className="t-eyebrow">{teacher ? "Your class" : `Taught by ${cls.teacher_name}`}</p>
-          <h1 className="t-h1 mt-2.5 truncate">{cls.name}</h1>
-          <p className="mt-2 text-md text-fg-3">
-            {plural(members.length, "student")}
-            {cls.current_unit ? ` · Unit ${cls.current_unit}: ${getUnit(cls.current_unit)?.title}` : ""}
-            {cls.test_day ? ` · ${cls.test_label || "Test"} ${formatDay(cls.test_day, { weekday: "short", month: "short", day: "numeric" })}` : ""}
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          {teacher ? <CodePill code={cls.code} /> : <LeaveClass classId={classId} name={cls.name} />}
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+        <ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />
+        <div className="flex items-end justify-between gap-6">
+          <div className="min-w-0 max-w-1/2">
+            <Link to={teacher ? "/class" : "/today"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg">
+              <ArrowLeft className="size-4" /> {teacher ? "Classes" : "Today"}
+            </Link>
+            <p className="t-eyebrow text-fg-2">{teacher ? "Your class" : `Taught by ${cls.teacher_name}`}</p>
+            <h1 className="t-h1 mt-2.5 truncate">{cls.name}</h1>
+            <p className="mt-2 text-md text-fg-2">
+              {plural(members.length, "student")}
+              {cls.current_unit ? ` · Unit ${cls.current_unit}: ${getUnit(cls.current_unit)?.title}` : ""}
+              {cls.test_day ? ` · ${cls.test_label || "Test"} ${formatDay(cls.test_day, { weekday: "short", month: "short", day: "numeric" })}` : ""}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            {teacher ? <CodePill code={cls.code} /> : <LeaveClass classId={classId} name={cls.name} />}
+          </div>
         </div>
       </header>
 
-      <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs} className="mb-6" />
+      <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs} className="mt-6 mb-6" />
 
       {teacher && tab === "students" && <Roster cls={cls} members={members} loading={membersLoading} assignments={sortedAssignments} submissions={submissions} today={today} />}
       {tab === "assignments" &&
@@ -200,7 +210,7 @@ function CodePill({ code }: { code: string }) {
           /* ignore */
         }
       }}
-      className="flex items-center gap-3 rounded-md border border-line-strong bg-surface px-4 py-2.5 text-left shadow-xs hover:bg-surface-2"
+      className="flex items-center gap-3 rounded-md border border-line-strong bg-surface px-4 py-2.5 text-left shadow-xs hover:bg-surface-2 focus-visible:shadow-[var(--ring),var(--shadow-xs)]"
       aria-label={`Copy join code ${code}`}
     >
       <span>
@@ -221,7 +231,7 @@ function LeaveClass({ classId, name }: { classId: string; name: string }) {
     <>
       <Menu>
         <MenuTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Class options">
+          <Button variant="secondary" size="icon" aria-label="Class options">
             <MoreHorizontal />
           </Button>
         </MenuTrigger>
@@ -317,12 +327,12 @@ function Roster({
   const header = (key: SortKey, label: string, className?: string) => (
     <th className={cn("px-4 py-3 text-left text-xs font-semibold tracking-[0.04em] text-fg-3 uppercase", className)}>
       <button className="inline-flex items-center gap-1 hover:text-fg" onClick={() => setSort((s) => ({ key, dir: s.key === key ? (s.dir === 1 ? -1 : 1) : 1 }))}>
-        {label} <ArrowUpDown className={cn("size-3", sort.key === key ? "text-fg" : "text-fg-4")} />
+        {label} <ArrowUpDown className={cn("size-3", sort.key === key ? "text-fg" : "text-fg-3")} />
       </button>
     </th>
   );
 
-  if (loading) return <Skeleton className="h-64 rounded-xl" />;
+  if (loading) return <Skeleton className="h-64 rounded-lg" />;
   if (members.length === 0) {
     return (
       <Card>
@@ -355,14 +365,14 @@ function Roster({
           {rows.map(({ m, s, done, unit }) => (
             <tr key={m.uid} className="cursor-pointer hover:bg-surface-2/50" onClick={() => setOpen(m)}>
               <td className="px-4 py-3">
-                <span className="flex items-center gap-3">
+                <button type="button" className="flex items-center gap-3 text-left" onClick={() => setOpen(m)}>
                   <Avatar name={m.username} src={m.avatar_url} size={30} />
                   <span className="text-base font-semibold text-fg">{m.username}</span>
-                </span>
+                </button>
               </td>
               <td className="t-num px-4 py-3 text-base text-fg-2">
                 <span className="inline-flex items-center gap-1.5">
-                  <Flame className={cn("size-4", s.streak ? "text-sun" : "text-fg-4")} /> {s.streak}
+                  <Flame className={cn("size-4", s.streak ? "text-sun" : "text-fg-3")} /> {s.streak}
                 </span>
               </td>
               <td className="px-4 py-3 text-base">
@@ -375,7 +385,7 @@ function Roster({
               </td>
               <td className="px-4 py-3">
                 {dueSoFar.length === 0 ? (
-                  <span className="text-sm text-fg-4">None yet</span>
+                  <span className="text-sm text-fg-3">None yet</span>
                 ) : (
                   <span className="flex items-center gap-3">
                     <ProgressBar value={(done / dueSoFar.length) * 100} className="h-1.5 w-20" label="Assignments done" />
@@ -417,7 +427,7 @@ function StudentDialog({
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
       <DialogContent title={member.username} description={`${stageForXp(member.xp_total ?? 0).name} · ${member.lessons_count ?? 0} lessons read · ${(member.masteries ?? []).length} units mastered`} wide>
-        <div className="grid grid-cols-[1fr_260px] gap-5">
+        <div className="grid grid-cols-[1fr_16.25rem] gap-5">
           <div className="overflow-hidden rounded-lg border border-line">
             <IslandScene
               health={islandHealth(member.last_set_day ?? undefined, today).value}
@@ -547,7 +557,7 @@ function TeacherAssignments({
         <div className="flex items-center gap-4 px-2 py-2.5">
           <button className="flex min-w-0 flex-1 items-center gap-4 text-left" onClick={() => setExpanded(isOpen ? null : a.id)} aria-expanded={isOpen}>
             <span className="grid size-10 shrink-0 place-items-center rounded-md bg-surface-2 text-fg-2">
-              <Icon className="size-[18px]" />
+              <Icon className="size-4.5" />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-md font-semibold text-fg">{a.title}</span>
@@ -556,7 +566,7 @@ function TeacherAssignments({
                 {a.min_pct ? ` · ${a.min_pct}% to pass` : ""}
               </span>
             </span>
-            <span className="flex w-[220px] items-center gap-3">
+            <span className="flex w-55 items-center gap-3">
               <ProgressBar value={members.length ? (done / members.length) * 100 : 0} className="h-1.5" label="Completion" />
               <span className="t-num text-sm whitespace-nowrap text-fg-2">
                 {done}/{members.length} done
@@ -614,7 +624,7 @@ function TeacherAssignments({
                         ) : sub ? (
                           <span className="text-fg-3">{sub.target > 1 ? `${sub.progress}/${sub.target}` : sub.score !== null ? `Best ${sub.score}%` : "Started"}</span>
                         ) : (
-                          <span className="text-fg-4">Not started</span>
+                          <span className="text-fg-3">Not started</span>
                         )}
                       </li>
                     );
@@ -636,7 +646,7 @@ function TeacherAssignments({
         </Button>
       </div>
       {loading ? (
-        <Skeleton className="h-48 rounded-xl" />
+        <Skeleton className="h-48 rounded-lg" />
       ) : assignments.length === 0 ? (
         <Card>
           <EmptyState icon={ListChecks} title="No assignments yet" body="Assign a lesson to read, a quiz, an FRQ, a number of daily sets or a field quest, each with a due date." action={<Button onClick={() => setEditing("new")}><Plus /> New assignment</Button>} />
@@ -813,7 +823,7 @@ function AssignmentForm({ cls, existing, onClose, today }: { cls: WithId<ClassDo
             />
           </Field>
           <Field label="Note to students (optional)" htmlFor="asg-notes" className="col-span-2">
-            <Textarea id="asg-notes" value={notes} maxLength={500} onChange={(e) => setNotes(e.target.value)} className="min-h-[72px]" placeholder="Focus on part (c). We'll discuss it Friday." />
+            <Textarea id="asg-notes" value={notes} maxLength={500} onChange={(e) => setNotes(e.target.value)} className="min-h-18 placeholder:text-fg-3" placeholder="Focus on part (c). We'll discuss it Friday." />
           </Field>
         </div>
         <div className="mt-6 flex justify-end gap-2">
@@ -831,7 +841,7 @@ function AssignmentForm({ cls, existing, onClose, today }: { cls: WithId<ClassDo
 
 function StudentAssignments({ assignments, loading, today }: { assignments: WithId<Omit<Assignment, "id">>[]; loading: boolean; today: DayKey }) {
   const profile = useProfile();
-  if (loading) return <Skeleton className="h-48 rounded-xl" />;
+  if (loading) return <Skeleton className="h-48 rounded-lg" />;
   if (assignments.length === 0) {
     return (
       <Card>
@@ -849,7 +859,7 @@ function StudentAssignments({ assignments, loading, today }: { assignments: With
           return (
             <li key={a.id} className="flex items-center gap-4 px-2 py-3.5">
               <span className={cn("grid size-10 shrink-0 place-items-center rounded-md", st.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
-                {st.done ? <Check className="size-[18px]" strokeWidth={2.6} /> : <Icon className="size-[18px]" />}
+                {st.done ? <Check className="size-4.5" strokeWidth={2.6} /> : <Icon className="size-4.5" />}
               </span>
               <div className="min-w-0 flex-1">
                 <p className={cn("truncate text-md font-semibold", st.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
@@ -890,9 +900,9 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
   const top = Math.max(1, ...rows.map((r) => Math.abs(r.value)));
   const unit = board === "streak" ? "days" : "XP";
 
-  if (loading) return <Skeleton className="h-64 rounded-xl" />;
+  if (loading) return <Skeleton className="h-64 rounded-lg" />;
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_300px] gap-6">
+    <div className="grid grid-cols-[minmax(0,1fr)_18.75rem] gap-6">
       <Card className="p-2">
         <div className="flex items-center justify-between px-4 pt-3 pb-2">
           <Segmented<Board>
@@ -917,7 +927,7 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
               return (
                 <li key={m.uid}>
                   <button onClick={() => setView(m)} className={cn("flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-surface-2/60", me && "bg-brand-soft/50")}>
-                    <span className={cn("t-num w-7 text-center text-base font-bold", i === 0 ? "text-sun-ink" : i < 3 ? "text-fg-2" : "text-fg-4")}>{i + 1}</span>
+                    <span className={cn("t-num w-7 text-center text-base font-bold", i === 0 ? "text-sun-ink" : i < 3 ? "text-fg-2" : "text-fg-3")}>{i + 1}</span>
                     <Avatar name={m.username} src={m.avatar_url} size={32} />
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-2 truncate text-md font-semibold text-fg">
@@ -929,12 +939,12 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
                         )}
                       </span>
                     </span>
-                    <span className="hidden w-[160px] lg:block">
+                    <span className="hidden w-40 lg:block">
                       <span className="block h-1.5 overflow-hidden rounded-full bg-surface-3">
                         <span className={cn("block h-full rounded-full", value < 0 ? "bg-coral/70" : "bg-brand")} style={{ width: `${(Math.abs(value) / top) * 100}%` }} />
                       </span>
                     </span>
-                    <span className="t-num w-[92px] text-right text-base font-semibold text-fg">
+                    <span className="t-num w-23 text-right text-base font-semibold text-fg">
                       {board === "growth" && value > 0 ? "+" : ""}
                       {value.toLocaleString()} <span className="text-xs font-medium text-fg-3">{unit}</span>
                     </span>
@@ -983,7 +993,7 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
 function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; meId: string }) {
   const { items, loading } = useCollection<Omit<NoteDoc, "id">>(`classes/${classId}/notes`, { orderBy: ["created_at", "desc"], limit: 100 });
   const toast = useToast();
-  if (loading) return <Skeleton className="h-48 rounded-xl" />;
+  if (loading) return <Skeleton className="h-48 rounded-lg" />;
   if (items.length === 0) {
     return (
       <Card>
@@ -1001,7 +1011,7 @@ function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; 
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-6">
       {items.map((n) => (
         <Card key={n.id} className="p-6">
           <div className="flex items-start gap-3">
@@ -1075,8 +1085,8 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
   };
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-6">
-      <Card className="p-7">
+    <div className="grid grid-cols-[minmax(0,1fr)_21.25rem] gap-6">
+      <Card className="p-6">
         <h2 className="t-h3">Class details</h2>
         <div className="mt-5 grid grid-cols-2 gap-5">
           <Field label="Class name" htmlFor="cls-name" className="col-span-2">
@@ -1096,7 +1106,7 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
             <Input id="cls-test" type="date" value={testDay} onChange={(e) => setTestDay(e.target.value)} />
           </Field>
           <Field label="Test name" htmlFor="cls-test-label">
-            <Input id="cls-test-label" value={testLabel} maxLength={60} placeholder="Unit 4 test" onChange={(e) => setTestLabel(e.target.value)} />
+            <Input id="cls-test-label" value={testLabel} maxLength={60} placeholder="Unit 4 test" className="placeholder:text-fg-3" onChange={(e) => setTestLabel(e.target.value)} />
           </Field>
         </div>
         <div className="mt-6 flex justify-end">
@@ -1107,7 +1117,7 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
       </Card>
       <div className="space-y-6 self-start">
       <JoinCodeCard cls={cls} />
-      <Card className="p-7">
+      <Card className="p-6">
         <h2 className="t-h3 text-coral">Delete class</h2>
         <p className="mt-2 text-base text-fg-3">Removes the roster, assignments, submissions and field notes. Students keep their own progress.</p>
         <Field label={`Type "${cls.name}" to confirm`} htmlFor="cls-del" className="mt-4">
@@ -1155,7 +1165,7 @@ function JoinCodeCard({ cls }: { cls: WithId<ClassDoc> }) {
     }
   };
   return (
-    <Card className="p-7">
+    <Card className="p-6">
       <h2 className="t-h3">Join code</h2>
       <p className="mt-2 text-base text-fg-3">
         Current code <span className="font-mono font-semibold tracking-[0.12em] text-fg">{cls.code}</span>. Reset it if it was shared outside your class. Students already in the class stay.
