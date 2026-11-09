@@ -24,12 +24,13 @@ function walk(dir: string): string[] {
 // z-index is not a position: it only orders a picture behind its own container's content.)
 const NEGATIVE = /(?<![\w-])(?:[a-z-]+:)*-(?:m[trblxyse]?|top|bottom|left|right|inset(?:-[xy])?|translate-[xy])-(?!1\/2\b|full\b)[\w./[\]-]+/g;
 
-// Each of these is a deliberate exception, and none puts one container over another.
-const ALLOWED: { file: string; text: string; why: string }[] = [
-  { file: "src/components/ui/dialog.tsx", text: "-m-1 rounded-md", why: "the close button grows its hit area into the dialog's own padding" },
-  { file: "src/pages/UnitPage.tsx", text: "-mx-2 flex items-center", why: "a link row widens its hover fill into the card's padding" },
-  { file: "src/components/act/EventCard.tsx", text: "hover:-translate-y-0.5", why: "a 2px lift of one card on hover; the grid gap is larger" },
-  { file: "src/components/ui/card.tsx", text: "hover:-translate-y-px", why: "a 1px lift of one card on hover; the grid gap is larger" },
+// Each of these is a deliberate exception, and none puts one container over another. An exception is one exact class
+// on a line that also holds `near`, so it cannot hide a second negative class beside it.
+const ALLOWED: { file: string; token: string; near: string; why: string }[] = [
+  { file: "src/components/ui/dialog.tsx", token: "-m-1", near: "rounded-md p-1.5", why: "the close button grows its hit area into the dialog's own padding" },
+  { file: "src/pages/UnitPage.tsx", token: "-mx-2", near: "flex items-center gap-3", why: "a link row widens its hover fill into the card's padding" },
+  { file: "src/components/act/EventCard.tsx", token: "hover:-translate-y-px", near: "card group", why: "a 1px lift of one card on hover, the same as an interactive Card; the grid gap is larger" },
+  { file: "src/components/ui/card.tsx", token: "hover:-translate-y-px", near: "interactive &&", why: "a 1px lift of one card on hover; the grid gap is larger" },
 ];
 
 describe("no overlapping containers", () => {
@@ -39,7 +40,7 @@ describe("no overlapping containers", () => {
       const rel = relative(ROOT, file);
       readFileSync(file, "utf8").split("\n").forEach((line, i) => {
         for (const m of line.matchAll(NEGATIVE)) {
-          const ok = ALLOWED.some((a) => a.file === rel && line.includes(a.text) && line.includes(m[0]));
+          const ok = ALLOWED.some((a) => a.file === rel && m[0] === a.token && line.includes(a.near));
           if (!ok) found.push(`${rel}:${i + 1}  ${m[0]}`);
         }
       });
@@ -48,7 +49,10 @@ describe("no overlapping containers", () => {
   });
 
   it("keeps every exception on a line that still exists, so the list cannot go stale", () => {
-    for (const a of ALLOWED) expect(readFileSync(join(ROOT, a.file), "utf8"), a.why).toContain(a.text);
+    for (const a of ALLOWED) {
+      const hit = readFileSync(join(ROOT, a.file), "utf8").split("\n").some((line) => line.includes(a.token) && line.includes(a.near));
+      expect(hit, `${a.file}: ${a.token} (${a.why})`).toBe(true);
+    }
   });
 
   it("sets the landing page's perks strip below the hero, and lets the hero's lines fade out instead of ending on an edge", () => {

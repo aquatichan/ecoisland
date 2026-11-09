@@ -9,7 +9,9 @@ import { EventCard } from "@/components/act/EventCard";
 import { EventForm, type ClassOption } from "@/components/act/EventForm";
 import { LogHoursDialog, ReviewHoursDialog, type VerifierOption } from "@/components/act/Dialogs";
 import { ScheduleAction } from "@/components/act/ScheduleAction";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -26,6 +28,11 @@ import { addDays } from "@/shared/dates";
 type Kind = "all" | "event" | "action";
 type Sort = "soonest" | "newest" | "popular" | "least";
 type Within = "any" | "today" | "week" | "month";
+
+// The coastal trail behind the page's header (existing art, from the landing plates). The text is held to the left
+// half of the banner, so that is where the scrim is; the sea, cliff and path show on the right. It is the same
+// scrim as the Study, Today and Island banners (the tests hold the four equal).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 const popularity = (l: Listing) => (l.kind === "event" ? (l.going_count ?? 0) : (l.done_count ?? 0));
 
@@ -129,33 +136,36 @@ export default function Act() {
 
   return (
     <Page>
-      <header className="mb-7 flex items-end justify-between gap-6">
-        <div>
-          <p className="t-eyebrow">Act</p>
-          <h1 className="t-h1 mt-2.5">Take it outside</h1>
-          <p className="mt-2 max-w-[60ch] text-md text-fg-3">
-            Volunteer events and eco actions from {teacher ? "your classes" : "your class"} and your community. Learn the science in Study, then put it to work here.
-          </p>
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          {teacher && classOptions.length > 0 ? (
-            <>
-              <Button variant="secondary" onClick={() => setForm("event")}>
-                <CalendarPlus /> Post an event
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+        <ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 38%" />
+        <div className="flex items-end justify-between gap-6">
+          <div className="min-w-0 max-w-1/2">
+            <p className="t-eyebrow text-fg-2">Act</p>
+            <h1 className="t-h1 mt-2.5">Take it outside</h1>
+            <p className="mt-2 text-md text-fg-2">
+              Volunteer events and eco actions from {teacher ? "your classes" : "your class"} and your community. Learn the science in Study, then put it to work here.
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            {teacher && classOptions.length > 0 ? (
+              <>
+                <Button variant="secondary" onClick={() => setForm("event")}>
+                  <CalendarPlus /> Post an event
+                </Button>
+                <Button onClick={() => setScheduling(true)}>
+                  <Leaf /> Schedule an eco action
+                </Button>
+              </>
+            ) : (
+              <Button variant={trusted ? "primary" : "secondary"} onClick={() => setForm("event")}>
+                <Plus /> {trusted ? "Post a community event" : "Suggest an event"}
               </Button>
-              <Button onClick={() => setScheduling(true)}>
-                <Leaf /> Schedule an eco action
-              </Button>
-            </>
-          ) : (
-            <Button variant={trusted ? "primary" : "secondary"} onClick={() => setForm("event")}>
-              <Plus /> {trusted ? "Post a community event" : "Suggest an event"}
-            </Button>
-          )}
+            )}
+          </div>
         </div>
       </header>
 
-      <div className="grid grid-cols-[minmax(0,1fr)_320px] gap-6">
+      <div className="mt-6 grid grid-cols-[minmax(0,1fr)_20rem] gap-6">
         <div className="min-w-0">
           <div className="mb-5 flex items-center justify-between gap-4">
             <Segmented<Phase>
@@ -163,8 +173,8 @@ export default function Act() {
               value={phase}
               onChange={(v) => setParam("when", v)}
               options={[
-                { value: "upcoming", label: <>Upcoming{counts.upcoming ? <span className="t-num text-fg-4">{counts.upcoming}</span> : null}</> },
-                { value: "now", label: <>Happening now{counts.now ? <span className="t-num text-fg-4">{counts.now}</span> : null}</> },
+                { value: "upcoming", label: <>Upcoming{counts.upcoming ? <span className="t-num text-fg-3">{counts.upcoming}</span> : null}</> },
+                { value: "now", label: <>Happening now{counts.now ? <span className="t-num text-fg-3">{counts.now}</span> : null}</> },
                 { value: "past", label: "Past" },
               ]}
             />
@@ -182,9 +192,9 @@ export default function Act() {
           </div>
 
           <div className="mb-5 flex flex-wrap items-center gap-2.5">
-            <div className="relative min-w-[200px] flex-1">
-              <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-4" aria-hidden />
-              <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-base" />
+            <div className="relative min-w-50 flex-1">
+              <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-3" aria-hidden />
+              <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-base placeholder:text-fg-3" />
             </div>
             <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-auto text-base">
               <option value="all">Classes and community</option>
@@ -245,10 +255,10 @@ export default function Act() {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-2 gap-4">
-              <Skeleton className="h-40 rounded-xl" />
-              <Skeleton className="h-40 rounded-xl" />
-              <Skeleton className="h-40 rounded-xl" />
+            <div className="grid grid-cols-2 gap-6">
+              <Skeleton className="h-40 rounded-lg" />
+              <Skeleton className="h-40 rounded-lg" />
+              <Skeleton className="h-40 rounded-lg" />
             </div>
           ) : shown.length === 0 ? (
             <Card>
@@ -276,7 +286,7 @@ export default function Act() {
               />
             </Card>
           ) : (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-6">
               {shown.map((l, i) => (
                 <EventCard key={l.key} e={l} going={going.has(l.key)} done={done.has(l.key)} index={i} />
               ))}
@@ -284,11 +294,11 @@ export default function Act() {
           )}
         </div>
 
-        <aside className="space-y-4 self-start">
+        <aside className="space-y-6 self-start">
           {teacher ? (
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
-                <ClipboardCheck className="size-[18px] text-brand" aria-hidden />
+                <ClipboardCheck className="size-4.5 text-brand" aria-hidden />
                 <h2 className="text-md font-semibold text-fg">Hours to verify</h2>
               </div>
               <p className="font-display t-num mt-3 text-4xl leading-none font-[600] text-fg">{toReview.items.length}</p>
@@ -304,7 +314,7 @@ export default function Act() {
           ) : (
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
-                <HandHeart className="size-[18px] text-brand" aria-hidden />
+                <HandHeart className="size-4.5 text-brand" aria-hidden />
                 <h2 className="text-md font-semibold text-fg">Your volunteer hours</h2>
               </div>
               <p className="mt-3 flex items-baseline gap-2">
@@ -348,7 +358,7 @@ export default function Act() {
           {admin && (
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
-                <Shield className="size-[18px] text-ocean" aria-hidden />
+                <Shield className="size-4.5 text-ocean" aria-hidden />
                 <h2 className="text-md font-semibold text-fg">Admin</h2>
               </div>
               <p className="mt-2 text-sm text-fg-3">Review suggested events and ambassador applications.</p>
@@ -358,23 +368,21 @@ export default function Act() {
             </Card>
           )}
 
-          <Card className="overflow-hidden">
-            <div className="bg-[linear-gradient(135deg,var(--brand-soft),var(--ocean-soft))] p-6">
-              <div className="flex items-center gap-2.5">
-                <Award className="size-[18px] text-brand-ink" aria-hidden />
-                <h2 className="text-md font-semibold text-fg">{profile.ambassador ? "You're an ambassador" : "Ecoisland Ambassadors"}</h2>
-              </div>
-              <p className="mt-2 text-sm text-fg-2">
-                {profile.ambassador
-                  ? "Post community events for your area. They go live right away."
-                  : "Organize real events in your area, post them for everyone, and earn volunteer hours."}
-              </p>
-              <Button variant={profile.ambassador ? "primary" : "secondary"} size="sm" className="mt-4" asChild>
-                <Link to="/ambassador">
-                  <Sparkles /> {profile.ambassador ? "Ambassador hub" : "Learn more and apply"}
-                </Link>
-              </Button>
+          <Card className="p-6">
+            <div className="flex items-center gap-2.5">
+              <Award className="size-4.5 text-brand-ink" aria-hidden />
+              <h2 className="text-md font-semibold text-fg">{profile.ambassador ? "You're an ambassador" : "Ecoisland Ambassadors"}</h2>
             </div>
+            <p className="mt-2 text-sm text-fg-3">
+              {profile.ambassador
+                ? "Post community events for your area. They go live right away."
+                : "Organize real events in your area, post them for everyone, and earn volunteer hours."}
+            </p>
+            <Button variant={profile.ambassador ? "primary" : "secondary"} size="sm" className="mt-4" asChild>
+              <Link to="/ambassador">
+                <Sparkles /> {profile.ambassador ? "Ambassador hub" : "Learn more and apply"}
+              </Link>
+            </Button>
           </Card>
         </aside>
       </div>

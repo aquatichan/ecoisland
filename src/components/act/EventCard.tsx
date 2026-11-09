@@ -15,11 +15,15 @@ export function EventCard({ e, going, done, index = 0 }: { e: Listing; going: bo
       <Link
         to={listingHref(e)}
         className={cn(
-          "card group flex h-full gap-4 p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md",
-          cancelled && "opacity-70",
+          // One tile for events and eco actions alike: the card, the same 1px lift as an interactive Card, and the shared
+          // focus ring composed over the card's own shadow (a shadow utility would otherwise hide it).
+          "card group flex h-full gap-4 p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-px hover:border-line-strong hover:shadow-md focus-visible:shadow-[var(--ring),var(--shadow-sm)] hover:focus-visible:shadow-[var(--ring),var(--shadow-md)]",
+          // A cancelled listing is a muted tile, not a faded one: the picture-like parts are greyed by a filter and every word
+          // keeps a token color, so its text still passes AA (70% opacity measured about 3:1).
+          cancelled && "bg-surface-2",
         )}
       >
-        <div className="flex w-14 shrink-0 flex-col items-center">
+        <div className={cn("flex w-14 shrink-0 flex-col items-center", cancelled && "grayscale")}>
           <div className="w-full overflow-hidden rounded-md border border-line bg-surface text-center shadow-xs">
             <p className={cn("py-0.5 text-2xs font-bold tracking-[0.08em]", TONE_CLASS[style.tone])}>{tile.month}</p>
             <p className="font-display t-num py-1 text-2xl leading-none font-[600] text-fg">{tile.day}</p>
@@ -44,7 +48,7 @@ export function EventCard({ e, going, done, index = 0 }: { e: Listing; going: bo
               </Badge>
             )}
           </div>
-          <h3 className="mt-2.5 text-lg leading-snug font-semibold text-fg group-hover:text-brand-ink">{e.title}</h3>
+          <h3 className={cn("mt-2.5 text-lg leading-snug font-semibold group-hover:text-brand-ink", cancelled ? "text-fg-2" : "text-fg")}>{e.title}</h3>
           <p className="mt-1 line-clamp-2 text-base leading-relaxed text-fg-3">{e.summary}</p>
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-fg-3">
             <span className="inline-flex items-center gap-1.5">
