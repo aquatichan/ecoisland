@@ -1,5 +1,6 @@
 // The landing page's section plates: opaque painted backdrops that sit behind a whole section
-// (never inside a card), one entry per picture in public/landing/. How they were made is in
+// (never inside a card), one entry per picture in public/landing/. The coastal-trail plate is also the
+// landscape at the foot of the app's sidebar (src/components/app/SidebarArt.tsx). How they were made is in
 // design/landing-art/README.md; test/unit/landing-plates.test.ts checks this manifest against the
 // files and against the page.
 //

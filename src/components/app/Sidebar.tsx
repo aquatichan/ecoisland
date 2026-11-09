@@ -11,6 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import { SIDEBAR, resolveDrag, useSidebar, widthForKey } from "@/lib/sidebar";
 import { cn, modKey } from "@/lib/utils";
 import { Logo } from "./Logo";
+import { SidebarArt } from "./SidebarArt";
 
 const NAV = [
   { to: "/today", label: "Home", icon: House },
@@ -140,11 +141,16 @@ export function Sidebar({ teacher }: { teacher: boolean }) {
   const active = activePath(pathname);
 
   return (
+    // The column stretches to the full height of the shell, so the page never shows below the sidebar,
+    // and carries the glass. The sidebar's content is a panel one viewport tall that sticks inside it, so
+    // it stays in view as the page scrolls. overflow-x: clip (not hidden) clips the width transition without
+    // making this a scroll container, which would stop the panel from sticking.
     <div
-      className={cn("sticky top-0 z-30 h-dvh shrink-0 self-start overflow-hidden print:hidden", !resizing && "transition-[width] duration-200 motion-reduce:transition-none")}
+      className={cn("relative z-30 shrink-0 self-stretch overflow-x-clip print:hidden", !resizing && "transition-[width] duration-200 motion-reduce:transition-none")}
       style={{ width: hidden ? 0 : width }}
     >
-      <aside id="app-sidebar" aria-label="Sidebar" inert={hidden} className="glass flex h-full flex-col border-r" style={{ width }}>
+      <div aria-hidden data-sidebar-glass className="glass absolute inset-y-0 left-0 border-r" style={{ width }} />
+      <aside id="app-sidebar" aria-label="Sidebar" inert={hidden} className="sticky top-0 flex h-dvh flex-col" style={{ width }}>
         <div className="flex h-16 shrink-0 items-center justify-between pr-3 pl-5">
           <Link to="/today" className="rounded-md" aria-label="Ecoisland home">
             <Logo />
@@ -162,14 +168,15 @@ export function Sidebar({ teacher }: { teacher: boolean }) {
             <PanelLeftClose className="size-[18px]" aria-hidden />
           </button>
         </div>
-        <nav aria-label="Main" className="flex flex-col gap-1 px-3 pt-2">
+        <nav aria-label="Main" className="flex shrink-0 flex-col gap-1 px-3 pt-2">
           {NAV.map((n) => (
             <NavItem key={n.to} {...n} label={n.to === "/class" && teacher ? "Classes" : n.label} active={active === n.to} />
           ))}
         </nav>
-        <div className="mt-auto px-3 pb-4">
+        <div className="mt-auto shrink-0 px-3 pb-4">
           <NavItem {...SETTINGS} active={active === SETTINGS.to} />
         </div>
+        <SidebarArt />
       </aside>
       {!hidden && <ResizeHandle />}
     </div>

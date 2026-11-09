@@ -116,6 +116,7 @@ Practice scoring lives in `worker/attempts.ts` and runs as `attempt/start`, then
 
 - Routes are lazy-loaded in `src/App.tsx`. Signed-in pages sit under `RequireProfile`, and `/dev/island` (IslandLab) exists only in dev builds.
 - `DesktopGate` blocks windows narrower than 1024px. The app is built for laptops and Chromebooks.
+- **The sidebar** (`src/components/app/Sidebar.tsx`) is a column that stretches to the shell's full height and carries the glass, so the page never shows below it. Its content is an `h-dvh` panel that sticks inside the column. The column clips with `overflow-x-clip`, never `overflow-hidden`: hidden would make it a scroll container and stop the panel sticking. It ends in `SidebarArt`, the coastal-trail plate faded into the glass. Width and visibility live in `src/lib/sidebar.tsx`.
 - Styling uses Tailwind v4 with primitives in `src/components/ui/`.
 - `src/components/bits/` contains vendored React Bits components. Keep their upstream style; lint relaxes rules there, and attribution is in `THIRD_PARTY_NOTICES.md`.
 - **The island** (`src/components/island/`) is a raster compositor, not SVG. `IslandScene` draws a painted base plus absolutely positioned item images over a CSS-gradient sky and sea. It draws only what the student owns, so callers pass `growth` and `decor` through `visibleGrowth` and `visibleDecor` (`src/shared/island.ts`); landmarks come from mastered units. A thirsty island fades with a CSS `filter` (`health.ts`) on the image wrapper only.
