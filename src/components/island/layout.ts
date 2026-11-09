@@ -1,7 +1,9 @@
 // Where plants grow on the island. Positions are generated once per seed
 // (each student's island has its own arrangement) and revealed in a fixed
 // order, so every study session adds something new and nothing ever moves.
-import { MAX_FLORA } from "@/shared/economy";
+// The SVG island pieces (Flora, Decor, Landmarks) are kept as the source for the
+// placeholder sprites (see src/pages/dev/SpriteLab.tsx); the live island draws rasters.
+const MAX_FLORA = 40;
 
 export const W = 1200;
 export const H = 720;

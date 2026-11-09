@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
-  MAX_FLORA,
+  ISLAND_UNLOCKS,
   REWARD,
   STAGES,
   dailySetReward,
-  floraCount,
   frqReward,
+  isUnlocked,
   islandHealth,
   legacyLifetimeXp,
   legacyRefund,
@@ -13,6 +13,7 @@ import {
   quizReward,
   stageForXp,
   stageProgress,
+  unlockedBetween,
 } from "../../src/shared/economy";
 import { DECOR, SKIES, itemPrice } from "../../src/shared/catalog";
 
@@ -50,20 +51,6 @@ describe("island growth", () => {
   it("reports progress toward the next stage", () => {
     expect(stageProgress(85)).toMatchObject({ stage: { n: 1 }, next: { n: 2 }, toNext: 65 });
     expect(stageProgress(5000)).toMatchObject({ pct: 100, toNext: 0 });
-  });
-
-  it("adds plants steadily and never removes them", () => {
-    expect(floraCount(0)).toBe(0);
-    expect(floraCount(20)).toBe(2);
-    // A first daily set (20-40 XP) already shows new life.
-    expect(floraCount(34)).toBeGreaterThan(floraCount(19));
-    let prev = 0;
-    for (let xp = 0; xp <= 6000; xp += 7) {
-      const n = floraCount(xp);
-      expect(n).toBeGreaterThanOrEqual(prev);
-      prev = n;
-    }
-    expect(floraCount(100000)).toBe(MAX_FLORA);
   });
 
   it("wilts after missed days and never punishes a new island", () => {
@@ -104,5 +91,54 @@ describe("catalog", () => {
     for (const s of SKIES.filter((s) => s.id !== "day")) expect(itemPrice(s.id)).toBeGreaterThan(0);
     for (const d of DECOR) expect(itemPrice(d.id)).toBe(d.price);
     expect(itemPrice("ambassador_badge")).toBeUndefined();
+  });
+});
+
+describe("island unlocks", () => {
+  it("opens an item exactly at its XP threshold, and never for an unknown id", () => {
+    expect(isUnlocked("campfire", 19)).toBe(false);
+    expect(isUnlocked("campfire", 20)).toBe(true);
+    expect(isUnlocked("campfire", 5000)).toBe(true);
+    expect(isUnlocked("aurora", 799)).toBe(false);
+    expect(isUnlocked("aurora", 800)).toBe(true);
+    expect(isUnlocked("day", 0)).toBe(true);
+    expect(isUnlocked("ambassador_badge", 100000)).toBe(false);
+    expect(isUnlocked("", 100000)).toBe(false);
+  });
+
+  it("has well-formed, unique entries", () => {
+    const ids = ISLAND_UNLOCKS.map((u) => u.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const u of ISLAND_UNLOCKS) {
+      expect(["growth", "decor", "sky"]).toContain(u.kind);
+      expect(Number.isInteger(u.minXp) && u.minXp >= 0, u.id).toBe(true);
+      if (u.starter) expect(u.kind).toBe("growth");
+    }
+  });
+
+  it("opens growth at or after each stage's XP, so the stages still pace the island", () => {
+    const growthXp = ISLAND_UNLOCKS.filter((u) => u.kind === "growth").map((u) => u.minXp);
+    for (const stage of STAGES.slice(1)) expect(growthXp, `stage ${stage.n}`).toContain(stage.minXp);
+    expect(Math.min(...growthXp)).toBe(STAGES[1].minXp);
+  });
+
+  it("gates every decoration and sky, including the free ones; only the default sky is open from the start", () => {
+    for (const u of ISLAND_UNLOCKS.filter((x) => x.kind !== "growth")) {
+      if (u.id === "day") expect(u.minXp).toBe(0);
+      else expect(u.minXp, u.id).toBeGreaterThan(0);
+    }
+    // The lowest threshold is the first purchasable decoration.
+    const decor = ISLAND_UNLOCKS.filter((u) => u.kind === "decor").map((u) => u.minXp);
+    expect(Math.min(...decor)).toBe(10);
+    expect(isUnlocked("bench", 9)).toBe(false);
+    expect(isUnlocked("bench", 10)).toBe(true);
+  });
+
+  it("lists what a session just opened in the market", () => {
+    expect(unlockedBetween(0, 9)).toEqual([]);
+    expect(unlockedBetween(0, 10).map((u) => u.id)).toEqual(["bench", "kite"]);
+    expect(unlockedBetween(10, 25).map((u) => u.id)).toEqual(["sprouts", "campfire", "hammock", "dawn"]);
+    expect(unlockedBetween(25, 25)).toEqual([]);
+    expect(unlockedBetween(0, 100000).some((u) => u.id === "day")).toBe(false); // the default sky was never "opened"
   });
 });

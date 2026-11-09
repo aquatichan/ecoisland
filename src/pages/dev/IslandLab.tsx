@@ -1,5 +1,6 @@
 // Development-only gallery of island states, for checking the artwork.
 import { useState } from "react";
+import { demoGrowth } from "@/components/island/demo";
 import { IslandScene } from "@/components/island/IslandScene";
 import { DECOR, SKIES, type SkyId } from "@/shared/catalog";
 
@@ -17,14 +18,14 @@ export default function IslandLab() {
   if (single) {
     return (
       <div className="p-4">
-        <IslandScene xp={Number(single)} health={health} sky={sky} decor={decor} landmarks={landmarks} animate={false} className="aspect-[5/3] w-[1200px] rounded-xl" />
+        <IslandScene growth={demoGrowth(Number(single))} health={health} sky={sky} decor={decor} landmarks={landmarks} animate={false} className="aspect-[5/3] w-[1200px] rounded-xl" />
       </div>
     );
   }
   return (
     <div className="grid grid-cols-3 gap-3 p-4">
       {XP.map((xp) => (
-        <IslandScene key={xp} xp={xp} health={health} sky={sky} decor={decor} landmarks={landmarks} animate={false} className="aspect-[5/3] rounded-xl" />
+        <IslandScene key={xp} growth={demoGrowth(xp)} health={health} sky={sky} decor={decor} landmarks={landmarks} animate={false} className="aspect-[5/3] rounded-xl" />
       ))}
       <p className="col-span-3 text-sm text-fg-3">Skies: {SKIES.map((s) => s.id).join(", ")}</p>
     </div>

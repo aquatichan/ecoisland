@@ -3,6 +3,7 @@
 import { Check, Copy, Laptop } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { IslandScene } from "@/components/island/IslandScene";
+import { demoGrowth } from "@/components/island/demo";
 import { Button } from "@/components/ui/button";
 import { LogoMark } from "./Logo";
 
@@ -41,7 +42,7 @@ export function DesktopGate({ children }: { children: ReactNode }) {
     <main className="flex min-h-dvh flex-col items-center justify-center bg-bg px-6 py-10 text-center">
       <LogoMark size={40} />
       <div className="mt-8 w-full max-w-[420px] overflow-hidden rounded-2xl border border-line shadow-md">
-        <IslandScene xp={420} health={1} sky="day" animate={false} className="aspect-[5/3]" label="An Ecoisland" />
+        <IslandScene growth={demoGrowth(420)} health={1} sky="day" animate={false} className="aspect-[5/3]" label="An Ecoisland" />
       </div>
       <h1 className="t-h1 mt-8 max-w-[18ch]">Oops! Ecoisland needs a bigger screen.</h1>
       <p className="mt-3 max-w-[34ch] text-md text-fg-3">

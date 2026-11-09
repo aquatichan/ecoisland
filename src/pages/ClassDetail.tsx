@@ -420,12 +420,11 @@ function StudentDialog({
         <div className="grid grid-cols-[1fr_260px] gap-5">
           <div className="overflow-hidden rounded-lg border border-line">
             <IslandScene
-              xp={member.xp_total ?? 0}
               health={islandHealth(member.last_set_day ?? undefined, today).value}
               sky={findSky(member.island_skybox)?.id ?? "day"}
+              growth={member.island_growth}
               decor={member.island_decor}
               landmarks={member.masteries}
-              seed={member.uid}
               animate={false}
               className="aspect-[5/3]"
             />
@@ -964,12 +963,11 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
           <DialogContent title={view.island_name?.trim() || `${view.username}'s island`} description={`${stageForXp(view.xp_total ?? 0).name} · ${(view.masteries ?? []).length} of 9 landmarks`} wide>
             <div className="overflow-hidden rounded-lg border border-line">
               <IslandScene
-                xp={view.xp_total ?? 0}
                 health={islandHealth(view.last_set_day ?? undefined, today).value}
                 sky={findSky(view.island_skybox)?.id ?? "day"}
+                growth={view.island_growth}
                 decor={view.island_decor}
                 landmarks={view.masteries}
-                seed={view.uid}
                 className="aspect-[5/3]"
               />
             </div>

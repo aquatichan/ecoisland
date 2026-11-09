@@ -302,15 +302,91 @@ describe("quizzes and lessons", () => {
   });
 });
 
+/** Sets fields on a student directly, the way a long stretch of study would. */
+const setUser = (uid: string, fields: Record<string, unknown>) => admin.commit([admin.patch(`users/${uid}`, fields, true)]);
+
 describe("shop", () => {
   it("charges the catalog price and prevents double purchases", async () => {
     await call("alice", "sync"); // 50 TC
+    await setUser("alice", { xp_total: 500 }); // everything below 500 XP is open
     expect((await call("alice", "purchase", { item: "lighthouse" })).status).toBe(402);
     const ok = await call("alice", "purchase", { item: "campfire" });
     expect(ok.body).toMatchObject({ treecoins: 0, owned_items: ["campfire"] });
     expect((await call("alice", "purchase", { item: "campfire" })).status).toBe(409);
     expect((await call("alice", "purchase", { item: "ambassador_badge" })).status).toBe(400);
     expect((await call("alice", "purchase", { item: "day" })).status).toBe(400);
+  });
+});
+
+describe("island market unlocks", () => {
+  it("rejects a purchase below the XP threshold with 403 locked, and allows it at the threshold", async () => {
+    await call("alice", "sync"); // 50 TC, 0 XP
+    await setUser("alice", { xp_total: 19 });
+    const locked = await call("alice", "purchase", { item: "campfire" }); // opens at 20 XP
+    expect(locked.status).toBe(403);
+    expect(locked.body.error.code).toBe("locked");
+    expect(locked.body.error.message).toContain("20 XP");
+    expect((await user("alice")).treecoins).toBe(50); // nothing was charged
+    expect((await user("alice")).owned_items).toEqual([]);
+
+    await setUser("alice", { xp_total: 20 });
+    const ok = await call("alice", "purchase", { item: "campfire" });
+    expect(ok.status).toBe(200);
+    expect(ok.body).toMatchObject({ treecoins: 0, owned_items: ["campfire"] });
+  });
+
+  it("gates skies and painted growth the same way", async () => {
+    await call("alice", "sync");
+    await setUser("alice", { treecoins: 1000, xp_total: 79 });
+    expect((await call("alice", "purchase", { item: "wildflowers" })).body.error.code).toBe("locked"); // growth, 80 XP
+    expect((await call("alice", "purchase", { item: "aurora" })).body.error.code).toBe("locked"); // sky, 800 XP
+    await setUser("alice", { xp_total: 80 });
+    const grown = await call("alice", "purchase", { item: "wildflowers" });
+    expect(grown.status).toBe(200);
+    expect(grown.body).toMatchObject({ treecoins: 975, owned_items: ["wildflowers"] });
+    await setUser("alice", { xp_total: 800 });
+    expect((await call("alice", "purchase", { item: "aurora" })).status).toBe(200);
+  });
+
+  it("makes price-0 items wait for their XP, then claims them free: no Treecoins taken, never owned twice", async () => {
+    await call("alice", "sync"); // 50 TC, 0 XP
+    await setUser("alice", { xp_total: 9 });
+    const locked = await call("alice", "purchase", { item: "bench" }); // free, but opens at 10 XP
+    expect(locked.status).toBe(403);
+    expect(locked.body.error.code).toBe("locked");
+    expect(locked.body.error.message).toContain("10 XP");
+    expect(await user("alice")).toMatchObject({ treecoins: 50, owned_items: [] });
+
+    await setUser("alice", { xp_total: 10 });
+    const claimed = await call("alice", "purchase", { item: "bench" });
+    expect(claimed.status).toBe(200);
+    expect(claimed.body).toMatchObject({ treecoins: 50, owned_items: ["bench"] }); // balance unchanged
+    const again = await call("alice", "purchase", { item: "bench" });
+    expect(again.status).toBe(409);
+    expect(again.body.error.code).toBe("already_owned");
+    expect(await user("alice")).toMatchObject({ treecoins: 50, owned_items: ["bench"] });
+  });
+
+  it("claims a free item with no Treecoins at all, and two simultaneous claims leave exactly one copy", async () => {
+    await call("alice", "sync");
+    await setUser("alice", { xp_total: 10, treecoins: 0 });
+    const [a, b] = await Promise.all([call("alice", "purchase", { item: "kite" }), call("alice", "purchase", { item: "kite" })]);
+    expect([a.status, b.status].sort()).toEqual([200, 409]);
+    expect(await user("alice")).toMatchObject({ treecoins: 0, owned_items: ["kite"] });
+  });
+
+  it("checks ownership first: an owned item stays owned even if XP were lower", async () => {
+    await call("alice", "sync");
+    await setUser("alice", { xp_total: 0, owned_items: ["lighthouse"] }); // had it from before the market opened by XP
+    const again = await call("alice", "purchase", { item: "lighthouse" });
+    expect(again.status).toBe(409);
+    expect(again.body.error.code).toBe("already_owned");
+  });
+
+  it("checks XP before Treecoins", async () => {
+    await call("alice", "sync"); // 50 TC: too little for the lighthouse as well as too little XP
+    const res = await call("alice", "purchase", { item: "lighthouse" });
+    expect(res.status).toBe(403);
   });
 });
 

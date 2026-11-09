@@ -30,6 +30,7 @@ const Settings = lazy(() => import("@/pages/Settings"));
 const PrivacyPolicy = lazy(() => import("@/pages/misc/PrivacyPolicy"));
 const TOS = lazy(() => import("@/pages/misc/TOS"));
 const IslandLab = import.meta.env.DEV ? lazy(() => import("@/pages/dev/IslandLab")) : null;
+const SpriteLab = import.meta.env.DEV ? lazy(() => import("@/pages/dev/SpriteLab")) : null;
 
 function OldLessonRedirect() {
   const { unit, lesson } = useParams();
@@ -80,6 +81,7 @@ export default function App() {
                       <Route path="/settings" element={<Settings />} />
                     </Route>
                     {IslandLab && <Route path="/dev/island" element={<IslandLab />} />}
+                  {SpriteLab && <Route path="/dev/sprites" element={<SpriteLab />} />}
                     {/* Older links keep working. */}
                     <Route path="/onboarding" element={<Navigate to="/start" replace />} />
                     <Route path="/dashboard" element={<Navigate to="/today" replace />} />

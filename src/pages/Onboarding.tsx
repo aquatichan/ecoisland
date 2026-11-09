@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { OnboardingStepper, Step } from "@/components/fx/OnboardingStepper";
 import { FullPageLoader } from "@/components/app/Guards";
 import { Logo } from "@/components/app/Logo";
+import { demoGrowth } from "@/components/island/demo";
 import { IslandScene } from "@/components/island/IslandScene";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ import { isOnboarded, useSession } from "@/lib/session";
 import { useToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { UNITS } from "@/shared/curriculum";
+import { visibleGrowth } from "@/shared/island";
 import type { Role } from "@/shared/types";
 
 function GoogleIcon() {
@@ -101,7 +103,7 @@ export default function Onboarding() {
           <p className="text-sm text-fg-4">Made for AP Environmental Science students and teachers.</p>
         </div>
         <div className="relative m-4 overflow-hidden rounded-2xl border border-line">
-          <IslandScene xp={900} health={1} sky="sunset" landmarks={[1, 4, 6]} decor={[{ id: "lighthouse", x: 0.74, y: 0.68 }, { id: "sailboat", x: 0.22, y: 0.85 }]} seed="welcome" className="absolute inset-0 [&>svg]:h-full [&>svg]:w-full" />
+          <IslandScene growth={demoGrowth(900)} health={1} sky="sunset" landmarks={[1, 4, 6]} decor={[{ id: "lighthouse", x: 0.74, y: 0.68 }, { id: "sailboat", x: 0.22, y: 0.85 }]} className="absolute inset-0" />
         </div>
       </div>
     );
@@ -388,7 +390,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                 <h1 className="t-h2">Meet your island</h1>
                 <p className="mt-1.5 text-md text-fg-3">It starts as bare rock. Every daily set grows it, and missed days dry it out. Your first set takes about five minutes.</p>
                 <div className="mt-5 overflow-hidden rounded-lg border border-line">
-                  <IslandScene xp={p.xp_total ?? 0} health={1} sky="day" seed={p.id} className="aspect-[5/2.4] [&>svg]:h-full" />
+                  <IslandScene health={1} sky="day" growth={visibleGrowth(p.owned_items)} className="aspect-[5/2.4]" />
                 </div>
               </>
             )}

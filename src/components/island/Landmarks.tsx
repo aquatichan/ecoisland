@@ -273,15 +273,3 @@ export function Landmark({ unit, p, night, animate }: { unit: number; p: IslandP
   const draw = LANDMARKS[unit];
   return draw ? draw({ p, night, animate }) : null;
 }
-
-export const LANDMARK_INFO: Record<number, { name: string; detail: string }> = {
-  1: { name: "Food web", detail: "Deer graze while a fox watches: producers, consumers and the energy between them." },
-  2: { name: "Wildflower meadow", detail: "A meadow, a beehive and pollinators: biodiversity at work." },
-  3: { name: "Seabird flock", detail: "A growing population circling overhead." },
-  4: { name: "River and waterfall", detail: "Water carving through soil layers on its way to the sea." },
-  5: { name: "Terraced farm", detail: "Contour terraces that hold soil in place." },
-  6: { name: "Wind and solar", detail: "A turbine and a solar array power the island." },
-  7: { name: "Weather station", detail: "Instruments tracking the air you learned about." },
-  8: { name: "Clean lagoon", detail: "Lily pads and leaping fish in clean water." },
-  9: { name: "Reef and mangroves", detail: "A coral reef offshore and mangroves guarding the shore." },
-};

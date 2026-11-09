@@ -1,7 +1,7 @@
 import { ArrowRight, Check, FileText, Layers, Lock, PenLine, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
-import { LANDMARK_INFO } from "@/components/island/Landmarks";
+import { LANDMARK_INFO } from "@/shared/landmarks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

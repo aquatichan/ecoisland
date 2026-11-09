@@ -10,7 +10,9 @@ import {
   MASTERY_PCT,
   REWARD,
   dailySetReward,
+  findUnlock,
   frqReward,
+  isUnlocked,
   legacyLifetimeXp,
   legacyRefund,
   pct,
@@ -441,6 +443,11 @@ export async function handlePurchase(ctx: Ctx, body: Body): Promise<unknown> {
     const user = await requireUser(tx, uid);
     const r = readRecord(user.data);
     if (r.owned_items.includes(itemId)) throw new HttpError(409, "already_owned", "You already own this");
+    // Owning never depends on XP, but buying does: the market opens item by item (ISLAND_UNLOCKS).
+    if (!isUnlocked(itemId, r.xp_total)) {
+      const need = findUnlock(itemId)?.minXp ?? 0;
+      throw new HttpError(403, "locked", `This opens at ${need.toLocaleString()} XP. You have ${r.xp_total.toLocaleString()}.`);
+    }
     if (r.treecoins < price) throw new HttpError(402, "not_enough", `You need ${price - r.treecoins} more Treecoins`);
     const patch = { treecoins: r.treecoins - price, owned_items: [...r.owned_items, itemId] };
     return { writes: [fs.patch(user.path, patch, true)], result: patch };

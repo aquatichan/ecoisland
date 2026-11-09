@@ -89,6 +89,8 @@ export type MemberDoc = {
   lessons_count?: number;
   island_skybox?: SkyId;
   island_decor?: PlacedDecor[];
+  /** (server) The painted growth the student owns, so classmates see the same island. */
+  island_growth?: string[];
   island_name?: string;
   last_set_day?: DayKey | null;
   masteries?: number[];

@@ -112,29 +112,75 @@ export function stageProgress(xp: number): { stage: Stage; next?: Stage; pct: nu
   };
 }
 
-export const MAX_FLORA = 40;
+// ─── Island unlocks ─────────────────────────────────────────────────────────
 
-// Each segment reveals one plant per `per` XP until `until`.
-const FLORA_SEGMENTS: { until: number; per: number }[] = [
-  { until: 150, per: 13 },
-  { until: 400, per: 30 },
-  { until: 800, per: 50 },
-  { until: 1500, per: 100 },
-  { until: Infinity, per: 200 },
+export type UnlockKind = "growth" | "decor" | "sky";
+
+export type Unlock = {
+  id: string;
+  kind: UnlockKind;
+  /** Lifetime XP needed before the item can be bought in the market. */
+  minXp: number;
+};
+
+/**
+ * What the island market sells and when it opens. Prices live in catalog.ts;
+ * the server checks this table in /api/purchase, so the browser can't skip it.
+ * Owning an item never depends on XP: students keep everything they have.
+ * Everything here is gated, including items that cost nothing: those are
+ * claimed once they open. Only the default sky ("day") is open from the start.
+ */
+export const ISLAND_UNLOCKS: readonly Unlock[] = [
+  // Growth: painted plants and wildlife that fill the island in. They open at
+  // the stages' XP (see STAGES) and in between.
+  { id: "sprouts", kind: "growth", minXp: 20 },
+  { id: "wildflowers", kind: "growth", minXp: 80 },
+  { id: "meadow", kind: "growth", minXp: 150 },
+  { id: "shrubs", kind: "growth", minXp: 250 },
+  { id: "saplings", kind: "growth", minXp: 400 },
+  { id: "grove", kind: "growth", minXp: 600 },
+  { id: "pond", kind: "growth", minXp: 800 },
+  { id: "forest", kind: "growth", minXp: 1000 },
+  { id: "songbirds", kind: "growth", minXp: 1200 },
+  { id: "heart-tree", kind: "growth", minXp: 1500 },
+  // Decorations.
+  { id: "bench", kind: "decor", minXp: 10 },
+  { id: "kite", kind: "decor", minXp: 10 },
+  { id: "campfire", kind: "decor", minXp: 20 },
+  { id: "hammock", kind: "decor", minXp: 20 },
+  { id: "dock", kind: "decor", minXp: 60 },
+  { id: "lanterns", kind: "decor", minXp: 60 },
+  { id: "tidepool", kind: "decor", minXp: 100 },
+  { id: "hut", kind: "decor", minXp: 150 },
+  { id: "telescope", kind: "decor", minXp: 150 },
+  { id: "sailboat", kind: "decor", minXp: 250 },
+  { id: "stones", kind: "decor", minXp: 250 },
+  { id: "lighthouse", kind: "decor", minXp: 400 },
+  { id: "treehouse", kind: "decor", minXp: 600 },
+  { id: "balloon", kind: "decor", minXp: 800 },
+  // Skies. "day" is free and always on.
+  { id: "day", kind: "sky", minXp: 0 },
+  { id: "dawn", kind: "sky", minXp: 20 },
+  { id: "rain", kind: "sky", minXp: 60 },
+  { id: "sunset", kind: "sky", minXp: 150 },
+  { id: "night", kind: "sky", minXp: 250 },
+  { id: "aurora", kind: "sky", minXp: 800 },
+  { id: "cosmos", kind: "sky", minXp: 1500 },
 ];
 
-/** How many trees, shrubs and flowers the island shows. Grows with every session. */
-export function floraCount(xp: number): number {
-  if (xp < STAGES[1].minXp) return 0;
-  let count = 2; // first sprouts
-  let from = STAGES[1].minXp;
-  for (const seg of FLORA_SEGMENTS) {
-    const end = Math.min(xp, seg.until);
-    if (end > from) count += Math.floor((end - from) / seg.per);
-    if (xp <= seg.until) break;
-    from = seg.until;
-  }
-  return Math.min(MAX_FLORA, count);
+export function findUnlock(id: unknown): Unlock | undefined {
+  return ISLAND_UNLOCKS.find((u) => u.id === id);
+}
+
+/** True once `xp` reaches the item's threshold. Unknown ids are never unlocked. */
+export function isUnlocked(id: string, xp: number): boolean {
+  const unlock = findUnlock(id);
+  return !!unlock && xp >= unlock.minXp;
+}
+
+/** The market items that opened between two XP totals (what a session just unlocked). */
+export function unlockedBetween(beforeXp: number, afterXp: number): Unlock[] {
+  return ISLAND_UNLOCKS.filter((u) => u.id !== "day" && u.minXp > beforeXp && u.minXp <= afterXp);
 }
 
 export type Health = {

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
-import { LANDMARK_INFO } from "@/components/island/Landmarks";
+import { LANDMARK_INFO } from "@/shared/landmarks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

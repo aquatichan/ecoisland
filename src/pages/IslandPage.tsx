@@ -3,10 +3,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
-import { DecorPreview } from "@/components/island/Decor";
+import { ArtThumb } from "@/components/island/ArtThumb";
 import { IslandScene } from "@/components/island/IslandScene";
-import { LANDMARK_INFO } from "@/components/island/Landmarks";
-import { SKY_PALETTES, islandPalette } from "@/components/island/palette";
+import { LANDMARK_INFO } from "@/shared/landmarks";
+import { SKY_LOOKS } from "@/components/island/skies";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,9 +19,10 @@ import { updateProfile } from "@/lib/profile";
 import { useProfile } from "@/lib/session";
 import { useToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
-import { DECOR, MAX_PLACED_DECOR, SKIES, findDecor, findSky, type DecorId, type SkyId } from "@/shared/catalog";
-import { MASTERY_PCT, islandHealth, masteredUnits, stageProgress } from "@/shared/economy";
+import { DECOR, GROWTH, MAX_PLACED_DECOR, SKIES, findDecor, findSky, isFreeItem, type DecorId, type SkyId } from "@/shared/catalog";
+import { MASTERY_PCT, findUnlock, islandHealth, isUnlocked, masteredUnits, stageProgress } from "@/shared/economy";
 import { UNITS } from "@/shared/curriculum";
+import { visibleGrowth } from "@/shared/island";
 import type { PlacedDecor } from "@/shared/types";
 
 type Tab = "landmarks" | "shop" | "arrange";
@@ -54,7 +55,6 @@ export default function IslandPage() {
   const sky = findSky(profile.island_skybox)?.id ?? "day";
   const mastered = masteredUnits(profile.unit_best);
   const coins = profile.treecoins ?? 0;
-  const p = useMemo(() => islandPalette(1), []);
   const islandName = profile.island_name?.trim() || `${profile.username || "Your"}'s island`;
 
   const saveDecor = (next: PlacedDecor[]) => {
@@ -78,7 +78,8 @@ export default function IslandPage() {
         const d = findDecor(id);
         if (d && decor.length < MAX_PLACED_DECOR) saveDecor([...decor, { id: d.id, x: d.x, y: d.y }]);
       }
-      toast.show({ tone: "success", title: `${label} is yours`, body: asSky ? "Your sky has changed." : "It's on your island. Switch to Arrange to move it." });
+      const placedDecor = !asSky && !!findDecor(id);
+      toast.show({ tone: "success", title: `${label} is yours`, body: asSky ? "Your sky has changed." : placedDecor ? "It's on your island. Switch to Arrange to move it." : "It's growing on your island." });
     } catch (err) {
       toast.show({ tone: "error", title: "Purchase didn't go through", body: errorMessage(err) });
     } finally {
@@ -116,12 +117,11 @@ export default function IslandPage() {
           <Card className="overflow-hidden">
             <div className="relative">
               <IslandScene
-                xp={xp}
                 health={health.value}
                 sky={sky}
+                growth={visibleGrowth(profile.owned_items)}
                 decor={decor}
                 landmarks={mastered}
-                seed={profile.id}
                 editable={tab === "arrange"}
                 selected={selected}
                 onSelect={setSelected}
@@ -257,15 +257,46 @@ export default function IslandPage() {
             {tab === "shop" && (
               <div className="space-y-7">
                 <section>
+                  <p className="mb-3 text-sm font-semibold text-fg-2">Growth</p>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {GROWTH.map((g) => {
+                      const has = owned.has(g.id);
+                      const locked = !has && !isUnlocked(g.id, xp);
+                      return (
+                        <div key={g.id} className="rounded-md border border-line p-2.5" title={g.description}>
+                          <div className="h-[72px] rounded-sm bg-surface-2/70 p-1.5">
+                            <ArtThumb art={g.art} />
+                          </div>
+                          <p className="mt-2 truncate text-sm font-semibold text-fg">{g.name}</p>
+                          {has ? (
+                            <p className="mt-1.5 flex h-7 items-center gap-1 text-sm font-semibold text-brand-ink">
+                              <Check className="size-3.5" /> On your island
+                            </p>
+                          ) : locked ? (
+                            <Button size="sm" variant="ghost" className="mt-1.5 h-7 w-full" disabled title={`Opens at ${findUnlock(g.id)?.minXp ?? 0} XP`}>
+                              <Lock className="size-3.5" /> {(findUnlock(g.id)?.minXp ?? 0).toLocaleString()} XP
+                            </Button>
+                          ) : (
+                            <Button size="sm" variant="soft" className="mt-1.5 h-7 w-full" disabled={coins < g.price} loading={buying === g.id} onClick={() => void buy(g.id, g.name)}>
+                              {isFreeItem(g.id) ? "Free" : <><Treecoin size={13} /> {g.price}</>}
+                            </Button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+                <section>
                   <p className="mb-3 text-sm font-semibold text-fg-2">Skies</p>
                   <div className="grid grid-cols-2 gap-2.5">
                     {SKIES.map((s) => {
                       const has = s.price === 0 || owned.has(s.id);
+                      const locked = !has && !isUnlocked(s.id, xp);
                       const inUse = sky === s.id;
-                      const sp = SKY_PALETTES[s.id];
+                      const sp = SKY_LOOKS[s.id];
                       return (
                         <div key={s.id} className={cn("overflow-hidden rounded-md border", inUse ? "border-brand ring-2 ring-brand/25" : "border-line")}>
-                          <div className="relative h-[64px]" style={{ background: `linear-gradient(${sp.top}, ${sp.mid} 60%, ${sp.water[1]} 61%, ${sp.water[2]})` }}>
+                          <div className="relative h-[64px]" style={{ background: `linear-gradient(${sp.sky[0]}, ${sp.sky[1]} 60%, ${sp.sea[1]} 61%, ${sp.sea[2]})` }}>
                             {s.animated && (
                               <Badge tone="neutral" className="absolute top-1.5 right-1.5 h-5 bg-black/35 text-2xs text-white">
                                 <Sparkles /> Animated
@@ -282,9 +313,13 @@ export default function IslandPage() {
                               <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => applySky(s.id)}>
                                 Use
                               </Button>
+                            ) : locked ? (
+                              <Button size="sm" variant="ghost" className="mt-1.5 h-7 w-full" disabled title={`Opens at ${findUnlock(s.id)?.minXp ?? 0} XP`}>
+                                <Lock className="size-3.5" /> {(findUnlock(s.id)?.minXp ?? 0).toLocaleString()} XP
+                              </Button>
                             ) : (
                               <Button size="sm" variant="soft" className="mt-1.5 h-7 w-full" disabled={coins < s.price} loading={buying === s.id} onClick={() => void buy(s.id, s.name)}>
-                                <Treecoin size={13} /> {s.price}
+                                {isFreeItem(s.id) ? "Free" : <><Treecoin size={13} /> {s.price}</>}
                               </Button>
                             )}
                           </div>
@@ -298,20 +333,25 @@ export default function IslandPage() {
                   <div className="grid grid-cols-2 gap-2.5">
                     {DECOR.map((d) => {
                       const has = owned.has(d.id);
+                      const locked = !has && !isUnlocked(d.id, xp);
                       const count = decor.filter((x) => x.id === d.id).length;
                       return (
                         <div key={d.id} className="rounded-md border border-line p-2.5" title={d.description}>
                           <div className="h-[72px] rounded-sm bg-surface-2/70 p-2">
-                            <DecorPreview id={d.id} p={p} />
+                            <ArtThumb art={d.art} />
                           </div>
                           <p className="mt-2 truncate text-sm font-semibold text-fg">{d.name}</p>
                           {has ? (
                             <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => place(d.id)}>
                               {count > 0 ? `Place another (${count})` : "Place"}
                             </Button>
+                          ) : locked ? (
+                            <Button size="sm" variant="ghost" className="mt-1.5 h-7 w-full" disabled title={`Opens at ${findUnlock(d.id)?.minXp ?? 0} XP`}>
+                              <Lock className="size-3.5" /> {(findUnlock(d.id)?.minXp ?? 0).toLocaleString()} XP
+                            </Button>
                           ) : (
                             <Button size="sm" variant="soft" className="mt-1.5 h-7 w-full" disabled={coins < d.price} loading={buying === d.id} onClick={() => void buy(d.id, d.name)}>
-                              <Treecoin size={13} /> {d.price}
+                              {isFreeItem(d.id) ? "Free" : <><Treecoin size={13} /> {d.price}</>}
                             </Button>
                           )}
                         </div>
@@ -336,7 +376,7 @@ export default function IslandPage() {
                       >
                         <button className="flex flex-1 items-center gap-3 text-left" onClick={() => setSelected(selected === i ? null : i)}>
                           <span className="size-9 rounded-sm bg-surface-2 p-1">
-                            <DecorPreview id={d.id} p={p} />
+                            <ArtThumb art={findDecor(d.id)?.art ?? ""} />
                           </span>
                           <span className="text-base font-medium text-fg">{findDecor(d.id)?.name}</span>
                         </button>

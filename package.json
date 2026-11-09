@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "content": "node tools/build-content.mjs",
+    "seed:emulator": "node tools/seed-emulator.mjs",
     "dev:emulators": "npx -y firebase-tools@15.34.2 emulators:start --project demo-ecoisland --only auth,firestore,storage",
     "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.worker.json",
     "build": "pnpm typecheck && vite build",

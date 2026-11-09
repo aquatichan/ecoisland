@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Ecoisland is an AP Environmental Science study app (daily spaced-repetition sets, quizzes, FRQs, teacher classes, volunteer/eco-action tracking, and an SVG island that grows with progress). It is a React SPA with a Cloudflare Worker API, backed by Firebase Auth, Firestore, and Storage. `docs/SETUP.md` covers deployment, secrets, and admin setup in full.
+Ecoisland is an AP Environmental Science study app (daily spaced-repetition sets, quizzes, FRQs, teacher classes, volunteer/eco-action tracking, and a painted island that grows with progress). It is a React SPA with a Cloudflare Worker API, backed by Firebase Auth, Firestore, and Storage. `docs/SETUP.md` covers deployment, secrets, and admin setup in full.
 
 ## Commands
 
@@ -11,6 +11,7 @@ Use pnpm.
 ```bash
 pnpm dev:emulators   # terminal 1: Firebase auth/firestore/storage emulators (needs Java)
 pnpm dev             # terminal 2: app + /api/* on http://localhost:5173
+pnpm seed:emulator   # once, with the emulators running: students nova (0 XP), alice (620), dana (2,400); sign in with __ecoSignIn("alice", "Alice Chen") in the console
 pnpm content         # regenerate public/ question files + worker/generated/content.ts from content/
 pnpm typecheck       # two passes: tsconfig.app.json (src) and tsconfig.worker.json (worker + src/shared)
 pnpm lint            # eslint with --max-warnings 0, so warnings fail
@@ -117,7 +118,9 @@ Practice scoring lives in `worker/attempts.ts` and runs as `attempt/start`, then
 - `DesktopGate` blocks windows narrower than 1024px. The app is built for laptops and Chromebooks.
 - Styling uses Tailwind v4 with primitives in `src/components/ui/`.
 - `src/components/bits/` contains vendored React Bits components. Keep their upstream style; lint relaxes rules there, and attribution is in `THIRD_PARTY_NOTICES.md`.
-- The island illustration lives in `src/components/island/`.
+- **The island** (`src/components/island/`) is a raster compositor, not SVG. `IslandScene` draws a painted base plus absolutely positioned item images over a CSS-gradient sky and sea. It draws only what the student owns, so callers pass `growth` and `decor` through `visibleGrowth` and `visibleDecor` (`src/shared/island.ts`); landmarks come from mastered units. A thirsty island fades with a CSS `filter` (`health.ts`) on the image wrapper only.
+- **What can be bought, and when:** `ISLAND_UNLOCKS` in `src/shared/economy.ts` gives every growth item, decoration and sky a `minXp`, and `handlePurchase` rejects below it with 403 `locked` (so the browser can't skip it). Prices, art ids, anchors and sizes live in `src/shared/catalog.ts`. A price of 0 is a free claim, still behind its XP.
+- **Island art** is in `public/island/` with versioned names (`*-v1.webp`), cached immutably (`public/_headers`), and listed in `src/components/island/assets.ts`. This is separate from the generic `public/images/` rule below. Painted sprites are the base and growth; decorations and landmarks are `placeholder` rasters of the old SVG pieces until their painted art is made (`design/island-art/README.md`). The SVG modules (`Decor`, `Landmarks`, `Flora`, `palette`) are kept only as the source for those placeholders, via the dev route `/dev/sprites`.
 
 ## Tests
 

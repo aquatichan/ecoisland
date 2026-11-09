@@ -23,9 +23,10 @@ import { useStudentContext } from "@/lib/student";
 import { shuffle } from "@/lib/utils";
 import type { CompletedAssignment } from "@/lib/types";
 import { findLesson, getUnit } from "@/shared/curriculum";
-import { DAILY_SET_SIZE, REWARD, floraCount, islandHealth, masteredUnits, stageForXp } from "@/shared/economy";
+import { DAILY_SET_SIZE, REWARD, islandHealth, masteredUnits, stageForXp, unlockedBetween } from "@/shared/economy";
+import { visibleDecor, visibleGrowth } from "@/shared/island";
 import { findSky } from "@/shared/catalog";
-import { LANDMARK_INFO } from "@/components/island/Landmarks";
+import { LANDMARK_INFO } from "@/shared/landmarks";
 
 type Mode = "daily" | "unit" | "lesson" | "mixed";
 
@@ -293,12 +294,11 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
       </div>
       <div className="overflow-hidden rounded-2xl border border-line shadow-md">
         <IslandScene
-          xp={profile.xp_total ?? 0}
           health={health.value}
           sky={findSky(profile.island_skybox)?.id ?? "day"}
-          decor={profile.island_decor}
+          growth={visibleGrowth(profile.owned_items)}
+          decor={visibleDecor(profile.owned_items, profile.island_decor)}
           landmarks={masteredUnits(profile.unit_best)}
-          seed={profile.id}
           className="aspect-[5/3]"
         />
       </div>
@@ -327,7 +327,7 @@ function Results({
   const correct = outcome.answers.filter((a) => a.correct).length;
   const pct = total ? Math.round((correct / total) * 100) : 0;
   const xpAfter = outcome.xpBefore + (outcome.reward?.xp ?? 0);
-  const grew = floraCount(xpAfter) - floraCount(outcome.xpBefore);
+  const opened = unlockedBetween(outcome.xpBefore, xpAfter);
   const stageUp = stageForXp(xpAfter).n > stageForXp(outcome.xpBefore).n;
   const mistakes = outcome.answers.filter((a) => !a.correct);
   useDocumentTitle(`${pct}% · Results`);
@@ -428,12 +428,11 @@ function Results({
 
         <div className="card overflow-hidden">
           <IslandScene
-            xp={xpAfter}
             health={islandHealth(mode === "daily" && !outcome.error ? today : profile.last_set_day, today).value}
             sky={findSky(profile.island_skybox)?.id ?? "day"}
-            decor={profile.island_decor}
+            growth={visibleGrowth(profile.owned_items)}
+            decor={visibleDecor(profile.owned_items, profile.island_decor)}
             landmarks={masteredUnits(profile.unit_best)}
-            seed={profile.id}
             className="aspect-[5/3]"
           />
           <div className="p-5">
@@ -449,11 +448,11 @@ function Results({
                 <p className="mt-2 text-md font-semibold text-fg">{stageForXp(xpAfter).name}</p>
                 <p className="mt-1 text-base text-fg-3">{stageForXp(xpAfter).blurb}</p>
               </>
-            ) : grew > 0 ? (
+            ) : opened.length > 0 ? (
               <>
-                <p className="text-md font-semibold text-fg">Your island grew</p>
+                <p className="text-md font-semibold text-fg">{opened.length === 1 ? "New in the island market" : `${opened.length} new things in the island market`}</p>
                 <p className="mt-1 text-base text-fg-3">
-                  {grew === 1 ? "A new plant took root." : `${grew} new plants took root.`} {mode === "daily" ? "See you tomorrow." : ""}
+                  Your XP opened {opened.length === 1 ? "something" : "more"} to grow your island. <Link to="/island" className="font-semibold text-brand-ink underline-offset-2 hover:underline">Take a look</Link>. {mode === "daily" ? "See you tomorrow." : ""}
                 </p>
               </>
             ) : (

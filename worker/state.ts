@@ -3,6 +3,7 @@
 
 import { isDayKey, type DayKey } from "../src/shared/dates";
 import { masteredUnits } from "../src/shared/economy";
+import { visibleGrowth } from "../src/shared/island";
 import { rollWeek } from "../src/shared/stats";
 import type { Data, Doc, Firestore, Write } from "./firestore";
 import { asNumberArray, asRecord, asStringArray, num } from "./http";
@@ -62,6 +63,7 @@ export function memberPayload(uid: string, data: Data, lastActiveDay: DayKey | n
     masteries: masteredUnits(r.unit_best),
     island_skybox: typeof data.island_skybox === "string" ? data.island_skybox : "day",
     // Only decorations the student actually bought are shown to classmates.
+    island_growth: visibleGrowth(r.owned_items),
     island_decor: Array.isArray(data.island_decor)
       ? data.island_decor.filter((d) => d && typeof d === "object" && r.owned_items.includes(String((d as { id?: unknown }).id))).slice(0, 24)
       : [],

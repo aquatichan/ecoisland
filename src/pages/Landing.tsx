@@ -26,7 +26,8 @@ import Magnet from "@/components/bits/Magnet";
 import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
 import { IslandScene } from "@/components/island/IslandScene";
-import { LANDMARK_INFO } from "@/components/island/Landmarks";
+import { demoGrowth } from "@/components/island/demo";
+import { LANDMARK_INFO } from "@/shared/landmarks";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -147,7 +148,7 @@ function Hero() {
 
         <div>
           <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-lg">
-            <IslandScene xp={s.xp} health={1} sky={s.sky} landmarks={s.landmarks} seed="showcase" className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
+            <IslandScene growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
             <div className="flex items-center justify-between gap-4 border-t border-line px-5 py-4">
               <div>
                 <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
@@ -205,7 +206,7 @@ function HowItWorks() {
           <div className="grid grid-cols-3 gap-2">
             {[0, 160, 900].map((xp) => (
               <div key={xp} className="overflow-hidden rounded-md border border-line">
-                <IslandScene xp={xp} health={1} sky="day" seed="how" animate={false} className="aspect-square" />
+                <IslandScene growth={demoGrowth(xp)} health={1} sky="day" animate={false} className="aspect-square" />
               </div>
             ))}
           </div>
@@ -215,10 +216,10 @@ function HowItWorks() {
         <div className="card flex flex-col p-6">
           <div className="grid grid-cols-2 gap-2">
             <div className="overflow-hidden rounded-md border border-line">
-              <IslandScene xp={700} health={1} sky="day" seed="wilt" animate={false} className="aspect-[4/3]" />
+              <IslandScene growth={demoGrowth(700)} health={1} sky="day" animate={false} className="aspect-[4/3]" />
             </div>
             <div className="overflow-hidden rounded-md border border-line">
-              <IslandScene xp={700} health={0.2} sky="day" seed="wilt" animate={false} className="aspect-[4/3]" />
+              <IslandScene growth={demoGrowth(700)} health={0.2} sky="day" animate={false} className="aspect-[4/3]" />
             </div>
           </div>
           <h3 className="mt-6 text-xl font-semibold text-fg">3. Skip days and it wilts</h3>
@@ -337,7 +338,7 @@ function Landmarks() {
             </div>
           </div>
           <div className="overflow-hidden rounded-2xl border border-line shadow-lg">
-            <IslandScene xp={1650} health={1} sky="sunset" landmarks={[1, 2, 3, 4, 5, 6, 7, 8, 9]} decor={[{ id: "dock", x: 0.73, y: 0.84 }]} seed="landmarks" className="aspect-[5/3]" />
+            <IslandScene growth={demoGrowth(1650)} health={1} sky="sunset" landmarks={[1, 2, 3, 4, 5, 6, 7, 8, 9]} decor={[{ id: "dock", x: 0.73, y: 0.84 }]} className="aspect-[5/3]" />
           </div>
         </div>
         <ul className="mt-14 grid grid-cols-3 gap-3">

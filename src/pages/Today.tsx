@@ -47,6 +47,7 @@ import { findSky } from "@/shared/catalog";
 import { findLesson, getUnit, neighbours } from "@/shared/curriculum";
 import { addDays, daysBetween, dueLabel, effectiveStreak, formatDay, weekStart, type DayKey } from "@/shared/dates";
 import { islandHealth, masteredUnits, stageForXp } from "@/shared/economy";
+import { visibleDecor, visibleGrowth } from "@/shared/island";
 import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import { actionOpen, eventPhase } from "@/shared/act";
@@ -192,12 +193,11 @@ function DailySetCard({
         </div>
         <Link to="/island" className="group relative block border-l border-line" aria-label="Open your island">
           <IslandScene
-            xp={profile.xp_total ?? 0}
             health={health.value}
             sky={findSky(profile.island_skybox)?.id ?? "day"}
-            decor={profile.island_decor}
+            growth={visibleGrowth(profile.owned_items)}
+            decor={visibleDecor(profile.owned_items, profile.island_decor)}
             landmarks={masteredUnits(profile.unit_best)}
-            seed={profile.id}
             className="h-full min-h-[220px] transition-transform duration-500 group-hover:scale-[1.015]"
           />
           <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold text-fg-2">
