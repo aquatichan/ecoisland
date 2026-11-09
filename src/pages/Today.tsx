@@ -117,7 +117,7 @@ function StudentToday() {
 
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 pt-9 pb-24 shadow-sm">
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
         <ArtBackdrop art="sky-day" scrim={GREETING_SCRIM} />
         <div className="max-w-1/2">
           <p className="t-eyebrow text-fg-2">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
@@ -128,7 +128,7 @@ function StudentToday() {
         </div>
       </header>
 
-      <DailySetCard className="relative z-10 mx-4 -mt-14" doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
+      <DailySetCard className="mt-6" doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
 
       <div className="mt-6 grid grid-cols-[minmax(0,1fr)_21.25rem] gap-6">
         <div className="space-y-6">

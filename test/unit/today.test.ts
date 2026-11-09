@@ -217,9 +217,11 @@ describe("today: the sky behind the greeting, with a scrim where the text sits",
     expect(header).toContain('<h1 className="t-h1 mt-2.5">');
   });
 
-  it("lays the daily-set card over the banner's lower edge, above it, on its own glass", () => {
+  it("sets the daily-set card below the banner in its own space, on its own glass", () => {
     const student = fn("StudentToday");
-    expect(student).toContain('<DailySetCard className="relative z-10 mx-4 -mt-14"');
+    expect(student).toContain('<DailySetCard className="mt-6"');
+    expect(student, "the banner pads evenly: it keeps no room for a card to sit over it").toContain("rounded-2xl border border-line px-8 py-9 shadow-sm");
+    expect(student).not.toMatch(/pb-24/);
     expect(fn("DailySetCard")).toContain('<Card className={cn("grid grid-cols-[minmax(0,1fr)_minmax(0,24rem)] gap-6 p-4", className)}>');
   });
 

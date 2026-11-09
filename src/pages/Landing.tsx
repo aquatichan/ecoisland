@@ -116,8 +116,10 @@ function Hero() {
         <div className="absolute inset-0" aria-hidden>
           <TopographyBackdrop />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
+          {/* The lines end on the page colour, not on a hard edge: nothing overlaps the hero to hide where it stops. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg to-transparent" />
         </div>
-        <div className="relative mx-auto grid max-w-page min-h-[calc(100dvh-8rem)] grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-center gap-12 px-8 pt-20 pb-32">
+        <div className="relative mx-auto grid max-w-page min-h-[calc(100dvh-8rem)] grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-center gap-12 px-8 pt-20 pb-20">
           <div>
             <p className="t-eyebrow text-fg-2">For AP Environmental Science</p>
             <h1 className="t-display mt-5 text-6xl">
@@ -174,8 +176,8 @@ function Hero() {
         </div>
       </section>
 
-      {/* The three promises, on a glass strip that overlaps the hero's lower edge. */}
-      <div className="relative z-10 mx-auto -mt-14 max-w-page px-8">
+      {/* The three promises, on a card strip below the hero in its own space. */}
+      <div className="mx-auto mt-8 max-w-page px-8">
         <ul className="card grid grid-cols-3 divide-x divide-line rounded-xl">
           {PERKS.map((t) => (
             <li key={t} className="flex items-center gap-3 px-6 py-5 text-md font-medium text-fg-2">
