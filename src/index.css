@@ -46,7 +46,9 @@
   --sun-soft: #fbf0d4;
   --sun-ink: #7e5204;
   --coral: #b83e29;
+  --coral-strong: #a23724;
   --coral-soft: #f9e5e0;
+  --coral-fg: #ffffff;
 
   /* Glass. Every fill that can sit behind text stays at or above 0.84. */
   --glass-fill: rgb(252 249 243 / 0.88);
@@ -115,7 +117,9 @@
   --color-sun-soft: var(--sun-soft);
   --color-sun-ink: var(--sun-ink);
   --color-coral: var(--coral);
+  --color-coral-strong: var(--coral-strong);
   --color-coral-soft: var(--coral-soft);
+  --color-coral-fg: var(--coral-fg);
   --color-overlay: var(--overlay);
 
   /* Type scale. The only font sizes components may use (text-2xs … text-6xl). */
@@ -142,6 +146,11 @@
   --radius-lg: 16px;
   --radius-xl: 22px;
   --radius-2xl: 28px;
+
+  /* Dialog widths (max-w-dialog, max-w-dialog-wide) and the blur behind a dialog (backdrop-blur-scrim). */
+  --container-dialog: 520px;
+  --container-dialog-wide: 760px;
+  --blur-scrim: 2px;
 
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);

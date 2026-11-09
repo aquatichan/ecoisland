@@ -25,7 +25,9 @@ export const COLORS = {
   "sun-soft": "#fbf0d4",
   "sun-ink": "#7e5204",
   coral: "#b83e29",
+  "coral-strong": "#a23724",
   "coral-soft": "#f9e5e0",
+  "coral-fg": "#ffffff",
 } as const;
 
 export type ColorToken = keyof typeof COLORS;

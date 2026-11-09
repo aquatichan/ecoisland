@@ -26,12 +26,12 @@ export function DialogContent({
 }) {
   return (
     <D.Portal>
-      <D.Overlay className="fixed inset-0 z-50 bg-overlay backdrop-blur-[2px] data-[state=open]:animate-[rise_200ms_ease-out]" />
+      <D.Overlay className="fixed inset-0 z-50 bg-overlay backdrop-blur-scrim data-[state=open]:animate-[rise_200ms_ease-out]" />
       <D.Content
         {...accentAttr(accent)}
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 max-h-[86vh] w-[min(92vw,520px)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-line bg-surface p-6 shadow-lg outline-none data-[state=open]:animate-[rise_240ms_var(--ease-out-soft)]",
-          wide && "w-[min(92vw,760px)]",
+          "fixed top-1/2 left-1/2 z-50 max-h-[86vh] w-[92vw] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border border-line bg-surface p-6 shadow-lg outline-none data-[state=open]:animate-[rise_240ms_var(--ease-out-soft)]",
+          wide ? "max-w-dialog-wide" : "max-w-dialog",
           className,
         )}
       >
@@ -45,7 +45,7 @@ export function DialogContent({
             )}
           </div>
           <D.Close className="-m-1 rounded-md p-1.5 text-fg-3 hover:bg-surface-2 hover:text-fg" aria-label="Close">
-            <X className="size-[18px]" />
+            <X className="size-4.5" />
           </D.Close>
         </div>
         {children}

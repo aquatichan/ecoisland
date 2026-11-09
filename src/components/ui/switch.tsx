@@ -9,6 +9,7 @@ export function Switch({ checked, onChange, label, disabled }: { checked: boolea
       onChange={onChange}
       disabled={disabled}
       ariaLabel={label}
+      className="[&_button]:rounded-full"
       width={46}
       height={28}
       trackColor={COLORS.track}

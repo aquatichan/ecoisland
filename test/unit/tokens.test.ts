@@ -75,6 +75,8 @@ describe("design tokens", () => {
     const pairs: Array<[string, string]> = [
       ["brand-fg", "brand"],
       ["brand-fg", "brand-strong"],
+      ["coral-fg", "coral"],
+      ["coral-fg", "coral-strong"],
       ["brand-ink", "brand-soft"],
       ["sun-ink", "sun-soft"],
       ["coral", "surface"],

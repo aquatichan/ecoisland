@@ -3,14 +3,14 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const control =
-  "w-full rounded-md border border-line-strong bg-surface px-3.5 text-md text-fg shadow-xs outline-none transition-[border-color,box-shadow] placeholder:text-fg-4 hover:border-[color-mix(in_srgb,var(--fg)_24%,transparent)] focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--brand)_22%,transparent)] disabled:opacity-50 aria-[invalid=true]:border-coral";
+  "w-full rounded-md border border-line-strong bg-surface px-3.5 text-md text-fg shadow-xs outline-none transition-[border-color,box-shadow] placeholder:text-fg-4 hover:border-fg/24 focus:border-brand focus-visible:shadow-[var(--ring),var(--shadow-xs)] disabled:opacity-50 aria-[invalid=true]:border-coral";
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input({ className, ...props }, ref) {
   return <input ref={ref} className={cn(control, "h-10", className)} {...props} />;
 });
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function Textarea({ className, ...props }, ref) {
-  return <textarea ref={ref} className={cn(control, "min-h-[96px] resize-y py-2.5 leading-relaxed", className)} {...props} />;
+  return <textarea ref={ref} className={cn(control, "min-h-24 resize-y py-2.5 leading-relaxed", className)} {...props} />;
 });
 
 export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement>>(function Select({ className, children, ...props }, ref) {
