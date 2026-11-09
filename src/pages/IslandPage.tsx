@@ -1,12 +1,13 @@
 import { Check, CheckCircle2, Lock, Move, Pencil, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
-import { ArtThumb } from "@/components/island/ArtThumb";
 import { IslandScene } from "@/components/island/IslandScene";
-import { LANDMARK_INFO } from "@/shared/landmarks";
-import { SkyThumb } from "@/components/island/SkyThumb";
+import { MarketTile, SkyWell, SpriteWell } from "@/components/island/tiles";
+import type { PlateScrim } from "@/components/landing/plates";
+import { LANDMARK_INFO, landmarkArt } from "@/shared/landmarks";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress";
@@ -26,6 +27,10 @@ import { marketState, visibleGrowth } from "@/shared/island";
 import type { PlacedDecor } from "@/shared/types";
 
 type Tab = "landmarks" | "shop" | "arrange";
+
+// The banner draws the same sky as the island scene below it, so the two read as one place. The island's name
+// sits in the left half, so that is where the scrim is (the same treatment as the Today page's greeting).
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 export default function IslandPage() {
   const profile = useProfile();
@@ -67,13 +72,13 @@ export default function IslandPage() {
     if (state === "locked") {
       const need = (findUnlock(id)?.minXp ?? 0).toLocaleString();
       return (
-        <Button size="sm" variant="ghost" className="mt-1.5 h-7 w-full" disabled title={`Opens at ${need} XP`}>
+        <Button size="sm" variant="ghost" className="mt-1.5 h-7 w-full disabled:opacity-100" disabled title={`Opens at ${need} XP`}>
           <Lock className="size-3.5" /> {need} XP
         </Button>
       );
     }
     return (
-      <Button size="sm" variant="soft" className="mt-1.5 h-7 w-full" disabled={coins < price} loading={buying === id} onClick={() => void buy(id, name)}>
+      <Button size="sm" variant="soft" className="mt-1.5 h-7 w-full disabled:bg-surface-2 disabled:text-fg-3 disabled:opacity-100" disabled={coins < price} loading={buying === id} onClick={() => void buy(id, name)}>
         {state === "free" ? "Free" : <><Treecoin size={13} /> {price}</>}
       </Button>
     );
@@ -135,7 +140,49 @@ export default function IslandPage() {
 
   return (
     <Page>
-      <div className="grid grid-cols-[minmax(0,1fr)_380px] gap-6">
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+        <ArtBackdrop art={`sky-${sky}`} scrim={BANNER_SCRIM} />
+        <div className="flex items-end justify-between gap-8">
+          <div className="min-w-0 max-w-1/2">
+            {editingName ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void saveName();
+                }}
+                className="flex items-center gap-2"
+              >
+                <input
+                  autoFocus
+                  value={name}
+                  maxLength={32}
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={() => void saveName()}
+                  className="font-display w-full max-w-85 border-b border-brand bg-transparent text-3xl font-[560] text-fg outline-none"
+                  aria-label="Island name"
+                />
+              </form>
+            ) : (
+              <button onClick={() => setEditingName(true)} className="group flex items-center gap-2 text-left" aria-label="Rename your island">
+                <h1 className="t-h1 truncate">{islandName}</h1>
+                <Pencil className="size-4 text-fg-3 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
+            )}
+            <p className="mt-1 text-base text-fg-2">
+              {progress.stage.name} · {progress.stage.blurb}
+            </p>
+          </div>
+          <div className="glass w-75 shrink-0 rounded-lg border p-4">
+            <div className="mb-2 flex items-center justify-between text-sm">
+              <span className="font-semibold text-fg-2">{progress.next ? `Next: ${progress.next.name}` : "Fully grown"}</span>
+              <span className="t-num text-fg-3">{progress.next ? `${progress.toNext} XP to go` : `${xp.toLocaleString()} XP`}</span>
+            </div>
+            <ProgressBar value={progress.pct} label="Growth to next stage" />
+          </div>
+        </div>
+      </header>
+
+      <div className="mt-6 grid grid-cols-[minmax(0,1fr)_23.75rem] gap-6">
         <div>
           <Card className="overflow-hidden">
             <div className="relative">
@@ -157,44 +204,6 @@ export default function IslandPage() {
                   <Move className="size-4 shrink-0" /> Drag to move, or select one and use the arrow keys
                 </div>
               )}
-            </div>
-            <div className="flex items-center gap-6 border-t border-line p-6">
-              <div className="min-w-0 flex-1">
-                {editingName ? (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      void saveName();
-                    }}
-                    className="flex items-center gap-2"
-                  >
-                    <input
-                      autoFocus
-                      value={name}
-                      maxLength={32}
-                      onChange={(e) => setName(e.target.value)}
-                      onBlur={() => void saveName()}
-                      className="font-display w-full max-w-[340px] border-b border-brand bg-transparent text-3xl font-[560] text-fg outline-none"
-                      aria-label="Island name"
-                    />
-                  </form>
-                ) : (
-                  <button onClick={() => setEditingName(true)} className="group flex items-center gap-2 text-left" aria-label="Rename your island">
-                    <h1 className="t-h2 truncate">{islandName}</h1>
-                    <Pencil className="size-4 text-fg-4 opacity-0 transition-opacity group-hover:opacity-100" />
-                  </button>
-                )}
-                <p className="mt-1 text-base text-fg-3">
-                  {progress.stage.name} · {progress.stage.blurb}
-                </p>
-              </div>
-              <div className="w-[300px]">
-                <div className="mb-2 flex items-center justify-between text-sm">
-                  <span className="font-semibold text-fg-2">{progress.next ? `Next: ${progress.next.name}` : "Fully grown"}</span>
-                  <span className="t-num text-fg-3">{progress.next ? `${progress.toNext} XP to go` : `${xp.toLocaleString()} XP`}</span>
-                </div>
-                <ProgressBar value={progress.pct} label="Growth to next stage" />
-              </div>
             </div>
           </Card>
 
@@ -227,7 +236,7 @@ export default function IslandPage() {
           </div>
         </div>
 
-        <Card className="flex max-h-[calc(100dvh-120px)] flex-col self-start overflow-hidden sticky top-24">
+        <Card className="sticky top-24 flex max-h-[calc(100dvh-7.5rem)] flex-col self-start overflow-hidden">
           <div className="border-b border-line p-5">
             <div className="flex items-center justify-between">
               <Segmented<Tab>
@@ -257,13 +266,14 @@ export default function IslandPage() {
                   const best = profile.unit_best?.[`u${u.n}`];
                   return (
                     <li key={u.n} className="flex items-start gap-3 rounded-md p-2.5 hover:bg-surface-2/60">
-                      <span className={cn("mt-0.5 grid size-8 shrink-0 place-items-center rounded-md", have ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-4")}>
-                        {have ? <CheckCircle2 className="size-4" /> : <Lock className="size-3.5" />}
-                      </span>
+                      <SpriteWell art={landmarkArt(u.n)} locked={!have} size="row" />
                       <div className="min-w-0 flex-1">
                         <p className="text-base font-semibold text-fg">{LANDMARK_INFO[u.n].name}</p>
-                        <p className="text-sm text-fg-3">
-                          Unit {u.n} · {have ? "Unlocked" : best !== undefined ? `Best ${best}%, need ${MASTERY_PCT}%` : `Score ${MASTERY_PCT}% on the unit quiz`}
+                        <p className="flex items-center gap-1.5 text-sm text-fg-3">
+                          {have ? <CheckCircle2 className="size-3.5 shrink-0 text-brand-ink" aria-hidden /> : <Lock className="size-3.5 shrink-0" aria-hidden />}
+                          <span>
+                            Unit {u.n} · {have ? "Unlocked" : best !== undefined ? `Best ${best}%, need ${MASTERY_PCT}%` : `Score ${MASTERY_PCT}% on the unit quiz`}
+                          </span>
                         </p>
                       </div>
                       {!have && (
@@ -283,10 +293,8 @@ export default function IslandPage() {
                   <p className="mb-3 text-sm font-semibold text-fg-2">Growth</p>
                   <div className="grid grid-cols-2 gap-2.5">
                     {GROWTH.map((g) => (
-                      <div key={g.id} className="rounded-md border border-line p-2.5" title={g.description}>
-                        <div className="h-[72px] rounded-sm bg-surface-2/70 p-1.5">
-                          <ArtThumb art={g.art} />
-                        </div>
+                      <MarketTile key={g.id} id={g.id} state={stateOf(g.id)} title={g.description}>
+                        <SpriteWell art={g.art} locked={stateOf(g.id) === "locked"} />
                         <p className="mt-2 truncate text-sm font-semibold text-fg">{g.name}</p>
                         {stateOf(g.id) === "owned" ? (
                           <p className="mt-1.5 flex h-7 items-center gap-1 text-sm font-semibold text-brand-ink">
@@ -295,7 +303,7 @@ export default function IslandPage() {
                         ) : (
                           getButton(g.id, g.name, g.price)
                         )}
-                      </div>
+                      </MarketTile>
                     ))}
                   </div>
                 </section>
@@ -305,25 +313,23 @@ export default function IslandPage() {
                     {SKIES.map((s) => {
                       const inUse = sky === s.id;
                       return (
-                        <div key={s.id} className={cn("overflow-hidden rounded-md border", inUse ? "border-brand ring-2 ring-brand/25" : "border-line")}>
-                          <SkyThumb id={s.id} animated={s.animated} />
-                          <div className="p-2.5">
-                            <p className="truncate text-sm font-semibold text-fg">{s.name}</p>
-                            {stateOf(s.id) === "owned" ? (
-                              inUse ? (
-                                <p className="mt-1.5 flex h-7 items-center gap-1 text-sm font-semibold text-brand-ink">
-                                  <Check className="size-3.5" /> In use
-                                </p>
-                              ) : (
-                                <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => applySky(s.id)}>
-                                  Use
-                                </Button>
-                              )
+                        <MarketTile key={s.id} id={s.id} state={stateOf(s.id)} selected={inUse}>
+                          <SkyWell id={s.id} animated={s.animated} locked={stateOf(s.id) === "locked"} />
+                          <p className="mt-2 truncate text-sm font-semibold text-fg">{s.name}</p>
+                          {stateOf(s.id) === "owned" ? (
+                            inUse ? (
+                              <p className="mt-1.5 flex h-7 items-center gap-1 text-sm font-semibold text-brand-ink">
+                                <Check className="size-3.5" /> In use
+                              </p>
                             ) : (
-                              getButton(s.id, s.name, s.price)
-                            )}
-                          </div>
-                        </div>
+                              <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => applySky(s.id)}>
+                                Use
+                              </Button>
+                            )
+                          ) : (
+                            getButton(s.id, s.name, s.price)
+                          )}
+                        </MarketTile>
                       );
                     })}
                   </div>
@@ -334,10 +340,8 @@ export default function IslandPage() {
                     {DECOR.map((d) => {
                       const count = decor.filter((x) => x.id === d.id).length;
                       return (
-                        <div key={d.id} className="rounded-md border border-line p-2.5" title={d.description}>
-                          <div className="h-[72px] rounded-sm bg-surface-2/70 p-2">
-                            <ArtThumb art={d.art} />
-                          </div>
+                        <MarketTile key={d.id} id={d.id} state={stateOf(d.id)} title={d.description}>
+                          <SpriteWell art={d.art} locked={stateOf(d.id) === "locked"} />
                           <p className="mt-2 truncate text-sm font-semibold text-fg">{d.name}</p>
                           {stateOf(d.id) === "owned" ? (
                             <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => place(d.id)}>
@@ -346,7 +350,7 @@ export default function IslandPage() {
                           ) : (
                             getButton(d.id, d.name, d.price)
                           )}
-                        </div>
+                        </MarketTile>
                       );
                     })}
                   </div>
@@ -367,9 +371,7 @@ export default function IslandPage() {
                         className={cn("flex items-center gap-3 rounded-md px-2.5 py-2", selected === i ? "bg-brand-soft" : "hover:bg-surface-2/70")}
                       >
                         <button className="flex flex-1 items-center gap-3 text-left" onClick={() => setSelected(selected === i ? null : i)}>
-                          <span className="size-9 rounded-sm bg-surface-2 p-1">
-                            <ArtThumb art={findDecor(d.id)?.art ?? ""} />
-                          </span>
+                          <SpriteWell art={findDecor(d.id)?.art ?? ""} size="row" />
                           <span className="text-base font-medium text-fg">{findDecor(d.id)?.name}</span>
                         </button>
                         <Button variant="ghost" size="icon-sm" onClick={() => remove(i)} aria-label={`Remove ${findDecor(d.id)?.name}`}>
