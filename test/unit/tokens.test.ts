@@ -100,3 +100,64 @@ describe("design tokens", () => {
     }
   });
 });
+
+describe("ambassador accent", () => {
+  const block = /\[data-accent="ambassador"\]\s*\{([\s\S]*?)\n\}/.exec(css)?.[1] ?? "";
+  const accent: Record<string, string> = {};
+  for (const m of block.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})\s*;/g)) accent[m[1]] = m[2].toLowerCase();
+  const tokens = rootHex();
+  const AA = 4.5;
+  // Glass at its opacity floor over the darkest backdrop, and over the sky.
+  const glassOverFoliage = over(tokens.surface, "#2f6a3b", 0.84);
+  const glassOverSky = over(tokens.surface, tokens.sky, 0.88);
+
+  it("defines the accent block", () => {
+    expect(Object.keys(accent).sort()).toEqual(["accent-2", "brand", "brand-fg", "brand-ink", "brand-soft", "brand-strong", "medal-cobalt", "medal-navy"]);
+  });
+
+  it("only overrides the brand, the accent, the medal and the focus ring", () => {
+    const declared = [...block.matchAll(/^\s*--([a-z0-9-]+):/gm)].map((m) => m[1]).sort();
+    expect(declared).toEqual(["accent-2", "brand", "brand-fg", "brand-ink", "brand-soft", "brand-strong", "medal-cobalt", "medal-navy", "ring"]);
+    // The ring bakes in the brand at :root, so it must be redefined here to follow the accent.
+    expect(block).toMatch(/--ring:[^;]*var\(--brand\)/);
+  });
+
+  it("is a real change: royal blue replaces the green brand", () => {
+    expect(accent.brand).not.toBe(tokens.brand);
+    expect(accent["brand-soft"]).not.toBe(tokens["brand-soft"]);
+  });
+
+  it("passes WCAG AA for white text on the blues", () => {
+    expect(contrast(accent["brand-fg"], accent.brand), "white on royal blue").toBeGreaterThanOrEqual(AA);
+    expect(contrast(accent["brand-fg"], accent["brand-strong"]), "white on cobalt").toBeGreaterThanOrEqual(AA);
+  });
+
+  it("passes WCAG AA for blue and purple text on glass, on the page surface and on the soft tint", () => {
+    for (const [name, fg] of [
+      ["royal blue", accent.brand],
+      ["cobalt", accent["brand-strong"]],
+      ["blue ink", accent["brand-ink"]],
+      ["purple", accent["accent-2"]],
+    ]) {
+      expect(contrast(fg, glassOverFoliage), `${name} on glass over dark foliage`).toBeGreaterThanOrEqual(AA);
+      expect(contrast(fg, glassOverSky), `${name} on glass over sky`).toBeGreaterThanOrEqual(AA);
+      expect(contrast(fg, tokens.surface), `${name} on surface`).toBeGreaterThanOrEqual(AA);
+      expect(contrast(fg, accent["brand-soft"]), `${name} on the soft tint`).toBeGreaterThanOrEqual(AA);
+    }
+  });
+
+  it("keeps the medal at full-strength navy and cobalt", () => {
+    for (const name of ["medal-navy", "medal-cobalt"]) {
+      expect(contrast("#ffffff", accent[name]), `white on ${name}`).toBeGreaterThanOrEqual(AA);
+    }
+    expect(luminance(accent["medal-navy"])).toBeLessThan(luminance(accent["medal-cobalt"]));
+  });
+
+  it("stays scoped: --accent-2 and the medal exist nowhere outside the block, and only the Ambassador page opts in", () => {
+    const outside = css.replace(block, "");
+    expect(outside).not.toMatch(/--medal-/);
+    expect(outside.match(/--accent-2:/g)).toBeNull();
+    const users = sourceFiles(join(root, "src")).filter((f) => /\.tsx?$/.test(f) && /data-accent=/.test(readFileSync(f, "utf8")));
+    expect(users.map((f) => f.replace(`${root}/`, ""))).toEqual(["src/pages/Ambassador.tsx"]);
+  });
+});

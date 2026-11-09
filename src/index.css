@@ -62,6 +62,29 @@
   --ring: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--brand) 70%, transparent);
 }
 
+/*
+ * Ambassador accent: royal blue and cobalt in place of the brand green, with a
+ * purple second accent. Scoped to the Ambassador page (its wrapper sets
+ * data-accent="ambassador"); the sidebar, top bar and every other page keep the
+ * green brand. Surfaces stay light glass. Custom properties that bake in the
+ * brand at :root (the focus ring) are redefined here so they follow the accent.
+ * test/unit/tokens.test.ts checks contrast and that nothing else leaks.
+ */
+[data-accent="ambassador"] {
+  --brand: #2a52c8;
+  --brand-strong: #0f47a8;
+  --brand-soft: #e4ebfb;
+  --brand-fg: #ffffff;
+  --brand-ink: #1a3f9c;
+  --accent-2: #6236bd;
+
+  /* The ambassador medal keeps full-strength navy and cobalt (no tint). */
+  --medal-navy: #0b1f4d;
+  --medal-cobalt: #0047ab;
+
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--brand) 70%, transparent);
+}
+
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
@@ -84,6 +107,8 @@
   --color-brand-soft: var(--brand-soft);
   --color-brand-fg: var(--brand-fg);
   --color-brand-ink: var(--brand-ink);
+  /* Only defined inside [data-accent="ambassador"]. */
+  --color-accent-2: var(--accent-2);
   --color-ocean: var(--ocean);
   --color-ocean-soft: var(--ocean-soft);
   --color-sun: var(--sun);

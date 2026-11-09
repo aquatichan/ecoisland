@@ -37,83 +37,86 @@ export default function Ambassador() {
 
   return (
     <Page className="mx-auto max-w-[1040px]">
-      <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
-        <ArrowLeft className="size-4" /> Act
-      </Link>
-      <div className="grid grid-cols-[minmax(0,1fr)_420px] gap-8">
-        <div>
-          <p className="t-eyebrow">Ecoisland Ambassadors</p>
-          <h1 className="t-display mt-3 max-w-[16ch]">Lead the work in your community</h1>
-          <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-fg-3">
-            Ambassadors organize cleanups, plantings and other real projects where they live, and bring their schools along. Ecoisland gives you the tools to post events, find volunteers and track their hours.
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            {BENEFITS.map((b) => (
-              <div key={b.title} className="rounded-lg border border-line bg-surface p-5">
-                <span className="grid size-9 place-items-center rounded-md bg-brand-soft text-brand-ink" aria-hidden>
-                  <b.icon className="size-[18px]" />
-                </span>
-                <p className="mt-3 text-md font-semibold text-fg">{b.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-fg-3">{b.body}</p>
-              </div>
-            ))}
+      {/* Blue and purple accent for this page only (see [data-accent] in index.css). */}
+      <div data-accent="ambassador">
+        <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+          <ArrowLeft className="size-4" /> Act
+        </Link>
+        <div className="grid grid-cols-[minmax(0,1fr)_420px] gap-8">
+          <div>
+            <p className="t-eyebrow text-accent-2">Ecoisland Ambassadors</p>
+            <h1 className="t-display mt-3 max-w-[16ch]">Lead the work in your community</h1>
+            <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-fg-3">
+              Ambassadors organize cleanups, plantings and other real projects where they live, and bring their schools along. Ecoisland gives you the tools to post events, find volunteers and track their hours.
+            </p>
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              {BENEFITS.map((b) => (
+                <div key={b.title} className="rounded-lg border border-line bg-surface p-5">
+                  <span className="grid size-9 place-items-center rounded-md bg-brand-soft text-brand-ink" aria-hidden>
+                    <b.icon className="size-[18px]" />
+                  </span>
+                  <p className="mt-3 text-md font-semibold text-fg">{b.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-fg-3">{b.body}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 flex items-center gap-2 text-base text-fg-3">
+              <Treecoin size={16} /> Approved ambassadors also get {ACT_REWARD.AMBASSADOR_TC} Treecoins for their island.
+            </p>
           </div>
-          <p className="mt-6 flex items-center gap-2 text-base text-fg-3">
-            <Treecoin size={16} /> Approved ambassadors also get {ACT_REWARD.AMBASSADOR_TC} Treecoins for their island.
-          </p>
-        </div>
 
-        <div className="self-start">
-          {loading ? (
-            <Skeleton className="h-96 rounded-xl" />
-          ) : profile.ambassador ? (
-            <Card className="p-7">
-              <Badge tone="brand">
-                <BadgeCheck /> Ambassador
-              </Badge>
-              <h2 className="t-h2 mt-4">You're an Ecoisland Ambassador</h2>
-              <p className="mt-2 text-base text-fg-3">
-                {profile.ambassador_region ? `For ${profile.ambassador_region}. ` : ""}Community events you post go live right away. Keep them accurate, and cancel anything that changes.
-              </p>
-              <Button className="mt-6 w-full" size="lg" onClick={() => setPosting(true)}>
-                <CalendarPlus /> Post a community event
-              </Button>
-              <Button variant="secondary" className="mt-2.5 w-full" asChild>
-                <Link to="/act">See what's happening</Link>
-              </Button>
-            </Card>
-          ) : application && !reapply ? (
-            <Card className="p-7">
-              {application.status === "pending" ? (
-                <>
-                  <Badge tone="sun">
-                    <Clock /> In review
-                  </Badge>
-                  <h2 className="t-h2 mt-4">Thanks for applying</h2>
-                  <p className="mt-2 text-base text-fg-3">
-                    We read every application. You'll see the decision here, usually within a week. We may email you at {application.email || "your account email"}.
-                  </p>
-                </>
-              ) : application.status === "declined" ? (
-                <>
-                  <Badge tone="coral">Not this time</Badge>
-                  <h2 className="t-h2 mt-4">Your application wasn't approved</h2>
-                  {application.review_note && <p className="mt-2 text-base text-fg-2">{application.review_note}</p>}
-                  <p className="mt-2 text-base text-fg-3">You're welcome to apply again with more detail about what you'd organize.</p>
-                  <Button className="mt-6" onClick={() => setReapply(true)}>
-                    Apply again
-                  </Button>
-                </>
-              ) : (
-                <p className="text-base text-fg-3">Your application was approved. Refresh the page to see your ambassador tools.</p>
-              )}
-            </Card>
-          ) : (
-            <ApplicationForm onDone={() => setReapply(false)} defaultName={profile.full_name ?? ""} teacher={profile.role === "teacher"} />
-          )}
+          <div className="self-start">
+            {loading ? (
+              <Skeleton className="h-96 rounded-xl" />
+            ) : profile.ambassador ? (
+              <Card className="p-7">
+                <Badge tone="brand">
+                  <BadgeCheck /> Ambassador
+                </Badge>
+                <h2 className="t-h2 mt-4">You're an Ecoisland Ambassador</h2>
+                <p className="mt-2 text-base text-fg-3">
+                  {profile.ambassador_region ? `For ${profile.ambassador_region}. ` : ""}Community events you post go live right away. Keep them accurate, and cancel anything that changes.
+                </p>
+                <Button className="mt-6 w-full" size="lg" onClick={() => setPosting(true)}>
+                  <CalendarPlus /> Post a community event
+                </Button>
+                <Button variant="secondary" className="mt-2.5 w-full" asChild>
+                  <Link to="/act">See what's happening</Link>
+                </Button>
+              </Card>
+            ) : application && !reapply ? (
+              <Card className="p-7">
+                {application.status === "pending" ? (
+                  <>
+                    <Badge tone="sun">
+                      <Clock /> In review
+                    </Badge>
+                    <h2 className="t-h2 mt-4">Thanks for applying</h2>
+                    <p className="mt-2 text-base text-fg-3">
+                      We read every application. You'll see the decision here, usually within a week. We may email you at {application.email || "your account email"}.
+                    </p>
+                  </>
+                ) : application.status === "declined" ? (
+                  <>
+                    <Badge tone="coral">Not this time</Badge>
+                    <h2 className="t-h2 mt-4">Your application wasn't approved</h2>
+                    {application.review_note && <p className="mt-2 text-base text-fg-2">{application.review_note}</p>}
+                    <p className="mt-2 text-base text-fg-3">You're welcome to apply again with more detail about what you'd organize.</p>
+                    <Button className="mt-6" onClick={() => setReapply(true)}>
+                      Apply again
+                    </Button>
+                  </>
+                ) : (
+                  <p className="text-base text-fg-3">Your application was approved. Refresh the page to see your ambassador tools.</p>
+                )}
+              </Card>
+            ) : (
+              <ApplicationForm onDone={() => setReapply(false)} defaultName={profile.full_name ?? ""} teacher={profile.role === "teacher"} />
+            )}
+          </div>
         </div>
+        {posting && <EventForm open onOpenChange={setPosting} classes={[]} trusted />}
       </div>
-      {posting && <EventForm open onOpenChange={setPosting} classes={[]} trusted />}
     </Page>
   );
 }
