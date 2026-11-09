@@ -29,6 +29,7 @@ import { Reveal } from "@/components/fx/Reveal";
 import { SpotlightCard } from "@/components/fx/SpotlightCard";
 import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
+import { Plate } from "@/components/landing/Plate";
 import { ART } from "@/components/island/assets";
 import { IslandScene } from "@/components/island/IslandScene";
 import { demoGrowth } from "@/components/island/demo";
@@ -95,6 +96,11 @@ function Header() {
     </header>
   );
 }
+
+// A card that sits over a section plate. It uses the strong glass fill (0.95) rather than the card's
+// 0.88, so its text passes AA over any picture, even a black one: coral text on the standard card over
+// the darkest part of the teachers plate measured 4.35:1.
+const ON_PLATE = "glass rounded-lg border shadow-sm";
 
 const PERKS = ["Free for students and teachers", "Made for laptops and Chromebooks", "All 9 units, 108 lessons"];
 
@@ -261,22 +267,25 @@ function Course() {
     { n: 27, label: "FRQs graded against a rubric", icon: PenLine },
   ];
   return (
-    <Reveal as="section" className="mx-auto max-w-page px-8 pb-8">
-      <div className="card grid grid-cols-4 divide-x divide-line rounded-xl">
-        {stats.map((s) => (
-          <div key={s.label} className="px-8 py-10">
-            <span className="grid size-10 place-items-center rounded-full bg-brand-soft text-brand-ink">
-              <s.icon className="size-5" aria-hidden />
-            </span>
-            <p className="font-display t-num mt-5 text-5xl leading-none font-[600] text-fg">
-              <span className="sr-only">{s.n.toLocaleString()}</span>
-              <span aria-hidden>
-                <CountUp to={s.n} duration={1.4} separator="," />
+    <Reveal as="section" lift={false} className="relative isolate overflow-hidden">
+      <Plate id="bg-stats" />
+      <div className="mx-auto max-w-page px-8 py-14">
+        <div className={cn(ON_PLATE, "grid grid-cols-4 divide-x divide-line rounded-xl")}>
+          {stats.map((s) => (
+            <div key={s.label} className="px-8 py-10">
+              <span className="grid size-10 place-items-center rounded-full bg-brand-soft text-brand-ink">
+                <s.icon className="size-5" aria-hidden />
               </span>
-            </p>
-            <p className="mt-2 text-md text-fg-3">{s.label}</p>
-          </div>
-        ))}
+              <p className="font-display t-num mt-5 text-5xl leading-none font-[600] text-fg">
+                <span className="sr-only">{s.n.toLocaleString()}</span>
+                <span aria-hidden>
+                  <CountUp to={s.n} duration={1.4} separator="," />
+                </span>
+              </p>
+              <p className="mt-2 text-md text-fg-3">{s.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </Reveal>
   );
@@ -305,62 +314,65 @@ function Teachers() {
   const frame = ROSTER_FRAMES[tick];
   const rows = ROSTER.map((r, k) => ({ ...r, ...frame.rows[k] }));
   return (
-    <Reveal as="section" id="teachers" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
-      <div>
-        <p className="t-eyebrow">For teachers</p>
-        <h2 className="t-h1 mt-3">Assign the work. See who's done it.</h2>
-        <p className="mt-4 text-lg text-fg-3">Create a class and share a six-character code. Students join in seconds, and everything they do counts toward what you assigned.</p>
-        <ul className="mt-8 space-y-4">
-          {[
-            { icon: ListChecks, t: "Assign lessons, lesson or unit quizzes, FRQs, daily sets or field quests, each with a due date." },
-            { icon: Users, t: "Watch completion fill in live. See who's late, who's on a streak, and who hasn't started." },
-            { icon: CalendarCheck, t: "Set the current unit and the test date. Every student's daily set focuses on that unit." },
-            { icon: MessageCircle, t: "Turn on a class chat you moderate, schedule eco actions, and verify students' volunteer hours." },
-          ].map((x) => (
-            <li key={x.t} className="flex gap-3.5 text-md text-fg-2">
-              <span className="grid size-8 shrink-0 place-items-center rounded-md bg-brand-soft text-brand-ink">
-                <x.icon className="size-4" />
-              </span>
-              {x.t}
-            </li>
-          ))}
-        </ul>
-        <Button className="mt-9" size="lg" asChild>
-          <Link to="/start">
-            <GraduationCap /> Set up your class
-          </Link>
-        </Button>
-      </div>
-      <div ref={ref} className="card overflow-hidden" aria-label="Example class roster" data-roster-frame={tick}>
-        <div className="flex items-center justify-between border-b border-line px-6 py-4">
-          <div>
-            <p className="text-md font-semibold text-fg">APES · Period 3</p>
-            <p className="text-sm text-fg-3">Unit 4: Earth Systems and Resources</p>
-          </div>
-          <span className="rounded-sm border border-line-strong px-2.5 py-1 font-mono text-sm font-semibold tracking-[0.14em] text-fg-2">K7Q2MX</span>
+    <Reveal as="section" id="teachers" lift={false} className="relative isolate scroll-mt-20 overflow-hidden">
+      <Plate id="bg-teachers" />
+      <div className="mx-auto grid max-w-page grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
+        <div>
+          <p className="t-eyebrow">For teachers</p>
+          <h2 className="t-h1 mt-3">Assign the work. See who's done it.</h2>
+          <p className="mt-4 text-lg text-fg-3">Create a class and share a six-character code. Students join in seconds, and everything they do counts toward what you assigned.</p>
+          <ul className="mt-8 space-y-4">
+            {[
+              { icon: ListChecks, t: "Assign lessons, lesson or unit quizzes, FRQs, daily sets or field quests, each with a due date." },
+              { icon: Users, t: "Watch completion fill in live. See who's late, who's on a streak, and who hasn't started." },
+              { icon: CalendarCheck, t: "Set the current unit and the test date. Every student's daily set focuses on that unit." },
+              { icon: MessageCircle, t: "Turn on a class chat you moderate, schedule eco actions, and verify students' volunteer hours." },
+            ].map((x) => (
+              <li key={x.t} className="flex gap-3.5 text-md text-fg-2">
+                <span className="grid size-8 shrink-0 place-items-center rounded-md bg-brand-soft text-brand-ink">
+                  <x.icon className="size-4" />
+                </span>
+                {x.t}
+              </li>
+            ))}
+          </ul>
+          <Button className="mt-9" size="lg" asChild>
+            <Link to="/start">
+              <GraduationCap /> Set up your class
+            </Link>
+          </Button>
         </div>
-        <div className="border-b border-line px-6 py-4">
-          <div className="flex items-center justify-between text-base">
-            <span className="font-semibold text-fg">Read 4.2 Soil Formation and Erosion</span>
-            <span className="t-num text-fg-3">
-              {frame.total}/{ROSTER_CLASS_SIZE} done
-            </span>
+        <div ref={ref} className={cn(ON_PLATE, "overflow-hidden")} aria-label="Example class roster" data-roster-frame={tick}>
+          <div className="flex items-center justify-between border-b border-line px-6 py-4">
+            <div>
+              <p className="text-md font-semibold text-fg">APES · Period 3</p>
+              <p className="text-sm text-fg-3">Unit 4: Earth Systems and Resources</p>
+            </div>
+            <span className="rounded-sm border border-line-strong px-2.5 py-1 font-mono text-sm font-semibold tracking-[0.14em] text-fg-2">K7Q2MX</span>
           </div>
-          <ProgressBar value={Math.round((frame.total / ROSTER_CLASS_SIZE) * 100)} className="mt-2.5 h-1.5" label="Example completion" />
-        </div>
-        <ul className="divide-y divide-line">
-          {rows.map((r, k) => (
-            <li key={r.name} className={cn("flex items-center gap-3 px-6 py-3 text-base transition-colors duration-700", frame.lit === k && "bg-brand-soft")}>
-              <Avatar name={r.name} size={28} />
-              <span className="flex-1 font-semibold text-fg">{r.name}</span>
-              <span className="flex w-14 items-center gap-1 text-fg-2">
-                <Flame className={cn("size-3.5", r.streak ? "text-sun" : "text-fg-4")} /> {r.streak}
+          <div className="border-b border-line px-6 py-4">
+            <div className="flex items-center justify-between text-base">
+              <span className="font-semibold text-fg">Read 4.2 Soil Formation and Erosion</span>
+              <span className="t-num text-fg-3">
+                {frame.total}/{ROSTER_CLASS_SIZE} done
               </span>
-              <span className={cn("w-24", r.idle ? "font-semibold text-coral" : "text-fg-3")}>{r.active}</span>
-              <span className="t-num w-12 text-right text-fg-2">{r.done}/5</span>
-            </li>
-          ))}
-        </ul>
+            </div>
+            <ProgressBar value={Math.round((frame.total / ROSTER_CLASS_SIZE) * 100)} className="mt-2.5 h-1.5" label="Example completion" />
+          </div>
+          <ul className="divide-y divide-line">
+            {rows.map((r, k) => (
+              <li key={r.name} className={cn("flex items-center gap-3 px-6 py-3 text-base transition-colors duration-700", frame.lit === k && "bg-brand-soft")}>
+                <Avatar name={r.name} size={28} />
+                <span className="flex-1 font-semibold text-fg">{r.name}</span>
+                <span className="flex w-14 items-center gap-1 text-fg-2">
+                  <Flame className={cn("size-3.5", r.streak ? "text-sun" : "text-fg-4")} /> {r.streak}
+                </span>
+                <span className={cn("w-24", r.idle ? "font-semibold text-coral" : "text-fg-3")}>{r.active}</span>
+                <span className="t-num w-12 text-right text-fg-2">{r.done}/5</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </Reveal>
   );
@@ -407,59 +419,62 @@ function ActSection() {
     { icon: Recycle, tone: "bg-brand-soft text-brand-ink", month: "NOV", day: "17", kind: "Eco action", title: "Trash audit", meta: "Unit 8 · one week", going: "APES · Period 3" },
   ];
   return (
-    <Reveal as="section" id="act" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
-      <div>
-        <p className="t-eyebrow">Act</p>
-        <h2 className="t-h1 mt-3">Then take it outside.</h2>
-        <p className="mt-4 text-lg text-fg-3">Every unit ends somewhere real. Find volunteer events near you, do eco actions that use what you just learned, and build a service record your teacher has verified.</p>
-        <ul className="mt-8 space-y-4">
-          {[
-            { icon: Recycle, t: "Twelve eco actions, each tied to an APES unit: a trash audit, a home energy hunt, a pollinator count." },
-            { icon: HandHeart, t: "RSVP to cleanups and plantings, contact the organizer, and log your hours afterwards." },
-            { icon: Award, t: "Ambassadors organize events in their own area and post them for everyone." },
-          ].map((x) => (
-            <li key={x.t} className="flex gap-3.5 text-md text-fg-2">
-              <span className="grid size-8 shrink-0 place-items-center rounded-md bg-brand-soft text-brand-ink">
-                <x.icon className="size-4" />
-              </span>
-              {x.t}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="relative" aria-label="Example listings in Act">
-        <div className="space-y-4">
-          {cards.map((c, i) => (
-            <div key={c.title} className={cn("card flex gap-4 p-5 shadow-md", i === 1 && "ml-10")}>
-              <div className="flex w-14 shrink-0 flex-col items-center">
-                <div className="w-full overflow-hidden rounded-md border border-line text-center">
-                  <p className={cn("py-0.5 text-2xs font-bold tracking-[0.08em]", c.tone)}>{c.month}</p>
-                  <p className="font-display py-1 text-2xl leading-none font-[600] text-fg">{c.day}</p>
-                </div>
-                <span className={cn("mt-2.5 grid size-8 place-items-center rounded-full", c.tone)}>
-                  <c.icon className="size-4" />
+    <Reveal as="section" id="act" lift={false} className="relative isolate scroll-mt-20 overflow-hidden">
+      <Plate id="bg-act" />
+      <div className="mx-auto grid max-w-page grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
+        <div>
+          <p className="t-eyebrow">Act</p>
+          <h2 className="t-h1 mt-3">Then take it outside.</h2>
+          <p className="mt-4 text-lg text-fg-3">Every unit ends somewhere real. Find volunteer events near you, do eco actions that use what you just learned, and build a service record your teacher has verified.</p>
+          <ul className="mt-8 space-y-4">
+            {[
+              { icon: Recycle, t: "Twelve eco actions, each tied to an APES unit: a trash audit, a home energy hunt, a pollinator count." },
+              { icon: HandHeart, t: "RSVP to cleanups and plantings, contact the organizer, and log your hours afterwards." },
+              { icon: Award, t: "Ambassadors organize events in their own area and post them for everyone." },
+            ].map((x) => (
+              <li key={x.t} className="flex gap-3.5 text-md text-fg-2">
+                <span className="grid size-8 shrink-0 place-items-center rounded-md bg-brand-soft text-brand-ink">
+                  <x.icon className="size-4" />
                 </span>
+                {x.t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="relative" aria-label="Example listings in Act">
+          <div className="space-y-4">
+            {cards.map((c, i) => (
+              <div key={c.title} className={cn(ON_PLATE, "flex gap-4 p-5 shadow-md", i === 1 && "ml-10")}>
+                <div className="flex w-14 shrink-0 flex-col items-center">
+                  <div className="w-full overflow-hidden rounded-md border border-line text-center">
+                    <p className={cn("py-0.5 text-2xs font-bold tracking-[0.08em]", c.tone)}>{c.month}</p>
+                    <p className="font-display py-1 text-2xl leading-none font-[600] text-fg">{c.day}</p>
+                  </div>
+                  <span className={cn("mt-2.5 grid size-8 place-items-center rounded-full", c.tone)}>
+                    <c.icon className="size-4" />
+                  </span>
+                </div>
+                <div className="min-w-0">
+                  <Badge tone={c.kind === "Eco action" ? "sun" : "ocean"}>{c.kind}</Badge>
+                  <p className="mt-2.5 text-lg font-semibold text-fg">{c.title}</p>
+                  <p className="mt-2 flex items-center gap-4 text-sm text-fg-3">
+                    <span className="inline-flex items-center gap-1.5">
+                      {c.kind === "Eco action" ? <Clock className="size-3.5" /> : <MapPin className="size-3.5" />} {c.meta}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Users className="size-3.5" /> {c.going}
+                    </span>
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <Badge tone={c.kind === "Eco action" ? "sun" : "ocean"}>{c.kind}</Badge>
-                <p className="mt-2.5 text-lg font-semibold text-fg">{c.title}</p>
-                <p className="mt-2 flex items-center gap-4 text-sm text-fg-3">
-                  <span className="inline-flex items-center gap-1.5">
-                    {c.kind === "Eco action" ? <Clock className="size-3.5" /> : <MapPin className="size-3.5" />} {c.meta}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Users className="size-3.5" /> {c.going}
-                  </span>
+            ))}
+            <div className={cn(ON_PLATE, "ml-20 flex items-center gap-4 p-5 shadow-md")}>
+              <HandHeart className="size-5 text-brand" />
+              <div>
+                <p className="font-display t-num text-3xl leading-none font-[600] text-fg">
+                  24.5 <span className="font-sans text-base font-normal text-fg-3">volunteer hours, verified</span>
                 </p>
               </div>
-            </div>
-          ))}
-          <div className="card ml-20 flex items-center gap-4 p-5 shadow-md">
-            <HandHeart className="size-5 text-brand" />
-            <div>
-              <p className="font-display t-num text-3xl leading-none font-[600] text-fg">
-                24.5 <span className="font-sans text-base font-normal text-fg-3">volunteer hours, verified</span>
-              </p>
             </div>
           </div>
         </div>
@@ -544,21 +559,24 @@ export default function Landing() {
       <ActSection />
       <ArtStrip />
       <FinalCta />
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-page items-center justify-between px-8 py-8 text-base text-fg-3">
-          <span className="flex items-center gap-3">
-            <Logo />
-            <span>Made by a high school student, for students.</span>
-          </span>
-          <span className="flex gap-5">
-            <Link to="/privacy-policy" className="hover:text-fg">
-              Privacy
-            </Link>
-            <Link to="/tos" className="hover:text-fg">
-              Terms
-            </Link>
-            <span>© 2026 Ecoisland</span>
-          </span>
+      <footer className="relative isolate overflow-hidden">
+        <Plate id="bg-footer" />
+        <div className="mx-auto max-w-page px-8 py-10">
+          <div className="glass flex items-center justify-between rounded-xl border px-6 py-4 text-base text-fg-3">
+            <span className="flex items-center gap-3">
+              <Logo />
+              <span>Made by a high school student, for students.</span>
+            </span>
+            <span className="flex gap-5">
+              <Link to="/privacy-policy" className="hover:text-fg">
+                Privacy
+              </Link>
+              <Link to="/tos" className="hover:text-fg">
+                Terms
+              </Link>
+              <span>© 2026 Ecoisland</span>
+            </span>
+          </div>
         </div>
       </footer>
     </div>
