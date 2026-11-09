@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Info, TriangleAlert, X } from "lucide-react";
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from "react";
+import { accentAttr, type Accent } from "./accent";
 import { cn } from "./utils";
 
 type Tone = "success" | "info" | "error";
-type Toast = { id: number; tone: Tone; title: string; body?: string };
+/** `accent` carries the page's accent into the toast, which renders at the app root, outside any page. */
+type Toast = { id: number; tone: Tone; title: string; body?: string; accent?: Accent };
 type ToastApi = { show: (t: Omit<Toast, "id">) => void };
 
 const ToastContext = createContext<ToastApi>({ show: () => {} });
@@ -45,6 +47,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 className="glass pointer-events-auto flex w-[380px] items-start gap-3 rounded-lg border px-4 py-3 shadow-lg"
                 role={t.tone === "error" ? "alert" : "status"}
+                {...accentAttr(t.accent)}
               >
                 <Icon
                   className={cn("mt-0.5 size-[18px] shrink-0", t.tone === "success" && "text-brand", t.tone === "info" && "text-ocean", t.tone === "error" && "text-coral")}

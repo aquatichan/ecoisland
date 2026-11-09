@@ -115,7 +115,7 @@ export default function Ambassador() {
             )}
           </div>
         </div>
-        {posting && <EventForm open onOpenChange={setPosting} classes={[]} trusted />}
+        {posting && <EventForm open onOpenChange={setPosting} classes={[]} trusted accent="ambassador" />}
       </div>
     </Page>
   );
@@ -141,7 +141,7 @@ function ApplicationForm({ onDone, defaultName, teacher }: { onDone: () => void;
     try {
       await api("ambassador/apply", { fullName, school, grade, region, why, idea, sponsor, agree });
       track("ambassador_applied");
-      toast.show({ tone: "success", title: "Application sent", body: "We'll review it and let you know here." });
+      toast.show({ tone: "success", title: "Application sent", body: "We'll review it and let you know here.", accent: "ambassador" });
       onDone();
     } catch (err) {
       setError(errorMessage(err));

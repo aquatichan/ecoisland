@@ -9,6 +9,7 @@ import { Field, Input, Select, Textarea } from "@/components/ui/field";
 import { Segmented } from "@/components/ui/segmented";
 import { track } from "@/lib/analytics";
 import { listingHref, toLocalInput, type Listing } from "@/lib/act";
+import type { Accent } from "@/lib/accent";
 import { api, errorMessage } from "@/lib/api";
 import { useToast } from "@/lib/toast";
 import { CATEGORIES, CATEGORY_IDS, LIMITS, type Category, type EventKind } from "@/shared/act";
@@ -79,6 +80,7 @@ export function EventForm({
   classes,
   trusted,
   initialKind = "event",
+  accent,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -88,6 +90,8 @@ export function EventForm({
   /** Admins and ambassadors publish community listings directly. */
   trusted: boolean;
   initialKind?: EventKind;
+  /** Carries the opening page's accent into the dialog and its toasts (they render outside the page). */
+  accent?: Accent;
 }) {
   const toast = useToast();
   const navigate = useNavigate();
@@ -171,9 +175,9 @@ export function EventForm({
       track(editing ? "event_edited" : "event_posted", { kind: d.kind, scope: body.scope as string, status: res.status });
       onOpenChange(false);
       if (res.status === "pending") {
-        toast.show({ tone: "success", title: "Thanks! Your suggestion is in review", body: "An Ecoisland admin will check it, usually within a couple of days." });
+        toast.show({ tone: "success", title: "Thanks! Your suggestion is in review", body: "An Ecoisland admin will check it, usually within a couple of days.", accent });
       } else {
-        toast.show({ tone: "success", title: editing ? "Listing updated" : "Listing posted" });
+        toast.show({ tone: "success", title: editing ? "Listing updated" : "Listing posted", accent });
         if (!editing) navigate(listingHref({ scope: body.scope as string, class_id: community ? null : d.target, id: res.id }));
       }
     } catch (err) {
@@ -189,6 +193,7 @@ export function EventForm({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         wide
+        accent={accent}
         title={editing ? "Edit listing" : isEvent ? "Post a volunteer event" : "Post an eco action"}
         description={
           community && !trusted
