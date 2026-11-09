@@ -151,6 +151,8 @@
   --container-dialog: 520px;
   --container-dialog-wide: 760px;
   --blur-scrim: 2px;
+  /* The content column of the public landing page (max-w-page). */
+  --container-page: 1200px;
 
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);

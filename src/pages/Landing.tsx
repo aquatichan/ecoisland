@@ -25,6 +25,7 @@ import CountUp from "@/components/bits/CountUp";
 import Magnet from "@/components/bits/Magnet";
 import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
+import { ART } from "@/components/island/assets";
 import { IslandScene } from "@/components/island/IslandScene";
 import { demoGrowth } from "@/components/island/demo";
 import { LANDMARK_INFO } from "@/shared/landmarks";
@@ -63,17 +64,17 @@ function Header() {
   const inApp = status === "ready" && isOnboarded(profile);
   return (
     <header className="glass sticky top-0 z-40 border-b">
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-8">
+      <div className="mx-auto flex h-16 max-w-page items-center justify-between px-8">
         <Link to="/" aria-label="Ecoisland home">
           <Logo />
         </Link>
-        <nav className="flex items-center gap-1 text-base font-medium text-fg-3" aria-label="Sections">
+        <nav className="flex items-center gap-1 rounded-full border border-line bg-surface-2 p-1 text-base font-medium text-fg-2" aria-label="Sections">
           {[
             ["#how", "How it works"],
             ["#teachers", "For teachers"],
             ["#landmarks", "Landmarks"],
           ].map(([href, label]) => (
-            <a key={href} href={href} className="rounded-sm px-3 py-2 hover:bg-surface-2 hover:text-fg">
+            <a key={href} href={href} className="rounded-full px-4 py-1.5 hover:bg-surface hover:text-fg">
               {label}
             </a>
           ))}
@@ -101,76 +102,84 @@ function Header() {
   );
 }
 
+const PERKS = ["Free for students and teachers", "Made for laptops and Chromebooks", "All 9 units, 108 lessons"];
+
 function Hero() {
   // Open on a grown island, then loop through the year from day one.
   const [i, setI] = useCycle(SHOWCASE.length, 2600, 4);
   const s = SHOWCASE[i];
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      <div className="absolute inset-0" aria-hidden>
-        <TopographyBackdrop />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
-      </div>
-      <div className="relative mx-auto grid min-h-[calc(100dvh-64px)] max-w-[1200px] grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-14 px-8 py-16">
-        <div>
-          <p className="t-eyebrow">For AP Environmental Science</p>
-          <h1 className="t-display mt-5 text-6xl">
-            <BlurText text="Study APES five minutes a day." animateBy="words" delay={60} className="inline" />{" "}
-            <span className="text-brand-ink">
-              <BlurText text="Watch your island grow." animateBy="words" delay={60} className="inline" />
-            </span>
-          </h1>
-          <p className="mt-6 max-w-[48ch] text-xl leading-relaxed text-fg-3">
-            A short daily set built with spaced repetition, the assignments your teacher posts, and an island that thrives when you show up and wilts when you don't.
-          </p>
-          <div className="mt-9 flex items-center gap-3">
-            <Magnet padding={60} magnetStrength={4}>
-              <Button size="lg" asChild>
+    <>
+      <section className="bg-scene relative overflow-hidden">
+        <div className="absolute inset-0" aria-hidden>
+          <TopographyBackdrop />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
+        </div>
+        <div className="relative mx-auto grid max-w-page min-h-[calc(100dvh-8rem)] grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-center gap-12 px-8 pt-20 pb-32">
+          <div>
+            <p className="t-eyebrow text-fg-2">For AP Environmental Science</p>
+            <h1 className="t-display mt-5 text-6xl">
+              <BlurText text="Study APES five minutes a day." animateBy="words" delay={60} className="inline" />{" "}
+              <span className="text-brand-ink">
+                <BlurText text="Watch your island grow." animateBy="words" delay={60} className="inline" />
+              </span>
+            </h1>
+            <p className="mt-6 max-w-[48ch] text-xl leading-relaxed text-fg-2">
+              A short daily set built with spaced repetition, the assignments your teacher posts, and an island that thrives when you show up and wilts when you don't.
+            </p>
+            <div className="mt-9 flex items-center gap-3">
+              <Magnet padding={60} magnetStrength={4}>
+                <Button size="lg" asChild>
+                  <Link to="/start">
+                    Start studying free <ArrowRight />
+                  </Link>
+                </Button>
+              </Magnet>
+              <Button size="lg" variant="secondary" asChild>
                 <Link to="/start">
-                  Start studying free <ArrowRight />
+                  <GraduationCap /> I'm a teacher
                 </Link>
               </Button>
-            </Magnet>
-            <Button size="lg" variant="secondary" asChild>
-              <Link to="/start">
-                <GraduationCap /> I'm a teacher
-              </Link>
-            </Button>
+            </div>
           </div>
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-base text-fg-3">
-            {["Free for students and teachers", "Made for laptops and Chromebooks", "All 9 units, 108 lessons"].map((t) => (
-              <li key={t} className="flex items-center gap-1.5">
-                <Check className="size-4 text-brand" strokeWidth={2.6} /> {t}
-              </li>
-            ))}
-          </ul>
-        </div>
 
-        <div>
-          <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-lg">
+          {/* One picture, with the caption and the stage picker on glass chips so no text sits on bare art. */}
+          <div className="relative overflow-hidden rounded-2xl border border-line shadow-lg">
             <IslandScene growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
-            <div className="flex items-center justify-between gap-4 border-t border-line px-5 py-4">
-              <div>
-                <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
-                <p className="text-sm text-fg-3">{s.caption}</p>
-              </div>
-              <div className="flex gap-1.5" role="tablist" aria-label="Island growth stages">
-                {SHOWCASE.map((x, k) => (
-                  <button
-                    key={x.caption}
-                    role="tab"
-                    aria-selected={k === i}
-                    aria-label={x.caption}
-                    onClick={() => setI(k)}
-                    className={cn("h-2 rounded-full transition-all", k === i ? "w-6 bg-brand" : "w-2 bg-surface-3 hover:bg-fg-4")}
-                  />
-                ))}
-              </div>
+            <div className="glass absolute top-4 right-4 rounded-lg border px-4 py-3">
+              <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
+              <p className="text-sm text-fg-3">{s.caption}</p>
+            </div>
+            <div className="glass absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full border px-3 py-2.5" role="tablist" aria-label="Island growth stages">
+              {SHOWCASE.map((x, k) => (
+                <button
+                  key={x.caption}
+                  role="tab"
+                  aria-selected={k === i}
+                  aria-label={x.caption}
+                  onClick={() => setI(k)}
+                  className={cn("h-2 rounded-full transition-all", k === i ? "w-6 bg-brand" : "w-2 bg-line-strong hover:bg-fg-4")}
+                />
+              ))}
             </div>
           </div>
         </div>
+      </section>
+
+      {/* The three promises, on a glass strip that overlaps the hero's lower edge. */}
+      <div className="relative z-10 mx-auto -mt-14 max-w-page px-8">
+        <ul className="card grid grid-cols-3 divide-x divide-line rounded-xl">
+          {PERKS.map((t) => (
+            <li key={t} className="flex items-center gap-3 px-6 py-5 text-md font-medium text-fg-2">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-ink">
+                <Check className="size-4" strokeWidth={2.6} aria-hidden />
+              </span>
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </>
   );
 }
 
@@ -182,7 +191,7 @@ function QuestionMock() {
       <div className="mt-3 space-y-1.5">
         {["O horizon", "B horizon", "C horizon"].map((t, k) => (
           <div key={t} className={cn("flex items-center gap-2 rounded-sm border px-2.5 py-1.5 text-sm", k === 0 ? "border-brand bg-brand-soft text-fg" : "border-line text-fg-3")}>
-            <span className={cn("grid size-4 place-items-center rounded-2xs text-2xs font-bold", k === 0 ? "bg-brand text-brand-fg" : "border border-line-strong")}>{k === 0 ? <Check className="size-2.5" strokeWidth={4} /> : "BCD"[k - 1]}</span>
+            <span className={cn("grid size-4 place-items-center rounded-2xs text-2xs font-bold", k === 0 ? "bg-brand text-brand-fg" : "border border-line-strong text-fg-2")}>{k === 0 ? <Check className="size-2.5" strokeWidth={4} /> : "BCD"[k - 1]}</span>
             {t}
           </div>
         ))}
@@ -193,35 +202,24 @@ function QuestionMock() {
 
 function HowItWorks() {
   return (
-    <section id="how" className="mx-auto max-w-[1200px] scroll-mt-20 px-8 py-28">
+    <section id="how" className="mx-auto max-w-page scroll-mt-20 px-8 py-28">
       <p className="t-eyebrow">How it works</p>
       <h2 className="t-h1 mt-3 max-w-[22ch]">A habit you can keep, and something to show for it.</h2>
       <div className="mt-14 grid grid-cols-3 gap-6">
         <div className="card flex flex-col p-6">
-          <QuestionMock />
+          <div className="grid aspect-[4/3] place-items-center rounded-md border border-line bg-surface-2 p-4">
+            <QuestionMock />
+          </div>
           <h3 className="mt-6 text-xl font-semibold text-fg">1. Do today's set</h3>
           <p className="mt-2 text-md text-fg-3">Ten questions from your class's current unit. The ones you miss come back on a schedule until they stick.</p>
         </div>
         <div className="card flex flex-col p-6">
-          <div className="grid grid-cols-3 gap-2">
-            {[0, 160, 900].map((xp) => (
-              <div key={xp} className="overflow-hidden rounded-md border border-line">
-                <IslandScene growth={demoGrowth(xp)} health={1} sky="day" animate={false} className="aspect-square" />
-              </div>
-            ))}
-          </div>
+          <IslandScene growth={demoGrowth(900)} health={1} sky="day" animate={false} className="aspect-[4/3] rounded-md border border-line" label="An island after a few weeks of daily sets" />
           <h3 className="mt-6 text-xl font-semibold text-fg">2. Your island grows</h3>
           <p className="mt-2 text-md text-fg-3">Every question, lesson and quest adds XP. Plants take root, then trees, then a whole ecosystem: {STAGES.length} stages in all.</p>
         </div>
         <div className="card flex flex-col p-6">
-          <div className="grid grid-cols-2 gap-2">
-            <div className="overflow-hidden rounded-md border border-line">
-              <IslandScene growth={demoGrowth(700)} health={1} sky="day" animate={false} className="aspect-[4/3]" />
-            </div>
-            <div className="overflow-hidden rounded-md border border-line">
-              <IslandScene growth={demoGrowth(700)} health={0.2} sky="day" animate={false} className="aspect-[4/3]" />
-            </div>
-          </div>
+          <IslandScene growth={demoGrowth(700)} health={0.2} sky="day" animate={false} className="aspect-[4/3] rounded-md border border-line" label="The same island after missed days, dry and faded" />
           <h3 className="mt-6 text-xl font-semibold text-fg">3. Skip days and it wilts</h3>
           <p className="mt-2 text-md text-fg-3">Miss a day and your island gets thirsty. Miss three and it dries out. One daily set brings it right back.</p>
         </div>
@@ -238,12 +236,14 @@ function Course() {
     { n: 27, label: "FRQs graded against a rubric", icon: PenLine },
   ];
   return (
-    <section className="border-y border-line bg-surface">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-4 gap-8 px-8 py-16">
+    <section className="mx-auto max-w-page px-8 pb-8">
+      <div className="card grid grid-cols-4 divide-x divide-line rounded-xl">
         {stats.map((s) => (
-          <div key={s.label}>
-            <s.icon className="size-5 text-brand" aria-hidden />
-            <p className="font-display t-num mt-4 text-5xl leading-none font-[600] text-fg">
+          <div key={s.label} className="px-8 py-10">
+            <span className="grid size-10 place-items-center rounded-full bg-brand-soft text-brand-ink">
+              <s.icon className="size-5" aria-hidden />
+            </span>
+            <p className="font-display t-num mt-5 text-5xl leading-none font-[600] text-fg">
               <span className="sr-only">{s.n.toLocaleString()}</span>
               <span aria-hidden>
                 <CountUp to={s.n} duration={1.4} separator="," />
@@ -265,7 +265,7 @@ function Teachers() {
     { name: "Maya Rivera", streak: 9, done: 5, active: "Yesterday" },
   ];
   return (
-    <section id="teachers" className="mx-auto grid max-w-[1200px] scroll-mt-20 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
+    <section id="teachers" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
       <div>
         <p className="t-eyebrow">For teachers</p>
         <h2 className="t-h1 mt-3">Assign the work. See who's done it.</h2>
@@ -327,7 +327,7 @@ function Teachers() {
 function Landmarks() {
   return (
     <section id="landmarks" className="scroll-mt-20 border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1200px] px-8 py-28">
+      <div className="mx-auto max-w-page px-8 py-28">
         <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-center gap-14">
           <div>
             <p className="t-eyebrow">Landmarks</p>
@@ -343,7 +343,7 @@ function Landmarks() {
         </div>
         <ul className="mt-14 grid grid-cols-3 gap-3">
           {UNITS.map((u) => (
-            <li key={u.n} className="flex items-start gap-3 rounded-lg border border-line p-4">
+            <li key={u.n} className="card flex items-start gap-3 p-4">
               <Badge tone="brand" className="mt-0.5 shrink-0">
                 Unit {u.n}
               </Badge>
@@ -365,7 +365,7 @@ function ActSection() {
     { icon: Recycle, tone: "bg-brand-soft text-brand-ink", month: "NOV", day: "17", kind: "Eco action", title: "Trash audit", meta: "Unit 8 · one week", going: "APES · Period 3" },
   ];
   return (
-    <section id="act" className="mx-auto grid max-w-[1200px] scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
+    <section id="act" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
       <div>
         <p className="t-eyebrow">Act</p>
         <h2 className="t-h1 mt-3">Then take it outside.</h2>
@@ -427,16 +427,23 @@ function ActSection() {
 }
 
 function FinalCta() {
+  const sky = ART["sky-day"];
   return (
-    <section className="mx-auto max-w-[1200px] px-8 py-28 text-center">
-      <Sparkles className="mx-auto size-6 text-brand" aria-hidden />
-      <h2 className="t-display mx-auto mt-5 max-w-[18ch] text-6xl">Your island is waiting.</h2>
-      <p className="mx-auto mt-4 max-w-[46ch] text-lg text-fg-3">Sign in with Google, join your class with its code, and do your first daily set. It takes about five minutes.</p>
-      <Button size="lg" className="mt-9" asChild>
-        <Link to="/start">
-          Get started <ArrowRight />
-        </Link>
-      </Button>
+    <section className="relative isolate overflow-hidden">
+      {/* The only picture here, behind the panel and never behind text. */}
+      <img src={sky.src} width={sky.w} height={sky.h} alt="" aria-hidden loading="lazy" decoding="async" className="absolute inset-0 -z-10 size-full object-cover object-top" />
+      <div className="mx-auto max-w-page px-8 py-28">
+        <div className="glass max-w-2xl rounded-2xl border p-12 shadow-lg">
+          <Sparkles className="size-6 text-brand" aria-hidden />
+          <h2 className="t-display mt-5 text-6xl">Your island is waiting.</h2>
+          <p className="mt-4 max-w-[46ch] text-lg text-fg-2">Sign in with Google, join your class with its code, and do your first daily set. It takes about five minutes.</p>
+          <Button size="lg" className="mt-9" asChild>
+            <Link to="/start">
+              Get started <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
     </section>
   );
 }
@@ -457,7 +464,7 @@ export default function Landing() {
       <ActSection />
       <FinalCta />
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-8 py-8 text-base text-fg-3">
+        <div className="mx-auto flex max-w-page items-center justify-between px-8 py-8 text-base text-fg-3">
           <span className="flex items-center gap-3">
             <Logo />
             <span>Made by a high school student, for students.</span>
