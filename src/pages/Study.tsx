@@ -34,11 +34,11 @@ export default function Study() {
         <div>
           <p className="t-eyebrow">AP Environmental Science</p>
           <h1 className="t-h1 mt-2.5">Study</h1>
-          <p className="mt-2 text-[15.5px] text-fg-3">
+          <p className="mt-2 text-lg text-fg-3">
             9 units · {ALL_LESSONS.length} lessons · 1,221 practice questions · 27 free-response questions
           </p>
         </div>
-        <span className="text-[13px] text-fg-4">
+        <span className="text-sm text-fg-4">
           Search any lesson with <span className="kbd">⌘K</span>
         </span>
       </header>
@@ -54,7 +54,7 @@ export default function Study() {
                 <Select
                   value={focusUnit}
                   onChange={(e) => void updateProfile(profile.id, { focus_unit: Number(e.target.value) })}
-                  className="h-7 w-[150px] py-0 text-[12.5px]"
+                  className="h-7 w-[150px] py-0 text-sm"
                   aria-label="Choose your focus unit"
                 >
                   {UNITS.map((u) => (
@@ -70,11 +70,11 @@ export default function Study() {
             </h2>
             <div className="mt-4 flex max-w-[520px] items-center gap-4">
               <ProgressBar value={(unitDone / unit.lessons.length) * 100} label="Lessons read" />
-              <span className="t-num shrink-0 text-[13px] text-fg-3">
+              <span className="t-num shrink-0 text-sm text-fg-3">
                 {unitDone}/{unit.lessons.length} lessons
               </span>
             </div>
-            <p className="mt-3 text-[13.5px] text-fg-3">
+            <p className="mt-3 text-base text-fg-3">
               {best !== undefined ? `Best unit quiz: ${best}%. ` : ""}
               {best !== undefined && best >= MASTERY_PCT
                 ? `${LANDMARK_INFO[unit.n].name} is on your island.`
@@ -104,12 +104,12 @@ export default function Study() {
         ].map((t) => (
           <Card key={t.to} interactive className="p-0">
             <Link to={t.to} className="flex h-full items-start gap-4 p-5">
-              <div className={cn("grid size-10 shrink-0 place-items-center rounded-[12px]", t.tone)}>
+              <div className={cn("grid size-10 shrink-0 place-items-center rounded-md", t.tone)}>
                 <t.icon className="size-[18px]" aria-hidden />
               </div>
               <div>
-                <p className="text-[15px] font-semibold text-fg">{t.title}</p>
-                <p className="mt-1 text-[13.5px] text-fg-3">{t.body}</p>
+                <p className="text-md font-semibold text-fg">{t.title}</p>
+                <p className="mt-1 text-base text-fg-3">{t.body}</p>
               </div>
             </Link>
           </Card>
@@ -127,17 +127,17 @@ export default function Study() {
               <Link to={`/study/unit/${u.n}`} className="flex h-full flex-col p-5">
                 <div className="flex items-center justify-between">
                   <span className="t-eyebrow">Unit {u.n}</span>
-                  <span className="text-[12px] text-fg-4">{u.examWeight} of exam</span>
+                  <span className="text-xs text-fg-4">{u.examWeight} of exam</span>
                 </div>
-                <p className="mt-2.5 text-[16px] leading-snug font-semibold text-fg">{u.title}</p>
+                <p className="mt-2.5 text-lg leading-snug font-semibold text-fg">{u.title}</p>
                 <div className="mt-auto pt-5">
                   <div className="flex items-center gap-3">
                     <ProgressBar value={(read / u.lessons.length) * 100} className="h-1.5" label={`Unit ${u.n} lessons read`} />
-                    <span className="t-num text-[12.5px] text-fg-3">
+                    <span className="t-num text-sm text-fg-3">
                       {read}/{u.lessons.length}
                     </span>
                   </div>
-                  <p className={cn("mt-3 flex items-center gap-1.5 text-[12.5px] font-medium", mastered ? "text-brand-ink" : "text-fg-3")}>
+                  <p className={cn("mt-3 flex items-center gap-1.5 text-sm font-medium", mastered ? "text-brand-ink" : "text-fg-3")}>
                     {mastered ? <Check className="size-3.5" strokeWidth={3} /> : <Lock className="size-3.5" />}
                     {mastered ? LANDMARK_INFO[u.n].name : b !== undefined ? `Best ${b}% · ${MASTERY_PCT}% unlocks a landmark` : `${MASTERY_PCT}% on the quiz unlocks a landmark`}
                   </p>

@@ -1,5 +1,5 @@
 import { deleteUser } from "firebase/auth";
-import { Award, Check, Copy, GraduationCap, LogOut, Mail, Monitor, Moon, Sprout, Sun, Trash2, Upload, UserRound } from "lucide-react";
+import { Award, Check, Copy, GraduationCap, LogOut, Mail, Sprout, Trash2, Upload, UserRound } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Page } from "@/components/app/Guards";
@@ -7,14 +7,12 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Field, Input } from "@/components/ui/field";
-import { Segmented } from "@/components/ui/segmented";
 import { Switch } from "@/components/ui/switch";
 import { api, errorMessage, serverHealth } from "@/lib/api";
 import { auth } from "@/lib/firebase";
 import { useDocumentTitle } from "@/lib/hooks";
 import { setUsername, updateProfile, uploadAvatar, usernameProblem, usernameTaken } from "@/lib/profile";
 import { useProfile, useSession } from "@/lib/session";
-import { useTheme, type ThemePref } from "@/lib/theme";
 import { useToast } from "@/lib/toast";
 import type { Role } from "@/shared/types";
 
@@ -22,7 +20,7 @@ function Section({ id, title, description, children }: { id: string; title: stri
   return (
     <Card id={id} className="scroll-mt-24 p-7">
       <h2 className="t-h3">{title}</h2>
-      {description && <p className="mt-1 text-[13.5px] text-fg-3">{description}</p>}
+      {description && <p className="mt-1 text-base text-fg-3">{description}</p>}
       <div className="mt-5">{children}</div>
     </Card>
   );
@@ -30,7 +28,6 @@ function Section({ id, title, description, children }: { id: string; title: stri
 
 const NAV = [
   { id: "profile", label: "Profile" },
-  { id: "appearance", label: "Appearance" },
   { id: "account-type", label: "Account type" },
   { id: "grow", label: "Grow Ecoisland" },
   { id: "account", label: "Account" },
@@ -50,7 +47,7 @@ export default function Settings() {
           <ul className="space-y-0.5">
             {NAV.map((n) => (
               <li key={n.id}>
-                <a href={`#${n.id}`} className="block rounded-[9px] px-3 py-2 text-[14px] font-medium text-fg-3 hover:bg-surface-2 hover:text-fg">
+                <a href={`#${n.id}`} className="block rounded-sm px-3 py-2 text-base font-medium text-fg-3 hover:bg-surface-2 hover:text-fg">
                   {n.label}
                 </a>
               </li>
@@ -59,7 +56,6 @@ export default function Settings() {
         </nav>
         <div className="space-y-6">
           <ProfileSection key={profile.username_lower ?? "p"} />
-          <AppearanceSection />
           <RoleSection />
           <RemindersSection />
           <GrowSection />
@@ -155,25 +151,7 @@ function ProfileSection() {
           Save
         </Button>
       </div>
-      <p className="mt-2 text-[13px] text-fg-3">Signed in as {profile.email || auth.currentUser?.email}. Your email is never shown to other students.</p>
-    </Section>
-  );
-}
-
-function AppearanceSection() {
-  const { pref, setPref } = useTheme();
-  return (
-    <Section id="appearance" title="Appearance" description="Ecoisland follows your computer's setting unless you pick one.">
-      <Segmented<ThemePref>
-        label="Theme"
-        value={pref}
-        onChange={setPref}
-        options={[
-          { value: "light", label: <><Sun /> Light</> },
-          { value: "dark", label: <><Moon /> Dark</> },
-          { value: "system", label: <><Monitor /> System</> },
-        ]}
-      />
+      <p className="mt-2 text-sm text-fg-3">Signed in as {profile.email || auth.currentUser?.email}. Your email is never shown to other students.</p>
     </Section>
   );
 }
@@ -206,17 +184,17 @@ function RoleSection() {
             onClick={() => void change(o.r)}
             disabled={blocked && o.r === "student"}
             aria-pressed={role === o.r}
-            className={`flex items-start gap-3 rounded-[13px] border p-4 text-left transition-colors disabled:opacity-50 ${role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2"}`}
+            className={`flex items-start gap-3 rounded-md border p-4 text-left transition-colors disabled:opacity-50 ${role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2"}`}
           >
             <o.icon className={`mt-0.5 size-5 ${role === o.r ? "text-brand-ink" : "text-fg-3"}`} />
             <span>
-              <span className="block text-[14.5px] font-semibold text-fg">{o.title}</span>
-              <span className="block text-[13px] text-fg-3">{o.body}</span>
+              <span className="block text-md font-semibold text-fg">{o.title}</span>
+              <span className="block text-sm text-fg-3">{o.body}</span>
             </span>
           </button>
         ))}
       </div>
-      {blocked && <p className="mt-3 text-[13px] text-fg-3">Delete or hand over your classes before switching back to a student account.</p>}
+      {blocked && <p className="mt-3 text-sm text-fg-3">Delete or hand over your classes before switching back to a student account.</p>}
     </Section>
   );
 }
@@ -232,8 +210,8 @@ function RemindersSection() {
     <Section id="reminders" title="Reminders" description="An optional email when your streak is about to end. At most one a day.">
       <label className="flex items-center justify-between gap-6">
         <span>
-          <span className="block text-[14.5px] font-medium text-fg">Email me if my island is about to wilt</span>
-          <span className="block text-[13px] text-fg-3">Sent to {profile.email || "your Google email"}. Turn it off any time.</span>
+          <span className="block text-md font-medium text-fg">Email me if my island is about to wilt</span>
+          <span className="block text-sm text-fg-3">Sent to {profile.email || "your Google email"}. Turn it off any time.</span>
         </span>
         <Switch checked={!!profile.email_reminders} onChange={(v) => void updateProfile(profile.id, { email_reminders: v })} label="Email reminders" />
       </label>
@@ -262,11 +240,11 @@ function GrowSection() {
       title="Grow Ecoisland"
       description={teacher ? "Know another APES teacher? Ecoisland is free for every class." : "Ecoisland works best when your whole class is on it. Bring your teacher and classmates."}
     >
-      <div className="flex items-start gap-4 rounded-[13px] bg-brand-soft/60 p-5">
+      <div className="flex items-start gap-4 rounded-md bg-brand-soft/60 p-5">
         <Sprout className="mt-0.5 size-5 shrink-0 text-brand-ink" />
         <div className="min-w-0 flex-1">
-          <p className="text-[14.5px] font-semibold text-fg">{teacher ? "Share with a colleague" : "Invite your APES teacher"}</p>
-          <p className="mt-1 text-[13.5px] text-fg-2">
+          <p className="text-md font-semibold text-fg">{teacher ? "Share with a colleague" : "Invite your APES teacher"}</p>
+          <p className="mt-1 text-base text-fg-2">
             {teacher ? "Send them the link. They can set up a class in under a minute." : "Teachers can create a class in under a minute. Send yours a note."}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -283,11 +261,11 @@ function GrowSection() {
           </div>
         </div>
       </div>
-      <div className="mt-3 flex items-start gap-4 rounded-[13px] border border-line p-5">
+      <div className="mt-3 flex items-start gap-4 rounded-md border border-line p-5">
         <Award className="mt-0.5 size-5 shrink-0 text-sun" />
         <div className="min-w-0 flex-1">
-          <p className="text-[14.5px] font-semibold text-fg">{profile.ambassador ? "You're an Ecoisland Ambassador" : "Become an Ecoisland Ambassador"}</p>
-          <p className="mt-1 text-[13.5px] text-fg-2">
+          <p className="text-md font-semibold text-fg">{profile.ambassador ? "You're an Ecoisland Ambassador" : "Become an Ecoisland Ambassador"}</p>
+          <p className="mt-1 text-base text-fg-2">
             {profile.ambassador ? "Post community events for your area from Act." : "Organize real events in your area, post them for everyone, and earn volunteer hours."}
           </p>
           <Button size="sm" variant="secondary" className="mt-4" asChild>
@@ -332,8 +310,8 @@ function AccountSection() {
     <Section id="account" title="Account">
       <div className="flex items-center justify-between gap-6">
         <div>
-          <p className="text-[14.5px] font-medium text-fg">Sign out</p>
-          <p className="text-[13px] text-fg-3">Your progress is saved to your account.</p>
+          <p className="text-md font-medium text-fg">Sign out</p>
+          <p className="text-sm text-fg-3">Your progress is saved to your account.</p>
         </div>
         <Button
           variant="secondary"
@@ -345,9 +323,9 @@ function AccountSection() {
           <LogOut /> Sign out
         </Button>
       </div>
-      <div className="mt-6 rounded-[13px] border border-coral/30 p-5">
-        <p className="text-[14.5px] font-semibold text-coral">Delete account</p>
-        <p className="mt-1 text-[13.5px] text-fg-3">
+      <div className="mt-6 rounded-md border border-coral/30 p-5">
+        <p className="text-md font-semibold text-coral">Delete account</p>
+        <p className="mt-1 text-base text-fg-3">
           Permanently deletes your profile, island, study history, class memberships, assignment records and field notes{profile.role === "teacher" ? ", and every class you teach" : ""}. This can't be undone.
         </p>
         <Field label={`Type "${phrase}" to confirm`} htmlFor="del-confirm" className="mt-4">

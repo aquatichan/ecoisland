@@ -51,8 +51,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                   aria-hidden
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="text-[14px] font-semibold text-fg">{t.title}</p>
-                  {t.body && <p className="mt-0.5 text-[13px] text-fg-3">{t.body}</p>}
+                  <p className="text-base font-semibold text-fg">{t.title}</p>
+                  {t.body && <p className="mt-0.5 text-sm text-fg-3">{t.body}</p>}
                 </div>
                 <button onClick={() => dismiss(t.id)} className="rounded-md p-1 text-fg-4 hover:bg-surface-2 hover:text-fg-2" aria-label="Dismiss">
                   <X className="size-4" />

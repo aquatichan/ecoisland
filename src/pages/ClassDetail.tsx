@@ -152,14 +152,14 @@ export default function ClassDetail() {
 
   return (
     <Page>
-      <Link to={teacher ? "/class" : "/today"} className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to={teacher ? "/class" : "/today"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> {teacher ? "Classes" : "Today"}
       </Link>
       <header className="mb-7 flex items-end justify-between gap-6">
         <div className="min-w-0">
           <p className="t-eyebrow">{teacher ? "Your class" : `Taught by ${cls.teacher_name}`}</p>
           <h1 className="t-h1 mt-2.5 truncate">{cls.name}</h1>
-          <p className="mt-2 text-[14.5px] text-fg-3">
+          <p className="mt-2 text-md text-fg-3">
             {plural(members.length, "student")}
             {cls.current_unit ? ` · Unit ${cls.current_unit}: ${getUnit(cls.current_unit)?.title}` : ""}
             {cls.test_day ? ` · ${cls.test_label || "Test"} ${formatDay(cls.test_day, { weekday: "short", month: "short", day: "numeric" })}` : ""}
@@ -200,12 +200,12 @@ function CodePill({ code }: { code: string }) {
           /* ignore */
         }
       }}
-      className="flex items-center gap-3 rounded-[13px] border border-line-strong bg-surface px-4 py-2.5 text-left shadow-xs hover:bg-surface-2"
+      className="flex items-center gap-3 rounded-md border border-line-strong bg-surface px-4 py-2.5 text-left shadow-xs hover:bg-surface-2"
       aria-label={`Copy join code ${code}`}
     >
       <span>
-        <span className="block text-[11.5px] font-semibold tracking-[0.06em] text-fg-3 uppercase">Join code</span>
-        <span className="font-mono text-[20px] font-bold tracking-[0.2em] text-fg">{code}</span>
+        <span className="block text-xs font-semibold tracking-[0.06em] text-fg-3 uppercase">Join code</span>
+        <span className="font-mono text-xl font-bold tracking-[0.2em] text-fg">{code}</span>
       </span>
       {copied ? <Check className="size-4 text-brand" /> : <Copy className="size-4 text-fg-3" />}
     </button>
@@ -315,7 +315,7 @@ function Roster({
   }, [members, today, dueSoFar, submissions, unitKey, sort]);
 
   const header = (key: SortKey, label: string, className?: string) => (
-    <th className={cn("px-4 py-3 text-left text-[12px] font-semibold tracking-[0.04em] text-fg-3 uppercase", className)}>
+    <th className={cn("px-4 py-3 text-left text-xs font-semibold tracking-[0.04em] text-fg-3 uppercase", className)}>
       <button className="inline-flex items-center gap-1 hover:text-fg" onClick={() => setSort((s) => ({ key, dir: s.key === key ? (s.dir === 1 ? -1 : 1) : 1 }))}>
         {label} <ArrowUpDown className={cn("size-3", sort.key === key ? "text-fg" : "text-fg-4")} />
       </button>
@@ -357,35 +357,35 @@ function Roster({
               <td className="px-4 py-3">
                 <span className="flex items-center gap-3">
                   <Avatar name={m.username} src={m.avatar_url} size={30} />
-                  <span className="text-[14px] font-semibold text-fg">{m.username}</span>
+                  <span className="text-base font-semibold text-fg">{m.username}</span>
                 </span>
               </td>
-              <td className="t-num px-4 py-3 text-[14px] text-fg-2">
+              <td className="t-num px-4 py-3 text-base text-fg-2">
                 <span className="inline-flex items-center gap-1.5">
                   <Flame className={cn("size-4", s.streak ? "text-sun" : "text-fg-4")} /> {s.streak}
                 </span>
               </td>
-              <td className="px-4 py-3 text-[14px]">
+              <td className="px-4 py-3 text-base">
                 <span className={cn(s.idleDays === null || s.idleDays >= 3 ? "font-semibold text-coral" : s.idleDays === 0 ? "text-brand-ink" : "text-fg-2")}>
                   {s.idleDays === null ? "Never" : s.idleDays === 0 ? "Today" : s.idleDays === 1 ? "Yesterday" : `${s.idleDays} days ago`}
                 </span>
               </td>
-              <td className="t-num px-4 py-3 text-[14px] text-fg-2">
+              <td className="t-num px-4 py-3 text-base text-fg-2">
                 {s.weekSets} {s.weekSets === 1 ? "set" : "sets"} · {s.weekXp} XP
               </td>
               <td className="px-4 py-3">
                 {dueSoFar.length === 0 ? (
-                  <span className="text-[13px] text-fg-4">None yet</span>
+                  <span className="text-sm text-fg-4">None yet</span>
                 ) : (
                   <span className="flex items-center gap-3">
                     <ProgressBar value={(done / dueSoFar.length) * 100} className="h-1.5 w-20" label="Assignments done" />
-                    <span className="t-num text-[13px] text-fg-2">
+                    <span className="t-num text-sm text-fg-2">
                       {done}/{dueSoFar.length}
                     </span>
                   </span>
                 )}
               </td>
-              <td className="t-num px-4 py-3 text-[14px] text-fg-2">{cls.current_unit ? (unit === null ? "–" : `${unit}%`) : ""}</td>
+              <td className="t-num px-4 py-3 text-base text-fg-2">{cls.current_unit ? (unit === null ? "–" : `${unit}%`) : ""}</td>
             </tr>
           ))}
         </tbody>
@@ -430,7 +430,7 @@ function StudentDialog({
               className="aspect-[5/3]"
             />
           </div>
-          <div className="space-y-2.5 text-[14px]">
+          <div className="space-y-2.5 text-base">
             {[
               ["Streak", `${s.streak} days`],
               ["This week", `${s.weekSets} sets · ${s.weekXp} XP`],
@@ -439,33 +439,33 @@ function StudentDialog({
               ["Volunteer hours", `${member.hours_verified ?? 0} verified`],
               ["Eco actions", `${member.actions_count ?? 0} done`],
             ].map(([k, v]) => (
-              <div key={k} className="flex justify-between rounded-[10px] bg-surface-2/70 px-3 py-2">
+              <div key={k} className="flex justify-between rounded-md bg-surface-2/70 px-3 py-2">
                 <span className="text-fg-3">{k}</span>
                 <span className="t-num font-semibold text-fg">{v}</span>
               </div>
             ))}
           </div>
         </div>
-        <p className="mt-6 mb-2 text-[13px] font-semibold text-fg-2">Unit quiz bests</p>
+        <p className="mt-6 mb-2 text-sm font-semibold text-fg-2">Unit quiz bests</p>
         <div className="grid grid-cols-9 gap-1.5">
           {UNITS.map((u) => {
             const b = member.unit_best?.[`u${u.n}`];
             return (
-              <div key={u.n} className={cn("rounded-[9px] px-1 py-2 text-center", b === undefined ? "bg-surface-2" : b >= 70 ? "bg-brand-soft" : "bg-sun-soft")}>
-                <p className="text-[11px] text-fg-3">U{u.n}</p>
-                <p className="t-num text-[13px] font-semibold text-fg">{b === undefined ? "–" : `${b}%`}</p>
+              <div key={u.n} className={cn("rounded-sm px-1 py-2 text-center", b === undefined ? "bg-surface-2" : b >= 70 ? "bg-brand-soft" : "bg-sun-soft")}>
+                <p className="text-2xs text-fg-3">U{u.n}</p>
+                <p className="t-num text-sm font-semibold text-fg">{b === undefined ? "–" : `${b}%`}</p>
               </div>
             );
           })}
         </div>
         {assignments.length > 0 && (
           <>
-            <p className="mt-6 mb-2 text-[13px] font-semibold text-fg-2">Assignments</p>
+            <p className="mt-6 mb-2 text-sm font-semibold text-fg-2">Assignments</p>
             <ul className="divide-y divide-line rounded-lg border border-line">
               {assignments.map((a) => {
                 const sub = submissions[a.id]?.[member.uid];
                 return (
-                  <li key={a.id} className="flex items-center gap-3 px-3.5 py-2.5 text-[13.5px]">
+                  <li key={a.id} className="flex items-center gap-3 px-3.5 py-2.5 text-base">
                     <span className="flex-1 truncate text-fg-2">{a.title}</span>
                     <span className="text-fg-3">{formatDay(a.due_day, { month: "short", day: "numeric" })}</span>
                     {sub?.done ? <Badge tone={sub.late ? "sun" : "brand"}>{sub.late ? "Late" : "Done"}{sub.score !== null ? ` · ${sub.score}%` : ""}</Badge> : <Badge tone={daysBetween(a.due_day, today) > 0 ? "coral" : "neutral"}>{sub && sub.progress > 0 ? `${sub.progress}/${sub.target}` : sub?.score != null ? `${sub.score}%` : "Not started"}</Badge>}
@@ -478,7 +478,7 @@ function StudentDialog({
         <div className="mt-6 flex justify-end">
           {confirm ? (
             <div className="flex items-center gap-2">
-              <span className="text-[13.5px] text-fg-3">Remove {member.username}? They can't rejoin until you allow it in Settings.</span>
+              <span className="text-base text-fg-3">Remove {member.username}? They can't rejoin until you allow it in Settings.</span>
               <Button variant="secondary" size="sm" onClick={() => setConfirm(false)}>
                 Cancel
               </Button>
@@ -547,19 +547,19 @@ function TeacherAssignments({
       <li key={a.id} className="py-1">
         <div className="flex items-center gap-4 px-2 py-2.5">
           <button className="flex min-w-0 flex-1 items-center gap-4 text-left" onClick={() => setExpanded(isOpen ? null : a.id)} aria-expanded={isOpen}>
-            <span className="grid size-10 shrink-0 place-items-center rounded-[12px] bg-surface-2 text-fg-2">
+            <span className="grid size-10 shrink-0 place-items-center rounded-md bg-surface-2 text-fg-2">
               <Icon className="size-[18px]" />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-[14.5px] font-semibold text-fg">{a.title}</span>
-              <span className="block truncate text-[13px] text-fg-3">
+              <span className="block truncate text-md font-semibold text-fg">{a.title}</span>
+              <span className="block truncate text-sm text-fg-3">
                 {ASSIGNMENT_TYPES.find((t) => t.type === a.type)?.label} · Due {formatDay(a.due_day, { weekday: "short", month: "short", day: "numeric" })}
                 {a.min_pct ? ` · ${a.min_pct}% to pass` : ""}
               </span>
             </span>
             <span className="flex w-[220px] items-center gap-3">
               <ProgressBar value={members.length ? (done / members.length) * 100 : 0} className="h-1.5" label="Completion" />
-              <span className="t-num text-[13px] whitespace-nowrap text-fg-2">
+              <span className="t-num text-sm whitespace-nowrap text-fg-2">
                 {done}/{members.length} done
               </span>
             </span>
@@ -594,9 +594,9 @@ function TeacherAssignments({
         </div>
         {isOpen && (
           <div className="mb-3 ml-16 rounded-lg border border-line">
-            {a.notes && <p className="border-b border-line px-4 py-2.5 text-[13.5px] text-fg-2">{a.notes}</p>}
+            {a.notes && <p className="border-b border-line px-4 py-2.5 text-base text-fg-2">{a.notes}</p>}
             {members.length === 0 ? (
-              <p className="px-4 py-3 text-[13.5px] text-fg-3">No students in this class yet.</p>
+              <p className="px-4 py-3 text-base text-fg-3">No students in this class yet.</p>
             ) : (
               <ul className="divide-y divide-line">
                 {[...members]
@@ -604,7 +604,7 @@ function TeacherAssignments({
                   .map((m) => {
                     const sub = subs[m.uid];
                     return (
-                      <li key={m.uid} className="flex items-center gap-3 px-4 py-2 text-[13.5px]">
+                      <li key={m.uid} className="flex items-center gap-3 px-4 py-2 text-base">
                         <Avatar name={m.username} src={m.avatar_url} size={22} />
                         <span className="flex-1 text-fg-2">{m.username}</span>
                         {sub?.done ? (
@@ -631,7 +631,7 @@ function TeacherAssignments({
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-[14px] text-fg-3">Students complete assignments by doing the work. Completion updates here automatically.</p>
+        <p className="text-base text-fg-3">Students complete assignments by doing the work. Completion updates here automatically.</p>
         <Button onClick={() => setEditing("new")}>
           <Plus /> New assignment
         </Button>
@@ -646,13 +646,13 @@ function TeacherAssignments({
         <div className="space-y-6">
           {upcoming.length > 0 && (
             <Card className="px-4 py-2">
-              <p className="px-2 pt-3 text-[12px] font-semibold tracking-[0.05em] text-fg-3 uppercase">Upcoming</p>
+              <p className="px-2 pt-3 text-xs font-semibold tracking-[0.05em] text-fg-3 uppercase">Upcoming</p>
               <ul className="divide-y divide-line">{upcoming.map(row)}</ul>
             </Card>
           )}
           {past.length > 0 && (
             <Card className="px-4 py-2">
-              <p className="px-2 pt-3 text-[12px] font-semibold tracking-[0.05em] text-fg-3 uppercase">Past due</p>
+              <p className="px-2 pt-3 text-xs font-semibold tracking-[0.05em] text-fg-3 uppercase">Past due</p>
               <ul className="divide-y divide-line">{past.map(row)}</ul>
             </Card>
           )}
@@ -741,7 +741,7 @@ function AssignmentForm({ cls, existing, onClose, today }: { cls: WithId<ClassDo
                     onClick={() => setType(t.type)}
                     aria-pressed={type === t.type}
                     className={cn(
-                      "flex items-center gap-2.5 rounded-[11px] border px-3 py-2.5 text-left text-[13.5px] font-semibold transition-colors",
+                      "flex items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-base font-semibold transition-colors",
                       type === t.type ? "border-brand bg-brand-soft text-brand-ink" : "border-line-strong text-fg-2 hover:bg-surface-2",
                     )}
                   >
@@ -849,17 +849,17 @@ function StudentAssignments({ assignments, loading, today }: { assignments: With
           const late = !st.done && daysBetween(a.due_day, today) > 0;
           return (
             <li key={a.id} className="flex items-center gap-4 px-2 py-3.5">
-              <span className={cn("grid size-10 shrink-0 place-items-center rounded-[12px]", st.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
+              <span className={cn("grid size-10 shrink-0 place-items-center rounded-md", st.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
                 {st.done ? <Check className="size-[18px]" strokeWidth={2.6} /> : <Icon className="size-[18px]" />}
               </span>
               <div className="min-w-0 flex-1">
-                <p className={cn("truncate text-[14.5px] font-semibold", st.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
-                <p className="truncate text-[13px] text-fg-3">
+                <p className={cn("truncate text-md font-semibold", st.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
+                <p className="truncate text-sm text-fg-3">
                   <span className={cn(late && "font-semibold text-coral")}>{dueLabel(a.due_day, today)}</span>
                   {a.notes ? ` · ${a.notes}` : ""}
                 </p>
               </div>
-              <span className="t-num text-[13px] text-fg-3">{st.done ? (st.score !== null ? `Done · ${st.score}%` : "Done") : a.type === "daily_sets" ? `${st.progress} of ${st.target}` : st.score !== null ? `Best ${st.score}%` : "Not started"}</span>
+              <span className="t-num text-sm text-fg-3">{st.done ? (st.score !== null ? `Done · ${st.score}%` : "Done") : a.type === "daily_sets" ? `${st.progress} of ${st.target}` : st.score !== null ? `Best ${st.score}%` : "Not started"}</span>
               {!st.done && (
                 <Button size="sm" variant={late ? "primary" : "secondary"} asChild>
                   <Link to={assignmentHref(a)}>Start</Link>
@@ -918,10 +918,10 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
               return (
                 <li key={m.uid}>
                   <button onClick={() => setView(m)} className={cn("flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-surface-2/60", me && "bg-brand-soft/50")}>
-                    <span className={cn("t-num w-7 text-center text-[14px] font-bold", i === 0 ? "text-sun-ink" : i < 3 ? "text-fg-2" : "text-fg-4")}>{i + 1}</span>
+                    <span className={cn("t-num w-7 text-center text-base font-bold", i === 0 ? "text-sun-ink" : i < 3 ? "text-fg-2" : "text-fg-4")}>{i + 1}</span>
                     <Avatar name={m.username} src={m.avatar_url} size={32} />
                     <span className="min-w-0 flex-1">
-                      <span className="flex items-center gap-2 truncate text-[14.5px] font-semibold text-fg">
+                      <span className="flex items-center gap-2 truncate text-md font-semibold text-fg">
                         {m.username} {me && <Badge tone="brand">You</Badge>}
                         {m.ambassador && (
                           <Badge tone="sun" title="Ecoisland Ambassador">
@@ -935,9 +935,9 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
                         <span className={cn("block h-full rounded-full", value < 0 ? "bg-coral/70" : "bg-brand")} style={{ width: `${(Math.abs(value) / top) * 100}%` }} />
                       </span>
                     </span>
-                    <span className="t-num w-[92px] text-right text-[14px] font-semibold text-fg">
+                    <span className="t-num w-[92px] text-right text-base font-semibold text-fg">
                       {board === "growth" && value > 0 ? "+" : ""}
-                      {value.toLocaleString()} <span className="text-[12px] font-medium text-fg-3">{unit}</span>
+                      {value.toLocaleString()} <span className="text-xs font-medium text-fg-3">{unit}</span>
                     </span>
                   </button>
                 </li>
@@ -948,7 +948,7 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
       </Card>
       <Card className="self-start p-6">
         <p className="t-eyebrow">{board === "growth" ? "Growth" : board === "week" ? "This week" : board === "all" ? "All time" : "Streaks"}</p>
-        <p className="mt-3 text-[14px] text-fg-2">
+        <p className="mt-3 text-base text-fg-2">
           {board === "growth"
             ? "This week's XP minus last week's. Anyone can top it just by improving on themselves."
             : board === "week"
@@ -957,7 +957,7 @@ function Leaderboard({ members, loading, today, meId }: { members: WithId<Member
                 ? "Total XP since joining Ecoisland."
                 : "Days in a row with a daily set."}
         </p>
-        <p className="mt-3 text-[13px] text-fg-3">Click a classmate to visit their island.</p>
+        <p className="mt-3 text-sm text-fg-3">Click a classmate to visit their island.</p>
       </Card>
       {view && (
         <Dialog open onOpenChange={(o) => !o && setView(null)}>
@@ -1009,8 +1009,8 @@ function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; 
           <div className="flex items-start gap-3">
             <Avatar name={n.username} src={n.avatar_url} size={34} />
             <div className="min-w-0 flex-1">
-              <p className="text-[14px] font-semibold text-fg">{n.username}</p>
-              <p className="text-[12.5px] text-fg-3">
+              <p className="text-base font-semibold text-fg">{n.username}</p>
+              <p className="text-sm text-fg-3">
                 {n.kind === "action" ? "Eco action" : `Unit ${n.unit}`} · {n.title} · {new Date(n.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
               </p>
             </div>
@@ -1038,7 +1038,7 @@ function Notes({ classId, teacher, meId }: { classId: string; teacher: boolean; 
               </Menu>
             )}
           </div>
-          <p className="mt-4 text-[14.5px] leading-relaxed whitespace-pre-wrap text-fg-2">{n.text}</p>
+          <p className="mt-4 text-md leading-relaxed whitespace-pre-wrap text-fg-2">{n.text}</p>
         </Card>
       ))}
     </div>
@@ -1111,7 +1111,7 @@ function ClassSettings({ cls }: { cls: WithId<ClassDoc> }) {
       <JoinCodeCard cls={cls} />
       <Card className="p-7">
         <h2 className="t-h3 text-coral">Delete class</h2>
-        <p className="mt-2 text-[13.5px] text-fg-3">Removes the roster, assignments, submissions and field notes. Students keep their own progress.</p>
+        <p className="mt-2 text-base text-fg-3">Removes the roster, assignments, submissions and field notes. Students keep their own progress.</p>
         <Field label={`Type "${cls.name}" to confirm`} htmlFor="cls-del" className="mt-4">
           <Input id="cls-del" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
         </Field>
@@ -1159,7 +1159,7 @@ function JoinCodeCard({ cls }: { cls: WithId<ClassDoc> }) {
   return (
     <Card className="p-7">
       <h2 className="t-h3">Join code</h2>
-      <p className="mt-2 text-[13.5px] text-fg-3">
+      <p className="mt-2 text-base text-fg-3">
         Current code <span className="font-mono font-semibold tracking-[0.12em] text-fg">{cls.code}</span>. Reset it if it was shared outside your class. Students already in the class stay.
       </p>
       <Button variant="secondary" className="mt-4 w-full" loading={busy === "reset"} onClick={() => run("reset", "class/reset-code", {}, (r) => `New code: ${r.code}`)}>
@@ -1167,10 +1167,10 @@ function JoinCodeCard({ cls }: { cls: WithId<ClassDoc> }) {
       </Button>
       {removed.length > 0 && (
         <div className="mt-5 border-t border-line pt-4">
-          <p className="text-[12.5px] font-semibold text-fg-3">Removed students can't rejoin</p>
+          <p className="text-sm font-semibold text-fg-3">Removed students can't rejoin</p>
           <ul className="mt-2 space-y-1.5">
             {removed.map((r) => (
-              <li key={r.id} className="flex items-center justify-between gap-2 text-[13.5px] text-fg-2">
+              <li key={r.id} className="flex items-center justify-between gap-2 text-base text-fg-2">
                 <span className="truncate">{r.username || "Student"}</span>
                 <Button size="sm" variant="ghost" loading={busy === r.id} onClick={() => run(r.id, "class/unblock", { uid: r.id }, () => `${r.username || "They"} can join again`)}>
                   Allow back

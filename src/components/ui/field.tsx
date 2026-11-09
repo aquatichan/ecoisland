@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const control =
-  "w-full rounded-[11px] border border-line-strong bg-surface px-3.5 text-[14.5px] text-fg shadow-xs outline-none transition-[border-color,box-shadow] placeholder:text-fg-4 hover:border-[color-mix(in_srgb,var(--fg)_24%,transparent)] focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--brand)_22%,transparent)] disabled:opacity-50 aria-[invalid=true]:border-coral";
+  "w-full rounded-md border border-line-strong bg-surface px-3.5 text-md text-fg shadow-xs outline-none transition-[border-color,box-shadow] placeholder:text-fg-4 hover:border-[color-mix(in_srgb,var(--fg)_24%,transparent)] focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--brand)_22%,transparent)] disabled:opacity-50 aria-[invalid=true]:border-coral";
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input({ className, ...props }, ref) {
   return <input ref={ref} className={cn(control, "h-10", className)} {...props} />;
@@ -27,11 +27,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSel
 export function Field({ label, hint, error, children, htmlFor, className }: { label: ReactNode; hint?: ReactNode; error?: string | null; children: ReactNode; htmlFor?: string; className?: string }) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={htmlFor} className="text-[13px] font-semibold text-fg-2">
+      <label htmlFor={htmlFor} className="text-sm font-semibold text-fg-2">
         {label}
       </label>
       {children}
-      {error ? <p className="text-[12.5px] font-medium text-coral">{error}</p> : hint ? <p className="text-[12.5px] text-fg-3">{hint}</p> : null}
+      {error ? <p className="text-sm font-medium text-coral">{error}</p> : hint ? <p className="text-sm text-fg-3">{hint}</p> : null}
     </div>
   );
 }

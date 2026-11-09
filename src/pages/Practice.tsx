@@ -231,7 +231,7 @@ export default function Practice() {
 
   if (phase === "saving" || !outcome) {
     return (
-      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-[14px] text-fg-3">
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-base text-fg-3">
         <Spinner /> Saving your results…
       </div>
     );
@@ -266,12 +266,12 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
       <div>
         <p className="t-eyebrow">{setup.eyebrow}</p>
         <h1 className="t-h1 mt-3">{doneToday ? "Extra practice" : "Today's daily set"}</h1>
-        <p className="mt-3 max-w-[46ch] text-[15.5px] text-fg-3">
+        <p className="mt-3 max-w-[46ch] text-lg text-fg-3">
           {doneToday
             ? "You've already finished today's set, so this round is practice only. Your answers still sharpen tomorrow's reviews."
             : `${count} questions from ${setup.title}, mixed with reviews of ones you've missed before. About five minutes.`}
         </p>
-        <ul className="mt-6 space-y-2.5 text-[14.5px] text-fg-2">
+        <ul className="mt-6 space-y-2.5 text-md text-fg-2">
           <li className="flex items-center gap-2.5">
             <Sparkles className="size-4 text-brand" aria-hidden /> Spaced repetition: questions you miss come back sooner
           </li>
@@ -286,7 +286,7 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
           <Button size="lg" onClick={onStart} autoFocus>
             Start <ArrowRight />
           </Button>
-          <span className="text-[13px] text-fg-4">
+          <span className="text-sm text-fg-4">
             or press <span className="kbd">Enter</span>
           </span>
         </div>
@@ -350,20 +350,20 @@ function Results({
           <p className="t-eyebrow">{setup.eyebrow}</p>
           <div className="mt-5 flex items-center gap-6">
             <ProgressRing value={pct} size={112} stroke={9}>
-              <span className="font-display t-num text-[30px] font-[600] text-fg">
+              <span className="font-display t-num text-3xl font-[600] text-fg">
                 <CountUp to={pct} duration={0.9} />%
               </span>
             </ProgressRing>
             <div>
               <h1 className="t-h1">{headline}</h1>
-              <p className="mt-1.5 text-[15px] text-fg-3">
+              <p className="mt-1.5 text-md text-fg-3">
                 {correct} of {total} correct
               </p>
             </div>
           </div>
 
           {outcome.error ? (
-            <div className="mt-7 flex items-start gap-3 rounded-lg bg-coral-soft p-4 text-[14px] text-coral">
+            <div className="mt-7 flex items-start gap-3 rounded-lg bg-coral-soft p-4 text-base text-coral">
               <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
               <div className="min-w-0 flex-1">
                 <p>Your answers were checked, but the results couldn't be saved: {outcome.error}</p>
@@ -391,15 +391,15 @@ function Results({
               ) : null}
             </div>
           )}
-          {outcome.already && <p className="mt-3 text-[13.5px] text-fg-3">Today's set was already done, so this round was practice only.</p>}
-          {outcome.capped && <p className="mt-3 text-[13.5px] text-fg-3">You've reached today's {REWARD.QUIZ_DAILY_CAP} rewarded quizzes. Scores still count for assignments and mastery.</p>}
+          {outcome.already && <p className="mt-3 text-base text-fg-3">Today's set was already done, so this round was practice only.</p>}
+          {outcome.capped && <p className="mt-3 text-base text-fg-3">You've reached today's {REWARD.QUIZ_DAILY_CAP} rewarded quizzes. Scores still count for assignments and mastery.</p>}
 
           {outcome.completed.length > 0 && (
             <div className="mt-6 rounded-lg border border-line bg-surface-2/60 p-4">
-              <p className="text-[13px] font-semibold text-fg-2">Assignment complete</p>
+              <p className="text-sm font-semibold text-fg-2">Assignment complete</p>
               <ul className="mt-2 space-y-1.5">
                 {outcome.completed.map((c) => (
-                  <li key={c.assignmentId} className="flex items-center gap-2 text-[14px] text-fg">
+                  <li key={c.assignmentId} className="flex items-center gap-2 text-base text-fg">
                     <CheckCircle2 className="size-4 text-brand" aria-hidden /> {c.title}
                   </li>
                 ))}
@@ -440,26 +440,26 @@ function Results({
             {outcome.newLandmark ? (
               <>
                 <Badge tone="brand">New landmark</Badge>
-                <p className="mt-2 text-[15px] font-semibold text-fg">{LANDMARK_INFO[outcome.newLandmark]?.name}</p>
-                <p className="mt-1 text-[13.5px] text-fg-3">You mastered Unit {outcome.newLandmark}. {LANDMARK_INFO[outcome.newLandmark]?.detail}</p>
+                <p className="mt-2 text-md font-semibold text-fg">{LANDMARK_INFO[outcome.newLandmark]?.name}</p>
+                <p className="mt-1 text-base text-fg-3">You mastered Unit {outcome.newLandmark}. {LANDMARK_INFO[outcome.newLandmark]?.detail}</p>
               </>
             ) : stageUp ? (
               <>
                 <Badge tone="brand">New stage</Badge>
-                <p className="mt-2 text-[15px] font-semibold text-fg">{stageForXp(xpAfter).name}</p>
-                <p className="mt-1 text-[13.5px] text-fg-3">{stageForXp(xpAfter).blurb}</p>
+                <p className="mt-2 text-md font-semibold text-fg">{stageForXp(xpAfter).name}</p>
+                <p className="mt-1 text-base text-fg-3">{stageForXp(xpAfter).blurb}</p>
               </>
             ) : grew > 0 ? (
               <>
-                <p className="text-[15px] font-semibold text-fg">Your island grew</p>
-                <p className="mt-1 text-[13.5px] text-fg-3">
+                <p className="text-md font-semibold text-fg">Your island grew</p>
+                <p className="mt-1 text-base text-fg-3">
                   {grew === 1 ? "A new plant took root." : `${grew} new plants took root.`} {mode === "daily" ? "See you tomorrow." : ""}
                 </p>
               </>
             ) : (
               <>
-                <p className="text-[15px] font-semibold text-fg">{stageForXp(xpAfter).name}</p>
-                <p className="mt-1 text-[13.5px] text-fg-3">Keep going. More XP grows more of your island.</p>
+                <p className="text-md font-semibold text-fg">{stageForXp(xpAfter).name}</p>
+                <p className="mt-1 text-base text-fg-3">Keep going. More XP grows more of your island.</p>
               </>
             )}
           </div>
@@ -470,15 +470,15 @@ function Results({
         <div className="mt-6 space-y-3">
           {mistakes.map(({ question: q, choice, answer }) => (
             <div key={q.id} className="card p-6">
-              <p className="text-[15px] leading-relaxed font-semibold text-fg">{q.prompt}</p>
-              <p className="mt-3 flex gap-2 text-[14px] text-coral">
+              <p className="text-md leading-relaxed font-semibold text-fg">{q.prompt}</p>
+              <p className="mt-3 flex gap-2 text-base text-coral">
                 <span className="font-semibold">You:</span> {q.choices[choice]}
               </p>
-              <p className="mt-1.5 flex gap-2 text-[14px] text-brand-ink">
+              <p className="mt-1.5 flex gap-2 text-base text-brand-ink">
                 <span className="font-semibold">Answer:</span> {q.choices[answer]}
               </p>
               {q.lessonId && (
-                <Link to={`/study/unit/${q.unit}/${encodeURIComponent(q.lessonId)}`} className="mt-3 inline-flex items-center gap-1 text-[13px] font-semibold text-brand-ink hover:underline">
+                <Link to={`/study/unit/${q.unit}/${encodeURIComponent(q.lessonId)}`} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:underline">
                   Reread {findLesson(q.lessonId)?.lesson.code} {findLesson(q.lessonId)?.lesson.title} <ArrowRight className="size-3.5" />
                 </Link>
               )}
@@ -492,13 +492,13 @@ function Results({
 
 function RewardChip({ label, value, icon, plain }: { label: string; value: number; icon: ReactNode; plain?: boolean }) {
   return (
-    <div className="flex items-center gap-2.5 rounded-[13px] border border-line bg-surface-2/70 px-4 py-2.5">
+    <div className="flex items-center gap-2.5 rounded-md border border-line bg-surface-2/70 px-4 py-2.5">
       {icon}
-      <span className="font-display t-num text-[22px] font-[600] text-fg">
+      <span className="font-display t-num text-2xl font-[600] text-fg">
         {plain ? "" : "+"}
         <CountUp to={value} duration={0.8} />
       </span>
-      <span className="text-[13px] text-fg-3">{label}</span>
+      <span className="text-sm text-fg-3">{label}</span>
     </div>
   );
 }

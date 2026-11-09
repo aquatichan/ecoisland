@@ -24,12 +24,12 @@ export default function Guide() {
   const frq = r.exam_structure?.free_response;
   return (
     <Page className="mx-auto max-w-[980px]">
-      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> Study
       </Link>
       <p className="t-eyebrow">AP Environmental Science</p>
       <h1 className="t-h1 mt-2.5">Exam guide</h1>
-      <p className="mt-2 text-[15px] text-fg-3">How the exam works, what each unit is worth, and how to pick up the points readers look for.</p>
+      <p className="mt-2 text-md text-fg-3">How the exam works, what each unit is worth, and how to pick up the points readers look for.</p>
 
       <div className="mt-8 grid grid-cols-2 gap-4">
         {[
@@ -40,19 +40,19 @@ export default function Guide() {
             <Card key={title} className="p-6">
               <p className="t-eyebrow">{title}</p>
               <p className="mt-3 flex items-baseline gap-2">
-                <span className="font-display t-num text-[40px] font-[600] text-fg">{s.questions}</span>
-                <span className="text-[14px] text-fg-3">
+                <span className="font-display t-num text-5xl font-[600] text-fg">{s.questions}</span>
+                <span className="text-base text-fg-3">
                   questions · {s.minutes} minutes · {s.weight}
                 </span>
               </p>
               {s.types && (
-                <ul className="mt-3 list-disc space-y-1 pl-5 text-[14px] text-fg-2">
+                <ul className="mt-3 list-disc space-y-1 pl-5 text-base text-fg-2">
                   {s.types.map((t) => (
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
               )}
-              {s.note && <p className="mt-3 text-[13.5px] text-fg-3">{s.note}</p>}
+              {s.note && <p className="mt-3 text-base text-fg-3">{s.note}</p>}
             </Card>
           ) : null,
         )}
@@ -65,7 +65,7 @@ export default function Guide() {
             {r.unit_weights.map((u) => {
               const top = Number(u.examWeight.split(/[-–]/).pop()?.replace("%", "")) || 0;
               return (
-                <li key={u.unit} className="grid grid-cols-[64px_1fr_220px_64px] items-center gap-4 text-[14px]">
+                <li key={u.unit} className="grid grid-cols-[64px_1fr_220px_64px] items-center gap-4 text-base">
                   <span className="text-fg-3">Unit {u.unit}</span>
                   <Link to={`/study/unit/${u.unit}`} className="truncate font-medium text-fg hover:underline">
                     {u.title}
@@ -86,7 +86,7 @@ export default function Guide() {
           <h2 className="t-h3">Tips from high scorers</h2>
           <ul className="mt-4 space-y-3">
             {r.tips_and_tricks.map((t, i) => (
-              <li key={i} className="flex gap-3 text-[14.5px] leading-relaxed text-fg-2">
+              <li key={i} className="flex gap-3 text-md leading-relaxed text-fg-2">
                 <Lightbulb className="mt-1 size-4 shrink-0 text-sun" aria-hidden /> {t}
               </li>
             ))}
@@ -101,11 +101,11 @@ export default function Guide() {
             {r.helpful_websites.map((w) => (
               <li key={w.name} className="flex items-start justify-between gap-6 py-3">
                 <div>
-                  <p className="text-[14.5px] font-semibold text-fg">{w.name}</p>
-                  {w.note && <p className="mt-0.5 text-[13.5px] text-fg-3">{w.note}</p>}
+                  <p className="text-md font-semibold text-fg">{w.name}</p>
+                  {w.note && <p className="mt-0.5 text-base text-fg-3">{w.note}</p>}
                 </div>
                 {w.url && (
-                  <a href={w.url} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1 text-[13px] font-semibold text-brand-ink hover:underline">
+                  <a href={w.url} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-brand-ink hover:underline">
                     Open <ExternalLink className="size-3.5" />
                   </a>
                 )}

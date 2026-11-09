@@ -34,7 +34,7 @@ export function DialogContent({
           <div>
             <D.Title className="t-h2">{title}</D.Title>
             {description ? (
-              <D.Description className="mt-1.5 text-[14px] text-fg-3">{description}</D.Description>
+              <D.Description className="mt-1.5 text-base text-fg-3">{description}</D.Description>
             ) : (
               <D.Description className="sr-only">{typeof title === "string" ? title : "Dialog"}</D.Description>
             )}

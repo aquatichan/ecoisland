@@ -6,12 +6,12 @@ export function EmptyState({ icon: Icon, title, body, action, className }: { ico
   return (
     <div className={cn("flex flex-col items-center px-6 py-10 text-center", className)}>
       {Icon && (
-        <div className="mb-4 grid size-11 place-items-center rounded-[13px] bg-surface-2 text-fg-3">
+        <div className="mb-4 grid size-11 place-items-center rounded-md bg-surface-2 text-fg-3">
           <Icon className="size-5" aria-hidden />
         </div>
       )}
-      <p className="text-[15px] font-semibold text-fg">{title}</p>
-      {body && <p className="mt-1.5 max-w-[42ch] text-[14px] text-fg-3">{body}</p>}
+      <p className="text-md font-semibold text-fg">{title}</p>
+      {body && <p className="mt-1.5 max-w-[42ch] text-base text-fg-3">{body}</p>}
       {action && <div className="mt-5">{action}</div>}
     </div>
   );

@@ -1,95 +1,65 @@
 @import "tailwindcss";
 
 /*
- * Ecoisland design system.
+ * Ecoisland design system: one glass theme.
  *
- * One set of semantic tokens, defined twice: light ("paper & leaf") and dark
- * ("night lagoon"). Components only ever use the semantic names
- * (bg-surface, text-fg-3, border-line, bg-brand…), never raw colors, so
- * both themes stay in step automatically.
+ * A single set of semantic tokens, sampled from the painted-island mockups
+ * (design/mockups). Components only ever use the semantic names (bg-surface,
+ * text-fg-3, border-line, bg-brand…), never raw colors.
+ *
+ * Glass: panels use --glass-fill, which keeps at least 84% opacity so body
+ * text stays readable over any painted background. test/unit/tokens.test.ts
+ * enforces that floor, the text contrast, and that src/lib/tokens.ts (the
+ * colors JS needs) matches this file.
  *
  * Type: Fraunces (display, optical sizing) + Inter (interface and reading).
+ * Sizes come from the --text-* scale and corners from the --radius-* scale
+ * below; arbitrary text-[Npx] and rounded-[Npx] classes are not allowed.
  */
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   color-scheme: light;
 
-  --bg: #f5f3ec;
-  --surface: #fffdf8;
-  --surface-2: #f0ede4;
-  --surface-3: #e7e3d8;
-  --line: rgba(31, 41, 33, 0.1);
-  --line-strong: rgba(31, 41, 33, 0.18);
+  --bg: #edf3ef;
+  --sky: #bfe2f8;
+  --surface: #fcf9f3;
+  --surface-2: #f3efe5;
+  --surface-3: #e8e3d6;
+  --track: #d6d1c3;
+  --line: rgba(24, 48, 40, 0.1);
+  --line-strong: rgba(24, 48, 40, 0.18);
 
-  --fg: #16201a;
-  --fg-2: #37423b;
-  --fg-3: #59645c;
-  --fg-4: #8a938c;
+  --fg: #11211d;
+  --fg-2: #34423d;
+  --fg-3: #55645d;
+  --fg-4: #84908a;
 
-  --brand: #1c7c50;
-  --brand-strong: #166640;
-  --brand-soft: #e1f1e7;
+  --brand: #177a58;
+  --brand-strong: #10654a;
+  --brand-soft: #e1efe2;
   --brand-fg: #ffffff;
-  --brand-ink: #176a44;
+  --brand-ink: #0f6347;
 
-  --ocean: #2470a8;
-  --ocean-soft: #e2eef8;
-  --sun: #e9a52e;
-  --sun-soft: #fbefd6;
-  --sun-ink: #8f5d06;
-  --coral: #c4452f;
+  --ocean: #216aa3;
+  --ocean-soft: #e0eef8;
+  --sun: #f2b73c;
+  --sun-soft: #fbf0d4;
+  --sun-ink: #7e5204;
+  --coral: #b83e29;
   --coral-soft: #f9e5e0;
 
-  --glass: rgba(250, 248, 242, 0.72);
-  --glass-line: rgba(31, 41, 33, 0.08);
-  --overlay: rgba(22, 32, 26, 0.36);
+  /* Glass. Every fill that can sit behind text stays at or above 0.84. */
+  --glass-fill: rgb(252 249 243 / 0.88);
+  --glass-fill-strong: rgb(252 249 243 / 0.95);
+  --glass-edge: rgb(24 48 40 / 0.09);
+  --glass-blur: 18px;
+  --overlay: rgba(17, 33, 29, 0.36);
 
-  --shadow-xs: 0 1px 1px rgba(28, 36, 30, 0.04);
-  --shadow-sm: 0 1px 2px rgba(28, 36, 30, 0.05), 0 2px 6px -2px rgba(28, 36, 30, 0.06);
-  --shadow-md: 0 1px 2px rgba(28, 36, 30, 0.05), 0 10px 28px -14px rgba(28, 36, 30, 0.22);
-  --shadow-lg: 0 2px 6px rgba(28, 36, 30, 0.06), 0 28px 64px -28px rgba(28, 36, 30, 0.34);
+  --shadow-xs: 0 1px 1px rgba(17, 33, 29, 0.04);
+  --shadow-sm: 0 1px 2px rgba(17, 33, 29, 0.05), 0 2px 6px -2px rgba(17, 33, 29, 0.06);
+  --shadow-md: 0 1px 2px rgba(17, 33, 29, 0.05), 0 10px 28px -14px rgba(17, 33, 29, 0.22);
+  --shadow-lg: 0 2px 6px rgba(17, 33, 29, 0.06), 0 28px 64px -28px rgba(17, 33, 29, 0.34);
   --ring: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--brand) 70%, transparent);
-}
-
-.dark {
-  color-scheme: dark;
-
-  --bg: #0b100e;
-  --surface: #121a17;
-  --surface-2: #18221e;
-  --surface-3: #202c27;
-  --line: rgba(214, 245, 226, 0.08);
-  --line-strong: rgba(214, 245, 226, 0.15);
-
-  --fg: #ecf3ee;
-  --fg-2: #c6d2ca;
-  --fg-3: #97a59d;
-  --fg-4: #67756d;
-
-  --brand: #46c48a;
-  --brand-strong: #5fd39d;
-  --brand-soft: rgba(70, 196, 138, 0.14);
-  --brand-fg: #04150c;
-  --brand-ink: #6fd8a6;
-
-  --ocean: #63ade6;
-  --ocean-soft: rgba(99, 173, 230, 0.14);
-  --sun: #f2b84b;
-  --sun-soft: rgba(242, 184, 75, 0.14);
-  --sun-ink: #f5c86f;
-  --coral: #f0846c;
-  --coral-soft: rgba(240, 132, 108, 0.14);
-
-  --glass: rgba(14, 20, 18, 0.66);
-  --glass-line: rgba(214, 245, 226, 0.07);
-  --overlay: rgba(0, 0, 0, 0.55);
-
-  --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 8px -2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.4), 0 30px 70px -28px rgba(0, 0, 0, 0.75);
 }
 
 @theme inline {
@@ -98,9 +68,11 @@
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
 
   --color-bg: var(--bg);
+  --color-sky: var(--sky);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
+  --color-track: var(--track);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-fg: var(--fg);
@@ -121,6 +93,24 @@
   --color-coral-soft: var(--coral-soft);
   --color-overlay: var(--overlay);
 
+  /* Type scale. The only font sizes components may use (text-2xs … text-6xl). */
+  --text-*: initial;
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+  --text-4xl: 34px;
+  --text-5xl: 44px;
+  --text-6xl: 56px;
+
+  /* Corner scale. */
+  --radius-*: initial;
+  --radius-2xs: 4px;
   --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -150,7 +140,7 @@
 
   body {
     @apply bg-bg font-sans text-fg;
-    font-size: 15px;
+    font-size: var(--text-md);
     line-height: 1.55;
     font-feature-settings: "cv11", "ss03";
     min-width: 0;
@@ -199,41 +189,53 @@
   }
 
   .t-display {
-    @apply font-display text-[56px] leading-[1.02] font-[560] tracking-[-0.025em] text-fg;
+    @apply font-display text-6xl leading-[1.02] font-[560] tracking-[-0.025em] text-fg;
     font-variation-settings: "SOFT" 50;
   }
   .t-h1 {
-    @apply font-display text-[34px] leading-[1.1] font-[560] tracking-[-0.02em] text-fg;
+    @apply font-display text-4xl leading-[1.1] font-[560] tracking-[-0.02em] text-fg;
     font-variation-settings: "SOFT" 50;
   }
   .t-h2 {
-    @apply font-display text-[24px] leading-[1.2] font-[560] tracking-[-0.015em] text-fg;
+    @apply font-display text-2xl leading-[1.2] font-[560] tracking-[-0.015em] text-fg;
     font-variation-settings: "SOFT" 50;
   }
   .t-h3 {
-    @apply text-[16px] leading-[1.35] font-semibold tracking-[-0.01em] text-fg;
+    @apply text-lg leading-[1.35] font-semibold tracking-[-0.01em] text-fg;
   }
   .t-eyebrow {
-    @apply text-[11.5px] leading-none font-semibold tracking-[0.08em] text-fg-3 uppercase;
+    @apply text-xs leading-none font-semibold tracking-[0.08em] text-fg-3 uppercase;
   }
   .t-num {
     font-variant-numeric: tabular-nums;
   }
 
+  /* Glass panel: the default surface for cards. */
   .card {
-    @apply rounded-lg border border-line bg-surface shadow-sm;
+    @apply rounded-lg border shadow-sm;
+    background: var(--glass-fill);
+    border-color: var(--glass-edge);
+    -webkit-backdrop-filter: saturate(160%) blur(var(--glass-blur));
+    backdrop-filter: saturate(160%) blur(var(--glass-blur));
   }
 
-  /* Apple-style frosted chrome for the header and floating bars. */
+  /* Frosted chrome for menus, palettes, toasts and floating bars. */
   .glass {
-    background: var(--glass);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-color: var(--glass-line);
+    background: var(--glass-fill-strong);
+    -webkit-backdrop-filter: saturate(160%) blur(var(--glass-blur));
+    backdrop-filter: saturate(160%) blur(var(--glass-blur));
+    border-color: var(--glass-edge);
+  }
+
+  /* The app backdrop: sky fading into the page color. Glass reads against it. */
+  .bg-scene {
+    background-color: var(--bg);
+    background-image: linear-gradient(180deg, var(--sky) 0, var(--bg) 520px);
+    background-repeat: no-repeat;
   }
 
   .kbd {
-    @apply inline-flex h-[20px] min-w-[20px] items-center justify-center rounded-[5px] border border-line-strong bg-surface-2 px-1 font-sans text-[11px] font-medium text-fg-3;
+    @apply inline-flex h-[20px] min-w-[20px] items-center justify-center rounded-xs border border-line-strong bg-surface-2 px-1 font-sans text-2xs font-medium text-fg-3;
     box-shadow: inset 0 -1px 0 var(--line);
   }
 

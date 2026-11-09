@@ -11,8 +11,7 @@
     <link rel="icon" type="image/png" href="/logo-64.png" />
     <link rel="apple-touch-icon" href="/logo-192.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#f5f3ec" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b100e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#edf3ef" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,13 +28,11 @@
     <meta property="og:url" content="https://ecoisland.xyz" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Apply the saved theme before first paint so there is no flash. -->
+    <!-- Ecoisland has one theme. Clear the preference the old dark/light toggle saved. -->
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("ecoisland-theme");
-          var dark = saved === "dark" || ((!saved || saved === "system") && window.matchMedia("(prefers-color-scheme: dark)").matches);
-          if (dark) document.documentElement.classList.add("dark");
+          localStorage.removeItem("ecoisland-theme");
         } catch (e) {}
       })();
     </script>

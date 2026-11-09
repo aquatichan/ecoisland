@@ -27,7 +27,7 @@ export function MenuItem({ children, onSelect, danger, className }: { children: 
     <M.Item
       onSelect={onSelect}
       className={cn(
-        "flex h-9 cursor-pointer items-center gap-2.5 rounded-[8px] px-2.5 text-[14px] font-medium text-fg-2 outline-none select-none data-[highlighted]:bg-surface-2 data-[highlighted]:text-fg [&_svg]:size-4 [&_svg]:text-fg-3",
+        "flex h-9 cursor-pointer items-center gap-2.5 rounded-sm px-2.5 text-base font-medium text-fg-2 outline-none select-none data-[highlighted]:bg-surface-2 data-[highlighted]:text-fg [&_svg]:size-4 [&_svg]:text-fg-3",
         danger && "text-coral data-[highlighted]:text-coral [&_svg]:text-coral",
         className,
       )}
@@ -38,7 +38,7 @@ export function MenuItem({ children, onSelect, danger, className }: { children: 
 }
 
 export function MenuLabel({ children }: { children: ReactNode }) {
-  return <M.Label className="px-2.5 pt-1.5 pb-2 text-[12.5px] text-fg-3">{children}</M.Label>;
+  return <M.Label className="px-2.5 pt-1.5 pb-2 text-sm text-fg-3">{children}</M.Label>;
 }
 
 export function MenuSeparator() {

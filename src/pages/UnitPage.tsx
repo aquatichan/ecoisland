@@ -53,7 +53,7 @@ export default function UnitPage() {
 
   return (
     <Page>
-      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> Study
       </Link>
       <header className="mb-8 flex items-end justify-between gap-6">
@@ -62,7 +62,7 @@ export default function UnitPage() {
             Unit {unit.n} · {unit.examWeight} of the exam
           </p>
           <h1 className="t-h1 mt-2.5">{unit.title}</h1>
-          <p className="mt-2 text-[15px] text-fg-3">
+          <p className="mt-2 text-md text-fg-3">
             {read} of {unit.lessons.length} lessons read{best !== undefined ? ` · best unit quiz ${best}%` : ""}
           </p>
         </div>
@@ -88,12 +88,12 @@ export default function UnitPage() {
               const quiz = profile.quiz_best?.[lessonKey(l.id)];
               return (
                 <li key={l.id} className="flex items-center gap-4 px-4 py-3.5">
-                  <span className={cn("grid size-8 shrink-0 place-items-center rounded-full text-[12px] font-bold", isRead ? "bg-brand text-brand-fg" : "bg-surface-2 text-fg-3")}>
+                  <span className={cn("grid size-8 shrink-0 place-items-center rounded-full text-xs font-bold", isRead ? "bg-brand text-brand-fg" : "bg-surface-2 text-fg-3")}>
                     {isRead ? <Check className="size-4" strokeWidth={3} /> : l.code.split(".")[1]}
                   </span>
                   <Link to={`/study/unit/${n}/${encodeURIComponent(l.id)}`} className="min-w-0 flex-1 hover:underline hover:decoration-line-strong hover:underline-offset-4">
-                    <span className="t-num mr-2 text-[13px] text-fg-4">{l.code}</span>
-                    <span className="text-[15px] font-medium text-fg">{l.title}</span>
+                    <span className="t-num mr-2 text-sm text-fg-4">{l.code}</span>
+                    <span className="text-md font-medium text-fg">{l.title}</span>
                   </Link>
                   {quiz !== undefined && <Badge tone={quiz >= 70 ? "brand" : "neutral"}>Quiz {quiz}%</Badge>}
                   <Button variant="ghost" size="sm" asChild>
@@ -108,7 +108,7 @@ export default function UnitPage() {
                       </Link>
                     </Button>
                   ) : (
-                    <span className="w-[68px] text-center text-[12px] text-fg-4">Overview</span>
+                    <span className="w-[68px] text-center text-xs text-fg-4">Overview</span>
                   )}
                 </li>
               );
@@ -119,11 +119,11 @@ export default function UnitPage() {
         <div className="space-y-6">
           <Card className="p-6">
             <p className="t-eyebrow">Landmark</p>
-            <p className="mt-3 flex items-center gap-2 text-[15.5px] font-semibold text-fg">
+            <p className="mt-3 flex items-center gap-2 text-lg font-semibold text-fg">
               {mastered ? <CheckCircle2 className="size-[18px] text-brand" /> : <Lock className="size-4 text-fg-3" />} {LANDMARK_INFO[n].name}
             </p>
-            <p className="mt-1.5 text-[13.5px] text-fg-3">{LANDMARK_INFO[n].detail}</p>
-            <p className="mt-3 text-[13px] text-fg-2">
+            <p className="mt-1.5 text-base text-fg-3">{LANDMARK_INFO[n].detail}</p>
+            <p className="mt-3 text-sm text-fg-2">
               {mastered ? "Unlocked and growing on your island." : `Score ${MASTERY_PCT}%+ on the Unit ${n} quiz to add it to your island.`}
             </p>
           </Card>
@@ -133,10 +133,10 @@ export default function UnitPage() {
               <p className="t-eyebrow flex items-center gap-1.5">
                 <Compass className="size-3.5" /> Field quest
               </p>
-              <p className="mt-3 text-[15.5px] font-semibold text-fg">{quest.title}</p>
-              <p className="mt-1.5 text-[13.5px] text-fg-3">{quest.prompt}</p>
+              <p className="mt-3 text-lg font-semibold text-fg">{quest.title}</p>
+              <p className="mt-1.5 text-base text-fg-3">{quest.prompt}</p>
               {questDone ? (
-                <p className="mt-4 flex items-center gap-2 text-[13.5px] font-semibold text-brand-ink">
+                <p className="mt-4 flex items-center gap-2 text-base font-semibold text-brand-ink">
                   <CheckCircle2 className="size-4" /> Field note submitted
                 </p>
               ) : (
@@ -157,8 +157,8 @@ export default function UnitPage() {
                   const b = profile.frq_best?.[safeKey(f.id)];
                   return (
                     <li key={f.id}>
-                      <Link to={`/study/frq/${encodeURIComponent(f.id)}`} className="-mx-2 flex items-center gap-3 rounded-[10px] px-2 py-2 hover:bg-surface-2">
-                        <span className="min-w-0 flex-1 text-[14px] leading-snug text-fg-2">{f.title}</span>
+                      <Link to={`/study/frq/${encodeURIComponent(f.id)}`} className="-mx-2 flex items-center gap-3 rounded-md px-2 py-2 hover:bg-surface-2">
+                        <span className="min-w-0 flex-1 text-base leading-snug text-fg-2">{f.title}</span>
                         {b !== undefined ? <Badge tone="brand">{b}%</Badge> : <ArrowRight className="size-4 text-fg-4" />}
                       </Link>
                     </li>
@@ -208,11 +208,11 @@ function QuestDialog({ unit, open, onOpenChange }: { unit: number; open: boolean
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent title={quest.title} description={`Unit ${unit} field quest. Go outside, look closely, then write what you found.`} wide>
-        <p className="text-[14.5px] text-fg-2">{quest.prompt}</p>
+        <p className="text-md text-fg-2">{quest.prompt}</p>
         <ol className="mt-4 space-y-2">
           {quest.steps.map((s, i) => (
-            <li key={i} className="flex gap-3 text-[14px] text-fg-2">
-              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-surface-2 text-[12px] font-bold text-fg-3">{i + 1}</span>
+            <li key={i} className="flex gap-3 text-base text-fg-2">
+              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-surface-2 text-xs font-bold text-fg-3">{i + 1}</span>
               {s}
             </li>
           ))}
@@ -226,7 +226,7 @@ function QuestDialog({ unit, open, onOpenChange }: { unit: number; open: boolean
           aria-label="Your field note"
         />
         <div className="mt-3 flex items-center justify-between gap-4">
-          <p className="text-[12.5px] text-fg-3">
+          <p className="text-sm text-fg-3">
             {remaining > 0 ? `${remaining} more characters to go.` : "Your teacher and classmates will be able to read this."} Drafts save automatically.
           </p>
           <Button onClick={submit} loading={busy} disabled={!ok}>

@@ -114,7 +114,7 @@ function StudentToday() {
         <h1 className="t-h1 mt-2.5">
           {greeting()}, {name}.
         </h1>
-        <p className="mt-2 text-[15.5px] text-fg-3">{subtitle}</p>
+        <p className="mt-2 text-lg text-fg-3">{subtitle}</p>
       </header>
 
       <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-6">
@@ -161,7 +161,7 @@ function DailySetCard({
               <h2 className="t-h2 mt-3 flex items-center gap-2.5">
                 <CheckCircle2 className="size-6 text-brand" aria-hidden /> Done for today
               </h2>
-              <p className="mt-2 text-[14.5px] text-fg-3">
+              <p className="mt-2 text-md text-fg-3">
                 {streak > 1 ? `${streak}-day streak. ` : ""}Your island is watered until tomorrow night. Want more practice?
               </p>
               <div className="mt-auto flex gap-2.5 pt-6">
@@ -176,7 +176,7 @@ function DailySetCard({
           ) : (
             <>
               <h2 className="t-h2 mt-3">Ten questions, about five minutes</h2>
-              <p className="mt-2 text-[14.5px] text-fg-3">
+              <p className="mt-2 text-md text-fg-3">
                 New questions from {unitTitle}, plus reviews of anything you've missed.{" "}
                 {health.label === "Thriving" ? "Keep your island thriving." : `Your island is ${health.label.toLowerCase()}.`}
               </p>
@@ -200,7 +200,7 @@ function DailySetCard({
             seed={profile.id}
             className="h-full min-h-[220px] transition-transform duration-500 group-hover:scale-[1.015]"
           />
-          <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] font-semibold text-fg-2">
+          <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold text-fg-2">
             <span className={cn("size-2 rounded-full", health.label === "Thriving" ? "bg-brand" : health.label === "Thirsty" ? "bg-sun" : "bg-coral")} />
             {stage.name} · {health.label}
           </div>
@@ -223,17 +223,17 @@ function AssignmentRow({ a, today }: { a: ClassAssignment; today: DayKey }) {
   const soon = !a.status.done && !late && daysBetween(today, a.due_day) <= 1;
   return (
     <li className="flex items-center gap-4 py-3.5">
-      <div className={cn("grid size-10 shrink-0 place-items-center rounded-[12px]", a.status.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
+      <div className={cn("grid size-10 shrink-0 place-items-center rounded-md", a.status.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
         {a.status.done ? <Check className="size-[18px]" strokeWidth={2.6} /> : <Icon className="size-[18px]" />}
       </div>
       <div className="min-w-0 flex-1">
-        <p className={cn("truncate text-[14.5px] font-semibold", a.status.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
-        <p className="mt-0.5 truncate text-[13px] text-fg-3">
+        <p className={cn("truncate text-md font-semibold", a.status.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
+        <p className="mt-0.5 truncate text-sm text-fg-3">
           {a.className} · <span className={cn(late && "font-semibold text-coral", soon && "font-semibold text-sun-ink")}>{dueLabel(a.due_day, today)}</span>
           {a.notes ? ` · ${a.notes}` : ""}
         </p>
       </div>
-      <span className="t-num text-[13px] font-medium whitespace-nowrap text-fg-3">{statusText(a)}</span>
+      <span className="t-num text-sm font-medium whitespace-nowrap text-fg-3">{statusText(a)}</span>
       {!a.status.done && (
         <Button size="sm" variant={late || soon ? "primary" : "secondary"} asChild>
           <Link to={assignmentHref(a)}>{a.status.progress > 0 || a.status.score !== null ? "Continue" : "Start"}</Link>
@@ -265,7 +265,7 @@ function AssignmentsCard({ assignments, hasClass, loading, today }: { assignment
       ) : (
         <>
           {open.length === 0 ? (
-            <p className="mt-4 flex items-center gap-2 text-[14.5px] text-fg-2">
+            <p className="mt-4 flex items-center gap-2 text-md text-fg-2">
               <CheckCircle2 className="size-[18px] text-brand" aria-hidden /> You're all caught up.
             </p>
           ) : (
@@ -277,7 +277,7 @@ function AssignmentsCard({ assignments, hasClass, loading, today }: { assignment
           )}
           {done.length > 0 && (
             <div className="mt-2 border-t border-line pt-3">
-              <button onClick={() => setShowDone((s) => !s)} className="flex items-center gap-1.5 text-[13px] font-semibold text-fg-3 hover:text-fg-2" aria-expanded={showDone}>
+              <button onClick={() => setShowDone((s) => !s)} className="flex items-center gap-1.5 text-sm font-semibold text-fg-3 hover:text-fg-2" aria-expanded={showDone}>
                 <ChevronDown className={cn("size-4 transition-transform", showDone && "rotate-180")} aria-hidden /> Completed ({done.length})
               </button>
               {showDone && (
@@ -318,8 +318,8 @@ export function JoinClassInline({ compact }: { compact?: boolean }) {
     <div className={cn(compact ? "" : "mt-4 rounded-lg border border-dashed border-line-strong p-5")}>
       {!compact && (
         <>
-          <p className="text-[14.5px] font-semibold text-fg">Join your class</p>
-          <p className="mt-1 text-[13.5px] text-fg-3">Enter the 6-character code from your teacher to see assignments, due dates and your class leaderboard.</p>
+          <p className="text-md font-semibold text-fg">Join your class</p>
+          <p className="mt-1 text-base text-fg-3">Enter the 6-character code from your teacher to see assignments, due dates and your class leaderboard.</p>
         </>
       )}
       <form
@@ -334,7 +334,7 @@ export function JoinClassInline({ compact }: { compact?: boolean }) {
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))}
           placeholder="K7Q2MX"
           aria-label="Class code"
-          className="w-[160px] font-mono text-[15px] tracking-[0.18em] uppercase"
+          className="w-[160px] font-mono text-md tracking-[0.18em] uppercase"
           autoComplete="off"
           spellCheck={false}
         />
@@ -361,15 +361,15 @@ function ContinueCard({ focusUnit }: { focusUnit: number }) {
   return (
     <Card interactive className="p-0">
       <Link to={`/study/unit/${found?.unit.n}/${encodeURIComponent(lesson.id)}`} className="flex items-center gap-5 p-6">
-        <div className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-ocean-soft text-ocean">
+        <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-ocean-soft text-ocean">
           <BookOpen className="size-5" aria-hidden />
         </div>
         <div className="min-w-0 flex-1">
           <p className="t-eyebrow">{resume ? "Continue reading" : "Up next"}</p>
-          <p className="mt-1.5 truncate text-[15.5px] font-semibold text-fg">
+          <p className="mt-1.5 truncate text-lg font-semibold text-fg">
             {lesson.code} {lesson.title}
           </p>
-          <p className="mt-0.5 text-[13px] text-fg-3">
+          <p className="mt-0.5 text-sm text-fg-3">
             Unit {found?.unit.n}: {found?.unit.title}
           </p>
         </div>
@@ -389,11 +389,11 @@ function StreakCard({ streak, best, days, today }: { streak: number; best: numbe
         <div>
           <p className="t-eyebrow">Streak</p>
           <p className="mt-3 flex items-baseline gap-2">
-            <span className="font-display t-num text-[44px] leading-none font-[600] text-fg">{streak}</span>
-            <span className="text-[14px] text-fg-3">{streak === 1 ? "day" : "days"}</span>
+            <span className="font-display t-num text-5xl leading-none font-[600] text-fg">{streak}</span>
+            <span className="text-base text-fg-3">{streak === 1 ? "day" : "days"}</span>
           </p>
         </div>
-        <div className={cn("grid size-11 place-items-center rounded-[13px]", streak > 0 ? "bg-sun-soft" : "bg-surface-2")}>
+        <div className={cn("grid size-11 place-items-center rounded-md", streak > 0 ? "bg-sun-soft" : "bg-surface-2")}>
           <Flame className={cn("size-6", streak > 0 ? "fill-sun/30 text-sun" : "text-fg-4")} aria-hidden />
         </div>
       </div>
@@ -404,10 +404,10 @@ function StreakCard({ streak, best, days, today }: { streak: number; best: numbe
           const future = daysBetween(today, d) > 0;
           return (
             <div key={d} className="flex flex-col items-center gap-1.5">
-              <span className="text-[11px] font-medium text-fg-4">{formatDay(d, { weekday: "narrow" })}</span>
+              <span className="text-2xs font-medium text-fg-4">{formatDay(d, { weekday: "narrow" })}</span>
               <span
                 className={cn(
-                  "grid size-8 place-items-center rounded-full text-[11px]",
+                  "grid size-8 place-items-center rounded-full text-2xs",
                   done ? "bg-brand text-brand-fg" : isToday ? "border-2 border-dashed border-brand/60" : future ? "bg-surface-2" : "bg-surface-3",
                 )}
                 title={formatDay(d, { weekday: "long", month: "short", day: "numeric" })}
@@ -418,7 +418,7 @@ function StreakCard({ streak, best, days, today }: { streak: number; best: numbe
           );
         })}
       </div>
-      <p className="mt-4 text-[13px] text-fg-3">Best streak: {Math.max(best, streak)} {Math.max(best, streak) === 1 ? "day" : "days"}</p>
+      <p className="mt-4 text-sm text-fg-3">Best streak: {Math.max(best, streak)} {Math.max(best, streak) === 1 ? "day" : "days"}</p>
     </Card>
   );
 }
@@ -445,19 +445,19 @@ function TestCard({ test, today }: { test: { day: DayKey; label: string; unit: n
       <div className="mt-3 flex items-center gap-4">
         {test.unit && (
           <ProgressRing value={ready ?? 0} size={58} stroke={5} tone="ocean">
-            <span className="t-num text-[13px] font-semibold text-fg">{ready ?? "–"}%</span>
+            <span className="t-num text-sm font-semibold text-fg">{ready ?? "–"}%</span>
           </ProgressRing>
         )}
         <div className="min-w-0">
-          <p className="truncate text-[15.5px] font-semibold text-fg">{test.label}</p>
-          <p className="text-[13px] text-fg-3">
+          <p className="truncate text-lg font-semibold text-fg">{test.label}</p>
+          <p className="text-sm text-fg-3">
             {formatDay(test.day, { weekday: "short", month: "short", day: "numeric" })} · {days === 0 ? "today" : days === 1 ? "tomorrow" : `in ${days} days`}
           </p>
         </div>
       </div>
       {test.unit && (
         <>
-          <p className="mt-3 text-[13px] text-fg-3">Readiness is the share of Unit {test.unit} questions you've answered correctly and still remember.</p>
+          <p className="mt-3 text-sm text-fg-3">Readiness is the share of Unit {test.unit} questions you've answered correctly and still remember.</p>
           <Button variant="secondary" className="mt-4 w-full" asChild>
             <Link to={`/practice?mode=unit&unit=${test.unit}`}>Practice Unit {test.unit}</Link>
           </Button>
@@ -475,10 +475,10 @@ function QuestCard({ unit, done }: { unit: number; done: boolean }) {
       <p className="t-eyebrow flex items-center gap-1.5">
         <Compass className="size-3.5" aria-hidden /> Field quest · Unit {unit}
       </p>
-      <p className="mt-3 text-[15.5px] font-semibold text-fg">{quest.title}</p>
-      <p className="mt-1.5 line-clamp-3 text-[13.5px] text-fg-3">{quest.prompt}</p>
+      <p className="mt-3 text-lg font-semibold text-fg">{quest.title}</p>
+      <p className="mt-1.5 line-clamp-3 text-base text-fg-3">{quest.prompt}</p>
       {done ? (
-        <p className="mt-4 flex items-center gap-2 text-[13.5px] font-semibold text-brand-ink">
+        <p className="mt-4 flex items-center gap-2 text-base font-semibold text-brand-ink">
           <CheckCircle2 className="size-4" aria-hidden /> Completed
         </p>
       ) : (
@@ -510,16 +510,16 @@ function ActCard({ profile, today }: { profile: UserDoc; today: DayKey }) {
       </p>
       {next ? (
         <>
-          <p className="mt-3 text-[15.5px] font-semibold text-fg">{next.title}</p>
-          <p className="mt-1 text-[13px] text-fg-3">{whenLabel(next)}</p>
+          <p className="mt-3 text-lg font-semibold text-fg">{next.title}</p>
+          <p className="mt-1 text-sm text-fg-3">{whenLabel(next)}</p>
           <Button variant="soft" className="mt-4 w-full" asChild>
             <Link to={listingHref(next)}>{next.kind === "action" ? "Do it · +20 TC" : going.has(next.key) ? "See details" : "Take a look"}</Link>
           </Button>
         </>
       ) : (
         <>
-          <p className="mt-3 text-[15.5px] font-semibold text-fg">Take it outside</p>
-          <p className="mt-1.5 text-[13.5px] text-fg-3">Find a volunteer event or an eco action, and log your service hours.</p>
+          <p className="mt-3 text-lg font-semibold text-fg">Take it outside</p>
+          <p className="mt-1.5 text-base text-fg-3">Find a volunteer event or an eco action, and log your service hours.</p>
           <Button variant="soft" className="mt-4 w-full" asChild>
             <Link to="/act">Open Act</Link>
           </Button>
@@ -560,14 +560,14 @@ function Attention({ classes, uid }: { classes: WithId<ClassDoc>[]; uid: string 
     <div className="mb-6 grid grid-cols-2 gap-4">
       {hours.items.length > 0 && (
         <Card className="flex items-center gap-4 p-5">
-          <span className="grid size-10 place-items-center rounded-[12px] bg-sun-soft text-sun-ink" aria-hidden>
+          <span className="grid size-10 place-items-center rounded-md bg-sun-soft text-sun-ink" aria-hidden>
             <ClipboardCheck className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[14.5px] font-semibold text-fg">
+            <p className="text-md font-semibold text-fg">
               {hours.items.length} volunteer {hours.items.length === 1 ? "entry" : "entries"} to verify
             </p>
-            <p className="text-[13px] text-fg-3">Verified hours go on each student's service record.</p>
+            <p className="text-sm text-fg-3">Verified hours go on each student's service record.</p>
           </div>
           <Button size="sm" onClick={() => setReviewing(true)}>
             Review
@@ -576,14 +576,14 @@ function Attention({ classes, uid }: { classes: WithId<ClassDoc>[]; uid: string 
       )}
       {flagged.map((c) => (
         <Card key={c.id} className="flex items-center gap-4 p-5">
-          <span className="grid size-10 place-items-center rounded-[12px] bg-coral-soft text-coral" aria-hidden>
+          <span className="grid size-10 place-items-center rounded-md bg-coral-soft text-coral" aria-hidden>
             <Flag className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[14.5px] font-semibold text-fg">
+            <p className="text-md font-semibold text-fg">
               {reports[c.id]} chat {reports[c.id] === 1 ? "message" : "messages"} to review
             </p>
-            <p className="truncate text-[13px] text-fg-3">In {c.name}'s chat</p>
+            <p className="truncate text-sm text-fg-3">In {c.name}'s chat</p>
           </div>
           <Button size="sm" variant="secondary" asChild>
             <Link to={`/class/${c.id}?tab=chat`}>Open chat</Link>
@@ -610,7 +610,7 @@ function TeacherToday() {
             {greeting()}
             {name ? `, ${firstName(name)}` : ""}.
           </h1>
-          <p className="mt-2 text-[15.5px] text-fg-3">
+          <p className="mt-2 text-lg text-fg-3">
             {classes.length === 0 ? "Create a class to start assigning work." : "Here's how your classes are doing today."}
           </p>
         </div>
@@ -662,11 +662,11 @@ export function CreateFirstClass() {
   };
   return (
     <Card className="mx-auto max-w-[640px] p-8 text-center">
-      <div className="mx-auto grid size-12 place-items-center rounded-[14px] bg-brand-soft text-brand-ink">
+      <div className="mx-auto grid size-12 place-items-center rounded-lg bg-brand-soft text-brand-ink">
         <Users className="size-6" aria-hidden />
       </div>
       <h2 className="t-h2 mt-5">Create your first class</h2>
-      <p className="mx-auto mt-2 max-w-[44ch] text-[14.5px] text-fg-3">
+      <p className="mx-auto mt-2 max-w-[44ch] text-md text-fg-3">
         You'll get a join code to share. Students who join show up on your roster, and you can assign lessons, quizzes, FRQs and daily practice with due dates.
       </p>
       <form
@@ -708,12 +708,12 @@ function ClassSummary({ cls, today }: { cls: WithId<ClassDoc>; today: DayKey }) 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h2 className="t-h2 truncate">{cls.name}</h2>
-          <p className="mt-1 text-[13.5px] text-fg-3">
+          <p className="mt-1 text-base text-fg-3">
             {cls.current_unit ? `Unit ${cls.current_unit}: ${getUnit(cls.current_unit)?.title}` : "No current unit set"}
             {cls.test_day ? ` · ${cls.test_label || "Test"} ${formatDay(cls.test_day, { month: "short", day: "numeric" })}` : ""}
           </p>
         </div>
-        <button onClick={copy} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] border border-line-strong px-2.5 font-mono text-[13px] font-semibold tracking-[0.14em] text-fg-2 hover:bg-surface-2" aria-label={`Copy class code ${cls.code}`}>
+        <button onClick={copy} className="inline-flex h-8 items-center gap-1.5 rounded-sm border border-line-strong px-2.5 font-mono text-sm font-semibold tracking-[0.14em] text-fg-2 hover:bg-surface-2" aria-label={`Copy class code ${cls.code}`}>
           {cls.code} {copied ? <Check className="size-3.5 text-brand" /> : <Copy className="size-3.5 text-fg-3" />}
         </button>
       </div>
@@ -723,22 +723,22 @@ function ClassSummary({ cls, today }: { cls: WithId<ClassDoc>; today: DayKey }) 
           { label: "Active today", value: loading ? "–" : activeToday },
           { label: "Sets this week", value: loading ? "–" : setsThisWeek },
         ].map((s) => (
-          <div key={s.label} className="rounded-[12px] bg-surface-2/70 px-4 py-3">
-            <p className="font-display t-num text-[24px] font-[600] text-fg">{s.value}</p>
-            <p className="text-[12.5px] text-fg-3">{s.label}</p>
+          <div key={s.label} className="rounded-md bg-surface-2/70 px-4 py-3">
+            <p className="font-display t-num text-2xl font-[600] text-fg">{s.value}</p>
+            <p className="text-sm text-fg-3">{s.label}</p>
           </div>
         ))}
       </div>
       <div className="mt-5 flex-1">
-        <p className="text-[13px] font-semibold text-fg-2">Needs a nudge</p>
+        <p className="text-sm font-semibold text-fg-2">Needs a nudge</p>
         {members.length === 0 ? (
-          <p className="mt-2 text-[13.5px] text-fg-3">No students yet. Share the code {cls.code} to get started.</p>
+          <p className="mt-2 text-base text-fg-3">No students yet. Share the code {cls.code} to get started.</p>
         ) : idle.length === 0 ? (
-          <p className="mt-2 text-[13.5px] text-fg-3">Everyone has studied in the last two days.</p>
+          <p className="mt-2 text-base text-fg-3">Everyone has studied in the last two days.</p>
         ) : (
           <ul className="mt-2 space-y-2">
             {idle.slice(0, 4).map(({ m, s }) => (
-              <li key={m.uid} className="flex items-center gap-2.5 text-[13.5px]">
+              <li key={m.uid} className="flex items-center gap-2.5 text-base">
                 <Avatar name={m.username} src={m.avatar_url} size={24} />
                 <span className="flex-1 truncate text-fg-2">{m.username}</span>
                 <span className="text-fg-3">{s.idleDays === null ? "Not started" : `${s.idleDays} days idle`}</span>

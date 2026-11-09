@@ -21,7 +21,7 @@ export type VerifierOption = { classId: string; label: string };
 function ErrorNote({ error }: { error: string | null }) {
   if (!error) return null;
   return (
-    <p className="mt-4 rounded-lg bg-coral-soft px-3.5 py-2.5 text-[13.5px] font-medium text-coral" role="alert">
+    <p className="mt-4 rounded-lg bg-coral-soft px-3.5 py-2.5 text-base font-medium text-coral" role="alert">
       {error}
     </p>
   );
@@ -157,7 +157,7 @@ export function CompleteActionDialog({ open, onOpenChange, listing }: { open: bo
         <Field label="Your write-up" htmlFor="ca-text" hint={count < LIMITS.REFLECTION_MIN ? `${LIMITS.REFLECTION_MIN - count} more characters` : `${count}/${LIMITS.REFLECTION_MAX}`}>
           <Textarea id="ca-text" value={text} rows={6} maxLength={LIMITS.REFLECTION_MAX} onChange={(e) => setText(e.target.value)} />
         </Field>
-        <p className="mt-3 text-[12.5px] text-fg-3">Your teacher and classmates can read it in Field notes.</p>
+        <p className="mt-3 text-sm text-fg-3">Your teacher and classmates can read it in Field notes.</p>
         <ErrorNote error={error} />
         <div className="mt-6 flex justify-end gap-2">
           <Button variant="ghost" onClick={() => onOpenChange(false)}>
@@ -200,28 +200,28 @@ export function HoursReviewList({ logs }: { logs: HoursLog[] }) {
   return (
     <ul className="space-y-3">
       {logs.map((log) => (
-        <li key={log.id} className="rounded-[14px] border border-line p-4">
+        <li key={log.id} className="rounded-lg border border-line p-4">
           <div className="flex items-start gap-3">
             <Avatar name={log.name} size={34} />
             <div className="min-w-0 flex-1">
-              <p className="text-[14px] font-semibold text-fg">
+              <p className="text-base font-semibold text-fg">
                 {log.name} · {formatHours(log.hours)}
               </p>
-              <p className="text-[12.5px] text-fg-3">
+              <p className="text-sm text-fg-3">
                 {log.title} · {log.org_name} · {formatDay(log.date, { month: "short", day: "numeric", year: "numeric" })}
                 {log.class_name ? ` · ${log.class_name}` : ""}
               </p>
-              <p className="mt-2 text-[13.5px] leading-relaxed whitespace-pre-wrap text-fg-2">{log.text}</p>
+              <p className="mt-2 text-base leading-relaxed whitespace-pre-wrap text-fg-2">{log.text}</p>
               {(log.flags ?? []).length > 0 && (
                 <ul className="mt-2.5 space-y-1">
                   {(log.flags ?? []).map((f) => (
-                    <li key={f} className="flex items-center gap-1.5 text-[12.5px] font-medium text-sun-ink">
+                    <li key={f} className="flex items-center gap-1.5 text-sm font-medium text-sun-ink">
                       <TriangleAlert className="size-3.5 shrink-0" aria-hidden /> {HOURS_FLAG_LABEL[f] ?? f}
                     </li>
                   ))}
                 </ul>
               )}
-              <p className="mt-2 text-[11.5px] text-fg-4">Submitted {new Date(log.created_at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</p>
+              <p className="mt-2 text-xs text-fg-4">Submitted {new Date(log.created_at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</p>
             </div>
           </div>
           {declining === log.id ? (

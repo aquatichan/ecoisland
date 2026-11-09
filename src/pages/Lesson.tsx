@@ -117,10 +117,10 @@ export default function Lesson() {
       </div>
       <div className="grid grid-cols-[250px_minmax(0,1fr)] gap-12">
         <aside className="sticky top-24 self-start">
-          <Link to={`/study/unit/${unit.n}`} className="inline-flex items-center gap-1.5 text-[13px] font-medium text-fg-3 hover:text-fg">
+          <Link to={`/study/unit/${unit.n}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-3 hover:text-fg">
             <ArrowLeft className="size-4" /> Unit {unit.n}
           </Link>
-          <p className="mt-4 text-[14px] leading-snug font-semibold text-fg">{unit.title}</p>
+          <p className="mt-4 text-base leading-snug font-semibold text-fg">{unit.title}</p>
           <nav className="mt-3 max-h-[calc(100dvh-180px)] space-y-0.5 overflow-y-auto pr-2" aria-label={`Unit ${unit.n} lessons`}>
             {unit.lessons.map((l) => {
               const active = l.id === lessonId;
@@ -131,7 +131,7 @@ export default function Lesson() {
                   to={lessonHref(l.id)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-start gap-2.5 rounded-[9px] px-2.5 py-2 text-[13.5px] leading-snug transition-colors",
+                    "flex items-start gap-2.5 rounded-sm px-2.5 py-2 text-base leading-snug transition-colors",
                     active ? "bg-brand-soft font-semibold text-brand-ink" : "text-fg-3 hover:bg-surface-2 hover:text-fg-2",
                   )}
                 >
@@ -149,8 +149,8 @@ export default function Lesson() {
             <p className="t-eyebrow">
               Unit {unit.n} · Lesson {lesson.code}
             </p>
-            <h1 className="t-display mt-4 text-[44px]">{lesson.title}</h1>
-            <p className="mt-4 flex items-center gap-4 text-[13.5px] text-fg-3">
+            <h1 className="t-display mt-4 text-5xl">{lesson.title}</h1>
+            <p className="mt-4 flex items-center gap-4 text-base text-fg-3">
               <span className="flex items-center gap-1.5">
                 <Clock className="size-4" /> {content ? `${minutes} min read` : "Loading…"}
               </span>
@@ -183,13 +183,13 @@ export default function Lesson() {
           {content && (
             <Card className="mt-14 max-w-[68ch] p-7">
               {isRead ? (
-                <p className="flex items-center gap-2 text-[15px] font-semibold text-fg">
+                <p className="flex items-center gap-2 text-md font-semibold text-fg">
                   <CheckCircle2 className="size-5 text-brand" /> You've finished this lesson
                 </p>
               ) : (
                 <>
-                  <p className="text-[15.5px] font-semibold text-fg">Finished reading?</p>
-                  <p className="mt-1 text-[14px] text-fg-3">Mark it read to track your progress and count it toward any assignment.</p>
+                  <p className="text-lg font-semibold text-fg">Finished reading?</p>
+                  <p className="mt-1 text-base text-fg-3">Mark it read to track your progress and count it toward any assignment.</p>
                 </>
               )}
               <div className="mt-5 flex flex-wrap gap-2.5">
@@ -219,10 +219,10 @@ export default function Lesson() {
           <nav className="mt-8 flex max-w-[68ch] justify-between gap-4" aria-label="Lesson navigation">
             {prev ? (
               <Link to={lessonHref(prev.id)} className="group flex max-w-[48%] flex-col rounded-lg border border-line px-4 py-3 hover:border-line-strong">
-                <span className="flex items-center gap-1 text-[12.5px] text-fg-3">
+                <span className="flex items-center gap-1 text-sm text-fg-3">
                   <ArrowLeft className="size-3.5" /> Previous
                 </span>
-                <span className="mt-1 truncate text-[14px] font-semibold text-fg">
+                <span className="mt-1 truncate text-base font-semibold text-fg">
                   {prev.code} {prev.title}
                 </span>
               </Link>
@@ -231,10 +231,10 @@ export default function Lesson() {
             )}
             {next && (
               <Link to={lessonHref(next.id)} className="group ml-auto flex max-w-[48%] flex-col items-end rounded-lg border border-line px-4 py-3 text-right hover:border-line-strong">
-                <span className="flex items-center gap-1 text-[12.5px] text-fg-3">
+                <span className="flex items-center gap-1 text-sm text-fg-3">
                   Next <ArrowRight className="size-3.5" />
                 </span>
-                <span className="mt-1 truncate text-[14px] font-semibold text-fg">
+                <span className="mt-1 truncate text-base font-semibold text-fg">
                   {next.code} {next.title}
                 </span>
               </Link>

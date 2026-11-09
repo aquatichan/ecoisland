@@ -5,7 +5,6 @@ import { DesktopGate } from "@/components/app/DesktopGate";
 import { ErrorBoundary } from "@/components/app/ErrorBoundary";
 import { FullPageLoader, RequireProfile } from "@/components/app/Guards";
 import { SessionProvider } from "@/lib/session";
-import { ThemeProvider } from "@/lib/theme";
 import { ToastProvider } from "@/lib/toast";
 
 const Landing = lazy(() => import("@/pages/Landing"));
@@ -47,60 +46,58 @@ function Gated() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <MotionConfig reducedMotion="user">
-        <ToastProvider>
-          <SessionProvider>
-            <BrowserRouter>
-              <ErrorBoundary>
-                <Suspense fallback={<FullPageLoader />}>
-                  <Routes>
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/tos" element={<TOS />} />
-                    <Route element={<Gated />}>
-                      <Route path="/" element={<Landing />} />
-                      <Route path="/start" element={<Onboarding />} />
-                      <Route element={<RequireProfile />}>
-                        <Route path="/today" element={<Today />} />
-                        <Route path="/practice" element={<Practice />} />
-                        <Route path="/study" element={<Study />} />
-                        <Route path="/study/unit/:unit" element={<UnitPage />} />
-                        <Route path="/study/unit/:unit/:lesson" element={<Lesson />} />
-                        <Route path="/study/frq" element={<FrqList />} />
-                        <Route path="/study/frq/:frqId" element={<FrqAttempt />} />
-                        <Route path="/study/flashcards" element={<Flashcards />} />
-                        <Route path="/study/guide" element={<Guide />} />
-                        <Route path="/act" element={<Act />} />
-                        <Route path="/act/hours" element={<Hours />} />
-                        <Route path="/act/e/:id" element={<EventDetail />} />
-                        <Route path="/act/class/:classId/:id" element={<EventDetail />} />
-                        <Route path="/ambassador" element={<Ambassador />} />
-                        <Route path="/admin" element={<Admin />} />
-                        <Route path="/island" element={<IslandPage />} />
-                        <Route path="/class" element={<Classes />} />
-                        <Route path="/class/:classId" element={<ClassDetail />} />
-                        <Route path="/settings" element={<Settings />} />
-                      </Route>
-                      {IslandLab && <Route path="/dev/island" element={<IslandLab />} />}
-                      {/* Older links keep working. */}
-                      <Route path="/onboarding" element={<Navigate to="/start" replace />} />
-                      <Route path="/dashboard" element={<Navigate to="/today" replace />} />
-                      <Route path="/apes" element={<Navigate to="/study" replace />} />
-                      <Route path="/apes/unit/:unit/:lesson" element={<OldLessonRedirect />} />
-                      <Route path="/leaderboard" element={<Navigate to="/class" replace />} />
-                      <Route path="/action-feed" element={<Navigate to="/act" replace />} />
-                      {["/impact", "/regional-data", "/danger-scan", "/carbon-footprint"].map((p) => (
-                        <Route key={p} path={p} element={<Navigate to="/today" replace />} />
-                      ))}
-                      <Route path="*" element={<Navigate to="/" replace />} />
+    <MotionConfig reducedMotion="user">
+      <ToastProvider>
+        <SessionProvider>
+          <BrowserRouter>
+            <ErrorBoundary>
+              <Suspense fallback={<FullPageLoader />}>
+                <Routes>
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/tos" element={<TOS />} />
+                  <Route element={<Gated />}>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/start" element={<Onboarding />} />
+                    <Route element={<RequireProfile />}>
+                      <Route path="/today" element={<Today />} />
+                      <Route path="/practice" element={<Practice />} />
+                      <Route path="/study" element={<Study />} />
+                      <Route path="/study/unit/:unit" element={<UnitPage />} />
+                      <Route path="/study/unit/:unit/:lesson" element={<Lesson />} />
+                      <Route path="/study/frq" element={<FrqList />} />
+                      <Route path="/study/frq/:frqId" element={<FrqAttempt />} />
+                      <Route path="/study/flashcards" element={<Flashcards />} />
+                      <Route path="/study/guide" element={<Guide />} />
+                      <Route path="/act" element={<Act />} />
+                      <Route path="/act/hours" element={<Hours />} />
+                      <Route path="/act/e/:id" element={<EventDetail />} />
+                      <Route path="/act/class/:classId/:id" element={<EventDetail />} />
+                      <Route path="/ambassador" element={<Ambassador />} />
+                      <Route path="/admin" element={<Admin />} />
+                      <Route path="/island" element={<IslandPage />} />
+                      <Route path="/class" element={<Classes />} />
+                      <Route path="/class/:classId" element={<ClassDetail />} />
+                      <Route path="/settings" element={<Settings />} />
                     </Route>
-                  </Routes>
-                </Suspense>
-              </ErrorBoundary>
-            </BrowserRouter>
-          </SessionProvider>
-        </ToastProvider>
-      </MotionConfig>
-    </ThemeProvider>
+                    {IslandLab && <Route path="/dev/island" element={<IslandLab />} />}
+                    {/* Older links keep working. */}
+                    <Route path="/onboarding" element={<Navigate to="/start" replace />} />
+                    <Route path="/dashboard" element={<Navigate to="/today" replace />} />
+                    <Route path="/apes" element={<Navigate to="/study" replace />} />
+                    <Route path="/apes/unit/:unit/:lesson" element={<OldLessonRedirect />} />
+                    <Route path="/leaderboard" element={<Navigate to="/class" replace />} />
+                    <Route path="/action-feed" element={<Navigate to="/act" replace />} />
+                    {["/impact", "/regional-data", "/danger-scan", "/carbon-footprint"].map((p) => (
+                      <Route key={p} path={p} element={<Navigate to="/today" replace />} />
+                    ))}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </BrowserRouter>
+        </SessionProvider>
+      </ToastProvider>
+    </MotionConfig>
   );
 }

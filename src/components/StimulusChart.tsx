@@ -38,13 +38,13 @@ function fmt(v: number) {
 function Frame({ title, note, children }: { title: string; note: string; children: ReactNode }) {
   return (
     <figure className="my-5 overflow-hidden rounded-lg border border-line bg-surface-2/60">
-      {title && <figcaption className="px-4 pt-3.5 text-[13.5px] font-semibold text-fg">{title}</figcaption>}
+      {title && <figcaption className="px-4 pt-3.5 text-base font-semibold text-fg">{title}</figcaption>}
       <div className="px-2 pb-1">
         <svg viewBox={`0 0 ${W} ${H}`} className="mx-auto block w-full max-w-[600px]" role="img" aria-label={title || "Data chart"}>
           {children}
         </svg>
       </div>
-      {note && <p className="px-4 pb-3 text-[12px] text-fg-3 italic">{note}</p>}
+      {note && <p className="px-4 pb-3 text-xs text-fg-3 italic">{note}</p>}
     </figure>
   );
 }
@@ -220,9 +220,9 @@ function Table({ s }: { s: Stimulus }) {
   const rows = (s.rows as unknown[][]).map((r) => (Array.isArray(r) ? r.map(text) : []));
   return (
     <figure className="my-5 overflow-hidden rounded-lg border border-line">
-      {text(s.title) && <figcaption className="border-b border-line bg-surface-2 px-4 py-2.5 text-[13.5px] font-semibold text-fg">{text(s.title)}</figcaption>}
+      {text(s.title) && <figcaption className="border-b border-line bg-surface-2 px-4 py-2.5 text-base font-semibold text-fg">{text(s.title)}</figcaption>}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-[14px]">
+        <table className="w-full border-collapse text-base">
           <thead>
             <tr className="bg-surface-2/60">
               {headers.map((h, i) => (
@@ -245,7 +245,7 @@ function Table({ s }: { s: Stimulus }) {
           </tbody>
         </table>
       </div>
-      {text(s.sourceNote) && <p className="border-t border-line px-4 py-2 text-[12px] text-fg-3 italic">{text(s.sourceNote)}</p>}
+      {text(s.sourceNote) && <p className="border-t border-line px-4 py-2 text-xs text-fg-3 italic">{text(s.sourceNote)}</p>}
     </figure>
   );
 }

@@ -108,9 +108,9 @@ function Suggestions() {
             <Badge tone={e.kind === "action" ? "sun" : "ocean"}>{e.kind === "action" ? "Eco action" : "Event"}</Badge>
             <Badge tone="outline">{CATEGORIES[e.category]}</Badge>
           </div>
-          <h2 className="mt-3 text-[16px] font-semibold text-fg">{e.title}</h2>
-          <p className="mt-1 text-[13.5px] text-fg-3">{e.summary}</p>
-          <dl className="mt-3 grid grid-cols-[110px_1fr] gap-x-3 gap-y-1 text-[13px]">
+          <h2 className="mt-3 text-lg font-semibold text-fg">{e.title}</h2>
+          <p className="mt-1 text-base text-fg-3">{e.summary}</p>
+          <dl className="mt-3 grid grid-cols-[110px_1fr] gap-x-3 gap-y-1 text-sm">
             <dt className="text-fg-4">When</dt>
             <dd className="text-fg-2">{whenLabel({ ...e, id: e.id })}</dd>
             {e.location && (
@@ -137,7 +137,7 @@ function Suggestions() {
             <dt className="text-fg-4">Suggested by</dt>
             <dd className="text-fg-2">{e.created_by_name}</dd>
           </dl>
-          {e.details && <p className="mt-3 line-clamp-4 text-[13px] whitespace-pre-wrap text-fg-3">{e.details}</p>}
+          {e.details && <p className="mt-3 line-clamp-4 text-sm whitespace-pre-wrap text-fg-3">{e.details}</p>}
           <ReviewButtons
             onReview={async (approve, note) => {
               try {
@@ -165,24 +165,24 @@ function Applications() {
         <Card key={a.uid} className="p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-[16px] font-semibold text-fg">
+              <h2 className="text-lg font-semibold text-fg">
                 {a.full_name} <span className="font-normal text-fg-3">@{a.username}</span>
               </h2>
-              <p className="mt-0.5 text-[13px] text-fg-3">
+              <p className="mt-0.5 text-sm text-fg-3">
                 {a.school} · {a.grade} · {a.region} · {a.email}
               </p>
             </div>
-            <span className="text-[12.5px] text-fg-4">{new Date(a.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
+            <span className="text-sm text-fg-4">{new Date(a.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
           </div>
-          <p className="mt-4 text-[12.5px] font-semibold text-fg-3">Why</p>
-          <p className="mt-1 text-[14px] leading-relaxed whitespace-pre-wrap text-fg-2">{a.why}</p>
+          <p className="mt-4 text-sm font-semibold text-fg-3">Why</p>
+          <p className="mt-1 text-base leading-relaxed whitespace-pre-wrap text-fg-2">{a.why}</p>
           {a.idea && (
             <>
-              <p className="mt-3 text-[12.5px] font-semibold text-fg-3">Event idea</p>
-              <p className="mt-1 text-[14px] leading-relaxed whitespace-pre-wrap text-fg-2">{a.idea}</p>
+              <p className="mt-3 text-sm font-semibold text-fg-3">Event idea</p>
+              <p className="mt-1 text-base leading-relaxed whitespace-pre-wrap text-fg-2">{a.idea}</p>
             </>
           )}
-          {a.sponsor && <p className="mt-3 text-[13px] text-fg-3">Sponsor: {a.sponsor}</p>}
+          {a.sponsor && <p className="mt-3 text-sm text-fg-3">Sponsor: {a.sponsor}</p>}
           <ReviewButtons
             onReview={async (approve, note) => {
               try {
@@ -208,8 +208,8 @@ function LiveListings() {
       {items.map((e) => (
         <Link key={e.id} to={listingHref({ scope: "community", id: e.id })} className="flex items-center gap-4 px-6 py-4 hover:bg-surface-2/50">
           <div className="min-w-0 flex-1">
-            <p className="truncate text-[14.5px] font-semibold text-fg">{e.title}</p>
-            <p className="text-[12.5px] text-fg-3">
+            <p className="truncate text-md font-semibold text-fg">{e.title}</p>
+            <p className="text-sm text-fg-3">
               {whenLabel({ ...e, id: e.id })} · {e.created_by_name}
             </p>
           </div>

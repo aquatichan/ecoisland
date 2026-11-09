@@ -55,14 +55,14 @@ export default function Hours() {
   return (
     <Page>
       <div className="print:hidden">
-        <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+        <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
           <ArrowLeft className="size-4" /> Act
         </Link>
         <header className="mb-7 flex items-end justify-between gap-6">
           <div>
             <p className="t-eyebrow">Act</p>
             <h1 className="t-h1 mt-2.5">Volunteer hours</h1>
-            <p className="mt-2 max-w-[60ch] text-[15px] text-fg-3">Log hours from any volunteering. When your teacher verifies them, they go on a service record you can print for school, clubs or applications.</p>
+            <p className="mt-2 max-w-[60ch] text-md text-fg-3">Log hours from any volunteering. When your teacher verifies them, they go on a service record you can print for school, clubs or applications.</p>
           </div>
           <div className="flex shrink-0 gap-2">
             <Button variant="secondary" onClick={() => window.print()} disabled={verified.length === 0}>
@@ -82,8 +82,8 @@ export default function Hours() {
           </Card>
         ) : (
           <Card className="overflow-hidden">
-            <table className="w-full text-left text-[14px]">
-              <thead className="border-b border-line bg-surface-2/50 text-[12.5px] text-fg-3">
+            <table className="w-full text-left text-base">
+              <thead className="border-b border-line bg-surface-2/50 text-sm text-fg-3">
                 <tr>
                   <th className="px-5 py-3 font-semibold">Date</th>
                   <th className="px-5 py-3 font-semibold">Activity</th>
@@ -98,14 +98,14 @@ export default function Hours() {
                     <td className="t-num px-5 py-4 whitespace-nowrap text-fg-2">{longDay(h.date)}</td>
                     <td className="px-5 py-4">
                       <p className="font-semibold text-fg">{h.title}</p>
-                      <p className="text-[13px] text-fg-3">{h.org_name}</p>
-                      <p className="mt-1.5 line-clamp-2 text-[13px] text-fg-3">{h.text}</p>
-                      {h.status === "rejected" && h.review_note && <p className="mt-1.5 text-[13px] text-coral">{h.review_note}</p>}
+                      <p className="text-sm text-fg-3">{h.org_name}</p>
+                      <p className="mt-1.5 line-clamp-2 text-sm text-fg-3">{h.text}</p>
+                      {h.status === "rejected" && h.review_note && <p className="mt-1.5 text-sm text-coral">{h.review_note}</p>}
                     </td>
                     <td className="t-num px-5 py-4 text-right font-semibold text-fg">{h.hours}</td>
                     <td className="px-5 py-4">
                       <Badge tone={STATUS[h.status].tone}>{STATUS[h.status].label}</Badge>
-                      {h.teacher_name && h.status !== "self" && <p className="mt-1 text-[12px] text-fg-4">{h.status === "verified" ? `by ${h.teacher_name}` : h.teacher_name}</p>}
+                      {h.teacher_name && h.status !== "self" && <p className="mt-1 text-xs text-fg-4">{h.status === "verified" ? `by ${h.teacher_name}` : h.teacher_name}</p>}
                     </td>
                     <td className="px-3 py-4">
                       {h.status !== "verified" && (
@@ -126,14 +126,14 @@ export default function Hours() {
       <section className="hidden bg-white text-black print:block" aria-hidden>
         <div className="flex items-center justify-between border-b-2 border-black pb-4">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.12em] uppercase">Volunteer service record</p>
-            <h1 className="mt-1 text-[26px] font-bold">{name}</h1>
+            <p className="text-xs font-semibold tracking-[0.12em] uppercase">Volunteer service record</p>
+            <h1 className="mt-1 text-3xl font-bold">{name}</h1>
           </div>
-          <div className="flex items-center gap-2 text-[13px]">
+          <div className="flex items-center gap-2 text-sm">
             <LogoMark size={28} /> Ecoisland
           </div>
         </div>
-        <table className="mt-6 w-full border-collapse text-left text-[12.5px]">
+        <table className="mt-6 w-full border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-black">
               <th className="py-2 pr-3">Date</th>
@@ -166,7 +166,7 @@ export default function Hours() {
             </tr>
           </tfoot>
         </table>
-        <p className="mt-8 text-[11px] text-gray-600">
+        <p className="mt-8 text-2xs text-gray-600">
           Each entry was logged by the student and verified by their teacher on Ecoisland (ecoisland.xyz). Printed {new Date().toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}.
         </p>
       </section>

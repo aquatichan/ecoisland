@@ -20,7 +20,7 @@ function ServerError({ message, retry }: { message: string; retry: () => void })
       <div className="card max-w-[460px] p-8 text-center">
         <LogoMark size={36} className="mx-auto" />
         <h1 className="t-h2 mt-5">Can't reach Ecoisland right now</h1>
-        <p className="mt-2 text-[14.5px] text-fg-3">{message}</p>
+        <p className="mt-2 text-md text-fg-3">{message}</p>
         <Button className="mt-6" onClick={retry}>
           <RotateCcw /> Try again
         </Button>

@@ -22,12 +22,12 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, State> {
         <div className="card max-w-[440px] p-8 text-center">
           <p className="t-eyebrow">Something broke</p>
           <h1 className="t-h2 mt-3">This page hit an error.</h1>
-          <p className="mt-2 text-[14.5px] text-fg-3">Your progress is saved on the server. Reloading usually fixes it.</p>
+          <p className="mt-2 text-md text-fg-3">Your progress is saved on the server. Reloading usually fixes it.</p>
           <div className="mt-6 flex justify-center gap-2">
-            <button className="h-10 rounded-[11px] bg-brand px-4 text-[14px] font-semibold text-brand-fg" onClick={() => window.location.reload()}>
+            <button className="h-10 rounded-md bg-brand px-4 text-base font-semibold text-brand-fg" onClick={() => window.location.reload()}>
               Reload
             </button>
-            <a className="inline-flex h-10 items-center rounded-[11px] border border-line-strong px-4 text-[14px] font-semibold text-fg" href="/today">
+            <a className="inline-flex h-10 items-center rounded-md border border-line-strong px-4 text-base font-semibold text-fg" href="/today">
               Go to Today
             </a>
           </div>

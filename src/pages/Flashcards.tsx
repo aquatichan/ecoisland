@@ -58,7 +58,7 @@ export default function Flashcards() {
 
   return (
     <Page className="mx-auto max-w-[820px]">
-      <Link to={lesson ? `/study/unit/${lesson.unit.n}/${encodeURIComponent(lesson.lesson.id)}` : "/study"} className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to={lesson ? `/study/unit/${lesson.unit.n}/${encodeURIComponent(lesson.lesson.id)}` : "/study"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> {lesson ? "Back to lesson" : "Study"}
       </Link>
       <header className="mb-7 flex items-end justify-between gap-6">
@@ -115,14 +115,14 @@ export default function Flashcards() {
                 >
                   <div className="card absolute inset-0 flex flex-col items-center justify-center p-10 text-center [backface-visibility:hidden]">
                     <p className="t-eyebrow">Term</p>
-                    <p className="font-display mt-4 text-[34px] leading-tight font-[560] text-fg">{card.term}</p>
-                    <p className="mt-8 text-[12.5px] text-fg-4">
+                    <p className="font-display mt-4 text-4xl leading-tight font-[560] text-fg">{card.term}</p>
+                    <p className="mt-8 text-sm text-fg-4">
                       Click or press <span className="kbd">Space</span> to flip
                     </p>
                   </div>
                   <div className="card absolute inset-0 flex flex-col items-center justify-center bg-surface p-10 text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
                     <p className="t-eyebrow">{card.term}</p>
-                    <p className="mt-4 max-w-[56ch] text-[18px] leading-relaxed text-fg">{card.definition}</p>
+                    <p className="mt-4 max-w-[56ch] text-xl leading-relaxed text-fg">{card.definition}</p>
                   </div>
                 </motion.div>
               </motion.button>
@@ -133,7 +133,7 @@ export default function Flashcards() {
               <ArrowLeft /> Previous
             </Button>
             <div className="flex items-center gap-4">
-              <span className="t-num text-[13.5px] font-semibold text-fg-3">
+              <span className="t-num text-base font-semibold text-fg-3">
                 {index + 1} / {deck.length}
               </span>
               <Button
@@ -152,7 +152,7 @@ export default function Flashcards() {
               Next <ArrowRight />
             </Button>
           </div>
-          <p className="mt-4 text-center text-[12.5px] text-fg-4">
+          <p className="mt-4 text-center text-sm text-fg-4">
             Use <span className="kbd">←</span> <span className="kbd">→</span> to move between cards
           </p>
         </>

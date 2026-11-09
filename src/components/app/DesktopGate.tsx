@@ -44,7 +44,7 @@ export function DesktopGate({ children }: { children: ReactNode }) {
         <IslandScene xp={420} health={1} sky="day" animate={false} className="aspect-[5/3]" label="An Ecoisland" />
       </div>
       <h1 className="t-h1 mt-8 max-w-[18ch]">Oops! Ecoisland needs a bigger screen.</h1>
-      <p className="mt-3 max-w-[34ch] text-[15px] text-fg-3">
+      <p className="mt-3 max-w-[34ch] text-md text-fg-3">
         It's built for laptops, Chromebooks and desktops. Open <span className="font-semibold text-fg-2">{window.location.host}</span> on a computer, or make this window wider.
       </p>
       <div className="mt-6 flex items-center gap-2">
@@ -53,7 +53,7 @@ export function DesktopGate({ children }: { children: ReactNode }) {
           {copied ? "Link copied" : "Copy link"}
         </Button>
       </div>
-      <p className="mt-8 flex items-center gap-2 text-[12.5px] text-fg-4">
+      <p className="mt-8 flex items-center gap-2 text-sm text-fg-4">
         <Laptop className="size-4" aria-hidden /> Needs a window at least {MIN_WIDTH}px wide
       </p>
     </main>

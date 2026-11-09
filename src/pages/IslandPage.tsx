@@ -130,7 +130,7 @@ export default function IslandPage() {
                 label={`${islandName}: ${progress.stage.name}, ${health.label.toLowerCase()}`}
               />
               {tab === "arrange" && (
-                <div className="glass pointer-events-none absolute top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-medium whitespace-nowrap text-fg-2 shadow-md">
+                <div className="glass pointer-events-none absolute top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap text-fg-2 shadow-md">
                   <Move className="size-4 shrink-0" /> Drag to move, or select one and use the arrow keys
                 </div>
               )}
@@ -151,7 +151,7 @@ export default function IslandPage() {
                       maxLength={32}
                       onChange={(e) => setName(e.target.value)}
                       onBlur={() => void saveName()}
-                      className="font-display w-full max-w-[340px] border-b border-brand bg-transparent text-[26px] font-[560] text-fg outline-none"
+                      className="font-display w-full max-w-[340px] border-b border-brand bg-transparent text-3xl font-[560] text-fg outline-none"
                       aria-label="Island name"
                     />
                   </form>
@@ -161,12 +161,12 @@ export default function IslandPage() {
                     <Pencil className="size-4 text-fg-4 opacity-0 transition-opacity group-hover:opacity-100" />
                   </button>
                 )}
-                <p className="mt-1 text-[14px] text-fg-3">
+                <p className="mt-1 text-base text-fg-3">
                   {progress.stage.name} · {progress.stage.blurb}
                 </p>
               </div>
               <div className="w-[300px]">
-                <div className="mb-2 flex items-center justify-between text-[13px]">
+                <div className="mb-2 flex items-center justify-between text-sm">
                   <span className="font-semibold text-fg-2">{progress.next ? `Next: ${progress.next.name}` : "Fully grown"}</span>
                   <span className="t-num text-fg-3">{progress.next ? `${progress.toNext} XP to go` : `${xp.toLocaleString()} XP`}</span>
                 </div>
@@ -178,8 +178,8 @@ export default function IslandPage() {
           <div className="mt-6 grid grid-cols-3 gap-4">
             <Card className="p-5">
               <p className="t-eyebrow">Health</p>
-              <p className={cn("mt-2.5 text-[17px] font-semibold", health.label === "Thriving" ? "text-brand-ink" : health.label === "Thirsty" ? "text-sun-ink" : "text-coral")}>{health.label}</p>
-              <p className="mt-1 text-[13px] text-fg-3">
+              <p className={cn("mt-2.5 text-xl font-semibold", health.label === "Thriving" ? "text-brand-ink" : health.label === "Thirsty" ? "text-sun-ink" : "text-coral")}>{health.label}</p>
+              <p className="mt-1 text-sm text-fg-3">
                 {health.daysMissed === 0 ? "Watered by your daily sets." : `${health.daysMissed} missed ${health.daysMissed === 1 ? "day" : "days"}. One daily set restores it.`}
               </p>
               {health.daysMissed > 0 && (
@@ -190,16 +190,16 @@ export default function IslandPage() {
             </Card>
             <Card className="p-5">
               <p className="t-eyebrow">Growth</p>
-              <p className="font-display t-num mt-2 text-[28px] font-[600] text-fg">{xp.toLocaleString()} XP</p>
-              <p className="mt-0.5 text-[13px] text-fg-3">Every question, lesson and quest adds XP. Your island never shrinks.</p>
+              <p className="font-display t-num mt-2 text-3xl font-[600] text-fg">{xp.toLocaleString()} XP</p>
+              <p className="mt-0.5 text-sm text-fg-3">Every question, lesson and quest adds XP. Your island never shrinks.</p>
             </Card>
             <Card className="p-5">
               <p className="t-eyebrow">Landmarks</p>
-              <p className="font-display t-num mt-2 text-[28px] font-[600] text-fg">
+              <p className="font-display t-num mt-2 text-3xl font-[600] text-fg">
                 {mastered.length}
-                <span className="text-[16px] text-fg-3"> / 9</span>
+                <span className="text-lg text-fg-3"> / 9</span>
               </p>
-              <p className="mt-0.5 text-[13px] text-fg-3">One for each unit you master at {MASTERY_PCT}%.</p>
+              <p className="mt-0.5 text-sm text-fg-3">One for each unit you master at {MASTERY_PCT}%.</p>
             </Card>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function IslandPage() {
                   { value: "arrange", label: "Arrange" },
                 ]}
               />
-              <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-fg">
+              <span className="inline-flex items-center gap-1.5 text-base font-semibold text-fg">
                 <Treecoin size={17} /> <span className="t-num">{coins.toLocaleString()}</span>
               </span>
             </div>
@@ -233,13 +233,13 @@ export default function IslandPage() {
                   const have = mastered.includes(u.n);
                   const best = profile.unit_best?.[`u${u.n}`];
                   return (
-                    <li key={u.n} className="flex items-start gap-3 rounded-[12px] p-2.5 hover:bg-surface-2/60">
-                      <span className={cn("mt-0.5 grid size-8 shrink-0 place-items-center rounded-[10px]", have ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-4")}>
+                    <li key={u.n} className="flex items-start gap-3 rounded-md p-2.5 hover:bg-surface-2/60">
+                      <span className={cn("mt-0.5 grid size-8 shrink-0 place-items-center rounded-md", have ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-4")}>
                         {have ? <CheckCircle2 className="size-4" /> : <Lock className="size-3.5" />}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="text-[14px] font-semibold text-fg">{LANDMARK_INFO[u.n].name}</p>
-                        <p className="text-[12.5px] text-fg-3">
+                        <p className="text-base font-semibold text-fg">{LANDMARK_INFO[u.n].name}</p>
+                        <p className="text-sm text-fg-3">
                           Unit {u.n} · {have ? "Unlocked" : best !== undefined ? `Best ${best}%, need ${MASTERY_PCT}%` : `Score ${MASTERY_PCT}% on the unit quiz`}
                         </p>
                       </div>
@@ -257,25 +257,25 @@ export default function IslandPage() {
             {tab === "shop" && (
               <div className="space-y-7">
                 <section>
-                  <p className="mb-3 text-[13px] font-semibold text-fg-2">Skies</p>
+                  <p className="mb-3 text-sm font-semibold text-fg-2">Skies</p>
                   <div className="grid grid-cols-2 gap-2.5">
                     {SKIES.map((s) => {
                       const has = s.price === 0 || owned.has(s.id);
                       const inUse = sky === s.id;
                       const sp = SKY_PALETTES[s.id];
                       return (
-                        <div key={s.id} className={cn("overflow-hidden rounded-[13px] border", inUse ? "border-brand ring-2 ring-brand/25" : "border-line")}>
+                        <div key={s.id} className={cn("overflow-hidden rounded-md border", inUse ? "border-brand ring-2 ring-brand/25" : "border-line")}>
                           <div className="relative h-[64px]" style={{ background: `linear-gradient(${sp.top}, ${sp.mid} 60%, ${sp.water[1]} 61%, ${sp.water[2]})` }}>
                             {s.animated && (
-                              <Badge tone="neutral" className="absolute top-1.5 right-1.5 h-5 bg-black/35 text-[10.5px] text-white">
+                              <Badge tone="neutral" className="absolute top-1.5 right-1.5 h-5 bg-black/35 text-2xs text-white">
                                 <Sparkles /> Animated
                               </Badge>
                             )}
                           </div>
                           <div className="p-2.5">
-                            <p className="truncate text-[13px] font-semibold text-fg">{s.name}</p>
+                            <p className="truncate text-sm font-semibold text-fg">{s.name}</p>
                             {inUse ? (
-                              <p className="mt-1.5 flex h-7 items-center gap-1 text-[12.5px] font-semibold text-brand-ink">
+                              <p className="mt-1.5 flex h-7 items-center gap-1 text-sm font-semibold text-brand-ink">
                                 <Check className="size-3.5" /> In use
                               </p>
                             ) : has ? (
@@ -294,17 +294,17 @@ export default function IslandPage() {
                   </div>
                 </section>
                 <section>
-                  <p className="mb-3 text-[13px] font-semibold text-fg-2">Decorations</p>
+                  <p className="mb-3 text-sm font-semibold text-fg-2">Decorations</p>
                   <div className="grid grid-cols-2 gap-2.5">
                     {DECOR.map((d) => {
                       const has = owned.has(d.id);
                       const count = decor.filter((x) => x.id === d.id).length;
                       return (
-                        <div key={d.id} className="rounded-[13px] border border-line p-2.5" title={d.description}>
-                          <div className="h-[72px] rounded-[9px] bg-surface-2/70 p-2">
+                        <div key={d.id} className="rounded-md border border-line p-2.5" title={d.description}>
+                          <div className="h-[72px] rounded-sm bg-surface-2/70 p-2">
                             <DecorPreview id={d.id} p={p} />
                           </div>
-                          <p className="mt-2 truncate text-[13px] font-semibold text-fg">{d.name}</p>
+                          <p className="mt-2 truncate text-sm font-semibold text-fg">{d.name}</p>
                           {has ? (
                             <Button size="sm" variant="secondary" className="mt-1.5 h-7 w-full" onClick={() => place(d.id)}>
                               {count > 0 ? `Place another (${count})` : "Place"}
@@ -318,7 +318,7 @@ export default function IslandPage() {
                       );
                     })}
                   </div>
-                  <p className="mt-4 text-[12.5px] text-fg-3">Treecoins come from daily sets, quizzes, lessons, FRQs and field quests.</p>
+                  <p className="mt-4 text-sm text-fg-3">Treecoins come from daily sets, quizzes, lessons, FRQs and field quests.</p>
                 </section>
               </div>
             )}
@@ -326,19 +326,19 @@ export default function IslandPage() {
             {tab === "arrange" && (
               <div>
                 {decor.length === 0 ? (
-                  <p className="text-[14px] text-fg-3">Nothing placed yet. Buy something in the Shop and it lands on your island.</p>
+                  <p className="text-base text-fg-3">Nothing placed yet. Buy something in the Shop and it lands on your island.</p>
                 ) : (
                   <ul className="space-y-1">
                     {decor.map((d, i) => (
                       <li
                         key={`${d.id}-${i}`}
-                        className={cn("flex items-center gap-3 rounded-[11px] px-2.5 py-2", selected === i ? "bg-brand-soft" : "hover:bg-surface-2/70")}
+                        className={cn("flex items-center gap-3 rounded-md px-2.5 py-2", selected === i ? "bg-brand-soft" : "hover:bg-surface-2/70")}
                       >
                         <button className="flex flex-1 items-center gap-3 text-left" onClick={() => setSelected(selected === i ? null : i)}>
-                          <span className="size-9 rounded-[8px] bg-surface-2 p-1">
+                          <span className="size-9 rounded-sm bg-surface-2 p-1">
                             <DecorPreview id={d.id} p={p} />
                           </span>
-                          <span className="text-[14px] font-medium text-fg">{findDecor(d.id)?.name}</span>
+                          <span className="text-base font-medium text-fg">{findDecor(d.id)?.name}</span>
                         </button>
                         <Button variant="ghost" size="icon-sm" onClick={() => remove(i)} aria-label={`Remove ${findDecor(d.id)?.name}`}>
                           <Trash2 />

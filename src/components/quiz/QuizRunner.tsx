@@ -139,9 +139,9 @@ export function QuizRunner({
       <div className="mb-6 flex items-center gap-4">
         <div className="min-w-0 flex-1">
           <p className="t-eyebrow">{eyebrow}</p>
-          <h1 className="mt-1.5 truncate text-[17px] font-semibold text-fg">{title}</h1>
+          <h1 className="mt-1.5 truncate text-xl font-semibold text-fg">{title}</h1>
         </div>
-        <span className="t-num text-[13.5px] font-semibold text-fg-3">
+        <span className="t-num text-base font-semibold text-fg-3">
           {index + 1} / {questions.length}
         </span>
         <Button variant="ghost" size="sm" onClick={onExit} aria-label="Leave practice">
@@ -174,7 +174,7 @@ export function QuizRunner({
           className="card p-8"
         >
           {q.stimulus && <StimulusChart stimulus={q.stimulus} />}
-          <h2 className="text-[18.5px] leading-[1.5] font-semibold text-fg">{q.prompt}</h2>
+          <h2 className="text-xl leading-[1.5] font-semibold text-fg">{q.prompt}</h2>
 
           <div className="mt-6 space-y-2.5" role="radiogroup" aria-label="Answer choices">
             {q.choices.map((text, i) => {
@@ -192,7 +192,7 @@ export function QuizRunner({
                   sparkCount={10}
                   sparkRadius={26}
                   sparkSize={9}
-                  className="rounded-[13px]"
+                  className="rounded-md"
                 >
                   <button
                     ref={(el) => {
@@ -203,7 +203,7 @@ export function QuizRunner({
                     disabled={choice !== null}
                     onClick={() => pick(i)}
                     className={cn(
-                      "group flex w-full items-start gap-3.5 rounded-[13px] border px-4 py-3.5 text-left text-[15px] leading-[1.5] transition-[background-color,border-color,opacity] duration-200",
+                      "group flex w-full items-start gap-3.5 rounded-md border px-4 py-3.5 text-left text-md leading-[1.5] transition-[background-color,border-color,opacity] duration-200",
                       state === "idle" && "border-line-strong bg-surface hover:border-[color-mix(in_srgb,var(--brand)_55%,transparent)] hover:bg-brand-soft/40",
                       state === "pending" && "border-brand bg-brand-soft/50 text-fg",
                       state === "right" && "border-brand bg-brand-soft text-fg",
@@ -213,7 +213,7 @@ export function QuizRunner({
                   >
                     <span
                       className={cn(
-                        "mt-px grid size-6 shrink-0 place-items-center rounded-[7px] border text-[12px] font-bold",
+                        "mt-px grid size-6 shrink-0 place-items-center rounded-sm border text-xs font-bold",
                         state === "right" ? "border-brand bg-brand text-brand-fg" : state === "wrong" ? "border-coral bg-coral text-white" : "border-line-strong text-fg-3 group-hover:border-brand group-hover:text-brand-ink",
                       )}
                     >
@@ -240,7 +240,7 @@ export function QuizRunner({
                 <motion.p
                   initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className={cn("text-[14.5px] font-semibold", result.correct ? "text-brand-ink" : "text-coral")}
+                  className={cn("text-md font-semibold", result.correct ? "text-brand-ink" : "text-coral")}
                   role="status"
                 >
                   {result.correct ? "Correct." : `Not quite. The answer is ${LETTERS[result.answer]}.`}
@@ -248,11 +248,11 @@ export function QuizRunner({
               )}
             </AnimatePresence>
             {checkError && (
-              <p className="flex items-center gap-2 text-[13.5px] font-medium text-coral" role="alert">
+              <p className="flex items-center gap-2 text-base font-medium text-coral" role="alert">
                 <RotateCcw className="size-3.5" aria-hidden /> {checkError} Pick your answer again.
               </p>
             )}
-            {!answered && !checkError && <p className="text-[13px] text-fg-4">{checking ? "Checking…" : "Press A–D or 1–4 to answer"}</p>}
+            {!answered && !checkError && <p className="text-sm text-fg-4">{checking ? "Checking…" : "Press A–D or 1–4 to answer"}</p>}
             <Button ref={continueRef} onClick={next} disabled={!answered} className="ml-auto">
               {last ? "See results" : "Continue"} <ArrowRight />
             </Button>

@@ -13,7 +13,7 @@ const TONES = {
 export function Badge({ tone = "neutral", className, ...props }: HTMLAttributes<HTMLSpanElement> & { tone?: keyof typeof TONES }) {
   return (
     <span
-      className={cn("inline-flex h-[22px] items-center gap-1 rounded-full px-2 text-[12px] font-semibold whitespace-nowrap [&_svg]:size-3", TONES[tone], className)}
+      className={cn("inline-flex h-[22px] items-center gap-1 rounded-full px-2 text-xs font-semibold whitespace-nowrap [&_svg]:size-3", TONES[tone], className)}
       {...props}
     />
   );

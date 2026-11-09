@@ -133,7 +133,7 @@ export default function Act() {
         <div>
           <p className="t-eyebrow">Act</p>
           <h1 className="t-h1 mt-2.5">Take it outside</h1>
-          <p className="mt-2 max-w-[60ch] text-[15px] text-fg-3">
+          <p className="mt-2 max-w-[60ch] text-md text-fg-3">
             Volunteer events and eco actions from {teacher ? "your classes" : "your class"} and your community. Learn the science in Study, then put it to work here.
           </p>
         </div>
@@ -184,9 +184,9 @@ export default function Act() {
           <div className="mb-5 flex flex-wrap items-center gap-2.5">
             <div className="relative min-w-[200px] flex-1">
               <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-4" aria-hidden />
-              <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-[13.5px]" />
+              <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-base" />
             </div>
-            <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-auto text-[13.5px]">
+            <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-auto text-base">
               <option value="all">Classes and community</option>
               <option value="class">{classNames.length > 1 ? "All my classes" : "My class"}</option>
               {classNames.length > 1 && classNames.map(([id, name]) => (
@@ -207,7 +207,7 @@ export default function Act() {
                 setParams(next, { replace: true });
               }}
               aria-label="Location"
-              className="h-9 w-auto text-[13.5px]"
+              className="h-9 w-auto text-base"
               disabled={regions.length === 0}
             >
               <option value="">{regions.length ? "Any location" : "No locations yet"}</option>
@@ -217,13 +217,13 @@ export default function Act() {
                 </option>
               ))}
             </Select>
-            <Select value={within} onChange={(e) => setParam("within", e.target.value === "any" ? "" : e.target.value)} aria-label="Time" className="h-9 w-auto text-[13.5px]">
+            <Select value={within} onChange={(e) => setParam("within", e.target.value === "any" ? "" : e.target.value)} aria-label="Time" className="h-9 w-auto text-base">
               <option value="any">Any time</option>
               <option value="today">{phase === "past" ? "Ended today" : "Today"}</option>
               <option value="week">{phase === "past" ? "Past week" : "Next 7 days"}</option>
               <option value="month">{phase === "past" ? "Past 30 days" : "Next 30 days"}</option>
             </Select>
-            <Select value={category} onChange={(e) => setParam("cat", e.target.value)} aria-label="Category" className="h-9 w-auto text-[13.5px]">
+            <Select value={category} onChange={(e) => setParam("cat", e.target.value)} aria-label="Category" className="h-9 w-auto text-base">
               <option value="">All categories</option>
               {CATEGORY_IDS.map((c) => (
                 <option key={c} value={c}>
@@ -231,7 +231,7 @@ export default function Act() {
                 </option>
               ))}
             </Select>
-            <Select value={sort} onChange={(e) => setParam("sort", e.target.value === "soonest" ? "" : e.target.value)} aria-label="Sort" className="h-9 w-auto text-[13.5px]">
+            <Select value={sort} onChange={(e) => setParam("sort", e.target.value === "soonest" ? "" : e.target.value)} aria-label="Sort" className="h-9 w-auto text-base">
               <option value="soonest">{phase === "past" ? "Most recent" : "Coming up soonest"}</option>
               <option value="newest">Newest posted</option>
               <option value="popular">Most popular</option>
@@ -289,10 +289,10 @@ export default function Act() {
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
                 <ClipboardCheck className="size-[18px] text-brand" aria-hidden />
-                <h2 className="text-[15px] font-semibold text-fg">Hours to verify</h2>
+                <h2 className="text-md font-semibold text-fg">Hours to verify</h2>
               </div>
-              <p className="font-display t-num mt-3 text-[34px] leading-none font-[600] text-fg">{toReview.items.length}</p>
-              <p className="mt-2 text-[13px] text-fg-3">
+              <p className="font-display t-num mt-3 text-4xl leading-none font-[600] text-fg">{toReview.items.length}</p>
+              <p className="mt-2 text-sm text-fg-3">
                 {toReview.items.length ? "Students are waiting on you to verify their volunteer hours." : "When students log hours with your class, you verify them here."}
               </p>
               {toReview.items.length > 0 && (
@@ -305,16 +305,16 @@ export default function Act() {
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
                 <HandHeart className="size-[18px] text-brand" aria-hidden />
-                <h2 className="text-[15px] font-semibold text-fg">Your volunteer hours</h2>
+                <h2 className="text-md font-semibold text-fg">Your volunteer hours</h2>
               </div>
               <p className="mt-3 flex items-baseline gap-2">
-                <span className="font-display t-num text-[38px] leading-none font-[600] text-fg">
+                <span className="font-display t-num text-4xl leading-none font-[600] text-fg">
                   <CountUp to={Math.round(verified * 100) / 100} duration={0.8} />
                 </span>
-                <span className="text-[13.5px] text-fg-3">verified</span>
+                <span className="text-base text-fg-3">verified</span>
               </p>
-              {pending.length > 0 && <p className="mt-1.5 text-[13px] text-sun-ink">{formatHours(pending.reduce((s, h) => s + h.hours, 0))} waiting for your teacher</p>}
-              <p className="mt-2 text-[13px] text-fg-3">Teacher-verified hours you can print for service requirements.</p>
+              {pending.length > 0 && <p className="mt-1.5 text-sm text-sun-ink">{formatHours(pending.reduce((s, h) => s + h.hours, 0))} waiting for your teacher</p>}
+              <p className="mt-2 text-sm text-fg-3">Teacher-verified hours you can print for service requirements.</p>
               <div className="mt-4 grid grid-cols-2 gap-2">
                 <Button onClick={() => setLogging(true)}>
                   <Plus /> Log hours
@@ -330,15 +330,15 @@ export default function Act() {
 
           {myOpen.length > 0 && (
             <Card className="p-6">
-              <h2 className="text-[15px] font-semibold text-fg">Your suggestions</h2>
+              <h2 className="text-md font-semibold text-fg">Your suggestions</h2>
               <ul className="mt-3 space-y-2.5">
                 {myOpen.map((s) => (
-                  <li key={s.id} className="text-[13.5px]">
+                  <li key={s.id} className="text-base">
                     <div className="flex items-center justify-between gap-2">
                       <span className="truncate font-medium text-fg-2">{s.title}</span>
                       <Badge tone={s.status === "pending" ? "sun" : "coral"}>{s.status === "pending" ? "In review" : "Not approved"}</Badge>
                     </div>
-                    {s.status === "rejected" && s.review_note && <p className="mt-1 text-[12.5px] text-fg-3">{s.review_note}</p>}
+                    {s.status === "rejected" && s.review_note && <p className="mt-1 text-sm text-fg-3">{s.review_note}</p>}
                   </li>
                 ))}
               </ul>
@@ -349,9 +349,9 @@ export default function Act() {
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
                 <Shield className="size-[18px] text-ocean" aria-hidden />
-                <h2 className="text-[15px] font-semibold text-fg">Admin</h2>
+                <h2 className="text-md font-semibold text-fg">Admin</h2>
               </div>
-              <p className="mt-2 text-[13px] text-fg-3">Review suggested events and ambassador applications.</p>
+              <p className="mt-2 text-sm text-fg-3">Review suggested events and ambassador applications.</p>
               <Button variant="secondary" className="mt-4 w-full" asChild>
                 <Link to="/admin">Open admin</Link>
               </Button>
@@ -362,9 +362,9 @@ export default function Act() {
             <div className="bg-[linear-gradient(135deg,var(--brand-soft),var(--ocean-soft))] p-6">
               <div className="flex items-center gap-2.5">
                 <Award className="size-[18px] text-brand-ink" aria-hidden />
-                <h2 className="text-[15px] font-semibold text-fg">{profile.ambassador ? "You're an ambassador" : "Ecoisland Ambassadors"}</h2>
+                <h2 className="text-md font-semibold text-fg">{profile.ambassador ? "You're an ambassador" : "Ecoisland Ambassadors"}</h2>
               </div>
-              <p className="mt-2 text-[13px] text-fg-2">
+              <p className="mt-2 text-sm text-fg-2">
                 {profile.ambassador
                   ? "Post community events for your area. They go live right away."
                   : "Organize real events in your area, post them for everyone, and earn volunteer hours."}

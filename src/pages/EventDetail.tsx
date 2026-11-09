@@ -129,17 +129,17 @@ function Detail({ listing: e }: { listing: Listing }) {
 
   return (
     <Page>
-      <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> Act
       </Link>
 
       {e.status === "pending" && (
-        <div className="mb-5 flex items-center gap-2.5 rounded-xl border border-sun/30 bg-sun-soft px-4 py-3 text-[13.5px] text-sun-ink">
+        <div className="mb-5 flex items-center gap-2.5 rounded-xl border border-sun/30 bg-sun-soft px-4 py-3 text-base text-sun-ink">
           <Info className="size-4 shrink-0" aria-hidden /> Only you can see this suggestion until an Ecoisland admin approves it.
         </div>
       )}
       {e.status === "rejected" && (
-        <div className="mb-5 flex items-center gap-2.5 rounded-xl bg-coral-soft px-4 py-3 text-[13.5px] text-coral">
+        <div className="mb-5 flex items-center gap-2.5 rounded-xl bg-coral-soft px-4 py-3 text-base text-coral">
           <CircleSlash className="size-4 shrink-0" aria-hidden /> This suggestion wasn't approved{e.review_note ? `: ${e.review_note}` : "."} You can edit it and send it again.
         </div>
       )}
@@ -158,7 +158,7 @@ function Detail({ listing: e }: { listing: Listing }) {
             {!cancelled && phase === "past" && <Badge tone="neutral">Ended</Badge>}
           </div>
           <h1 className="t-h1 mt-3">{e.title}</h1>
-          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px] text-fg-3">
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-base text-fg-3">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-4" aria-hidden /> {whenLabel(e)}
             </span>
@@ -186,39 +186,39 @@ function Detail({ listing: e }: { listing: Listing }) {
       <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-6">
         <div className="min-w-0 space-y-4">
           <Card className="p-7">
-            <p className="text-[16px] leading-relaxed font-medium text-fg">{e.summary}</p>
+            <p className="text-lg leading-relaxed font-medium text-fg">{e.summary}</p>
             {template ? (
               <>
                 <h2 className="t-h3 mt-6">What to do</h2>
                 <ol className="mt-3 space-y-2.5">
                   {template.steps.map((s, i) => (
-                    <li key={i} className="flex gap-3 text-[14.5px] leading-relaxed text-fg-2">
-                      <span className="t-num mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-surface-2 text-[12px] font-bold text-fg-3">{i + 1}</span>
+                    <li key={i} className="flex gap-3 text-md leading-relaxed text-fg-2">
+                      <span className="t-num mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-surface-2 text-xs font-bold text-fg-3">{i + 1}</span>
                       {s}
                     </li>
                   ))}
                 </ol>
-                <div className="mt-6 rounded-[14px] bg-brand-soft/60 p-5">
-                  <p className="text-[13px] font-semibold text-brand-ink">Why it matters</p>
-                  <p className="mt-1.5 text-[14px] leading-relaxed text-fg-2">{template.why}</p>
+                <div className="mt-6 rounded-lg bg-brand-soft/60 p-5">
+                  <p className="text-sm font-semibold text-brand-ink">Why it matters</p>
+                  <p className="mt-1.5 text-base leading-relaxed text-fg-2">{template.why}</p>
                 </div>
-                <p className="mt-5 text-[13.5px] text-fg-3">
+                <p className="mt-5 text-base text-fg-3">
                   <span className="font-semibold text-fg-2">Your write-up:</span> {template.prompt}
                 </p>
               </>
             ) : e.details ? (
-              <p className="mt-5 text-[14.5px] leading-relaxed whitespace-pre-wrap text-fg-2">{e.details}</p>
+              <p className="mt-5 text-md leading-relaxed whitespace-pre-wrap text-fg-2">{e.details}</p>
             ) : null}
           </Card>
 
           {unit && (
             <Link to={`/study/unit/${unit.n}`} className="card flex items-center gap-4 p-5 transition-colors hover:border-line-strong">
-              <span className="grid size-10 place-items-center rounded-[12px] bg-ocean-soft text-ocean" aria-hidden>
+              <span className="grid size-10 place-items-center rounded-md bg-ocean-soft text-ocean" aria-hidden>
                 <BookOpen className="size-5" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[12.5px] font-semibold text-fg-3">Learn the science</p>
-                <p className="text-[15px] font-semibold text-fg">
+                <p className="text-sm font-semibold text-fg-3">Learn the science</p>
+                <p className="text-md font-semibold text-fg">
                   Unit {unit.n}: {unit.title}
                 </p>
               </div>
@@ -227,7 +227,7 @@ function Detail({ listing: e }: { listing: Listing }) {
           )}
 
           {e.kind === "event" && (
-            <div className="flex gap-3 rounded-xl border border-line bg-surface-2/50 p-5 text-[13.5px] leading-relaxed text-fg-3">
+            <div className="flex gap-3 rounded-xl border border-line bg-surface-2/50 p-5 text-base leading-relaxed text-fg-3">
               <ShieldCheck className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
               <p>
                 {e.scope === "community" ? `This event is run by ${e.org_name || "its organizer"}, not Ecoisland.` : "Your teacher posted this event."} Check with a parent or guardian before you go, bring a friend,
@@ -244,16 +244,16 @@ function Detail({ listing: e }: { listing: Listing }) {
             {e.kind === "event" ? (
               <>
                 {(e.going_count ?? 0) > 0 && (
-                  <p className="mb-4 flex items-center gap-2 text-[13.5px] text-fg-3">
+                  <p className="mb-4 flex items-center gap-2 text-base text-fg-3">
                     <Users className="size-4" aria-hidden /> {e.going_count} going
                     {e.capacity ? ` · ${Math.max(0, e.capacity - (e.going_count ?? 0))} spots left` : ""}
                   </p>
                 )}
                 {cancelled ? (
-                  <p className="text-[14px] font-semibold text-coral">This event was cancelled.</p>
+                  <p className="text-base font-semibold text-coral">This event was cancelled.</p>
                 ) : going ? (
                   <div className="flex items-center gap-2">
-                    <p className="flex h-10 flex-1 items-center justify-center gap-2 rounded-[11px] bg-brand-soft text-[14px] font-semibold text-brand-ink" role="status">
+                    <p className="flex h-10 flex-1 items-center justify-center gap-2 rounded-md bg-brand-soft text-base font-semibold text-brand-ink" role="status">
                       <Check className="size-4" aria-hidden /> You're going
                     </p>
                     {!ended && (
@@ -267,7 +267,7 @@ function Detail({ listing: e }: { listing: Listing }) {
                     {full ? "Event is full" : "I'm going"}
                   </Button>
                 ) : (
-                  <p className="text-[14px] text-fg-3">This event has ended.</p>
+                  <p className="text-base text-fg-3">This event has ended.</p>
                 )}
                 {!cancelled && !ended && (
                   <Button variant="secondary" className="mt-2.5 w-full" onClick={() => downloadCalendar(e)}>
@@ -284,7 +284,7 @@ function Detail({ listing: e }: { listing: Listing }) {
                 {!teacher && e.status === "published" && hoursOpen(e) && (
                   <div className="mt-5 border-t border-line pt-5">
                     {myLog ? (
-                      <p className="text-[13.5px] text-fg-2">
+                      <p className="text-base text-fg-2">
                         <span className="font-semibold">{formatHours(myLog.hours)} logged.</span>{" "}
                         {myLog.status === "verified"
                           ? `Verified by ${myLog.teacher_name}.`
@@ -296,7 +296,7 @@ function Detail({ listing: e }: { listing: Listing }) {
                       </p>
                     ) : (
                       <>
-                        <p className="text-[13.5px] text-fg-3">Went? Log your hours and your teacher can verify them.</p>
+                        <p className="text-base text-fg-3">Went? Log your hours and your teacher can verify them.</p>
                         <Button className="mt-3 w-full" onClick={() => setLogging(true)}>
                           <HandHeart /> Log your hours
                         </Button>
@@ -308,31 +308,31 @@ function Detail({ listing: e }: { listing: Listing }) {
             ) : (
               <>
                 {(e.done_count ?? 0) > 0 && (
-                  <p className="mb-4 flex items-center gap-2 text-[13.5px] text-fg-3">
+                  <p className="mb-4 flex items-center gap-2 text-base text-fg-3">
                     <Users className="size-4" aria-hidden /> {e.done_count} finished so far
                   </p>
                 )}
                 {cancelled ? (
-                  <p className="text-[14px] font-semibold text-coral">This eco action was cancelled.</p>
+                  <p className="text-base font-semibold text-coral">This eco action was cancelled.</p>
                 ) : done ? (
-                  <p className="flex h-10 items-center justify-center gap-2 rounded-[11px] bg-brand-soft text-[14px] font-semibold text-brand-ink" role="status">
+                  <p className="flex h-10 items-center justify-center gap-2 rounded-md bg-brand-soft text-base font-semibold text-brand-ink" role="status">
                     <Check className="size-4" aria-hidden /> Done. Nice work.
                   </p>
                 ) : teacher && e.scope === "class" ? (
-                  <p className="text-[13.5px] text-fg-3">Students mark this done with a short write-up. You'll find them in your class's Field notes.</p>
+                  <p className="text-base text-fg-3">Students mark this done with a short write-up. You'll find them in your class's Field notes.</p>
                 ) : actionOpen(e, today) ? (
                   <>
                     <Button className="w-full" size="lg" onClick={() => setCompleting(true)}>
                       <Check /> Mark done
                     </Button>
-                    <p className="mt-2.5 text-center text-[12.5px] text-fg-3">
+                    <p className="mt-2.5 text-center text-sm text-fg-3">
                       +{ACT_REWARD.ACTION_TC} Treecoins and {ACT_REWARD.ACTION_XP} XP
                     </p>
                   </>
                 ) : phase === "upcoming" ? (
-                  <p className="text-[13.5px] text-fg-3">Opens {e.start_day ? formatDay(e.start_day, { weekday: "long", month: "short", day: "numeric" }) : "soon"}.</p>
+                  <p className="text-base text-fg-3">Opens {e.start_day ? formatDay(e.start_day, { weekday: "long", month: "short", day: "numeric" }) : "soon"}.</p>
                 ) : (
-                  <p className="text-[13.5px] text-fg-3">
+                  <p className="text-base text-fg-3">
                     Closed {e.end_day ? formatDay(addDays(e.end_day, LIMITS.ACTION_GRACE_DAYS), { month: "short", day: "numeric" }) : ""}.
                   </p>
                 )}
@@ -347,8 +347,8 @@ function Detail({ listing: e }: { listing: Listing }) {
 
           {(e.org_name || e.org_email || e.org_url || e.org_phone) && (
             <Card className="p-6">
-              <p className="text-[12.5px] font-semibold text-fg-3">Organized by</p>
-              <p className="mt-1 text-[15px] font-semibold text-fg">{e.org_name || e.created_by_name}</p>
+              <p className="text-sm font-semibold text-fg-3">Organized by</p>
+              <p className="mt-1 text-md font-semibold text-fg">{e.org_name || e.created_by_name}</p>
               <div className="mt-4 space-y-2">
                 {mailto && (
                   <Button variant="secondary" className="w-full justify-start" asChild>
@@ -375,7 +375,7 @@ function Detail({ listing: e }: { listing: Listing }) {
             </Card>
           )}
 
-          <p className="px-1 text-[12.5px] text-fg-4">
+          <p className="px-1 text-sm text-fg-4">
             Posted by {e.created_by_name}
             {e.scope === "class" ? ` for ${e.class_name || "this class"}` : ""} · {new Date(e.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
           </p>
@@ -438,15 +438,15 @@ function Attendees({ listing }: { listing: Listing }) {
   if (listing.kind !== "event") return null;
   return (
     <Card className="p-6">
-      <h2 className="text-[15px] font-semibold text-fg">Going ({rows?.length ?? 0})</h2>
+      <h2 className="text-md font-semibold text-fg">Going ({rows?.length ?? 0})</h2>
       {rows === null ? (
         <Skeleton className="mt-3 h-10" />
       ) : rows.length === 0 ? (
-        <p className="mt-2 text-[13.5px] text-fg-3">No one has RSVP'd yet.</p>
+        <p className="mt-2 text-base text-fg-3">No one has RSVP'd yet.</p>
       ) : (
         <ul className="mt-3 grid grid-cols-2 gap-2.5">
           {rows.map((r) => (
-            <li key={r.uid} className="flex items-center gap-2.5 text-[14px] text-fg-2">
+            <li key={r.uid} className="flex items-center gap-2.5 text-base text-fg-2">
               <Avatar name={r.name} size={28} /> {r.name}
             </li>
           ))}

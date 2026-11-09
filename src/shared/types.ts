@@ -17,7 +17,7 @@ export type UserDoc = {
   avatar_url?: string;
   role?: Role;
   onboarding_complete?: boolean;
-  preferences?: { theme?: "light" | "dark" | "system" };
+  preferences?: Record<string, unknown>;
   email_reminders?: boolean;
   focus_unit?: number | null;
   last_lesson?: { id: string; unit: number; at: string } | null;

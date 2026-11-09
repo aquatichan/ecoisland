@@ -283,8 +283,8 @@ export function EventForm({
           )}
 
           <div className="col-span-2 mt-1 border-t border-line pt-4">
-            <p className="text-[13px] font-semibold text-fg-2">Organizer</p>
-            <p className="text-[12.5px] text-fg-3">{isEvent ? (community ? "Add at least one way to contact them or sign up." : "Who runs it, and how to reach them.") : "Optional, if a group is behind it."}</p>
+            <p className="text-sm font-semibold text-fg-2">Organizer</p>
+            <p className="text-sm text-fg-3">{isEvent ? (community ? "Add at least one way to contact them or sign up." : "Who runs it, and how to reach them.") : "Optional, if a group is behind it."}</p>
           </div>
           <Field label="Organization" htmlFor={id("org")}>
             <Input id={id("org")} value={d.orgName} maxLength={LIMITS.ORG} placeholder="Friends of Golden Gardens" onChange={(e) => set("orgName", e.target.value)} />
@@ -308,7 +308,7 @@ export function EventForm({
           </Field>
         </div>
         {error && (
-          <p className="mt-4 rounded-lg bg-coral-soft px-3.5 py-2.5 text-[13.5px] font-medium text-coral" role="alert">
+          <p className="mt-4 rounded-lg bg-coral-soft px-3.5 py-2.5 text-base font-medium text-coral" role="alert">
             {error}
           </p>
         )}

@@ -20,9 +20,9 @@ export function EventCard({ e, going, done, index = 0 }: { e: Listing; going: bo
         )}
       >
         <div className="flex w-14 shrink-0 flex-col items-center">
-          <div className="w-full overflow-hidden rounded-[12px] border border-line bg-surface text-center shadow-xs">
-            <p className={cn("py-0.5 text-[10.5px] font-bold tracking-[0.08em]", TONE_CLASS[style.tone])}>{tile.month}</p>
-            <p className="font-display t-num py-1 text-[22px] leading-none font-[600] text-fg">{tile.day}</p>
+          <div className="w-full overflow-hidden rounded-md border border-line bg-surface text-center shadow-xs">
+            <p className={cn("py-0.5 text-2xs font-bold tracking-[0.08em]", TONE_CLASS[style.tone])}>{tile.month}</p>
+            <p className="font-display t-num py-1 text-2xl leading-none font-[600] text-fg">{tile.day}</p>
           </div>
           <span className={cn("mt-2.5 grid size-8 place-items-center rounded-full", TONE_CLASS[style.tone])} aria-hidden>
             <Icon className="size-4" />
@@ -44,9 +44,9 @@ export function EventCard({ e, going, done, index = 0 }: { e: Listing; going: bo
               </Badge>
             )}
           </div>
-          <h3 className="mt-2.5 text-[16px] leading-snug font-semibold text-fg group-hover:text-brand-ink">{e.title}</h3>
-          <p className="mt-1 line-clamp-2 text-[13.5px] leading-relaxed text-fg-3">{e.summary}</p>
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] text-fg-3">
+          <h3 className="mt-2.5 text-lg leading-snug font-semibold text-fg group-hover:text-brand-ink">{e.title}</h3>
+          <p className="mt-1 line-clamp-2 text-base leading-relaxed text-fg-3">{e.summary}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-fg-3">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-3.5" aria-hidden /> {whenLabel(e)}
             </span>

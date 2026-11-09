@@ -27,7 +27,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
       { id: "p-amb", label: "Ecoisland Ambassadors", hint: "Act", to: "/ambassador", icon: Award, keywords: "ambassador apply program" },
       { id: "p-island", label: "Your island", hint: "Page", to: "/island", icon: Palmtree, keywords: "shop decorations sky" },
       { id: "p-class", label: teacher ? "Classes" : "Class", hint: "Page", to: "/class", icon: Users, keywords: "leaderboard assignments roster" },
-      { id: "p-settings", label: "Settings", hint: "Page", to: "/settings", icon: Settings, keywords: "profile account theme" },
+      { id: "p-settings", label: "Settings", hint: "Page", to: "/settings", icon: Settings, keywords: "profile account" },
     ];
     const units: Item[] = UNITS.flatMap((u) => [
       { id: `u-${u.n}`, label: `Unit ${u.n}: ${u.title}`, hint: "Unit", to: `/study/unit/${u.n}`, icon: BookOpen, keywords: `unit ${u.n}` },
@@ -91,7 +91,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
                 }
               }}
               placeholder="Search lessons, units and pages…"
-              className="h-14 flex-1 bg-transparent text-[16px] text-fg outline-none placeholder:text-fg-4"
+              className="h-14 flex-1 bg-transparent text-lg text-fg outline-none placeholder:text-fg-4"
               aria-label="Search"
               role="combobox"
               aria-expanded
@@ -101,7 +101,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
             <span className="kbd">esc</span>
           </div>
           <div ref={listRef} id="palette-results" role="listbox" className="max-h-[380px] overflow-y-auto p-2">
-            {results.length === 0 && <p className="px-3 py-8 text-center text-[14px] text-fg-3">Nothing matches "{q}".</p>}
+            {results.length === 0 && <p className="px-3 py-8 text-center text-base text-fg-3">Nothing matches "{q}".</p>}
             {results.map((item, i) => (
               <button
                 key={item.id}
@@ -111,11 +111,11 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
                 aria-selected={i === index}
                 onMouseMove={() => setIndex(i)}
                 onClick={() => go(item)}
-                className={cn("flex h-11 w-full items-center gap-3 rounded-[10px] px-3 text-left text-[14px]", i === index ? "bg-surface-2 text-fg" : "text-fg-2")}
+                className={cn("flex h-11 w-full items-center gap-3 rounded-md px-3 text-left text-base", i === index ? "bg-surface-2 text-fg" : "text-fg-2")}
               >
                 <item.icon className="size-4 shrink-0 text-fg-3" />
                 <span className="flex-1 truncate font-medium">{item.label}</span>
-                <span className="text-[12.5px] text-fg-4">{item.hint}</span>
+                <span className="text-sm text-fg-4">{item.hint}</span>
                 {i === index && <CornerDownLeft className="size-3.5 text-fg-3" aria-hidden />}
               </button>
             ))}

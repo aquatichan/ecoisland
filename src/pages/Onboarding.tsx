@@ -15,7 +15,6 @@ import { api, errorMessage } from "@/lib/api";
 import { useDocumentTitle } from "@/lib/hooks";
 import { setUsername, updateProfile, usernameProblem, usernameTaken } from "@/lib/profile";
 import { isOnboarded, useSession } from "@/lib/session";
-import { useTheme } from "@/lib/theme";
 import { useToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { UNITS } from "@/shared/curriculum";
@@ -67,8 +66,8 @@ export default function Onboarding() {
           </Link>
           <div className="max-w-[440px]">
             <p className="t-eyebrow">Welcome</p>
-            <h1 className="t-display mt-4 text-[48px]">Study a little every day. Watch your island grow.</h1>
-            <p className="mt-4 text-[16px] text-fg-3">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
+            <h1 className="t-display mt-4 text-5xl">Study a little every day. Watch your island grow.</h1>
+            <p className="mt-4 text-lg text-fg-3">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
             <Button
               size="lg"
               variant="secondary"
@@ -87,7 +86,7 @@ export default function Onboarding() {
             >
               {!signingIn && <GoogleIcon />} Continue with Google
             </Button>
-            <p className="mt-5 text-[12.5px] text-fg-4">
+            <p className="mt-5 text-sm text-fg-4">
               By continuing you agree to the{" "}
               <Link to="/tos" className="underline underline-offset-2 hover:text-fg-2">
                 Terms
@@ -99,7 +98,7 @@ export default function Onboarding() {
               .
             </p>
           </div>
-          <p className="text-[12.5px] text-fg-4">Made for AP Environmental Science students and teachers.</p>
+          <p className="text-sm text-fg-4">Made for AP Environmental Science students and teachers.</p>
         </div>
         <div className="relative m-4 overflow-hidden rounded-2xl border border-line">
           <IslandScene xp={900} health={1} sky="sunset" landmarks={[1, 4, 6]} decor={[{ id: "lighthouse", x: 0.74, y: 0.68 }, { id: "sailboat", x: 0.22, y: 0.85 }]} seed="welcome" className="absolute inset-0 [&>svg]:h-full [&>svg]:w-full" />
@@ -117,7 +116,6 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
   const p = profile!;
   const navigate = useNavigate();
   const toast = useToast();
-  const { resolved } = useTheme();
   const [step, setStep] = useState(1);
   const [role, setRole] = useState<Role | null>(p.role ?? null);
   const [username, setName] = useState(p.username && !usernameProblem(p.username) ? p.username : suggestUsername(p.full_name));
@@ -243,7 +241,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
         step={step}
         onStepChange={setStep}
         disableStepIndicators
-        theme={resolved}
+        theme="light"
         width={620}
         radius={26}
         style={stepperStyle}
@@ -261,7 +259,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
         <Step title="You">
           <div className="pt-2 pb-4">
             <h1 className="t-h2">Are you a student or a teacher?</h1>
-            <p className="mt-1.5 text-[14.5px] text-fg-3">You can change this later in Settings.</p>
+            <p className="mt-1.5 text-md text-fg-3">You can change this later in Settings.</p>
             <div className="mt-6 grid grid-cols-2 gap-3">
               {(
                 [
@@ -273,11 +271,11 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                   key={o.r}
                   onClick={() => setRole(o.r)}
                   aria-pressed={role === o.r}
-                  className={cn("rounded-[16px] border p-5 text-left transition-[border-color,background-color]", role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2")}
+                  className={cn("rounded-lg border p-5 text-left transition-[border-color,background-color]", role === o.r ? "border-brand bg-brand-soft" : "border-line-strong hover:bg-surface-2")}
                 >
                   <o.icon className={cn("size-6", role === o.r ? "text-brand-ink" : "text-fg-3")} />
-                  <p className="mt-4 text-[16px] font-semibold text-fg">{o.title}</p>
-                  <p className="mt-1 text-[13.5px] text-fg-3">{o.body}</p>
+                  <p className="mt-4 text-lg font-semibold text-fg">{o.title}</p>
+                  <p className="mt-1 text-base text-fg-3">{o.body}</p>
                 </button>
               ))}
             </div>
@@ -287,7 +285,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
         <Step title="Profile">
           <div className="pt-2 pb-4">
             <h1 className="t-h2">Pick a username</h1>
-            <p className="mt-1.5 text-[14.5px] text-fg-3">{role === "teacher" ? "Students see this on their class page." : "Your teacher and classmates see this, never your email."}</p>
+            <p className="mt-1.5 text-md text-fg-3">{role === "teacher" ? "Students see this on their class page." : "Your teacher and classmates see this, never your email."}</p>
             <div className="mt-6 flex items-start gap-4">
               <Avatar name={username || p.full_name || "You"} src={p.avatar_url} size={52} />
               <Field label="Username" htmlFor="ob-username" error={nameProblem} hint={!nameProblem && username && !checking ? "Looks good." : "3–20 letters, numbers, periods, dashes or underscores."} className="flex-1">
@@ -315,7 +313,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
               created ? (
                 <>
                   <h1 className="t-h2">Your class is ready</h1>
-                  <p className="mt-1.5 text-[14.5px] text-fg-3">Students sign in and enter this code. You can create more classes later.</p>
+                  <p className="mt-1.5 text-md text-fg-3">Students sign in and enter this code. You can create more classes later.</p>
                   <button
                     onClick={async () => {
                       try {
@@ -325,16 +323,16 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                         /* ignore */
                       }
                     }}
-                    className="mt-6 flex w-full items-center justify-between rounded-[16px] border border-line-strong px-6 py-5 hover:bg-surface-2"
+                    className="mt-6 flex w-full items-center justify-between rounded-lg border border-line-strong px-6 py-5 hover:bg-surface-2"
                   >
-                    <span className="font-mono text-[34px] font-bold tracking-[0.25em] text-fg">{created.code}</span>
-                    <span className="flex items-center gap-1.5 text-[13.5px] font-semibold text-fg-3">{copied ? <Check className="size-4 text-brand" /> : <Copy className="size-4" />} {copied ? "Copied" : "Copy"}</span>
+                    <span className="font-mono text-4xl font-bold tracking-[0.25em] text-fg">{created.code}</span>
+                    <span className="flex items-center gap-1.5 text-base font-semibold text-fg-3">{copied ? <Check className="size-4 text-brand" /> : <Copy className="size-4" />} {copied ? "Copied" : "Copy"}</span>
                   </button>
                 </>
               ) : (
                 <>
                   <h1 className="t-h2">Create your first class</h1>
-                  <p className="mt-1.5 text-[14.5px] text-fg-3">One class per period keeps rosters and leaderboards separate. You can skip this and do it later.</p>
+                  <p className="mt-1.5 text-md text-fg-3">One class per period keeps rosters and leaderboards separate. You can skip this and do it later.</p>
                   <form
                     className="mt-6 flex gap-2"
                     onSubmit={(e) => {
@@ -354,12 +352,12 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                 <h1 className="t-h2 flex items-center gap-2.5">
                   <Check className="size-6 text-brand" strokeWidth={3} /> You're in {joined.name}
                 </h1>
-                <p className="mt-1.5 text-[14.5px] text-fg-3">Assignments from your teacher will show up on your Today page, and your daily sets follow the unit your class is on.</p>
+                <p className="mt-1.5 text-md text-fg-3">Assignments from your teacher will show up on your Today page, and your daily sets follow the unit your class is on.</p>
               </>
             ) : (
               <>
                 <h1 className="t-h2">Join your class</h1>
-                <p className="mt-1.5 text-[14.5px] text-fg-3">Got a code from your teacher? Enter it here. No code yet? Skip this; you can join later from the Class tab.</p>
+                <p className="mt-1.5 text-md text-fg-3">Got a code from your teacher? Enter it here. No code yet? Skip this; you can join later from the Class tab.</p>
                 <form
                   className="mt-6 flex gap-2"
                   onSubmit={(e) => {
@@ -372,7 +370,7 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
                     onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))}
                     placeholder="K7Q2MX"
                     aria-label="Class code"
-                    className="w-[200px] font-mono text-[17px] tracking-[0.22em]"
+                    className="w-[200px] font-mono text-xl tracking-[0.22em]"
                     autoComplete="off"
                     spellCheck={false}
                     autoFocus
@@ -400,10 +398,10 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
             {role === "teacher" ? (
               <>
                 <h1 className="t-h2">You're all set</h1>
-                <p className="mt-1.5 text-[14.5px] text-fg-3">
+                <p className="mt-1.5 text-md text-fg-3">
                   {created ? `Share ${created.code} with your students, then post your first assignment.` : "Create a class whenever you're ready from the Classes tab."}
                 </p>
-                <ul className="mt-5 space-y-2.5 text-[14px] text-fg-2">
+                <ul className="mt-5 space-y-2.5 text-base text-fg-2">
                   {["Assign lessons, quizzes, FRQs, daily sets or field quests with due dates", "Completion updates live as students do the work", "Set the class's current unit and test date to focus everyone's practice"].map((t) => (
                     <li key={t} className="flex gap-2.5">
                       <ArrowRight className="mt-0.5 size-4 shrink-0 text-brand" /> {t}
@@ -414,8 +412,8 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
             ) : (
               <>
                 <h1 className="t-h2">Meet your island</h1>
-                <p className="mt-1.5 text-[14.5px] text-fg-3">It starts as bare rock. Every daily set grows it, and missed days dry it out. Your first set takes about five minutes.</p>
-                <div className="mt-5 overflow-hidden rounded-[16px] border border-line">
+                <p className="mt-1.5 text-md text-fg-3">It starts as bare rock. Every daily set grows it, and missed days dry it out. Your first set takes about five minutes.</p>
+                <div className="mt-5 overflow-hidden rounded-lg border border-line">
                   <IslandScene xp={p.xp_total ?? 0} health={1} sky="day" seed={p.id} className="aspect-[5/2.4] [&>svg]:h-full" />
                 </div>
               </>

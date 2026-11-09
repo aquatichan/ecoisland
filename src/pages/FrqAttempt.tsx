@@ -88,7 +88,7 @@ export default function FrqAttempt() {
 
   return (
     <Page className="mx-auto max-w-[860px]">
-      <Link to="/study/frq" className="mb-5 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-fg-3 hover:text-fg">
+      <Link to="/study/frq" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
         <ArrowLeft className="size-4" /> FRQ practice
       </Link>
       <p className="t-eyebrow">
@@ -100,14 +100,14 @@ export default function FrqAttempt() {
         <Card className="mt-7 p-7">
           <div className="flex items-center gap-6">
             <ProgressRing value={pct} size={96} stroke={8}>
-              <span className="font-display t-num text-[22px] font-[600] text-fg">
+              <span className="font-display t-num text-2xl font-[600] text-fg">
                 <CountUp to={result.grade.totalEarned} duration={0.8} />/{result.grade.totalPossible}
               </span>
             </ProgressRing>
             <div className="min-w-0 flex-1">
-              <p className="text-[17px] font-semibold text-fg">{pct >= 80 ? "Strong answer." : pct >= 50 ? "Solid start." : "Good practice. Check the feedback below."}</p>
-              {result.grade.overallFeedback && <p className="mt-1.5 text-[14.5px] text-fg-2">{result.grade.overallFeedback}</p>}
-              <div className="mt-3 flex items-center gap-3 text-[13.5px]">
+              <p className="text-xl font-semibold text-fg">{pct >= 80 ? "Strong answer." : pct >= 50 ? "Solid start." : "Good practice. Check the feedback below."}</p>
+              {result.grade.overallFeedback && <p className="mt-1.5 text-md text-fg-2">{result.grade.overallFeedback}</p>}
+              <div className="mt-3 flex items-center gap-3 text-base">
                 {result.capped ? (
                   <span className="text-fg-3">Scored for practice. Today's FRQ rewards are used up, or you've already been rewarded for this one today.</span>
                 ) : (
@@ -130,7 +130,7 @@ export default function FrqAttempt() {
       )}
 
       <Card className="mt-7 p-7">
-        <p className="text-[15.5px] leading-relaxed text-fg-2">{frq.prompt}</p>
+        <p className="text-lg leading-relaxed text-fg-2">{frq.prompt}</p>
         {frq.stimulus && <StimulusChart stimulus={frq.stimulus} />}
       </Card>
 
@@ -141,7 +141,7 @@ export default function FrqAttempt() {
           return (
             <Card key={p.label} className="p-7">
               <div className="flex items-start justify-between gap-4">
-                <p className="text-[15.5px] leading-relaxed text-fg">
+                <p className="text-lg leading-relaxed text-fg">
                   <span className="mr-2 font-semibold">{p.label}</span>
                   {p.prompt}
                 </p>
@@ -165,12 +165,12 @@ export default function FrqAttempt() {
                 aria-label={`Answer for part ${p.label}`}
               />
               {g ? (
-                <p className={cn("mt-3 flex items-start gap-2 text-[14px]", g.pointsEarned === g.pointsPossible ? "text-brand-ink" : "text-fg-2")}>
+                <p className={cn("mt-3 flex items-start gap-2 text-base", g.pointsEarned === g.pointsPossible ? "text-brand-ink" : "text-fg-2")}>
                   {g.pointsEarned === g.pointsPossible ? <CheckCircle2 className="mt-0.5 size-4 shrink-0" /> : <CircleDashed className="mt-0.5 size-4 shrink-0 text-fg-3" />}
                   {g.feedback}
                 </p>
               ) : (
-                <p className="mt-2 text-right text-[12px] text-fg-4">{len < MIN_PART ? "Write a little more to submit" : `${len} characters`}</p>
+                <p className="mt-2 text-right text-xs text-fg-4">{len < MIN_PART ? "Write a little more to submit" : `${len} characters`}</p>
               )}
             </Card>
           );
@@ -180,7 +180,7 @@ export default function FrqAttempt() {
       {!result && (
         <div className="sticky bottom-6 mt-8">
           <div className="glass flex items-center justify-between gap-4 rounded-xl border px-5 py-4 shadow-lg">
-            <p className="text-[13.5px] text-fg-3">
+            <p className="text-base text-fg-3">
               {error ? (
                 <span className="flex items-center gap-2 text-coral">
                   <TriangleAlert className="size-4" /> {error}

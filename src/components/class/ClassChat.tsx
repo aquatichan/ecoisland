@@ -142,12 +142,12 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
           <Card className="p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-[15px] font-semibold text-fg">Class chat</h2>
-                <p className="mt-1 text-[13px] text-fg-3">{enabled ? "On. Students can post." : "Off. Nobody can post."}</p>
+                <h2 className="text-md font-semibold text-fg">Class chat</h2>
+                <p className="mt-1 text-sm text-fg-3">{enabled ? "On. Students can post." : "Off. Nobody can post."}</p>
               </div>
               <Switch checked={enabled} onChange={setChat} label="Class chat" disabled={toggling} />
             </div>
-            <ul className="mt-5 space-y-2.5 text-[13px] text-fg-3">
+            <ul className="mt-5 space-y-2.5 text-sm text-fg-3">
               <li className="flex gap-2.5">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden /> Only you and this class can read it.
               </li>
@@ -168,18 +168,18 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
               <History /> Moderation log
             </Button>
             {reported.length > 0 && (
-              <p className="mt-5 rounded-lg bg-coral-soft px-3.5 py-2.5 text-[13px] font-semibold text-coral">
+              <p className="mt-5 rounded-lg bg-coral-soft px-3.5 py-2.5 text-sm font-semibold text-coral">
                 {reported.length} reported {reported.length === 1 ? "message needs" : "messages need"} review
               </p>
             )}
             {muted.size > 0 && (
               <div className="mt-5 border-t border-line pt-4">
-                <p className="text-[12.5px] font-semibold text-fg-3">Muted</p>
+                <p className="text-sm font-semibold text-fg-3">Muted</p>
                 <ul className="mt-2 space-y-1.5">
                   {members
                     .filter((m) => m.muted)
                     .map((m) => (
-                      <li key={m.uid} className="flex items-center justify-between gap-2 text-[13.5px] text-fg-2">
+                      <li key={m.uid} className="flex items-center justify-between gap-2 text-base text-fg-2">
                         <span className="truncate">{m.username}</span>
                         <Button size="sm" variant="ghost" onClick={() => act("chat/mute", { uid: m.uid, muted: false }, "Unmuted")}>
                           <Volume2 /> Unmute
@@ -192,15 +192,15 @@ export function ClassChat({ cls, teacher, meId, members }: { cls: WithId<ClassDo
           </Card>
         ) : (
           <Card className="p-6">
-            <h2 className="text-[15px] font-semibold text-fg">Chat guidelines</h2>
-            <ul className="mt-3 space-y-2 text-[13px] leading-relaxed text-fg-3">
+            <h2 className="text-md font-semibold text-fg">Chat guidelines</h2>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-fg-3">
               <li>Be kind and keep it about class.</li>
               <li>Everything here is visible to the whole class and to {cls.teacher_name}. There are no private messages.</li>
               <li>Phone numbers, emails, social media, addresses and outside links aren't allowed. Links to course sites like College Board, Khan Academy and .gov pages are fine.</li>
               <li>See something wrong, or worried about someone? Use the message menu to report it. Only your teacher sees who reported.</li>
               <li>Messages are deleted after {RETENTION_DAYS} days.</li>
             </ul>
-            <div className="mt-4 flex gap-2.5 rounded-lg bg-surface-2/70 p-3 text-[12.5px] leading-relaxed text-fg-3">
+            <div className="mt-4 flex gap-2.5 rounded-lg bg-surface-2/70 p-3 text-sm leading-relaxed text-fg-3">
               <HeartHandshake className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
               <span>
                 Going through something hard? Talk to a trusted adult, or call or text <span className="font-semibold text-fg-2">988</span> (US) any time.
@@ -230,20 +230,20 @@ function ReportDialog({ message, onClose, onReport }: { message: WithId<Omit<Mes
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
       <DialogContent title="Report this message" description="Your teacher will see the message and why you reported it. Classmates won't know it was you.">
-        <blockquote className="rounded-lg border-l-2 border-line-strong bg-surface-2/60 px-4 py-3 text-[14px] text-fg-2">
+        <blockquote className="rounded-lg border-l-2 border-line-strong bg-surface-2/60 px-4 py-3 text-base text-fg-2">
           <span className="font-semibold text-fg">{message.name}:</span> {message.text}
         </blockquote>
         <fieldset className="mt-4 space-y-1.5">
-          <legend className="mb-2 text-[13px] font-semibold text-fg-2">What's wrong?</legend>
+          <legend className="mb-2 text-sm font-semibold text-fg-2">What's wrong?</legend>
           {REASONS.map((r) => (
-            <label key={r.value} className="flex cursor-pointer items-center gap-3 rounded-[10px] px-3 py-2 text-[14px] text-fg-2 hover:bg-surface-2">
+            <label key={r.value} className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-base text-fg-2 hover:bg-surface-2">
               <input type="radio" name="reason" value={r.value} checked={reason === r.value} onChange={() => setReason(r.value)} className="size-4 accent-[var(--brand)]" />
               {r.label}
             </label>
           ))}
         </fieldset>
         {reason === "wellbeing" && (
-          <p className="mt-3 rounded-lg bg-brand-soft/60 p-3 text-[13px] text-fg-2">
+          <p className="mt-3 rounded-lg bg-brand-soft/60 p-3 text-sm text-fg-2">
             Thank you for looking out for them. If someone is in danger right now, tell a trusted adult. In the US you can call or text 988 any time.
           </p>
         )}
@@ -289,21 +289,21 @@ function ModerationLog({ classId, members, onClose }: { classId: string; members
         {loading ? (
           <Skeleton className="h-40" />
         ) : items.length === 0 ? (
-          <p className="py-8 text-center text-[14px] text-fg-3">Nothing yet.</p>
+          <p className="py-8 text-center text-base text-fg-3">Nothing yet.</p>
         ) : (
           <ul className="divide-y divide-line rounded-lg border border-line">
             {items.map((r) => (
-              <li key={r.id} className="px-4 py-3 text-[13.5px]">
+              <li key={r.id} className="px-4 py-3 text-base">
                 <div className="flex items-center gap-2">
                   <Badge tone={r.action === "blocked" || r.action === "flagged" || r.action === "reported" ? "coral" : r.action === "deleted" || r.action === "muted" ? "sun" : "neutral"}>{ACTION_LABEL[r.action] ?? r.action}</Badge>
                   {r.author_name && <span className="font-semibold text-fg">{r.author_name}</span>}
                   {r.reason && <span className="text-fg-3">· {REASON_LABEL[r.reason] ?? r.reason}</span>}
-                  <time className="ml-auto text-[12px] text-fg-4" dateTime={r.at}>
+                  <time className="ml-auto text-xs text-fg-4" dateTime={r.at}>
                     {new Date(r.at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
                   </time>
                 </div>
                 {r.text && <p className="mt-1.5 whitespace-pre-wrap text-fg-2">{r.text}</p>}
-                {r.action === "reported" && <p className="mt-1 text-[12px] text-fg-4">Reported by {nameOf(r.actor_uid)}</p>}
+                {r.action === "reported" && <p className="mt-1 text-xs text-fg-4">Reported by {nameOf(r.actor_uid)}</p>}
               </li>
             ))}
           </ul>
@@ -397,13 +397,13 @@ function MessageList({
             {newDay && (
               <div className="my-4 flex items-center gap-3 first:mt-0" role="separator">
                 <span className="h-px flex-1 bg-line" />
-                <span className="text-[12px] font-semibold text-fg-4">{dayLabel(m.created_at)}</span>
+                <span className="text-xs font-semibold text-fg-4">{dayLabel(m.created_at)}</span>
                 <span className="h-px flex-1 bg-line" />
               </div>
             )}
             <div
               className={cn(
-                "group relative flex gap-3 rounded-[12px] px-2.5 transition-colors hover:bg-surface-2/60",
+                "group relative flex gap-3 rounded-md px-2.5 transition-colors hover:bg-surface-2/60",
                 grouped ? "py-0.5" : "mt-2 py-1.5",
                 flagged && "bg-coral-soft/60 hover:bg-coral-soft ring-1 ring-coral/30",
               )}
@@ -413,24 +413,24 @@ function MessageList({
               </div>
               <div className="min-w-0 flex-1 pr-10">
                 {!grouped && (
-                  <p className="flex items-center gap-2 text-[13.5px]">
+                  <p className="flex items-center gap-2 text-base">
                     <span className="font-semibold text-fg">{m.name}</span>
                     {m.role === "teacher" && <Badge tone="brand">Teacher</Badge>}
-                    {own && m.role !== "teacher" && <span className="text-[12px] text-fg-4">You</span>}
+                    {own && m.role !== "teacher" && <span className="text-xs text-fg-4">You</span>}
                     {canMute && muted.has(m.uid) && (
                       <Badge tone="neutral">
                         <VolumeX /> Muted
                       </Badge>
                     )}
-                    <time className="text-[12px] text-fg-4" dateTime={m.created_at}>
+                    <time className="text-xs text-fg-4" dateTime={m.created_at}>
                       {timeLabel(m.created_at)}
                     </time>
                   </p>
                 )}
                 {m.deleted ? (
-                  <p className="text-[14px] text-fg-4 italic">{m.deleted_by === "teacher" ? "Removed by the teacher" : "Message deleted"}</p>
+                  <p className="text-base text-fg-4 italic">{m.deleted_by === "teacher" ? "Removed by the teacher" : "Message deleted"}</p>
                 ) : (
-                  <p className="text-[14.5px] leading-[1.55] break-words whitespace-pre-wrap text-fg-2">{m.text}</p>
+                  <p className="text-md leading-[1.55] break-words whitespace-pre-wrap text-fg-2">{m.text}</p>
                 )}
                 {flagged && (
                   <div className="mt-2 flex items-center gap-2">
@@ -438,7 +438,7 @@ function MessageList({
                       <Flag /> {(m.report_reasons ?? []).includes("wellbeing") ? "Check in with this student" : `Reported${(m.report_count ?? 0) > 1 ? ` ${m.report_count} times` : ""}`}
                     </Badge>
                     {(m.report_reasons ?? []).filter((r) => r !== "wellbeing").map((r) => (
-                      <span key={r} className="text-[12px] text-coral">
+                      <span key={r} className="text-xs text-coral">
                         {REASON_LABEL[r] ?? r}
                       </span>
                     ))}
@@ -531,7 +531,7 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
 
   if (disabled) {
     return (
-      <div className="flex items-center gap-2.5 border-t border-line bg-surface-2/60 px-5 py-4 text-[13.5px] text-fg-3">
+      <div className="flex items-center gap-2.5 border-t border-line bg-surface-2/60 px-5 py-4 text-base text-fg-3">
         <VolumeX className="size-4 shrink-0" aria-hidden /> {disabledReason}
       </div>
     );
@@ -540,17 +540,17 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
   return (
     <div className="border-t border-line p-3">
       {support && (
-        <div className="mb-3 flex items-start gap-3 rounded-[12px] bg-brand-soft/70 p-3.5 text-[13.5px] text-fg-2" role="status">
+        <div className="mb-3 flex items-start gap-3 rounded-md bg-brand-soft/70 p-3.5 text-base text-fg-2" role="status">
           <HeartHandshake className="mt-0.5 size-4 shrink-0 text-brand-ink" aria-hidden />
           <p className="flex-1">
             It sounds like things might be hard right now. Your teacher can see your message and can help. You can also call or text <span className="font-semibold">988</span> (Suicide &amp; Crisis Lifeline, US) any time, day or night.
           </p>
-          <button className="text-[12.5px] font-semibold text-fg-3 hover:text-fg" onClick={() => setSupport(false)}>
+          <button className="text-sm font-semibold text-fg-3 hover:text-fg" onClick={() => setSupport(false)}>
             Dismiss
           </button>
         </div>
       )}
-      <div className="flex items-end gap-2 rounded-[14px] border border-line-strong bg-surface px-3 py-2 focus-within:border-brand focus-within:shadow-[var(--ring)]">
+      <div className="flex items-end gap-2 rounded-lg border border-line-strong bg-surface px-3 py-2 focus-within:border-brand focus-within:shadow-[var(--ring)]">
         <textarea
           ref={area}
           value={text}
@@ -559,16 +559,16 @@ function Composer({ classId, disabled, disabledReason }: { classId: string; disa
           rows={1}
           placeholder="Message your class"
           aria-label="Message your class"
-          className="max-h-[132px] min-h-[24px] flex-1 resize-none bg-transparent py-1 text-[14.5px] leading-[1.55] text-fg outline-none placeholder:text-fg-4 focus-visible:shadow-none focus-visible:outline-none"
+          className="max-h-[132px] min-h-[24px] flex-1 resize-none bg-transparent py-1 text-md leading-[1.55] text-fg outline-none placeholder:text-fg-4 focus-visible:shadow-none focus-visible:outline-none"
         />
         {text.length > CHAT_MAX_CHARS - 80 && (
-          <span className={cn("t-num pb-1.5 text-[12px]", over ? "font-semibold text-coral" : "text-fg-4")}>{CHAT_MAX_CHARS - text.length}</span>
+          <span className={cn("t-num pb-1.5 text-xs", over ? "font-semibold text-coral" : "text-fg-4")}>{CHAT_MAX_CHARS - text.length}</span>
         )}
         <Button size="icon-sm" onClick={send} disabled={!trimmed || over} loading={sending} aria-label="Send message">
           <SendHorizontal />
         </Button>
       </div>
-      <p className="mt-1.5 px-1 text-[11.5px] text-fg-4">
+      <p className="mt-1.5 px-1 text-xs text-fg-4">
         <span className="kbd">Enter</span> to send · <span className="kbd">Shift</span> + <span className="kbd">Enter</span> for a new line
       </p>
     </div>
