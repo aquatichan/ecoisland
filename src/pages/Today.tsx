@@ -21,8 +21,10 @@ import { collection, limit, onSnapshot, query, where } from "firebase/firestore"
 import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { ReviewHoursDialog } from "@/components/act/Dialogs";
 import { Link, useNavigate } from "react-router-dom";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { IslandScene } from "@/components/island/IslandScene";
+import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,6 +55,10 @@ import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import { actionOpen, eventPhase } from "@/shared/act";
 import type { ClassDoc, MemberDoc, UserDoc } from "@/shared/types";
+
+// The sky behind the greeting (existing art, from the manifest). The text is held to the left half of the
+// banner, so that is where the scrim is; the sun and clouds show on the right.
+const GREETING_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 function greeting() {
   const h = new Date().getHours();
@@ -111,24 +117,28 @@ function StudentToday() {
 
   return (
     <Page>
-      <header className="mb-8">
-        <p className="t-eyebrow">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
-        <h1 className="t-h1 mt-2.5">
-          {greeting()}, {name}.
-        </h1>
-        <p className="mt-2 text-lg text-fg-3">{subtitle}</p>
+      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 pt-9 pb-24 shadow-sm">
+        <ArtBackdrop art="sky-day" scrim={GREETING_SCRIM} />
+        <div className="max-w-1/2">
+          <p className="t-eyebrow text-fg-2">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
+          <h1 className="t-h1 mt-2.5">
+            {greeting()}, {name}.
+          </h1>
+          <p className="mt-2 text-lg text-fg-2">{subtitle}</p>
+        </div>
       </header>
 
-      <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-6">
+      <DailySetCard className="relative z-10 mx-4 -mt-14" doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
+
+      <div className="mt-6 grid grid-cols-[minmax(0,1fr)_21.25rem] gap-6">
         <div className="space-y-6">
-          <DailySetCard doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
           <AssignmentsCard assignments={assignments} hasClass={classes.length > 0} loading={loading} today={today} />
           <ContinueCard focusUnit={focusUnit} />
+          <ActCard profile={profile} today={today} />
         </div>
         <div className="space-y-6">
           <StreakCard streak={streak} best={profile.streak_best ?? 0} days={profile.set_days ?? []} today={today} />
           {test && <TestCard test={test} today={today} />}
-          <ActCard profile={profile} today={today} />
           <QuestCard unit={focusUnit} done={(profile.quests_done ?? []).includes(focusUnit)} />
         </div>
       </div>
@@ -142,71 +152,72 @@ function DailySetCard({
   focusUnit,
   health,
   streak,
+  className,
 }: {
   doneToday: boolean;
   unitTitle: string;
   focusUnit: number;
   health: Health;
   streak: number;
+  className?: string;
 }) {
   const profile = useProfile();
   const stage = stageForXp(profile.xp_total ?? 0);
   return (
-    <Card className="overflow-hidden">
-      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-        <div className="flex flex-col p-7">
-          <p className="t-eyebrow">
-            Daily set · Unit {focusUnit}
-          </p>
-          {doneToday ? (
-            <>
-              <h2 className="t-h2 mt-3 flex items-center gap-2.5">
-                <CheckCircle2 className="size-6 text-brand" aria-hidden /> Done for today
-              </h2>
-              <p className="mt-2 text-md text-fg-3">
-                {streak > 1 ? `${streak}-day streak. ` : ""}Your island is watered until tomorrow night. Want more practice?
-              </p>
-              <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
-                <Button variant="secondary" asChild>
-                  <Link to={`/practice?mode=unit&unit=${focusUnit}`}>Unit {focusUnit} quiz</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/practice?mode=mixed">Mixed review</Link>
-                </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <h2 className="t-h2 mt-3">Ten questions, about five minutes</h2>
-              <p className="mt-2 text-md text-fg-3">
-                New questions from {unitTitle}, plus reviews of anything you've missed.{" "}
-                {health.label === "Thriving" ? "Keep your island thriving." : `Your island is ${health.label.toLowerCase()}.`}
-              </p>
-              <div className="mt-auto flex items-center gap-3 pt-6">
-                <Button size="lg" asChild>
-                  <Link to="/practice?mode=daily">
-                    Start daily set <ArrowRight />
-                  </Link>
-                </Button>
-              </div>
-            </>
-          )}
-        </div>
-        <Link to="/island" className="group relative block border-l border-line" aria-label="Open your island">
-          <IslandScene
-            health={health.value}
-            sky={findSky(profile.island_skybox)?.id ?? "day"}
-            growth={visibleGrowth(profile.owned_items)}
-            decor={visibleDecor(profile.owned_items, profile.island_decor)}
-            landmarks={masteredUnits(profile.unit_best)}
-            className="h-full min-h-[220px] transition-transform duration-500 group-hover:scale-[1.015]"
-          />
-          <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold text-fg-2">
-            <span className={cn("size-2 rounded-full", health.label === "Thriving" ? "bg-brand" : health.label === "Thirsty" ? "bg-sun" : "bg-coral")} />
-            {stage.name} · {health.label}
-          </div>
-        </Link>
+    <Card className={cn("grid grid-cols-[minmax(0,1fr)_minmax(0,24rem)] gap-6 p-4", className)}>
+      <div className="flex flex-col p-4">
+        <p className="t-eyebrow">
+          Daily set · Unit {focusUnit}
+        </p>
+        {doneToday ? (
+          <>
+            <h2 className="t-h2 mt-3 flex items-center gap-2.5">
+              <CheckCircle2 className="size-6 text-brand" aria-hidden /> Done for today
+            </h2>
+            <p className="mt-2 text-md text-fg-3">
+              {streak > 1 ? `${streak}-day streak. ` : ""}Your island is watered until tomorrow night. Want more practice?
+            </p>
+            <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
+              <Button variant="secondary" asChild>
+                <Link to={`/practice?mode=unit&unit=${focusUnit}`}>Unit {focusUnit} quiz</Link>
+              </Button>
+              <Button variant="ghost" asChild>
+                <Link to="/practice?mode=mixed">Mixed review</Link>
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 className="t-h2 mt-3">Ten questions, about five minutes</h2>
+            <p className="mt-2 text-md text-fg-3">
+              New questions from {unitTitle}, plus reviews of anything you've missed.{" "}
+              {health.label === "Thriving" ? "Keep your island thriving." : `Your island is ${health.label.toLowerCase()}.`}
+            </p>
+            <div className="mt-auto flex items-center gap-3 pt-6">
+              <Button size="lg" asChild>
+                <Link to="/practice?mode=daily">
+                  Start daily set <ArrowRight />
+                </Link>
+              </Button>
+            </div>
+          </>
+        )}
       </div>
+      {/* The island is the card's one picture: in its own rounded frame, with the stage and health on a glass chip. */}
+      <Link to="/island" className="group relative block overflow-hidden rounded-lg border border-line" aria-label="Open your island">
+        <IslandScene
+          health={health.value}
+          sky={findSky(profile.island_skybox)?.id ?? "day"}
+          growth={visibleGrowth(profile.owned_items)}
+          decor={visibleDecor(profile.owned_items, profile.island_decor)}
+          landmarks={masteredUnits(profile.unit_best)}
+          className="h-full min-h-55 transition-transform duration-500 group-hover:scale-[1.015] motion-reduce:group-hover:scale-100"
+        />
+        <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold text-fg-2">
+          <span className={cn("size-2 rounded-full", health.label === "Thriving" ? "bg-brand" : health.label === "Thirsty" ? "bg-sun" : "bg-coral")} />
+          {stage.name} · {health.label}
+        </div>
+      </Link>
     </Card>
   );
 }
@@ -225,7 +236,7 @@ function AssignmentRow({ a, today }: { a: ClassAssignment; today: DayKey }) {
   return (
     <li className="flex items-center gap-4 py-3.5">
       <div className={cn("grid size-10 shrink-0 place-items-center rounded-md", a.status.done ? "bg-brand-soft text-brand-ink" : "bg-surface-2 text-fg-2")}>
-        {a.status.done ? <Check className="size-[18px]" strokeWidth={2.6} /> : <Icon className="size-[18px]" />}
+        {a.status.done ? <Check className="size-4.5" strokeWidth={2.6} /> : <Icon className="size-4.5" />}
       </div>
       <div className="min-w-0 flex-1">
         <p className={cn("truncate text-md font-semibold", a.status.done ? "text-fg-3" : "text-fg")}>{a.title}</p>
@@ -251,7 +262,9 @@ function AssignmentsCard({ assignments, hasClass, loading, today }: { assignment
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between">
-        <h2 className="t-h3">Assignments</h2>
+        <h2 className="t-h2 flex items-center gap-2.5">
+          <ListChecks className="size-5 text-brand-ink" aria-hidden /> Assignments
+        </h2>
         {open.length > 0 && <Badge tone="neutral">{open.length} to do</Badge>}
       </div>
       {!hasClass ? (
@@ -267,7 +280,7 @@ function AssignmentsCard({ assignments, hasClass, loading, today }: { assignment
         <>
           {open.length === 0 ? (
             <p className="mt-4 flex items-center gap-2 text-md text-fg-2">
-              <CheckCircle2 className="size-[18px] text-brand" aria-hidden /> You're all caught up.
+              <CheckCircle2 className="size-4.5 text-brand" aria-hidden /> You're all caught up.
             </p>
           ) : (
             <ul className="mt-1 divide-y divide-line">
@@ -335,7 +348,7 @@ export function JoinClassInline({ compact }: { compact?: boolean }) {
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))}
           placeholder="K7Q2MX"
           aria-label="Class code"
-          className="w-[160px] font-mono text-md tracking-[0.18em] uppercase"
+          className="w-40 font-mono text-md tracking-[0.18em] uppercase"
           autoComplete="off"
           spellCheck={false}
         />
@@ -361,7 +374,7 @@ function ContinueCard({ focusUnit }: { focusUnit: number }) {
   const resume = last && last.lesson.id === lesson.id;
   return (
     <Card interactive className="p-0">
-      <Link to={`/study/unit/${found?.unit.n}/${encodeURIComponent(lesson.id)}`} className="flex items-center gap-5 p-6">
+      <Link to={`/study/unit/${found?.unit.n}/${encodeURIComponent(lesson.id)}`} className="flex items-center gap-5 rounded-lg p-6">
         <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-ocean-soft text-ocean">
           <BookOpen className="size-5" aria-hidden />
         </div>
@@ -395,7 +408,7 @@ function StreakCard({ streak, best, days, today }: { streak: number; best: numbe
           </p>
         </div>
         <div className={cn("grid size-11 place-items-center rounded-md", streak > 0 ? "bg-sun-soft" : "bg-surface-2")}>
-          <Flame className={cn("size-6", streak > 0 ? "fill-sun/30 text-sun" : "text-fg-4")} aria-hidden />
+          <Flame className={cn("size-6", streak > 0 ? "fill-sun/30 text-sun" : "text-fg-3")} aria-hidden />
         </div>
       </div>
       <div className="mt-5 grid grid-cols-7 gap-1.5" aria-label="This week">
@@ -405,7 +418,7 @@ function StreakCard({ streak, best, days, today }: { streak: number; best: numbe
           const future = daysBetween(today, d) > 0;
           return (
             <div key={d} className="flex flex-col items-center gap-1.5">
-              <span className="text-2xs font-medium text-fg-4">{formatDay(d, { weekday: "narrow" })}</span>
+              <span className="text-2xs font-medium text-fg-3">{formatDay(d, { weekday: "narrow" })}</span>
               <span
                 className={cn(
                   "grid size-8 place-items-center rounded-full text-2xs",
@@ -662,7 +675,7 @@ export function CreateFirstClass() {
     }
   };
   return (
-    <Card className="mx-auto max-w-[640px] p-8 text-center">
+    <Card className="mx-auto max-w-160 p-8 text-center">
       <div className="mx-auto grid size-12 place-items-center rounded-lg bg-brand-soft text-brand-ink">
         <Users className="size-6" aria-hidden />
       </div>
@@ -671,7 +684,7 @@ export function CreateFirstClass() {
         You'll get a join code to share. Students who join show up on your roster, and you can assign lessons, quizzes, FRQs and daily practice with due dates.
       </p>
       <form
-        className="mx-auto mt-6 flex max-w-[420px] gap-2"
+        className="mx-auto mt-6 flex max-w-105 gap-2"
         onSubmit={(e) => {
           e.preventDefault();
           if (name.trim().length >= 2) void create();
