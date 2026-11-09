@@ -101,7 +101,7 @@ describe("landing: island art", () => {
   });
 
   it("puts at most one picture in each How-it-works card", () => {
-    const cards = fn("HowItWorks", "function Course(").split('className="card').slice(1);
+    const cards = fn("HowItWorks", "function Course(").split(/<SpotlightCard|className="card/).slice(1);
     expect(cards).toHaveLength(3);
     for (const card of cards) expect(card.match(/<IslandScene|<img\b/g)?.length ?? 0).toBeLessThanOrEqual(1);
   });

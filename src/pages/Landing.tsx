@@ -23,6 +23,10 @@ import { Link } from "react-router-dom";
 import BlurText from "@/components/bits/BlurText";
 import CountUp from "@/components/bits/CountUp";
 import Magnet from "@/components/bits/Magnet";
+import { Marquee } from "@/components/fx/Marquee";
+import { useCycle, useInView } from "@/components/fx/motion";
+import { Reveal } from "@/components/fx/Reveal";
+import { SpotlightCard } from "@/components/fx/SpotlightCard";
 import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
 import { ART } from "@/components/island/assets";
@@ -38,7 +42,7 @@ import { isOnboarded, useSession } from "@/lib/session";
 import { cn } from "@/lib/utils";
 import { UNITS } from "@/shared/curriculum";
 import { STAGES, stageForXp } from "@/shared/economy";
-import type { SkyId } from "@/shared/catalog";
+import { GROWTH, type SkyId } from "@/shared/catalog";
 
 const SHOWCASE: { xp: number; caption: string; landmarks: number[]; sky: SkyId }[] = [
   { xp: 0, caption: "Day 1", landmarks: [], sky: "dawn" },
@@ -48,16 +52,6 @@ const SHOWCASE: { xp: number; caption: string; landmarks: number[]; sky: SkyId }
   { xp: 950, caption: "After six weeks", landmarks: [1, 2, 3, 4], sky: "day" },
   { xp: 1650, caption: "By the exam", landmarks: [1, 2, 3, 4, 5, 6, 7, 8, 9], sky: "night" },
 ];
-
-function useCycle(length: number, ms: number, start = 0) {
-  const [i, setI] = useState(start);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setI((n) => (n + 1) % length), ms);
-    return () => window.clearInterval(id);
-  }, [length, ms]);
-  return [i, setI] as const;
-}
 
 function Header() {
   const { status, profile } = useSession();
@@ -105,8 +99,10 @@ function Header() {
 const PERKS = ["Free for students and teachers", "Made for laptops and Chromebooks", "All 9 units, 108 lessons"];
 
 function Hero() {
-  // Open on a grown island, then loop through the year from day one.
-  const [i, setI] = useCycle(SHOWCASE.length, 2600, 4);
+  // Open on a grown island, then loop through the year from day one. Hovering or focusing the
+  // picture holds the stage so a visitor can read it or pick one; reduced motion holds "After six weeks".
+  const [hold, setHold] = useState(false);
+  const [i, setI] = useCycle({ length: SHOWCASE.length, ms: 2600, start: 4, rest: 4, paused: hold });
   const s = SHOWCASE[i];
   return (
     <>
@@ -144,8 +140,14 @@ function Hero() {
           </div>
 
           {/* One picture, with the caption and the stage picker on glass chips so no text sits on bare art. */}
-          <div className="relative overflow-hidden rounded-2xl border border-line shadow-lg">
-            <IslandScene growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
+          <div
+            className="relative overflow-hidden rounded-2xl border border-line shadow-lg"
+            onPointerEnter={() => setHold(true)}
+            onPointerLeave={() => setHold(false)}
+            onFocusCapture={() => setHold(true)}
+            onBlurCapture={() => setHold(false)}
+          >
+            <IslandScene growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} float className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
             <div className="glass absolute top-4 right-4 rounded-lg border px-4 py-3">
               <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
               <p className="text-sm text-fg-3">{s.caption}</p>
@@ -183,18 +185,41 @@ function Hero() {
   );
 }
 
+// The sample question picks its own answer: nothing chosen, the pointer over "O horizon", the press,
+// then the answered state held for two beats. Reduced motion shows the answered state and nothing else.
+const QUESTION_STEPS = ["idle", "hover", "press", "answered", "answered"] as const;
+const QUESTION_OPTIONS = ["O horizon", "B horizon", "C horizon"];
+
 function QuestionMock() {
+  const [ref, inView] = useInView<HTMLDivElement>();
+  const [step] = useCycle({ length: QUESTION_STEPS.length, ms: 1100, start: 0, rest: QUESTION_STEPS.length - 1, paused: !inView });
+  const state = QUESTION_STEPS[step];
   return (
-    <div className="rounded-lg border border-line bg-surface p-4 shadow-sm">
+    <div ref={ref} data-question-step={state} className="rounded-lg border border-line bg-surface p-4 shadow-sm">
       <p className="text-xs font-semibold text-fg-3">Daily set · 4 / 10</p>
       <p className="mt-2 text-base leading-snug font-semibold text-fg">Which layer of soil is richest in organic matter?</p>
       <div className="mt-3 space-y-1.5">
-        {["O horizon", "B horizon", "C horizon"].map((t, k) => (
-          <div key={t} className={cn("flex items-center gap-2 rounded-sm border px-2.5 py-1.5 text-sm", k === 0 ? "border-brand bg-brand-soft text-fg" : "border-line text-fg-3")}>
-            <span className={cn("grid size-4 place-items-center rounded-2xs text-2xs font-bold", k === 0 ? "bg-brand text-brand-fg" : "border border-line-strong text-fg-2")}>{k === 0 ? <Check className="size-2.5" strokeWidth={4} /> : "BCD"[k - 1]}</span>
-            {t}
-          </div>
-        ))}
+        {QUESTION_OPTIONS.map((t, k) => {
+          const first = k === 0;
+          const answered = first && state === "answered";
+          return (
+            <div
+              key={t}
+              className={cn(
+                "flex items-center gap-2 rounded-sm border px-2.5 py-1.5 text-sm transition-[background-color,border-color,scale] duration-300",
+                answered && "border-brand bg-brand-soft text-fg",
+                first && state === "press" && "scale-99 border-brand bg-brand-soft text-fg",
+                first && state === "hover" && "border-line-strong bg-surface-2 text-fg-2",
+                !answered && !(first && state !== "idle") && "border-line text-fg-3",
+              )}
+            >
+              <span className={cn("grid size-4 place-items-center rounded-2xs text-2xs font-bold transition-colors duration-300", answered ? "bg-brand text-brand-fg" : "border border-line-strong text-fg-2")}>
+                {answered ? <Check className="size-2.5" strokeWidth={4} /> : "ABC"[k]}
+              </span>
+              {t}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -202,29 +227,29 @@ function QuestionMock() {
 
 function HowItWorks() {
   return (
-    <section id="how" className="mx-auto max-w-page scroll-mt-20 px-8 py-28">
+    <Reveal as="section" id="how" className="mx-auto max-w-page scroll-mt-20 px-8 py-28">
       <p className="t-eyebrow">How it works</p>
       <h2 className="t-h1 mt-3 max-w-[22ch]">A habit you can keep, and something to show for it.</h2>
       <div className="mt-14 grid grid-cols-3 gap-6">
-        <div className="card flex flex-col p-6">
+        <SpotlightCard className="flex flex-col p-6">
           <div className="grid aspect-[4/3] place-items-center rounded-md border border-line bg-surface-2 p-4">
             <QuestionMock />
           </div>
           <h3 className="mt-6 text-xl font-semibold text-fg">1. Do today's set</h3>
           <p className="mt-2 text-md text-fg-3">Ten questions from your class's current unit. The ones you miss come back on a schedule until they stick.</p>
-        </div>
-        <div className="card flex flex-col p-6">
+        </SpotlightCard>
+        <SpotlightCard className="flex flex-col p-6">
           <IslandScene growth={demoGrowth(900)} health={1} sky="day" animate={false} className="aspect-[4/3] rounded-md border border-line" label="An island after a few weeks of daily sets" />
           <h3 className="mt-6 text-xl font-semibold text-fg">2. Your island grows</h3>
           <p className="mt-2 text-md text-fg-3">Every question, lesson and quest adds XP. Plants take root, then trees, then a whole ecosystem: {STAGES.length} stages in all.</p>
-        </div>
-        <div className="card flex flex-col p-6">
+        </SpotlightCard>
+        <SpotlightCard className="flex flex-col p-6">
           <IslandScene growth={demoGrowth(700)} health={0.2} sky="day" animate={false} className="aspect-[4/3] rounded-md border border-line" label="The same island after missed days, dry and faded" />
           <h3 className="mt-6 text-xl font-semibold text-fg">3. Skip days and it wilts</h3>
           <p className="mt-2 text-md text-fg-3">Miss a day and your island gets thirsty. Miss three and it dries out. One daily set brings it right back.</p>
-        </div>
+        </SpotlightCard>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -236,7 +261,7 @@ function Course() {
     { n: 27, label: "FRQs graded against a rubric", icon: PenLine },
   ];
   return (
-    <section className="mx-auto max-w-page px-8 pb-8">
+    <Reveal as="section" className="mx-auto max-w-page px-8 pb-8">
       <div className="card grid grid-cols-4 divide-x divide-line rounded-xl">
         {stats.map((s) => (
           <div key={s.label} className="px-8 py-10">
@@ -253,19 +278,34 @@ function Course() {
           </div>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }
 
+// The sample roster ticks through completions: a student finishes, their row lights up and the
+// class total moves. Frame 0 is the resting roster; reduced motion holds it.
+type RosterRow = { name: string; streak: number; done: number; active: string; idle?: boolean };
+const ROSTER: RosterRow[] = [
+  { name: "Avery Chen", streak: 12, done: 5, active: "Today" },
+  { name: "Jordan Patel", streak: 6, done: 4, active: "Today" },
+  { name: "Sam Okafor", streak: 0, done: 2, active: "4 days ago", idle: true },
+  { name: "Maya Rivera", streak: 9, done: 5, active: "Yesterday" },
+];
+const ROSTER_CLASS_SIZE = 26;
+const ROSTER_FRAMES: { total: number; rows: Record<number, Partial<RosterRow>>; lit: number | null }[] = [
+  { total: 22, rows: {}, lit: null },
+  { total: 23, rows: { 1: { done: 5 } }, lit: 1 },
+  { total: 24, rows: { 1: { done: 5 }, 2: { done: 3, active: "Today", streak: 1, idle: false } }, lit: 2 },
+  { total: 25, rows: { 1: { done: 5 }, 2: { done: 3, active: "Today", streak: 1, idle: false } }, lit: null },
+];
+
 function Teachers() {
-  const rows = [
-    { name: "Avery Chen", streak: 12, done: 5, active: "Today" },
-    { name: "Jordan Patel", streak: 6, done: 4, active: "Today" },
-    { name: "Sam Okafor", streak: 0, done: 2, active: "4 days ago", idle: true },
-    { name: "Maya Rivera", streak: 9, done: 5, active: "Yesterday" },
-  ];
+  const [ref, inView] = useInView<HTMLDivElement>();
+  const [tick] = useCycle({ length: ROSTER_FRAMES.length, ms: 2600, start: 0, rest: 0, paused: !inView });
+  const frame = ROSTER_FRAMES[tick];
+  const rows = ROSTER.map((r, k) => ({ ...r, ...frame.rows[k] }));
   return (
-    <section id="teachers" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
+    <Reveal as="section" id="teachers" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-16 px-8 py-28">
       <div>
         <p className="t-eyebrow">For teachers</p>
         <h2 className="t-h1 mt-3">Assign the work. See who's done it.</h2>
@@ -291,7 +331,7 @@ function Teachers() {
           </Link>
         </Button>
       </div>
-      <div className="card overflow-hidden" aria-label="Example class roster">
+      <div ref={ref} className="card overflow-hidden" aria-label="Example class roster" data-roster-frame={tick}>
         <div className="flex items-center justify-between border-b border-line px-6 py-4">
           <div>
             <p className="text-md font-semibold text-fg">APES · Period 3</p>
@@ -302,13 +342,15 @@ function Teachers() {
         <div className="border-b border-line px-6 py-4">
           <div className="flex items-center justify-between text-base">
             <span className="font-semibold text-fg">Read 4.2 Soil Formation and Erosion</span>
-            <span className="t-num text-fg-3">22/26 done</span>
+            <span className="t-num text-fg-3">
+              {frame.total}/{ROSTER_CLASS_SIZE} done
+            </span>
           </div>
-          <ProgressBar value={85} className="mt-2.5 h-1.5" label="Example completion" />
+          <ProgressBar value={Math.round((frame.total / ROSTER_CLASS_SIZE) * 100)} className="mt-2.5 h-1.5" label="Example completion" />
         </div>
         <ul className="divide-y divide-line">
-          {rows.map((r) => (
-            <li key={r.name} className="flex items-center gap-3 px-6 py-3 text-base">
+          {rows.map((r, k) => (
+            <li key={r.name} className={cn("flex items-center gap-3 px-6 py-3 text-base transition-colors duration-700", frame.lit === k && "bg-brand-soft")}>
               <Avatar name={r.name} size={28} />
               <span className="flex-1 font-semibold text-fg">{r.name}</span>
               <span className="flex w-14 items-center gap-1 text-fg-2">
@@ -320,13 +362,13 @@ function Teachers() {
           ))}
         </ul>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
 function Landmarks() {
   return (
-    <section id="landmarks" className="scroll-mt-20 border-t border-line bg-surface">
+    <Reveal as="section" id="landmarks" lift={false} className="scroll-mt-20 border-t border-line bg-surface">
       <div className="mx-auto max-w-page px-8 py-28">
         <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-center gap-14">
           <div>
@@ -355,7 +397,7 @@ function Landmarks() {
           ))}
         </ul>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -365,7 +407,7 @@ function ActSection() {
     { icon: Recycle, tone: "bg-brand-soft text-brand-ink", month: "NOV", day: "17", kind: "Eco action", title: "Trash audit", meta: "Unit 8 · one week", going: "APES · Period 3" },
   ];
   return (
-    <section id="act" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
+    <Reveal as="section" id="act" className="mx-auto grid max-w-page scroll-mt-20 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-16 px-8 py-28">
       <div>
         <p className="t-eyebrow">Act</p>
         <h2 className="t-h1 mt-3">Then take it outside.</h2>
@@ -422,14 +464,51 @@ function ActSection() {
           </div>
         </div>
       </div>
-    </section>
+    </Reveal>
+  );
+}
+
+// Two decorative strips. Each is a band of its own with nothing laid over it: the moving content
+// never sits behind text. Both hold still, wrapped, when motion is reduced (see Marquee).
+function UnitStrip() {
+  return (
+    <Reveal className="mx-auto max-w-page px-8 pt-14">
+      <Marquee seconds={80}>
+        {UNITS.map((u) => (
+          <li key={u.n} className="card flex shrink-0 items-center gap-3 rounded-full py-2.5 pr-6 pl-3 text-md font-medium whitespace-nowrap text-fg-2">
+            <span className="grid size-7 place-items-center rounded-full bg-brand-soft text-sm font-semibold text-brand-ink">{u.n}</span>
+            {u.title}
+          </li>
+        ))}
+      </Marquee>
+    </Reveal>
+  );
+}
+
+// Growth and landmark art from the manifest, alternating, one picture to a tile.
+const STRIP_ART = GROWTH.flatMap((g, i) => (UNITS[i] ? [g.art, `landmark-${UNITS[i].n}`] : [g.art]));
+
+function ArtStrip() {
+  return (
+    <Reveal className="py-16">
+      <Marquee seconds={90}>
+        {STRIP_ART.map((id) => {
+          const art = ART[id];
+          return (
+            <li key={id} className="card flex size-28 shrink-0 p-3">
+              <img src={art.src} width={art.w} height={art.h} alt="" draggable={false} decoding="async" className="size-full object-contain" />
+            </li>
+          );
+        })}
+      </Marquee>
+    </Reveal>
   );
 }
 
 function FinalCta() {
   const sky = ART["sky-day"];
   return (
-    <section className="relative isolate overflow-hidden">
+    <Reveal as="section" lift={false} className="relative isolate overflow-hidden">
       {/* The only picture here, behind the panel and never behind text. */}
       <img src={sky.src} width={sky.w} height={sky.h} alt="" aria-hidden loading="lazy" decoding="async" className="absolute inset-0 -z-10 size-full object-cover object-top" />
       <div className="mx-auto max-w-page px-8 py-28">
@@ -444,7 +523,7 @@ function FinalCta() {
           </Button>
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 }
 
@@ -457,11 +536,13 @@ export default function Landing() {
     <div className="min-h-dvh bg-bg">
       <Header />
       <Hero />
+      <UnitStrip />
       <HowItWorks />
       <Course />
       <Teachers />
       <Landmarks />
       <ActSection />
+      <ArtStrip />
       <FinalCta />
       <footer className="border-t border-line">
         <div className="mx-auto flex max-w-page items-center justify-between px-8 py-8 text-base text-fg-3">

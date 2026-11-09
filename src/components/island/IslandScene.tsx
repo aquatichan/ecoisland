@@ -42,6 +42,8 @@ export type IslandSceneProps = {
   label?: string;
   /** cover crops to fill the container (default); contain shows the whole scene. */
   fit?: "cover" | "contain";
+  /** A slow float for the island and everything on it; the sky, the sea and the island's shadow stay put. Still when motion is reduced. */
+  float?: boolean;
 };
 
 type Interactive = {
@@ -120,6 +122,7 @@ export function IslandScene({
   className,
   label,
   fit = "cover",
+  float = false,
 }: IslandSceneProps) {
   const reduced = useReducedMotion();
   const motion = animate && !reduced;
@@ -234,7 +237,7 @@ export function IslandScene({
           className="absolute aspect-[8/1]"
           style={{ left: `${pctX(BASE.x)}%`, top: `${pctY(BASE.y - 6)}%`, width: `${pctW(BASE.w * 1.25)}%`, transform: "translate(-50%, -50%)", background: "radial-gradient(ellipse at center, rgba(6,22,40,0.38) 0%, transparent 70%)" }}
         />
-        <div className="absolute inset-0 transition-[filter] duration-700" style={{ filter: healthFilter(health) }}>
+        <div className={cn("absolute inset-0 transition-[filter] duration-700", float && "fx-float")} data-island-layer style={{ filter: healthFilter(health) }}>
           <Placed art="island-base" sx={BASE.x} sy={BASE.y} sw={BASE.w} anchor={{ x: BASE.ax, y: BASE.ay }} z={1} />
           {stand.map((s, i) => s.make(10 + i))}
         </div>

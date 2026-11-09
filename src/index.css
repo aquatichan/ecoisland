@@ -535,6 +535,94 @@
   animation-play-state: paused !important;
 }
 
+/* ── Motion (src/components/fx) ───────────────────────────────────────────── */
+/*
+ * Each effect below has its own rule in the reduced-motion block that follows, so
+ * it holds still for people who ask for less motion without depending on the
+ * catch-all. test/unit/landing-motion.test.ts checks every one of them.
+ */
+
+/* A slow float for the island layer (IslandScene's `float` prop); its shadow stays put. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.6rem);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer components {
+  .fx-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  /*
+   * A marquee strip: two identical copies in a track that slides one copy's width, so the
+   * loop is seamless. The ends fade out through a mask, and hovering pauses it.
+   */
+  .fx-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, var(--fg) 8%, var(--fg) 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, var(--fg) 8%, var(--fg) 92%, transparent 100%);
+  }
+  .fx-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-seconds, 60s) linear infinite;
+  }
+  .fx-marquee:hover .fx-marquee-track {
+    animation-play-state: paused;
+  }
+  .fx-marquee-copy {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.75rem 1rem 0.75rem 0;
+    list-style: none;
+  }
+
+  /*
+   * An edge highlight that follows the cursor (SpotlightCard). A ring one border wide,
+   * lit by a radial gradient centred on the pointer, masked down to the edge.
+   */
+  .spotlight {
+    position: relative;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 2px;
+    border-radius: inherit;
+    background: radial-gradient(14rem circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--brand) 75%, transparent), transparent 65%);
+    -webkit-mask:
+      linear-gradient(var(--fg) 0 0) content-box,
+      linear-gradient(var(--fg) 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(var(--fg) 0 0) content-box exclude,
+      linear-gradient(var(--fg) 0 0);
+    opacity: 0;
+    transition: opacity 250ms var(--ease-out-soft);
+    pointer-events: none;
+  }
+  .spotlight[data-lit]::before {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -543,6 +631,38 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The island holds still. */
+  .fx-float {
+    animation: none;
+  }
+  /* The marquee stops sliding and lays every item out, centred and wrapped, with no clipped ends. */
+  .fx-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .fx-marquee-track {
+    width: auto;
+    animation: none;
+    justify-content: center;
+  }
+  .fx-marquee-copy {
+    /* Let the copy shrink to the strip's width (the base rule pins it at its content width), so it can wrap. */
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+  .fx-marquee-copy[data-clone] {
+    display: none;
+  }
+}
+
+/* The edge highlight follows a mouse: never on touch, never when motion is reduced. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .spotlight::before {
+    display: none;
   }
 }
 
