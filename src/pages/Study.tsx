@@ -1,6 +1,9 @@
-import { ArrowRight, Check, FileText, Layers, Lock, PenLine, Target } from "lucide-react";
+import { ArrowRight, FileText, Layers, PenLine, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
+import type { PlateScrim } from "@/components/landing/plates";
+import { UnitCard } from "@/components/study/UnitCard";
 import { LANDMARK_INFO } from "@/shared/landmarks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +17,10 @@ import { useStudentContext } from "@/lib/student";
 import { cn } from "@/lib/utils";
 import { ALL_LESSONS, UNITS, getUnit } from "@/shared/curriculum";
 import { MASTERY_PCT } from "@/shared/economy";
+
+// The sky behind the page title (existing art, from the manifest). The title is at the left, so that is
+// where the scrim is; the sun and clouds show on the right.
+const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.4, fade: 0.2 };
 
 export default function Study() {
   const profile = useProfile();
@@ -30,17 +37,20 @@ export default function Study() {
 
   return (
     <Page>
-      <header className="mb-8 flex items-end justify-between gap-6">
-        <div>
+      <header className="mb-8">
+        <div className="relative isolate flex min-h-40 flex-col justify-center overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
+          <ArtBackdrop art="sky-day" scrim={BANNER_SCRIM} />
           <p className="t-eyebrow">AP Environmental Science</p>
           <h1 className="t-h1 mt-2.5">Study</h1>
-          <p className="mt-2 text-lg text-fg-3">
+        </div>
+        <div className="mt-4 flex items-center justify-between gap-6">
+          <p className="text-lg text-fg-3">
             9 units · {ALL_LESSONS.length} lessons · 1,221 practice questions · 27 free-response questions
           </p>
+          <span className="shrink-0 text-sm text-fg-3">
+            Search any lesson with <span className="kbd">⌘K</span>
+          </span>
         </div>
-        <span className="text-sm text-fg-4">
-          Search any lesson with <span className="kbd">⌘K</span>
-        </span>
       </header>
 
       {!teacher && (
@@ -54,7 +64,7 @@ export default function Study() {
                 <Select
                   value={focusUnit}
                   onChange={(e) => void updateProfile(profile.id, { focus_unit: Number(e.target.value) })}
-                  className="h-7 w-[150px] py-0 text-sm"
+                  className="h-7 w-37.5 py-0 text-sm"
                   aria-label="Choose your focus unit"
                 >
                   {UNITS.map((u) => (
@@ -68,7 +78,7 @@ export default function Study() {
             <h2 className="t-h2 mt-3">
               Unit {unit.n}: {unit.title}
             </h2>
-            <div className="mt-4 flex max-w-[520px] items-center gap-4">
+            <div className="mt-4 flex max-w-130 items-center gap-4">
               <ProgressBar value={(unitDone / unit.lessons.length) * 100} label="Lessons read" />
               <span className="t-num shrink-0 text-sm text-fg-3">
                 {unitDone}/{unit.lessons.length} lessons
@@ -103,9 +113,9 @@ export default function Study() {
           { to: "/study/guide", icon: FileText, title: "Exam guide", body: "How the exam is scored, unit weights and test-day tips.", tone: "bg-brand-soft text-brand-ink" },
         ].map((t) => (
           <Card key={t.to} interactive className="p-0">
-            <Link to={t.to} className="flex h-full items-start gap-4 p-5">
+            <Link to={t.to} className="flex h-full items-start gap-4 rounded-lg p-5">
               <div className={cn("grid size-10 shrink-0 place-items-center rounded-md", t.tone)}>
-                <t.icon className="size-[18px]" aria-hidden />
+                <t.icon className="size-4.5" aria-hidden />
               </div>
               <div>
                 <p className="text-md font-semibold text-fg">{t.title}</p>
@@ -122,29 +132,7 @@ export default function Study() {
           const read = u.lessons.filter((l) => done.has(l.id)).length;
           const b = profile.unit_best?.[`u${u.n}`];
           const mastered = (b ?? 0) >= MASTERY_PCT;
-          return (
-            <Card key={u.n} interactive className={cn("p-0", u.n === focusUnit && !teacher && "ring-2 ring-brand/40")}>
-              <Link to={`/study/unit/${u.n}`} className="flex h-full flex-col p-5">
-                <div className="flex items-center justify-between">
-                  <span className="t-eyebrow">Unit {u.n}</span>
-                  <span className="text-xs text-fg-4">{u.examWeight} of exam</span>
-                </div>
-                <p className="mt-2.5 text-lg leading-snug font-semibold text-fg">{u.title}</p>
-                <div className="mt-auto pt-5">
-                  <div className="flex items-center gap-3">
-                    <ProgressBar value={(read / u.lessons.length) * 100} className="h-1.5" label={`Unit ${u.n} lessons read`} />
-                    <span className="t-num text-sm text-fg-3">
-                      {read}/{u.lessons.length}
-                    </span>
-                  </div>
-                  <p className={cn("mt-3 flex items-center gap-1.5 text-sm font-medium", mastered ? "text-brand-ink" : "text-fg-3")}>
-                    {mastered ? <Check className="size-3.5" strokeWidth={3} /> : <Lock className="size-3.5" />}
-                    {mastered ? LANDMARK_INFO[u.n].name : b !== undefined ? `Best ${b}% · ${MASTERY_PCT}% unlocks a landmark` : `${MASTERY_PCT}% on the quiz unlocks a landmark`}
-                  </p>
-                </div>
-              </Link>
-            </Card>
-          );
+          return <UnitCard key={u.n} unit={u} read={read} total={u.lessons.length} best={b} mastered={mastered} isFocus={u.n === focusUnit && !teacher} />;
         })}
       </div>
     </Page>
