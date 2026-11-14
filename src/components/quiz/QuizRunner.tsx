@@ -251,7 +251,7 @@ export function QuizRunner({
                 <RotateCcw className="size-3.5" aria-hidden /> {checkError} Pick your answer again.
               </p>
             )}
-            {!answered && !checkError && <p className="text-sm text-fg-4">{checking ? "Checking…" : "Press A–D or 1–4 to answer"}</p>}
+            {!answered && !checkError && <p className="text-sm text-fg-3">{checking ? "Checking…" : "Press A–D or 1–4 to answer"}</p>}
             <Button ref={continueRef} onClick={next} disabled={!answered} className="ml-auto">
               {last ? "See results" : "Continue"} <ArrowRight />
             </Button>

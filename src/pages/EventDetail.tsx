@@ -129,7 +129,7 @@ function Detail({ listing: e }: { listing: Listing }) {
 
   return (
     <Page>
-      <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+      <Link to="/act" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
         <ArrowLeft className="size-4" /> Act
       </Link>
 
@@ -144,7 +144,7 @@ function Detail({ listing: e }: { listing: Listing }) {
         </div>
       )}
 
-      <header className="mb-7 flex items-start gap-5">
+      <header className="mb-6 flex items-start gap-5">
         <span className={cn("grid size-14 shrink-0 place-items-center rounded-2xl", TONE_CLASS[style.tone])} aria-hidden>
           <style.icon className="size-6" />
         </span>
@@ -375,7 +375,7 @@ function Detail({ listing: e }: { listing: Listing }) {
             </Card>
           )}
 
-          <p className="px-1 text-sm text-fg-4">
+          <p className="px-1 text-sm text-fg-3">
             Posted by {e.created_by_name}
             {e.scope === "class" ? ` for ${e.class_name || "this class"}` : ""} · {new Date(e.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
           </p>

@@ -24,15 +24,14 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { ClassChat, useChatUnread } from "@/components/class/ClassChat";
 import { IslandScene } from "@/components/island/IslandScene";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tray } from "@/components/ui/tray";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EmptyState, Skeleton } from "@/components/ui/empty";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
@@ -57,10 +56,6 @@ import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import type { ClassDoc, MemberDoc, NoteDoc, SubmissionDoc } from "@/shared/types";
 
-// The faint sky behind the class's header (existing art, from the landing plates). The text is held to the left half
-// of the banner, so that is where the scrim is. It is the same scrim as the Today, Island, Act and Ambassador banners
-// (the tests hold them equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 type TeacherTab = "students" | "assignments" | "chat" | "leaderboard" | "notes" | "settings";
 type StudentTab = "assignments" | "chat" | "leaderboard" | "notes";
@@ -159,15 +154,14 @@ export default function ClassDetail() {
 
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-        <ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />
+      <header className="page-hero">
         <div className="flex items-end justify-between gap-6">
           <div className="min-w-0 max-w-1/2">
-            <Link to={teacher ? "/class" : "/today"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg">
+            <Link to={teacher ? "/class" : "/today"} className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
               <ArrowLeft className="size-4" /> {teacher ? "Classes" : "Today"}
             </Link>
             <p className="t-eyebrow text-fg-2">{teacher ? "Your class" : `Taught by ${cls.teacher_name}`}</p>
-            <h1 className="t-h1 mt-2.5 truncate">{cls.name}</h1>
+            <h1 className="t-hero mt-2.5 truncate">{cls.name}</h1>
             <p className="mt-2 text-md text-fg-2">
               {plural(members.length, "student")}
               {cls.current_unit ? ` · Unit ${cls.current_unit}: ${getUnit(cls.current_unit)?.title}` : ""}
@@ -180,19 +174,21 @@ export default function ClassDetail() {
         </div>
       </header>
 
-      <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs} className="mt-6 mb-6" />
+      <Tray>
+        <Segmented label="Class sections" value={tab} onChange={setTab} options={tabs} className="mb-3" />
 
-      {teacher && tab === "students" && <Roster cls={cls} members={members} loading={membersLoading} assignments={sortedAssignments} submissions={submissions} today={today} />}
-      {tab === "assignments" &&
-        (teacher ? (
-          <TeacherAssignments cls={cls} members={members} assignments={sortedAssignments} submissions={submissions} loading={assignmentsLoading} today={today} openNew={params.get("new") === "1"} />
-        ) : (
-          <StudentAssignments assignments={sortedAssignments} loading={assignmentsLoading} today={today} />
-        ))}
-      {tab === "chat" && <ClassChat cls={cls} teacher={teacher} meId={profile.id} members={members} />}
-      {tab === "leaderboard" && <Leaderboard members={members} loading={membersLoading} today={today} meId={profile.id} />}
-      {tab === "notes" && <Notes classId={classId} teacher={teacher} meId={profile.id} />}
-      {teacher && tab === "settings" && <ClassSettings cls={cls} />}
+        {teacher && tab === "students" && <Roster cls={cls} members={members} loading={membersLoading} assignments={sortedAssignments} submissions={submissions} today={today} />}
+        {tab === "assignments" &&
+          (teacher ? (
+            <TeacherAssignments cls={cls} members={members} assignments={sortedAssignments} submissions={submissions} loading={assignmentsLoading} today={today} openNew={params.get("new") === "1"} />
+          ) : (
+            <StudentAssignments assignments={sortedAssignments} loading={assignmentsLoading} today={today} />
+          ))}
+        {tab === "chat" && <ClassChat cls={cls} teacher={teacher} meId={profile.id} members={members} />}
+        {tab === "leaderboard" && <Leaderboard members={members} loading={membersLoading} today={today} meId={profile.id} />}
+        {tab === "notes" && <Notes classId={classId} teacher={teacher} meId={profile.id} />}
+        {teacher && tab === "settings" && <ClassSettings cls={cls} />}
+      </Tray>
     </Page>
   );
 }
@@ -640,7 +636,7 @@ function TeacherAssignments({
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-base text-fg-3">Students complete assignments by doing the work. Completion updates here automatically.</p>
+        <p className="plate text-base text-fg-3">Students complete assignments by doing the work. Completion updates here automatically.</p>
         <Button onClick={() => setEditing("new")}>
           <Plus /> New assignment
         </Button>

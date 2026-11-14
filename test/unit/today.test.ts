@@ -1,8 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { ART } from "../../src/components/island/assets";
-import { SCRIM_FLOOR } from "../../src/components/landing/plates";
 import { islandHealth } from "../../src/shared/economy";
 
 // The Today page in the same style system as the rest of the app: the 4a primitives and tokens only, a sky
@@ -37,13 +35,7 @@ const ratio = (a: string, b: string) => {
   const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
 };
-const over = (fg: string, bg: string, alpha: number) => {
-  const f = [1, 3, 5].map((i) => parseInt(fg.slice(i, i + 2), 16));
-  const b = [1, 3, 5].map((i) => parseInt(bg.slice(i, i + 2), 16));
-  return `#${f.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`;
-};
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
-const alphaOf = (name: string) => Number(new RegExp(`--${name}:\\s*rgb\\([^/]+/\\s*([0-9.]+)\\s*\\)`).exec(css)?.[1]);
 
 const STUDENT_CARDS = ["AssignmentsCard", "ContinueCard", "StreakCard", "TestCard", "QuestCard", "ActCard"];
 
@@ -60,11 +52,11 @@ describe("today: tokens only", () => {
   it("uses the spacing scale and rem where it had 18px, 160px, 220px, 420px, 640px, 340px and 380px", () => {
     expect(today).toContain("size-4.5"); // 18px
     expect(today).toContain("w-40"); // 160px
-    expect(today).toContain("min-h-55"); // 220px
+    expect(today).toContain("min-h-72"); // the island panel, 288px
     expect(today).toContain("max-w-105"); // 420px
     expect(today).toContain("max-w-160"); // 640px
-    expect(today).toContain("grid-cols-[minmax(0,1fr)_21.25rem]"); // the 340px column
-    expect(today).toContain("grid-cols-[minmax(0,1fr)_minmax(0,24rem)]"); // the island's column
+    expect(today).toContain("grid-cols-[minmax(0,1.9fr)_minmax(16rem,1fr)]"); // the side column: about a third of the width, never under 256px
+    expect(today).toContain("grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]"); // the island's column
   });
 
   it("never uses the faintest text color: fg-4 is below AA on the page, so the weekday letters are fg-3", () => {
@@ -86,21 +78,20 @@ describe("today: every picture is from the art manifest, one to a card", () => {
     expect(code(today)).not.toMatch(/\.(webp|png|jpe?g|svg|gif)\b|["'`]\/(?:island|landing|images)\/|["'`]public\//);
   });
 
-  it("has two pictures on the student's page, both manifest art: the sky behind the greeting and the island", () => {
-    expect(today.match(/<ArtBackdrop\b/g)).toHaveLength(1);
+  it("has one picture on the student's page, manifest art: the island (the lagoon behind the page is the shell's scene)", () => {
+    expect(today).not.toMatch(/<ArtBackdrop\b/);
     expect(today.match(/<IslandScene\b/g)).toHaveLength(1);
     expect(today).not.toMatch(/<img\b/);
-    expect(today).toContain('art="sky-day"');
-    expect(ART["sky-day"]?.source).toBe("generated"); // registered, with a source
     expect(today).toMatch(/from "@\/components\/island\/IslandScene"/); // the island is drawn from the same manifest (assets.ts)
   });
 
-  it("puts the sky on the banner, outside every card", () => {
+  it("sets the greeting on the scene, above every card, with no picture of its own", () => {
     const student = fn("StudentToday");
     const header = student.slice(student.indexOf("<header"), student.indexOf("</header>"));
-    expect(header).toContain("<ArtBackdrop");
-    expect(student.indexOf("<ArtBackdrop")).toBeLessThan(student.indexOf("<DailySetCard")); // before any card
-    expect(student, "the page draws its cards through components, so nothing wraps the banner in one").not.toContain("<Card");
+    expect(header).toContain('<header className="page-hero">');
+    expect(header).not.toMatch(/<ArtBackdrop|<img\b/);
+    expect(student.indexOf("<header")).toBeLessThan(student.indexOf("<DailySetCard")); // before any card
+    expect(student, "the page draws its cards through components, so nothing wraps the greeting in one").not.toContain("<Card");
   });
 
   it("gives the daily-set card the island as its one picture, and no other card a picture at all", () => {
@@ -128,7 +119,8 @@ describe("today: the island's health still comes from useIslandHealth", () => {
     expect(today).not.toMatch(/import \{[^}]*\bislandHealth\b[^}]*\} from/);
     const daily = fn("DailySetCard");
     expect(daily).toContain("health={health.value}");
-    expect(daily).toContain("{stage.name} · {health.label}");
+    expect(daily).toContain("          {health.label}\n"); // the chip shows health only: the stage is in the XP strip beside it
+    expect(daily).toContain("{stage.name}</p>");
     expect(daily).toContain('health.label === "Thriving" ? "Keep your island thriving."');
     expect(fn("StudentToday")).toContain("health.daysMissed > 0");
   });
@@ -188,7 +180,7 @@ describe("today: what the restyle must not change", () => {
   });
 
   it("keeps the teacher's page and the two helpers other pages import", () => {
-    expect(today).toContain('<header className="mb-8 flex items-end justify-between gap-6">'); // the teacher's header, not the banner
+    expect(today).toContain('<header className="page-hero flex-row items-end justify-between gap-6">'); // the teacher's greeting, on the scene too
     expect(today).toMatch(/export function JoinClassInline\(/);
     expect(today).toMatch(/export function CreateFirstClass\(/);
     expect(today).toContain("const subtitle = doneToday");
@@ -196,43 +188,20 @@ describe("today: what the restyle must not change", () => {
   });
 });
 
-describe("today: the sky behind the greeting, with a scrim where the text sits", () => {
-  const scrim = /const GREETING_SCRIM: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(today);
-
-  it("tints the text's side at least as opaque as the glass floor, and holds it past the text", () => {
-    expect(scrim, "GREETING_SCRIM").not.toBeNull();
-    const [alpha, hold] = [Number(scrim![1]), Number(scrim![2])];
-    expect(alpha).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    // The text block is capped at half the banner, so its right edge is at most 50% of the width at any window size.
-    const student = fn("StudentToday");
-    expect(student).toContain('<div className="max-w-1/2">');
-    expect(hold).toBeGreaterThan(0.5);
-    for (const text of ["fg", "fg-2"]) expect(ratio(token(text), over(token("bg"), "#000000", alpha)), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it("keeps the greeting's small text at fg-2, with the margin the lighter fg-3 would not have over a scrim", () => {
-    const header = fn("StudentToday").slice(fn("StudentToday").indexOf("<header"), fn("StudentToday").indexOf("</header>"));
-    expect(header).toContain('<p className="t-eyebrow text-fg-2">');
-    expect(header).toContain('<p className="mt-2 text-lg text-fg-2">{subtitle}</p>');
-    expect(header).toContain('<h1 className="t-h1 mt-2.5">');
-  });
-
-  it("sets the daily-set card below the banner in its own space, on its own glass", () => {
-    const student = fn("StudentToday");
-    expect(student).toContain('<DailySetCard className="mt-6"');
-    expect(student, "the banner pads evenly: it keeps no room for a card to sit over it").toContain("rounded-2xl border border-line px-8 py-9 shadow-sm");
-    expect(student).not.toMatch(/pb-24/);
-    expect(fn("DailySetCard")).toContain('<Card className={cn("grid grid-cols-[minmax(0,1fr)_minmax(0,24rem)] gap-6 p-4", className)}>');
-  });
-
-  it("passes AA for the page's text on its cards over the lightest and darkest backdrops", () => {
-    for (const behind of [token("sky"), token("bg")]) {
-      const card = over(token("surface"), behind, alphaOf("glass-fill"));
-      for (const text of ["fg", "fg-2", "fg-3", "brand-ink", "sun-ink", "coral"]) expect(ratio(token(text), card), `${text} on a card over ${behind}`).toBeGreaterThanOrEqual(4.5);
+describe("today: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Today.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-    // The stage-and-health chip over the island is strong glass: readable over any picture.
-    expect(ratio(token("fg-2"), over(token("surface"), "#000000", alphaOf("glass-fill-strong"))), "the chip over black").toBeGreaterThanOrEqual(4.5);
-    expect(fn("DailySetCard")).toContain('className="glass absolute bottom-3 left-3');
   });
 });
 

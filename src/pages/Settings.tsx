@@ -2,9 +2,7 @@ import { deleteUser } from "firebase/auth";
 import { Award, Check, Copy, GraduationCap, LogOut, Mail, Sprout, Trash2, Upload, UserRound } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,10 +17,6 @@ import { useToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import type { Role } from "@/shared/types";
 
-// The faint sky behind the page's header (existing art, from the landing plates), the same as the Class banner. The
-// text is held to the left half of the banner, so that is where the scrim is. It is the same scrim as the Today,
-// Island, Act, Ambassador and Class banners (the tests hold them equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 // The tile inside a section (an account type, an invitation, the delete zone): one shape, tinted or bordered per use.
 const INNER = "rounded-md border p-5";
@@ -49,26 +43,25 @@ export default function Settings() {
   useDocumentTitle("Settings");
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-        <ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />
+      <header className="page-hero">
         <div className="max-w-1/2">
           <p className="t-eyebrow text-fg-2">Settings</p>
-          <h1 className="t-h1 mt-2.5">Your account</h1>
+          <h1 className="t-hero mt-2.5">Your account</h1>
         </div>
       </header>
-      <div className="mt-6 grid grid-cols-[12.5rem_minmax(0,45rem)] gap-10">
-        <nav className="sticky top-24 self-start" aria-label="Settings sections">
+      <div className="tray grid grid-cols-[12.5rem_minmax(0,1fr)] items-start gap-3">
+        <nav className="card sticky top-24 self-start p-2" aria-label="Settings sections">
           <ul className="space-y-0.5">
             {NAV.map((n) => (
               <li key={n.id}>
-                <a href={`#${n.id}`} className="block rounded-sm px-3 py-2 text-base font-medium text-fg-3 hover:bg-surface-2 hover:text-fg">
+                <a href={`#${n.id}`} className="block rounded-md px-3 py-2 text-base font-medium text-fg-3 hover:bg-surface-2 hover:text-fg">
                   {n.label}
                 </a>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="space-y-6">
+        <div className="space-y-3">
           <ProfileSection key={profile.username_lower ?? "p"} />
           <RoleSection />
           <RemindersSection />

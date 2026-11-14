@@ -7,6 +7,7 @@ import { LANDMARK_INFO } from "@/shared/landmarks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tray } from "@/components/ui/tray";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/field";
 import { track } from "@/lib/analytics";
@@ -53,16 +54,16 @@ export default function UnitPage() {
 
   return (
     <Page>
-      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+      <Link to="/study" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
         <ArrowLeft className="size-4" /> Study
       </Link>
-      <header className="mb-8 flex items-end justify-between gap-6">
-        <div>
-          <p className="t-eyebrow">
+      <header className="page-hero flex-row items-end justify-between gap-6">
+        <div className="max-w-1/2">
+          <p className="t-eyebrow text-fg-2">
             Unit {unit.n} · {unit.examWeight} of the exam
           </p>
-          <h1 className="t-h1 mt-2.5">{unit.title}</h1>
-          <p className="mt-2 text-md text-fg-3">
+          <h1 className="t-hero mt-2.5">{unit.title}</h1>
+          <p className="mt-2 text-md text-fg-2">
             {read} of {unit.lessons.length} lessons read{best !== undefined ? ` · best unit quiz ${best}%` : ""}
           </p>
         </div>
@@ -80,7 +81,7 @@ export default function UnitPage() {
         </div>
       </header>
 
-      <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-6">
+      <Tray className="grid grid-cols-[minmax(0,1.9fr)_minmax(16rem,1fr)] items-start gap-3">
         <Card className="p-2">
           <ul className="divide-y divide-line">
             {unit.lessons.map((l) => {
@@ -92,7 +93,7 @@ export default function UnitPage() {
                     {isRead ? <Check className="size-4" strokeWidth={3} /> : l.code.split(".")[1]}
                   </span>
                   <Link to={`/study/unit/${n}/${encodeURIComponent(l.id)}`} className="min-w-0 flex-1 hover:underline hover:decoration-line-strong hover:underline-offset-4">
-                    <span className="t-num mr-2 text-sm text-fg-4">{l.code}</span>
+                    <span className="t-num mr-2 text-sm text-fg-3">{l.code}</span>
                     <span className="text-md font-medium text-fg">{l.title}</span>
                   </Link>
                   {quiz !== undefined && <Badge tone={quiz >= 70 ? "brand" : "neutral"}>Quiz {quiz}%</Badge>}
@@ -108,7 +109,7 @@ export default function UnitPage() {
                       </Link>
                     </Button>
                   ) : (
-                    <span className="w-[68px] text-center text-xs text-fg-4">Overview</span>
+                    <span className="w-[68px] text-center text-xs text-fg-3">Overview</span>
                   )}
                 </li>
               );
@@ -116,7 +117,7 @@ export default function UnitPage() {
           </ul>
         </Card>
 
-        <div className="space-y-6">
+        <div className="space-y-3">
           <Card className="p-6">
             <p className="t-eyebrow">Landmark</p>
             <p className="mt-3 flex items-center gap-2 text-lg font-semibold text-fg">
@@ -168,7 +169,7 @@ export default function UnitPage() {
             </Card>
           )}
         </div>
-      </div>
+      </Tray>
 
       {quest && !questDone && <QuestDialog unit={n} open={questOpen} onOpenChange={setQuest} />}
     </Page>

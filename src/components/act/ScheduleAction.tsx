@@ -89,7 +89,7 @@ export function ScheduleAction({ open, onOpenChange, classes, trusted }: { open:
                     {on && <Check className="size-4 text-brand" aria-hidden />}
                   </span>
                   <span className="mt-0.5 block text-sm leading-snug text-fg-3">{a.summary}</span>
-                  <span className="mt-1.5 block text-xs font-semibold text-fg-4">Unit {a.unit}</span>
+                  <span className="mt-1.5 block text-xs font-semibold text-fg-3">Unit {a.unit}</span>
                 </span>
               </button>
             );

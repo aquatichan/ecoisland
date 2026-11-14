@@ -15,23 +15,23 @@ import {
   PenLine,
   Plus,
   Sparkles,
+  Sprout,
   Users,
 } from "lucide-react";
 import { collection, limit, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
 import { ReviewHoursDialog } from "@/components/act/Dialogs";
 import { Link, useNavigate } from "react-router-dom";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { IslandScene } from "@/components/island/IslandScene";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tray } from "@/components/ui/tray";
 import { EmptyState, Skeleton } from "@/components/ui/empty";
 import { Input } from "@/components/ui/field";
-import { ProgressRing } from "@/components/ui/progress";
+import { ProgressBar, ProgressRing } from "@/components/ui/progress";
 import { track } from "@/lib/analytics";
 import { api, errorMessage } from "@/lib/api";
 import { unitPool } from "@/lib/content";
@@ -48,17 +48,13 @@ import { assignmentHref, type AssignmentType } from "@/shared/assignments";
 import { findSky } from "@/shared/catalog";
 import { findLesson, getUnit, neighbours } from "@/shared/curriculum";
 import { addDays, daysBetween, dueLabel, effectiveStreak, formatDay, weekStart, type DayKey } from "@/shared/dates";
-import { masteredUnits, stageForXp, type Health } from "@/shared/economy";
+import { masteredUnits, stageProgress, type Health } from "@/shared/economy";
 import { useIslandHealth } from "@/lib/island";
 import { visibleDecor, visibleGrowth } from "@/shared/island";
 import { questForUnit } from "@/shared/quests";
 import { weekStats } from "@/shared/stats";
 import { actionOpen, eventPhase } from "@/shared/act";
 import type { ClassDoc, MemberDoc, UserDoc } from "@/shared/types";
-
-// The sky behind the greeting (existing art, from the manifest). The text is held to the left half of the
-// banner, so that is where the scrim is; the sun and clouds show on the right.
-const GREETING_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 function greeting() {
   const h = new Date().getHours();
@@ -117,30 +113,30 @@ function StudentToday() {
 
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-        <ArtBackdrop art="sky-day" scrim={GREETING_SCRIM} />
+      {/* The greeting sits on the lagoon scene, in its haze; the scene's island shows to its right. */}
+      <header className="page-hero">
         <div className="max-w-1/2">
           <p className="t-eyebrow text-fg-2">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
-          <h1 className="t-h1 mt-2.5">
-            {greeting()}, {name}.
+          <h1 className="t-hero mt-2.5">
+            {greeting()}, {name}!
           </h1>
-          <p className="mt-2 text-lg text-fg-2">{subtitle}</p>
+          <p className="mt-3 text-lg text-fg-2">{subtitle}</p>
         </div>
       </header>
 
-      <DailySetCard className="mt-6" doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
+      <DailySetCard doneToday={doneToday} unitTitle={unit?.title ?? ""} focusUnit={focusUnit} health={health} streak={streak} />
 
-      <div className="mt-6 grid grid-cols-[minmax(0,1fr)_21.25rem] gap-6">
-        <div className="space-y-6">
+      <div className="mt-6 grid grid-cols-[minmax(0,1.9fr)_minmax(16rem,1fr)] items-start gap-6">
+        <Tray className="space-y-3">
           <AssignmentsCard assignments={assignments} hasClass={classes.length > 0} loading={loading} today={today} />
           <ContinueCard focusUnit={focusUnit} />
           <ActCard profile={profile} today={today} />
-        </div>
-        <div className="space-y-6">
+        </Tray>
+        <Tray className="space-y-3">
           <StreakCard streak={streak} best={profile.streak_best ?? 0} days={profile.set_days ?? []} today={today} />
           {test && <TestCard test={test} today={today} />}
           <QuestCard unit={focusUnit} done={(profile.quests_done ?? []).includes(focusUnit)} />
-        </div>
+        </Tray>
       </div>
     </Page>
   );
@@ -162,10 +158,11 @@ function DailySetCard({
   className?: string;
 }) {
   const profile = useProfile();
-  const stage = stageForXp(profile.xp_total ?? 0);
+  const xp = profile.xp_total ?? 0;
+  const { stage, next, pct } = stageProgress(xp);
   return (
-    <Card className={cn("grid grid-cols-[minmax(0,1fr)_minmax(0,24rem)] gap-6 p-4", className)}>
-      <div className="flex flex-col p-4">
+    <Tray className={cn("grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-3", className)}>
+      <Card className="flex flex-col p-6">
         <p className="t-eyebrow">
           Daily set · Unit {focusUnit}
         </p>
@@ -202,8 +199,19 @@ function DailySetCard({
             </div>
           </>
         )}
-      </div>
-      {/* The island is the card's one picture: in its own rounded frame, with the stage and health on a glass chip. */}
+        {/* The island's stage and how far it is to the next one: the student's level, from the XP they already have. */}
+        <div data-island-level className="mt-6 flex items-center gap-4 rounded-lg bg-surface-2 px-4 py-3">
+          <Sprout className="size-5 shrink-0 text-brand" aria-hidden />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-base font-semibold text-fg">{stage.name}</p>
+              <p className="t-num shrink-0 text-sm text-fg-3">{next ? `${xp.toLocaleString()} / ${next.minXp.toLocaleString()} XP` : `${xp.toLocaleString()} XP`}</p>
+            </div>
+            <ProgressBar value={pct} className="mt-2" label={next ? `Progress to ${next.name}` : "Island fully grown"} />
+          </div>
+        </div>
+      </Card>
+      {/* The island is the tray's one picture: in its own rounded frame beside the card, with its health on a glass chip (the stage is in the card's XP strip). */}
       <Link to="/island" className="group relative block overflow-hidden rounded-lg border border-line" aria-label="Open your island">
         <IslandScene
           health={health.value}
@@ -211,14 +219,14 @@ function DailySetCard({
           growth={visibleGrowth(profile.owned_items)}
           decor={visibleDecor(profile.owned_items, profile.island_decor)}
           landmarks={masteredUnits(profile.unit_best)}
-          className="h-full min-h-55 transition-transform duration-500 group-hover:scale-[1.015] motion-reduce:group-hover:scale-100"
+          className="h-full min-h-72 transition-transform duration-500 group-hover:scale-[1.015] motion-reduce:group-hover:scale-100"
         />
         <div className="glass absolute bottom-3 left-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold text-fg-2">
           <span className={cn("size-2 rounded-full", health.label === "Thriving" ? "bg-brand" : health.label === "Thirsty" ? "bg-sun" : "bg-coral")} />
-          {stage.name} · {health.label}
+          {health.label}
         </div>
       </Link>
-    </Card>
+    </Tray>
   );
 }
 
@@ -571,7 +579,7 @@ function Attention({ classes, uid }: { classes: WithId<ClassDoc>[]; uid: string 
   const flagged = classes.filter((c) => (reports[c.id] ?? 0) > 0);
   if (hours.items.length === 0 && flagged.length === 0) return null;
   return (
-    <div className="mb-6 grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-3">
       {hours.items.length > 0 && (
         <Card className="flex items-center gap-4 p-5">
           <span className="grid size-10 place-items-center rounded-md bg-sun-soft text-sun-ink" aria-hidden>
@@ -617,14 +625,14 @@ function TeacherToday() {
   const name = profile.username || profile.full_name || "";
   return (
     <Page>
-      <header className="mb-8 flex items-end justify-between gap-6">
-        <div>
-          <p className="t-eyebrow">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
-          <h1 className="t-h1 mt-2.5">
+      <header className="page-hero flex-row items-end justify-between gap-6">
+        <div className="max-w-1/2">
+          <p className="t-eyebrow text-fg-2">{formatDay(today, { weekday: "long", month: "long", day: "numeric" })}</p>
+          <h1 className="t-hero mt-2.5">
             {greeting()}
-            {name ? `, ${firstName(name)}` : ""}.
+            {name ? `, ${firstName(name)}` : ""}!
           </h1>
-          <p className="mt-2 text-lg text-fg-3">
+          <p className="mt-3 text-lg text-fg-2">
             {classes.length === 0 ? "Create a class to start assigning work." : "Here's how your classes are doing today."}
           </p>
         </div>
@@ -638,20 +646,21 @@ function TeacherToday() {
       </header>
       {loading ? (
         <div className="grid grid-cols-2 gap-6">
-          <Skeleton className="h-64 rounded-xl" />
-          <Skeleton className="h-64 rounded-xl" />
+          <Skeleton className="h-64 rounded-3xl" />
+          <Skeleton className="h-64 rounded-3xl" />
         </div>
       ) : classes.length === 0 ? (
         <CreateFirstClass />
       ) : (
-        <>
+        <Tray className="space-y-3">
           <Attention classes={classes} uid={profile.id} />
-          <div className="grid grid-cols-2 gap-6">
+          {/* One column per class up to two; a lone class fills the tray's width instead of leaving half of it empty. */}
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(24rem,1fr))] gap-3">
             {classes.map((c) => (
               <ClassSummary key={c.id} cls={c} today={today} />
             ))}
           </div>
-        </>
+        </Tray>
       )}
     </Page>
   );

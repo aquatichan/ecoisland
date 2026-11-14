@@ -54,7 +54,7 @@ export function DesktopGate({ children }: { children: ReactNode }) {
           {copied ? "Link copied" : "Copy link"}
         </Button>
       </div>
-      <p className="mt-8 flex items-center gap-2 text-sm text-fg-4">
+      <p className="mt-8 flex items-center gap-2 text-sm text-fg-3">
         <Laptop className="size-4" aria-hidden /> Needs a window at least {MIN_WIDTH}px wide
       </p>
     </main>

@@ -39,12 +39,12 @@ export function LegalLayout({
         </div>
       </header>
       <main className="mx-auto max-w-[880px] px-5 py-12">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+        <Link to="/" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
           <ArrowLeft className="size-4" /> Home
         </Link>
-        <h1 className="t-h1 mt-6">{title}</h1>
+        <h1 className="t-h1">{title}</h1>
         <p className="mt-3 max-w-[60ch] text-lg text-fg-3">{intro}</p>
-        <p className="mt-2 text-sm text-fg-4">Last updated {updated}</p>
+        <p className="mt-2 text-sm text-fg-3">Last updated {updated}</p>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {summary.map((s) => (

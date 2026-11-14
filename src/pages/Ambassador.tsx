@@ -5,10 +5,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { EventForm } from "@/components/act/EventForm";
 import { AMBASSADOR_MEDAL } from "@/components/ambassador/medal";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
 import { Treecoin } from "@/components/app/Logo";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,10 +21,6 @@ import { useToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { ACT_REWARD, GRADES, LIMITS } from "@/shared/act";
 
-// The canopy behind the page's header (existing art, from the landing plates), lit from the upper left like the
-// island's sprites. The text is held to the left half of the banner, so that is where the scrim is; the trees show
-// on the right. It is the same scrim as the Today, Island and Act banners (the tests hold them equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 const BENEFITS = [
   { icon: HandHeart, title: "Earn volunteer hours", body: "Organizing and running events counts toward your service hours." },
@@ -45,28 +39,27 @@ export default function Ambassador() {
   const [reapply, setReapply] = useState(false);
 
   return (
-    <Page className="mx-auto max-w-260">
+    <Page>
       {/* Blue and purple accent for this page only (see [data-accent] in index.css). */}
       <div data-accent="ambassador">
-        <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-          <ArtBackdrop art="bg-teachers" scrim={BANNER_SCRIM} position="center 30%" />
+        <header className="page-hero">
           {/* The medal hangs from the banner's top edge, inside it, on the right where the picture shows (never under the text). */}
           <img src={AMBASSADOR_MEDAL.src} width={AMBASSADOR_MEDAL.w} height={AMBASSADOR_MEDAL.h} alt="" aria-hidden draggable={false} decoding="async" className="pointer-events-none absolute top-0 right-12 w-28 select-none drop-shadow-md" />
           <div className="min-w-0 max-w-1/2">
-            <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg">
+            <Link to="/act" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
               <ArrowLeft className="size-4" /> Act
             </Link>
             <p className="t-eyebrow text-accent-2">Ecoisland Ambassadors</p>
-            <h1 className="t-display mt-3">Lead the work in your community</h1>
+            <h1 className="t-hero mt-3">Lead the work in your community</h1>
             <p className="mt-4 text-lg leading-relaxed text-fg-2">
               Ambassadors organize cleanups, plantings and other real projects where they live, and bring their schools along. Ecoisland gives you the tools to post events, find volunteers and track their hours.
             </p>
           </div>
         </header>
 
-        <div className="mt-6 grid grid-cols-[minmax(0,1fr)_26.25rem] gap-6">
-          <div>
-            <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(20rem,1fr)] items-start gap-6">
+          <div className="tray @container space-y-3">
+            <div className="grid grid-cols-1 gap-3 @md:grid-cols-2">
               {BENEFITS.map((b) => (
                 <Card key={b.title} className="p-6">
                   <span className="grid size-9 place-items-center rounded-md bg-brand-soft text-brand-ink" aria-hidden>
@@ -77,12 +70,12 @@ export default function Ambassador() {
                 </Card>
               ))}
             </div>
-            <p className="mt-6 flex items-center gap-2 text-base text-fg-2">
+            <p className="plate text-base text-fg-2">
               <Treecoin size={16} /> Approved ambassadors also get {ACT_REWARD.AMBASSADOR_TC} Treecoins for their island.
             </p>
           </div>
 
-          <div className="self-start">
+          <div className="tray">
             {loading ? (
               <Skeleton className="h-96 rounded-lg" />
             ) : profile.ambassador ? (

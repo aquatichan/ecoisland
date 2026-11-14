@@ -59,13 +59,13 @@ describe("landing: what the restyle must not change", () => {
     expect(src).not.toMatch(/"(Dashboard|Learn|Community|More)"/);
   });
 
-  it("keeps BlurText, Magnet and the counter as direct React Bits imports, and the backdrop through its wrapper", () => {
+  it("keeps BlurText, Magnet and the counter as direct React Bits imports, and draws the hero on the open-sea scene", () => {
     for (const name of ["BlurText", "CountUp", "Magnet"]) {
       expect(src).toContain(`import ${name} from "@/components/bits/${name}";`);
       expect(src, name).toContain(`<${name}`);
     }
-    expect(src).toContain('import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";');
-    expect(src).toContain("<TopographyBackdrop");
+    expect(src).toContain('import { SceneBackdrop } from "@/components/app/SceneBackdrop";');
+    expect(src).toContain('<SceneBackdrop scene="scene-hero" haze={false} />');
     expect(src).not.toMatch(/bits\/Topography/);
   });
 });
@@ -110,17 +110,24 @@ describe("landing: island art", () => {
 describe("landing: the closing call to action", () => {
   const cta = () => fn("FinalCta", "export default function Landing(");
 
-  it("is a glass panel over the generated day sky, with the text inside the panel and the picture behind it", () => {
+  it("is light text on the sunset bay, under a dark tint at least as opaque as the scrim floor, with a gold button", () => {
     const body = cta();
-    expect(ART["sky-day"]?.source).toBe("generated");
-    expect(body).toContain('ART["sky-day"]');
-    const img = body.indexOf("<img");
-    const panel = body.indexOf('className="glass');
-    expect(img).toBeGreaterThan(-1);
-    expect(panel).toBeGreaterThan(img); // the panel is drawn after the art, on top of it
-    for (const text of ["<h2", "<p ", "<Button"]) expect(body.indexOf(text), text).toBeGreaterThan(panel); // all text lives in the panel
-    expect(body.match(/<img\b/g)).toHaveLength(1); // one picture
-    expect(body).toMatch(/<img[^>]*alt=""/); // decorative
+    expect(body).toContain('<SceneBackdrop scene="scene-sunset" haze={false} lazy />');
+    expect(body).not.toMatch(/<img\b/); // the scene is the one picture
+    const scene = body.indexOf("<SceneBackdrop");
+    const tint = body.indexOf("CTA_SCRIM");
+    expect(tint).toBeGreaterThan(scene); // the tint is drawn over the picture
+    for (const text of ["<h2", "<p ", "<Button"]) expect(body.indexOf(text), text).toBeGreaterThan(tint);
+    // The tint is the ink colour at 84%, held to 46% of the width; the text column stops at 44% of the content.
+    expect(src).toContain('const CTA_TINT = "color-mix(in srgb, var(--fg) 84%, transparent)";');
+    expect(src).toContain("${CTA_TINT} 46%, transparent 76%");
+    expect(body).toContain('className="max-w-[44%]"');
+    expect(body).toMatch(/<h2 className="[^"]*text-surface/);
+    expect(body).toMatch(/<p className="[^"]*text-surface/);
+    expect(body).toContain('variant="sun"');
+    // Cream text on the tint passes AA even where the picture behind it is white.
+    const mix = (a: string, b: string, t: number) => `#${[1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * t + parseInt(b.slice(i, i + 2), 16) * (1 - t)).toString(16).padStart(2, "0")).join("")}`;
+    expect(contrast(token("surface"), mix(token("fg"), "#ffffff", 0.84))).toBeGreaterThanOrEqual(4.5);
   });
 
   it("stays readable: the glass fill is opaque enough that the text passes AA over any art", () => {
@@ -138,7 +145,7 @@ describe("landing: the hero reads on the sky", () => {
     for (const text of ["fg", "fg-2", "brand-ink"]) expect(contrast(token(text), sky), `${text} on the sky`).toBeGreaterThanOrEqual(4.5);
     // The small hero text is fg-2, not the lighter fg-3 (which only just clears AA on this sky).
     const hero = fn("Hero", "function QuestionMock(");
-    expect(hero).toContain('t-eyebrow text-fg-2');
+    expect(hero).toContain('<p className="plate t-eyebrow py-2 text-brand-ink">'); // the eyebrow is on a plate of its own
     expect(hero).toMatch(/text-xl leading-relaxed text-fg-2/);
   });
 });

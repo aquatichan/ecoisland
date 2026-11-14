@@ -3,10 +3,8 @@ import { join } from "node:path";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
 import { ART } from "../../src/components/island/assets";
 import { GREYED, MarketTile, SkyWell, SpriteWell, TILE, WELL, WELL_PAD, WELL_SIZE } from "../../src/components/island/tiles";
-import { SCRIM_FLOOR } from "../../src/components/landing/plates";
 import { DECOR, GROWTH, SKIES } from "../../src/shared/catalog";
 import { islandHealth } from "../../src/shared/economy";
 import { marketState, type MarketState } from "../../src/shared/island";
@@ -36,13 +34,7 @@ const ratio = (a: string, b: string) => {
   const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
 };
-const over = (fg: string, bg: string, alpha: number) => {
-  const f = [1, 3, 5].map((i) => parseInt(fg.slice(i, i + 2), 16));
-  const b = [1, 3, 5].map((i) => parseInt(bg.slice(i, i + 2), 16));
-  return `#${f.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`;
-};
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
-const alphaOf = (name: string) => Number(new RegExp(`--${name}:\\s*rgb\\([^/]+/\\s*([0-9.]+)\\s*\\)`).exec(css)?.[1]);
 /** The text of the page's `getButton`, which is the one place a price or a lock can be drawn. */
 const getButton = page.slice(page.indexOf("const getButton ="), page.indexOf("const saveDecor"));
 const STATES: MarketState[] = ["owned", "locked", "free", "buy"];
@@ -65,7 +57,7 @@ describe("island page: tokens only", () => {
     expect(skyThumb).not.toContain("h-[64px]");
     expect(page).toContain("w-75"); // 300px
     expect(page).toContain("max-w-85"); // 340px
-    expect(page).toContain("grid-cols-[minmax(0,1fr)_23.75rem]"); // the 380px market column
+    expect(page).toContain("grid-cols-[minmax(0,1.6fr)_minmax(19rem,1fr)]"); // the market column: about 38% of the width, never under 304px
     expect(page).toContain("max-h-[calc(100dvh-7.5rem)]"); // 120px
   });
 
@@ -254,59 +246,32 @@ describe("island page: every picture is from the art manifest, one to a tile", (
     for (let n = 1; n <= 9; n++) one(renderToStaticMarkup(h(SpriteWell, { art: landmarkArt(n), size: "row", locked: n % 2 === 0 })));
   });
 
-  it("has the scene as the scene card's one picture and the sky on the banner, outside every card", () => {
+  it("has the scene as the scene card's one picture, and no picture on the title (the open sea behind the page is the shell's scene)", () => {
     expect(page.match(/<IslandScene\b/g)).toHaveLength(1);
-    expect(page.match(/<ArtBackdrop\b/g)).toHaveLength(1);
+    expect(page).not.toMatch(/<ArtBackdrop\b/);
     const header = page.slice(page.indexOf("<header"), page.indexOf("</header>"));
-    expect(header).toContain("<ArtBackdrop");
-    expect(page.indexOf("<ArtBackdrop")).toBeLessThan(page.indexOf("<Card"));
+    expect(header).not.toMatch(/<img\b|IslandScene/);
+    expect(page.indexOf("<header")).toBeLessThan(page.indexOf("<Card"));
     const sceneCard = page.slice(page.indexOf("<Card className=\"overflow-hidden\">"), page.indexOf("</Card>"));
     expect(sceneCard.match(/<IslandScene\b/g)).toHaveLength(1);
     expect(sceneCard).not.toMatch(/<img\b|ArtBackdrop|SpriteWell|SkyWell/);
   });
 });
 
-describe("island page: the banner, on the scene's own sky, under one scrim", () => {
-  const scrim = /const BANNER_SCRIM: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(page);
-
-  it("draws the same sky as the scene, from one value", () => {
-    expect(page).toContain('const sky = findSky(profile.island_skybox)?.id ?? "day";');
-    expect(page.match(/\bsky=\{sky\}/g)).toHaveLength(1);
-    expect(page).toContain("<ArtBackdrop art={`sky-${sky}`} scrim={BANNER_SCRIM} />");
-    for (const id of skyIds) {
-      const html = renderToStaticMarkup(h(ArtBackdrop, { art: `sky-${id}`, scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-      expect(html, id).toContain(`src="${ART[`sky-${id}`].src}"`);
+describe("island page: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/IslandPage.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-  });
-
-  it("is the same scrim as the Today page's greeting, at least as opaque as the glass floor, held past the text", () => {
-    expect(scrim, "BANNER_SCRIM").not.toBeNull();
-    const today = /const GREETING_SCRIM: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(read("src/pages/Today.tsx"))!;
-    expect(scrim!.slice(1)).toEqual(today.slice(1));
-    expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(Number(scrim![2])).toBeGreaterThan(0.5);
-    expect(page).toContain('<div className="min-w-0 max-w-1/2">'); // the text is held to half the banner, so its right edge is at most 50%
-    for (const text of ["fg", "fg-2"]) expect(ratio(token(text), over(token("bg"), "#000000", Number(scrim![1]))), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it("sits above the scene and the market in its own space: even padding, no room kept for a card to overlap, a gap below", () => {
-    expect(page).toContain('<header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">');
-    expect(page).not.toMatch(/pb-24/);
-    expect(page, "the scene and the market start below the banner, with a gap").toContain('<div className="mt-6 grid grid-cols-[minmax(0,1fr)_23.75rem] gap-6">');
-  });
-
-  it("puts everything else that sits over art on strong glass: the progress panel, the arrange hint and the Animated chip", () => {
-    expect(page).toContain('<div className="glass w-75 shrink-0 rounded-lg border p-4">');
-    expect(page).toContain('className="glass pointer-events-none absolute top-4 left-1/2');
-    expect(skyThumb).toContain('className="glass absolute top-1.5 right-1.5');
-    const strong = over(token("surface"), "#000000", alphaOf("glass-fill-strong"));
-    for (const text of ["fg", "fg-2", "fg-3"]) expect(ratio(token(text), strong), `${text} on strong glass over black`).toBeGreaterThanOrEqual(4.5);
-    expect(page.match(/<ArtBackdrop\b/g), "one scrim").toHaveLength(1);
-  });
-
-  it("keeps the small text over the scrim at fg-2", () => {
-    expect(page).toContain('<p className="mt-1 text-base text-fg-2">');
-    expect(page).toContain('<h1 className="t-h1 truncate">{islandName}</h1>');
   });
 });
 

@@ -1,11 +1,7 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
-import { PLATES, SCRIM_FLOOR } from "../../src/components/landing/plates";
 
 // The Settings page in the same style system as Today, Island, Act, Ambassador and Class: the 4a primitives and tokens
 // only, the faint sky behind the header under the one banner scrim (the same as the Class banner), every section one
@@ -44,9 +40,7 @@ const over = (fg: string, bg: string, alpha: number) => {
 };
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
 const alphaOf = (name: string) => Number(new RegExp(`--${name}:\\s*rgb\\([^/]+/\\s*([0-9.]+)\\s*\\)`).exec(css)?.[1]);
-const scrimOf = (src: string) => /const \w+: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(src);
 const header = page.slice(page.indexOf("<header"), page.indexOf("</header>"));
-const BANNER = "rounded-2xl border border-line px-8 py-9 shadow-sm";
 
 describe("settings page: tokens only", () => {
   it("has no hex color, no arbitrary pixel size and no raw white, black or default-palette color", () => {
@@ -64,48 +58,25 @@ describe("settings page: tokens only", () => {
 
   it("uses the spacing scale and rem where it had 26px and the 200px and 720px columns", () => {
     expect(page).toContain("mb-6.5"); // 26px
-    expect(page).toContain("grid-cols-[12.5rem_minmax(0,45rem)]"); // 200px and 720px
+    expect(page).toContain("grid-cols-[12.5rem_minmax(0,1fr)]"); // 200px and 720px
     expect(page).not.toMatch(/mb-\[26px\]|200px|720px/);
   });
 });
 
-describe("settings page: the banner, on the faint sky, under one scrim", () => {
-  const scrim = scrimOf(page);
-
-  it("draws the plate the Class banner draws: registered, generated, in public/, and the page's only decorative picture", () => {
-    const plate = PLATES["bg-stats"];
-    expect(plate.source).toBe("generated");
-    expect(existsSync(join(root, "public", plate.src))).toBe(true);
-    expect(page.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    expect(page).toContain('<ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />');
-    expect(header).toContain("<ArtBackdrop");
-    expect(page.indexOf("<ArtBackdrop"), "the first container on the page, ahead of the nav and every section").toBeLessThan(page.indexOf("<nav"));
-    expect(page, "no other picture: the one image is the member's own photo, drawn by Avatar").not.toMatch(/<img\b|<picture\b|role="img"|backgroundImage|url\(/);
-    expect(read("src/pages/ClassDetail.tsx")).toContain('<ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />');
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "bg-stats", scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-    expect(html).toContain(`src="${plate.src}"`);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
-  });
-
-  it("is the same scrim as the Today, Island, Act, Ambassador and Class banners, held past the text, with the text readable over black", () => {
-    expect(scrim, "BANNER_SCRIM").not.toBeNull();
-    for (const [name, file] of [["Today", "src/pages/Today.tsx"], ["Island", "src/pages/IslandPage.tsx"], ["Act", "src/pages/Act.tsx"], ["Ambassador", "src/pages/Ambassador.tsx"], ["Class", "src/pages/Classes.tsx"]]) {
-      expect(scrim!.slice(1), `the Settings scrim and ${name}'s`).toEqual(scrimOf(read(file))!.slice(1));
+describe("settings page: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Settings.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-    expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(Number(scrim![2]), "held past the 50% the text may reach").toBeGreaterThan(0.5);
-    expect(header).toContain('<div className="max-w-1/2">');
-    expect(header).toContain('<p className="t-eyebrow text-fg-2">Settings</p>');
-    const behind = over(token("bg"), "#000000", Number(scrim![1]));
-    for (const text of ["fg", "fg-2"]) expect(ratio(token(text), behind), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it("is the same banner as the other pages', in its own space with the content under it", () => {
-    expect(page).toContain(`<header className="relative isolate overflow-hidden ${BANNER}">`);
-    for (const file of ["src/pages/Today.tsx", "src/pages/IslandPage.tsx", "src/pages/Act.tsx", "src/pages/Ambassador.tsx", "src/pages/Classes.tsx"]) expect(read(file), file).toContain(BANNER);
-    expect(page).toContain('<div className="mt-6 grid grid-cols-[12.5rem_minmax(0,45rem)] gap-10">');
-    expect(page.indexOf("</header>")).toBeLessThan(page.indexOf('<div className="mt-6 grid'));
-    expect(page).not.toMatch(/pb-24|(?<![\w-])-mt-/);
   });
 });
 
@@ -161,7 +132,7 @@ describe("settings page: focus, accent and motion", () => {
 describe("settings page: copy, routes, writes and flows are the page's own", () => {
   it("keeps every line of copy, every route and every call, exactly (every line but its class strings is pinned)", () => {
     // If you change the page's copy, routes or logic on purpose, replace this hash: it exists so a styling change cannot touch them.
-    expect(sha(norm(page))).toBe("e940d9c65b20382573b63cd97e8890f8fda58b7ee4ec3d42a56b576a8e4a2a96");
+    expect(sha(norm(page))).toBe("bfb4ea005ff930be9126c239fd8f4d7d9001cde492aaf91d7aad0ce63663e818");
   });
 
   it("keeps the writes and flows by name", () => {

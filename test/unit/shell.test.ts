@@ -4,7 +4,6 @@ import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { SIDEBAR_ART, SIDEBAR_ART_FADE, SidebarArt } from "../../src/components/app/SidebarArt";
-import { PLATES } from "../../src/components/landing/plates";
 
 // The app shell and its sidebar: the sidebar fills the height of the page (not just the window), carries the
 // glass, keeps its content pinned as the page scrolls, and ends in a decorative landscape from the art
@@ -95,30 +94,41 @@ describe("shell: the sidebar fills the height of the page", () => {
 });
 
 describe("shell: the art at the foot of the sidebar", () => {
-  it("is a registered plate from the art manifest, generated, and nothing new", () => {
-    expect(SIDEBAR_ART).toBe("bg-act");
-    expect(PLATES[SIDEBAR_ART]).toBeDefined();
-    expect(PLATES[SIDEBAR_ART].source).toBe("generated");
-    expect(art).toContain("PLATES[SIDEBAR_ART]");
-    expect(code(art)).not.toMatch(/\.(webp|png|jpe?g|svg|gif)\b|["'`]\/(?:island|landing|images)\/|["'`]public\//); // no file named here
+  it("is its own generated painting: an opaque WebP the size the code says, versioned, cached forever, and small", () => {
+    expect(SIDEBAR_ART.source).toBe("generated");
+    expect(SIDEBAR_ART.src).toMatch(/^\/sidebar\/[a-z]+-v\d+\.webp$/);
+    const file = join(root, "public", SIDEBAR_ART.src);
+    const b = readFileSync(file);
+    expect(b.toString("ascii", 0, 4)).toBe("RIFF");
+    expect(b.toString("ascii", 8, 12)).toBe("WEBP");
+    // Chromium's encoder writes the extended header to carry a colour profile; its alpha flag must be off.
+    const kind = b.toString("ascii", 12, 16);
+    const info = kind === "VP8X" ? { alpha: (b[20] & 0x10) !== 0, w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3) } : { alpha: false, w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
+    expect(info.alpha, "opaque").toBe(false);
+    expect({ w: info.w, h: info.h }).toEqual({ w: SIDEBAR_ART.w, h: SIDEBAR_ART.h });
+    // Twice the sidebar's widest setting, no more: the old foot was a 1536px plate drawn 248px wide.
+    expect(SIDEBAR_ART.w).toBe(720);
+    expect(b.length).toBeLessThanOrEqual(80 * 1024);
+    expect(read("public/_headers")).toMatch(/\/sidebar\/\*\n\s+Cache-Control: public, max-age=31536000, immutable/);
   });
 
   it("renders as one decorative picture: hidden from assistive tech, empty alt, never taking a click", () => {
     const html = renderToStaticMarkup(h(SidebarArt));
     expect(html).toContain('aria-hidden="true"');
-    expect(html).toContain(`data-sidebar-art="${SIDEBAR_ART}"`);
+    expect(html).toContain('data-sidebar-art="cove"');
     expect(html).toMatch(/pointer-events-none/);
     expect(html.match(/<img\b/g)).toHaveLength(1);
     expect(html).toMatch(/<img[^>]*alt=""/);
-    expect(html).toContain(`src="${PLATES[SIDEBAR_ART].src}"`);
+    expect(html).toContain(`src="${SIDEBAR_ART.src}"`);
+    expect(html).toContain("object-bottom"); // as the sidebar narrows, the empty sky at the top is what gets cropped
     expect(html).not.toMatch(/<(a|button)\b/);
   });
 
   it("fades out at its top edge into the glass, through a mask, so it isn't a picture box", () => {
-    expect(SIDEBAR_ART_FADE).toBe("linear-gradient(180deg, transparent 0%, var(--fg) 55%)");
+    expect(SIDEBAR_ART_FADE).toBe("linear-gradient(180deg, transparent 0%, var(--fg) 40%)");
     const html = renderToStaticMarkup(h(SidebarArt));
-    expect(html).toContain("mask-image:linear-gradient(180deg, transparent 0%, var(--fg) 55%)");
-    expect(html).toContain("-webkit-mask-image:linear-gradient(180deg, transparent 0%, var(--fg) 55%)");
+    expect(html).toContain("mask-image:linear-gradient(180deg, transparent 0%, var(--fg) 40%)");
+    expect(html).toContain("-webkit-mask-image:linear-gradient(180deg, transparent 0%, var(--fg) 40%)");
     expect(SIDEBAR_ART_FADE).not.toMatch(/#[0-9a-fA-F]{3,8}\b|rgba?\(/);
   });
 

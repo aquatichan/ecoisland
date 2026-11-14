@@ -52,7 +52,7 @@ export default function Admin() {
   }
   return (
     <Page>
-      <header className="mb-7">
+      <header className="mb-6">
         <p className="t-eyebrow">Admin</p>
         <h1 className="t-h1 mt-2.5">Review queue</h1>
       </header>
@@ -111,22 +111,22 @@ function Suggestions() {
           <h2 className="mt-3 text-lg font-semibold text-fg">{e.title}</h2>
           <p className="mt-1 text-base text-fg-3">{e.summary}</p>
           <dl className="mt-3 grid grid-cols-[110px_1fr] gap-x-3 gap-y-1 text-sm">
-            <dt className="text-fg-4">When</dt>
+            <dt className="text-fg-3">When</dt>
             <dd className="text-fg-2">{whenLabel({ ...e, id: e.id })}</dd>
             {e.location && (
               <>
-                <dt className="text-fg-4">Where</dt>
+                <dt className="text-fg-3">Where</dt>
                 <dd className="text-fg-2">
                   {e.location}
                   {e.region ? ` · ${e.region}` : ""}
                 </dd>
               </>
             )}
-            <dt className="text-fg-4">Organizer</dt>
+            <dt className="text-fg-3">Organizer</dt>
             <dd className="text-fg-2">{[e.org_name, e.org_email, e.org_phone].filter(Boolean).join(" · ") || "Not given"}</dd>
             {e.org_url && (
               <>
-                <dt className="text-fg-4">Website</dt>
+                <dt className="text-fg-3">Website</dt>
                 <dd className="truncate text-fg-2">
                   <a href={e.org_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-ink hover:underline">
                     {e.org_url} <ExternalLink className="size-3" />
@@ -134,7 +134,7 @@ function Suggestions() {
                 </dd>
               </>
             )}
-            <dt className="text-fg-4">Suggested by</dt>
+            <dt className="text-fg-3">Suggested by</dt>
             <dd className="text-fg-2">{e.created_by_name}</dd>
           </dl>
           {e.details && <p className="mt-3 line-clamp-4 text-sm whitespace-pre-wrap text-fg-3">{e.details}</p>}
@@ -172,7 +172,7 @@ function Applications() {
                 {a.school} · {a.grade} · {a.region} · {a.email}
               </p>
             </div>
-            <span className="text-sm text-fg-4">{new Date(a.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
+            <span className="text-sm text-fg-3">{new Date(a.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
           </div>
           <p className="mt-4 text-sm font-semibold text-fg-3">Why</p>
           <p className="mt-1 text-base leading-relaxed whitespace-pre-wrap text-fg-2">{a.why}</p>

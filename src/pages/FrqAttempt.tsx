@@ -88,7 +88,7 @@ export default function FrqAttempt() {
 
   return (
     <Page className="mx-auto max-w-[860px]">
-      <Link to="/study/frq" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+      <Link to="/study/frq" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
         <ArrowLeft className="size-4" /> FRQ practice
       </Link>
       <p className="t-eyebrow">
@@ -170,7 +170,7 @@ export default function FrqAttempt() {
                   {g.feedback}
                 </p>
               ) : (
-                <p className="mt-2 text-right text-xs text-fg-4">{len < MIN_PART ? "Write a little more to submit" : `${len} characters`}</p>
+                <p className="mt-2 text-right text-xs text-fg-3">{len < MIN_PART ? "Write a little more to submit" : `${len} characters`}</p>
               )}
             </Card>
           );

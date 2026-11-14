@@ -1,12 +1,7 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
-import { ART } from "../../src/components/island/assets";
-import { PLATES, SCRIM_FLOOR } from "../../src/components/landing/plates";
 
 // The Act page in the same style system as the rest of the app: the 4a primitives and tokens only, the coastal
 // trail behind the page's header under the one banner scrim, every event and eco-action card the same tile, no
@@ -40,9 +35,7 @@ const over = (fg: string, bg: string, alpha: number) => {
 };
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
 const alphaOf = (name: string) => Number(new RegExp(`--${name}:\\s*rgb\\([^/]+/\\s*([0-9.]+)\\s*\\)`).exec(css)?.[1]);
-const scrimOf = (src: string) => /const \w+: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(src);
 /** The page's header and the grid under it. */
-const header = act.slice(act.indexOf("<header"), act.indexOf("</header>"));
 
 describe("act page: tokens only", () => {
   it("has no hex color, no arbitrary pixel size and no raw white, black or default-palette color", () => {
@@ -60,8 +53,8 @@ describe("act page: tokens only", () => {
 
   it("uses the spacing scale and rem where it had 18px, 200px, 320px and 60ch", () => {
     expect(act).toContain("size-4.5"); // 18px
-    expect(act).toContain("min-w-50"); // 200px
-    expect(act).toContain("grid-cols-[minmax(0,1fr)_20rem]"); // the 320px side column
+    expect(act).toContain("minmax(10.5rem,1fr)"); // the filter grid: each control at least 168px, as many to a row as fit
+    expect(act).toContain("grid-cols-[minmax(0,1.9fr)_minmax(16rem,1fr)]"); // the side column: about a third of the width, never under 256px
     expect(act).not.toMatch(/size-\[18px\]|min-w-\[200px\]|320px|max-w-\[60ch\]/);
   });
 
@@ -73,67 +66,20 @@ describe("act page: tokens only", () => {
   });
 });
 
-describe("act page: the banner, on the coastal trail, under one scrim", () => {
-  const scrim = scrimOf(act);
-
-  it("draws the plate from the manifest: registered, generated, in public/, and not also an island picture", () => {
-    const plate = PLATES["bg-act"];
-    expect(plate.source).toBe("generated");
-    expect(existsSync(join(root, "public", plate.src))).toBe(true);
-    expect(Object.keys(ART), "one id means one picture").not.toContain("bg-act");
-    expect(act).toContain('<ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 38%" />');
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "bg-act", scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-    expect(html).toContain(`src="${plate.src}"`);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
-    expect(renderToStaticMarkup(h(ArtBackdrop, { art: "not-in-either-manifest", scrim: { kind: "all", alpha: 0.9 } }))).toBe("");
-  });
-
-  it("has one picture, in the banner, before any card", () => {
-    expect(act.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    expect(header).toContain("<ArtBackdrop");
-    expect(act.indexOf("<ArtBackdrop")).toBeLessThan(act.indexOf("<Card"));
-    expect(act.indexOf("<ArtBackdrop")).toBeLessThan(act.indexOf("<EventCard"));
-    expect(act, "the page draws no other image").not.toMatch(/<img\b|<picture\b|role="img"|backgroundImage|url\(/);
-  });
-
-  it("is the same scrim as the Today and Island banners (the Study banner's differs only in where its hold ends), at least as opaque as the glass floor, held past the text", () => {
-    expect(scrim, "BANNER_SCRIM").not.toBeNull();
-    const today = scrimOf(read("src/pages/Today.tsx"));
-    const island = scrimOf(read("src/pages/IslandPage.tsx"));
-    const study = scrimOf(read("src/pages/Study.tsx"));
-    for (const [name, other] of Object.entries({ Today: today, Island: island })) {
-      expect(other, `${name}'s scrim`).not.toBeNull();
-      expect(scrim!.slice(1), `Act's scrim and ${name}'s`).toEqual(other!.slice(1));
+describe("act page: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Act.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-    // Study's text is narrower (it ends by 35% of the banner), so its hold is shorter; the tint itself is the same.
-    expect(study, "Study's scrim").not.toBeNull();
-    expect(study![1], "the same tint").toBe(scrim![1]);
-    expect(Number(study![2]), "held only as far as its own, narrower text").toBeLessThan(Number(scrim![2]));
-    expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(Number(scrim![2]), "held past the 50% the text may reach").toBeGreaterThan(0.5);
-    expect(header).toContain('<div className="min-w-0 max-w-1/2">'); // the text is held to half the banner, so its right edge is at most 50%
-    for (const text of ["fg", "fg-2"]) expect(ratio(token(text), over(token("bg"), "#000000", Number(scrim![1]))), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-    expect(header).toContain('<p className="t-eyebrow text-fg-2">Act</p>');
-    expect(header).toContain('<p className="mt-2 text-md text-fg-2">');
-  });
-
-  it("keeps its buttons on an opaque fill over the picture, never a ghost or soft one", () => {
-    expect(header).not.toMatch(/variant="(?:ghost|soft|danger-soft)"/);
-    const variants = read("src/components/ui/button-variants.ts");
-    expect(variants).toMatch(/primary:\s*"bg-brand text-brand-fg/);
-    expect(variants).toMatch(/secondary: "border border-line-strong bg-surface text-fg/);
-    expect(ratio(token("brand-fg"), token("brand"))).toBeGreaterThanOrEqual(4.5);
-    expect(ratio(token("fg"), token("surface"))).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it("is the same banner as Today's and the Island's, in its own space with the content under it", () => {
-    const banner = "rounded-2xl border border-line px-8 py-9 shadow-sm";
-    expect(act).toContain(`<header className="relative isolate overflow-hidden ${banner}">`);
-    expect(read("src/pages/Today.tsx")).toContain(banner);
-    expect(read("src/pages/IslandPage.tsx")).toContain(banner);
-    expect(act).not.toMatch(/pb-24/);
-    expect(act, "the content starts below the banner, with a gap").toContain('<div className="mt-6 grid grid-cols-[minmax(0,1fr)_20rem] gap-6">');
-    expect(act.indexOf("</header>")).toBeLessThan(act.indexOf('<div className="mt-6 grid'));
   });
 });
 
@@ -160,8 +106,8 @@ describe("act page: one tile for every event and eco action, no art on a card", 
     expect(act.match(/<Card className="p-6">/g)).toHaveLength(5); // hours to verify, volunteer hours, suggestions, admin, ambassadors
     expect(act).not.toMatch(/<Card className="overflow-hidden"/);
     expect(act).not.toMatch(/--brand-soft\),var\(--ocean-soft|linear-gradient/);
-    expect(act).toContain('<aside className="space-y-6 self-start">');
-    expect(act.match(/grid grid-cols-2 gap-6/g)).toHaveLength(2); // the loading skeletons and the cards: the same gap as the columns
+    expect(act).toContain('<aside className="tray space-y-3">');
+    expect(act.match(/grid grid-cols-1 gap-3 @lg:grid-cols-2/g)).toHaveLength(2); // the loading skeletons and the cards: 12px apart inside their tray, two to a row once the tray is wide enough
   });
 
   it("matches the loading skeleton to the card's radius", () => {

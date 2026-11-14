@@ -1,15 +1,16 @@
 // The onboarding stepper (React Bits Stepper) dressed in Ecoisland's tokens.
-// Its frame, tiles and ink are CSS variables, so they follow src/index.css.
+// Its frame, tiles and ink are CSS variables, so they follow src/index.css. The frame is the strong
+// glass fill with a deep shadow: it floats on the welcome scene, and all of setup's text is on it.
 import type { ComponentProps, CSSProperties } from "react";
 import Stepper from "@/components/bits/Stepper";
 
 export { Step } from "@/components/bits/Stepper";
 
 const STYLE = {
-  "--stepper-frame": "var(--surface)",
+  "--stepper-frame": "var(--glass-fill-strong)",
   "--stepper-frame-edge": "var(--line)",
   "--stepper-frame-highlight": "transparent",
-  "--stepper-frame-shadow": "var(--shadow-sm)",
+  "--stepper-frame-shadow": "var(--shadow-lg)",
   "--stepper-tile": "var(--surface)",
   "--stepper-tile-edge": "var(--line-strong)",
   "--stepper-tile-highlight": "transparent",

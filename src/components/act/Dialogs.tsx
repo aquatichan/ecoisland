@@ -221,7 +221,7 @@ export function HoursReviewList({ logs }: { logs: HoursLog[] }) {
                   ))}
                 </ul>
               )}
-              <p className="mt-2 text-xs text-fg-4">Submitted {new Date(log.created_at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</p>
+              <p className="mt-2 text-xs text-fg-3">Submitted {new Date(log.created_at).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</p>
             </div>
           </div>
           {declining === log.id ? (

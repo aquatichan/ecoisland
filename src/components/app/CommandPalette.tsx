@@ -68,12 +68,12 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
   return (
     <D.Root open={open} onOpenChange={onOpenChange}>
       <D.Portal>
-        <D.Overlay className="fixed inset-0 z-50 bg-overlay/60 backdrop-blur-[2px]" />
+        <D.Overlay className="fixed inset-0 z-50 bg-overlay/60 backdrop-blur-scrim" />
         <D.Content className="glass fixed top-[14vh] left-1/2 z-50 w-[620px] -translate-x-1/2 overflow-hidden rounded-xl border shadow-lg outline-none data-[state=open]:animate-[rise_180ms_var(--ease-out-soft)]">
           <D.Title className="sr-only">Search Ecoisland</D.Title>
           <D.Description className="sr-only">Type to find a lesson, unit or page, then press Enter.</D.Description>
-          <div className="flex items-center gap-3 border-b border-line px-4">
-            <Search className="size-[18px] text-fg-3" aria-hidden />
+          <div className="flex items-center gap-3 border-b border-line px-5 py-1.5">
+            <Search className="size-4.5 shrink-0 text-fg-3" aria-hidden />
             <input
               autoFocus
               value={q}
@@ -91,7 +91,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
                 }
               }}
               placeholder="Search lessons, units and pages…"
-              className="h-14 flex-1 bg-transparent text-lg text-fg outline-none placeholder:text-fg-4"
+              className="h-12 min-w-0 flex-1 bg-transparent text-lg text-fg outline-none placeholder:text-fg-3 focus-visible:shadow-none"
               aria-label="Search"
               role="combobox"
               aria-expanded
@@ -100,7 +100,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
             />
             <span className="kbd">esc</span>
           </div>
-          <div ref={listRef} id="palette-results" role="listbox" className="max-h-[380px] overflow-y-auto p-2">
+          <div ref={listRef} id="palette-results" role="listbox" className="max-h-95 overflow-y-auto p-2.5">
             {results.length === 0 && <p className="px-3 py-8 text-center text-base text-fg-3">Nothing matches "{q}".</p>}
             {results.map((item, i) => (
               <button
@@ -115,7 +115,7 @@ export function CommandPalette({ open, onOpenChange, teacher }: { open: boolean;
               >
                 <item.icon className="size-4 shrink-0 text-fg-3" />
                 <span className="flex-1 truncate font-medium">{item.label}</span>
-                <span className="text-sm text-fg-4">{item.hint}</span>
+                <span className="text-sm text-fg-3">{item.hint}</span>
                 {i === index && <CornerDownLeft className="size-3.5 text-fg-3" aria-hidden />}
               </button>
             ))}

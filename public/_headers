@@ -15,3 +15,9 @@
 
 /ambassador/*
   Cache-Control: public, max-age=31536000, immutable
+
+/scenes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/sidebar/*
+  Cache-Control: public, max-age=31536000, immutable

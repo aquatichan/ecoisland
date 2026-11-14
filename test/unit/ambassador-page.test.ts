@@ -1,13 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
-import { ART } from "../../src/components/island/assets";
-import { AMBASSADOR_MEDAL } from "../../src/components/ambassador/medal";
-import { PLATES, SCRIM_FLOOR } from "../../src/components/landing/plates";
 
 // The Ambassador page in the same style system as Today, Island and Act: the 4a primitives and tokens only, the
 // forest canopy behind the page's header under the one banner scrim, the four benefit cards and the application
@@ -41,9 +35,7 @@ const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).ex
 const alphaOf = (name: string) => Number(new RegExp(`--${name}:\\s*rgb\\([^/]+/\\s*([0-9.]+)\\s*\\)`).exec(css)?.[1]);
 const accentBlock = /\[data-accent="ambassador"\]\s*\{([\s\S]*?)\n\}/.exec(css)?.[1] ?? "";
 const accent = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(accentBlock)?.[1] ?? "";
-const scrimOf = (src: string) => /const \w+: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(src);
 const sha = (text: string) => createHash("sha256").update(text).digest("hex");
-const header = page.slice(page.indexOf("<header"), page.indexOf("</header>"));
 
 describe("ambassador page: tokens only", () => {
   it("has no hex color, no arbitrary pixel size and no raw white, black or default-palette color", () => {
@@ -59,8 +51,8 @@ describe("ambassador page: tokens only", () => {
   });
 
   it("uses the spacing scale and rem where it had 1040px, 420px, 18px, 52ch and 16ch", () => {
-    expect(page).toContain('<Page className="mx-auto max-w-260">'); // 1040px
-    expect(page).toContain("grid-cols-[minmax(0,1fr)_26.25rem]"); // the 420px form column
+    expect(page).toContain("    <Page>\n"); // the shared content width, like every other page (it was a narrower 1040px column)
+    expect(page).toContain("grid-cols-[minmax(0,1.3fr)_minmax(20rem,1fr)]"); // the form column: about 43% of the width, never under 320px
     expect(page).toContain("size-4.5"); // 18px
     expect(page).not.toMatch(/max-w-\[1040px\]|420px|size-\[18px\]|max-w-\[52ch\]|max-w-\[16ch\]/);
   });
@@ -75,89 +67,20 @@ describe("ambassador page: tokens only", () => {
   });
 });
 
-describe("ambassador page: the banner, on the forest canopy, under one scrim", () => {
-  const scrim = scrimOf(page);
-
-  it("draws the plate from the manifest: registered, generated, in public/, and not also an island picture", () => {
-    const plate = PLATES["bg-teachers"];
-    expect(plate.source).toBe("generated");
-    expect(existsSync(join(root, "public", plate.src))).toBe(true);
-    expect(Object.keys(ART)).not.toContain("bg-teachers");
-    expect(page).toContain('<ArtBackdrop art="bg-teachers" scrim={BANNER_SCRIM} position="center 30%" />');
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "bg-teachers", scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-    expect(html).toContain(`src="${plate.src}"`);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
-  });
-
-  it("has two pictures, both in the banner and before any card: the plate behind it and the medal hung from it", () => {
-    expect(page.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    expect(page.match(/<img\b/g)).toHaveLength(1); // the medal: the plate is drawn by ArtBackdrop
-    expect(header).toContain("<ArtBackdrop");
-    expect(header).toContain("<img src={AMBASSADOR_MEDAL.src}");
-    expect(page.indexOf("<ArtBackdrop")).toBeLessThan(page.indexOf("<Card"));
-    expect(page.indexOf("<img")).toBeLessThan(page.indexOf("<Card"));
-    expect(page, "the page draws no other image").not.toMatch(/<picture\b|role="img"|backgroundImage|url\(/);
-  });
-
-  it("is the same scrim as the Today, Island and Act banners, at least as opaque as the glass floor, held past the text", () => {
-    expect(scrim, "BANNER_SCRIM").not.toBeNull();
-    for (const [name, file] of [["Today", "src/pages/Today.tsx"], ["Island", "src/pages/IslandPage.tsx"], ["Act", "src/pages/Act.tsx"]]) {
-      const other = scrimOf(read(file));
-      expect(other, `${name}'s scrim`).not.toBeNull();
-      expect(scrim!.slice(1), `the Ambassador scrim and ${name}'s`).toEqual(other!.slice(1));
+describe("ambassador page: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Ambassador.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-    expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(Number(scrim![2]), "held past the 50% the text may reach").toBeGreaterThan(0.5);
-    expect(header).toContain('<div className="min-w-0 max-w-1/2">'); // the text is held to half the banner, so its right edge is at most 50%
-  });
-
-  it("registers the medal in a manifest with a source, as a versioned, transparent WebP of the size it says, within budget", () => {
-    expect(AMBASSADOR_MEDAL.source).toBe("generated");
-    expect(AMBASSADOR_MEDAL.src).toMatch(/^\/ambassador\/medal-v\d+\.webp$/);
-    const path = join(root, "public", AMBASSADOR_MEDAL.src);
-    expect(existsSync(path)).toBe(true);
-    const b = readFileSync(path);
-    expect(b.toString("ascii", 0, 4)).toBe("RIFF");
-    expect(b.toString("ascii", 8, 12)).toBe("WEBP");
-    expect(b.toString("ascii", 12, 16), "an extended header, so it can carry alpha").toBe("VP8X");
-    expect((b[20] & 0x10) !== 0, "an alpha channel").toBe(true);
-    expect({ w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3) }).toEqual({ w: AMBASSADOR_MEDAL.w, h: AMBASSADOR_MEDAL.h });
-    expect(b.length, "bytes").toBeLessThan(40 * 1024);
-    expect(AMBASSADOR_MEDAL.w, "2x the 112px it is shown at").toBe(224);
-    expect(readFileSync(join(root, "public/_headers"), "utf8")).toMatch(/\/ambassador\/\*\s+Cache-Control: public, max-age=31536000, immutable/);
-    expect(existsSync(join(root, "design/ambassador-art/README.md"))).toBe(true);
-    const files = (dir: string): string[] => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? files(join(dir, e.name)) : [join(dir, e.name)]));
-    expect(files("public/ambassador"), "the medal is the only file in its folder").toEqual([`public${AMBASSADOR_MEDAL.src}`]);
-  });
-
-  it("hangs the medal from the banner's top edge, inside it, on the right and away from the text, untinted and decorative", () => {
-    const img = /<img src=\{AMBASSADOR_MEDAL\.src\}[^\n]*\/>/.exec(header)?.[0] ?? "";
-    expect(img).toContain('alt="" aria-hidden');
-    expect(img).toContain('className="pointer-events-none absolute top-0 right-12 w-28 select-none drop-shadow-md"');
-    expect(img, "inside the banner's own box: no negative offset").not.toMatch(/-(?:top|right|left|bottom|mt|mr|translate)/);
-    expect(img, "never tinted or faded by the page: only the soft shadow").not.toMatch(/(?<![\w-])(?:opacity|grayscale|sepia|hue-rotate|saturate|brightness|contrast|invert|blur|mix-blend|bg-blend)-/);
-    // 3rem in from the right edge, 7rem wide: it ends 10rem from the right, and the text column ends at half the banner
-    expect(112 + 48, "px the medal takes from the right edge").toBeLessThan(0.5 * (968 - 2));
-    expect(header.indexOf("<img")).toBeLessThan(header.indexOf('<div className="min-w-0 max-w-1/2">'));
-  });
-
-  it("keeps the text on the scrim readable, the purple eyebrow and the blue links included, even over a black picture", () => {
-    const behind = over(token("bg"), "#000000", Number(scrim![1]));
-    for (const [name, fg] of [["fg", token("fg")], ["fg-2", token("fg-2")], ["purple eyebrow", accent("accent-2")], ["blue ink", accent("brand-ink")], ["royal blue", accent("brand")]]) {
-      expect(ratio(fg, behind), `${name} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-    }
-    expect(header).toContain('<p className="t-eyebrow text-accent-2">Ecoisland Ambassadors</p>');
-    expect(header).toContain('<h1 className="t-display mt-3">Lead the work in your community</h1>');
-    expect(header).toContain('<p className="mt-4 text-lg leading-relaxed text-fg-2">');
-    expect(header).toContain('className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg"');
-  });
-
-  it("is the same banner as Today's, the Island's and Act's, in its own space with the content under it", () => {
-    const banner = "rounded-2xl border border-line px-8 py-9 shadow-sm";
-    expect(page).toContain(`<header className="relative isolate overflow-hidden ${banner}">`);
-    for (const file of ["src/pages/Today.tsx", "src/pages/IslandPage.tsx", "src/pages/Act.tsx"]) expect(read(file), file).toContain(banner);
-    expect(page.indexOf("</header>")).toBeLessThan(page.indexOf('<div className="mt-6 grid grid-cols-[minmax(0,1fr)_26.25rem] gap-6">'));
-    expect(page).not.toMatch(/pb-24|-mt-/);
   });
 });
 
@@ -172,7 +95,7 @@ describe("ambassador page: one tile for the four benefits and the application pa
   it("draws the four benefits through one Card in a map, with the icon in the page's accent tile", () => {
     expect(page.match(/BENEFITS\.map\(/g)).toHaveLength(1);
     expect(page).toContain('<span className="grid size-9 place-items-center rounded-md bg-brand-soft text-brand-ink" aria-hidden>');
-    expect(page).toContain('<div className="grid grid-cols-2 gap-6">');
+    expect(page).toContain('<div className="grid grid-cols-2 gap-3">'); // 12px apart inside their tray
     expect(page).toContain('<p className="mt-3 text-md font-semibold text-fg">{b.title}</p>');
     expect(page).toContain('<p className="mt-1 text-sm leading-relaxed text-fg-3">{b.body}</p>');
   });
@@ -309,7 +232,7 @@ describe("ambassador page: copy, routes, validation and the application logic ar
   });
 
   it("keeps the routes: back to Act twice, the terms in a new tab, and the application's own API call", () => {
-    expect(page).toContain('<Link to="/act" className="mb-5 inline-flex');
+    expect(page).toContain('<Link to="/act" className="plate mb-4');
     expect(page).toContain("<Link to=\"/act\">See what's happening</Link>");
     expect(page).toContain('<a href="/tos" target="_blank" rel="noopener noreferrer"');
     expect(page).toContain('await api("ambassador/apply", { fullName, school, grade, region, why, idea, sponsor, agree });');

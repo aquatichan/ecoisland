@@ -9,12 +9,11 @@ import { EventCard } from "@/components/act/EventCard";
 import { EventForm, type ClassOption } from "@/components/act/EventForm";
 import { LogHoursDialog, ReviewHoursDialog, type VerifierOption } from "@/components/act/Dialogs";
 import { ScheduleAction } from "@/components/act/ScheduleAction";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tray } from "@/components/ui/tray";
 import { EmptyState, Skeleton } from "@/components/ui/empty";
 import { Input, Select } from "@/components/ui/field";
 import { Segmented } from "@/components/ui/segmented";
@@ -29,10 +28,6 @@ type Kind = "all" | "event" | "action";
 type Sort = "soonest" | "newest" | "popular" | "least";
 type Within = "any" | "today" | "week" | "month";
 
-// The coastal trail behind the page's header (existing art, from the landing plates). The text is held to the left
-// half of the banner, so that is where the scrim is; the sea, cliff and path show on the right. It is the same
-// scrim as the Study, Today and Island banners (the tests hold the four equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 const popularity = (l: Listing) => (l.kind === "event" ? (l.going_count ?? 0) : (l.done_count ?? 0));
 
@@ -136,12 +131,11 @@ export default function Act() {
 
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-        <ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 38%" />
+      <header className="page-hero">
         <div className="flex items-end justify-between gap-6">
           <div className="min-w-0 max-w-1/2">
             <p className="t-eyebrow text-fg-2">Act</p>
-            <h1 className="t-h1 mt-2.5">Take it outside</h1>
+            <h1 className="t-hero mt-2.5">Take it outside</h1>
             <p className="mt-2 text-md text-fg-2">
               Volunteer events and eco actions from {teacher ? "your classes" : "your class"} and your community. Learn the science in Study, then put it to work here.
             </p>
@@ -165,9 +159,9 @@ export default function Act() {
         </div>
       </header>
 
-      <div className="mt-6 grid grid-cols-[minmax(0,1fr)_20rem] gap-6">
-        <div className="min-w-0">
-          <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="grid grid-cols-[minmax(0,1.9fr)_minmax(16rem,1fr)] items-start gap-6">
+        <Tray className="@container min-w-0">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
             <Segmented<Phase>
               label="When"
               value={phase}
@@ -191,12 +185,12 @@ export default function Act() {
             />
           </div>
 
-          <div className="mb-5 flex flex-wrap items-center gap-2.5">
-            <div className="relative min-w-50 flex-1">
+          <div className="mb-3 grid grid-cols-[repeat(auto-fill,minmax(10.5rem,1fr))] gap-2.5">
+            <div className="relative col-span-full">
               <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-3" aria-hidden />
               <Input value={q} onChange={(e) => setParam("q", e.target.value)} placeholder="Search title, organizer or place" aria-label="Search listings" className="h-9 pl-9 text-base placeholder:text-fg-3" />
             </div>
-            <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-auto text-base">
+            <Select value={scope} onChange={(e) => setParam("scope", e.target.value === "all" ? "" : e.target.value)} aria-label="Who it's for" className="h-9 w-full text-base">
               <option value="all">Classes and community</option>
               <option value="class">{classNames.length > 1 ? "All my classes" : "My class"}</option>
               {classNames.length > 1 && classNames.map(([id, name]) => (
@@ -217,7 +211,7 @@ export default function Act() {
                 setParams(next, { replace: true });
               }}
               aria-label="Location"
-              className="h-9 w-auto text-base"
+              className="h-9 w-full text-base"
               disabled={regions.length === 0}
             >
               <option value="">{regions.length ? "Any location" : "No locations yet"}</option>
@@ -227,13 +221,13 @@ export default function Act() {
                 </option>
               ))}
             </Select>
-            <Select value={within} onChange={(e) => setParam("within", e.target.value === "any" ? "" : e.target.value)} aria-label="Time" className="h-9 w-auto text-base">
+            <Select value={within} onChange={(e) => setParam("within", e.target.value === "any" ? "" : e.target.value)} aria-label="Time" className="h-9 w-full text-base">
               <option value="any">Any time</option>
               <option value="today">{phase === "past" ? "Ended today" : "Today"}</option>
               <option value="week">{phase === "past" ? "Past week" : "Next 7 days"}</option>
               <option value="month">{phase === "past" ? "Past 30 days" : "Next 30 days"}</option>
             </Select>
-            <Select value={category} onChange={(e) => setParam("cat", e.target.value)} aria-label="Category" className="h-9 w-auto text-base">
+            <Select value={category} onChange={(e) => setParam("cat", e.target.value)} aria-label="Category" className="h-9 w-full text-base">
               <option value="">All categories</option>
               {CATEGORY_IDS.map((c) => (
                 <option key={c} value={c}>
@@ -241,7 +235,7 @@ export default function Act() {
                 </option>
               ))}
             </Select>
-            <Select value={sort} onChange={(e) => setParam("sort", e.target.value === "soonest" ? "" : e.target.value)} aria-label="Sort" className="h-9 w-auto text-base">
+            <Select value={sort} onChange={(e) => setParam("sort", e.target.value === "soonest" ? "" : e.target.value)} aria-label="Sort" className="h-9 w-full text-base">
               <option value="soonest">{phase === "past" ? "Most recent" : "Coming up soonest"}</option>
               <option value="newest">Newest posted</option>
               <option value="popular">Most popular</option>
@@ -255,7 +249,7 @@ export default function Act() {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-3 @lg:grid-cols-2">
               <Skeleton className="h-40 rounded-lg" />
               <Skeleton className="h-40 rounded-lg" />
               <Skeleton className="h-40 rounded-lg" />
@@ -286,15 +280,15 @@ export default function Act() {
               />
             </Card>
           ) : (
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-3 @lg:grid-cols-2">
               {shown.map((l, i) => (
                 <EventCard key={l.key} e={l} going={going.has(l.key)} done={done.has(l.key)} index={i} />
               ))}
             </div>
           )}
-        </div>
+        </Tray>
 
-        <aside className="space-y-6 self-start">
+        <aside className="tray space-y-3">
           {teacher ? (
             <Card className="p-6">
               <div className="flex items-center gap-2.5">
@@ -325,11 +319,11 @@ export default function Act() {
               </p>
               {pending.length > 0 && <p className="mt-1.5 text-sm text-sun-ink">{formatHours(pending.reduce((s, h) => s + h.hours, 0))} waiting for your teacher</p>}
               <p className="mt-2 text-sm text-fg-3">Teacher-verified hours you can print for service requirements.</p>
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                <Button onClick={() => setLogging(true)}>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Button className="flex-1" onClick={() => setLogging(true)}>
                   <Plus /> Log hours
                 </Button>
-                <Button variant="secondary" asChild>
+                <Button variant="secondary" className="flex-1" asChild>
                   <Link to="/act/hours">
                     <Printer /> Record
                   </Link>

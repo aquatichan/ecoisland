@@ -74,21 +74,36 @@ export default function Lesson() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lessonId]);
 
+  // Reading progress: measured at most once a frame, and stored as a whole percent, so scrolling a long lesson
+  // re-renders the page about a hundred times in all rather than on every scroll event.
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+      setProgress(max > 0 ? Math.round(Math.min(100, (window.scrollY / max) * 100)) : 0);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(measure);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    measure();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [content]);
+
+  // The reading time, counted once per lesson rather than on every render.
+  const words = useMemo(
+    () => (content ? content.blocks.reduce((n, b) => n + ("html" in b ? b.html : "text" in b ? b.text : "").replace(/<[^>]+>/g, " ").split(/\s+/).length, 0) : 0),
+    [content],
+  );
 
   if (!found) return <Navigate to="/study" replace />;
   const { lesson, unit } = found;
   const { prev, next } = neighbours(lessonId);
   const isRead = (profile.lessons_done ?? []).includes(lessonId);
-  const words = content ? content.blocks.reduce((n, b) => n + ("html" in b ? b.html : "text" in b ? b.text : "").replace(/<[^>]+>/g, " ").split(/\s+/).length, 0) : 0;
   const minutes = Math.max(2, Math.round(words / 200));
 
   const markRead = async () => {
@@ -117,7 +132,7 @@ export default function Lesson() {
       </div>
       <div className="grid grid-cols-[250px_minmax(0,1fr)] gap-12">
         <aside className="sticky top-24 self-start">
-          <Link to={`/study/unit/${unit.n}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-3 hover:text-fg">
+          <Link to={`/study/unit/${unit.n}`} className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
             <ArrowLeft className="size-4" /> Unit {unit.n}
           </Link>
           <p className="mt-4 text-base leading-snug font-semibold text-fg">{unit.title}</p>
@@ -135,7 +150,7 @@ export default function Lesson() {
                     active ? "bg-brand-soft font-semibold text-brand-ink" : "text-fg-3 hover:bg-surface-2 hover:text-fg-2",
                   )}
                 >
-                  <span className="t-num w-7 shrink-0 text-fg-4">{l.code}</span>
+                  <span className="t-num w-7 shrink-0 text-fg-3">{l.code}</span>
                   <span className="flex-1">{l.title}</span>
                   {done && <Check className="mt-0.5 size-3.5 shrink-0 text-brand" strokeWidth={3} aria-label="Read" />}
                 </Link>

@@ -287,7 +287,7 @@ function DailyIntro({ setup, doneToday, onStart }: { setup: Setup; doneToday: bo
           <Button size="lg" onClick={onStart} autoFocus>
             Start <ArrowRight />
           </Button>
-          <span className="text-sm text-fg-4">
+          <span className="text-sm text-fg-3">
             or press <span className="kbd">Enter</span>
           </span>
         </div>

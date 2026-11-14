@@ -55,10 +55,10 @@ export default function Hours() {
   return (
     <Page>
       <div className="print:hidden">
-        <Link to="/act" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+        <Link to="/act" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
           <ArrowLeft className="size-4" /> Act
         </Link>
-        <header className="mb-7 flex items-end justify-between gap-6">
+        <header className="mb-6 flex items-end justify-between gap-6">
           <div>
             <p className="t-eyebrow">Act</p>
             <h1 className="t-h1 mt-2.5">Volunteer hours</h1>
@@ -105,7 +105,7 @@ export default function Hours() {
                     <td className="t-num px-5 py-4 text-right font-semibold text-fg">{h.hours}</td>
                     <td className="px-5 py-4">
                       <Badge tone={STATUS[h.status].tone}>{STATUS[h.status].label}</Badge>
-                      {h.teacher_name && h.status !== "self" && <p className="mt-1 text-xs text-fg-4">{h.status === "verified" ? `by ${h.teacher_name}` : h.teacher_name}</p>}
+                      {h.teacher_name && h.status !== "self" && <p className="mt-1 text-xs text-fg-3">{h.status === "verified" ? `by ${h.teacher_name}` : h.teacher_name}</p>}
                     </td>
                     <td className="px-3 py-4">
                       {h.status !== "verified" && (

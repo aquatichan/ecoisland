@@ -1,11 +1,8 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
-import { PLATES, SCRIM_FLOOR } from "../../src/components/landing/plates";
+import { SCRIM_FLOOR } from "../../src/components/landing/plates";
 
 // The Onboarding page (the Google sign-in and the four steps) in the same style system as the rest of the app: the 4a
 // primitives and tokens only, the coastal trail behind the sign-in hero under the one banner scrim, one shape for every
@@ -51,7 +48,6 @@ const over = (fg: string, bg: string, alpha: number) => {
 };
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
 const scrimOf = (src: string) => /const \w+: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(src);
-const BANNER = "rounded-2xl border border-line px-8 py-9 shadow-sm";
 
 describe("onboarding page: tokens only, except Google's own button logo", () => {
   it("has no hex color outside the Google logo, no arbitrary pixel size anywhere, and no raw white, black or default-palette color", () => {
@@ -84,48 +80,48 @@ describe("onboarding page: tokens only, except Google's own button logo", () => 
   });
 });
 
-describe("onboarding page: the sign-in hero, on the coastal trail, under one scrim", () => {
-  const scrim = scrimOf(page);
-
-  it("draws the plate from the manifest: registered, generated, in public/, and the sign-in's only picture", () => {
-    const plate = PLATES["bg-act"];
-    expect(plate.source).toBe("generated");
-    expect(existsSync(join(root, "public", plate.src))).toBe(true);
-    expect(signIn.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    expect(page.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    expect(signIn).toContain('<ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 40%" />');
-    expect(signIn, "no island scene, no other picture on the sign-in").not.toMatch(/<IslandScene|<img\b|<picture\b|role="img"|backgroundImage|url\(/);
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "bg-act", scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-    expect(html).toContain(`src="${plate.src}"`);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
+describe("onboarding page: sign-in and setup on the welcome scene", () => {
+  // The lagoon (scene-welcome) fills both screens. The scene itself, its file and its size are checked in
+  // test/unit/scenes.test.ts; this holds the page to it.
+  it("fills the sign-in screen with the welcome scene, the only picture, behind everything", () => {
+    expect(signIn.match(/<SceneBackdrop\b/g)).toHaveLength(1);
+    expect(signIn).toContain('<SceneBackdrop scene="scene-welcome" haze={false} />');
+    expect(signIn).toContain('<div className="relative isolate flex min-h-dvh flex-col px-8 py-8">');
+    expect(signIn).not.toMatch(/<img\b|ArtBackdrop/);
+    expect(page).not.toMatch(/\.(webp|png|jpe?g)\b/); // no file named here: the manifest owns the path
   });
 
-  it("puts the headline, the paragraph, the Google button and the terms inside the hero's own box, on its scrim, held to the left half", () => {
-    const hero = signIn.slice(signIn.indexOf("<header"), signIn.indexOf("</header>"));
-    expect(hero).toContain(`<header className="relative isolate w-full overflow-hidden ${BANNER}">`);
-    expect(hero.indexOf("<ArtBackdrop")).toBeLessThan(hero.indexOf("<p"));
-    for (const part of ["Welcome", "<h1", "Sign in with your school", "<Button", "By continuing you agree"]) expect(hero, part).toContain(part);
-    expect(hero).toContain('<div className="max-w-1/2 py-8">');
-    expect(hero).toContain('<p className="t-eyebrow text-fg-2">Welcome</p>');
-    expect(hero).toContain('<p className="mt-4 text-lg text-fg-2">');
-    expect(hero).toContain('<p className="mt-5 text-sm text-fg-2">');
+  it("holds the headline, the paragraph, the Google button and the terms to the left, on a tint at least as opaque as the scrim floor", () => {
+    const m = scrimOf(page)!;
+    expect(m, "the page declares one scrim").not.toBeNull();
+    const [alpha, hold] = [Number(m[1]), Number(m[2])];
+    expect(alpha).toBeGreaterThanOrEqual(SCRIM_FLOOR);
+    expect(signIn).toContain("scrimGradient(WELCOME_SCRIM)");
+    const header = signIn.slice(signIn.indexOf("<header"), signIn.indexOf("</header>"));
+    expect(header).toContain('<header className="max-w-[46%]">');
+    expect(hold, "the tint holds past the 46% text column").toBeGreaterThanOrEqual(0.5);
+    for (const text of ["<h1", "Sign in with your school", "<Button", "By continuing you agree"]) expect(header, text).toContain(text);
+    // Ink on the tint passes AA even where the picture behind it is black.
+    for (const ink of ["fg", "fg-2", "brand-ink"]) expect(ratio(token(ink), over(token("bg"), "#000000", alpha)), ink).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("is the same scrim as every other banner, at least as opaque as the glass floor, held past the text, with the text readable over black", () => {
-    expect(scrim, "BANNER_SCRIM").not.toBeNull();
-    for (const file of ["src/pages/Today.tsx", "src/pages/IslandPage.tsx", "src/pages/Act.tsx", "src/pages/Ambassador.tsx", "src/pages/Classes.tsx", "src/pages/Settings.tsx"]) expect(scrim!.slice(1), file).toEqual(scrimOf(read(file))!.slice(1));
-    expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(Number(scrim![2]), "held past the 50% the text may reach").toBeGreaterThan(0.5);
-    const behind = over(token("bg"), "#000000", Number(scrim![1]));
-    for (const text of ["fg", "fg-2"]) expect(ratio(token(text), behind), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
+  it("puts everything outside the tinted column on glass: the logo is a plate, and there is no footer line", () => {
+    expect(signIn).toContain('<Link to="/" aria-label="Ecoisland home" className="plate h-11 py-0 pr-5 pl-2.5">');
+    expect(signIn).not.toContain("Made for AP Environmental Science students and teachers.");
+    expect(css).toMatch(/\.plate \{[^}]*background: var\(--glass-fill\);/);
   });
 
-  it("stacks the logo, the hero and the footer line in their own space: nothing is laid over anything", () => {
-    expect(signIn.indexOf("<Logo")).toBeLessThan(signIn.indexOf("<header"));
-    expect(signIn.indexOf("</header>")).toBeLessThan(signIn.indexOf("Made for AP Environmental Science"));
-    expect(signIn).toContain('<div className="flex min-h-dvh flex-col bg-bg px-8 py-10">');
-    expect(page).not.toMatch(/(?<![\w-])-(?:m[trblxy]?|top|bottom|left|right|translate-[xy])-|pb-24|absolute inset-0/);
-    expect(signIn).toContain('<p className="mx-auto w-full max-w-page text-sm text-fg-3">Made for AP Environmental Science students and teachers.</p>');
+  it("draws setup on the same scene with no tint: every word is on the stepper's glass or the logo's plate", () => {
+    expect(setup.match(/<SceneBackdrop\b/g)).toHaveLength(1);
+    expect(setup).toContain('<SceneBackdrop scene="scene-welcome" haze={false} />');
+    expect(setup).toContain('<div className="relative isolate flex min-h-dvh flex-col items-center justify-center px-6 py-10">');
+    expect(setup).toContain('<div className="plate mb-8 h-11 py-0 pr-5 pl-2.5">');
+    expect(setup).not.toMatch(/scrimGradient/);
+  });
+
+  it("stacks the logo, the text column and the footer line in their own space: nothing is laid over anything", () => {
+    expect(pageSansGoogle).not.toMatch(/(?<![\w-])-(?:m[trblxyse]?|top|bottom|left|right|inset(?:-[xy])?|translate-[xy])-(?!1\/2\b|full\b)/);
+    expect(signIn).not.toMatch(/(?<![\w-])(?:fixed|sticky)(?![\w-])/);
   });
 });
 
@@ -137,7 +133,8 @@ describe("onboarding page: the steps", () => {
     expect(wrapper).toContain('<Stepper theme="light" width={620} radius={RADIUS_2XL} {...props} style={STYLE} />');
     expect(wrapper).toContain("const RADIUS_2XL = 28;");
     expect(css).toMatch(/--radius-2xl:\s*28px;/);
-    expect(wrapper).toContain('"--stepper-frame-shadow": "var(--shadow-sm)",');
+    expect(wrapper).toContain('"--stepper-frame": "var(--glass-fill-strong)",'); // strong glass: it floats on the welcome scene
+    expect(wrapper).toContain('"--stepper-frame-shadow": "var(--shadow-lg)",');
     expect(wrapper, "a hovered Continue darkens, so white on the green stays AA").toContain('"--stepper-solid-hover": "brightness(0.9)",');
     expect(ratio(token("brand-fg"), over(token("brand"), "#000000", 0.9)), "white on the green at brightness 0.9").toBeGreaterThanOrEqual(4.5);
     expect(page.match(/<OnboardingStepper\b/g)).toHaveLength(1);
@@ -192,7 +189,7 @@ describe("onboarding page: focus, accent and motion", () => {
 describe("onboarding page: copy, routes, the auth flow and the writes are the page's own", () => {
   it("keeps every line of copy, every route and every call, exactly (every line but its class strings is pinned)", () => {
     // If you change the page's copy, routes or logic on purpose, replace this hash: it exists so a styling change cannot touch them.
-    expect(sha(norm(page))).toBe("2bf7933f622414d7b012578890547eaddb28d17189da24c81f65ec8fb282b2f6");
+    expect(sha(norm(page))).toBe("497d0869bfe31ce48e342cc817d4b2956a786556ff36bbb0a44ba6813569ab84");
   });
 
   it("keeps the routes, the auth flow and the writes by name", () => {

@@ -1,11 +1,7 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
-import { PLATES, SCRIM_FLOOR } from "../../src/components/landing/plates";
 
 // The Class pages (the list of classes and one class, as a teacher and as a student) in the same style system as Today,
 // Island, Act and Ambassador: the 4a primitives and tokens only, the faint sky behind each header under the one banner
@@ -42,15 +38,7 @@ const ratio = (a: string, b: string) => {
   const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
   return (hi + 0.05) / (lo + 0.05);
 };
-const over = (fg: string, bg: string, alpha: number) => {
-  const f = [1, 3, 5].map((i) => parseInt(fg.slice(i, i + 2), 16));
-  const b = [1, 3, 5].map((i) => parseInt(bg.slice(i, i + 2), 16));
-  return `#${f.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`;
-};
 const token = (name: string) => new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`).exec(css)?.[1] ?? "";
-const scrimOf = (src: string) => /const \w+: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(src);
-const header = (src: string) => src.slice(src.indexOf("<header"), src.indexOf("</header>"));
-const BANNER = "rounded-2xl border border-line px-8 py-9 shadow-sm";
 
 describe("class pages: tokens only", () => {
   it("has no hex color, no arbitrary pixel size and no raw white, black or default-palette color", () => {
@@ -91,70 +79,20 @@ describe("class pages: tokens only", () => {
   });
 });
 
-describe("class pages: the banner, on the faint sky, under one scrim", () => {
-  it("draws the plate from the manifest on both pages: registered, generated, in public/", () => {
-    const plate = PLATES["bg-stats"];
-    expect(plate.source).toBe("generated");
-    expect(existsSync(join(root, "public", plate.src))).toBe(true);
-    for (const [name, src] of [["Classes", classes], ["ClassDetail", detail]] as const) {
-      expect(src.match(/<ArtBackdrop\b/g), name).toHaveLength(1);
-      expect(src, name).toContain('<ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />');
-      expect(header(src), name).toContain("<ArtBackdrop");
-      // the first container on the page, ahead of the tabs and every card the page's own content draws
-      expect(src.indexOf("<ArtBackdrop"), `${name}: before the content`).toBeLessThan(src.indexOf(name === "Classes" ? "<Card" : "<Segmented"));
+describe("class pages: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Classes.tsx", "src/pages/ClassDetail.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
     }
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "bg-stats", scrim: { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 } }));
-    expect(html).toContain(`src="${plate.src}"`);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
-  });
-
-  it("draws no other picture on either page: the only images are the island scenes inside the two dialogs", () => {
-    for (const [name, src] of [["Classes", classes], ["ClassDetail", detail], ["ClassChat", chat]] as const) expect(src, name).not.toMatch(/<img\b|<picture\b|role="img"|backgroundImage|url\(/);
-    expect(detail.match(/<IslandScene\b/g)).toHaveLength(2);
-    for (const m of detail.matchAll(/<IslandScene\b[\s\S]*?\/>/g)) {
-      const before = detail.slice(0, m.index);
-      expect(before.lastIndexOf("<DialogContent"), "an island scene sits inside a dialog").toBeGreaterThan(before.lastIndexOf("</DialogContent>"));
-    }
-  });
-
-  it("is the same scrim as the Today, Island, Act and Ambassador banners, at least as opaque as the glass floor, held past the text", () => {
-    for (const [name, src] of [["Classes", classes], ["ClassDetail", detail]] as const) {
-      const scrim = scrimOf(src);
-      expect(scrim, `${name}'s scrim`).not.toBeNull();
-      for (const [other, file] of [["Today", "src/pages/Today.tsx"], ["Island", "src/pages/IslandPage.tsx"], ["Act", "src/pages/Act.tsx"], ["Ambassador", "src/pages/Ambassador.tsx"]]) {
-        expect(scrim!.slice(1), `${name}'s scrim and ${other}'s`).toEqual(scrimOf(read(file))!.slice(1));
-      }
-      expect(Number(scrim![1])).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-      expect(Number(scrim![2]), "held past the 50% the text may reach").toBeGreaterThan(0.5);
-      const behind = over(token("bg"), "#000000", Number(scrim![1]));
-      for (const text of ["fg", "fg-2"]) expect(ratio(token(text), behind), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-    }
-  });
-
-  it("holds the text to the left half and keeps what sits over the picture on an opaque fill", () => {
-    expect(header(classes)).toContain('<div className="max-w-1/2">');
-    expect(header(detail)).toContain('<div className="min-w-0 max-w-1/2">');
-    expect(header(classes)).toContain('<p className="t-eyebrow text-fg-2">');
-    expect(header(detail)).toContain('<p className="t-eyebrow text-fg-2">');
-    expect(header(classes)).toContain('<p className="mt-2 text-md text-fg-2">');
-    expect(header(detail)).toContain('<p className="mt-2 text-md text-fg-2">');
-    expect(header(detail)).toContain('className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-2 hover:text-fg"');
-    // the join code and the class menu sit over the picture: an opaque surface button each, never a ghost one
-    expect(detail).toContain("rounded-md border border-line-strong bg-surface px-4 py-2.5 text-left shadow-xs hover:bg-surface-2");
-    expect(detail).toContain('<Button variant="secondary" size="icon" aria-label="Class options">');
-    expect(header(detail)).not.toMatch(/variant="(?:ghost|soft)"/);
-  });
-
-  it("is the same banner as the other pages', in its own space with the content under it", () => {
-    for (const [name, src] of [["Classes", classes], ["ClassDetail", detail]] as const) {
-      expect(src, name).toContain(`<header className="relative isolate overflow-hidden ${BANNER}">`);
-      expect(src, name).not.toMatch(/pb-24|-mt-/);
-    }
-    for (const file of ["src/pages/Today.tsx", "src/pages/IslandPage.tsx", "src/pages/Act.tsx", "src/pages/Ambassador.tsx"]) expect(read(file), file).toContain(BANNER);
-    expect(classes).toContain('<div className="mt-6 space-y-6">');
-    expect(classes).toContain('<div className="mt-6 grid grid-cols-3 gap-6">');
-    expect(detail).toContain('options={tabs} className="mt-6 mb-6" />');
-    expect(detail.indexOf("</header>")).toBeLessThan(detail.indexOf("<Segmented"));
   });
 });
 
@@ -228,8 +166,8 @@ describe("class pages: no accent and no motion of their own", () => {
 describe("class pages: copy, routes and logic are the pages' own", () => {
   it("keeps every line of copy, every route and every call, exactly (every line but its class strings is pinned)", () => {
     // If you change a page's copy, route or logic on purpose, replace these hashes: they exist so a styling change cannot touch them.
-    expect(sha(norm(classes))).toBe("b416606fecaa2fd0db3f2f6daae03b3f25f15979002c0b4e5908742a78e615ad");
-    expect(sha(norm(detail))).toBe("3f6780d5769a24a6baf8220c20b8eb8770993dd6555f0928f8ea45ce35bd861b");
+    expect(sha(norm(classes))).toBe("5edaf5ad3e5ed76c55ebe0091161a3aca010d6b14d378a91dfbb2dfca924c2b0");
+    expect(sha(norm(detail))).toBe("683942d4492c5633fee8ce903642a5ac007856433fe80f60c802c37df9c5e051");
     expect(sha(norm(chat))).toBe("99c0274547b717784ef1fdd85030a1d5e58eb279ac55a0ed178c059656f774e2");
   });
 

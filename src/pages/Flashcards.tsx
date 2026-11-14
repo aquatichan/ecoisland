@@ -58,10 +58,10 @@ export default function Flashcards() {
 
   return (
     <Page className="mx-auto max-w-[820px]">
-      <Link to={lesson ? `/study/unit/${lesson.unit.n}/${encodeURIComponent(lesson.lesson.id)}` : "/study"} className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+      <Link to={lesson ? `/study/unit/${lesson.unit.n}/${encodeURIComponent(lesson.lesson.id)}` : "/study"} className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
         <ArrowLeft className="size-4" /> {lesson ? "Back to lesson" : "Study"}
       </Link>
-      <header className="mb-7 flex items-end justify-between gap-6">
+      <header className="mb-6 flex items-end justify-between gap-6">
         <div>
           <p className="t-eyebrow">Flashcards</p>
           <h1 className="t-h1 mt-2.5">{title}</h1>
@@ -116,7 +116,7 @@ export default function Flashcards() {
                   <div className="card absolute inset-0 flex flex-col items-center justify-center p-10 text-center [backface-visibility:hidden]">
                     <p className="t-eyebrow">Term</p>
                     <p className="font-display mt-4 text-4xl leading-tight font-[560] text-fg">{card.term}</p>
-                    <p className="mt-8 text-sm text-fg-4">
+                    <p className="mt-8 text-sm text-fg-3">
                       Click or press <span className="kbd">Space</span> to flip
                     </p>
                   </div>
@@ -152,7 +152,7 @@ export default function Flashcards() {
               Next <ArrowRight />
             </Button>
           </div>
-          <p className="mt-4 text-center text-sm text-fg-4">
+          <p className="mt-4 text-center text-sm text-fg-3">
             Use <span className="kbd">←</span> <span className="kbd">→</span> to move between cards
           </p>
         </>

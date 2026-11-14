@@ -1,9 +1,8 @@
 import { ArrowRight, Users } from "lucide-react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
 import { Page } from "@/components/app/Guards";
-import type { PlateScrim } from "@/components/landing/plates";
 import { Card } from "@/components/ui/card";
+import { Tray } from "@/components/ui/tray";
 import { Skeleton } from "@/components/ui/empty";
 import { useClasses } from "@/lib/data";
 import { useDocumentTitle } from "@/lib/hooks";
@@ -12,10 +11,6 @@ import { getUnit } from "@/shared/curriculum";
 import { formatDay } from "@/shared/dates";
 import { CreateFirstClass, JoinClassInline } from "./Today";
 
-// The faint sky behind the page's header (existing art, from the landing plates). The text is held to the left half
-// of the banner, so that is where the scrim is. It is the same scrim as the Today, Island, Act and Ambassador
-// banners (the tests hold them equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
 
 // A class is one card, and the whole card is the link: the same tile as an event card on Act, with the shared focus
 // ring composed over the card's own shadow (a shadow utility would otherwise hide the base ring).
@@ -34,11 +29,10 @@ export default function Classes() {
 
   return (
     <Page>
-      <header className="relative isolate overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-        <ArtBackdrop art="bg-stats" scrim={BANNER_SCRIM} position="center 40%" />
+      <header className="page-hero">
         <div className="max-w-1/2">
           <p className="t-eyebrow text-fg-2">{teacher ? "Teaching" : "Your classes"}</p>
-          <h1 className="t-h1 mt-2.5">{teacher ? "Classes" : "Class"}</h1>
+          <h1 className="t-hero mt-2.5">{teacher ? "Classes" : "Class"}</h1>
           <p className="mt-2 text-md text-fg-2">
             {teacher
               ? "Each class has its own join code, roster, assignments and leaderboard."
@@ -48,14 +42,14 @@ export default function Classes() {
       </header>
 
       {loading ? (
-        <div className="mt-6 grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6">
           <Skeleton className="h-36 rounded-lg" />
           <Skeleton className="h-36 rounded-lg" />
         </div>
       ) : (
-        <div className="mt-6 space-y-6">
+        <Tray className="space-y-3">
           {classes.length > 0 && (
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-3">
               {classes.map((c) => (
                 <Link key={c.id} to={`/class/${c.id}`} className={CLASS_CARD}>
                   <div className="flex items-center justify-between">
@@ -94,11 +88,11 @@ export default function Classes() {
               </Card>
             )
           ) : (
-            <div className="max-w-140">
+            <div className="card max-w-140 px-5 pt-1 pb-5">
               <JoinClassInline />
             </div>
           )}
-        </div>
+        </Tray>
       )}
     </Page>
   );

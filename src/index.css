@@ -53,6 +53,8 @@
   /* Glass. Every fill that can sit behind text stays at or above 0.84. */
   --glass-fill: rgb(252 249 243 / 0.88);
   --glass-fill-strong: rgb(252 249 243 / 0.95);
+  /* A tray (.tray): lighter than a card, so the scene reads through it. Only --fg headings sit straight on it. */
+  --tray-fill: rgb(252 249 243 / 0.55);
   --glass-edge: rgb(24 48 40 / 0.09);
   --glass-blur: 18px;
   --overlay: rgba(17, 33, 29, 0.36);
@@ -61,6 +63,10 @@
   --shadow-sm: 0 1px 2px rgba(17, 33, 29, 0.05), 0 2px 6px -2px rgba(17, 33, 29, 0.06);
   --shadow-md: 0 1px 2px rgba(17, 33, 29, 0.05), 0 10px 28px -14px rgba(17, 33, 29, 0.22);
   --shadow-lg: 0 2px 6px rgba(17, 33, 29, 0.06), 0 28px 64px -28px rgba(17, 33, 29, 0.34);
+  /* A card floating on a scene: a soft drop that reads over sea, sand and foliage alike. */
+  --shadow-float: 0 1px 2px rgba(10, 40, 48, 0.08), 0 14px 34px -16px rgba(10, 40, 48, 0.38);
+  /* The lit top edge of a glass panel. */
+  --glass-shine: inset 0 1px 0 rgb(255 255 255 / 0.7);
   --ring: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in srgb, var(--brand) 70%, transparent);
 }
 
@@ -143,9 +149,11 @@
   --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 22px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
   --radius-2xl: 28px;
+  /* A tray's corner: a card's 20px plus the tray's 12px padding, so the two corners are concentric. */
+  --radius-3xl: 32px;
 
   /* Dialog widths (max-w-dialog, max-w-dialog-wide) and the blur behind a dialog (backdrop-blur-scrim). */
   --container-dialog: 520px;
@@ -236,6 +244,21 @@
     @apply font-display text-2xl leading-[1.2] font-[560] tracking-[-0.015em] text-fg;
     font-variation-settings: "SOFT" 50;
   }
+  /* A page title on its scene (PageHero). */
+  .t-hero {
+    @apply font-display text-5xl leading-[1.06] font-[600] tracking-[-0.025em] text-fg;
+    font-variation-settings: "SOFT" 60;
+  }
+  /*
+   * The title block at the top of a signed-in page. No box and no picture of its own: it sits on
+   * the area's scene inside the title haze (SceneBackdrop), with the scene's subject showing to its
+   * right. Its text column is held to half the width (max-w-1/2), which ends inside the haze; an
+   * action beside it sits past the haze, so it brings its own fill (a button, a plate). It reserves no
+   * height: the title starts right under the top bar, and the page's first tray is 24px below it.
+   */
+  .page-hero {
+    @apply relative mb-6 flex flex-col;
+  }
   .t-h3 {
     @apply text-lg leading-[1.35] font-semibold tracking-[-0.01em] text-fg;
   }
@@ -246,11 +269,18 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Glass panel: the default surface for cards. */
+  /*
+   * Glass panel: the default surface for cards. Cream glass at --glass-fill (0.88) with a lit top
+   * edge, floating on the page's scene. The shine is an inset shadow of its own, so a shadow
+   * utility on a card (hover:shadow-md, a focus ring) composes with it instead of replacing it.
+   */
   .card {
-    @apply rounded-lg border shadow-sm;
+    @apply rounded-lg border;
     background: var(--glass-fill);
     border-color: var(--glass-edge);
+    --tw-inset-shadow: var(--glass-shine);
+    --tw-shadow: var(--shadow-float);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow, 0 0 #0000), var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     -webkit-backdrop-filter: saturate(160%) blur(var(--glass-blur));
     backdrop-filter: saturate(160%) blur(var(--glass-blur));
   }
@@ -263,11 +293,77 @@
     border-color: var(--glass-edge);
   }
 
-  /* The app backdrop: sky fading into the page color. Glass reads against it. */
+  /*
+   * A tray: the translucent pane under one feature group (a page's daily set, its units, a market, a
+   * form), lighter than a card so the scene shows through it, and the thing that tells one group from
+   * the next. Cards sit inside it 12px apart and 12px from its edge, with corners concentric to its own.
+   * It is the bigger surface, so it is the thicker material: a stronger blur and a deeper shadow than a
+   * card. Text straight on a tray is a heading in --fg (passes AA at this fill even over black); every
+   * other word sits on a card or a plate inside it.
+   *
+   * The tray does the blurring for everything in it: a card, plate or chip inside one paints its fill
+   * without a backdrop filter of its own, which keeps a page to a handful of blurred layers while it
+   * scrolls over the scene.
+   */
+  .tray {
+    @apply rounded-3xl border p-3;
+    background: var(--tray-fill);
+    border-color: color-mix(in srgb, var(--surface) 70%, transparent);
+    box-shadow: var(--glass-shine), var(--shadow-md);
+    -webkit-backdrop-filter: saturate(150%) blur(24px);
+    backdrop-filter: saturate(150%) blur(24px);
+  }
+  .tray-head {
+    @apply flex min-h-9 items-center justify-between gap-4 px-2 pb-3;
+  }
+  .tray .card,
+  .tray .plate,
+  .tray .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /*
+   * A plate: a small glass label for text that would otherwise sit straight on a scene (a section
+   * heading, a caption, a stat in the top bar). Same fill as a card, pill-shaped, sized by its content.
+   */
+  .plate {
+    @apply inline-flex w-fit items-center gap-2 rounded-full border px-4 py-1.5;
+    /* A plate that is a link (a back link) darkens its words on hover; the colour change is the only motion. */
+    transition: color 150ms var(--ease-out-soft);
+    background: var(--glass-fill);
+    border-color: var(--glass-edge);
+    box-shadow: var(--glass-shine), var(--shadow-sm);
+    -webkit-backdrop-filter: saturate(160%) blur(var(--glass-blur));
+    backdrop-filter: saturate(160%) blur(var(--glass-blur));
+  }
+
+  /*
+   * The app backdrop: sky fading into the page color, under the area's scene (SceneBackdrop). It
+   * isolates, so the scene's negative z-index puts it over this fill and under the page.
+   */
   .bg-scene {
     background-color: var(--bg);
     background-image: linear-gradient(180deg, var(--sky) 0, var(--bg) 520px);
     background-repeat: no-repeat;
+    isolation: isolate;
+  }
+
+  /*
+   * The top bar is a strip of floating pills, not a band. Behind them, a blur that fades out
+   * downwards softens whatever scrolls under the bar, so the pills never sit on hard text.
+   */
+  .hud::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, transparent), color-mix(in srgb, var(--bg) 40%, transparent));
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    -webkit-mask-image: linear-gradient(180deg, var(--fg) 62%, transparent);
+    mask-image: linear-gradient(180deg, var(--fg) 62%, transparent);
   }
 
   .kbd {
@@ -656,6 +752,36 @@
   }
   .fx-marquee-copy[data-clone] {
     display: none;
+  }
+}
+
+/*
+ * Reduced transparency: every glass surface becomes solid cream, with no blur, so nothing behind it
+ * shows through. Increased contrast: the same, plus a defined edge.
+ */
+@media (prefers-reduced-transparency: reduce) {
+  .card,
+  .glass,
+  .plate,
+  .tray,
+  .hud::before {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .tray {
+    background: var(--surface-2);
+  }
+}
+@media (prefers-contrast: more) {
+  .card,
+  .glass,
+  .plate,
+  .tray {
+    background: var(--surface);
+    border-color: var(--line-strong);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 

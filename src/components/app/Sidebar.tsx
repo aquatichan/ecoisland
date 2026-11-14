@@ -39,18 +39,18 @@ function NavItem({ to, label, icon: Icon, active }: { to: string; label: string;
       to={to}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "relative z-0 flex h-10 items-center gap-3 rounded-md px-3 text-base font-semibold transition-colors",
+        "relative z-0 flex h-11 items-center gap-3.5 rounded-lg px-3.5 text-md font-semibold transition-colors",
         active ? "text-brand-ink" : "text-fg-3 hover:bg-surface-2/70 hover:text-fg",
       )}
     >
       {active && (
         <motion.span
           layoutId="sidebar-pill"
-          className="absolute inset-0 -z-10 rounded-md bg-brand-soft"
+          className="absolute inset-0 -z-10 rounded-lg bg-brand-soft"
           transition={{ type: "spring", stiffness: 520, damping: 40 }}
         />
       )}
-      <Icon className="size-[18px] shrink-0" aria-hidden />
+      <Icon className="size-5 shrink-0" aria-hidden />
       <span className="truncate">{label}</span>
     </Link>
   );

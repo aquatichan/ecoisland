@@ -7,8 +7,8 @@ import { OnboardingStepper, Step } from "@/components/fx/OnboardingStepper";
 import { FullPageLoader } from "@/components/app/Guards";
 import { Logo } from "@/components/app/Logo";
 import { IslandScene } from "@/components/island/IslandScene";
-import { ArtBackdrop } from "@/components/app/ArtBackdrop";
-import type { PlateScrim } from "@/components/landing/plates";
+import { SceneBackdrop } from "@/components/app/SceneBackdrop";
+import { scrimGradient, type PlateScrim } from "@/components/landing/plates";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
@@ -23,10 +23,9 @@ import { UNITS } from "@/shared/curriculum";
 import { visibleGrowth } from "@/shared/island";
 import type { Role } from "@/shared/types";
 
-// The coastal trail behind the sign-in hero (existing art, from the landing plates). The headline, the paragraph and the
-// Google button are held to the left half of the hero, so that is where the scrim is, inside the hero's own box. It is the
-// same scrim as every other banner (the tests hold them equal).
-const BANNER_SCRIM: PlateScrim = { kind: "start", alpha: 0.92, hold: 0.52, fade: 0.16 };
+// The lagoon fills the sign-in screen (the welcome scene). The headline, the paragraph and the Google button are held
+// to the left of it, so that is where the tint is; the island, the waterfall and the turtle show on the right.
+const WELCOME_SCRIM: PlateScrim = { kind: "start", alpha: 0.88, hold: 0.5, fade: 0.24 };
 
 // A tile inside a step (a role to pick, the class code to copy): the same shape as a tile inside a Settings section.
 const TILE = "rounded-md border p-5";
@@ -75,52 +74,52 @@ export default function Onboarding() {
 
   if (status === "signed_out" || !authUser) {
     return (
-      <div className="flex min-h-dvh flex-col bg-bg px-8 py-10">
+      <div className="relative isolate flex min-h-dvh flex-col px-8 py-8">
+        <SceneBackdrop scene="scene-welcome" haze={false} />
+        <div aria-hidden data-scrim={WELCOME_SCRIM.kind} data-scrim-alpha={WELCOME_SCRIM.alpha} className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: scrimGradient(WELCOME_SCRIM) ?? undefined }} />
         <div className="mx-auto w-full max-w-page">
-          <Link to="/" aria-label="Ecoisland home" className="inline-block">
+          <Link to="/" aria-label="Ecoisland home" className="plate h-11 py-0 pr-5 pl-2.5">
             <Logo />
           </Link>
         </div>
         <div className="mx-auto flex w-full max-w-page flex-1 items-center py-8">
-          <header className="relative isolate w-full overflow-hidden rounded-2xl border border-line px-8 py-9 shadow-sm">
-            <ArtBackdrop art="bg-act" scrim={BANNER_SCRIM} position="center 40%" />
-            <div className="max-w-1/2 py-8">
-              <p className="t-eyebrow text-fg-2">Welcome</p>
-              <h1 className="t-display mt-4 text-5xl">Study a little every day. Watch your island grow.</h1>
-              <p className="mt-4 text-lg text-fg-2">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="mt-8"
-                loading={signingIn}
-                onClick={async () => {
-                  setSigningIn(true);
-                  try {
-                    await signIn();
-                  } catch (err) {
-                    toast.show({ tone: "error", title: "Sign-in didn't finish", body: errorMessage(err) });
-                  } finally {
-                    setSigningIn(false);
-                  }
-                }}
-              >
-                {!signingIn && <GoogleIcon />} Continue with Google
-              </Button>
-              <p className="mt-5 text-sm text-fg-2">
-                By continuing you agree to the{" "}
-                <Link to="/tos" className="underline underline-offset-2 hover:text-fg">
-                  Terms
-                </Link>{" "}
-                and{" "}
-                <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-fg">
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </div>
+          <header className="max-w-[46%]">
+            <p className="plate t-eyebrow py-2 text-brand-ink">Welcome</p>
+            <h1 className="t-display mt-6 text-6xl">
+              Study a little every day. Watch your island <span className="text-brand-ink">grow.</span>
+            </h1>
+            <p className="mt-5 text-xl leading-relaxed text-fg-2">Sign in with your school or personal Google account. It takes about a minute to set up.</p>
+            <Button
+              size="lg"
+              variant="secondary"
+              className="mt-8"
+              loading={signingIn}
+              onClick={async () => {
+                setSigningIn(true);
+                try {
+                  await signIn();
+                } catch (err) {
+                  toast.show({ tone: "error", title: "Sign-in didn't finish", body: errorMessage(err) });
+                } finally {
+                  setSigningIn(false);
+                }
+              }}
+            >
+              {!signingIn && <GoogleIcon />} Continue with Google <ArrowRight />
+            </Button>
+            <p className="mt-5 text-sm text-fg-2">
+              By continuing you agree to the{" "}
+              <Link to="/tos" className="underline underline-offset-2 hover:text-fg">
+                Terms
+              </Link>{" "}
+              and{" "}
+              <Link to="/privacy-policy" className="underline underline-offset-2 hover:text-fg">
+                Privacy Policy
+              </Link>
+              .
+            </p>
           </header>
         </div>
-        <p className="mx-auto w-full max-w-page text-sm text-fg-3">Made for AP Environmental Science students and teachers.</p>
       </div>
     );
   }
@@ -231,8 +230,12 @@ function Setup({ next, onFinish }: { next: string | null; onFinish: (target: str
   const completeText = role === "teacher" ? (created ? "Go to my class" : "Go to Ecoisland") : "Start my first daily set";
 
   return (
-    <div className="flex min-h-dvh flex-col items-center bg-bg px-6 py-10">
-      <Logo className="mb-10" />
+    <div className="relative isolate flex min-h-dvh flex-col items-center justify-center px-6 py-10">
+      {/* The same lagoon as the sign-in screen, clear all over: every word of setup is on the stepper's glass. */}
+      <SceneBackdrop scene="scene-welcome" haze={false} />
+      <div className="plate mb-8 h-11 py-0 pr-5 pl-2.5">
+        <Logo />
+      </div>
       <OnboardingStepper
         step={step}
         onStepChange={setStep}

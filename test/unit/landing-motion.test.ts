@@ -191,30 +191,13 @@ describe("Marquee", () => {
   });
 });
 
-describe("marquee content never sits behind text", () => {
-  const strips = () => [fn("UnitStrip", "// Growth and landmark art"), landing.slice(landing.indexOf("function ArtStrip("), landing.indexOf("function FinalCta("))];
-
-  it("keeps each strip a band of its own: the marquee and its items, with no heading, paragraph or overlay", () => {
-    for (const body of strips()) {
-      expect(body).toMatch(/^function \w+\(\) \{\s*return \(\s*<Reveal [^>]*>\s*<Marquee /);
-      expect(body).not.toMatch(/<h[1-6]\b|<p\b/);
-      expect(body).not.toMatch(/\babsolute\b|\brelative\b|-z-|\bz-\d|\bglass\b/);
-    }
-  });
-
-  it("puts the strips between sections, never inside one", () => {
+describe("the landing page has no marquee strips", () => {
+  it("draws no Marquee and keeps the hero and the sections in order", () => {
+    expect(landing).not.toMatch(/Marquee|UnitStrip|ArtStrip/);
     const page = landing.slice(landing.indexOf("export default function Landing()"));
-    const order = ["<Hero />", "<UnitStrip />", "<HowItWorks />", "<ActSection />", "<ArtStrip />", "<FinalCta />"].map((tag) => page.indexOf(tag));
+    const order = ["<Hero />", "<HowItWorks />", "<Course />", "<Teachers />", "<Landmarks />", "<ActSection />", "<FinalCta />"].map((tag) => page.indexOf(tag));
     expect(order.every((at) => at > -1)).toBe(true);
     expect([...order].sort((a, b) => a - b)).toEqual(order);
-    expect(landing.slice(landing.indexOf("function Hero("), landing.indexOf("function QuestionMock("))).not.toMatch(/Marquee|Strip/);
-  });
-
-  it("holds one decorative image per tile, and the strips use the generated art from the manifest", () => {
-    const art = landing.slice(landing.indexOf("function ArtStrip("), landing.indexOf("function FinalCta("));
-    expect(art.match(/<img\b/g)).toHaveLength(1); // one per tile (the tile is the only thing the map renders)
-    expect(art).toContain("ART[id]");
-    expect(art).toMatch(/alt=""/);
   });
 });
 

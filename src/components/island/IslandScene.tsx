@@ -44,6 +44,8 @@ export type IslandSceneProps = {
   fit?: "cover" | "contain";
   /** A slow float for the island and everything on it; the sky, the sea and the island's shadow stay put. Still when motion is reduced. */
   float?: boolean;
+  /** Draws only the island and what stands on it: no sky, no sea and no ground shadow. For a page that paints its own (the landing hero's scene). */
+  bare?: boolean;
 };
 
 type Interactive = {
@@ -123,6 +125,7 @@ export function IslandScene({
   label,
   fit = "cover",
   float = false,
+  bare = false,
 }: IslandSceneProps) {
   const reduced = useReducedMotion();
   const motion = animate && !reduced;
@@ -220,23 +223,29 @@ export function IslandScene({
         onPointerUp={editable ? onUp : undefined}
         onPointerCancel={editable ? onUp : undefined}
       >
-        <div aria-hidden className="absolute inset-x-0" style={{ top: "-100%", height: "300%", background: gradient }} />
-        {skyArt ? (
-          <img src={skyArt.src} width={skyArt.w} height={skyArt.h} alt="" draggable={false} decoding="async" className="absolute inset-0 size-full object-cover" />
-        ) : (
+        {!bare && (
           <>
-            {look.stars && <Stars />}
-            {look.sun && <Disc {...look.sun} />}
-            {look.moon && <Disc x={look.moon.x} y={look.moon.y} r={look.moon.r} color="#f3f1de" glow="#f3f1de55" />}
+            <div aria-hidden className="absolute inset-x-0" style={{ top: "-100%", height: "300%", background: gradient }} />
+            {skyArt ? (
+              <img src={skyArt.src} width={skyArt.w} height={skyArt.h} alt="" draggable={false} decoding="async" className="absolute inset-0 size-full object-cover" />
+            ) : (
+              <>
+                {look.stars && <Stars />}
+                {look.sun && <Disc {...look.sun} />}
+                {look.moon && <Disc x={look.moon.x} y={look.moon.y} r={look.moon.r} color="#f3f1de" glow="#f3f1de55" />}
+              </>
+            )}
+            {motion && look.animated === "aurora" && <AuroraSky key={sky} />}
+            {motion && look.animated === "cosmos" && <GalaxySky key={sky} />}
           </>
         )}
-        {motion && look.animated === "aurora" && <AuroraSky key={sky} />}
-        {motion && look.animated === "cosmos" && <GalaxySky key={sky} />}
-        <div
-          aria-hidden
-          className="absolute aspect-[8/1]"
-          style={{ left: `${pctX(BASE.x)}%`, top: `${pctY(BASE.y - 6)}%`, width: `${pctW(BASE.w * 1.25)}%`, transform: "translate(-50%, -50%)", background: "radial-gradient(ellipse at center, rgba(6,22,40,0.38) 0%, transparent 70%)" }}
-        />
+        {!bare && (
+          <div
+            aria-hidden
+            className="absolute aspect-[8/1]"
+            style={{ left: `${pctX(BASE.x)}%`, top: `${pctY(BASE.y - 6)}%`, width: `${pctW(BASE.w * 1.25)}%`, transform: "translate(-50%, -50%)", background: "radial-gradient(ellipse at center, rgba(6,22,40,0.38) 0%, transparent 70%)" }}
+          />
+        )}
         <div className={cn("absolute inset-0 transition-[filter] duration-700", float && "fx-float")} data-island-layer style={{ filter: healthFilter(health) }}>
           <Placed art="island-base" sx={BASE.x} sy={BASE.y} sw={BASE.w} anchor={{ x: BASE.ax, y: BASE.ay }} z={1} />
           {stand.map((s, i) => s.make(10 + i))}

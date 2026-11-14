@@ -6,7 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { ArtBackdrop } from "../../src/components/app/ArtBackdrop";
 import { ART } from "../../src/components/island/assets";
-import { SCRIM_FLOOR } from "../../src/components/landing/plates";
 import { UnitCard } from "../../src/components/study/UnitCard";
 import { UNITS } from "../../src/shared/curriculum";
 import { MASTERY_PCT } from "../../src/shared/economy";
@@ -88,13 +87,12 @@ describe("study: every picture comes from the art manifest", () => {
     for (const [name, text] of Object.entries(FILES)) expect(code(text), name).not.toMatch(/\.(webp|png|jpe?g|svg|gif)\b|["'`]\/(?:island|landing|images)\/|["'`]public\//); // an image file or an asset URL in a string (an import path is fine)
   });
 
-  it("registers the sky and all nine landmarks, each with a source", () => {
-    for (const id of ["sky-day", ...UNITS.map((u) => landmarkArt(u.n))]) {
+  it("registers all nine landmarks, each with a source", () => {
+    for (const id of UNITS.map((u) => landmarkArt(u.n))) {
       expect(ART[id], id).toBeDefined();
       expect(["generated", "placeholder"], id).toContain(ART[id].source);
       expect(ART[id].source, id).toBe("generated");
     }
-    expect(study).toContain('art="sky-day"');
     expect(unitCard).toContain("ART[landmarkArt(unit.n)]");
   });
 
@@ -167,54 +165,27 @@ describe("study: unit cards pair each unit with its own landmark, one picture to
   });
 });
 
-describe("study: the sky behind the title, with a scrim where the text sits", () => {
-  it("is the one sky on the page, on the banner, outside every card", () => {
-    expect(study.match(/<ArtBackdrop\b/g)).toHaveLength(1);
-    const header = study.slice(study.indexOf("<header"), study.indexOf("</header>"));
-    expect(header).toContain("<ArtBackdrop");
-    expect(study.indexOf("<ArtBackdrop")).toBeLessThan(study.indexOf("<Card"));
-  });
-
-  it("keeps only the eyebrow and the title on the sky: the facts and the hint are on the page below it", () => {
-    const header = study.slice(study.indexOf("<header"), study.indexOf("</header>"));
-    const banner = header.slice(0, header.indexOf("</div>"));
-    expect(banner).toContain("t-eyebrow");
-    expect(banner).toContain("<h1");
-    expect(banner).not.toMatch(/practice questions|Search any lesson/);
-    expect(header.indexOf("practice questions")).toBeGreaterThan(header.indexOf("</div>"));
-    expect(header.indexOf("Search any lesson")).toBeGreaterThan(header.indexOf("</div>"));
-  });
-
-  it("tints the title's side at least as opaque as the glass floor, and holds it past the title", () => {
-    const m = /const BANNER_SCRIM: PlateScrim = \{ kind: "start", alpha: ([\d.]+), hold: ([\d.]+), fade: ([\d.]+) \};/.exec(study)!;
-    expect(m, "BANNER_SCRIM").not.toBeNull();
-    const [alpha, hold] = [Number(m[1]), Number(m[2])];
-    expect(alpha).toBeGreaterThanOrEqual(SCRIM_FLOOR);
-    expect(hold).toBeGreaterThanOrEqual(0.4);
-    // The eyebrow is the widest thing on the banner, about 220px after the 32px padding: that is 35% of the
-    // narrowest banner (712px, a 1024px window) and less of any wider one.
-    expect((32 + 220) / 712).toBeLessThan(hold);
-    for (const text of ["fg", "fg-2", "fg-3"]) expect(ratio(token(text), over(token("bg"), "#000000", alpha)), `${text} on the scrim over black`).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it("renders as one picture and its scrim, behind everything and out of the way", () => {
-    const html = renderToStaticMarkup(h(ArtBackdrop, { art: "sky-day", scrim: { kind: "start", alpha: 0.92, hold: 0.4, fade: 0.2 } }));
-    expect(html).toContain('aria-hidden="true"');
-    expect(html).toContain('data-backdrop="sky-day"');
-    expect(html).toMatch(/pointer-events-none/);
-    expect(html).toMatch(/-z-10/);
-    expect(html.match(/<img\b/g)).toHaveLength(1);
-    expect(html).toMatch(/<img[^>]*alt=""/);
-    expect(html).toContain(`src="${ART["sky-day"].src}"`);
-    expect(html).toContain('data-scrim="start"');
-    expect(html).toContain('data-scrim-hold="0.4"');
-    expect(html).toContain("var(--bg)");
+describe("study: the title sits on the area's scene", () => {
+  // The page no longer draws a banner picture of its own: the area's scene fills the window behind the page
+  // (src/components/app/SceneBackdrop.tsx), and the title sits on it inside the title haze. The scene, the haze
+  // and its contrast are checked once, in test/unit/scenes.test.ts.
+  it("has a page-hero header with no box and no picture of its own, its text held to half the width, inside the haze", () => {
+    for (const rel of ["src/pages/Study.tsx"]) {
+      const src = readFileSync(join(__dirname, "../..", rel), "utf8");
+      const start = src.indexOf('<header className="page-hero');
+      expect(start, rel).toBeGreaterThan(-1);
+      const head = src.slice(start, src.indexOf("</header>", start));
+      expect(src, rel).not.toMatch(/ArtBackdrop|PlateScrim/);
+      expect(head, rel).toContain("max-w-1/2");
+      expect(head.slice(0, head.indexOf(">")), rel).not.toMatch(/rounded-|border|shadow-|overflow-hidden|isolate/);
+    }
   });
 });
 
 describe("study: what the restyle must not change", () => {
   it("keeps its sections and copy, 'Your focus' and 'Exam guide' among them", () => {
-    for (const text of ["AP Environmental Science", ">Study<", "Your focus", "Set by your teacher", "Choose your focus unit", "FRQ practice", "Flashcards", "Exam guide", "27 original FRQs, graded part by part against an AP-style rubric.", "Every key term in the course, by unit or lesson.", "How the exam is scored, unit weights and test-day tips.", ">Units<", "Search any lesson with", "9 units · {ALL_LESSONS.length} lessons · 1,221 practice questions · 27 free-response questions", "to add the ${LANDMARK_INFO[unit.n].name.toLowerCase()} to your island."]) {
+    expect(study).toContain('<Tray title="Units"'); // the units' heading is their tray's title
+    for (const text of ["AP Environmental Science", ">Study<", "Your focus", "Set by your teacher", "Choose your focus unit", "FRQ practice", "Flashcards", "Exam guide", "27 original FRQs, graded part by part against an AP-style rubric.", "Every key term in the course, by unit or lesson.", "How the exam is scored, unit weights and test-day tips.", "Search any lesson with", "9 units · {ALL_LESSONS.length} lessons · 1,221 practice questions · 27 free-response questions", "to add the ${LANDMARK_INFO[unit.n].name.toLowerCase()} to your island."]) {
       expect(study, text).toContain(text);
     }
   });
@@ -257,10 +228,10 @@ describe("study: text stays readable", () => {
     }
   });
 
-  it("passes AA for the facts and the hint on the page itself, down to the sky at the top of its gradient", () => {
+  it("keeps the facts in the title's haze at fg-2 and the search hint on a plate of its own", () => {
     for (const text of ["fg", "fg-2", "fg-3"]) expect(ratio(token(text), token("sky")), `${text} on the sky`).toBeGreaterThanOrEqual(4.5);
-    expect(study).toMatch(/<p className="text-lg text-fg-3">/);
-    expect(study).toMatch(/<span className="shrink-0 text-sm text-fg-3">/);
+    expect(study).toMatch(/<p className="mt-3 text-lg text-fg-2">/);
+    expect(study).toMatch(/<span className="plate shrink-0 text-sm text-fg-3">/);
   });
 });
 

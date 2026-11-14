@@ -14,7 +14,7 @@ const root = join(__dirname, "../..");
 const require = createRequire(join(root, "package.json"));
 const css = readFileSync(join(root, "src/index.css"), "utf8");
 
-const VARIANTS = ["primary", "secondary", "soft", "ghost", "danger", "danger-soft"] as const;
+const VARIANTS = ["primary", "sun", "secondary", "soft", "ghost", "danger", "danger-soft"] as const;
 const classesOf = (variant: (typeof VARIANTS)[number]) => button({ variant }).split(/\s+/).filter(Boolean);
 const escape = (cls: string) => cls.replace(/[^a-zA-Z0-9_-]/g, "\\$&");
 
@@ -68,10 +68,8 @@ describe("button focus ring", () => {
     const focus = classesOf("primary").find((c) => c.startsWith("focus-visible:shadow-"))!;
     const body = rule(focus);
     expect(body).toContain("&:focus-visible");
-    // --ring first, so its band paints over the resting highlight and drop shadow that follow it.
-    expect(body).toContain(
-      "--tw-shadow: var(--ring), inset 0 1px 0 var(--tw-shadow-color, rgba(255,255,255,0.18)), 0 1px 2px var(--tw-shadow-color, rgba(0,0,0,0.12));",
-    );
+    // --ring first, so its band paints over the resting highlight, the raised edge and the glow that follow it.
+    expect(body).toMatch(/--tw-shadow: var\(--ring\), inset 0 1px 0 var\(--tw-shadow-color, rgba\(255,255,255,0\.28\)\), 0 3px 0 var\(--tw-shadow-color, var\(--btn-edge\)\), 0 10px 18px -8px var\(--tw-shadow-color, var\(--btn-glow\)\);/);
     expect(body).toMatch(/box-shadow: [^;]*var\(--tw-shadow\)/);
   });
 

@@ -124,7 +124,7 @@ describe("plates: a scrim wherever text sits over one", () => {
       const gap = Number(/\bgap-(\d+)\b/.exec(body)![1]) * 4;
       return { first: Number(fr[1]), second: Number(fr[2]), gap };
     };
-    const layouts = { "bg-teachers": grid("Teachers", "function Landmarks("), "bg-act": grid("ActSection", "// Two decorative strips") };
+    const layouts = { "bg-teachers": grid("Teachers", "function Landmarks("), "bg-act": grid("ActSection", "function FinalCta(") };
     for (const [id, g] of Object.entries(layouts)) {
       const scrim = PLATES[id as PlateId].scrim;
       expect(scrim.kind, id).toBe("start");
@@ -158,7 +158,7 @@ describe("plates: a scrim wherever text sits over one", () => {
 
   it("makes every card over a plate a strong-glass card, never the standard one", () => {
     expect(landing).toContain('const ON_PLATE = "glass rounded-lg border shadow-sm";');
-    for (const [name, next] of [["Course", "function Teachers("], ["Teachers", "function Landmarks("], ["ActSection", "// Two decorative strips"]] as const) {
+    for (const [name, next] of [["Course", "function Teachers("], ["Teachers", "function Landmarks("], ["ActSection", "function FinalCta("]] as const) {
       const body = fn(name, next);
       expect(body, `${name} has cards over its plate`).toContain("ON_PLATE");
       expect(body, `${name} uses no standard card over its plate`).not.toMatch(/className=(\{cn\()?"card\b/);
@@ -229,8 +229,8 @@ describe("plates: sit on sections, behind everything, never in a card", () => {
       const tag = before.slice(before.lastIndexOf("<"));
       expect(tag, id).not.toMatch(/\bcard\b|\bglass\b|SpotlightCard/);
     }
-    for (const name of ["HowItWorks", "QuestionMock", "Hero", "Landmarks", "UnitStrip", "ArtStrip", "FinalCta"]) {
-      const next = { HowItWorks: "function Course(", QuestionMock: "function HowItWorks(", Hero: "function QuestionMock(", Landmarks: "function ActSection(", UnitStrip: "// Growth and landmark art", ArtStrip: "function FinalCta(", FinalCta: "export default function Landing(" }[name]!;
+    for (const name of ["HowItWorks", "QuestionMock", "Hero", "Landmarks", "FinalCta"]) {
+      const next = { HowItWorks: "function Course(", QuestionMock: "function HowItWorks(", Hero: "function QuestionMock(", Landmarks: "function ActSection(", FinalCta: "export default function Landing(" }[name]!;
       expect(fn(name, next), `${name} has no plate`).not.toContain("<Plate");
     }
   });

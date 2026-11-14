@@ -23,14 +23,13 @@ import { Link } from "react-router-dom";
 import BlurText from "@/components/bits/BlurText";
 import CountUp from "@/components/bits/CountUp";
 import Magnet from "@/components/bits/Magnet";
-import { Marquee } from "@/components/fx/Marquee";
 import { useCycle, useInView } from "@/components/fx/motion";
 import { Reveal } from "@/components/fx/Reveal";
 import { SpotlightCard } from "@/components/fx/SpotlightCard";
-import { TopographyBackdrop } from "@/components/fx/TopographyBackdrop";
 import { Logo, Treecoin } from "@/components/app/Logo";
+import { SceneBackdrop } from "@/components/app/SceneBackdrop";
 import { Plate } from "@/components/landing/Plate";
-import { ART } from "@/components/island/assets";
+import { scrimGradient, type PlateScrim } from "@/components/landing/plates";
 import { IslandScene } from "@/components/island/IslandScene";
 import { demoGrowth } from "@/components/island/demo";
 import { LANDMARK_INFO } from "@/shared/landmarks";
@@ -43,7 +42,7 @@ import { isOnboarded, useSession } from "@/lib/session";
 import { cn } from "@/lib/utils";
 import { UNITS } from "@/shared/curriculum";
 import { STAGES, stageForXp } from "@/shared/economy";
-import { GROWTH, type SkyId } from "@/shared/catalog";
+import type { SkyId } from "@/shared/catalog";
 
 const SHOWCASE: { xp: number; caption: string; landmarks: number[]; sky: SkyId }[] = [
   { xp: 0, caption: "Day 1", landmarks: [], sky: "dawn" },
@@ -58,23 +57,23 @@ function Header() {
   const { status, profile } = useSession();
   const inApp = status === "ready" && isOnboarded(profile);
   return (
-    <header className="glass sticky top-0 z-40 border-b">
-      <div className="mx-auto flex h-16 max-w-page items-center justify-between px-8">
-        <Link to="/" aria-label="Ecoisland home">
+    <header className="hud fixed inset-x-0 top-0 z-40">
+      <div className="mx-auto flex h-18 max-w-page items-center justify-between px-8">
+        <Link to="/" aria-label="Ecoisland home" className="plate h-11 py-0 pr-5 pl-2.5">
           <Logo />
         </Link>
-        <nav className="flex items-center gap-1 rounded-full border border-line bg-surface-2 p-1 text-base font-medium text-fg-2" aria-label="Sections">
+        <nav className="plate h-11 gap-1 p-1 text-base font-medium text-fg-2" aria-label="Sections">
           {[
             ["#how", "How it works"],
             ["#teachers", "For teachers"],
             ["#landmarks", "Landmarks"],
           ].map(([href, label]) => (
-            <a key={href} href={href} className="rounded-full px-4 py-1.5 hover:bg-surface hover:text-fg">
+            <a key={href} href={href} className="rounded-full px-4 py-1.5 transition-colors hover:bg-surface-2 hover:text-fg">
               {label}
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {inApp ? (
             <Button asChild>
               <Link to="/today">
@@ -83,7 +82,7 @@ function Header() {
             </Button>
           ) : (
             <>
-              <Button variant="ghost" asChild>
+              <Button variant="secondary" asChild>
                 <Link to="/start">Sign in</Link>
               </Button>
               <Button asChild>
@@ -102,6 +101,15 @@ function Header() {
 // the darkest part of the teachers plate measured 4.35:1.
 const ON_PLATE = "glass rounded-lg border shadow-sm";
 
+// The hero's headline sits in the left half of the open-sea scene, so that is where the tint is; the
+// sea, the clouds and the demo island show on the right.
+const HERO_SCRIM: PlateScrim = { kind: "start", alpha: 0.88, hold: 0.5, fade: 0.26 };
+
+// The closing call to action is light text on the sunset bay: a dark tint (the ink colour, never
+// lighter than the scrim floor) holds over the left half, where the picture is already deep teal.
+const CTA_TINT = "color-mix(in srgb, var(--fg) 84%, transparent)";
+const CTA_SCRIM = `linear-gradient(90deg, ${CTA_TINT} 0%, ${CTA_TINT} 46%, transparent 76%)`;
+
 const PERKS = ["Free for students and teachers", "Made for laptops and Chromebooks", "All 9 units, 108 lessons"];
 
 function Hero() {
@@ -112,23 +120,22 @@ function Hero() {
   const s = SHOWCASE[i];
   return (
     <>
-      <section className="bg-scene relative overflow-hidden">
-        <div className="absolute inset-0" aria-hidden>
-          <TopographyBackdrop />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_28%_42%,var(--bg)_12%,transparent_58%)]" />
-          {/* The lines end on the page colour, not on a hard edge: nothing overlaps the hero to hide where it stops. */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg to-transparent" />
-        </div>
-        <div className="relative mx-auto grid max-w-page min-h-[calc(100dvh-8rem)] grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-center gap-12 px-8 pt-20 pb-20">
+      {/* The whole first screen is the open-sea scene; the demo island floats in it, with no frame of its own. */}
+      <section className="relative isolate overflow-hidden">
+        <SceneBackdrop scene="scene-hero" haze={false} />
+        <div aria-hidden data-scrim={HERO_SCRIM.kind} data-scrim-alpha={HERO_SCRIM.alpha} className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: scrimGradient(HERO_SCRIM) ?? undefined }} />
+        {/* The scene ends on the page colour, not on a hard edge: nothing overlaps the hero to hide where it stops. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg to-transparent" />
+        <div className="relative mx-auto grid max-w-page min-h-dvh grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center gap-10 px-8 pt-28 pb-20">
           <div>
-            <p className="t-eyebrow text-fg-2">For AP Environmental Science</p>
-            <h1 className="t-display mt-5 text-6xl">
+            <p className="plate t-eyebrow py-2 text-brand-ink">For AP Environmental Science</p>
+            <h1 className="t-display mt-6 text-6xl">
               <BlurText text="Study APES five minutes a day." animateBy="words" delay={60} className="inline" />{" "}
               <span className="text-brand-ink">
                 <BlurText text="Watch your island grow." animateBy="words" delay={60} className="inline" />
               </span>
             </h1>
-            <p className="mt-6 max-w-[48ch] text-xl leading-relaxed text-fg-2">
+            <p className="mt-6 max-w-[46ch] text-xl leading-relaxed text-fg-2">
               A short daily set built with spaced repetition, the assignments your teacher posts, and an island that thrives when you show up and wilts when you don't.
             </p>
             <div className="mt-9 flex items-center gap-3">
@@ -147,30 +154,32 @@ function Hero() {
             </div>
           </div>
 
-          {/* One picture, with the caption and the stage picker on glass chips so no text sits on bare art. */}
+          {/* The real island, drawn straight onto the scene's sea. Its caption and the stage picker sit together in one cream card below it, in their own space. */}
           <div
-            className="relative overflow-hidden rounded-2xl border border-line shadow-lg"
+            className="tray p-5"
             onPointerEnter={() => setHold(true)}
             onPointerLeave={() => setHold(false)}
             onFocusCapture={() => setHold(true)}
             onBlurCapture={() => setHold(false)}
           >
-            <IslandScene growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} float className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
-            <div className="glass absolute top-4 right-4 rounded-lg border px-4 py-3">
-              <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
-              <p className="text-sm text-fg-3">{s.caption}</p>
-            </div>
-            <div className="glass absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full border px-3 py-2.5" role="tablist" aria-label="Island growth stages">
-              {SHOWCASE.map((x, k) => (
-                <button
-                  key={x.caption}
-                  role="tab"
-                  aria-selected={k === i}
-                  aria-label={x.caption}
-                  onClick={() => setI(k)}
-                  className={cn("h-2 rounded-full transition-all", k === i ? "w-6 bg-brand" : "w-2 bg-line-strong hover:bg-fg-4")}
-                />
-              ))}
+            <IslandScene bare fit="contain" growth={demoGrowth(s.xp)} health={1} sky={s.sky} landmarks={s.landmarks} float className="aspect-[5/3]" label="An Ecoisland growing over a school year" />
+            <div className="card mx-auto mt-4 flex items-center bg-surface justify-between gap-6 px-5 py-3.5 shadow-sm">
+              <div>
+                <p className="text-md font-semibold text-fg">{stageForXp(s.xp).name}</p>
+                <p className="text-sm text-fg-3">{s.caption}</p>
+              </div>
+              <div className="flex gap-1.5" role="tablist" aria-label="Island growth stages">
+                {SHOWCASE.map((x, k) => (
+                  <button
+                    key={x.caption}
+                    role="tab"
+                    aria-selected={k === i}
+                    aria-label={x.caption}
+                    onClick={() => setI(k)}
+                    className={cn("h-2 rounded-full transition-all", k === i ? "w-6 bg-brand" : "w-2 bg-line-strong hover:bg-fg-4")}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -238,7 +247,7 @@ function HowItWorks() {
     <Reveal as="section" id="how" className="mx-auto max-w-page scroll-mt-20 px-8 py-28">
       <p className="t-eyebrow">How it works</p>
       <h2 className="t-h1 mt-3 max-w-[22ch]">A habit you can keep, and something to show for it.</h2>
-      <div className="mt-14 grid grid-cols-3 gap-6">
+      <div className="tray mt-14 grid grid-cols-3 gap-3">
         <SpotlightCard className="flex flex-col p-6">
           <div className="grid aspect-[4/3] place-items-center rounded-md border border-line bg-surface-2 p-4">
             <QuestionMock />
@@ -344,36 +353,38 @@ function Teachers() {
             </Link>
           </Button>
         </div>
-        <div ref={ref} className={cn(ON_PLATE, "overflow-hidden")} aria-label="Example class roster" data-roster-frame={tick}>
-          <div className="flex items-center justify-between border-b border-line px-6 py-4">
-            <div>
-              <p className="text-md font-semibold text-fg">APES · Period 3</p>
-              <p className="text-sm text-fg-3">Unit 4: Earth Systems and Resources</p>
+        <div className="tray">
+          <div ref={ref} className={cn(ON_PLATE, "overflow-hidden")} aria-label="Example class roster" data-roster-frame={tick}>
+            <div className="flex items-center justify-between border-b border-line px-6 py-4">
+              <div>
+                <p className="text-md font-semibold text-fg">APES · Period 3</p>
+                <p className="text-sm text-fg-3">Unit 4: Earth Systems and Resources</p>
+              </div>
+              <span className="rounded-sm border border-line-strong px-2.5 py-1 font-mono text-sm font-semibold tracking-[0.14em] text-fg-2">K7Q2MX</span>
             </div>
-            <span className="rounded-sm border border-line-strong px-2.5 py-1 font-mono text-sm font-semibold tracking-[0.14em] text-fg-2">K7Q2MX</span>
-          </div>
-          <div className="border-b border-line px-6 py-4">
-            <div className="flex items-center justify-between text-base">
-              <span className="font-semibold text-fg">Read 4.2 Soil Formation and Erosion</span>
-              <span className="t-num text-fg-3">
-                {frame.total}/{ROSTER_CLASS_SIZE} done
-              </span>
-            </div>
-            <ProgressBar value={Math.round((frame.total / ROSTER_CLASS_SIZE) * 100)} className="mt-2.5 h-1.5" label="Example completion" />
-          </div>
-          <ul className="divide-y divide-line">
-            {rows.map((r, k) => (
-              <li key={r.name} className={cn("flex items-center gap-3 px-6 py-3 text-base transition-colors duration-700", frame.lit === k && "bg-brand-soft")}>
-                <Avatar name={r.name} size={28} />
-                <span className="flex-1 font-semibold text-fg">{r.name}</span>
-                <span className="flex w-14 items-center gap-1 text-fg-2">
-                  <Flame className={cn("size-3.5", r.streak ? "text-sun" : "text-fg-4")} /> {r.streak}
+            <div className="border-b border-line px-6 py-4">
+              <div className="flex items-center justify-between text-base">
+                <span className="font-semibold text-fg">Read 4.2 Soil Formation and Erosion</span>
+                <span className="t-num text-fg-3">
+                  {frame.total}/{ROSTER_CLASS_SIZE} done
                 </span>
-                <span className={cn("w-24", r.idle ? "font-semibold text-coral" : "text-fg-3")}>{r.active}</span>
-                <span className="t-num w-12 text-right text-fg-2">{r.done}/5</span>
-              </li>
-            ))}
-          </ul>
+              </div>
+              <ProgressBar value={Math.round((frame.total / ROSTER_CLASS_SIZE) * 100)} className="mt-2.5 h-1.5" label="Example completion" />
+            </div>
+            <ul className="divide-y divide-line">
+              {rows.map((r, k) => (
+                <li key={r.name} className={cn("flex items-center gap-3 px-6 py-3 text-base transition-colors duration-700", frame.lit === k && "bg-brand-soft")}>
+                  <Avatar name={r.name} size={28} />
+                  <span className="flex-1 font-semibold text-fg">{r.name}</span>
+                  <span className="flex w-14 items-center gap-1 text-fg-2">
+                    <Flame className={cn("size-3.5", r.streak ? "text-sun" : "text-fg-4")} /> {r.streak}
+                  </span>
+                  <span className={cn("w-24", r.idle ? "font-semibold text-coral" : "text-fg-3")}>{r.active}</span>
+                  <span className="t-num w-12 text-right text-fg-2">{r.done}/5</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </Reveal>
@@ -397,7 +408,7 @@ function Landmarks() {
             <IslandScene growth={demoGrowth(1650)} health={1} sky="sunset" landmarks={[1, 2, 3, 4, 5, 6, 7, 8, 9]} decor={[{ id: "dock", x: 0.73, y: 0.84 }]} className="aspect-[5/3]" />
           </div>
         </div>
-        <ul className="mt-14 grid grid-cols-3 gap-3">
+        <ul className="tray mt-14 grid grid-cols-3 gap-3">
           {UNITS.map((u) => (
             <li key={u.n} className="card flex items-start gap-3 p-4">
               <Badge tone="brand" className="mt-0.5 shrink-0">
@@ -443,8 +454,8 @@ function ActSection() {
             ))}
           </ul>
         </div>
-        <div className="relative" aria-label="Example listings in Act">
-          <div className="space-y-4">
+        <div className="tray relative" aria-label="Example listings in Act">
+          <div className="space-y-3">
             {cards.map((c, i) => (
               <div key={c.title} className={cn(ON_PLATE, "flex gap-4 p-5 shadow-md", i === 1 && "ml-10")}>
                 <div className="flex w-14 shrink-0 flex-col items-center">
@@ -485,55 +496,18 @@ function ActSection() {
   );
 }
 
-// Two decorative strips. Each is a band of its own with nothing laid over it: the moving content
-// never sits behind text. Both hold still, wrapped, when motion is reduced (see Marquee).
-function UnitStrip() {
-  return (
-    <Reveal className="mx-auto max-w-page px-8 pt-14">
-      <Marquee seconds={80}>
-        {UNITS.map((u) => (
-          <li key={u.n} className="card flex shrink-0 items-center gap-3 rounded-full py-2.5 pr-6 pl-3 text-md font-medium whitespace-nowrap text-fg-2">
-            <span className="grid size-7 place-items-center rounded-full bg-brand-soft text-sm font-semibold text-brand-ink">{u.n}</span>
-            {u.title}
-          </li>
-        ))}
-      </Marquee>
-    </Reveal>
-  );
-}
-
-// Growth and landmark art from the manifest, alternating, one picture to a tile.
-const STRIP_ART = GROWTH.flatMap((g, i) => (UNITS[i] ? [g.art, `landmark-${UNITS[i].n}`] : [g.art]));
-
-function ArtStrip() {
-  return (
-    <Reveal className="py-16">
-      <Marquee seconds={90}>
-        {STRIP_ART.map((id) => {
-          const art = ART[id];
-          return (
-            <li key={id} className="card flex size-28 shrink-0 p-3">
-              <img src={art.src} width={art.w} height={art.h} alt="" draggable={false} decoding="async" className="size-full object-contain" />
-            </li>
-          );
-        })}
-      </Marquee>
-    </Reveal>
-  );
-}
-
 function FinalCta() {
-  const sky = ART["sky-day"];
   return (
     <Reveal as="section" lift={false} className="relative isolate overflow-hidden">
-      {/* The only picture here, behind the panel and never behind text. */}
-      <img src={sky.src} width={sky.w} height={sky.h} alt="" aria-hidden loading="lazy" decoding="async" className="absolute inset-0 -z-10 size-full object-cover object-top" />
-      <div className="mx-auto max-w-page px-8 py-28">
-        <div className="glass max-w-2xl rounded-2xl border p-12 shadow-lg">
-          <Sparkles className="size-6 text-brand" aria-hidden />
-          <h2 className="t-display mt-5 text-6xl">Your island is waiting.</h2>
-          <p className="mt-4 max-w-[46ch] text-lg text-fg-2">Sign in with Google, join your class with its code, and do your first daily set. It takes about five minutes.</p>
-          <Button size="lg" className="mt-9" asChild>
+      {/* The sunset bay fills the section. The words are light, on the dark tint over its left half. */}
+      <SceneBackdrop scene="scene-sunset" haze={false} lazy />
+      <div aria-hidden data-scrim="dark" className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: CTA_SCRIM }} />
+      <div className="mx-auto max-w-page px-8 py-36">
+        <div className="max-w-[44%]">
+          <Sparkles className="size-7 text-sun" aria-hidden />
+          <h2 className="t-display mt-5 text-6xl text-surface">Your island is waiting.</h2>
+          <p className="mt-5 text-xl leading-relaxed text-surface">Sign in with Google, join your class with its code, and do your first daily set. It takes about five minutes.</p>
+          <Button size="lg" variant="sun" className="mt-9" asChild>
             <Link to="/start">
               Get started <ArrowRight />
             </Link>
@@ -553,13 +527,11 @@ export default function Landing() {
     <div className="min-h-dvh bg-bg">
       <Header />
       <Hero />
-      <UnitStrip />
       <HowItWorks />
       <Course />
       <Teachers />
       <Landmarks />
       <ActSection />
-      <ArtStrip />
       <FinalCta />
       <footer className="relative isolate overflow-hidden">
         <Plate id="bg-footer" />

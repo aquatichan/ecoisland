@@ -24,14 +24,16 @@ export default function Guide() {
   const frq = r.exam_structure?.free_response;
   return (
     <Page className="mx-auto max-w-[980px]">
-      <Link to="/study" className="mb-5 inline-flex items-center gap-1.5 text-base font-medium text-fg-3 hover:text-fg">
+      <Link to="/study" className="plate mb-4 text-base font-medium text-fg-2 hover:text-fg">
         <ArrowLeft className="size-4" /> Study
       </Link>
-      <p className="t-eyebrow">AP Environmental Science</p>
-      <h1 className="t-h1 mt-2.5">Exam guide</h1>
-      <p className="mt-2 text-md text-fg-3">How the exam works, what each unit is worth, and how to pick up the points readers look for.</p>
+      <header className="mb-6">
+        <p className="t-eyebrow">AP Environmental Science</p>
+        <h1 className="t-h1 mt-2.5">Exam guide</h1>
+        <p className="mt-2 text-md text-fg-3">How the exam works, what each unit is worth, and how to pick up the points readers look for.</p>
+      </header>
 
-      <div className="mt-8 grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-6">
         {[
           { title: "Multiple choice", s: mc },
           { title: "Free response", s: frq },
